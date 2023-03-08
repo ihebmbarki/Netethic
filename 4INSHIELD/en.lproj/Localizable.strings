@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  4INSHIELD
+
+  Created by iheb mbarki on 3/3/2023.
+  
+*/
+
+//MARK: Login
+"Welcome" = "Welcome to 4INSHIELD";
+"Welcome2" = "Sign in to continue";
+"e_mail" = "Email";
+"Password" = "Password";
+"forget" = "Forgot password?";
+"Login" = "Login";
+"text_register" = "Don't have an account?";
+"register" = "Sign up";
+"google_connect" = "Login with Google";
+"fb" = "Login with Facebook";
+
+//MARK: Register
+"your_username" = "Username";
+"create_account" = "Create an account";
+"re_type_password" = "Confirm Password";
+"sign_up" = "sign up";
+"text_login" = "Have an account?";
+"Login" = "Sign in";
+"signup_google" = "Sign up with Google";
+"signup_facebook" = "Sign up with Facebook";
+
+

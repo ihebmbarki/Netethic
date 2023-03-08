@@ -29,3 +29,5 @@
 "signup_facebook" = "Sign up with Facebook";
 
 
+//MARK: Confirmation
+"code" = "Enter the code sent to your email";

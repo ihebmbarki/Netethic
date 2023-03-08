@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Inter-VariableFont_slnt,wght.ttf">
+        <array key="Inter-Regular.ttf">
             <string>Inter-Regular</string>
         </array>
         <array key="Poppins-Medium.ttf">
@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="height" constant="42" id="QVx-9r-WbQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.19607843137254902" green="0.49411764705882355" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +78,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="google_icon" imagePlacement="leading" title="Se connecter avec Google" imagePadding="10"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous n'avez pas de compte ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-le-gJJ">
-                                <rect key="frame" x="32" y="561.33333333333337" width="165" height="49.666666666666629"/>
+                                <rect key="frame" x="32" y="562.33333333333337" width="165" height="49.666666666666629"/>
                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="12"/>
                                 <color key="textColor" red="0.13725490196078433" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -297,7 +297,7 @@
                                             <constraint firstAttribute="height" constant="42" id="UpG-kP-vXo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -313,7 +313,7 @@
                                             <constraint firstAttribute="height" constant="42" id="KaA-zN-Ofo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -478,18 +478,15 @@
                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="entrez le code envoyé à votre email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhq-B8-4tV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="entrez le code envoyé à votre email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhq-B8-4tV">
                                 <rect key="frame" x="40" y="319" width="311" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="gyW-kU-qMf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tK3-0K-sce" customClass="PinView" customModule="_INSHIELD" customModuleProvider="target">
-                                <rect key="frame" x="134" y="532" width="125" height="42"/>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcV-yP-oXd">
                                 <rect key="frame" x="50" y="582" width="293" height="42"/>
                                 <constraints>
@@ -503,25 +500,56 @@
                                     <action selector="registerBtnTapped:" destination="jea-gb-NUc" eventType="touchUpInside" id="T4s-cR-vth"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EN7-nN-hEQ">
+                                <rect key="frame" x="60" y="526" width="273" height="34"/>
+                                <subviews>
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jUk-0V-Ie6">
+                                        <rect key="frame" x="0.0" y="0.0" width="37.333333333333336" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDC-FT-aOV">
+                                        <rect key="frame" x="47.333333333333329" y="0.0" width="37" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="3" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WX-Ob-vAg">
+                                        <rect key="frame" x="94.333333333333343" y="0.0" width="37.333333333333343" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="4" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DXb-Gu-nuc">
+                                        <rect key="frame" x="141.66666666666666" y="0.0" width="37" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="5" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P4X-YA-zBC">
+                                        <rect key="frame" x="188.66666666666666" y="0.0" width="37.333333333333343" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="6" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6EY-Iw-Xdz">
+                                        <rect key="frame" x="236" y="0.0" width="37" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jCx-As-rnN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="UcV-yP-oXd" firstAttribute="top" secondItem="EN7-nN-hEQ" secondAttribute="bottom" constant="22" id="6TO-lf-FXI"/>
                             <constraint firstItem="Ss1-na-iQH" firstAttribute="leading" secondItem="jCx-As-rnN" secondAttribute="leading" constant="65" id="7Jb-qd-dEe"/>
                             <constraint firstItem="UcV-yP-oXd" firstAttribute="leading" secondItem="jCx-As-rnN" secondAttribute="leading" constant="50" id="7rG-Jp-pwu"/>
                             <constraint firstItem="Vhq-B8-4tV" firstAttribute="centerX" secondItem="Ss1-na-iQH" secondAttribute="centerX" constant="-1" id="BwW-Sh-w76"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="top" secondItem="K7F-Ka-38G" secondAttribute="top" constant="532" id="J55-jx-LjE"/>
+                            <constraint firstItem="EN7-nN-hEQ" firstAttribute="top" secondItem="Vhq-B8-4tV" secondAttribute="bottom" constant="180" id="GzK-A7-RFa"/>
                             <constraint firstItem="Ss1-na-iQH" firstAttribute="top" secondItem="8ZJ-pU-lM4" secondAttribute="bottom" constant="8" id="M2h-he-Pip"/>
                             <constraint firstItem="UcV-yP-oXd" firstAttribute="top" secondItem="K7F-Ka-38G" secondAttribute="top" constant="582" id="MaA-oY-Wjm"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="centerY" secondItem="K7F-Ka-38G" secondAttribute="centerY" id="NVY-3k-I1v"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="leading" secondItem="jCx-As-rnN" secondAttribute="leading" constant="134" id="OMo-L7-fX4"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="leading" secondItem="jCx-As-rnN" secondAttribute="leading" constant="134" id="SUD-Bn-yjV"/>
                             <constraint firstItem="8ZJ-pU-lM4" firstAttribute="centerY" secondItem="x7v-2Q-8tQ" secondAttribute="centerY" id="ULu-AB-KMl"/>
-                            <constraint firstItem="UcV-yP-oXd" firstAttribute="top" secondItem="tK3-0K-sce" secondAttribute="bottom" constant="8" id="Wt7-RV-gUz"/>
                             <constraint firstItem="8ZJ-pU-lM4" firstAttribute="centerX" secondItem="x7v-2Q-8tQ" secondAttribute="centerX" id="aEP-gA-Lao"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="centerX" secondItem="K7F-Ka-38G" secondAttribute="centerX" id="bjW-ot-R1a"/>
-                            <constraint firstItem="tK3-0K-sce" firstAttribute="top" secondItem="Vhq-B8-4tV" secondAttribute="bottom" constant="186" id="boF-IH-Eq9"/>
-                            <constraint firstItem="jCx-As-rnN" firstAttribute="trailing" secondItem="tK3-0K-sce" secondAttribute="trailing" constant="134" id="c2h-aI-cZq"/>
+                            <constraint firstItem="EN7-nN-hEQ" firstAttribute="leading" secondItem="jCx-As-rnN" secondAttribute="leading" constant="60" id="av0-ZB-RvI"/>
+                            <constraint firstItem="jCx-As-rnN" firstAttribute="trailing" secondItem="EN7-nN-hEQ" secondAttribute="trailing" constant="60" id="f7T-W9-098"/>
                             <constraint firstItem="Ss1-na-iQH" firstAttribute="centerX" secondItem="K7F-Ka-38G" secondAttribute="centerX" id="gvx-sm-QQc"/>
                             <constraint firstItem="Vhq-B8-4tV" firstAttribute="top" secondItem="Ss1-na-iQH" secondAttribute="bottom" constant="55" id="iqP-gv-aAg"/>
                             <constraint firstItem="jCx-As-rnN" firstAttribute="trailing" secondItem="x7v-2Q-8tQ" secondAttribute="trailing" constant="140" id="jFE-I1-87i"/>
@@ -533,8 +561,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="enterCodeLbl" destination="Vhq-B8-4tV" id="LRg-iZ-gqc"/>
+                        <outlet property="fifthOtpTf" destination="P4X-YA-zBC" id="Tvj-kt-QPO"/>
+                        <outlet property="firstOtpTf" destination="jUk-0V-Ie6" id="0QC-U9-J6R"/>
+                        <outlet property="fourthOtpTf" destination="DXb-Gu-nuc" id="mFc-py-269"/>
                         <outlet property="registerBtn" destination="UcV-yP-oXd" id="uHN-ih-gn6"/>
-                        <outlet property="viewOTP" destination="tK3-0K-sce" id="Gxx-gL-ys0"/>
+                        <outlet property="secondOtpTf" destination="cDC-FT-aOV" id="zZh-eL-YyV"/>
+                        <outlet property="sixthOtpTf" destination="6EY-Iw-Xdz" id="bAl-oI-4Zi"/>
+                        <outlet property="thirdOtpTf" destination="7WX-Ob-vAg" id="wTh-1r-Rm8"/>
+                        <outlet property="welcomeLbl" destination="Ss1-na-iQH" id="hRu-ng-zwE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAV-rv-M7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

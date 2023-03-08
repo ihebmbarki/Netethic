@@ -77,7 +77,6 @@ class APIManager {
         }
     }
     
-
     func verifyOTPActivationCode(email: String, codeOTP: String, completionHandler: @escaping handler){
         
         let headers: HTTPHeaders = [

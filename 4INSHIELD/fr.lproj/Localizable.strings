@@ -27,3 +27,6 @@
 "Login" = "Connectez-vous";
 "signup_google" = "S'inscrire avec Google";
 "signup_facebook" = "S'inscrire avec Facebook";
+
+//MARK: Confirmation
+"code" = "Entrez le code envoyé à votre email";

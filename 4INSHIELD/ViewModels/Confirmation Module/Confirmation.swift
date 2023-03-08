@@ -6,69 +6,84 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 
-class Confirmation: UIViewController {
 
-    @IBOutlet weak var viewOTP: PinView!
+class Confirmation: UIViewController, UITextFieldDelegate {
+    
+    //IBOutlets
+    @IBOutlet weak var welcomeLbl: UILabel!
+    @IBOutlet weak var enterCodeLbl: UILabel!
     @IBOutlet weak var registerBtn: UIButton!
     
+    @IBOutlet weak var firstOtpTf: UITextField!
+    @IBOutlet weak var secondOtpTf: UITextField!
+    @IBOutlet weak var thirdOtpTf: UITextField!
+    @IBOutlet weak var fourthOtpTf: UITextField!
+    @IBOutlet weak var fifthOtpTf: UITextField!
+    @IBOutlet weak var sixthOtpTf: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-//        viewOTP.setUpView()
-        configurePinView()
+        
+        //MARK: Translate
+        welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
+        enterCodeLbl.text = NSLocalizedString("code", comment: "confirmation code")
+        
+        
+        firstOtpTf.delegate = self
+        secondOtpTf.delegate = self
+        thirdOtpTf.delegate = self
+        fourthOtpTf.delegate = self
+        fifthOtpTf.delegate = self
+        sixthOtpTf.delegate = self
     }
     
-    func configurePinView() {
-        var config:PinConfig!     = PinConfig()
-        config.otpLength          = .six
-        config.dotColor           = .black
-        config.lineColor          = #colorLiteral(red: 0.1986600459, green: 0.3112253845, blue: 0.5295307636, alpha: 1)
-        config.spacing            = 5
-        config.isSecureTextEntry  = false
-        config.showPlaceHolder    = false
-
-        viewOTP.config = config
-        viewOTP.setUpView()
-        viewOTP.textFields[0].becomeFirstResponder()
+    //limit the user input to one character per text field
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newLength = (textField.text?.count ?? 0) + string.count - range.length
+        return newLength <= 1
     }
+    
+    //move the focus to the next text field when the user presses the "Next" button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextTextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    //Append entries
+    let otpCode = "(firstOtpTf.text!)(secondOtpTf.text!)(thirdOtpTf.text!)(fourthOtpTf.text!)(fifthOtpTf.text!)(sixthOtpTf.text!)"
     
     @IBAction func ConfirmationBtnTapped(_ sender: Any) {
-        guard let savedUserEmail: String = KeychainWrapper.standard.string(forKey: "userEmail") else {return}
-        var otpCode:String = ""
-        do {
-            otpCode = try self.viewOTP.getOTP()
-        } catch OTPError.inCompleteOTPEntry {
-            print("Incomplete OTP Entry error")
-        } catch let error {
-            print(error.localizedDescription)
-        }
         
-        APIManager.shareInstance.verifyOTPActivationCode(email: savedUserEmail, codeOTP: String(otpCode)) { result in
-            switch result {
-            case .success(let isValidOTP):
-                if let valid = isValidOTP as? Bool, valid {
-                    APIManager.shareInstance.activateAccount(withEmail: savedUserEmail) { activated in
-                        if activated {
-                            print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is now active!")
-                            
-                        }
-                        
-                    }
-                    
-                }
-            case .failure(_):
-                print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is not active!")
-            }
-            
-        }
+        //        APIManager.shareInstance.verifyOTPActivationCode(email: savedUserEmail, codeOTP: String(otpCode)) { result in
+        //            switch result {
+        //            case .success(let isValidOTP):
+        //                if let valid = isValidOTP as? Bool, valid {
+        //                    APIManager.shareInstance.activateAccount(withEmail: savedUserEmail) { activated in
+        //                        if activated {
+        //                            print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is now active!")
+        //
+        //                        }
+        //
+        //                    }
+        //
+        //                }
+        //            case .failure(_):
+        //                print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is not active!")
+        //            }
+        //
+        //        }
+        //    }
+        
+        
     }
     
-   
+    
+    
 }
-
-
-

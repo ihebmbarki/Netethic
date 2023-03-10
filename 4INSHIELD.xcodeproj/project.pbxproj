@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		043557FA29AE35B900D4F012 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557F929AE35B900D4F012 /* Constant.swift */; };
 		043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FC29AE377700D4F012 /* RegisterModel.swift */; };
 		0435580029AE386B00D4F012 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FF29AE386B00D4F012 /* APIManager.swift */; };
 		0435580329AE39B800D4F012 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0435580229AE39B800D4F012 /* Alamofire */; };
+		0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441E86D29BB60FA00E73AF2 /* Home.swift */; };
 		04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C4E29ACC3E3001A27FF /* AppDelegate.swift */; };
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
-		04850C5829ACC3EB001A27FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5729ACC3EB001A27FF /* Assets.xcassets */; };
 		04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */; };
 		0496979629AF769800F65DF4 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979529AF769800F65DF4 /* Loading.swift */; };
 		0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979729AFAD6C00F65DF4 /* Confirmation.swift */; };
@@ -29,14 +30,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043557F929AE35B900D4F012 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		043557FC29AE377700D4F012 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		043557FF29AE386B00D4F012 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0441E86D29BB60FA00E73AF2 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		04850C4B29ACC3E3001A27FF /* 4INSHIELD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 4INSHIELD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04850C4E29ACC3E3001A27FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04850C5029ACC3E4001A27FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		04850C5529ACC3E4001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		04850C5729ACC3EB001A27FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04850C5A29ACC3EB001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04850C5C29ACC3EB001A27FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0496979529AF769800F65DF4 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		0441E86C29BB60DB00E73AF2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0441E86D29BB60FA00E73AF2 /* Home.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +132,8 @@
 				04E54A3A29ACCB3500B00906 /* Utilities */,
 				04850C4E29ACC3E3001A27FF /* AppDelegate.swift */,
 				04850C5029ACC3E4001A27FF /* SceneDelegate.swift */,
+				040F91D229BA293D00D7C4A0 /* Assets.xcassets */,
 				04850C5429ACC3E4001A27FF /* Main.storyboard */,
-				04850C5729ACC3EB001A27FF /* Assets.xcassets */,
 				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
 				049C44AF29B2024100AAA582 /* Localizable.strings */,
@@ -134,6 +144,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				0441E86C29BB60DB00E73AF2 /* Home */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
 				04A963B829B0DE7A009EA1CB /* Confirmation Module */,
 				04E54A3729ACC83F00B00906 /* Auth Module */,
@@ -287,8 +298,8 @@
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
-				04850C5829ACC3EB001A27FF /* Assets.xcassets in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
+				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
 				04E54A3F29ACCC3B00B00906 /* Inter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +363,7 @@
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
+				0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

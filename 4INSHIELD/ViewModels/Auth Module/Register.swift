@@ -21,25 +21,12 @@ class Register: UIViewController {
     @IBOutlet weak var register_google: UIButton!
     @IBOutlet weak var register_facebook: UIButton!
     @IBOutlet weak var haveAccLbl: UILabel!
-    
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        //MARK: Translate
-        welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
-        createAccLbl.text = NSLocalizedString("create_account", comment: "sign up label")
-        usernameTF.text = NSLocalizedString("your_username", comment: "username")
-        emailTF.text = NSLocalizedString("e_mail", comment: "email")
-        passwordTF.text = NSLocalizedString("Password", comment: "Password")
-        confirmPasswordTF.text = NSLocalizedString("Password", comment: "Password")
-        registerBtn.setTitle(NSLocalizedString("sign_up", comment: "sign up"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        haveAccLbl.text = NSLocalizedString("text_login", comment: "text login")
-        register_google.setTitle(NSLocalizedString("signup_google", comment: "sign up google"), for: .normal)
-        register_facebook.setTitle(NSLocalizedString("signup_facebook", comment: "sign up facebook"), for: .normal)
+        // Do any additional setup after loading the view.
         
         //Text fields lefrt side images
         usernameTF.setupLeftSideImages(ImageViewNamed: "user")
@@ -58,6 +45,45 @@ class Register: UIViewController {
         register_google.setupBorderBtns()
         register_facebook.setupBorderBtns()
     }
+    func updateLocalizedStrings() {
+        welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
+        createAccLbl.text = NSLocalizedString("create_account", comment: "sign up label")
+        usernameTF.placeholder = NSLocalizedString("your_username", comment: "username")
+        emailTF.placeholder = NSLocalizedString("e_mail", comment: "email")
+        passwordTF.placeholder = NSLocalizedString("Password", comment: "Password")
+        confirmPasswordTF.placeholder = NSLocalizedString("re_type_password", comment: "Confirm Password")
+        registerBtn.setTitle(NSLocalizedString("sign_up", comment: "sign up"), for: .normal)
+        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
+        haveAccLbl.text = NSLocalizedString("text_login", comment: "text login")
+        register_google.setTitle(NSLocalizedString("signup_google", comment: "sign up google"), for: .normal)
+        register_facebook.setTitle(NSLocalizedString("signup_facebook", comment: "sign up facebook"), for: .normal)
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["Anglais", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "Anglais" {
+                    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+                } else if action.title == "Français" {
+                    UserDefaults.standard.set(["fr"], forKey: "AppleLanguages")
+                }
+                
+                UserDefaults.standard.synchronize() // Save language selection
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -70,32 +96,35 @@ class Register: UIViewController {
         let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(ConfirmationVC, animated: true)
     }
-
-
+    
+    func resetFields() {
+        usernameTF.text = ""
+        emailTF.text = ""
+        passwordTF.text = ""
+        confirmPasswordTF.text = ""
+    }
     
     @IBAction func registerBtnTapped(_ sender: Any) {
         guard let username = self.usernameTF.text else { return }
         guard let email = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
         guard let confirmPassword = self.confirmPasswordTF.text else { return }
-
-
+        
+        
         let register = RegisterModel(username: username, email: email, password: password, confirmPassword: confirmPassword)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
-//                self.showAlert(message: str)
+                //                self.showAlert(message: str)
                 self.goToConfirmation(withId: "ConfirmationID")
                 
-
+                
             }else {
                 self.showAlert(message: str)
             }
-            
         }
-
+        self.resetFields()
     }
     
-
 }
 
 extension UITextField {

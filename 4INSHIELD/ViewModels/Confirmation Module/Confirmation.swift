@@ -30,6 +30,7 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         //MARK: Translate
         welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
         enterCodeLbl.text = NSLocalizedString("code", comment: "confirmation code")
+        registerBtn.setTitle(NSLocalizedString("sign_up", comment: "sign_up"), for: .normal)
         
         
         firstOtpTf.delegate = self
@@ -38,51 +39,75 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         fourthOtpTf.delegate = self
         fifthOtpTf.delegate = self
         sixthOtpTf.delegate = self
+        
+        registerBtn.applyGradient()
     }
-    
-    //limit the user input to one character per text field
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newLength = (textField.text?.count ?? 0) + string.count - range.length
-        return newLength <= 1
-    }
-    
-    //move the focus to the next text field when the user presses the "Next" button
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let nextTextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
-            nextTextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
+        
+        // Allow backspace
+        if string.isEmpty {
+            if let prevTextField = textField.superview?.viewWithTag(textField.tag - 1) as? UITextField {
+                prevTextField.becomeFirstResponder()
+            }
+            textField.text = ""
+            return false
         }
-        return true
+        
+        // Limit to one character
+        if newLength > 1 {
+            return false
+        }
+        
+        // Move to the next text field if there is input
+        if let nextTextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField,
+           !string.isEmpty {
+            nextTextField.becomeFirstResponder()
+        }
+        
+        // Fill the text field with the input
+        textField.text = string
+        
+        return false
     }
     
     //Append entries
     let otpCode = "(firstOtpTf.text!)(secondOtpTf.text!)(thirdOtpTf.text!)(fourthOtpTf.text!)(fifthOtpTf.text!)(sixthOtpTf.text!)"
     
     @IBAction func ConfirmationBtnTapped(_ sender: Any) {
-        
-        //        APIManager.shareInstance.verifyOTPActivationCode(email: savedUserEmail, codeOTP: String(otpCode)) { result in
-        //            switch result {
-        //            case .success(let isValidOTP):
-        //                if let valid = isValidOTP as? Bool, valid {
-        //                    APIManager.shareInstance.activateAccount(withEmail: savedUserEmail) { activated in
-        //                        if activated {
-        //                            print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is now active!")
-        //
-        //                        }
-        //
-        //                    }
-        //
-        //                }
-        //            case .failure(_):
-        //                print("DEBUG: Congrats: Your account associated to this email \(savedUserEmail) is not active!")
-        //            }
-        //
-        //        }
-        //    }
-        
-        
+        guard let savedUserEmail = UserDefaults.standard.string(forKey: "userEmail") else {
+            return
+        }
+        APIManager.shareInstance.verifyOTPActivationCode(email: savedUserEmail, codeOTP: String(otpCode)) { result in
+            switch result {
+            case .success:
+                APIManager.shareInstance.activateAccount(withEmail: savedUserEmail) { activated in
+                    if activated {
+                        print("Your account associated to this email \(savedUserEmail) is now active!")
+                    } else {
+                        print("Your account associated to this email \(savedUserEmail) is not active!")
+                    }
+                }
+                
+                let alertController = UIAlertController(title: "Great Job!", message: "Your 4INSHIELD account has been successfully activated! Now you can login", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Login", style: .default, handler: { _ in
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! Home
+                    self.navigationController?.pushViewController(homeVC, animated: true)
+                }))
+                self.present(alertController, animated: true, completion: nil)
+                
+            case .failure(let error):
+                print("This is a Non-valid/Expired OTP Code! Error: \(error.localizedDescription)")
+                let alertController = UIAlertController(title: "Oops", message: "This PIN code is expired or not valid! , please verify your code or ask for a new one", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
+
     
     
     

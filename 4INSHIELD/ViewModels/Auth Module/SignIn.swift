@@ -26,26 +26,8 @@ class SignIn: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the
         
-        //MARK: Translate
-        welcomeLabel.text = NSLocalizedString("Welcome", comment: "welcome label")
-        signInLabel.text = NSLocalizedString("Welcome2", comment: "sign in label")
-        emailTF.text = NSLocalizedString("e_mail", comment: "sign in label")
-        passwordTF.text = NSLocalizedString("Password", comment: "sign in label")
-        dontHaveAccLabel.text = NSLocalizedString("text_register", comment: "no account ?")
-        forgotPwdBtn.setTitle(NSLocalizedString("forget", comment: "forgot password"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        registerBtn.setTitle(NSLocalizedString("register", comment: "register"), for: .normal)
-        signIn_google.setTitle(NSLocalizedString("google_connect", comment: "google"), for: .normal)
-        signIn_facebook.setTitle(NSLocalizedString("fb", comment: "facebook"), for: .normal)
-        
-        let currentLanguage = Bundle.main.preferredLocalizations[0]
-        if let flagImage = languageFlags[currentLanguage] {
-            changeLanguageBtn.setImage(flagImage, for: .normal)
-        }
-
         //Text fields left side image
         emailTF.setupLeftSideImage(ImageViewNamed: "mail")
         passwordTF.setupLeftSideImage(ImageViewNamed: "password")
@@ -60,118 +42,83 @@ class SignIn: UIViewController {
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
     }
+
     
-    
-//    let languageFlags = [
-//        "en": UIImage(named: "english"),
-//        "fr": UIImage(named: "french")
-//    ]
-//
-//    private var bundleKey: UInt8 = 0
-//
-//    func setLanguage(_ languageCode: String, button: UIButton) {
-//        print("Setting language to \(languageCode)")
-//
-//        UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
-//        UserDefaults.standard.synchronize()
-//
-//        guard let path = Bundle.main.path(forResource: languageCode, ofType: "lproj") else {
-//            print("Could not find path for language code \(languageCode)")
-//            return
-//        }
-//
-//        let bundle = Bundle(path: path)
-//        guard let localizedBundle = bundle else {
-//            print("Could not load bundle for language code \(languageCode)")
-//            return
-//        }
-//        objc_setAssociatedObject(Bundle.main, &bundleKey, localizedBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//
-//        // Update flag image on button
-//        if let flagImage = languageFlags[languageCode] {
-//            button.setImage(flagImage, for: .normal)
-//        } else {
-//            print("Could not find flag image for language code \(languageCode)")
-//        }
-//
-//        // Force a reload of the view controller to update the localized strings
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//            let viewController = windowScene.windows.first?.rootViewController {
-//            viewController.viewDidLoad()
-//        }
-//    }
-    
-    
-    let languageFlags = [
-        "en": UIImage(named: "english"),
-        "fr": UIImage(named: "french")
-    ]
-    
-        private var bundleKey: UInt8 = 0
-    
-    func setLanguage(_ languageCode: String, button: UIButton) {
-        UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
-           UserDefaults.standard.synchronize()
-   
-           guard let path = Bundle.main.path(forResource: languageCode, ofType: "lproj") else {
-               print("Could not find path for language code \(languageCode)")
-               return
-           }
-   
-           let bundle = Bundle(path: path)
-           guard let localizedBundle = bundle else {
-               print("Could not load bundle for language code \(languageCode)")
-               return
-           }
-           objc_setAssociatedObject(Bundle.main, &bundleKey, localizedBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//        Update flag image on button
-        if let flagImage = languageFlags[languageCode] {
-            button.setImage(flagImage, for: .normal)
-        } else {
-            print("Could not find flag image for language code \(languageCode)")
-        }
-        if let navController = self.navigationController {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "SignIn")
-            navController.setViewControllers([viewController], animated: false)
+    func verifyFields() -> Bool {
+        guard let username =  emailTF.text else { return false }
+        guard let password =  passwordTF.text else { return false }
+
+        if username.isEmpty || password.isEmpty {
+            return false
         }
         
-        
+        return true
     }
     
-    func restartApplication() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateInitialViewController()
-        appDelegate.window?.rootViewController = initialViewController
+    
+    func resetFields() {
+        emailTF.text = ""
+        passwordTF.text = ""
     }
 
     @IBAction func changeLanguageBtnTapped(_ sender: UIButton) {
-//        let currentLanguage = Locale.current.language.languageCode?.identifier
-//        let newLanguage = currentLanguage == "en" ? "fr" : "en"
-//        UserDefaults.standard.set([newLanguage], forKey: "AppleLanguages")
-        let currentLanguage = Bundle.main.preferredLocalizations[0]
-            let nextLanguage = currentLanguage == "en" ? "fr" : "en"
-            setLanguage(nextLanguage, button: sender)
+        let languages = ["Anglais", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "Anglais" {
+                    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+                } else if action.title == "Français" {
+                    UserDefaults.standard.set(nil, forKey: "AppleLanguages")
+                }
+                UserDefaults.standard.synchronize() // Save language selection
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
     }
-    
+
+    func updateLocalizedStrings() {
+        welcomeLabel.text = NSLocalizedString("Welcome", comment: "welcome label")
+        signInLabel.text = NSLocalizedString("Welcome2", comment: "sign in label")
+        emailTF.placeholder = NSLocalizedString("e_mail", comment: "sign in label")
+        passwordTF.placeholder = NSLocalizedString("Password", comment: "sign in label")
+        dontHaveAccLabel.text = NSLocalizedString("text_register", comment: "no account ?")
+        forgotPwdBtn.setTitle(NSLocalizedString("forget", comment: "forgot password"), for: .normal)
+        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
+        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
+        registerBtn.setTitle(NSLocalizedString("register", comment: "register"), for: .normal)
+        signIn_google.setTitle(NSLocalizedString("google_connect", comment: "google"), for: .normal)
+        signIn_facebook.setTitle(NSLocalizedString("fb", comment: "facebook"), for: .normal)
+    }
+
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
         guard let username = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
         
-        let login = LoginModel(username: username, password: password)
-        APIManager.shareInstance.loginAPI(login: login) { result in
-            switch result {
-            case.success(let json):
-                print(json as AnyObject)
-            case.failure(let err):
-                print(err.localizedDescription)
+        if(verifyFields()) {
+            
+            let login = LoginModel(username: username, password: password)
+            APIManager.shareInstance.loginAPI(login: login) { result in
+                switch result {
+                case.success(let json):
+                    print(json as AnyObject)
+                case.failure(let err):
+                    print(err.localizedDescription)
+                }
+                
             }
+            
         }
-        
+        self.resetFields()
     }
 
 }

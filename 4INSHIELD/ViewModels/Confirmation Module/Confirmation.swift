@@ -11,6 +11,8 @@ import UIKit
 class Confirmation: UIViewController, UITextFieldDelegate {
     
     //IBOutlets
+    
+    @IBOutlet weak var ChangeLanguageBtn: UIButton!
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var enterCodeLbl: UILabel!
     @IBOutlet weak var registerBtn: UIButton!
@@ -22,16 +24,11 @@ class Confirmation: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fifthOtpTf: UITextField!
     @IBOutlet weak var sixthOtpTf: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
-        //MARK: Translate
-        welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
-        enterCodeLbl.text = NSLocalizedString("code", comment: "confirmation code")
-        registerBtn.setTitle(NSLocalizedString("sign_up", comment: "sign_up"), for: .normal)
-        
         
         firstOtpTf.delegate = self
         secondOtpTf.delegate = self
@@ -42,7 +39,46 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         
         registerBtn.applyGradient()
     }
+    
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
 
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.ChangeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.ChangeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                }
+
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+
+        present(languageAlert, animated: true, completion: nil)
+    }
+
+
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+            
+        welcomeLbl.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
+        enterCodeLbl.text = NSLocalizedString("code", tableName: nil, bundle: bundle, value: "", comment: "confirmation code")
+        registerBtn.setTitle(NSLocalizedString("Confirm", tableName: nil, bundle: bundle, value: "", comment: "Confirm"), for: .normal)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newLength = (textField.text?.count ?? 0) + string.count - range.length
         

@@ -27,6 +27,14 @@ class Register: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+       
+        // Set the initial language based on the saved language
+            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+                LanguageManager.shared.currentLanguage = selectedLanguage
+            }
+
+            // Update localized strings
+            updateLocalizedStrings()
         
         //Text fields lefrt side images
         usernameTF.setupLeftSideImages(ImageViewNamed: "user")
@@ -45,45 +53,56 @@ class Register: UIViewController {
         register_google.setupBorderBtns()
         register_facebook.setupBorderBtns()
     }
-    func updateLocalizedStrings() {
-        welcomeLbl.text = NSLocalizedString("Welcome", comment: "welcome label")
-        createAccLbl.text = NSLocalizedString("create_account", comment: "sign up label")
-        usernameTF.placeholder = NSLocalizedString("your_username", comment: "username")
-        emailTF.placeholder = NSLocalizedString("e_mail", comment: "email")
-        passwordTF.placeholder = NSLocalizedString("Password", comment: "Password")
-        confirmPasswordTF.placeholder = NSLocalizedString("re_type_password", comment: "Confirm Password")
-        registerBtn.setTitle(NSLocalizedString("sign_up", comment: "sign up"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        haveAccLbl.text = NSLocalizedString("text_login", comment: "text login")
-        register_google.setTitle(NSLocalizedString("signup_google", comment: "sign up google"), for: .normal)
-        register_facebook.setTitle(NSLocalizedString("signup_facebook", comment: "sign up facebook"), for: .normal)
-    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+    }
+
+
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
-        let languages = ["Anglais", "Français"]
+        let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-        
+
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
-                if action.title == "Anglais" {
-                    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
                 } else if action.title == "Français" {
-                    UserDefaults.standard.set(["fr"], forKey: "AppleLanguages")
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
                 }
-                
-                UserDefaults.standard.synchronize() // Save language selection
+
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
         }
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         languageAlert.addAction(cancelAction)
-        
+
         present(languageAlert, animated: true, completion: nil)
     }
     
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+            
+        welcomeLbl.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
+        createAccLbl.text = NSLocalizedString("create_account", tableName: nil, bundle: bundle, value: "", comment: "sign up label")
+        usernameTF.placeholder = NSLocalizedString("your_username", tableName: nil, bundle: bundle, value: "", comment: "username")
+        emailTF.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
+        passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "Password")
+        confirmPasswordTF.placeholder = NSLocalizedString("re_type_password", tableName: nil, bundle: bundle, value: "", comment: "Confirm Password")
+        registerBtn.setTitle(NSLocalizedString("sign_up", tableName: nil, bundle: bundle, value: "", comment: "sign up"), for: .normal)
+        signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
+        haveAccLbl.text = NSLocalizedString("text_login", tableName: nil, bundle: bundle, value: "", comment: "text login")
+        register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
+        register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal)
+    }
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)

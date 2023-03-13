@@ -22,11 +22,20 @@ class SignIn: UIViewController {
     @IBOutlet weak var signIn_google: UIButton!
     @IBOutlet weak var signIn_facebook: UIButton!
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the
+        
+        // Set the initial language based on the saved language
+           if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+               LanguageManager.shared.currentLanguage = selectedLanguage
+           }
+
+           // Update localized strings
+           updateLocalizedStrings()
         
         //Text fields left side image
         emailTF.setupLeftSideImage(ImageViewNamed: "mail")
@@ -41,6 +50,12 @@ class SignIn: UIViewController {
         signInBtn.applyGradient()
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        LanguageManager.shared.currentLanguage = "fr"
+        updateLocalizedStrings()
     }
 
     
@@ -61,43 +76,50 @@ class SignIn: UIViewController {
         passwordTF.text = ""
     }
 
-    @IBAction func changeLanguageBtnTapped(_ sender: UIButton) {
-        let languages = ["Anglais", "Français"]
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-        
+
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
-                if action.title == "Anglais" {
-                    UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
                 } else if action.title == "Français" {
-                    UserDefaults.standard.set(nil, forKey: "AppleLanguages")
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
                 }
-                UserDefaults.standard.synchronize() // Save language selection
+
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
         }
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         languageAlert.addAction(cancelAction)
-        
+
         present(languageAlert, animated: true, completion: nil)
     }
 
+
     func updateLocalizedStrings() {
-        welcomeLabel.text = NSLocalizedString("Welcome", comment: "welcome label")
-        signInLabel.text = NSLocalizedString("Welcome2", comment: "sign in label")
-        emailTF.placeholder = NSLocalizedString("e_mail", comment: "sign in label")
-        passwordTF.placeholder = NSLocalizedString("Password", comment: "sign in label")
-        dontHaveAccLabel.text = NSLocalizedString("text_register", comment: "no account ?")
-        forgotPwdBtn.setTitle(NSLocalizedString("forget", comment: "forgot password"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", comment: "Login"), for: .normal)
-        registerBtn.setTitle(NSLocalizedString("register", comment: "register"), for: .normal)
-        signIn_google.setTitle(NSLocalizedString("google_connect", comment: "google"), for: .normal)
-        signIn_facebook.setTitle(NSLocalizedString("fb", comment: "facebook"), for: .normal)
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        welcomeLabel.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
+        signInLabel.text = NSLocalizedString("Welcome2", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
+        emailTF.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
+        passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
+        dontHaveAccLabel.text = NSLocalizedString("text_register", tableName: nil, bundle: bundle, value: "", comment: "no account ?")
+        forgotPwdBtn.setTitle(NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot password"), for: .normal)
+        signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
+        registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
+        signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
+        signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
     }
+
 
     
     @IBAction func SignInBtnTapped(_ sender: Any) {

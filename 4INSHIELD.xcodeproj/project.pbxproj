@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
+		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
+		04340B2429C09BDF0055B394 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2329C09BDF0055B394 /* Phone.swift */; };
+		04340B2629C09C070055B394 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2529C09C070055B394 /* Events.swift */; };
+		04340B2829C09C2F0055B394 /* Formation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2729C09C2F0055B394 /* Formation.swift */; };
 		043557FA29AE35B900D4F012 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557F929AE35B900D4F012 /* Constant.swift */; };
 		043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FC29AE377700D4F012 /* RegisterModel.swift */; };
 		0435580029AE386B00D4F012 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FF29AE386B00D4F012 /* APIManager.swift */; };
@@ -32,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
+		04340B2329C09BDF0055B394 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
+		04340B2529C09C070055B394 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		04340B2729C09C2F0055B394 /* Formation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formation.swift; sourceTree = "<group>"; };
 		043557F929AE35B900D4F012 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		043557FC29AE377700D4F012 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		043557FF29AE386B00D4F012 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -73,6 +81,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04340B1B29C097F10055B394 /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				049C44AF29B2024100AAA582 /* Localizable.strings */,
+				049FD9AA29BF705D00DCD577 /* LanguageManager.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		04340B1F29C09B4B0055B394 /* Dashboard Tab  */ = {
+			isa = PBXGroup;
+			children = (
+				0441E86D29BB60FA00E73AF2 /* Home.swift */,
+				04340B2029C09B610055B394 /* SocialMedia.swift */,
+				04340B2329C09BDF0055B394 /* Phone.swift */,
+				04340B2529C09C070055B394 /* Events.swift */,
+				04340B2729C09C2F0055B394 /* Formation.swift */,
+			);
+			path = "Dashboard Tab ";
+			sourceTree = "<group>";
+		};
 		043557F829AE359300D4F012 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,14 +125,6 @@
 				043557FF29AE386B00D4F012 /* APIManager.swift */,
 			);
 			path = APIManager;
-			sourceTree = "<group>";
-		};
-		0441E86C29BB60DB00E73AF2 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				0441E86D29BB60FA00E73AF2 /* Home.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		04850C4229ACC3E3001A27FF = {
@@ -138,8 +159,7 @@
 				04850C5429ACC3E4001A27FF /* Main.storyboard */,
 				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
-				049C44AF29B2024100AAA582 /* Localizable.strings */,
-				049FD9AA29BF705D00DCD577 /* LanguageManager.swift */,
+				04340B1B29C097F10055B394 /* Translation */,
 			);
 			path = 4INSHIELD;
 			sourceTree = "<group>";
@@ -147,7 +167,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				0441E86C29BB60DB00E73AF2 /* Home */,
+				04340B1F29C09B4B0055B394 /* Dashboard Tab  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
 				04A963B829B0DE7A009EA1CB /* Confirmation Module */,
 				04E54A3729ACC83F00B00906 /* Auth Module */,
@@ -356,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
@@ -364,9 +385,12 @@
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
+				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
+				04340B2629C09C070055B394 /* Events.swift in Sources */,
+				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 			);

@@ -8,6 +8,7 @@ target '4INSHIELD' do
   # Pods for 4INSHIELD
     
     pod 'SwiftKeychainWrapper'
+    pod 'SideMenu'
 
 
 end

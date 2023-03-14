@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "connect3.png",
+      "filename" : "Groupe 12.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Groupe 12@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Groupe 12@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

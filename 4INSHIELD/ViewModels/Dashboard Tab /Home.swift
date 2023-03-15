@@ -43,30 +43,60 @@ class MenuListController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+       
+        
         // Set up header view
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 200))
-        let backgroundImage = UIImageView(frame: headerView.bounds)
-        backgroundImage.image = UIImage(named: "backgroundImage")
-        backgroundImage.contentMode = .scaleToFill // Set content mode
-        headerView.addSubview(backgroundImage)
-        let logoImage = UIImageView(frame: CGRect(x: (headerView.frame.width - 100) / 2, y: 50, width: 100, height: 100))
-        logoImage.image = UIImage(named: "4inshield logo blanc")
-        logoImage.contentMode = .scaleToFill // Set content mode
-        headerView.addSubview(logoImage)
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 145))
         tableView.tableHeaderView = headerView
+        headerView.backgroundColor = UIColor(red: 0.12, green: 0.73, blue: 0.94, alpha: 1.00)
 
+//        let backgroundImage = UIImage(named: "backgroundImage")
+//        let backgroundImageView = UIImageView(image: backgroundImage)
+//        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+//        headerView.addSubview(backgroundImageView)
+//
+//        NSLayoutConstraint.activate([
+//            backgroundImageView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+//            backgroundImageView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+//            backgroundImageView.topAnchor.constraint(equalTo: headerView.topAnchor),
+//            backgroundImageView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor)
+//        ])
+        
+        let logoImageView = UIImageView(image: UIImage(named: "4inshield logo blanc"))
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(logoImageView)
+        
+        NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 20),
+            logoImageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: 80),
+            logoImageView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        
+        
+        tableView.tableHeaderView = headerView
+        
         // Set up footer view
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
-        let footerImage = UIImageView(frame: footerView.bounds)
-        footerImage.image = UIImage(named: "footer")
-        footerImage.contentMode = .scaleToFill // Set content mode
-        footerView.addSubview(footerImage)
+        
+        let footerImageView = UIImageView(image: UIImage(named: "footer"))
+        footerImageView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.addSubview(footerImageView)
+        
+//        NSLayoutConstraint.activate([
+//            footerImageView.leadingAnchor.constraint(equalTo: footerView.leadingAnchor),
+//            footerImageView.trailingAnchor.constraint(equalTo: footerView.trailingAnchor),
+//            footerImageView.topAnchor.constraint(equalTo: footerView.topAnchor),
+//            footerImageView.bottomAnchor.constraint(equalTo: footerView.bottomAnchor)
+//        ])
+        
         let footerLabel = UILabel(frame: CGRect(x: 0, y: 10, width: tableView.frame.width, height: 30))
         footerLabel.text = "© 2023 All Rights Reserved Made by 4INDATA"
         footerLabel.textColor = .white
         footerLabel.textAlignment = .center
         footerLabel.backgroundColor = .blue // Set background color
         footerView.addSubview(footerLabel)
+        
         tableView.tableFooterView = footerView
     }
     

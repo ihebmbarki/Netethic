@@ -27,6 +27,9 @@
 		049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C44A729B1E96400AAA582 /* LoginModel.swift */; };
 		049C44AD29B2024100AAA582 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049C44AF29B2024100AAA582 /* Localizable.strings */; };
 		049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD9AA29BF705D00DCD577 /* LanguageManager.swift */; };
+		04A52E0D29C206A00097C145 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0C29C206A00097C145 /* SideBar.swift */; };
+		04A52E0F29C207A70097C145 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0E29C207A70097C145 /* homeVC.swift */; };
+		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
@@ -59,6 +62,9 @@
 		049C44AE29B2024100AAA582 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049C44B029B2025900AAA582 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049FD9AA29BF705D00DCD577 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		04A52E0C29C206A00097C145 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
+		04A52E0E29C207A70097C145 /* homeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
+		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 				04340B2329C09BDF0055B394 /* Phone.swift */,
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
+				04A52E0E29C207A70097C145 /* homeVC.swift */,
 			);
 			path = "Dashboard Tab ";
 			sourceTree = "<group>";
@@ -167,6 +174,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				04A52E0B29C206860097C145 /* Side Menu */,
 				04340B1F29C09B4B0055B394 /* Dashboard Tab  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
 				04A963B829B0DE7A009EA1CB /* Confirmation Module */,
@@ -181,6 +189,15 @@
 				0496979529AF769800F65DF4 /* Loading.swift */,
 			);
 			path = "Loading Screen ";
+			sourceTree = "<group>";
+		};
+		04A52E0B29C206860097C145 /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				04A52E0C29C206A00097C145 /* SideBar.swift */,
+				04A52E1029C20A3F0097C145 /* SideMenuModel.swift */,
+			);
+			path = "Side Menu";
 			sourceTree = "<group>";
 		};
 		04A963B429B0CFE8009EA1CB /* Authentication */ = {
@@ -385,13 +402,16 @@
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
+				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
 				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
+				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */,
+				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

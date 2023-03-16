@@ -130,7 +130,7 @@ class Confirmation: UIViewController, UITextFieldDelegate {
                 
                 alertController.addAction(UIAlertAction(title: "Login", style: .default, handler: { _ in
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! Home
+                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! homeVC
                     self.navigationController?.pushViewController(homeVC, animated: true)
                 }))
                 self.present(alertController, animated: true, completion: nil)

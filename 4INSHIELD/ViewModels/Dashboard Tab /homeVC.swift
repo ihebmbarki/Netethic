@@ -49,8 +49,10 @@ class homeVC: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.SideBar = storyboard.instantiateViewController(withIdentifier: "sidebarViewController") as? SideBar
         self.SideBar.defaultHighlightedCell = 0 // Default Highlighted Cell
+        
         self.SideBar.delegate = self
         view.insertSubview(self.SideBar!.view, at: self.revealSideMenuOnTop ? 2 : 0)
+        view.bringSubviewToFront(self.SideBar!.view)
         addChild(self.SideBar!)
         self.SideBar!.didMove(toParent: self)
         

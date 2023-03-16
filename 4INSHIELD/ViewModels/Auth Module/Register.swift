@@ -144,6 +144,14 @@ class Register: UIViewController {
         self.resetFields()
     }
     
+    @IBAction func signUpGoogleTapped(_ sender: Any) {
+    }
+    
+    
+    @IBAction func signUpFacebookTapped(_ sender: Any) {
+    }
+    
+    
 }
 
 extension UITextField {

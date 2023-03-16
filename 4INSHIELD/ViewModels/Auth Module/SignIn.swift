@@ -142,6 +142,15 @@ class SignIn: UIViewController {
         }
         self.resetFields()
     }
+    
+    
+    @IBAction func signInGoogleTapped(_ sender: Any) {
+    }
+    
+    @IBAction func signInFacebookTapped(_ sender: Any) {
+    }
+    
+    
 
 }
 

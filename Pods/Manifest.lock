@@ -1,20 +1,3 @@
-PODS:
-  - SideMenu (6.5.0)
-  - SwiftKeychainWrapper (4.0.1)
-
-DEPENDENCIES:
-  - SideMenu
-  - SwiftKeychainWrapper
-
-SPEC REPOS:
-  trunk:
-    - SideMenu
-    - SwiftKeychainWrapper
-
-SPEC CHECKSUMS:
-  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
-  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
-
-PODFILE CHECKSUM: b6441523e04546748f55a1d8aef8f266808becea
+PODFILE CHECKSUM: bc1b535a9e7f413ba777280b10fe50de5e5371bf
 
 COCOAPODS: 1.11.3

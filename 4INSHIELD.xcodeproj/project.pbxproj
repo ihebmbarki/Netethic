@@ -16,7 +16,6 @@
 		043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FC29AE377700D4F012 /* RegisterModel.swift */; };
 		0435580029AE386B00D4F012 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FF29AE386B00D4F012 /* APIManager.swift */; };
 		0435580329AE39B800D4F012 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0435580229AE39B800D4F012 /* Alamofire */; };
-		0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441E86D29BB60FA00E73AF2 /* Home.swift */; };
 		04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C4E29ACC3E3001A27FF /* AppDelegate.swift */; };
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
@@ -46,7 +45,6 @@
 		043557F929AE35B900D4F012 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		043557FC29AE377700D4F012 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		043557FF29AE386B00D4F012 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		0441E86D29BB60FA00E73AF2 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		04850C4B29ACC3E3001A27FF /* 4INSHIELD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 4INSHIELD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04850C4E29ACC3E3001A27FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04850C5029ACC3E4001A27FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,12 +97,11 @@
 		04340B1F29C09B4B0055B394 /* Dashboard Tab  */ = {
 			isa = PBXGroup;
 			children = (
-				0441E86D29BB60FA00E73AF2 /* Home.swift */,
+				04A52E0E29C207A70097C145 /* homeVC.swift */,
 				04340B2029C09B610055B394 /* SocialMedia.swift */,
 				04340B2329C09BDF0055B394 /* Phone.swift */,
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
-				04A52E0E29C207A70097C145 /* homeVC.swift */,
 			);
 			path = "Dashboard Tab ";
 			sourceTree = "<group>";
@@ -279,7 +276,6 @@
 				04850C4729ACC3E3001A27FF /* Sources */,
 				04850C4829ACC3E3001A27FF /* Frameworks */,
 				04850C4929ACC3E3001A27FF /* Resources */,
-				A3870EFF926409EEC3D66862 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -347,23 +343,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A3870EFF926409EEC3D66862 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D4DCD77E2BAFE4D7E37A9191 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,7 +389,6 @@
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
-				0441E86E29BB60FA00E73AF2 /* Home.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 			);

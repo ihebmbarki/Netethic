@@ -35,6 +35,7 @@ class homeVC: UIViewController {
         panGestureRecognizer.delegate = self
         view.addGestureRecognizer(panGestureRecognizer)
         
+        // Shadow Background View
         self.sideMenuShadowView = UIView(frame: self.view.bounds)
         self.sideMenuShadowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer))
@@ -68,6 +69,8 @@ class homeVC: UIViewController {
             self.SideBar.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
         ])
+        // Default Main View Controller
+//        showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
         
     }
     
@@ -96,8 +99,22 @@ extension homeVC : SideBarDelegate {
         switch row {
         case 0:
             // Paramètres
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "PhoneID")
-            
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "ParamètresID")
+//        case 1:
+//            // Autorisation d’accés
+//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+//        case 2:
+//            // Nous contacter
+//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+//        case 3:
+//            // Mentions légales
+//            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
+//        case 4:
+//            // À propos
+//            self.showViewController(viewController: APropos.self, storyboardId: " ")
+//        case 5:
+//            //Déconnexion
+//            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
         default:
             break
         }
@@ -118,6 +135,15 @@ extension homeVC : SideBarDelegate {
         vc.view.tag = 99
         view.insertSubview(vc.view, at: self.revealSideMenuOnTop ? 0 : 1)
         addChild(vc)
+        DispatchQueue.main.async {
+            vc.view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                vc.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                vc.view.topAnchor.constraint(equalTo: self.view.topAnchor),
+                vc.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                vc.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            ])
+        }
         if !self.revealSideMenuOnTop {
             if isExpanded {
                 vc.view.frame.origin.x = self.sideMenuRevealWidth
@@ -161,7 +187,6 @@ extension homeVC : SideBarDelegate {
 
 extension UIViewController {
     // With this extension you can access the MainViewController from the child view controllers.
-
     func revealViewController() -> homeVC? {
         var viewController: UIViewController? = self
 
@@ -178,6 +203,7 @@ extension UIViewController {
     }
 }
 
+//MARK: Gesture Recognizer Delegate
 extension homeVC: UIGestureRecognizerDelegate {
     
     @objc func TapGestureRecognizer(sender: UITapGestureRecognizer) {

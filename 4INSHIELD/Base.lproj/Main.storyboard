@@ -630,7 +630,7 @@
         <!--HomeVC-->
         <scene sceneID="Jkl-kS-L7c">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="cdu-QE-tmx" customClass="homeVC" customModule="_INSHIELD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeNavID" id="cdu-QE-tmx" customClass="homeVC" customModule="_INSHIELD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cb8-0F-scN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -669,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAg-WG-Aar" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4475.5725190839694" y="1533.8028169014085"/>
+            <point key="canvasLocation" x="4476" y="1562"/>
         </scene>
         <!--Social Media-->
         <scene sceneID="Qcm-VZ-jwO">
@@ -713,7 +713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWQ-bM-oJv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5402" y="1534"/>
+            <point key="canvasLocation" x="5402" y="1562"/>
         </scene>
         <!--Phone-->
         <scene sceneID="Drd-U0-Fu9">
@@ -755,7 +755,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pmc-Ry-aF6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6320" y="1534"/>
+            <point key="canvasLocation" x="6320" y="1562"/>
         </scene>
         <!--Events-->
         <scene sceneID="PbN-LW-XA8">
@@ -797,7 +797,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Jz-2F-cTm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7247" y="1534"/>
+            <point key="canvasLocation" x="7247" y="1562"/>
         </scene>
         <!--Formation-->
         <scene sceneID="OIu-LW-R2N">
@@ -839,7 +839,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sF0-Ao-gjd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8044" y="1534"/>
+            <point key="canvasLocation" x="8044" y="1562"/>
         </scene>
         <!--Loading-->
         <scene sceneID="E8P-GO-YPd">

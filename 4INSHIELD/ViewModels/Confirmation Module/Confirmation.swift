@@ -108,43 +108,50 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    //Append entries
-    let otpCode = "(firstOtpTf.text!)(secondOtpTf.text!)(thirdOtpTf.text!)(fourthOtpTf.text!)(fifthOtpTf.text!)(sixthOtpTf.text!)"
+    func goToSignIn(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let SignIn = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(SignIn, animated: true)
+    }
+    
+    
     
     @IBAction func ConfirmationBtnTapped(_ sender: Any) {
-        guard let savedUserEmail = UserDefaults.standard.string(forKey: "userEmail") else {
-            return
-        }
-        APIManager.shareInstance.verifyOTPActivationCode(email: savedUserEmail, codeOTP: String(otpCode)) { result in
+        let otpCode = "\(firstOtpTf.text!)\(secondOtpTf.text!)\(thirdOtpTf.text!)\(fourthOtpTf.text!)\(fifthOtpTf.text!)\(sixthOtpTf.text!)"
+        print("otpCode: \(otpCode)")
+        APIManager.shareInstance.verifyOTPActivationCode(codeOTP: String(otpCode)) { result in
             switch result {
-            case .success:
-                APIManager.shareInstance.activateAccount(withEmail: savedUserEmail) { activated in
-                    if activated {
-                        print("Your account associated to this email \(savedUserEmail) is now active!")
-                    } else {
-                        print("Your account associated to this email \(savedUserEmail) is not active!")
+            case .success(let email):
+                print("valid OTP Code")
+                
+                APIManager.shareInstance.activateAccount { result in
+                    switch result {
+                    case .success(_):
+                        print("Your account associated to this email \(email) is now active!")
+                        DispatchQueue.main.async {
+                            let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
+                            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                self.goToSignIn(withId: "SignIn")
+                            }
+                            alertController.addAction(okayAction)
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+
+                    case .failure(let error):
+                        print("Your account associated with this email \(email) is not active!")
+                        print("Error: \(error.localizedDescription)")
                     }
                 }
-                
-                let alertController = UIAlertController(title: "Great Job!", message: "Your 4INSHIELD account has been successfully activated! Now you can login", preferredStyle: .alert)
-                
-                alertController.addAction(UIAlertAction(title: "Login", style: .default, handler: { _ in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! homeVC
-                    self.navigationController?.pushViewController(homeVC, animated: true)
-                }))
-                self.present(alertController, animated: true, completion: nil)
-                
             case .failure(let error):
-                print("This is a Non-valid/Expired OTP Code! Error: \(error.localizedDescription)")
-                let alertController = UIAlertController(title: "Oops", message: "This PIN code is expired or not valid! , please verify your code or ask for a new one", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                let errorMessage = error.localizedDescription
+                print("\(errorMessage)")
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Error", message: "Failed to confirm", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
             }
         }
     }
-
-    
-    
-    
 }

@@ -31,6 +31,7 @@
 		04A52E0F29C207A70097C145 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0E29C207A70097C145 /* homeVC.swift */; };
 		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
+		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
 		04E54A3F29ACCC3B00B00906 /* Inter in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3E29ACCC3B00B00906 /* Inter */; };
@@ -67,6 +68,7 @@
 		04A52E0E29C207A70097C145 /* homeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
+		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
 		04E54A3E29ACCC3B00B00906 /* Inter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inter; path = ../../../../../Downloads/Inter; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				04B2A60B29CB51A00028B7E2 /* Wizard */,
 				04A52E0B29C206860097C145 /* Side Menu */,
 				04340B1F29C09B4B0055B394 /* Dashboard Tab  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
@@ -227,6 +230,14 @@
 				0496979729AFAD6C00F65DF4 /* Confirmation.swift */,
 			);
 			path = "Confirmation Module";
+			sourceTree = "<group>";
+		};
+		04B2A60B29CB51A00028B7E2 /* Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				04B2A60C29CB52250028B7E2 /* ChildProfile.swift */,
+			);
+			path = Wizard;
 			sourceTree = "<group>";
 		};
 		04E54A3729ACC83F00B00906 /* Auth Module */ = {
@@ -403,6 +414,7 @@
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
+				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

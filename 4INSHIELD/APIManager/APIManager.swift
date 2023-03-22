@@ -50,7 +50,7 @@ class APIManager {
     
     func loginAPI(login: LoginModel, completionHandler: @escaping handler){
         
-        let headers: HTTPHeaders = [ 
+        let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
         
@@ -77,63 +77,60 @@ class APIManager {
         }
     }
     
-    func verifyOTPActivationCode(email: String, codeOTP: String, completionHandler: @escaping handler){
-        
-        let headers: HTTPHeaders = [
-            .contentType("application/json")
-        ]
-        let data = [
-            "email": email,
-            "token": codeOTP
-        ]
-        AF.request(otp_url, method: .post, parameters: data , encoder: JSONParameterEncoder.default, headers: headers).response { response in
-            debugPrint(response)
+    func verifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Result<String, APIError>) -> Void) {
             
-            switch response.result {
-            case.success(let data):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                    if response.response?.statusCode == 200 {
-                        completionHandler(.success(json))
-                    }else {
-                        completionHandler(.failure(.custom(message: "Check your network connectivity")))
+            guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
+                completionHandler(.failure(.custom(message: "User email not found")))
+                return
+            }
+            
+            let data = ["email": email,
+                        "token": codeOTP]
+
+            AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
+                switch response.result {
+                case .success( _):
+                    guard let statusCode = (response.response?.statusCode) else {return}
+                    if statusCode == 200 {
+                        completionHandler(.success(email))
+                    } else {
+                        completionHandler(.failure(.custom(message: "Invalid OTP code")))
                     }
-                }catch{
-                    print(error.localizedDescription)
+                case .failure(let err):
+                    print(err.localizedDescription)
                     completionHandler(.failure(.custom(message: "Try again")))
                 }
-            case.failure(let err):
+            }
+        }
+    
+    func activateAccount(completionHandler: @escaping (Result<Bool, APIError>) -> Void) {
+        guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
+            completionHandler(.failure(.custom(message: "User email not found")))
+            return
+        }
+        
+        AF.request(email_verif_url, method: .post, parameters: ["email": email], encoder: JSONParameterEncoder.default).response { response in
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completionHandler(.success(true))
+                } else {
+                    completionHandler(.failure(.custom(message: "Account activation failed")))
+                }
+            case .failure(let err):
                 print(err.localizedDescription)
                 completionHandler(.failure(.custom(message: "Try again")))
             }
-            
         }
     }
     
-    func activateAccount(withEmail: String, completion: @escaping(Bool) -> Void) {
-     
-        let data = [
-            "email": withEmail
-        ]
-        AF.request(email_verif_url, method: .post, parameters: data,
-                   encoder: JSONParameterEncoder.default).response { response in
-            debugPrint(response)
-
-            switch response.result {
-//            case .success(let data):
-            case .success( _):
-//                print("DEBUG:", data)
-                
-                guard let statusCode = (response.response?.statusCode) else {return}
-                if statusCode == 200 {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-                
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
+    struct ErrorResponse: Decodable {
+        let message: String
+    }
+    enum APIError: Error {
+        case custom(message: String)
+        case decodingError
+        case serverError
     }
 }

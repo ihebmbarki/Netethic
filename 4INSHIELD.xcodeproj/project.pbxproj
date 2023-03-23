@@ -17,6 +17,10 @@
 		043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FC29AE377700D4F012 /* RegisterModel.swift */; };
 		0435580029AE386B00D4F012 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FF29AE386B00D4F012 /* APIManager.swift */; };
 		0435580329AE39B800D4F012 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0435580229AE39B800D4F012 /* Alamofire */; };
+		0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739529CC922C00FD28DF /* ChildSocialMedia.swift */; };
+		0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739729CC927200FD28DF /* ChildProfileAdded.swift */; };
+		0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739929CC929C00FD28DF /* ChildDevice.swift */; };
+		0479739C29CC92D100FD28DF /* Congrats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739B29CC92D100FD28DF /* Congrats.swift */; };
 		04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C4E29ACC3E3001A27FF /* AppDelegate.swift */; };
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
@@ -48,6 +52,10 @@
 		043557F929AE35B900D4F012 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		043557FC29AE377700D4F012 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		043557FF29AE386B00D4F012 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0479739529CC922C00FD28DF /* ChildSocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMedia.swift; sourceTree = "<group>"; };
+		0479739729CC927200FD28DF /* ChildProfileAdded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfileAdded.swift; sourceTree = "<group>"; };
+		0479739929CC929C00FD28DF /* ChildDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDevice.swift; sourceTree = "<group>"; };
+		0479739B29CC92D100FD28DF /* Congrats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Congrats.swift; sourceTree = "<group>"; };
 		0483D6281F8244EA5AD38CE0 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		04850C4B29ACC3E3001A27FF /* 4INSHIELD_Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 4INSHIELD_Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04850C4E29ACC3E3001A27FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +244,10 @@
 			isa = PBXGroup;
 			children = (
 				04B2A60C29CB52250028B7E2 /* ChildProfile.swift */,
+				0479739529CC922C00FD28DF /* ChildSocialMedia.swift */,
+				0479739729CC927200FD28DF /* ChildProfileAdded.swift */,
+				0479739929CC929C00FD28DF /* ChildDevice.swift */,
+				0479739B29CC92D100FD28DF /* Congrats.swift */,
 			);
 			path = Wizard;
 			sourceTree = "<group>";
@@ -394,10 +406,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
+				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
+				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
@@ -414,6 +429,7 @@
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
+				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

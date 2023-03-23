@@ -138,8 +138,6 @@ class Register: UIViewController {
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
-
-                
             }else {
                 self.showAlert(message: str)
             }

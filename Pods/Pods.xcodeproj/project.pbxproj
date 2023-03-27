@@ -7,129 +7,244 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5FB965EC6A879EAD0BA79C07DA88F09E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		B753C07E28039241A4F273FC346D9E21 /* Pods-4INSHIELD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F9881D8F2D96670AAE503EB2BE9943B /* Pods-4INSHIELD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF58FE615AEED34B7BA6D3C6D4548812 /* Pods-4INSHIELD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFC596CFF171CAF3E9E8F5140F6CD5 /* Pods-4INSHIELD-dummy.m */; };
+		09AC21330F0AE6258FB1CA63B83ECFBF /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84874DC2A9FFD290F8F6ED6DF5A6A6BB /* FLAnimatedImage.m */; };
+		39501B8B1AF3A7580942A25467C3FEBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BADAF97F77FC4003B3610E7ACA312E1 /* Foundation.framework */; };
+		467613BD646A4BE7BE2FC15E97553195 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5EE3948404F12C5B6DA9AF99AB40738 /* QuartzCore.framework */; };
+		76AAC19F68FC1B80C9DA220383E19CBC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4219BA7CAED0202261970996230F11F /* CoreGraphics.framework */; };
+		7B6B3E396F9966D7F073E5DB8BE99B62 /* FLAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = DCB07A1600D26760D31075538EBBD1F6 /* FLAnimatedImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		893499E81C294198B60E8BDBCDBC4024 /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C51101052D895A1BF423A141E7BF3DB /* FLAnimatedImageView.m */; };
+		8C01988FE9BB5620CA782EB48E7217D1 /* Pods-4INSHIELD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A86F7A6346F502865CBDB9CB9BCF8DE4 /* Pods-4INSHIELD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91A16D9AFD2ABBE267DD1AB88697C196 /* FLAnimatedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 531AA74C7F9BF13D70CB979B7B0E606B /* FLAnimatedImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABA1B8E55C2D30A21B52652AED73B889 /* Pods-4INSHIELD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B05E27BA91147F12EAC5CF36DE83A4 /* Pods-4INSHIELD-dummy.m */; };
+		C3EA456557B1B3E3119ADC6A3775836F /* FLAnimatedImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB4C9C310C55568D4EE3BC5FA749E4 /* FLAnimatedImage-dummy.m */; };
+		C4027C5A2BD8945D9073783860A9E9A7 /* FLAnimatedImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2460EA6980F7555B2F0BEF8FC0AC347C /* FLAnimatedImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB6631F490BE3C2A0F60FACFE4184944 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BADAF97F77FC4003B3610E7ACA312E1 /* Foundation.framework */; };
+		F36464FB1D1ECDECCECFA3D108B000C8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 434BDB8968205C3B66ECCF4FCB2767A8 /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2BFA93626C5E80DB68C0E2CC96AD3A82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8E8992707D01510894596DB9BCCA00;
+			remoteInfo = FLAnimatedImage;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		0902BE122B959BBF0747D961E8C8F1C7 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
-		124DFA576B212EED192BB19D90F477B6 /* Pods-4INSHIELD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-4INSHIELD.modulemap"; sourceTree = "<group>"; };
-		1A80C3CFDF758C205A557641489C2BD3 /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
-		1E6259C4E992B180C98A8E20D895B841 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
-		28908ED774A4ECFD553FE74AB7A9069F /* Pods-4INSHIELD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-4INSHIELD-Info.plist"; sourceTree = "<group>"; };
-		33ED22A1E57DFB6580F0C2296BD08620 /* Pods-4INSHIELD-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-4INSHIELD-acknowledgements.plist"; sourceTree = "<group>"; };
-		5F9881D8F2D96670AAE503EB2BE9943B /* Pods-4INSHIELD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-4INSHIELD-umbrella.h"; sourceTree = "<group>"; };
-		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		8D19A8C9132D0F4C0BEE8FCE37B5CA5D /* Pods-4INSHIELD-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-4INSHIELD-acknowledgements.markdown"; sourceTree = "<group>"; };
-		96CFC596CFF171CAF3E9E8F5140F6CD5 /* Pods-4INSHIELD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-4INSHIELD-dummy.m"; sourceTree = "<group>"; };
+		00F48A99D838D2013AA447442C5A19F2 /* Pods-4INSHIELD-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-4INSHIELD-acknowledgements.plist"; sourceTree = "<group>"; };
+		0B7D787FE102C4423B8CC63F736FEC67 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
+		0BADAF97F77FC4003B3610E7ACA312E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		12B047E51D7EE26CC36A6D293FA90045 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
+		1C51101052D895A1BF423A141E7BF3DB /* FLAnimatedImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLAnimatedImageView.m; path = FLAnimatedImage/FLAnimatedImageView.m; sourceTree = "<group>"; };
+		2460EA6980F7555B2F0BEF8FC0AC347C /* FLAnimatedImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLAnimatedImage-umbrella.h"; sourceTree = "<group>"; };
+		27B05E27BA91147F12EAC5CF36DE83A4 /* Pods-4INSHIELD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-4INSHIELD-dummy.m"; sourceTree = "<group>"; };
+		39E4E0A0D118DE5252B450E58E3D24C1 /* Pods-4INSHIELD-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-4INSHIELD-frameworks.sh"; sourceTree = "<group>"; };
+		419B5A02798684C61B0E69A481B41D74 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
+		434BDB8968205C3B66ECCF4FCB2767A8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		4E8D65F2CD629366232479012A1083B7 /* Pods-4INSHIELD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-4INSHIELD-Info.plist"; sourceTree = "<group>"; };
+		531AA74C7F9BF13D70CB979B7B0E606B /* FLAnimatedImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLAnimatedImage.h; path = FLAnimatedImage/include/FLAnimatedImage.h; sourceTree = "<group>"; };
+		6CA967FA0A919C4CABBAE257D8887A98 /* FLAnimatedImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLAnimatedImage-prefix.pch"; sourceTree = "<group>"; };
+		7A27656E9EFA9B2B6ED0D644489E99CB /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
+		7E5A3C52754158B9F0BC9AE0B0D3BA21 /* FLAnimatedImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLAnimatedImage-Info.plist"; sourceTree = "<group>"; };
+		7EEB4C9C310C55568D4EE3BC5FA749E4 /* FLAnimatedImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FLAnimatedImage-dummy.m"; sourceTree = "<group>"; };
+		84874DC2A9FFD290F8F6ED6DF5A6A6BB /* FLAnimatedImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FLAnimatedImage.m; path = FLAnimatedImage/FLAnimatedImage.m; sourceTree = "<group>"; };
 		9AAF22D926D0DE82F5E1D4CF61632F64 /* Pods-4INSHIELD */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-4INSHIELD"; path = Pods_4INSHIELD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D8651CF769E40A36AB7CD4EBD7B84932 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
-		F271F5540ABF77C89FC7D859AFE891F3 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
-		F37C1519E8EB52C5EC533369975AE9B4 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F4A5C6812AD9C5A3C5B78D44CC6C269 /* Pods-4INSHIELD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-4INSHIELD.modulemap"; sourceTree = "<group>"; };
+		A778AED83916F3F3466819CD51280256 /* Pods-4INSHIELD-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-4INSHIELD-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A86F7A6346F502865CBDB9CB9BCF8DE4 /* Pods-4INSHIELD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-4INSHIELD-umbrella.h"; sourceTree = "<group>"; };
+		A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FLAnimatedImage.release.xcconfig; sourceTree = "<group>"; };
+		C84846FFC531C2691F217D113BEDF757 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
+		DCB07A1600D26760D31075538EBBD1F6 /* FLAnimatedImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FLAnimatedImageView.h; path = FLAnimatedImage/include/FLAnimatedImageView.h; sourceTree = "<group>"; };
+		DD809E075B7F0D2F44C4AA05E65C2F9C /* FLAnimatedImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FLAnimatedImage.modulemap; sourceTree = "<group>"; };
+		F4219BA7CAED0202261970996230F11F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		F5EE3948404F12C5B6DA9AF99AB40738 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		FAA5F2D71B90788C908800A94534AA92 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLAnimatedImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBAA60F2726BD1D8EF832DD80CA380B /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		12E901958E5F16D691FB59761D798637 /* Frameworks */ = {
+		6BFDF7DE4FA9D66B377EE53ADD1AADC1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FB965EC6A879EAD0BA79C07DA88F09E /* Foundation.framework in Frameworks */,
+				76AAC19F68FC1B80C9DA220383E19CBC /* CoreGraphics.framework in Frameworks */,
+				39501B8B1AF3A7580942A25467C3FEBF /* Foundation.framework in Frameworks */,
+				F36464FB1D1ECDECCECFA3D108B000C8 /* ImageIO.framework in Frameworks */,
+				467613BD646A4BE7BE2FC15E97553195 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B07E6A8B583AEA5CC1413CCE429183EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB6631F490BE3C2A0F60FACFE4184944 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		42B66AAD9B9C2CE44E395BA4ACFE32EF /* Pods-4INSHIELD */ = {
+		10E4D1C88C55675A64EDCBFFCCEBB25E /* Pods-4INSHIELD */ = {
 			isa = PBXGroup;
 			children = (
-				124DFA576B212EED192BB19D90F477B6 /* Pods-4INSHIELD.modulemap */,
-				8D19A8C9132D0F4C0BEE8FCE37B5CA5D /* Pods-4INSHIELD-acknowledgements.markdown */,
-				33ED22A1E57DFB6580F0C2296BD08620 /* Pods-4INSHIELD-acknowledgements.plist */,
-				96CFC596CFF171CAF3E9E8F5140F6CD5 /* Pods-4INSHIELD-dummy.m */,
-				28908ED774A4ECFD553FE74AB7A9069F /* Pods-4INSHIELD-Info.plist */,
-				5F9881D8F2D96670AAE503EB2BE9943B /* Pods-4INSHIELD-umbrella.h */,
-				F37C1519E8EB52C5EC533369975AE9B4 /* Pods-4INSHIELD.debug development.xcconfig */,
-				F271F5540ABF77C89FC7D859AFE891F3 /* Pods-4INSHIELD.debug production.xcconfig */,
-				D8651CF769E40A36AB7CD4EBD7B84932 /* Pods-4INSHIELD.debug staging.xcconfig */,
-				0902BE122B959BBF0747D961E8C8F1C7 /* Pods-4INSHIELD.release development.xcconfig */,
-				1E6259C4E992B180C98A8E20D895B841 /* Pods-4INSHIELD.release production.xcconfig */,
-				1A80C3CFDF758C205A557641489C2BD3 /* Pods-4INSHIELD.release staging.xcconfig */,
+				9F4A5C6812AD9C5A3C5B78D44CC6C269 /* Pods-4INSHIELD.modulemap */,
+				A778AED83916F3F3466819CD51280256 /* Pods-4INSHIELD-acknowledgements.markdown */,
+				00F48A99D838D2013AA447442C5A19F2 /* Pods-4INSHIELD-acknowledgements.plist */,
+				27B05E27BA91147F12EAC5CF36DE83A4 /* Pods-4INSHIELD-dummy.m */,
+				39E4E0A0D118DE5252B450E58E3D24C1 /* Pods-4INSHIELD-frameworks.sh */,
+				4E8D65F2CD629366232479012A1083B7 /* Pods-4INSHIELD-Info.plist */,
+				A86F7A6346F502865CBDB9CB9BCF8DE4 /* Pods-4INSHIELD-umbrella.h */,
+				419B5A02798684C61B0E69A481B41D74 /* Pods-4INSHIELD.debug development.xcconfig */,
+				12B047E51D7EE26CC36A6D293FA90045 /* Pods-4INSHIELD.debug production.xcconfig */,
+				FCBAA60F2726BD1D8EF832DD80CA380B /* Pods-4INSHIELD.debug staging.xcconfig */,
+				C84846FFC531C2691F217D113BEDF757 /* Pods-4INSHIELD.release development.xcconfig */,
+				0B7D787FE102C4423B8CC63F736FEC67 /* Pods-4INSHIELD.release production.xcconfig */,
+				7A27656E9EFA9B2B6ED0D644489E99CB /* Pods-4INSHIELD.release staging.xcconfig */,
 			);
 			name = "Pods-4INSHIELD";
 			path = "Target Support Files/Pods-4INSHIELD";
 			sourceTree = "<group>";
 		};
-		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+		34DB828EB16A4056F97A443521F4E712 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+				10E4D1C88C55675A64EDCBFFCCEBB25E /* Pods-4INSHIELD */,
 			);
-			name = iOS;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		90FEA68FB551A9E8D6246C939B20F81D /* Products */ = {
+		39E9B3E28A9FFEF61937DD0019D16DB8 /* FLAnimatedImage */ = {
 			isa = PBXGroup;
 			children = (
+				531AA74C7F9BF13D70CB979B7B0E606B /* FLAnimatedImage.h */,
+				84874DC2A9FFD290F8F6ED6DF5A6A6BB /* FLAnimatedImage.m */,
+				DCB07A1600D26760D31075538EBBD1F6 /* FLAnimatedImageView.h */,
+				1C51101052D895A1BF423A141E7BF3DB /* FLAnimatedImageView.m */,
+				FB8CCADA9E9756D731A81E3CB80883E5 /* Support Files */,
+			);
+			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
+		40C159E25BAADDADD1279CCDFFE01945 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAA5F2D71B90788C908800A94534AA92 /* FLAnimatedImage.framework */,
 				9AAF22D926D0DE82F5E1D4CF61632F64 /* Pods-4INSHIELD */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C5BBC01FB074717F62740C87238F4499 /* Targets Support Files */ = {
+		4B23E791B8839DB6941C7EB499DAE965 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				42B66AAD9B9C2CE44E395BA4ACFE32EF /* Pods-4INSHIELD */,
+				39E9B3E28A9FFEF61937DD0019D16DB8 /* FLAnimatedImage */,
 			);
-			name = "Targets Support Files";
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC5800BB3AAFD3E119788196BC84235B /* iOS */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				90FEA68FB551A9E8D6246C939B20F81D /* Products */,
-				C5BBC01FB074717F62740C87238F4499 /* Targets Support Files */,
+				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
+				4B23E791B8839DB6941C7EB499DAE965 /* Pods */,
+				40C159E25BAADDADD1279CCDFFE01945 /* Products */,
+				34DB828EB16A4056F97A443521F4E712 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		FB8CCADA9E9756D731A81E3CB80883E5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				578452D2E740E91742655AC8F1636D1F /* iOS */,
+				DD809E075B7F0D2F44C4AA05E65C2F9C /* FLAnimatedImage.modulemap */,
+				7EEB4C9C310C55568D4EE3BC5FA749E4 /* FLAnimatedImage-dummy.m */,
+				7E5A3C52754158B9F0BC9AE0B0D3BA21 /* FLAnimatedImage-Info.plist */,
+				6CA967FA0A919C4CABBAE257D8887A98 /* FLAnimatedImage-prefix.pch */,
+				2460EA6980F7555B2F0BEF8FC0AC347C /* FLAnimatedImage-umbrella.h */,
+				A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/FLAnimatedImage";
+			sourceTree = "<group>";
+		};
+		FC5800BB3AAFD3E119788196BC84235B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F4219BA7CAED0202261970996230F11F /* CoreGraphics.framework */,
+				0BADAF97F77FC4003B3610E7ACA312E1 /* Foundation.framework */,
+				434BDB8968205C3B66ECCF4FCB2767A8 /* ImageIO.framework */,
+				F5EE3948404F12C5B6DA9AF99AB40738 /* QuartzCore.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		53CEB2368FC6B742B291884B9787546C /* Headers */ = {
+		90CF7B55D9D0662C91F3E1FC7A79766B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B753C07E28039241A4F273FC346D9E21 /* Pods-4INSHIELD-umbrella.h in Headers */,
+				91A16D9AFD2ABBE267DD1AB88697C196 /* FLAnimatedImage.h in Headers */,
+				C4027C5A2BD8945D9073783860A9E9A7 /* FLAnimatedImage-umbrella.h in Headers */,
+				7B6B3E396F9966D7F073E5DB8BE99B62 /* FLAnimatedImageView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7F86AC4CBE0A61F079E656E94F820F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C01988FE9BB5620CA782EB48E7217D1 /* Pods-4INSHIELD-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FDF57776EBC9D5B9722AD3112468288C /* Pods-4INSHIELD */ = {
+		4A8E8992707D01510894596DB9BCCA00 /* FLAnimatedImage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9EFA806F95AF98EC879D283B7B67EF8 /* Build configuration list for PBXNativeTarget "Pods-4INSHIELD" */;
+			buildConfigurationList = 92F0E6F3F0515923222F3B9BA4CA33EC /* Build configuration list for PBXNativeTarget "FLAnimatedImage" */;
 			buildPhases = (
-				53CEB2368FC6B742B291884B9787546C /* Headers */,
-				D1D0132CF2B49A8D518C99645E2AB684 /* Sources */,
-				12E901958E5F16D691FB59761D798637 /* Frameworks */,
-				DFE31F343D6BF0D6156016F33902D564 /* Resources */,
+				90CF7B55D9D0662C91F3E1FC7A79766B /* Headers */,
+				515AA53165CA7DD1773E9EFE7DE02EF0 /* Sources */,
+				6BFDF7DE4FA9D66B377EE53ADD1AADC1 /* Frameworks */,
+				14D7B15C0A07128C93D2FC8751841038 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			name = FLAnimatedImage;
+			productName = FLAnimatedImage;
+			productReference = FAA5F2D71B90788C908800A94534AA92 /* FLAnimatedImage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FDF57776EBC9D5B9722AD3112468288C /* Pods-4INSHIELD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B22DA84430C008A93588E074BD8BA6A /* Build configuration list for PBXNativeTarget "Pods-4INSHIELD" */;
+			buildPhases = (
+				C7F86AC4CBE0A61F079E656E94F820F3 /* Headers */,
+				0149D92344BC8D6E4E9392418EC386D7 /* Sources */,
+				B07E6A8B583AEA5CC1413CCE429183EE /* Frameworks */,
+				7EDD4D2947B16A88E89EAA143FDBA938 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3EB447C03CBFFE6E4C2F8E453ED8AF69 /* PBXTargetDependency */,
 			);
 			name = "Pods-4INSHIELD";
 			productName = Pods_4INSHIELD;
@@ -143,7 +258,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1420;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -154,17 +269,25 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 90FEA68FB551A9E8D6246C939B20F81D /* Products */;
+			productRefGroup = 40C159E25BAADDADD1279CCDFFE01945 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				4A8E8992707D01510894596DB9BCCA00 /* FLAnimatedImage */,
 				FDF57776EBC9D5B9722AD3112468288C /* Pods-4INSHIELD */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		DFE31F343D6BF0D6156016F33902D564 /* Resources */ = {
+		14D7B15C0A07128C93D2FC8751841038 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EDD4D2947B16A88E89EAA143FDBA938 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -174,82 +297,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D1D0132CF2B49A8D518C99645E2AB684 /* Sources */ = {
+		0149D92344BC8D6E4E9392418EC386D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF58FE615AEED34B7BA6D3C6D4548812 /* Pods-4INSHIELD-dummy.m in Sources */,
+				ABA1B8E55C2D30A21B52652AED73B889 /* Pods-4INSHIELD-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		515AA53165CA7DD1773E9EFE7DE02EF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09AC21330F0AE6258FB1CA63B83ECFBF /* FLAnimatedImage.m in Sources */,
+				C3EA456557B1B3E3119ADC6A3775836F /* FLAnimatedImage-dummy.m in Sources */,
+				893499E81C294198B60E8BDBCDBC4024 /* FLAnimatedImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin XCBuildConfiguration section */
-		1962F5B5E271F712085F235B63C034C8 /* Release Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE_DEVELOPMENT=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = "Release Development";
+/* Begin PBXTargetDependency section */
+		3EB447C03CBFFE6E4C2F8E453ED8AF69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FLAnimatedImage;
+			target = 4A8E8992707D01510894596DB9BCCA00 /* FLAnimatedImage */;
+			targetProxy = 2BFA93626C5E80DB68C0E2CC96AD3A82 /* PBXContainerItemProxy */;
 		};
-		20DFE110333A5D5B0BEF85DFD7CF99EE /* Release Production */ = {
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0817D1DDDEA42DF561752F4D67DFE52E /* Release Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E6259C4E992B180C98A8E20D895B841 /* Pods-4INSHIELD.release production.xcconfig */;
+			baseConfigurationReference = C84846FFC531C2691F217D113BEDF757 /* Pods-4INSHIELD.release development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -283,9 +363,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release Production";
+			name = "Release Development";
 		};
-		3F032C609979C554F6DA121B1EDAF1F8 /* Debug */ = {
+		094B00E13102AEFA99507D47E512B6B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -321,9 +401,179 @@
 			};
 			name = Debug;
 		};
-		40C66872CB684AF2F56E1734964C867B /* Debug Staging */ = {
+		0DCE681E18C1DF122AE0C0797746EB1D /* Release Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8651CF769E40A36AB7CD4EBD7B84932 /* Pods-4INSHIELD.debug staging.xcconfig */;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Release Production";
+		};
+		10275BB5FBF9D7FFE745CD0975759ADC /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug Staging";
+		};
+		1962F5B5E271F712085F235B63C034C8 /* Release Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE_DEVELOPMENT=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = "Release Development";
+		};
+		38322DA9A2D67ED6058435F0521FA4D5 /* Debug Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug Development";
+		};
+		39083285B76A058F16FC25F30E3E2C59 /* Debug Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 419B5A02798684C61B0E69A481B41D74 /* Pods-4INSHIELD.debug development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -357,7 +607,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug Staging";
+			name = "Debug Development";
 		};
 		446BA1B9A1F1F2F95D04E5F82EB1B0F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -394,6 +644,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -424,6 +675,79 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
+		};
+		447B80259CC6FE898C345AE446875F67 /* Release Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B7D787FE102C4423B8CC63F736FEC67 /* Pods-4INSHIELD.release production.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Release Production";
+		};
+		4EE1AD463779CB7296612F16DF00BE31 /* Release Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Release Development";
 		};
 		5D47E2EFAC6FAC81A782D9BFD8736F53 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -460,6 +784,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -487,7 +812,7 @@
 			};
 			name = Release;
 		};
-		61BA83FC5B88CA4226C3FF3010243280 /* Release */ = {
+		664BF9962C4A5491D149DA64D232238C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
@@ -524,6 +849,44 @@
 			};
 			name = Release;
 		};
+		71C362207BD3EDAF9FACA2EC494C40F4 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCBAA60F2726BD1D8EF832DD80CA380B /* Pods-4INSHIELD.debug staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug Staging";
+		};
 		7C6EC943D503CF37517685445BA3DF1A /* Release Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -559,6 +922,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -621,9 +985,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -639,6 +1005,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -648,9 +1015,9 @@
 			};
 			name = "Debug Development";
 		};
-		904A1D426F9012FCBAF7B22BDE501C15 /* Debug Production */ = {
+		AF709FA90B157AEBE54DA94B8E355371 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F271F5540ABF77C89FC7D859AFE891F3 /* Pods-4INSHIELD.debug production.xcconfig */;
+			baseConfigurationReference = 7A27656E9EFA9B2B6ED0D644489E99CB /* Pods-4INSHIELD.release staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -684,7 +1051,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug Production";
+			name = "Release Staging";
 		};
 		B1EEA7A82D7E46FD4636EAA603339856 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
@@ -721,6 +1088,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -747,6 +1115,39 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = "Release Staging";
+		};
+		B45129BACD7C05AC9DD6755B3B1ECE83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		B86EBD9998E1E10E633F5E19DF34CC24 /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
@@ -783,9 +1184,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -801,6 +1204,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -810,12 +1214,10 @@
 			};
 			name = "Debug Staging";
 		};
-		C1BAAC37048C03C4D8187D8B92D12A36 /* Release Development */ = {
+		C3B004F024D95850FC44A93D87CE6B61 /* Debug Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0902BE122B959BBF0747D961E8C8F1C7 /* Pods-4INSHIELD.release development.xcconfig */;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -824,29 +1226,28 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release Development";
+			name = "Debug Production";
 		};
 		C82F68272B4EC03A5487C00C206BE8FE /* Debug Production */ = {
 			isa = XCBuildConfiguration;
@@ -883,9 +1284,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -901,6 +1304,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -910,12 +1314,10 @@
 			};
 			name = "Debug Production";
 		};
-		F4814A8713346C20C803CB457780DE50 /* Debug Development */ = {
+		DF911116F6B85B6482EBC9EE20C90E01 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F37C1519E8EB52C5EC533369975AE9B4 /* Pods-4INSHIELD.debug development.xcconfig */;
+			baseConfigurationReference = A8B9F40161302F35E167E4664C922AD0 /* FLAnimatedImage.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -924,67 +1326,100 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = "Debug Development";
-		};
-		F72F834AD4EEEBBB4C5968585B1BE4CA /* Release Staging */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A80C3CFDF758C205A557641489C2BD3 /* Pods-4INSHIELD.release staging.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = "Release Staging";
+		};
+		E4F2C243A7132954A83D1011DA31E81E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FLAnimatedImage/FLAnimatedImage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FLAnimatedImage/FLAnimatedImage.modulemap";
+				PRODUCT_MODULE_NAME = FLAnimatedImage;
+				PRODUCT_NAME = FLAnimatedImage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FE5A15572F9990FEC3E018110BAE3331 /* Debug Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12B047E51D7EE26CC36A6D293FA90045 /* Pods-4INSHIELD.debug production.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug Production";
 		};
 /* End XCBuildConfiguration section */
 
@@ -1004,17 +1439,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9EFA806F95AF98EC879D283B7B67EF8 /* Build configuration list for PBXNativeTarget "Pods-4INSHIELD" */ = {
+		8B22DA84430C008A93588E074BD8BA6A /* Build configuration list for PBXNativeTarget "Pods-4INSHIELD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F032C609979C554F6DA121B1EDAF1F8 /* Debug */,
-				F4814A8713346C20C803CB457780DE50 /* Debug Development */,
-				904A1D426F9012FCBAF7B22BDE501C15 /* Debug Production */,
-				40C66872CB684AF2F56E1734964C867B /* Debug Staging */,
-				61BA83FC5B88CA4226C3FF3010243280 /* Release */,
-				C1BAAC37048C03C4D8187D8B92D12A36 /* Release Development */,
-				20DFE110333A5D5B0BEF85DFD7CF99EE /* Release Production */,
-				F72F834AD4EEEBBB4C5968585B1BE4CA /* Release Staging */,
+				094B00E13102AEFA99507D47E512B6B0 /* Debug */,
+				39083285B76A058F16FC25F30E3E2C59 /* Debug Development */,
+				FE5A15572F9990FEC3E018110BAE3331 /* Debug Production */,
+				71C362207BD3EDAF9FACA2EC494C40F4 /* Debug Staging */,
+				664BF9962C4A5491D149DA64D232238C /* Release */,
+				0817D1DDDEA42DF561752F4D67DFE52E /* Release Development */,
+				447B80259CC6FE898C345AE446875F67 /* Release Production */,
+				AF709FA90B157AEBE54DA94B8E355371 /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92F0E6F3F0515923222F3B9BA4CA33EC /* Build configuration list for PBXNativeTarget "FLAnimatedImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B45129BACD7C05AC9DD6755B3B1ECE83 /* Debug */,
+				38322DA9A2D67ED6058435F0521FA4D5 /* Debug Development */,
+				C3B004F024D95850FC44A93D87CE6B61 /* Debug Production */,
+				10275BB5FBF9D7FFE745CD0975759ADC /* Debug Staging */,
+				E4F2C243A7132954A83D1011DA31E81E /* Release */,
+				4EE1AD463779CB7296612F16DF00BE31 /* Release Development */,
+				0DCE681E18C1DF122AE0C0797746EB1D /* Release Production */,
+				DF911116F6B85B6482EBC9EE20C90E01 /* Release Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -134,3 +134,32 @@ class APIManager {
         case serverError
     }
 }
+
+func addChildInfos(registerData: Childd, completionHandler: @escaping(ChildModel) -> Void) {
+    
+    let headers: HTTPHeaders = [
+        .contentType("application/json")
+    ]
+    
+    AF.request(add_Child_url, method: .post, parameters: registerData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+        debugPrint(response)
+        switch response.result {
+        case.success(let data):
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                if (200..<300).contains(response.response!.statusCode)  {
+//                    completionHandler(true, "Child registered successfully")
+                }else {
+//                    completionHandler(false, "try again!")
+                }
+            }catch{
+                print(error.localizedDescription)
+//                completionHandler(false, "try again!")
+            }
+        case.failure(let err):
+            print(err.localizedDescription)
+//            completionHandler(false, "try again!")
+        }
+        
+    }
+}

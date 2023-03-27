@@ -36,6 +36,9 @@
 		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
 		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
+		04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04B2D91E29D1AE5A0062E324 /* Succes.gif */; };
+		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
+		04C1363C29D1DBA8008F1A58 /* Childd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363B29D1DBA8008F1A58 /* Childd.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
 		04E54A3F29ACCC3B00B00906 /* Inter in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3E29ACCC3B00B00906 /* Inter */; };
@@ -77,6 +80,9 @@
 		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
+		04B2D91E29D1AE5A0062E324 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
+		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
+		04C1363B29D1DBA8008F1A58 /* Childd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Childd.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
 		04E54A3E29ACCC3B00B00906 /* Inter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inter; path = ../../../../../Downloads/Inter; sourceTree = "<group>"; };
@@ -110,7 +116,7 @@
 			path = Translation;
 			sourceTree = "<group>";
 		};
-		04340B1F29C09B4B0055B394 /* Dashboard Tab  */ = {
+		04340B1F29C09B4B0055B394 /* Dashboard Module  */ = {
 			isa = PBXGroup;
 			children = (
 				04A52E0E29C207A70097C145 /* homeVC.swift */,
@@ -119,7 +125,7 @@
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
 			);
-			path = "Dashboard Tab ";
+			path = "Dashboard Module ";
 			sourceTree = "<group>";
 		};
 		043557F829AE359300D4F012 /* Constants */ = {
@@ -134,6 +140,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04C1363829D1C9BF008F1A58 /* Children */,
 				04A963B529B0D01C009EA1CB /* Confirmation */,
 				04A963B429B0CFE8009EA1CB /* Authentication */,
 			);
@@ -153,6 +160,7 @@
 			children = (
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
+				04B2D91E29D1AE5A0062E324 /* Succes.gif */,
 				7160F104408BB7EFF5A238CD /* Pods */,
 				72D91BAC2A261D52D33B8DB4 /* Frameworks */,
 			);
@@ -188,9 +196,9 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				04B2A60B29CB51A00028B7E2 /* Wizard */,
+				04B2A60B29CB51A00028B7E2 /* Children Module */,
 				04A52E0B29C206860097C145 /* Side Menu */,
-				04340B1F29C09B4B0055B394 /* Dashboard Tab  */,
+				04340B1F29C09B4B0055B394 /* Dashboard Module  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
 				04A963B829B0DE7A009EA1CB /* Confirmation Module */,
 				04E54A3729ACC83F00B00906 /* Auth Module */,
@@ -240,7 +248,7 @@
 			path = "Confirmation Module";
 			sourceTree = "<group>";
 		};
-		04B2A60B29CB51A00028B7E2 /* Wizard */ = {
+		04B2A60B29CB51A00028B7E2 /* Children Module */ = {
 			isa = PBXGroup;
 			children = (
 				04B2A60C29CB52250028B7E2 /* ChildProfile.swift */,
@@ -249,7 +257,16 @@
 				0479739929CC929C00FD28DF /* ChildDevice.swift */,
 				0479739B29CC92D100FD28DF /* Congrats.swift */,
 			);
-			path = Wizard;
+			path = "Children Module";
+			sourceTree = "<group>";
+		};
+		04C1363829D1C9BF008F1A58 /* Children */ = {
+			isa = PBXGroup;
+			children = (
+				04C1363929D1C9D5008F1A58 /* ChildModel.swift */,
+				04C1363B29D1DBA8008F1A58 /* Childd.swift */,
+			);
+			path = Children;
 			sourceTree = "<group>";
 		};
 		04E54A3729ACC83F00B00906 /* Auth Module */ = {
@@ -310,6 +327,7 @@
 				04850C4729ACC3E3001A27FF /* Sources */,
 				04850C4829ACC3E3001A27FF /* Frameworks */,
 				04850C4929ACC3E3001A27FF /* Resources */,
+				6A84737C67B52EB04BF591CD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -365,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */,
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
@@ -399,6 +418,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6A84737C67B52EB04BF591CD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -410,6 +446,7 @@
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
+				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
@@ -417,6 +454,7 @@
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
+				04C1363C29D1DBA8008F1A58 /* Childd.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,

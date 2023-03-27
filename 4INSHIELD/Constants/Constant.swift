@@ -14,3 +14,4 @@ let register_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/registe
 let login_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/login/"
 let otp_url =  "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/verify-totp-token/"
 let email_verif_url =  "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/email-verify-app-mobile/"
+let add_Child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/"

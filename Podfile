@@ -6,6 +6,7 @@ target '4INSHIELD' do
   use_frameworks!
 
   # Pods for 4INSHIELD
+    pod 'FLAnimatedImage'
     
 
 

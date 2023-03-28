@@ -120,10 +120,22 @@ class SignIn: UIViewController {
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
     }
 
-
+    func goToWizard(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(ConfirmationVC, animated: true)
+    }
+    
+    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
         guard let username = self.emailTF.text else { return }
+        let trimmedUserName = username.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let password = self.passwordTF.text else { return }
         
         if(verifyFields()) {
@@ -133,8 +145,41 @@ class SignIn: UIViewController {
                 switch result {
                 case.success(let json):
                     print(json as AnyObject)
-                case.failure(let err):
-                    print(err.localizedDescription)
+                    if let jsonDict = json as? [String: Any],
+                       let id = jsonDict["id"] as? Int,
+                       let username = jsonDict["username"] as? String {
+                        // Save id and username to UserDefaults
+                        UserDefaults.standard.set(id, forKey: "userID")
+                        UserDefaults.standard.set(username, forKey: "username")
+                        UserDefaults.standard.synchronize()
+                        print("User ID: \(id)")
+                    } else {
+                        print("Error: could not parse response")
+                    }
+                    
+                    DispatchQueue.main.async {
+                        APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                            switch wizardStep {
+                            case 0:
+                                self.gotoScreen(storyBoardName: "ChildProfile", stbIdentifier: "childInfos")
+                            case 1:
+                                self.gotoScreen(storyBoardName: "ChildSocialMedia", stbIdentifier: "ChildSocialMedia")
+                            case 2:
+                                self.gotoScreen(storyBoardName: "ChildProfileAdded", stbIdentifier: "ChildProfileAdded")
+                            case 3:
+                                self.gotoScreen(storyBoardName: "ChildDevice", stbIdentifier: "ChildDevice")
+                            case 4:
+                                self.gotoScreen(storyBoardName: "Congrats", stbIdentifier: "Congrats")
+                            default:
+                                break
+                            }
+                        }
+                    }
+                    
+//                    self.goToWizard(withId: "childInfos")
+                case.failure(let error):
+                    print(error.localizedDescription)
+                    
                 }
                 
             }
@@ -142,7 +187,7 @@ class SignIn: UIViewController {
         }
         self.resetFields()
     }
-    
+
     
     @IBAction func signInGoogleTapped(_ sender: Any) {
     }

@@ -38,7 +38,7 @@
 		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
 		04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04B2D91E29D1AE5A0062E324 /* Succes.gif */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
-		04C1363C29D1DBA8008F1A58 /* Childd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363B29D1DBA8008F1A58 /* Childd.swift */; };
+		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
 		04E54A3F29ACCC3B00B00906 /* Inter in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3E29ACCC3B00B00906 /* Inter */; };
@@ -82,7 +82,7 @@
 		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
 		04B2D91E29D1AE5A0062E324 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
-		04C1363B29D1DBA8008F1A58 /* Childd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Childd.swift; sourceTree = "<group>"; };
+		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
 		04E54A3E29ACCC3B00B00906 /* Inter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inter; path = ../../../../../Downloads/Inter; sourceTree = "<group>"; };
@@ -140,6 +140,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04D270DC29D31AA40071B4AB /* WizardStep & Journey */,
 				04C1363829D1C9BF008F1A58 /* Children */,
 				04A963B529B0D01C009EA1CB /* Confirmation */,
 				04A963B429B0CFE8009EA1CB /* Authentication */,
@@ -264,9 +265,16 @@
 			isa = PBXGroup;
 			children = (
 				04C1363929D1C9D5008F1A58 /* ChildModel.swift */,
-				04C1363B29D1DBA8008F1A58 /* Childd.swift */,
 			);
 			path = Children;
+			sourceTree = "<group>";
+		};
+		04D270DC29D31AA40071B4AB /* WizardStep & Journey */ = {
+			isa = PBXGroup;
+			children = (
+				04D270DD29D31AB90071B4AB /* UserJourney.swift */,
+			);
+			path = "WizardStep & Journey";
 			sourceTree = "<group>";
 		};
 		04E54A3729ACC83F00B00906 /* Auth Module */ = {
@@ -454,7 +462,6 @@
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
-				04C1363C29D1DBA8008F1A58 /* Childd.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
@@ -464,6 +471,7 @@
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
+				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,

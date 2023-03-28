@@ -54,37 +54,84 @@ class ChildProfile: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func
+    goToSocial(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let ChildSocialMedia = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(ChildSocialMedia, animated: true)
+    }
+    
     @IBAction func nextBtnClicked(_ sender: Any) {
-        guard let firstName =  firstNameTF.text else { return }
-        guard let lastName =  lastNameTF.text else { return }
+        guard let firstName = firstNameTF.text, !firstName.isEmpty else {
+            showAlert(with: "Please enter first name")
+            return
+        }
+        guard let lastName = lastNameTF.text, !lastName.isEmpty else {
+            showAlert(with: "Please enter last name")
+            return
+        }
+        guard let gender = genderTF.text, !gender.isEmpty else {
+            showAlert(with: "Please enter gender")
+            return
+        }
         
         let date = birthdayDatePicker.date
         let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
-    
-        guard let userID = UserDefaults.standard.value(forKey: "userID") as? Int else {return}
-        print(userID)
         
-        let regData = [
-            "parent": userID,
-            "first_name": firstName,
-            "last_name": lastName,
-            "birthday":stringDate,
-            "gender": gender,
-        ] as [String : Any]
-         let child = Childd(dictionary: regData)
+        guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
+              let userID = Int(userIDString) else {
+            showAlert(with: "User ID not found")
+            return
+        }
         
-        APIManager.shareInstance.addChildInfos(registerData: child) { result in
+        let regData = ChildModel(parent: userID, first_name: firstName, last_name: lastName, birthday: stringDate, gender: gender)
+        
+        APIManager.shareInstance.addChildInfos(regData: regData) { result in
             switch result {
-            case .success (_):
-                print("child added")
+            case .success:
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                        self.goToSocial(withId: "ChildSocialMedia")
+                    }
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                let date = Date()
+                let df = DateFormatter()
+                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                let dateString = df.string(from: date)
+                
+                let x = [
+                    "user": userID,
+                    "wizard_step": 1,
+                    "platform": "mobile",
+                    "date": dateString
+                ] as [String : Any]
+                
+                do {
+                    let journey = try UserJourney(from: x as! Decoder)
+                    APIManager.shareInstance.saveUserJourney(journeyData: journey) { userJourney in
+                        print(userJourney)
+                    }
+                } catch (let error) {
+                    print(error.localizedDescription)
+                }
                 
             case .failure(let error):
-                print("Failed to add child")
-                print("Error: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
-         
-        }     
+        }
+        
     }
+
+    func showAlert(with message: String) {
+        let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
     
 }
 

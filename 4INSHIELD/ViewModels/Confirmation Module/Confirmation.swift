@@ -108,7 +108,8 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    func goToSignIn(withId identifier: String) {
+    func
+    goToSignIn(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let SignIn = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(SignIn, animated: true)

@@ -19,6 +19,84 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
+        var userJourneys = [UserJourney]()
+        var lastStep = 0
+        
+        let user_step_url = "https://api.shield.kaisens.fr/api/users/\(withUserName)/journey/"
+        
+        AF.request(user_step_url, method: .get).response { response in
+            switch response.result {
+            case .success( _):
+                do {
+                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
+                    if userJourneys.isEmpty {
+                        lastStep = 0
+                    } else {
+                        guard let lastJourney = userJourneys.last else {return}
+                        lastStep = lastJourney.wizard_step
+                    }
+                    completion(lastStep)
+                } catch let error as NSError {
+                    print("Failed to load journey data: \(error)")
+                } catch let jsonError {
+                    print("Failed to parse JSON data: \(jsonError)")
+                    print(String(data: response.data ?? Data(), encoding: .utf8)!)
+                }
+            case .failure(let error):
+                print("DEBUG: API Error getting journey data: \(error)")
+            }
+        }
+    }
+    
+    func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void) {
+            
+        var journey: UserJourney?
+        let _: HTTPHeaders = [
+            .contentType("application/json")
+        ]
+            
+            AF.request(user_journey_url, method: .post, parameters: journeyData, encoder: JSONParameterEncoder.default).response { response in
+                switch response.result {
+                case .success( _):
+                    guard let statusCode = (response.response?.statusCode) else {return}
+                    if statusCode == 200 {
+                        do {
+                            journey = try JSONDecoder().decode(UserJourney.self, from: response.data!)
+                            completionHandler(journey!)
+                        } catch let error as NSError {
+                            print("Failed to load: \(error)")
+                        }
+                    }
+                case .failure(let err):
+                    debugPrint("API Error : \(err)")
+                    break
+                }
+            }
+        }
+    
+    func addChildInfos(regData: ChildModel, completionHandler: @escaping (Result<String, APIError>) -> Void){
+        
+        let headers: HTTPHeaders = [.contentType("application/json")]
+        
+        AF.request(add_Child_url, method: .post, parameters: regData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            debugPrint(response)
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completionHandler(.success("Child registered successfully"))
+                } else {
+                    completionHandler(.failure(.custom(message: "Failed to register child")))
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+                completionHandler(.failure(.custom(message: "Failed to register child")))
+            }
+        }
+    }
+
+    
     func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
         
         let headers: HTTPHeaders = [
@@ -135,31 +213,4 @@ class APIManager {
     }
 }
 
-func addChildInfos(registerData: Childd, completionHandler: @escaping(ChildModel) -> Void) {
-    
-    let headers: HTTPHeaders = [
-        .contentType("application/json")
-    ]
-    
-    AF.request(add_Child_url, method: .post, parameters: registerData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-        debugPrint(response)
-        switch response.result {
-        case.success(let data):
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                if (200..<300).contains(response.response!.statusCode)  {
-//                    completionHandler(true, "Child registered successfully")
-                }else {
-//                    completionHandler(false, "try again!")
-                }
-            }catch{
-                print(error.localizedDescription)
-//                completionHandler(false, "try again!")
-            }
-        case.failure(let err):
-            print(err.localizedDescription)
-//            completionHandler(false, "try again!")
-        }
-        
-    }
-}
+

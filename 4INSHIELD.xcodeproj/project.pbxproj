@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040821AA29D43F4500D7A562 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821A929D43F4500D7A562 /* Profil.swift */; };
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040821A929D43F4500D7A562 /* Profil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040821A829D43F1000D7A562 /* SocialMedia & Profile */ = {
+			isa = PBXGroup;
+			children = (
+				040821A929D43F4500D7A562 /* Profil.swift */,
+			);
+			path = "SocialMedia & Profile";
+			sourceTree = "<group>";
+		};
 		04340B1B29C097F10055B394 /* Translation */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				040821A829D43F1000D7A562 /* SocialMedia & Profile */,
 				04D270DC29D31AA40071B4AB /* WizardStep & Journey */,
 				04C1363829D1C9BF008F1A58 /* Children */,
 				04A963B529B0D01C009EA1CB /* Confirmation */,
@@ -457,6 +468,7 @@
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
+				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,

@@ -36,7 +36,6 @@ class BuildConfiguration {
     
     // Add the following variables
     let MLENGINE_BASE_URL = "https://mlengine.staging.4indata.fr"
-//    let WEBERVSER_BASE_URL  = "https://webserver.staging.4indata.fr"
     let CRAWLSERVER_BASE_URL  = "https://crawlserver.staging.4indata.fr"
     let DEVICESERVER_BASE_URL = "https://deviceserver.staging.4indata.fr"
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"

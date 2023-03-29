@@ -18,3 +18,4 @@ let add_Child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/
 let user_journey_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/userjourney/"
 //let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/journey/"
 
+let add_Child_Profile = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/profiles/"

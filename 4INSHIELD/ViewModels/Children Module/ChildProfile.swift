@@ -60,7 +60,7 @@ class ChildProfile: UIViewController {
         let ChildSocialMedia = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(ChildSocialMedia, animated: true)
     }
-    
+//    UserDefaults.standard.set(id, forKey: "childID")
     @IBAction func nextBtnClicked(_ sender: Any) {
         guard let firstName = firstNameTF.text, !firstName.isEmpty else {
             showAlert(with: "Please enter first name")
@@ -88,16 +88,27 @@ class ChildProfile: UIViewController {
         
         APIManager.shareInstance.addChildInfos(regData: regData) { result in
             switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                        self.goToSocial(withId: "ChildSocialMedia")
-                    }
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
+            case .success(let json):
+//                DispatchQueue.main.async {
+//                    let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
+//                    let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+//                        self.goToSocial(withId: "ChildSocialMedia")
+//                    }
+//                    alertController.addAction(okayAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
+                print(json as AnyObject)
+                if let jsonDict = json as? [String: Any],
+                   let id = jsonDict["id"] as? Int {
+                    // Save id to UserDefaults
+                    UserDefaults.standard.set(id, forKey: "childID")
+                    UserDefaults.standard.synchronize()
+                    print("childID: \(id)")
+                } else {
+                    print("Error: could not parse response")
                 }
-                
+               
+                    
                 let date = Date()
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -105,11 +116,10 @@ class ChildProfile: UIViewController {
                 
                 let x = [
                     "user": userID,
-                    "wizard_step": 1,
+                    "wizard_step": 2,
                     "platform": "mobile",
                     "date": dateString
                 ] as [String : Any]
-                
                 do {
                     let journey = try UserJourney(from: x as! Decoder)
                     APIManager.shareInstance.saveUserJourney(journeyData: journey) { userJourney in
@@ -118,12 +128,10 @@ class ChildProfile: UIViewController {
                 } catch (let error) {
                     print(error.localizedDescription)
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-        
     }
 
     func showAlert(with message: String) {

@@ -19,35 +19,63 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
-    func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
-        var userJourneys = [UserJourney]()
-        var lastStep = 0
+    func addSocialMediaProfile(socialData: Profil, completion: @escaping(Profil) -> Void) {
+        let headers: HTTPHeaders = [
+            .contentType("application/json")
+        ]
         
-        let user_step_url = "https://api.shield.kaisens.fr/api/users/\(withUserName)/journey/"
+        AF.request(add_Child_Profile,method: .post, parameters: socialData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case .success(let data):
+                print(data as Any)
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 201 {
+                    do {
+                        let profile = try JSONDecoder().decode(Profil.self, from: response.data!)
+                        //print(user.username)
+                        print("Your new child's profile has been successfully created!")
+                        completion(profile)
+                    } catch let error as NSError {
+                        print("Failed to load: \(error)")
+                    }
+                }
+            case .failure(let err):
+                print("Error sending data to the API: \(err.localizedDescription)")
+            }
+        }
+    }
+
+    func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
+        let user_step_url = "https://webserver.staging.4indata.fr/api/users/\(withUserName)/journey/"
         
         AF.request(user_step_url, method: .get).response { response in
             switch response.result {
-            case .success( _):
+            case .success(let data):
                 do {
-                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
+                    let userJourneys = try JSONDecoder().decode([UserJourney].self, from: data!)
                     if userJourneys.isEmpty {
-                        lastStep = 0
+                        completion(0)
                     } else {
-                        guard let lastJourney = userJourneys.last else {return}
-                        lastStep = lastJourney.wizard_step
+                        if let lastStep = userJourneys.last?.wizard_step {
+                            completion(lastStep)
+                        } else {
+                            print("Failed to get last wizard step")
+                        }
                     }
-                    completion(lastStep)
                 } catch let error as NSError {
                     print("Failed to load journey data: \(error)")
                 } catch let jsonError {
                     print("Failed to parse JSON data: \(jsonError)")
-                    print(String(data: response.data ?? Data(), encoding: .utf8)!)
+                    print(String(data: data!, encoding: .utf8)!)
                 }
             case .failure(let error):
-                print("DEBUG: API Error getting journey data: \(error)")
+                print("API Error getting journey data: \(error)")
             }
         }
     }
+
+
+
     
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void) {
             

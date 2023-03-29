@@ -120,18 +120,13 @@ class SignIn: UIViewController {
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
     }
 
-    func goToWizard(withId identifier: String) {
+    func goToScreen(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(ConfirmationVC, animated: true)
+        let VC = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(VC, animated: true)
     }
     
-    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
-        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
+ 
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
         guard let username = self.emailTF.text else { return }
@@ -156,34 +151,30 @@ class SignIn: UIViewController {
                     } else {
                         print("Error: could not parse response")
                     }
-                    
                     DispatchQueue.main.async {
                         APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
-                            switch wizardStep {
+                            print(wizardStep)
+                            switch
+                            wizardStep {
                             case 0:
-                                self.gotoScreen(storyBoardName: "ChildProfile", stbIdentifier: "childInfos")
-                            case 1:
-                                self.gotoScreen(storyBoardName: "ChildSocialMedia", stbIdentifier: "ChildSocialMedia")
+                                self.goToScreen(withId: "childInfos")
                             case 2:
-                                self.gotoScreen(storyBoardName: "ChildProfileAdded", stbIdentifier: "ChildProfileAdded")
+                                self.goToScreen(withId: "ChildSocialMedia")
                             case 3:
-                                self.gotoScreen(storyBoardName: "ChildDevice", stbIdentifier: "ChildDevice")
+                                self.goToScreen(withId: "ChildProfileAdded")
                             case 4:
-                                self.gotoScreen(storyBoardName: "Congrats", stbIdentifier: "Congrats")
+                                self.goToScreen(withId: "ChildDevice")
+                            case 5:
+                                self.goToScreen(withId: "Congrats")
                             default:
                                 break
                             }
                         }
                     }
-                    
-//                    self.goToWizard(withId: "childInfos")
                 case.failure(let error):
                     print(error.localizedDescription)
-                    
                 }
-                
             }
-            
         }
         self.resetFields()
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aAE-Gg-NkL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G4t-F4-zOB">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -693,7 +693,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Entrer l'URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yoF-Vm-NoX">
                                         <rect key="frame" x="0.0" y="124" width="328.33333333333331" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="k1p-Dk-fyY"/>
+                                            <constraint firstAttribute="height" constant="42" id="YH4-CO-cc2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -778,7 +778,7 @@
                     <connections>
                         <outlet property="sauterBtn" destination="QOa-hB-uJa" id="xh2-iQ-Rvw"/>
                         <outlet property="socialMediaTF" destination="dbz-Ch-2Fa" id="L3z-vH-fsc"/>
-                        <outlet property="socialPseudoTF" destination="DN0-1F-Cht" id="uSg-fs-EKp"/>
+                        <outlet property="socialPseudoTF" destination="DN0-1F-Cht" id="SRR-aT-sEq"/>
                         <outlet property="socialUrlTF" destination="yoF-Vm-NoX" id="5GX-7Z-dQ8"/>
                     </connections>
                 </viewController>
@@ -815,19 +815,19 @@
                                 <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taY-uh-ssh">
-                                <rect key="frame" x="16" y="682" width="214" height="42"/>
+                                <rect key="frame" x="16" y="660" width="174" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="uYv-v5-4Eg"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="174" id="gdH-Yf-JFf"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Ajouter un nouveau profil"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATF-sM-Ka3">
-                                <rect key="frame" x="238" y="682" width="134" height="42"/>
+                                <rect key="frame" x="209" y="660" width="123" height="42"/>
                                 <color key="backgroundColor" red="0.90196078431372551" green="0.92156862745098034" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="XuO-Sd-0wK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="123" id="XuO-Sd-0wK"/>
                                     <constraint firstAttribute="height" constant="42" id="hgr-qe-J4g"/>
                                 </constraints>
                                 <color key="tintColor" red="0.12156862745098039" green="0.49411764705882355" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -836,15 +836,6 @@
                                 <connections>
                                     <segue destination="w0k-dj-PMx" kind="show" id="EPn-8b-emQ"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-w8-53D">
-                                <rect key="frame" x="16" y="734" width="356" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="qyG-GD-AVI"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Modifier les informations du profil"/>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="VMq-a4-5VY">
                                 <rect key="frame" x="0.0" y="790" width="393" height="66"/>
@@ -859,43 +850,53 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-kD-wvi" customClass="FLAnimatedImageView">
-                                <rect key="frame" x="76" y="373" width="241" height="268"/>
+                                <rect key="frame" x="76" y="373" width="241" height="246"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-w8-53D">
+                                <rect key="frame" x="90" y="723" width="213" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="qyG-GD-AVI"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Modifier les informations du profil"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QY2-SG-D5Y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ymm-w8-53D" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="16" id="14r-Xh-d8M"/>
+                            <constraint firstItem="Ymm-w8-53D" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="90" id="14r-Xh-d8M"/>
                             <constraint firstItem="2Wc-kD-wvi" firstAttribute="centerX" secondItem="VMq-a4-5VY" secondAttribute="centerX" id="5fJ-eb-I2u"/>
+                            <constraint firstItem="taY-uh-ssh" firstAttribute="bottom" secondItem="ATF-sM-Ka3" secondAttribute="bottom" id="7Z1-wy-hCO"/>
                             <constraint firstItem="MnB-Mx-0u0" firstAttribute="centerY" secondItem="Iff-J5-zZm" secondAttribute="centerY" id="7sF-YB-6ez"/>
+                            <constraint firstItem="ATF-sM-Ka3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="taY-uh-ssh" secondAttribute="trailing" constant="8" symbolic="YES" id="Axd-76-Oyi"/>
                             <constraint firstItem="yCL-au-Cm9" firstAttribute="top" secondItem="Iff-J5-zZm" secondAttribute="bottom" constant="8" symbolic="YES" id="BL8-nI-n2r"/>
                             <constraint firstItem="ATF-sM-Ka3" firstAttribute="top" secondItem="2Wc-kD-wvi" secondAttribute="bottom" constant="41" id="CYX-b0-LK7"/>
                             <constraint firstItem="yCL-au-Cm9" firstAttribute="leading" secondItem="IxB-v8-UOc" secondAttribute="leadingMargin" id="ItY-pr-zHr"/>
-                            <constraint firstItem="9Yb-HZ-UWt" firstAttribute="top" secondItem="Ymm-w8-53D" secondAttribute="bottom" constant="30.000000000000114" id="JPD-Bd-j1h"/>
+                            <constraint firstItem="9Yb-HZ-UWt" firstAttribute="top" secondItem="Ymm-w8-53D" secondAttribute="bottom" constant="41" id="JPD-Bd-j1h"/>
                             <constraint firstItem="9Yb-HZ-UWt" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="33" id="LZl-Fo-xp4"/>
                             <constraint firstItem="2Wc-kD-wvi" firstAttribute="top" secondItem="CH7-9z-qod" secondAttribute="bottom" constant="8" id="Lgi-f3-TBp"/>
                             <constraint firstItem="VMq-a4-5VY" firstAttribute="leading" secondItem="IxB-v8-UOc" secondAttribute="leading" id="O1W-le-kHV"/>
                             <constraint firstItem="CH7-9z-qod" firstAttribute="top" secondItem="yCL-au-Cm9" secondAttribute="bottom" constant="18" id="ODl-aN-Ytr"/>
-                            <constraint firstItem="Ymm-w8-53D" firstAttribute="top" secondItem="ATF-sM-Ka3" secondAttribute="bottom" constant="10" id="PVY-xf-4CN"/>
-                            <constraint firstItem="ATF-sM-Ka3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="taY-uh-ssh" secondAttribute="trailing" constant="8" symbolic="YES" id="SuO-yJ-W7B"/>
+                            <constraint firstItem="Ymm-w8-53D" firstAttribute="top" secondItem="ATF-sM-Ka3" secondAttribute="bottom" constant="21" id="PVY-xf-4CN"/>
+                            <constraint firstItem="taY-uh-ssh" firstAttribute="top" secondItem="ATF-sM-Ka3" secondAttribute="top" id="UYs-H0-KYt"/>
                             <constraint firstItem="Iff-J5-zZm" firstAttribute="leading" secondItem="IxB-v8-UOc" secondAttribute="leadingMargin" constant="-49" id="VGV-yg-nqb"/>
                             <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Yb-HZ-UWt" secondAttribute="trailing" symbolic="YES" id="VQ7-jg-Uz0"/>
                             <constraint firstAttribute="bottomMargin" secondItem="VMq-a4-5VY" secondAttribute="bottom" constant="-38" id="Wkx-x8-T8e"/>
                             <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" secondItem="CH7-9z-qod" secondAttribute="trailing" constant="16" id="Yg7-58-Dak"/>
                             <constraint firstItem="2Wc-kD-wvi" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="76" id="a0a-kB-bP8"/>
-                            <constraint firstItem="VMq-a4-5VY" firstAttribute="top" secondItem="Ymm-w8-53D" secondAttribute="bottom" constant="14" id="c7s-Zp-m1e"/>
+                            <constraint firstItem="VMq-a4-5VY" firstAttribute="top" secondItem="Ymm-w8-53D" secondAttribute="bottom" constant="25" id="c7s-Zp-m1e"/>
                             <constraint firstItem="Iff-J5-zZm" firstAttribute="centerX" secondItem="IxB-v8-UOc" secondAttribute="centerX" id="cTj-jF-AiY"/>
-                            <constraint firstItem="taY-uh-ssh" firstAttribute="leading" secondItem="Ymm-w8-53D" secondAttribute="leading" id="dJy-Oc-yXn"/>
                             <constraint firstItem="MnB-Mx-0u0" firstAttribute="centerX" secondItem="yCL-au-Cm9" secondAttribute="centerX" id="dgy-2k-Epn"/>
                             <constraint firstItem="yCL-au-Cm9" firstAttribute="top" secondItem="MnB-Mx-0u0" secondAttribute="bottom" constant="73" id="dzV-fk-hpO"/>
                             <constraint firstItem="CH7-9z-qod" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="16" id="ee7-dn-JzJ"/>
-                            <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" secondItem="ATF-sM-Ka3" secondAttribute="trailing" constant="21" id="jHW-8s-k5u"/>
+                            <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" secondItem="ATF-sM-Ka3" secondAttribute="trailing" constant="61" id="jHW-8s-k5u"/>
                             <constraint firstItem="MnB-Mx-0u0" firstAttribute="leading" secondItem="QY2-SG-D5Y" secondAttribute="leading" constant="140" id="noo-gZ-nvN"/>
-                            <constraint firstItem="taY-uh-ssh" firstAttribute="top" secondItem="ATF-sM-Ka3" secondAttribute="top" id="pBv-pf-MMi"/>
+                            <constraint firstItem="taY-uh-ssh" firstAttribute="leading" secondItem="CH7-9z-qod" secondAttribute="leading" id="pLu-4w-6dA"/>
                             <constraint firstItem="2Wc-kD-wvi" firstAttribute="centerX" secondItem="yCL-au-Cm9" secondAttribute="centerX" id="rcI-aP-Dc7"/>
                             <constraint firstItem="MnB-Mx-0u0" firstAttribute="centerX" secondItem="Iff-J5-zZm" secondAttribute="centerX" id="sxi-bh-cRu"/>
                             <constraint firstItem="Iff-J5-zZm" firstAttribute="top" secondItem="IxB-v8-UOc" secondAttribute="top" id="w2V-ZU-gN3"/>
-                            <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" secondItem="Ymm-w8-53D" secondAttribute="trailing" constant="21" id="xV9-gJ-hKd"/>
+                            <constraint firstItem="QY2-SG-D5Y" firstAttribute="trailing" secondItem="Ymm-w8-53D" secondAttribute="trailing" constant="90" id="xV9-gJ-hKd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ee3-jl-pfO"/>
@@ -994,6 +995,11 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sauter"/>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="YYd-gd-WMZ">
+                                <rect key="frame" x="16" y="185" width="361" height="26"/>
+                                <color key="pageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c01-kf-bga">
                                 <rect key="frame" x="234" y="737" width="128" height="42"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.92156862750000001" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1008,11 +1014,6 @@
                                     <segue destination="oOW-s0-i52" kind="show" id="XAK-Mk-5FX"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="YYd-gd-WMZ">
-                                <rect key="frame" x="16" y="185" width="361" height="26"/>
-                                <color key="pageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ffi-l4-c83"/>
                         <color key="backgroundColor" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

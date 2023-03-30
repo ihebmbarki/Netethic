@@ -19,11 +19,43 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
-    func addSocialMediaProfile(socialData: Profil, completion: @escaping(Profil) -> Void) {
+    
+    func getLastregistredChildID(withUsername: String, completion: @escaping(Int) -> Void) {
+        var childs = [Child]()
+        var lastChildID = 0
+        
+        let get_ChildID_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUsername)/childs/"
+        
+        AF.request(get_ChildID_url, method: .get).response
+        { response in
+            switch response.result {
+            case .success(let data):
+                if let data = data {
+                    do {
+                        childs = try JSONDecoder().decode([Child].self, from: data)
+                        let sortedChilds: [Child] = childs.sorted { $0.created_at.compare($1.created_at) == .orderedAscending }
+                        print("Sorted childs: \(sortedChilds)")
+                        
+                        if let lastChild = sortedChilds.last {
+                            lastChildID = lastChild.id
+                            completion(lastChildID)
+                        }
+                    } catch let error as NSError {
+                        print("Failed to decode JSON: \(error.localizedDescription)")
+                    }
+                } else {
+                    print("Response data is nil")
+                }
+            case .failure(let error):
+                print("API Error getting journey data: \(error)")
+            }
+        }
+    }
+    
+    func addSocialMediaProfile(socialData: Profil, completionHandler: @escaping (Result<String, APIError>) -> Void) {
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
-        
         AF.request(add_Child_Profile,method: .post, parameters: socialData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
             switch response.result {
             case .success(let data):
@@ -32,11 +64,10 @@ class APIManager {
                 if statusCode == 201 {
                     do {
                         let profile = try JSONDecoder().decode(Profil.self, from: response.data!)
-                        //print(user.username)
-                        print("Your new child's profile has been successfully created!")
-                        completion(profile)
-                    } catch let error as NSError {
-                        print("Failed to load: \(error)")
+                        completionHandler(.success("Child social media registered successfully"))
+                        
+                    } catch {
+                        completionHandler(.failure(.custom(message: "Failed to register child's social media")))
                     }
                 }
             case .failure(let err):
@@ -46,7 +77,7 @@ class APIManager {
     }
 
     func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
-        let user_step_url = "https://webserver.staging.4indata.fr/api/users/\(withUserName)/journey/"
+        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/\(withUserName)/journey_state/"
         
         AF.request(user_step_url, method: .get).response { response in
             switch response.result {
@@ -63,7 +94,8 @@ class APIManager {
                         }
                     }
                 } catch let error as NSError {
-                    print("Failed to load journey data: \(error)")
+//                    print("Failed to load journey data: \(error)")
+                    print(error.localizedDescription)
                 } catch let jsonError {
                     print("Failed to parse JSON data: \(jsonError)")
                     print(String(data: data!, encoding: .utf8)!)

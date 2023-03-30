@@ -146,25 +146,25 @@ class SignIn: UIViewController {
                         // Save id and username to UserDefaults
                         UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
-                        UserDefaults.standard.synchronize()
+//                        UserDefaults.standard.synchronize()
                         print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
                     DispatchQueue.main.async {
                         APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
-                            print(wizardStep)
+                            print("wizard Step: \(wizardStep)")
                             switch
                             wizardStep {
                             case 0:
                                 self.goToScreen(withId: "childInfos")
-                            case 2:
+                            case 1:
                                 self.goToScreen(withId: "ChildSocialMedia")
-                            case 3:
+                            case 2:
                                 self.goToScreen(withId: "ChildProfileAdded")
-                            case 4:
+                            case 3:
                                 self.goToScreen(withId: "ChildDevice")
-                            case 5:
+                            case 4:
                                 self.goToScreen(withId: "Congrats")
                             default:
                                 break

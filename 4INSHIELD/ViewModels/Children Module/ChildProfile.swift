@@ -89,25 +89,20 @@ class ChildProfile: UIViewController {
         APIManager.shareInstance.addChildInfos(regData: regData) { result in
             switch result {
             case .success(let json):
-//                DispatchQueue.main.async {
-//                    let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
-//                    let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-//                        self.goToSocial(withId: "ChildSocialMedia")
-//                    }
-//                    alertController.addAction(okayAction)
-//                    self.present(alertController, animated: true, completion: nil)
-//                }
                 print(json as AnyObject)
-                if let jsonDict = json as? [String: Any],
-                   let id = jsonDict["id"] as? Int {
-                    // Save id to UserDefaults
-                    UserDefaults.standard.set(id, forKey: "childID")
-                    UserDefaults.standard.synchronize()
-                    print("childID: \(id)")
+                if let data = json.data(using: .utf8),
+                   let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let id = jsonDict["id"] as? Int,
+                   let username = jsonDict["username"] as? String {
+                       // Save id and username to UserDefaults
+                       UserDefaults.standard.set(id, forKey: "childID")
+                       UserDefaults.standard.set(username, forKey: "username")
+                       UserDefaults.standard.synchronize()
+                       print("childID: \(id), username: \(username)")
                 } else {
-                    print("Error: could not parse response")
+                       print("Error: could not parse response")
                 }
-               
+     
                     
                 let date = Date()
                 let df = DateFormatter()

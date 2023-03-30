@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040821AA29D43F4500D7A562 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821A929D43F4500D7A562 /* Profil.swift */; };
+		040821AC29D5B91200D7A562 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821AB29D5B91200D7A562 /* Child.swift */; };
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		040821A929D43F4500D7A562 /* Profil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
+		040821AB29D5B91200D7A562 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				04C1363929D1C9D5008F1A58 /* ChildModel.swift */,
+				040821AB29D5B91200D7A562 /* Child.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
+				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,

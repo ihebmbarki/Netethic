@@ -111,7 +111,7 @@ class ChildProfile: UIViewController {
                 
                 let x = [
                     "user": userID,
-                    "wizard_step": 2,
+                    "wizard_step": 1,
                     "platform": "mobile",
                     "date": dateString
                 ] as [String : Any]

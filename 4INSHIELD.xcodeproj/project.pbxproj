@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		040821AA29D43F4500D7A562 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821A929D43F4500D7A562 /* Profil.swift */; };
 		040821AC29D5B91200D7A562 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821AB29D5B91200D7A562 /* Child.swift */; };
+		040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821AE29D6DB1400D7A562 /* OnboardingSlide.swift */; };
+		040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821B129D6E1B600D7A562 /* OnboardingViewController.swift */; };
+		040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */; };
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
@@ -50,6 +53,9 @@
 /* Begin PBXFileReference section */
 		040821A929D43F4500D7A562 /* Profil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		040821AB29D5B91200D7A562 /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		040821AE29D6DB1400D7A562 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		040821B129D6E1B600D7A562 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
@@ -119,6 +125,23 @@
 			path = "SocialMedia & Profile";
 			sourceTree = "<group>";
 		};
+		040821AD29D6DAEE00D7A562 /* Onboarding Model */ = {
+			isa = PBXGroup;
+			children = (
+				040821AE29D6DB1400D7A562 /* OnboardingSlide.swift */,
+			);
+			path = "Onboarding Model";
+			sourceTree = "<group>";
+		};
+		040821B029D6E16300D7A562 /* Onboarding Module */ = {
+			isa = PBXGroup;
+			children = (
+				040821B129D6E1B600D7A562 /* OnboardingViewController.swift */,
+				040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */,
+			);
+			path = "Onboarding Module";
+			sourceTree = "<group>";
+		};
 		04340B1B29C097F10055B394 /* Translation */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +175,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				040821AD29D6DAEE00D7A562 /* Onboarding Model */,
 				040821A829D43F1000D7A562 /* SocialMedia & Profile */,
 				04D270DC29D31AA40071B4AB /* WizardStep & Journey */,
 				04C1363829D1C9BF008F1A58 /* Children */,
@@ -210,6 +234,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				040821B029D6E16300D7A562 /* Onboarding Module */,
 				04B2A60B29CB51A00028B7E2 /* Children Module */,
 				04A52E0B29C206860097C145 /* Side Menu */,
 				04340B1F29C09B4B0055B394 /* Dashboard Module  */,
@@ -467,6 +492,7 @@
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
+				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
@@ -474,6 +500,7 @@
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
+				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
@@ -486,6 +513,7 @@
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
+				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,

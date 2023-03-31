@@ -34,7 +34,7 @@ class APIManager {
                     do {
                         childs = try JSONDecoder().decode([Child].self, from: data)
                         let sortedChilds: [Child] = childs.sorted { $0.created_at.compare($1.created_at) == .orderedAscending }
-                        print("Sorted childs: \(sortedChilds)")
+//                        print("Sorted childs: \(sortedChilds)")
                         
                         if let lastChild = sortedChilds.last {
                             lastChildID = lastChild.id
@@ -76,29 +76,24 @@ class APIManager {
         }
     }
 
-    func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
+    func getUserWizardStep(withUserName: String, completion: @escaping (Int) -> Void) {
+        var userJourneys: [UserJourney]?
+
         let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/\(withUserName)/journey_state/"
-        
+
         AF.request(user_step_url, method: .get).response { response in
             switch response.result {
-            case .success(let data):
+            case .success(_):
                 do {
-                    let userJourneys = try JSONDecoder().decode([UserJourney].self, from: data!)
-                    if userJourneys.isEmpty {
-                        completion(0)
-                    } else {
-                        if let lastStep = userJourneys.last?.wizard_step {
-                            completion(lastStep)
-                        } else {
-                            print("Failed to get last wizard step")
-                        }
-                    }
+                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
+                    let lastJourney = userJourneys?.last
+                    let wizardStep = lastJourney?.wizard_step ?? 0
+                    
+                        completion(wizardStep)
+                   
                 } catch let error as NSError {
-//                    print("Failed to load journey data: \(error)")
                     print(error.localizedDescription)
-                } catch let jsonError {
-                    print("Failed to parse JSON data: \(jsonError)")
-                    print(String(data: data!, encoding: .utf8)!)
+                    print("Failed to load journey data: \(error)")
                 }
             case .failure(let error):
                 print("API Error getting journey data: \(error)")
@@ -108,7 +103,7 @@ class APIManager {
 
 
 
-    
+
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void) {
             
         var journey: UserJourney?

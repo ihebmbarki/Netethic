@@ -126,7 +126,11 @@ class SignIn: UIViewController {
         navigationController?.pushViewController(VC, animated: true)
     }
     
- 
+    fileprivate func getLastChildID(username: String) {
+        APIManager.shareInstance.getLastregistredChildID(withUsername: username) { lastChildID in
+            UserDefaults.standard.set(lastChildID, forKey: "childID")
+        }
+    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
         guard let username = self.emailTF.text else { return }
@@ -139,32 +143,35 @@ class SignIn: UIViewController {
             APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
                 case.success(let json):
-                    print(json as AnyObject)
-                    if let jsonDict = json as? [String: Any],
-                       let id = jsonDict["id"] as? Int,
-                       let username = jsonDict["username"] as? String {
-                        // Save id and username to UserDefaults
-                        UserDefaults.standard.set(id, forKey: "userID")
-                        UserDefaults.standard.set(username, forKey: "username")
-//                        UserDefaults.standard.synchronize()
-                        print("User ID: \(id)")
-                    } else {
-                        print("Error: could not parse response")
-                    }
+//                    print(json as AnyObject)
+//                    if let jsonDict = json as? [String: Any],
+//                       let id = jsonDict["id"] as? Int,
+//                       let username = jsonDict["username"] as? String {
+//                        // Save id and username to UserDefaults
+//                        UserDefaults.standard.set(id, forKey: "userID")
+//                        UserDefaults.standard.set(username, forKey: "username")
+////                        UserDefaults.standard.synchronize()
+//                        print("User ID: \(id)")
+//                    } else {
+//                        print("Error: could not parse response")
+//                    }
                     DispatchQueue.main.async {
-                        APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                        APIManager.shareInstance.getUserWizardStep(withUserName: username) { wizardStep in
                             print("wizard Step: \(wizardStep)")
+//                          let wizardStep = 0
                             switch
                             wizardStep {
                             case 0:
-                                self.goToScreen(withId: "childInfos")
+                                self.goToScreen(withId: "OnboardingSB")
                             case 1:
-                                self.goToScreen(withId: "ChildSocialMedia")
+                                self.goToScreen(withId: "childInfos")
                             case 2:
-                                self.goToScreen(withId: "ChildProfileAdded")
+                                self.goToScreen(withId: "ChildSocialMedia")
                             case 3:
-                                self.goToScreen(withId: "ChildDevice")
+                                self.goToScreen(withId: "ChildProfileAdded")
                             case 4:
+                                self.goToScreen(withId: "ChildDevice")
+                            case 5:
                                 self.goToScreen(withId: "Congrats")
                             default:
                                 break

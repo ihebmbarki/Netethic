@@ -4,7 +4,7 @@
 //
 //  Created by iheb mbarki on 31/3/2023.
 //
-
+import Foundation
 import UIKit
 
 class OnboardingViewController: UIViewController {
@@ -22,6 +22,7 @@ class OnboardingViewController: UIViewController {
                 nextBtn.setTitle("C'est parti !", for: .normal)
             } else {
                 nextBtn.setTitle("Suivant", for: .normal)
+                
             }
         }
     }

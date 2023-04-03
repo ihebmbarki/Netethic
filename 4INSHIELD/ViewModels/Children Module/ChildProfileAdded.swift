@@ -4,7 +4,7 @@
 //
 //  Created by iheb mbarki on 23/3/2023.
 //
-
+import Foundation
 import UIKit
 import FLAnimatedImage
 
@@ -35,6 +35,32 @@ class ChildProfileAdded: UIViewController {
         //Buttons style
         addNewProfileBtn.applyGradient()
         editProfileInfoBtn.applyGradient()
+    }
+    
+    
+    @IBAction func continueBtnTapped(_ sender: Any) {
+        guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
+              let userID = Int(userIDString) else {
+            print("User ID not found")
+            return
+        }
+        
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let dateString = df.string(from: date)
+
+        let x = [
+            "user": userID,
+            "wizard_step": 3,
+            "platform": "mobile",
+            "date": dateString
+        ] as [String : Any]
+        let journey = UserJourney(dictionary: x)
+        
+        APIManager.shareInstance.saveUserJourney(journeyData: journey) { userJourney in
+            print(userJourney)
+        }
     }
     
 }

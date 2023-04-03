@@ -19,6 +19,43 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func setOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void) {
+        let parameters: [String: Any] = [
+            "username": username,
+            "onboarding_simple": true
+        ]
+        AF.request(set_Onboarding_url, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+            switch response.result {
+            case .success(let value):
+                print("Onboarding simple set to true: \(String(describing: value))")
+                completion(.success(value))
+            case .failure(let error):
+                print("Failed to set onboarding simple to true: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getUserOnboardingStatus(withUserName: String, completion: @escaping (Bool?) -> Void) {
+        let onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/"
+        
+        AF.request(onboarding_url, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let loginModel = try JSONDecoder().decode(LoginModel.self, from: data!)
+                    completion(loginModel.onboarding_simple)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                    print("Failed to load onboarding data: \(error)")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("API Error getting onboarding data: \(error)")
+                completion(nil)
+            }
+        }
+    }
     
     func getLastregistredChildID(withUsername: String, completion: @escaping(Int) -> Void) {
         var childs = [Child]()
@@ -76,21 +113,24 @@ class APIManager {
         }
     }
 
-    func getUserWizardStep(withUserName: String, completion: @escaping (Int) -> Void) {
+    func getUserWizardStep(withUserName: String, completion: @escaping (Int?) -> Void) {
         var userJourneys: [UserJourney]?
+        var lastStep: Int?
 
-        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/\(withUserName)/journey_state/"
+        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/users/\(withUserName)/journey_state/"
 
         AF.request(user_step_url, method: .get).response { response in
             switch response.result {
-            case .success(_):
+            case .success(let data):
                 do {
-                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
-                    let lastJourney = userJourneys?.last
-                    let wizardStep = lastJourney?.wizard_step ?? 0
-                    
-                        completion(wizardStep)
-                   
+                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: data!)
+                                        
+                    if userJourneys!.isEmpty {
+                        lastStep = 0
+                    } else {
+                        guard let lastJourney = userJourneys?.last else {return}
+                        lastStep = lastJourney.wizard_step
+                    }
                 } catch let error as NSError {
                     print(error.localizedDescription)
                     print("Failed to load journey data: \(error)")
@@ -98,8 +138,11 @@ class APIManager {
             case .failure(let error):
                 print("API Error getting journey data: \(error)")
             }
+            
+            completion(lastStep)
         }
     }
+
 
 
 

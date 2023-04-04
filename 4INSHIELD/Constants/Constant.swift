@@ -16,7 +16,7 @@ let login_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/login/"
 let otp_url =  "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/verify-totp-token/"
 let email_verif_url =  "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/email-verify-app-mobile/"
 let add_Child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/"
-let user_journey_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/journey/"
+let user_journey_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/userjourney/"
 //let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/journey/"
 
 let add_Child_Profile = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/profiles/"

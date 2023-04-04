@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 class OnboardingViewController: UIViewController {
-
+    
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -30,11 +30,11 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateScrollView()
-
+        
         nextBtn.applyGradient()
         // Do any additional setup after loading the view.
     }
-
+    
     func populateScrollView() {
         slides = [
             OnboardingSlide(title: "Protégez vos enfants en ligne", description: "4INSHIELD vous garantie que l’activité en ligne de vos enfants soit sereine et sans danger",bgimage: #imageLiteral(resourceName: "Ellipse 174") , image: #imageLiteral(resourceName: "image 8")),
@@ -45,15 +45,60 @@ class OnboardingViewController: UIViewController {
         pageControl.numberOfPages = slides.count
     }
     
+    func goToScreen(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(VC, animated: true)
+    }
+    
     @IBAction func nextBtnTapped(_ sender: Any) {
         if currentPage == slides.count - 1 {
-            UserDefaults.standard.hasOnboarded = true
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "childInfos")
-            vc.modalPresentationStyle = .fullScreen
-            vc.modalTransitionStyle = .coverVertical
-            present(vc, animated: true, completion: nil)
-        } else {
+            // Proceed to wizard screen
+            if let username = UserDefaults.standard.string(forKey: "username") {
+                APIManager.shareInstance.getUserWizardStep(withUserName: username) { wizardStep in
+                    print("Retrieved wizard step from server: \(String(describing: wizardStep))")
+                    // Update the user defaults with the new wizard step value
+                    UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
+                    if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
+                        print("Retrieved wizard step from user defaults: \(wizardStep)")
+                        switch wizardStep {
+                        case 1:
+                            self.goToScreen(withId: "childInfos")
+                        case 2:
+                            self.goToScreen(withId: "ChildSocialMedia")
+                        case 3:
+                            self.goToScreen(withId: "ChildProfileAdded")
+                        case 4:
+                            self.goToScreen(withId: "ChildDevice")
+                        case 5:
+                            self.goToScreen(withId: "Congrats")
+                        default:
+                            // The wizard step value is not set in the user defaults
+                            // Redirect to the onboarding screen
+                            self.goToScreen(withId: "OnboardingSB")
+                        }
+                    } else {
+                        // The wizard step value is not set in the user defaults
+                        // Redirect to the onboarding screen
+                        self.goToScreen(withId: "OnboardingSB")
+                    }
+                }
+                let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
+                if onboardingSimple == false, let username = UserDefaults.standard.string(forKey: "username") {
+                    APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: username) { result in
+                        switch result {
+                        case .success(let value):
+                            print("Response: \(String(describing: value))")
+                            // Update user default value for onboardingSimple to true
+                            UserDefaults.standard.set(true, forKey: "onboardingSimple")
+                        case .failure(let error):
+                            print("Error: \(error)")
+                        }
+                    }
+                }
+            }
+            
+        }else {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)

@@ -117,7 +117,6 @@ class ChildSocialMedia: UIViewController {
                     alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
-
                 let date = Date()
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

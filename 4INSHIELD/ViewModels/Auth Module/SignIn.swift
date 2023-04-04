@@ -136,13 +136,15 @@ class SignIn: UIViewController {
         guard let username = self.emailTF.text else { return }
         let trimmedUserName = username.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let password = self.passwordTF.text else { return }
-        
-        if(verifyFields()) {
-            
-            let login = LoginModel(username: username, password: password, onboarding_simple: false)
+
+        if verifyFields() {
+            // Check if onboarding has been completed for this user
+            let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
+            let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
+
             APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
-                case.success(let json):
+                case .success(let json):
                     print(json as AnyObject)
                     if let jsonDict = json as? [String: Any],
                        let id = jsonDict["id"] as? Int,
@@ -150,60 +152,73 @@ class SignIn: UIViewController {
                         // Save id and username to UserDefaults
                         UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
-//                        UserDefaults.standard.synchronize()
                         print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
                     DispatchQueue.main.async {
-                        APIManager.shareInstance.getUserOnboardingStatus(withUserName: username) { onboardingSimple in
-                            if let onboardingSimple = onboardingSimple, !onboardingSimple {
-                                // Redirect to onboarding screen
+                        APIManager.shareInstance.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
+                            UserDefaults.standard.set(onboardingSimple, forKey: "onboardingSimple")
+                            print("Value of onboardingSimple: \(onboardingSimple)")
+                            if onboardingSimple == false {
                                 self.goToScreen(withId: "OnboardingSB")
                             } else {
                                 // Proceed to wizard screen
-                                APIManager.shareInstance.getUserWizardStep(withUserName: username) { wizardStep in
-                                    print("wizard Step: \(String(describing: wizardStep))")
-                                    let wizardStep = wizardStep ?? 0
-                                    switch wizardStep {
-                                    case 0:
+                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                                    print("Retrieved wizard step from server: \(String(describing: wizardStep))")
+                                    // Update the user defaults with the new wizard step value
+                                    UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
+                                    if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
+                                        print("Retrieved wizard step from user defaults: \(wizardStep)")
+                                        switch wizardStep {
+                                        case 1:
+                                            self.goToScreen(withId: "childInfos")
+                                        case 2:
+                                            self.goToScreen(withId: "ChildSocialMedia")
+                                        case 3:
+                                            self.goToScreen(withId: "ChildProfileAdded")
+                                        case 4:
+                                            self.goToScreen(withId: "ChildDevice")
+                                        case 5:
+                                            self.goToScreen(withId: "Congrats")
+                                        default:
+                                            // The wizard step value is not set in the user defaults
+                                            // Redirect to the onboarding screen
+                                            self.goToScreen(withId: "OnboardingSB")
+                                        }
+                                    } else {
+                                        // The wizard step value is not set in the user defaults
+                                        // Redirect to the onboarding screen
                                         self.goToScreen(withId: "OnboardingSB")
-                                    case 1:
-                                        self.goToScreen(withId: "childInfos")
-                                    case 2:
-                                        self.goToScreen(withId: "ChildSocialMedia")
-                                    case 3:
-                                        self.goToScreen(withId: "ChildProfileAdded")
-                                    case 4:
-                                        self.goToScreen(withId: "ChildDevice")
-                                    case 5:
-                                        self.goToScreen(withId: "Congrats")
-                                    default:
-                                        break
                                     }
                                 }
                             }
+
                         }
                         // Call the setOnboardingSimpleTrue function to set onboarding_simple to true
-                        if let username = UserDefaults.standard.string(forKey: "username") {
-                            APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: username) { result in
-                                switch result {
-                                case .success(let value):
-                                    print("Response: \(String(describing: value))")
-                                case .failure(let error):
-                                    print("Error: \(error)")
-                                }
-                            }
-                        }
+//                        if !onboardingSimple, let username = UserDefaults.standard.string(forKey: "username") {
+//                            APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: trimmedUserName) { result in
+//                                switch result {
+//                                case .success(let value):
+//                                    print("Response: \(String(describing: value))")
+//                                    // Update user default value for onboardingSimple to true
+//                                    UserDefaults.standard.set(true, forKey: "onboardingSimple")
+//                                case .failure(let error):
+//                                    print("Error: \(error)")
+//                                }
+//                            }
+//
+//                        }
                     }
-
-                case.failure(let error):
+                case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
         self.resetFields()
     }
+
+
 
     
     @IBAction func signInGoogleTapped(_ sender: Any) {

@@ -39,24 +39,22 @@ class APIManager {
     func getUserOnboardingStatus(withUserName: String, completion: @escaping (Bool?) -> Void) {
         let onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/"
         
-        AF.request(onboarding_url, method: .get).response { response in
+        AF.request(onboarding_url, method: .get).responseJSON { response in
             switch response.result {
-            case .success(let data):
-                do {
-                    let loginModel = try JSONDecoder().decode(LoginModel.self, from: data!)
-                    completion(loginModel.onboarding_simple)
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                    print("Failed to load onboarding data: \(error)")
+            case .success(let value):
+                guard let json = value as? [String: Any],
+                      let onboardingSimple = json["onboarding_simple"] as? Bool else {
                     completion(nil)
+                    return
                 }
+                completion(onboardingSimple)
             case .failure(let error):
                 print("API Error getting onboarding data: \(error)")
                 completion(nil)
             }
         }
     }
-    
+
     func getLastregistredChildID(withUsername: String, completion: @escaping(Int) -> Void) {
         var childs = [Child]()
         var lastChildID = 0
@@ -112,40 +110,40 @@ class APIManager {
             }
         }
     }
+    
 
-    func getUserWizardStep(withUserName: String, completion: @escaping (Int?) -> Void) {
-        var userJourneys: [UserJourney]?
-        var lastStep: Int?
-
-        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/users/\(withUserName)/journey_state/"
-
-        AF.request(user_step_url, method: .get).response { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: data!)
-                                        
-                    if userJourneys!.isEmpty {
-                        lastStep = 0
-                    } else {
-                        guard let lastJourney = userJourneys?.last else {return}
-                        lastStep = lastJourney.wizard_step
-                    }
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                    print("Failed to load journey data: \(error)")
-                }
-            case .failure(let error):
-                print("API Error getting journey data: \(error)")
-            }
+    func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
             
-            completion(lastStep)
+            var userJourneys = [UserJourney]()
+            var lastStep = 0
+            
+            let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/journey/"
+
+            AF.request(user_step_url, method: .get).response
+            {
+                response in
+                print(response)
+                switch response.result {
+                case .success( _):
+                    do {
+                        userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
+                                                
+                        if userJourneys.isEmpty {
+                            lastStep = 0
+                        } else {
+                            guard let lastJourney = userJourneys.last else {return}
+                            lastStep = lastJourney.wizard_step
+                        }
+                        
+                        completion(lastStep)
+                    } catch let error as NSError {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                case .failure(let error):
+                    print("API Error getting journey data: \(error)")
+                }
+            }
         }
-    }
-
-
-
-
 
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void) {
             

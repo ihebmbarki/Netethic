@@ -7,6 +7,7 @@ target '4INSHIELD' do
 
   # Pods for 4INSHIELD
     pod 'FLAnimatedImage'
+    pod 'SDWebImage', '~> 5.0'
     
 
 

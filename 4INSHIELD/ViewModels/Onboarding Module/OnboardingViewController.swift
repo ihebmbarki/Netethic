@@ -92,7 +92,7 @@ class OnboardingViewController: UIViewController {
                             // Update user default value for onboardingSimple to true
                             UserDefaults.standard.set(true, forKey: "onboardingSimple")
                         case .failure(let error):
-                            print("Error: \(error)")
+                            print("Error: \(error.localizedDescription)")
                         }
                     }
                 }

@@ -19,18 +19,39 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func fetchCurrentUserChildren(withUserName: String, completion: @escaping ([Child]) -> Void) {
+        var children = [Child]()
+        
+        let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/childs/"
+        AF.request(serverURL, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    children = try JSONDecoder().decode([Child].self, from: data!)
+                    print("Decoded children: \(children)")
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
+                }
+                completion(children)
+            case .failure(let error):
+                print("Error getting children list: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    
     func setOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void) {
         let parameters: [String: Any] = [
             "username": username,
             "onboarding_simple": true
         ]
-        AF.request(set_Onboarding_url, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+        AF.request(set_Onboarding_url, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
             switch response.result {
             case .success(let value):
                 print("Onboarding simple set to true: \(String(describing: value))")
                 completion(.success(value))
             case .failure(let error):
-                print("Failed to set onboarding simple to true: \(error)")
+                print("Failed to set onboarding simple to true: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

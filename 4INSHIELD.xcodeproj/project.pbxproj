@@ -33,6 +33,10 @@
 		0496979629AF769800F65DF4 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979529AF769800F65DF4 /* Loading.swift */; };
 		0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979729AFAD6C00F65DF4 /* Confirmation.swift */; };
 		049736BE29ACFEB0005C3662 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049736BD29ACFEB0005C3662 /* Register.swift */; };
+		049C154229DD83B70028A314 /* Children.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049C154129DD83B70028A314 /* Children.storyboard */; };
+		049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C154529DD85430028A314 /* ChildTableViewCell.xib */; };
+		049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C154929DD85E30028A314 /* ChildrenViewController.swift */; };
+		049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C154B29DD860F0028A314 /* ChildTableViewCell.swift */; };
 		049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C44A729B1E96400AAA582 /* LoginModel.swift */; };
 		049C44AD29B2024100AAA582 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049C44AF29B2024100AAA582 /* Localizable.strings */; };
 		049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD9AA29BF705D00DCD577 /* LanguageManager.swift */; };
@@ -79,6 +83,10 @@
 		0496979529AF769800F65DF4 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		0496979729AFAD6C00F65DF4 /* Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirmation.swift; sourceTree = "<group>"; };
 		049736BD29ACFEB0005C3662 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		049C154129DD83B70028A314 /* Children.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Children.storyboard; sourceTree = "<group>"; };
+		049C154529DD85430028A314 /* ChildTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildTableViewCell.xib; sourceTree = "<group>"; };
+		049C154929DD85E30028A314 /* ChildrenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenViewController.swift; sourceTree = "<group>"; };
+		049C154B29DD860F0028A314 /* ChildTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTableViewCell.swift; sourceTree = "<group>"; };
 		049C44A729B1E96400AAA582 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		049C44A929B2017A00AAA582 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		049C44AA29B2017A00AAA582 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -253,6 +261,18 @@
 			path = "Loading Screen ";
 			sourceTree = "<group>";
 		};
+		049C154829DD85A80028A314 /* Add Child Informations */ = {
+			isa = PBXGroup;
+			children = (
+				04B2A60C29CB52250028B7E2 /* ChildProfile.swift */,
+				0479739529CC922C00FD28DF /* ChildSocialMedia.swift */,
+				0479739729CC927200FD28DF /* ChildProfileAdded.swift */,
+				0479739929CC929C00FD28DF /* ChildDevice.swift */,
+				0479739B29CC92D100FD28DF /* Congrats.swift */,
+			);
+			path = "Add Child Informations";
+			sourceTree = "<group>";
+		};
 		04A52E0B29C206860097C145 /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,11 +310,11 @@
 		04B2A60B29CB51A00028B7E2 /* Children Module */ = {
 			isa = PBXGroup;
 			children = (
-				04B2A60C29CB52250028B7E2 /* ChildProfile.swift */,
-				0479739529CC922C00FD28DF /* ChildSocialMedia.swift */,
-				0479739729CC927200FD28DF /* ChildProfileAdded.swift */,
-				0479739929CC929C00FD28DF /* ChildDevice.swift */,
-				0479739B29CC92D100FD28DF /* Congrats.swift */,
+				049C154829DD85A80028A314 /* Add Child Informations */,
+				049C154929DD85E30028A314 /* ChildrenViewController.swift */,
+				049C154129DD83B70028A314 /* Children.storyboard */,
+				049C154B29DD860F0028A314 /* ChildTableViewCell.swift */,
+				049C154529DD85430028A314 /* ChildTableViewCell.xib */,
 			);
 			path = "Children Module";
 			sourceTree = "<group>";
@@ -432,7 +452,9 @@
 			files = (
 				04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */,
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
+				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
+				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
@@ -496,6 +518,7 @@
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
+				049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
@@ -512,6 +535,7 @@
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
+				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,

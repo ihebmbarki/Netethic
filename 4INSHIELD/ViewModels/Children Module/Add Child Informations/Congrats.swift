@@ -36,6 +36,8 @@ class Congrats: UIViewController {
     }
     
     @IBAction func continueBtnTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToChildrenList", sender: self)
+
         guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
               let userID = Int(userIDString) else {
             print("User ID not found")

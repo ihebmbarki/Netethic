@@ -181,9 +181,9 @@ class SignIn: UIViewController {
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:
                                             self.goToScreen(withId: "Congrats")
+                                        case 6:
+                                            self.goToScreen(withId: "ChildrenVC")
                                         default:
-                                            // The wizard step value is not set in the user defaults
-                                            // Redirect to the onboarding screen
                                             self.goToScreen(withId: "OnboardingSB")
                                         }
                                     } else {
@@ -195,20 +195,6 @@ class SignIn: UIViewController {
                             }
 
                         }
-                        // Call the setOnboardingSimpleTrue function to set onboarding_simple to true
-//                        if !onboardingSimple, let username = UserDefaults.standard.string(forKey: "username") {
-//                            APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: trimmedUserName) { result in
-//                                switch result {
-//                                case .success(let value):
-//                                    print("Response: \(String(describing: value))")
-//                                    // Update user default value for onboardingSimple to true
-//                                    UserDefaults.standard.set(true, forKey: "onboardingSimple")
-//                                case .failure(let error):
-//                                    print("Error: \(error)")
-//                                }
-//                            }
-//
-//                        }
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SDWebImage
+
 
 //let CLIENT_ID = BuildConfiguration.shared.CLIENT_ID
 //let CLIENT_SECRET = BuildConfiguration.shared.CLIENT_SECRET
@@ -30,8 +32,39 @@ let set_Onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/us
 
 
 
+
+
+
+
+
 //Colors
 struct Colrs {
     static let redColor = UIColor(red: 239, green: 82, blue: 96, alpha: 1)
     static let bgColor = UIColor(red: 63/255, green: 99/255, blue: 169/255, alpha: 1)
+}
+//Display
+extension UIView {
+    public func roundCorners(_ cornerRadius: CGFloat, borderWidth: CGFloat = 0) {
+        self.layer.cornerRadius = cornerRadius
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.layer.borderWidth = borderWidth
+    }
+}
+//Image
+extension UIImageView {
+    
+    func loadImage(_ urlString: String?, onSuccess:((UIImage) -> Void)? = nil) {
+        self.image = UIImage()
+        guard let string = urlString else {return}
+        guard let url = URL(string: string) else {return}
+        
+        self.sd_setImage(with: url) { (image, error, type, url) in
+            if onSuccess != nil , error == nil {
+                onSuccess!(image!)
+            }
+        }
+    }
+    
+    
 }

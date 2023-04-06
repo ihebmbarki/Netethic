@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ChildrenViewController: UIViewController {
     @IBOutlet weak var exitBtnLbl: UIBarButtonItem!
@@ -34,27 +35,66 @@ class ChildrenViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configureUI()
+        getCurrentUserChildren()
+        configureTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let btn = UIButton()
+        view.addSubview(btn)
+        btn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 20, paddingRight: 8, width: 50, height: 50)
+
+
+//        btn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 20, paddingRight: 8, width: 50, height: 50)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.getCurrentUserChildren()
+            guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
+                  let userID = Int(userIDString) else {
+                print("User ID not found")
+                return
+            }
+
+            let date = Date()
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let dateString = df.string(from: date)
+
+            let x = [
+                "user": userID,
+                "wizard_step": 6,
+                "platform": "mobile",
+                "date": dateString
+            ] as [String : Any]
+            let journey = UserJourney(dictionary: x)
+            
+            APIManager.shareInstance.saveUserJourney(journeyData: journey) { userJourney in
+                print(userJourney)
+            }
+        }
     }
 
     
     func getCurrentUserChildren() {
         guard let username = UserDefaults.standard.string(forKey: "username") else { return }
-            APIManager.shareInstance.fetchCurrentUserChildren(withUserName: username) { children in
+            APIManager.shareInstance.fetchCurrentUserChildren(username: username) { children in
                 self.childrenArray = children
-                DispatchQueue.main.async {
                     self.tableView.reloadData()
-                }
-                print("\(children)")
+//                print("\(children)")
                 self.verifyChildList(childrenList: children)
         }
     }
     
-    // MARK: - Helpers
     func configureUI() {
         navigationItem.rightBarButtonItem = nil
         navigationItem.leftBarButtonItem = nil
-//        let savedEmail: String? = KeychainWrapper.standard.string(forKey: "userEmail")
-//        print(savedEmail!)
+        guard let username = UserDefaults.standard.string(forKey: "username") else { return }
+        print(username)
         view.addSubview(btn)
         btn.addTarget(self, action: #selector(addChildd), for: .touchUpInside)
     }
@@ -82,12 +122,12 @@ class ChildrenViewController: UIViewController {
 
     //register tableView Cell
     func configureTableView(){
+//        tableView.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "ChildTableViewCell", bundle: nil), forCellReuseIdentifier: "ChildCell")
     }
     
-
 }
 
 extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
@@ -226,4 +266,19 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     
     
   
+}
+
+extension UIButton {
+    func anchor(top: NSLayoutYAxisAnchor? = nil,
+                left: NSLayoutXAxisAnchor? = nil,
+                bottom: NSLayoutYAxisAnchor? = nil,
+                right: NSLayoutXAxisAnchor? = nil,
+                paddingTop: CGFloat = 0,
+                paddingLeft: CGFloat = 0,
+                paddingBottom: CGFloat = 0,
+                paddingRight: CGFloat = 0,
+                width: CGFloat? = nil,
+                height: CGFloat? = nil) {
+        self.imageView?.anchor(top: top, left: left, bottom: bottom, right: right, paddingTop: paddingTop, paddingLeft: paddingLeft, paddingBottom: paddingBottom, paddingRight: paddingRight, width: width, height: height)
+    }
 }

@@ -74,9 +74,9 @@
             <viewLayoutGuide key="safeArea" id="PIV-MT-9HV"/>
             <color key="backgroundColor" red="0.3224783242" green="0.42824769019999998" blue="0.69414657349999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
-                <outlet property="childAvatar" destination="O0H-hf-wfx" id="gWa-wP-c2C"/>
-                <outlet property="childFullName" destination="rak-O2-Jnh" id="aqP-OG-fbZ"/>
-                <outlet property="childView" destination="4EF-OI-I82" id="5ii-m8-Jjd"/>
+                <outlet property="childAvatar" destination="O0H-hf-wfx" id="Zly-nG-lD8"/>
+                <outlet property="childFullName" destination="rak-O2-Jnh" id="omQ-kz-ZYm"/>
+                <outlet property="childView" destination="4EF-OI-I82" id="OFH-ZA-r3J"/>
             </connections>
             <point key="canvasLocation" x="195" y="23"/>
         </tableViewCell>

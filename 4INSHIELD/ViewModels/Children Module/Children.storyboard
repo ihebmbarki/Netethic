@@ -12,7 +12,7 @@
         <!--Children View Controller-->
         <scene sceneID="he0-cD-Q6O">
             <objects>
-                <viewController id="7ll-Og-AKn" customClass="ChildrenViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChildrenListSB" id="7ll-Og-AKn" customClass="ChildrenViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJY-yu-HLs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,9 +46,6 @@
                                                 <imageReference key="image" image="info.circle.fill" catalog="system" symbolScale="large"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
                                             </buttonConfiguration>
-                                            <connections>
-                                                <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="CUe-gs-fet"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,29 +62,22 @@
                         <viewLayoutGuide key="safeArea" id="HTw-er-wuD"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0Cu-dI-PCp" firstAttribute="leading" secondItem="HTw-er-wuD" secondAttribute="leading" id="6BF-kc-ewW"/>
-                            <constraint firstItem="HTw-er-wuD" firstAttribute="bottom" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="50" id="Vk5-xw-K6j"/>
-                            <constraint firstItem="0Cu-dI-PCp" firstAttribute="top" secondItem="HTw-er-wuD" secondAttribute="top" id="YwQ-oq-aSt"/>
-                            <constraint firstItem="HTw-er-wuD" firstAttribute="trailing" secondItem="0Cu-dI-PCp" secondAttribute="trailing" id="gbU-kT-zVM"/>
+                            <constraint firstAttribute="trailing" secondItem="0Cu-dI-PCp" secondAttribute="trailing" id="Ua8-6g-0X5"/>
+                            <constraint firstItem="0Cu-dI-PCp" firstAttribute="leading" secondItem="nJY-yu-HLs" secondAttribute="leading" id="dQ4-F7-dyU"/>
+                            <constraint firstItem="0Cu-dI-PCp" firstAttribute="top" secondItem="HTw-er-wuD" secondAttribute="top" id="dhx-Li-P6G"/>
+                            <constraint firstItem="HTw-er-wuD" firstAttribute="bottom" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="50" id="g3N-lE-p9V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qYp-4c-c4m">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="back" id="H9r-k3-GRX">
-                            <connections>
-                                <action selector="exitBtnTapped:" destination="7ll-Og-AKn" id="kFf-Bh-6ET"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="back" id="H9r-k3-GRX"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up.circle.fill" catalog="system" id="syR-DH-fbQ">
                             <color key="tintColor" red="0.96921208960000005" green="0.3159907079" blue="0.2446699011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="logoutBtnTapped:" destination="7ll-Og-AKn" id="ZBW-Bl-Unn"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="backBtn" destination="H9r-k3-GRX" id="aQs-oY-bfC"/>
-                        <outlet property="exitBtnLbl" destination="H9r-k3-GRX" id="sYe-RQ-NOw"/>
-                        <outlet property="tableView" destination="0Cu-dI-PCp" id="qDl-U0-tsm"/>
+                        <outlet property="backBtn" destination="H9r-k3-GRX" id="2qi-Tz-pPK"/>
+                        <outlet property="exitBtnLbl" destination="H9r-k3-GRX" id="uEc-Uz-xQn"/>
+                        <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7O-g4-BcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -97,7 +87,7 @@
         <!--Navigation Controller-->
         <scene sceneID="4ng-yE-6V8">
             <objects>
-                <navigationController storyboardIdentifier="ChildrenVC" automaticallyAdjustsScrollViewInsets="NO" id="kNC-uX-pep" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kNC-uX-pep" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="T6H-Pb-eHc">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

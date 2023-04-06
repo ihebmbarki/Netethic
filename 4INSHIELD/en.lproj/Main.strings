@@ -1,0 +1,294 @@
+
+/* Class = "UILabel"; text = "Connectez-vous pour continuer"; ObjectID = "0Mw-Is-DzV"; */
+"0Mw-Is-DzV.text" = "Connectez-vous pour continuer";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "1c5-t6-cZ1"; */
+"1c5-t6-cZ1.text" = "En cours de traitement";
+
+/* Class = "UITextField"; placeholder = "Nom d'utilisateur"; ObjectID = "2dZ-Rc-YPo"; */
+"2dZ-Rc-YPo.placeholder" = "Nom d'utilisateur";
+
+/* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "3wG-Ov-Ng4"; */
+"3wG-Ov-Ng4.text" = "Bienvenue à 4INSHIELD";
+
+/* Class = "UILabel"; text = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement "; ObjectID = "4Pw-LW-EQM"; */
+"4Pw-LW-EQM.text" = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement ";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire avec Facebook"; ObjectID = "5pu-E5-fN6"; */
+"5pu-E5-fN6.configuration.title" = "S’inscrire avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5pu-E5-fN6"; */
+"5pu-E5-fN6.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "6EY-Iw-Xdz"; */
+"6EY-Iw-Xdz.placeholder" = "*";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "6vS-he-vLf"; */
+"6vS-he-vLf.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "70N-do-NMb"; */
+"70N-do-NMb.placeholder" = "Mot de passe";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "7WX-Ob-vAg"; */
+"7WX-Ob-vAg.placeholder" = "*";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Google"; ObjectID = "89e-Md-AUq"; */
+"89e-Md-AUq.configuration.title" = "Se connecter avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "89e-Md-AUq"; */
+"89e-Md-AUq.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "9Yb-HZ-UWt"; */
+"9Yb-HZ-UWt.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+
+/* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "ATF-sM-Ka3"; */
+"ATF-sM-Ka3.configuration.title" = "Continuer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ATF-sM-Ka3"; */
+"ATF-sM-Ka3.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Adresse Email"; ObjectID = "AnP-iP-gr1"; */
+"AnP-iP-gr1.placeholder" = "Adresse Email";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "B2C-ZV-3hW"; */
+"B2C-ZV-3hW.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Les informations de profil de votre enfant ont été ajoutées avec succès"; ObjectID = "CH7-9z-qod"; */
+"CH7-9z-qod.text" = "Les informations de profil de votre enfant ont été ajoutées avec succès";
+
+/* Class = "UITextField"; placeholder = "Entrez le pseudo"; ObjectID = "DN0-1F-Cht"; */
+"DN0-1F-Cht.placeholder" = "Entrez le pseudo";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "DXb-Gu-nuc"; */
+"DXb-Gu-nuc.placeholder" = "*";
+
+/* Class = "UILabel"; text = "© 2023 All Rights Reserved Made by 4INDATA"; ObjectID = "E5u-ud-NuO"; */
+"E5u-ud-NuO.text" = "© 2023 All Rights Reserved Made by 4INDATA";
+
+/* Class = "UIButton"; configuration.title = "Connectez-vous"; ObjectID = "ECl-ri-KQW"; */
+"ECl-ri-KQW.configuration.title" = "Connectez-vous";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ECl-ri-KQW"; */
+"ECl-ri-KQW.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "Ebf-lm-pqL"; */
+"Ebf-lm-pqL.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+
+/* Class = "UIButton"; configuration.title = "Inscrivez-vous"; ObjectID = "IJv-yG-F8h"; */
+"IJv-yG-F8h.configuration.title" = "Inscrivez-vous";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IJv-yG-F8h"; */
+"IJv-yG-F8h.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "Iuy-Ng-Hfj"; */
+"Iuy-Ng-Hfj.configuration.title" = "S’inscrire";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Iuy-Ng-Hfj"; */
+"Iuy-Ng-Hfj.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire avec Google"; ObjectID = "IwV-FI-W00"; */
+"IwV-FI-W00.configuration.title" = "S’inscrire avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IwV-FI-W00"; */
+"IwV-FI-W00.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Veuillez entrer les informations requises pour compléter le profil de votre enfant"; ObjectID = "KT4-84-xMF"; */
+"KT4-84-xMF.text" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant";
+
+/* Class = "UILabel"; text = "Les informations fournies par l'appareil de votre enfant vous aideront à surveiller sa santé mentale, la qualité de son sommeil, sa localisation, et les applications qui l'intéressent, etc."; ObjectID = "LeO-DZ-nFh"; */
+"LeO-DZ-nFh.text" = "Les informations fournies par l'appareil de votre enfant vous aideront à surveiller sa santé mentale, la qualité de son sommeil, sa localisation, et les applications qui l'intéressent, etc.";
+
+/* Class = "UILabel"; text = "1. Prenez le téléphone portable de votre enfant"; ObjectID = "N0u-Vi-eTt"; */
+"N0u-Vi-eTt.text" = "1. Prenez le téléphone portable de votre enfant";
+
+/* Class = "UITextField"; placeholder = "Retaper le mot de passe"; ObjectID = "N2b-Qz-8wZ"; */
+"N2b-Qz-8wZ.placeholder" = "Retaper le mot de passe";
+
+/* Class = "UITextField"; placeholder = "Prénom"; ObjectID = "Nf4-SW-HUT"; */
+"Nf4-SW-HUT.placeholder" = "Prénom";
+
+/* Class = "UILabel"; text = "Vous avez un compte ?"; ObjectID = "Nxd-j1-IiP"; */
+"Nxd-j1-IiP.text" = "Vous avez un compte ?";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "P4X-YA-zBC"; */
+"P4X-YA-zBC.placeholder" = "*";
+
+/* Class = "UIButton"; configuration.title = "Sauter"; ObjectID = "QOa-hB-uJa"; */
+"QOa-hB-uJa.configuration.title" = "Sauter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QOa-hB-uJa"; */
+"QOa-hB-uJa.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Vous n'avez pas de compte ?"; ObjectID = "RbV-le-gJJ"; */
+"RbV-le-gJJ.text" = "Vous n'avez pas de compte ?";
+
+/* Class = "UIButton"; configuration.title = "Se connecter"; ObjectID = "SGR-x7-yO2"; */
+"SGR-x7-yO2.configuration.title" = "Se connecter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SGR-x7-yO2"; */
+"SGR-x7-yO2.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "SaW-qz-T1M"; */
+"SaW-qz-T1M.title" = "Item";
+
+/* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "Ss1-na-iQH"; */
+"Ss1-na-iQH.text" = "Bienvenue à 4INSHIELD";
+
+/* Class = "UILabel"; text = "5. Confirmez que le téléphone va être utilisé par un enfant"; ObjectID = "TmF-DW-eCM"; */
+"TmF-DW-eCM.text" = "5. Confirmez que le téléphone va être utilisé par un enfant";
+
+/* Class = "UILabel"; text = "Félicitations!"; ObjectID = "USi-mW-vFm"; */
+"USi-mW-vFm.text" = "Félicitations!";
+
+/* Class = "UIButton"; configuration.title = "Confirmer"; ObjectID = "UcV-yP-oXd"; */
+"UcV-yP-oXd.configuration.title" = "Confirmer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UcV-yP-oXd"; */
+"UcV-yP-oXd.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "UlJ-wz-kqY"; */
+"UlJ-wz-kqY.text" = "En cours de traitement";
+
+/* Class = "UILabel"; text = "Entrez le code envoyé à votre email"; ObjectID = "Vhq-B8-4tV"; */
+"Vhq-B8-4tV.text" = "Entrez le code envoyé à votre email";
+
+/* Class = "UILabel"; text = "Créer un compte"; ObjectID = "WWU-0k-jhN"; */
+"WWU-0k-jhN.text" = "Créer un compte";
+
+/* Class = "UILabel"; text = "Date de naissaance"; ObjectID = "WXf-sC-vkl"; */
+"WXf-sC-vkl.text" = "Date de naissaance";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "Wlq-So-h61"; */
+"Wlq-So-h61.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "YeE-y0-BZG"; */
+"YeE-y0-BZG.placeholder" = "Email";
+
+/* Class = "UIButton"; configuration.title = "Modifier les informations du profil"; ObjectID = "Ymm-w8-53D"; */
+"Ymm-w8-53D.configuration.title" = "Modifier les informations du profil";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ymm-w8-53D"; */
+"Ymm-w8-53D.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Genre"; ObjectID = "b2V-p1-zAb"; */
+"b2V-p1-zAb.placeholder" = "Genre";
+
+/* Class = "UIButton"; configuration.title = "Suivant"; ObjectID = "c01-kf-bga"; */
+"c01-kf-bga.configuration.title" = "Suivant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "c01-kf-bga"; */
+"c01-kf-bga.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Veuillez saisir les informations du compte de réseau social de votre enfant"; ObjectID = "c1h-vn-REv"; */
+"c1h-vn-REv.text" = "Veuillez saisir les informations du compte de réseau social de votre enfant";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "cDC-FT-aOV"; */
+"cDC-FT-aOV.placeholder" = "*";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "cIV-hG-dn3"; */
+"cIV-hG-dn3.text" = "En cours de traitement";
+
+/* Class = "UILabel"; text = "Veuillez suivre les étapes suivantes"; ObjectID = "cq2-fN-zPX"; */
+"cq2-fN-zPX.text" = "Veuillez suivre les étapes suivantes";
+
+/* Class = "UIButton"; normalTitle = "Suivant"; ObjectID = "dH9-sa-jc0"; */
+"dH9-sa-jc0.normalTitle" = "Suivant";
+
+/* Class = "UITextField"; placeholder = "Choisissez un profil de réseau social"; ObjectID = "dbz-Ch-2Fa"; */
+"dbz-Ch-2Fa.placeholder" = "Choisissez un profil de réseau social";
+
+/* Class = "UILabel"; text = "3. Vous serez redirigé vers la page de téléchargement de l'application 4INSHIELD"; ObjectID = "dtH-ii-qj1"; */
+"dtH-ii-qj1.text" = "3. Vous serez redirigé vers la page de téléchargement de l'application 4INSHIELD";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "dx2-MK-y9U"; */
+"dx2-MK-y9U.placeholder" = "Mot de passe";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "fGA-GN-vAf"; */
+"fGA-GN-vAf.text" = "En cours de traitement";
+
+/* Class = "UIButton"; configuration.title = "Suivant"; ObjectID = "hAy-8v-d7D"; */
+"hAy-8v-d7D.configuration.title" = "Suivant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "hAy-8v-d7D"; */
+"hAy-8v-d7D.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Suivant"; ObjectID = "haY-nQ-1ki"; */
+"haY-nQ-1ki.configuration.title" = "Suivant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "haY-nQ-1ki"; */
+"haY-nQ-1ki.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "2. Scannez ce code QR avec l'appareil photo de l'appareil de votre enfant"; ObjectID = "htk-7J-CVp"; */
+"htk-7J-CVp.text" = "2. Scannez ce code QR avec l'appareil photo de l'appareil de votre enfant";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"; ObjectID = "j48-nz-zey"; */
+"j48-nz-zey.text" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod";
+
+/* Class = "UILabel"; text = " 4. Une fois l'application est installée, connectez-vous !"; ObjectID = "jQw-wp-eHs"; */
+"jQw-wp-eHs.text" = " 4. Une fois l'application est installée, connectez-vous !";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "jUk-0V-Ie6"; */
+"jUk-0V-Ie6.placeholder" = "*";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "mat-Sc-iFX"; */
+"mat-Sc-iFX.text" = "En cours de traitement";
+
+/* Class = "UIButton"; configuration.title = "Mot de passe oublié ?"; ObjectID = "mdY-P9-cCR"; */
+"mdY-P9-cCR.configuration.title" = "Mot de passe oublié ?";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mdY-P9-cCR"; */
+"mdY-P9-cCR.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mzF-4H-p5N"; */
+"mzF-4H-p5N.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Facebook"; ObjectID = "oia-8x-1Sd"; */
+"oia-8x-1Sd.configuration.title" = "Se connecter avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "oia-8x-1Sd"; */
+"oia-8x-1Sd.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Ajouter un autre enfant"; ObjectID = "s23-Up-M8M"; */
+"s23-Up-M8M.configuration.title" = "Ajouter un autre enfant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "s23-Up-M8M"; */
+"s23-Up-M8M.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "sLh-mE-9g4"; */
+"sLh-mE-9g4.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "soA-Va-fJP"; */
+"soA-Va-fJP.placeholder" = "Nom";
+
+/* Class = "UIButton"; configuration.title = "Ajouter un nouveau profil"; ObjectID = "taY-uh-ssh"; */
+"taY-uh-ssh.configuration.title" = "Ajouter un nouveau profil";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "taY-uh-ssh"; */
+"taY-uh-ssh.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Veuillez ajouter les appareils de votre enfant"; ObjectID = "v4w-xN-Z4V"; */
+"v4w-xN-Z4V.text" = "Veuillez ajouter les appareils de votre enfant";
+
+/* Class = "UILabel"; text = "Vous avez complété avec succès le profil de votre enfant. "; ObjectID = "vji-bi-msN"; */
+"vji-bi-msN.text" = "Vous avez complété avec succès le profil de votre enfant. ";
+
+/* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "w6R-fu-y3N"; */
+"w6R-fu-y3N.text" = "Bienvenue à 4INSHIELD";
+
+/* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "wMN-hu-vat"; */
+"wMN-hu-vat.configuration.title" = "Continuer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wMN-hu-vat"; */
+"wMN-hu-vat.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Welcome to 4INSHIELD, Lorem ipsum"; ObjectID = "ynN-se-daa"; */
+"ynN-se-daa.text" = "Welcome to 4INSHIELD, Lorem ipsum";
+
+/* Class = "UITextField"; placeholder = "Entrer l'URL"; ObjectID = "yoF-Vm-NoX"; */
+"yoF-Vm-NoX.placeholder" = "Entrer l'URL";
+
+/* Class = "UIButton"; configuration.title = "Sauter"; ObjectID = "yxO-MT-oAW"; */
+"yxO-MT-oAW.configuration.title" = "Sauter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yxO-MT-oAW"; */
+"yxO-MT-oAW.normalTitle" = "Button";

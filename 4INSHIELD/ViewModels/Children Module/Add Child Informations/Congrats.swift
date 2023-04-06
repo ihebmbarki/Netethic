@@ -35,6 +35,19 @@ class Congrats: UIViewController {
         addAnotherchildBtn.applyGradient()
     }
     
+    func goToScreen(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(VC, animated: true)
+    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toDashboard" {
+//            if let vc = segue.destination as? ChildrenViewController {
+//                vc.child = self.selectedChild
+//            }
+//        }
+//    }
+    
     @IBAction func continueBtnTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "goToChildrenList", sender: self)
 

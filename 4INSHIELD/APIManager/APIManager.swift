@@ -19,15 +19,15 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
-    func fetchCurrentUserChildren(withUserName: String, completion: @escaping ([Child]) -> Void) {
+    func fetchCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
         var children = [Child]()
         
-        let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/childs/"
-        AF.request(serverURL, method: .get).response { response in
+        let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/childs/"
+        AF.request(serverURL, method: .get).responseJSON { response in
             switch response.result {
             case .success(let data):
                 do {
-                    children = try JSONDecoder().decode([Child].self, from: data!)
+                    children = try JSONDecoder().decode([Child].self, from: response.data!)
                     print("Decoded children: \(children)")
                 } catch let error as NSError {
                     print("Failed to load: \(error.localizedDescription)")
@@ -38,7 +38,6 @@ class APIManager {
             }
         }
     }
-
     
     func setOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void) {
         let parameters: [String: Any] = [

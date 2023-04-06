@@ -26,6 +26,9 @@
 		0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739729CC927200FD28DF /* ChildProfileAdded.swift */; };
 		0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739929CC929C00FD28DF /* ChildDevice.swift */; };
 		0479739C29CC92D100FD28DF /* Congrats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739B29CC92D100FD28DF /* Congrats.swift */; };
+		04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */; };
+		0484E3F829DE448000C482F1 /* childListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E3F729DE448000C482F1 /* childListTest.swift */; };
+		0484E3FA29DE483900C482F1 /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E3F929DE483900C482F1 /* ChildTvCell.swift */; };
 		04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C4E29ACC3E3001A27FF /* AppDelegate.swift */; };
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
@@ -74,6 +77,10 @@
 		0479739929CC929C00FD28DF /* ChildDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDevice.swift; sourceTree = "<group>"; };
 		0479739B29CC92D100FD28DF /* Congrats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Congrats.swift; sourceTree = "<group>"; };
 		0483D6281F8244EA5AD38CE0 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
+		04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
+		0484E3F629DE43B200C482F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		0484E3F729DE448000C482F1 /* childListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = childListTest.swift; sourceTree = "<group>"; };
+		0484E3F929DE483900C482F1 /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
 		04850C4B29ACC3E3001A27FF /* 4INSHIELD_Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 4INSHIELD_Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04850C4E29ACC3E3001A27FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04850C5029ACC3E4001A27FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +208,14 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		04844B4B29DF100C008AFBF6 /* Forgot Pwd */ = {
+			isa = PBXGroup;
+			children = (
+				04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */,
+			);
+			path = "Forgot Pwd";
+			sourceTree = "<group>";
+		};
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +330,8 @@
 				049C154129DD83B70028A314 /* Children.storyboard */,
 				049C154B29DD860F0028A314 /* ChildTableViewCell.swift */,
 				049C154529DD85430028A314 /* ChildTableViewCell.xib */,
+				0484E3F729DE448000C482F1 /* childListTest.swift */,
+				0484E3F929DE483900C482F1 /* ChildTvCell.swift */,
 			);
 			path = "Children Module";
 			sourceTree = "<group>";
@@ -339,6 +356,7 @@
 		04E54A3729ACC83F00B00906 /* Auth Module */ = {
 			isa = PBXGroup;
 			children = (
+				04844B4B29DF100C008AFBF6 /* Forgot Pwd */,
 				04E54A3829ACC95300B00906 /* SignIn.swift */,
 				049736BD29ACFEB0005C3662 /* Register.swift */,
 			);
@@ -512,8 +530,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
+				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
+				0484E3F829DE448000C482F1 /* childListTest.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
@@ -544,6 +564,7 @@
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
+				0484E3FA29DE483900C482F1 /* ChildTvCell.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,6 +577,7 @@
 			children = (
 				04850C5529ACC3E4001A27FF /* Base */,
 				049C44A929B2017A00AAA582 /* fr */,
+				0484E3F629DE43B200C482F1 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

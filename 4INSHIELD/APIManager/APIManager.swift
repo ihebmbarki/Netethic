@@ -14,10 +14,45 @@ enum APIErrors: Error {
 }
 typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
-
-
 class APIManager {
     static let shareInstance = APIManager()
+    
+    func fetchUsers(completion: @escaping([User]) -> Void) {
+        var users = [User]()
+        AF.request(onboarding_url, method: .get).response
+        {
+            response in switch response.result {
+            case .success( _):
+                do {
+                    users = try JSONDecoder().decode([User].self, from: response.data!)
+                    completion(users)
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("Error:\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func generateOTPActivationCode(email: String, completion: @escaping(Bool) -> Void) {
+        let data = [
+            "email": email
+        ]
+        AF.request(generate_newOtp_url, method: .post, parameters: data).response { response in
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            case .failure(let err):
+                print("Error: \(err.localizedDescription)")
+            }
+        }
+    }
     
     func fetchCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
         var children = [Child]()

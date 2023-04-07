@@ -27,6 +27,9 @@
 		0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739929CC929C00FD28DF /* ChildDevice.swift */; };
 		0479739C29CC92D100FD28DF /* Congrats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739B29CC92D100FD28DF /* Congrats.swift */; };
 		04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */; };
+		04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04844B4F29E0269E008AFBF6 /* ResetPwdViewController.swift */; };
+		04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04844B5129E026B7008AFBF6 /* CreateNewPwdViewController.swift */; };
+		04844B5529E03D9F008AFBF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04844B5429E03D9F008AFBF6 /* User.swift */; };
 		0484E3F829DE448000C482F1 /* childListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E3F729DE448000C482F1 /* childListTest.swift */; };
 		0484E3FA29DE483900C482F1 /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E3F929DE483900C482F1 /* ChildTvCell.swift */; };
 		04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C4E29ACC3E3001A27FF /* AppDelegate.swift */; };
@@ -78,6 +81,9 @@
 		0479739B29CC92D100FD28DF /* Congrats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Congrats.swift; sourceTree = "<group>"; };
 		0483D6281F8244EA5AD38CE0 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
+		04844B4F29E0269E008AFBF6 /* ResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdViewController.swift; sourceTree = "<group>"; };
+		04844B5129E026B7008AFBF6 /* CreateNewPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPwdViewController.swift; sourceTree = "<group>"; };
+		04844B5429E03D9F008AFBF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0484E3F629DE43B200C482F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		0484E3F729DE448000C482F1 /* childListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = childListTest.swift; sourceTree = "<group>"; };
 		0484E3F929DE483900C482F1 /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04844B5329E03D7F008AFBF6 /* Users */,
 				040821AD29D6DAEE00D7A562 /* Onboarding Model */,
 				040821A829D43F1000D7A562 /* SocialMedia & Profile */,
 				04D270DC29D31AA40071B4AB /* WizardStep & Journey */,
@@ -212,8 +219,18 @@
 			isa = PBXGroup;
 			children = (
 				04844B4C29DF1035008AFBF6 /* ForgotViewController.swift */,
+				04844B4F29E0269E008AFBF6 /* ResetPwdViewController.swift */,
+				04844B5129E026B7008AFBF6 /* CreateNewPwdViewController.swift */,
 			);
 			path = "Forgot Pwd";
+			sourceTree = "<group>";
+		};
+		04844B5329E03D7F008AFBF6 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				04844B5429E03D9F008AFBF6 /* User.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 		04850C4229ACC3E3001A27FF = {
@@ -541,6 +558,7 @@
 				049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
+				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
@@ -556,10 +574,12 @@
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
+				04844B5529E03D9F008AFBF6 /* User.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
+				04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */,
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,

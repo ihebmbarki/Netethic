@@ -104,7 +104,9 @@ class Register: UIViewController {
         register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal)
     }
     
-    func showAlert(message: String) {
+    func
+    
+    showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)

@@ -25,6 +25,7 @@ let add_Child_Profile = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/pro
 let onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/"
 let set_Onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/onboarding_simple/"
 let generate_newOtp_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/generate-new-totp-token/"
+let change_pwd_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/change-password/"
 
 
 

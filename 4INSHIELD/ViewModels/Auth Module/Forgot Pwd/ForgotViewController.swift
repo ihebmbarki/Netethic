@@ -16,9 +16,15 @@ class ForgotViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        configureUI()
     }
+    
+    func configureUI() {
+        resetBtn.roundCorners(5)
+        resetBtn.applyGradient()
+    }
+
     
     func resetFields() {
         emailTf.text = ""
@@ -40,17 +46,16 @@ class ForgotViewController: UIViewController {
                 APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
                     if success {
                         print("OTP Code was generated successfully")
+                        //Go To reset password view
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
+                        self.navigationController?.pushViewController(VC, animated: true)
                     } else {
                         print("Error was occured while generating OTP Code!")
                     }
                 })
                 print("User \(email) exists")
                 UserDefaults.standard.set(email, forKey: "userEmail")
-                
-                //Go To reset password view
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
-                self.navigationController?.pushViewController(VC, animated: true)
             } else {
                 print("User \(email) dosen't exists")
                 let alert = UIAlertController(title: "Alert", message: "This email does not exist!", preferredStyle: .alert)

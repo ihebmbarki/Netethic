@@ -17,6 +17,49 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func resetPassword(withEmail: String, newPassword: String, completion: @escaping(Bool) -> Void) {
+        let userData = [
+            "email": withEmail,
+            "password": newPassword
+        ] as [String : Any]
+        AF.request(change_pwd_url, method: .patch, parameters: userData).response
+        {
+            response in switch response.result {
+            case .success( _):
+                
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completion(true)
+                }
+                else if statusCode == 400 {
+                    completion(false)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func verifyOTPCode(email: String, codeOTP: String, completion: @escaping(Bool) -> Void) {
+        let data = [
+            "email": email,
+            "token": codeOTP
+        ]
+        AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
     func fetchUsers(completion: @escaping([User]) -> Void) {
         var users = [User]()
         AF.request(onboarding_url, method: .get).response

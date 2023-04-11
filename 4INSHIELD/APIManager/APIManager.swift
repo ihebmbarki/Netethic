@@ -17,6 +17,42 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func deleteDevice(deviceID: Int) {
+        let deleteDevice_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/devices/\(deviceID)/"
+        
+        AF.request(deleteDevice_url, method: .delete).response
+        {
+            response in switch response.result {
+            case .success( _):
+                print("Child device was successfully deleted")
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+     
+    func deleteChild(withID childID: Int) {
+        
+        let child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
+        
+        AF.request(child_url, method: .delete).response
+        {
+            response in switch response.result {
+            case .success( _):
+                print("Child deleted successfully")
+                
+                guard let savedDeviceID = UserDefaults.standard.value(forKey: "savedDeviceID") as? Int else { return }
+                self.deleteDevice(deviceID: savedDeviceID)
+
+                // Remove savedDeviceID from UserDefaults after deleting the device
+                UserDefaults.standard.removeObject(forKey: "savedDeviceID")
+                
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func resetPassword(withEmail: String, newPassword: String, completion: @escaping(Bool) -> Void) {
         let userData = [
             "email": withEmail,
@@ -137,21 +173,18 @@ class APIManager {
     func getUserOnboardingStatus(withUserName: String, completion: @escaping (Bool?) -> Void) {
         let onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/"
         
-        AF.request(onboarding_url, method: .get).responseJSON { response in
+        AF.request(onboarding_url, method: .get).responseDecodable(of: [String: Bool].self) { response in
             switch response.result {
-            case .success(let value):
-                guard let json = value as? [String: Any],
-                      let onboardingSimple = json["onboarding_simple"] as? Bool else {
-                    completion(nil)
-                    return
-                }
+            case .success(let onboardingDict):
+                let onboardingSimple = onboardingDict["onboarding_simple"]
                 completion(onboardingSimple)
             case .failure(let error):
-                print("API Error getting onboarding data: \(error)")
+                print("Error: \(error.localizedDescription)")
                 completion(nil)
             }
         }
     }
+
 
     func getLastregistredChildID(withUsername: String, completion: @escaping(Int) -> Void) {
         var childs = [Child]()

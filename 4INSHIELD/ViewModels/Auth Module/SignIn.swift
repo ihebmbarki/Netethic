@@ -159,7 +159,7 @@ class SignIn: UIViewController {
                     DispatchQueue.main.async {
                         APIManager.shareInstance.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
                             UserDefaults.standard.set(onboardingSimple, forKey: "onboardingSimple")
-                            print("Value of onboardingSimple: \(onboardingSimple)")
+                            print("Value of onboardingSimple: \(String(describing: onboardingSimple))")
                             if onboardingSimple == false {
                                 self.goToScreen(withId: "OnboardingSB")
                             } else {
@@ -182,7 +182,10 @@ class SignIn: UIViewController {
                                         case 5:
                                             self.goToScreen(withId: "Congrats")
                                         case 6:
-                                            self.goToScreen(withId: "ChildrenVC")
+                                            let storyboard = UIStoryboard(name: "Children", bundle: nil)
+                                            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+                                            vc.modalPresentationStyle = .fullScreen
+                                            self.present(vc, animated: true, completion: nil)
                                         default:
                                             self.goToScreen(withId: "OnboardingSB")
                                         }

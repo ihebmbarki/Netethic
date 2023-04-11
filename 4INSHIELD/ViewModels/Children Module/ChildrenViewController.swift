@@ -226,26 +226,26 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     }
 
     
-//    @available(iOS 11.0, *)
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-//    {
-//        let child = self.childrenArray[indexPath.row]
-//
-//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
-//
-//            let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
-//            alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
-//                self.childrenArray.remove(at: indexPath.row)
-//                self.tableView.deleteRows(at: [indexPath], with: .fade)
-//                Services.shared.deleteChild(withID: child.id)
-//                print("DEBUG: u've deleted element \(child.first_name)")
-//            }))
-//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//        deleteAction.image = UIImage(systemName: "trash.fill")
-//        deleteAction.backgroundColor =  .systemRed
-//
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let child = self.childrenArray[indexPath.row]
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
+
+            let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
+                self.childrenArray.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                APIManager.shareInstance.deleteChild(withID: child.id)
+                print("You have deleted element \(child.first_name)")
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
+            self.present(alert, animated: true, completion: nil)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.backgroundColor =  .systemRed
+
 //        let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
 //            let _ : Bool = KeychainWrapper.standard.set(child.id, forKey: "childID")
 //            print(child.id)
@@ -257,12 +257,12 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
 //        }
 //        updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
 //        updateAction.backgroundColor = Colrs.bgColor
-//
-//
-//        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, updateAction])
-//        configuration.performsFirstActionWithFullSwipe = false
-//        return configuration
-//    }
+
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
     
     
   

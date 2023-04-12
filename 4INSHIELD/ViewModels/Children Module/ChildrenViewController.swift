@@ -144,16 +144,16 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
 
         let child = childrenArray[indexPath.row]
           DispatchQueue.main.async {
-              if (child.photo ?? "").isEmpty {
+              if !(child.photo ?? "").isEmpty {
+                  cell.childAvatar.loadImage(child.photo)
+              } else {
                   if child.gender == "M" {
                       cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
                   } else {
                       cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
                   }
-              } else {
-                  cell.childAvatar.loadImage(child.photo)
               }
-                cell.childFullName.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
+              cell.childFullName.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
           }
         return cell
     }
@@ -246,20 +246,21 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         deleteAction.image = UIImage(systemName: "trash.fill")
         deleteAction.backgroundColor =  .systemRed
 
-//        let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
-//            let _ : Bool = KeychainWrapper.standard.set(child.id, forKey: "childID")
-//            print(child.id)
-//
-////            self.performSegue(withIdentifier: "goToUpdateChild", sender: self)
-//
-//            self.gotoScreen(storyBoardName: "ModifyChild", stbIdentifier: "ModifyChildSB")
-//
-//        }
-//        updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
-//        updateAction.backgroundColor = Colrs.bgColor
+        let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
+            UserDefaults.standard.set(child.id, forKey: "childID")
+            print(child.id)
+            //Go To update child view
+            self.gotoScreen(storyBoardName: "Main", stbIdentifier: "updateChild")
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let VC = storyboard.instantiateViewController(withIdentifier: "updateChild")
+//            self.navigationController?.pushViewController(VC, animated: true)
+
+        }
+        updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
+        updateAction.backgroundColor = Colrs.bgColor
 
 
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, updateAction])
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }

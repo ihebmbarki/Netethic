@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-
+import UIKit
 
 enum APIErrors: Error {
     case custom(message: String)
@@ -16,6 +16,96 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
 class APIManager {
     static let shareInstance = APIManager()
+    
+    func uploadChildPic(withID childID: Int, photo: UIImage) {
+//        ProgressHUD.show("Updating profile photo..")
+        let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/upload_photo/"
+        guard let imageData = photo.jpegData(compressionQuality: 0.50) else {return}
+        let headers: HTTPHeaders = [
+            "Content-type": "multipart/form-data"
+        ]
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData,
+                                         withName: "photo",
+                                         fileName: "profilePic.jpeg", mimeType: "image/jpeg"
+                )
+            },
+            to: uploadPic_url,
+            method: .post ,
+            headers: headers
+        )
+            .response { response in
+                switch response.result {
+                case .success(_):
+                    debugPrint("Your child profile pic has been successfully updated")
+//                    ProgressHUD.dismiss()
+                    break
+                case .failure(let err):
+                    debugPrint("Error while updating the child profile pic ", err.localizedDescription)
+//                    ProgressHUD.dismiss()
+                    break
+                }
+            }
+    }
+    
+    func deleteChildProfilePic(withID childID: Int) {
+        let userData = [
+            "id": childID,
+            "photo": ""
+        ] as [String : Any]
+        
+        let delete_childPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
+        AF.request(delete_childPic_url, method: .patch, parameters: userData).response
+        {
+            response in switch response.result {
+            case .success( _):
+                print("Your child profile's pic has been successfully deleted")
+            case .failure(let error):
+                print("Error deleting child profile's pic: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func getCurrentChildProfiles(withID childID: Int, completion: @escaping([Profile]) -> Void) {
+        var profiles = [Profile]()
+        
+        let child_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/profiles/"
+        
+        AF.request(child_profile_url, method: .get).response
+        {
+            response in switch response.result {
+            case .success( _):
+                do {
+                    profiles = try JSONDecoder().decode([Profile].self, from: response.data!)
+                    completion(profiles)
+                } catch let error as NSError {
+                    print("Error \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }        
+    }
+    
+    func fetchChild(withID childID: Int ,completion: @escaping(Child) -> Void) {
+        var child: Child?
+        let fetch_child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
+        AF.request(fetch_child_url, method: .get).response
+        {
+            response in switch response.result {
+            case .success( _):
+                do {
+                    child = try JSONDecoder().decode(Child.self, from: response.data!)
+                    completion(child!)
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
     func deleteDevice(deviceID: Int) {
         let deleteDevice_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/devices/\(deviceID)/"

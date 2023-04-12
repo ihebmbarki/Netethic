@@ -14,6 +14,7 @@
 		040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */; };
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
+		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
 		042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A4C4829E5A8640080CADF /* UpdateChild.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
 		04340B2429C09BDF0055B394 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2329C09BDF0055B394 /* Phone.swift */; };
@@ -26,6 +27,7 @@
 		043C49F729E439FF00B5FF9E /* PinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49F629E439FF00B5FF9E /* PinView.swift */; };
 		043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49F829E43A7D00B5FF9E /* PinTextField.swift */; };
 		043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49FA29E43AC900B5FF9E /* PinConfig.swift */; };
+		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
 		0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739529CC922C00FD28DF /* ChildSocialMedia.swift */; };
 		0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739729CC927200FD28DF /* ChildProfileAdded.swift */; };
 		0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739929CC929C00FD28DF /* ChildDevice.swift */; };
@@ -70,6 +72,7 @@
 		040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		042A4C4829E5A8640080CADF /* UpdateChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChild.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
 		04340B2329C09BDF0055B394 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		043C49F629E439FF00B5FF9E /* PinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinView.swift; sourceTree = "<group>"; };
 		043C49F829E43A7D00B5FF9E /* PinTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinTextField.swift; sourceTree = "<group>"; };
 		043C49FA29E43AC900B5FF9E /* PinConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfig.swift; sourceTree = "<group>"; };
+		0469863129E6D78100D3CC5F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0479739529CC922C00FD28DF /* ChildSocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMedia.swift; sourceTree = "<group>"; };
 		0479739729CC927200FD28DF /* ChildProfileAdded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfileAdded.swift; sourceTree = "<group>"; };
 		0479739929CC929C00FD28DF /* ChildDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDevice.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				040821A929D43F4500D7A562 /* Profil.swift */,
+				0469863129E6D78100D3CC5F /* Profile.swift */,
 			);
 			path = "SocialMedia & Profile";
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				043C49FE29E43B0000B5FF9E /* KPin */,
 				043557F929AE35B900D4F012 /* Constant.swift */,
 				041910C029C8BAF800C9D17D /* Environment.swift */,
+				041BB32C29E6AC1B00B149F1 /* extensions.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -600,6 +606,8 @@
 				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
+				041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */,
+				0469863229E6D78100D3CC5F /* Profile.swift in Sources */,
 				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);

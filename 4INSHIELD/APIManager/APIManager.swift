@@ -17,8 +17,28 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func updateChild(withID childID: Int, childData: [String:Any], completion: @escaping(Child) -> Void) {
+        var child: Child?
+        
+        let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
+        AF.request(serverURL, method: .put, parameters: childData).response
+        {
+            response in switch response.result {
+            case .success( _):
+                do {
+                    child = try JSONDecoder().decode(Child.self, from: response.data!)
+                    completion(child!)
+                    print("Your child information has been successfully updated")
+                } catch let error as NSError {
+                    debugPrint("Failed to load: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("Error updating child info: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func uploadChildPic(withID childID: Int, photo: UIImage) {
-//        ProgressHUD.show("Updating profile photo..")
         let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/upload_photo/"
         guard let imageData = photo.jpegData(compressionQuality: 0.50) else {return}
         let headers: HTTPHeaders = [
@@ -39,11 +59,9 @@ class APIManager {
                 switch response.result {
                 case .success(_):
                     debugPrint("Your child profile pic has been successfully updated")
-//                    ProgressHUD.dismiss()
                     break
                 case .failure(let err):
                     debugPrint("Error while updating the child profile pic ", err.localizedDescription)
-//                    ProgressHUD.dismiss()
                     break
                 }
             }
@@ -80,10 +98,10 @@ class APIManager {
                     profiles = try JSONDecoder().decode([Profile].self, from: response.data!)
                     completion(profiles)
                 } catch let error as NSError {
-                    print("Error \(error.localizedDescription)")
+                    print("Error: failed to load profile; \(error.localizedDescription)")
                 }
             case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+                print("Error getting profiles; \(error.localizedDescription)")
             }
         }        
     }

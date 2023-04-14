@@ -24,6 +24,8 @@ class UpdateChild: UIViewController {
     var image: UIImage? = nil
     var gender = "N"
     var birthday = "1990-02-02"
+    
+    var childId: Int?
 
 //    var socialProfilesArray = [String]()
 //    var socialProfilesArrayIDs = [Int]()
@@ -44,7 +46,7 @@ class UpdateChild: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        configureUI()
         SetUpDesign()
         loadChildInfo()
         getCurrentChildSocialMedia()
@@ -132,7 +134,7 @@ class UpdateChild: UIViewController {
         childPhoto.addGestureRecognizer(tap)
         birthdayPicker.tintColor = Colrs.bgColor
         
-        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.white], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.blue], for: .selected)
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: Colrs.bgColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: Colrs.bgColor]

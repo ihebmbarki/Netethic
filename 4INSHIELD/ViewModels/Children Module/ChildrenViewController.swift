@@ -13,19 +13,19 @@ class ChildrenViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backBtn: UIBarButtonItem!
     
-    private let btn: UIButton = {
-        let button = UIButton()
-//        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 25
-        button.backgroundColor = Colrs.bgColor
-        let img = UIImage(systemName: "plus")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold))
-        button.setImage(img, for: .normal)
-        button.tintColor = .white
-        button.setTitleColor(.blue, for: .normal)
-        button.layer.shadowRadius = 10
-        button.layer.shadowOpacity = 0.3
-        return button
-    }()
+//    private let btn: UIButton = {
+//        let button = UIButton()
+////        button.layer.masksToBounds = true
+//        button.layer.cornerRadius = 25
+//        button.backgroundColor = Colrs.bgColor
+//        let img = UIImage(systemName: "plus")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold))
+//        button.setImage(img, for: .normal)
+//        button.tintColor = .white
+//        button.setTitleColor(.blue, for: .normal)
+//        button.layer.shadowRadius = 10
+//        button.layer.shadowOpacity = 0.3
+//        return button
+//    }()
     
     var childrenArray = [Child]()
     var selectedChild: Child?
@@ -35,20 +35,19 @@ class ChildrenViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        configureUI()
         getCurrentUserChildren()
         configureTableView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let btn = UIButton()
-        view.addSubview(btn)
-        btn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 20, paddingRight: 8, width: 50, height: 50)
-
-
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        let btn = UIButton()
+//        view.addSubview(btn)
 //        btn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 20, paddingRight: 8, width: 50, height: 50)
-    }
+//
+//
+////        btn.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 20, paddingRight: 8, width: 50, height: 50)
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -90,24 +89,11 @@ class ChildrenViewController: UIViewController {
         }
     }
     
-    func configureUI() {
-        navigationItem.rightBarButtonItem = nil
-        navigationItem.leftBarButtonItem = nil
-        guard let username = UserDefaults.standard.string(forKey: "username") else { return }
-        print(username)
-        view.addSubview(btn)
-        btn.addTarget(self, action: #selector(addChildd), for: .touchUpInside)
-    }
-    
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
-    }
-      @objc func addChildd() {
-        print("Add child btn got tapped")
-          gotoScreen(storyBoardName: "Main", stbIdentifier: "childInfos")
     }
     
     func verifyChildList(childrenList: [Child]) {
@@ -128,7 +114,12 @@ class ChildrenViewController: UIViewController {
         tableView.register(UINib.init(nibName: "ChildTableViewCell", bundle: nil), forCellReuseIdentifier: "ChildCell")
     }
     
-    
+        
+    @IBAction func infoBtnTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
@@ -140,24 +131,30 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     
     
     
-      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildCell", for: indexPath) as! ChildTableViewCell
-
+        
         let child = childrenArray[indexPath.row]
-          DispatchQueue.main.async {
-              if !(child.photo ?? "").isEmpty {
-                  cell.childAvatar.loadImage(child.photo)
-              } else {
-                  if child.gender == "M" {
-                      cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
-                  } else {
-                      cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
-                  }
-              }
-              cell.childFullName.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
-          }
+        
+        DispatchQueue.main.async {
+            if let photo = child.photo, !photo.isEmpty {
+                var photoUrl = photo
+                if let range = photo.range(of: "http") {
+                    photoUrl.insert("s", at: range.upperBound)
+                }
+                cell.childAvatar.loadImage(photoUrl)
+            } else {
+                if child.gender == "M" {
+                    cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
+                } else {
+                    cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
+                }
+            }
+            cell.childFullName.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
+        }
         return cell
     }
+
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -251,8 +248,8 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             UserDefaults.standard.set(child.id, forKey: "childID")
             print(child.id)
             //Go To update child view
-            self.gotoScreen(storyBoardName: "Main", stbIdentifier: "updateChild")
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ChildProfileAdded")
+//            let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
 //            let VC = storyboard.instantiateViewController(withIdentifier: "updateChild")
 //            self.navigationController?.pushViewController(VC, animated: true)
 

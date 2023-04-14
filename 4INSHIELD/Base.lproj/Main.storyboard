@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Inter-Regular.ttf">
+        <array key="Inter-VariableFont_slnt,wght.ttf">
             <string>Inter-Regular</string>
         </array>
         <array key="Poppins-Medium.ttf">
@@ -1368,10 +1368,10 @@
             </objects>
             <point key="canvasLocation" x="2333.5877862595421" y="1662.6760563380283"/>
         </scene>
-        <!--Update Child-->
+        <!--View Controller-->
         <scene sceneID="tPK-i4-AXM">
             <objects>
-                <viewController id="VsA-mQ-b44" customClass="UpdateChild" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VsA-mQ-b44" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uNQ-T8-33o">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1571,7 +1571,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8d-s1-kf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3125.9541984732823" y="2480.2816901408451"/>
+            <point key="canvasLocation" x="4105" y="2494"/>
         </scene>
         <!--Congrats-->
         <scene sceneID="eMo-x0-tD4">
@@ -2615,22 +2615,23 @@
             <point key="canvasLocation" x="1912" y="-1444"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="aor-8D-dLn">
+        <scene sceneID="Ji0-Ge-9vc">
             <objects>
-                <navigationController storyboardIdentifier="updateChild" automaticallyAdjustsScrollViewInsets="NO" id="uRu-AK-Ct1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i1i-oz-m6J" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z9T-jO-vt8">
+                    <navigationItem key="navigationItem" id="QrL-fz-2OC"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CTT-d9-GhE">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="VsA-mQ-b44" kind="relationship" relationship="rootViewController" id="Yyi-28-XlY"/>
+                        <segue destination="VsA-mQ-b44" kind="relationship" relationship="rootViewController" id="TT0-dZ-lhV"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GQM-Ti-a7m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AqG-yH-GEA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2199.2366412213742" y="2481.6901408450703"/>
+            <point key="canvasLocation" x="3125.9541984732823" y="2480.2816901408451"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

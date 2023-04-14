@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,27 +33,23 @@
                                             <color key="textColor" red="0.2533203363" green="0.38035202029999998" blue="0.66277480129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCV-zR-5BQ">
-                                            <rect key="frame" x="339.66666666666669" y="12" width="46" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="46" id="Boy-50-I3t"/>
-                                                <constraint firstAttribute="height" constant="31" id="ggf-8M-Ley"/>
-                                            </constraints>
-                                            <color key="tintColor" name="Primary"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
+                                            <rect key="frame" x="338" y="10" width="47" height="35"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain">
-                                                <imageReference key="image" image="info.circle.fill" catalog="system" symbolScale="large"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
-                                            </buttonConfiguration>
+                                            <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
+                                            <connections>
+                                                <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="nSG-84-xB5"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="centerY" secondItem="15u-TT-Ukm" secondAttribute="centerY" id="30c-s3-kkF"/>
                                         <constraint firstItem="15u-TT-Ukm" firstAttribute="centerX" secondItem="PZF-RR-aO5" secondAttribute="centerX" id="FGD-Aw-NsW"/>
-                                        <constraint firstItem="bCV-zR-5BQ" firstAttribute="centerY" secondItem="15u-TT-Ukm" secondAttribute="centerY" id="G2n-1c-ivE"/>
                                         <constraint firstItem="15u-TT-Ukm" firstAttribute="leading" secondItem="PZF-RR-aO5" secondAttribute="leading" constant="63.333333333333343" id="LEa-Zb-HqX"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="15u-TT-Ukm" secondAttribute="trailing" constant="8.3333333333333712" id="TOF-nq-gB4"/>
                                         <constraint firstAttribute="bottom" secondItem="15u-TT-Ukm" secondAttribute="bottom" constant="50" id="ZSU-Py-MJg"/>
-                                        <constraint firstItem="bCV-zR-5BQ" firstAttribute="leading" secondItem="15u-TT-Ukm" secondAttribute="trailing" constant="10" id="wKS-n7-mz7"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
                                     </constraints>
                                 </view>
                             </tableView>
@@ -78,11 +73,20 @@
                         <outlet property="backBtn" destination="H9r-k3-GRX" id="2qi-Tz-pPK"/>
                         <outlet property="exitBtnLbl" destination="H9r-k3-GRX" id="uEc-Uz-xQn"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
+                        <segue destination="q7z-R8-De8" kind="presentation" identifier="goToUpdateChild" id="m4g-yn-AZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7O-g4-BcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1318.3206106870227" y="-92.253521126760575"/>
+            <point key="canvasLocation" x="1198" y="-92"/>
+        </scene>
+        <!--UpdateChild-->
+        <scene sceneID="6U7-1x-LcX">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="goToUpdateChild" storyboardName="UpdateChild" id="q7z-R8-De8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GS6-xf-Nxk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1982" y="9"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ng-yE-6V8">
@@ -107,8 +111,5 @@
         <image name="back" width="36" height="36"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="123"/>
-        <namedColor name="Primary">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

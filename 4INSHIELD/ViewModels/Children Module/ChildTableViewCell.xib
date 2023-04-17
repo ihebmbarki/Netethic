@@ -79,7 +79,7 @@
                 <outlet property="childFullName" destination="rak-O2-Jnh" id="omQ-kz-ZYm"/>
                 <outlet property="childView" destination="4EF-OI-I82" id="OFH-ZA-r3J"/>
             </connections>
-            <point key="canvasLocation" x="195" y="23"/>
+            <point key="canvasLocation" x="194.6564885496183" y="22.535211267605636"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -1,22 +1,26 @@
 PODS:
+  - DLRadioButton (1.4.12)
   - FLAnimatedImage (1.0.17)
   - SDWebImage (5.15.5):
     - SDWebImage/Core (= 5.15.5)
   - SDWebImage/Core (5.15.5)
 
 DEPENDENCIES:
+  - DLRadioButton (~> 1.4)
   - FLAnimatedImage
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
+    - DLRadioButton
     - FLAnimatedImage
     - SDWebImage
 
 SPEC CHECKSUMS:
+  DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
 
-PODFILE CHECKSUM: 36eaa14276d541152fb291c70e1160eb51108ff9
+PODFILE CHECKSUM: 7fda25b6238d453b4d48af26ecbbca468a173099
 
 COCOAPODS: 1.11.3

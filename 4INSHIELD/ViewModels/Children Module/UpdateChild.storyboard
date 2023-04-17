@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vER-GZ-nmd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -17,7 +17,7 @@
         <!--Update Child-->
         <scene sceneID="0qg-sY-B8G">
             <objects>
-                <viewController id="wyn-el-f4F" customClass="UpdateChild" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="updateChild" id="wyn-el-f4F" customClass="UpdateChild" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A7Q-C6-gDK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date de naissance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRS-7U-pyD">
-                                <rect key="frame" x="16" y="388" width="127" height="15"/>
+                                <rect key="frame" x="16" y="364.66666666666669" width="127" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="5PV-lS-n5s"/>
                                 </constraints>
@@ -73,7 +73,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Les réseaux sociaux de l'enfant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkD-MP-qRE">
-                                <rect key="frame" x="16" y="467" width="296" height="24.666666666666686"/>
+                                <rect key="frame" x="16" y="443.66666666666669" width="322.66666666666669" height="29.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="21"/>
                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -88,26 +88,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AhA-s3-a6h">
-                                <rect key="frame" x="16" y="340" width="361" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="v3N-AK-qfP"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Garçon"/>
-                                    <segment title="Fille"/>
-                                    <segment title="Autre"/>
-                                </segments>
-                            </segmentedControl>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-rM-apW">
-                                <rect key="frame" x="16" y="412" width="119" height="34"/>
+                                <rect key="frame" x="16" y="388.66666666666669" width="119" height="34"/>
                                 <color key="tintColor" red="0.25490196079999999" green="0.3803921569" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="3Ys-kl-xfT"/>
                                 </constraints>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-sM-oSv">
-                                <rect key="frame" x="95" y="686" width="203" height="34"/>
+                                <rect key="frame" x="86" y="667.66666666666663" width="229" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="pMi-Jf-GMh"/>
                                 </constraints>
@@ -116,15 +105,21 @@
                                 <buttonConfiguration key="configuration" style="plain" image="plus.circle" catalog="system" title="Ajouter un réseau social" imagePadding="3">
                                     <fontDescription key="titleFontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addNewProfileBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="L6N-6c-jRV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-sD-5sE">
-                                <rect key="frame" x="195.33333333333334" y="759" width="83.000000000000028" height="35"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="195.33333333333334" y="740.66666666666663" width="83.000000000000028" height="34.333333333333371"/>
+                                <color key="tintColor" red="0.25098039215686274" green="0.5725490196078431" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Annuler"/>
+                                <connections>
+                                    <action selector="cancelBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="i0S-eA-Y3v"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZV-PH-uaH">
-                                <rect key="frame" x="287.33333333333331" y="759" width="86.666666666666686" height="35"/>
+                                <rect key="frame" x="287.33333333333331" y="740.66666666666663" width="86.666666666666686" height="34.333333333333371"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Modifier"/>
@@ -133,7 +128,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PX-Ou-0sv">
-                                <rect key="frame" x="216" y="135" width="44" height="47"/>
+                                <rect key="frame" x="229" y="149" width="32" height="47"/>
                                 <color key="tintColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Groupe 105"/>
@@ -142,39 +137,134 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="paz-J7-2VT">
-                                <rect key="frame" x="16" y="499" width="361" height="179"/>
+                                <rect key="frame" x="16" y="480.66666666666674" width="361" height="179"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="179" id="Dzr-Zk-6wW"/>
                                 </constraints>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="deJ-kW-AAC">
+                                <rect key="frame" x="16.000000000000014" y="335.66666666666669" width="251.33333333333337" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yk-dF-bkk" customClass="DLRadioButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                                <color key="value" red="0.14117647058823529" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                                <color key="value" red="0.19607843137254902" green="0.49411764705882355" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="radioButtonTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="er8-59-sGB"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="garçon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Imx-H1-qgo">
+                                        <rect key="frame" x="28.999999999999996" y="0.0" width="43.666666666666657" height="24"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                        <color key="textColor" red="0.14117647058823529" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrR-z9-aVe">
+                                        <rect key="frame" x="77.666666666666671" y="0.0" width="24" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="cxn-ey-4v8"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="doy-6v-fiA"/>
+                                            <constraint firstAttribute="width" constant="24" id="gNq-kZ-Rj5"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlo-0A-HfU" customClass="DLRadioButton">
+                                        <rect key="frame" x="106.66666666666667" y="0.0" width="24.000000000000014" height="24"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                                <color key="value" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                                <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="radioButtonTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="3OC-bd-TXy"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fille" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gv-Le-6bU">
+                                        <rect key="frame" x="135.66666666666666" y="0.0" width="20.333333333333343" height="24"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                        <color key="textColor" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3As-eg-hSc">
+                                        <rect key="frame" x="161" y="0.0" width="24" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="UZf-GP-dsu"/>
+                                            <constraint firstAttribute="width" constant="24" id="hA8-NR-Uo0"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="xWW-xg-jJ8"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkH-Kj-woZ" customClass="DLRadioButton">
+                                        <rect key="frame" x="190" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="yaX-4K-i2b"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                                <color key="value" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                                                <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="radioButtonTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="z4V-cU-zxW"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaU-d2-AMp">
+                                        <rect key="frame" x="219" y="0.0" width="32.333333333333343" height="24"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                        <color key="textColor" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xo1-vw-FJL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="top" secondItem="GKe-Xt-1wx" secondAttribute="bottom" constant="53" id="2qZ-b8-JLc"/>
-                            <constraint firstItem="1PX-Ou-0sv" firstAttribute="top" secondItem="xo1-vw-FJL" secondAttribute="top" constant="32" id="3RL-Mv-8nR"/>
+                            <constraint firstItem="1PX-Ou-0sv" firstAttribute="top" secondItem="xo1-vw-FJL" secondAttribute="top" constant="46" id="3RL-Mv-8nR"/>
                             <constraint firstItem="CZV-PH-uaH" firstAttribute="leading" secondItem="QBZ-sD-5sE" secondAttribute="trailing" constant="9" id="3eJ-Nw-fBI"/>
-                            <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="1PX-Ou-0sv" secondAttribute="trailing" constant="133" id="5b6-7n-WW4"/>
+                            <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="1PX-Ou-0sv" secondAttribute="trailing" constant="132" id="5b6-7n-WW4"/>
+                            <constraint firstItem="ffH-sM-oSv" firstAttribute="leading" secondItem="xo1-vw-FJL" secondAttribute="leading" constant="86" id="6Hf-Po-xOX"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="bottom" secondItem="YIB-qn-mZX" secondAttribute="bottom" constant="638" id="78A-Yn-etX"/>
-                            <constraint firstItem="AhA-s3-a6h" firstAttribute="top" secondItem="sS4-Zg-0u4" secondAttribute="bottom" constant="7" id="9XD-QQ-lIM"/>
                             <constraint firstItem="GKe-Xt-1wx" firstAttribute="leading" secondItem="xo1-vw-FJL" secondAttribute="leading" id="ARo-hf-Jze"/>
                             <constraint firstItem="ffH-sM-oSv" firstAttribute="top" secondItem="paz-J7-2VT" secondAttribute="bottom" constant="8" id="Bl6-fN-1Ku"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="CZV-PH-uaH" secondAttribute="trailing" constant="19" id="BrK-nx-qvc"/>
+                            <constraint firstItem="IRS-7U-pyD" firstAttribute="top" secondItem="deJ-kW-AAC" secondAttribute="bottom" constant="5" id="CFA-6Y-PTL"/>
                             <constraint firstItem="sS4-Zg-0u4" firstAttribute="top" secondItem="A7Q-C6-gDK" secondAttribute="top" constant="318" id="Ci8-Qn-Qeb"/>
                             <constraint firstItem="CZV-PH-uaH" firstAttribute="baseline" secondItem="QBZ-sD-5sE" secondAttribute="baseline" id="Dhz-4m-BfE"/>
-                            <constraint firstItem="jfD-rM-apW" firstAttribute="trailing" secondItem="AhA-s3-a6h" secondAttribute="trailing" constant="-242" id="DqN-tq-MIT"/>
                             <constraint firstItem="YIB-qn-mZX" firstAttribute="leading" secondItem="xo1-vw-FJL" secondAttribute="leading" constant="156" id="EGT-W8-B6d"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8dp-eI-yNw" secondAttribute="trailing" symbolic="YES" id="HRe-SJ-ew2"/>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="w8V-aA-UG7" secondAttribute="leading" id="Ley-gP-KDg"/>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="Qb6-AP-JEn" secondAttribute="leading" id="Lr9-Xn-EhT"/>
+                            <constraint firstItem="IRS-7U-pyD" firstAttribute="leading" secondItem="deJ-kW-AAC" secondAttribute="leading" id="M9m-T6-md0"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="YIB-qn-mZX" secondAttribute="trailing" constant="147" id="Mmw-dm-aCZ"/>
                             <constraint firstItem="paz-J7-2VT" firstAttribute="leading" secondItem="GkD-MP-qRE" secondAttribute="leading" id="N31-Oc-wPr"/>
-                            <constraint firstItem="IRS-7U-pyD" firstAttribute="top" secondItem="AhA-s3-a6h" secondAttribute="bottom" constant="17" id="N4X-eb-CsF"/>
                             <constraint firstItem="jfD-rM-apW" firstAttribute="top" secondItem="IRS-7U-pyD" secondAttribute="bottom" constant="9" id="Rpj-rE-zXf"/>
+                            <constraint firstItem="paz-J7-2VT" firstAttribute="trailing" secondItem="Qb6-AP-JEn" secondAttribute="trailing" id="SNr-De-nCZ"/>
                             <constraint firstItem="paz-J7-2VT" firstAttribute="top" secondItem="GkD-MP-qRE" secondAttribute="bottom" constant="7.3333333333333144" id="TTE-VK-1Fo"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="sS4-Zg-0u4" secondAttribute="trailing" constant="337" id="Tqf-am-US8"/>
-                            <constraint firstItem="paz-J7-2VT" firstAttribute="trailing" secondItem="AhA-s3-a6h" secondAttribute="trailing" id="VMC-IT-QyA"/>
                             <constraint firstItem="YIB-qn-mZX" firstAttribute="top" secondItem="A7Q-C6-gDK" secondAttribute="topMargin" constant="-13" id="VZx-9q-4dU"/>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="jfD-rM-apW" secondAttribute="leading" id="W4I-3A-qTb"/>
                             <constraint firstItem="jfD-rM-apW" firstAttribute="centerX" secondItem="GKe-Xt-1wx" secondAttribute="centerX" constant="-121" id="Wcz-u5-Nq0"/>
@@ -189,17 +279,17 @@
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="g9g-a4-AdR" secondAttribute="trailing" constant="345" id="czi-Xn-tWZ"/>
                             <constraint firstItem="g9g-a4-AdR" firstAttribute="top" secondItem="A7Q-C6-gDK" secondAttribute="top" constant="258" id="fjf-NL-38N"/>
                             <constraint firstItem="CZV-PH-uaH" firstAttribute="top" secondItem="ffH-sM-oSv" secondAttribute="bottom" constant="39" id="gBM-g2-FhA"/>
+                            <constraint firstItem="xo1-vw-FJL" firstAttribute="bottom" secondItem="QBZ-sD-5sE" secondAttribute="bottom" constant="43" id="jDC-jo-sN8"/>
                             <constraint firstItem="jfD-rM-apW" firstAttribute="trailing" secondItem="Qb6-AP-JEn" secondAttribute="trailing" constant="-242" id="jRs-KC-3kg"/>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="A7Q-C6-gDK" secondAttribute="leadingMargin" id="lOh-hd-BaD"/>
                             <constraint firstItem="w8V-aA-UG7" firstAttribute="top" secondItem="8dp-eI-yNw" secondAttribute="bottom" constant="5" id="lq2-4S-nNR"/>
-                            <constraint firstItem="1PX-Ou-0sv" firstAttribute="leading" secondItem="xo1-vw-FJL" secondAttribute="leading" constant="216" id="lvN-RR-jQ6"/>
+                            <constraint firstItem="1PX-Ou-0sv" firstAttribute="leading" secondItem="xo1-vw-FJL" secondAttribute="leading" constant="229" id="lvN-RR-jQ6"/>
                             <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="g9g-a4-AdR" secondAttribute="leading" id="nsS-OV-gAE"/>
                             <constraint firstItem="xo1-vw-FJL" firstAttribute="trailing" secondItem="IRS-7U-pyD" secondAttribute="trailing" constant="250" id="pTn-aH-gwy"/>
                             <constraint firstItem="GKe-Xt-1wx" firstAttribute="centerX" secondItem="A7Q-C6-gDK" secondAttribute="centerX" id="pX2-Nv-zc5"/>
-                            <constraint firstItem="jfD-rM-apW" firstAttribute="centerX" secondItem="ffH-sM-oSv" secondAttribute="centerX" constant="-121" id="rrR-XJ-EGc"/>
+                            <constraint firstItem="jfD-rM-apW" firstAttribute="centerX" secondItem="ffH-sM-oSv" secondAttribute="centerX" constant="-125" id="rrR-XJ-EGc"/>
                             <constraint firstItem="g9g-a4-AdR" firstAttribute="top" secondItem="w8V-aA-UG7" secondAttribute="bottom" constant="8" id="v5J-8N-GFI"/>
                             <constraint firstItem="jfD-rM-apW" firstAttribute="trailing" secondItem="w8V-aA-UG7" secondAttribute="trailing" constant="-242" id="xlF-9l-IQ5"/>
-                            <constraint firstItem="8dp-eI-yNw" firstAttribute="leading" secondItem="AhA-s3-a6h" secondAttribute="leading" id="zF5-SI-O42"/>
                             <constraint firstItem="QBZ-sD-5sE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xo1-vw-FJL" secondAttribute="leading" symbolic="YES" id="zgA-BB-gWo"/>
                         </constraints>
                     </view>
@@ -210,32 +300,34 @@
                         <outlet property="birthdayPicker" destination="jfD-rM-apW" id="uyE-KZ-prg"/>
                         <outlet property="cancelBtn" destination="QBZ-sD-5sE" id="IDW-aM-vTZ"/>
                         <outlet property="childPhoto" destination="YIB-qn-mZX" id="AYu-DR-Udx"/>
-                        <outlet property="genderSegmetUI" destination="AhA-s3-a6h" id="luF-T3-kuj"/>
+                        <outlet property="femaleRadioButton" destination="tlo-0A-HfU" id="MKs-eu-nCt"/>
+                        <outlet property="maleRadioButton" destination="3yk-dF-bkk" id="RSe-1d-GDH"/>
                         <outlet property="nomTf" destination="Qb6-AP-JEn" id="QNe-5d-TfI"/>
+                        <outlet property="otherRadioButton" destination="xkH-Kj-woZ" id="QMN-fp-btV"/>
                         <outlet property="updateBtn" destination="CZV-PH-uaH" id="9ou-a4-AcU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBI-UB-V8t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5031.2977099236641" y="2493.6619718309862"/>
+            <point key="canvasLocation" x="5958.0152671755723" y="2493.6619718309862"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="KZh-jf-Ru5">
+        <scene sceneID="3LE-GQ-ln5">
             <objects>
-                <navigationController storyboardIdentifier="updateChild" automaticallyAdjustsScrollViewInsets="NO" id="vER-GZ-nmd" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kTE-1c-ml1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2hu-F5-qvo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Px-pU-gr4">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="wyn-el-f4F" kind="relationship" relationship="rootViewController" id="zkB-js-bqN"/>
+                        <segue destination="wyn-el-f4F" kind="relationship" relationship="rootViewController" id="cOS-L5-dwe"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H7h-sL-APd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0W-lY-5eP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4104.580152671756" y="2493.6619718309862"/>
+            <point key="canvasLocation" x="5031.2977099236641" y="2493.6619718309862"/>
         </scene>
     </scenes>
     <resources>

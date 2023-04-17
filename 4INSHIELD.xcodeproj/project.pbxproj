@@ -58,8 +58,8 @@
 		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
 		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
-		04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04B2D91E29D1AE5A0062E324 /* Succes.gif */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
+		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
 		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
@@ -124,8 +124,8 @@
 		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
-		04B2D91E29D1AE5A0062E324 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
+		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
@@ -263,9 +263,9 @@
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
+				04C241A929ED76C3003C3F97 /* Succes.gif */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
-				04B2D91E29D1AE5A0062E324 /* Succes.gif */,
 				7160F104408BB7EFF5A238CD /* Pods */,
 				22F016510B6F5C33B7CDB5C7 /* Frameworks */,
 			);
@@ -374,8 +374,8 @@
 				049C154129DD83B70028A314 /* Children.storyboard */,
 				049C154B29DD860F0028A314 /* ChildTableViewCell.swift */,
 				049C154529DD85430028A314 /* ChildTableViewCell.xib */,
-				0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */,
 				0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */,
+				0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */,
 				042A4C4829E5A8640080CADF /* UpdateChild.swift */,
 				0481480029E997C700A03C61 /* UpdateChild.storyboard */,
 			);
@@ -514,7 +514,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B2D91F29D1AE5A0062E324 /* Succes.gif in Resources */,
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
@@ -522,6 +521,7 @@
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
+				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
 				04E54A3F29ACCC3B00B00906 /* Inter in Resources */,

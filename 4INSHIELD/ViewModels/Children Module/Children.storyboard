@@ -73,20 +73,11 @@
                         <outlet property="backBtn" destination="H9r-k3-GRX" id="2qi-Tz-pPK"/>
                         <outlet property="exitBtnLbl" destination="H9r-k3-GRX" id="uEc-Uz-xQn"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
-                        <segue destination="q7z-R8-De8" kind="presentation" identifier="goToUpdateChild" id="m4g-yn-AZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7O-g4-BcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1198" y="-92"/>
-        </scene>
-        <!--UpdateChild-->
-        <scene sceneID="6U7-1x-LcX">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="goToUpdateChild" storyboardName="UpdateChild" id="q7z-R8-De8" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GS6-xf-Nxk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1982" y="9"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ng-yE-6V8">

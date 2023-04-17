@@ -228,9 +228,9 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let child = self.childrenArray[indexPath.row]
-
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
-
+            
             let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
                 self.childrenArray.remove(at: indexPath.row)
@@ -243,21 +243,21 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
         deleteAction.backgroundColor =  .systemRed
-
+        
         let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
             UserDefaults.standard.set(child.id, forKey: "childID")
             print(child.id)
-            //Go To update child view
-            self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ChildProfileAdded")
-//            let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
-//            let VC = storyboard.instantiateViewController(withIdentifier: "updateChild")
-//            self.navigationController?.pushViewController(VC, animated: true)
-
+            
+            let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "updateChild")
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }
+        
         updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
         updateAction.backgroundColor = Colrs.bgColor
-
-
+        
+        
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, updateAction])
         configuration.performsFirstActionWithFullSwipe = false
         return configuration

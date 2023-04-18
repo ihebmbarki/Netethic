@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Foundation
 import DLRadioButton
+import FSCalendar
 
-class UpdateChild: UIViewController {
+class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
 
     //IBOutlets
     @IBOutlet weak var childPhoto: UIImageView!
@@ -19,12 +21,19 @@ class UpdateChild: UIViewController {
     @IBOutlet weak var femaleRadioButton: DLRadioButton!
     @IBOutlet weak var otherRadioButton: DLRadioButton!
     
-    @IBOutlet weak var birthdayPicker: UIDatePicker!
+    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var calendarButton: UIButton!
+    
+
     @IBOutlet weak var SocialMediaTableView: UITableView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
     let pickerView = UIPickerView()
+    let datePicker = UIDatePicker()
     var index = 0
+    
+    var selectedDate: Date?
+    var dateFormatter = DateFormatter()
 
     var child: Child?
     var image: UIImage?
@@ -52,6 +61,11 @@ class UpdateChild: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        // Set up the button's action
+        calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        
+        
         //Radio Buttons group property
         maleRadioButton.otherButtons = [femaleRadioButton, otherRadioButton]
         femaleRadioButton.otherButtons = [maleRadioButton, otherRadioButton]
@@ -68,6 +82,79 @@ class UpdateChild: UIViewController {
         configureTableView()
         
     }
+    
+    
+    @objc func showDatePicker() {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
+
+        // Configure the date picker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.frame = CGRect(x: 0, y: 0, width: 270, height: 216)
+
+        // Add the date picker to the alert controller
+        alertController.view.addSubview(datePicker)
+
+        // Add the "Done" button to dismiss the alert controller
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            // Update the text field with the selected date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            self.dateTextField.text = dateFormatter.string(from: datePicker.date)
+        }))
+
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
+    }
+
+
+    
+//    @objc func showCalendar() {
+//        // Create the alert controller
+//        let alertController = UIAlertController(title: "Pick a date", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+//
+//        // Specify the type of the calendarView explicitly
+//        let calendarView = CalendarView()
+//        calendarView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//
+//        // Set the delegate and data source of the calendar to the calendarView instance
+//        let calendar = FSCalendar()
+//        calendar.delegate = self
+//        calendar.dataSource = self
+//
+//        alertController.view.addSubview(calendarView)
+//
+//        // Add constraints to center the calendar view
+//        calendarView.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor).isActive = true
+//        calendarView.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor).isActive = true
+//        calendarView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//        calendarView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//
+//        // Add an action to dismiss the alert controller when a date is selected
+//        alertController.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+//            if let selectedDate = calendarView.selectedDate {
+//                print("Selected date: \(selectedDate)")
+//                self.dateTextField.text = self.dateFormatter.string(from: selectedDate)
+//            }
+//            alertController.dismiss(animated: true, completion: nil)
+//        })
+//
+//        // Add a tap gesture recognizer to dismiss the alert controller when tapping outside of the calendar
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissCalendar(_:)))
+//        alertController.view.superview?.addGestureRecognizer(tapGestureRecognizer)
+//
+//        // Present the alert controller
+//        present(alertController, animated: true, completion: nil)
+//    }
+//
+//    @objc private func dismissCalendar(_ gesture: UITapGestureRecognizer) {
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+
+
 
     //register tableView Cell
     func configureTableView(){
@@ -90,7 +177,7 @@ class UpdateChild: UIViewController {
         //Add Padding to Textfields
         let prenomPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         let nomPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
-
+        let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         
         //Set up firstname textfield
         PrenomTf.layer.borderWidth = 1
@@ -107,6 +194,14 @@ class UpdateChild: UIViewController {
         nomTf.layer.masksToBounds = true
         nomTf.leftView = nomPaddingView
         nomTf.leftViewMode = .always
+        
+        //Set up date textfield
+        dateTextField.layer.borderWidth = 1
+        dateTextField.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        dateTextField.layer.cornerRadius = dateTextField.frame.size.height/2
+        dateTextField.layer.masksToBounds = true
+        dateTextField.leftView = datePaddingView
+        dateTextField.leftViewMode = .always
         
         //Set up buttons
         cancelBtn.layer.borderWidth = 1
@@ -153,7 +248,7 @@ class UpdateChild: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageButtonTapped))
         childPhoto.isUserInteractionEnabled = true
         childPhoto.addGestureRecognizer(tap)
-        birthdayPicker.tintColor = Colrs.bgColor
+//        birthdayPicker.tintColor = Colrs.bgColor
 
 //        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.blue], for: .selected)
 
@@ -216,7 +311,7 @@ class UpdateChild: UIViewController {
             gender = "F"
         case 2: // other
             gender = "N"
-        default:
+        default:  
             break
         }
     }
@@ -236,7 +331,12 @@ class UpdateChild: UIViewController {
                     self.otherRadioButton.isSelected = true
                 }
 
-                self.birthdayPicker.date = child.birthday.toDate()!
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                if let birthdate = dateFormatter.date(from: child.birthday) {
+                    self.dateTextField.text = dateFormatter.string(from: birthdate)
+                }
+                
                 if (child.photo ?? "").isEmpty {
                     if child.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
@@ -280,7 +380,7 @@ class UpdateChild: UIViewController {
                     "parent": userID,
                     "first_name": fName ,
                     "last_name": lName ,
-                    "birthday": self.birthdayPicker.date,
+                    "birthday": dateTextField.text ?? "",
                     "gender": gender,
                 ] as [String : Any]
 

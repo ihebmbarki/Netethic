@@ -89,11 +89,13 @@ class APIManager {
         var profiles = [Profile]()
         
         let child_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/profiles/"
+        print("URL: \(child_profile_url)")
         
         AF.request(child_profile_url, method: .get).response
         {
             response in switch response.result {
-            case .success( _):
+            case .success(let data):
+                print("Raw response data: \(data)")
                 do {
                     profiles = try JSONDecoder().decode([Profile].self, from: response.data!)
                     completion(profiles)
@@ -101,7 +103,7 @@ class APIManager {
                     print("Error: failed to load profile; \(error.localizedDescription)")
                 }
             case .failure(let error):
-                print("Error getting profiles; \(error.localizedDescription)")
+                print("Response: \(response)")
             }
         }        
     }

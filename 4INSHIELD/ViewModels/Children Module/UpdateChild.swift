@@ -78,7 +78,7 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         configureUI()
         SetUpDesign()
         loadChildInfo()
-        getCurrentChildSocialMedia()
+//        getCurrentChildSocialMedia()
         configureTableView()
         
     }
@@ -166,7 +166,7 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI()
-        self.getCurrentChildSocialMedia()
+//        self.getCurrentChildSocialMedia()
     }
 
     func SetUpDesign() {
@@ -213,25 +213,27 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         updateBtn.layer.masksToBounds = true
     }
 
-    func getCurrentChildSocialMedia() {
-        guard let childID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
-            APIManager.shareInstance.getCurrentChildProfiles(withID: childID) { profiles in
-                self.socialArray = profiles
-                    self.SocialMediaTableView.reloadData()
+//    func getCurrentChildSocialMedia() {
+//        guard let childID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
+//        DispatchQueue.main.async {
+//            APIManager.shareInstance.getCurrentChildProfiles(withID: childID) { profiles in
+//                self.socialArray = profiles
+//                self.SocialMediaTableView.reloadData()
 //                print("\(profiles)")
-                self.verifyProfileList(profileList: profiles)
-        }
-    }
+//                self.verifyProfileList(profileList: profiles)
+//            }
+//        }
+//    }
 
-    func verifyProfileList(profileList: [Profile]) {
-        if profileList.count > 0 {
-            // profile list is not empty, do nothing.
-        } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your profiles list is empty!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
+//    func verifyProfileList(profileList: [Profile]) {
+//        if profileList.count > 0 {
+//            // profile list is not empty, do nothing.
+//        } else {
+//            let alertController = UIAlertController(title: "4INSHIELD", message: "Your profiles list is empty!", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            self.present(alertController, animated: true, completion: nil)
+//        }
+//    }
 
     func configureUI() {
         guard let childID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
@@ -395,15 +397,9 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
     
     @IBAction func addNewProfileBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChildSocialMedia")
-        // Wrap the current view controller inside a navigation controller
-        let navController = UINavigationController(rootViewController: self)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildSocialMedia") as! ChildSocialMedia
         // Push the new view controller onto the navigation stack
-        navController.pushViewController(vc, animated: true)
-        // Replace the current view controller with the navigation controller
-        UIApplication.shared.windows.first?.rootViewController = navController
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
-
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -413,9 +409,6 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         self.present(vc, animated: true, completion: nil)
     }
     
-    
-    
-
 }
 
 extension UpdateChild: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -450,13 +443,29 @@ extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildSocialMediaCell", for: indexPath) as! ChildSocialMediaTableViewCell
 
-        let profile = socialArray[indexPath.row]
-
-        cell.socialPlatform.text = socialMediaNames[profile.social_media_name] ?? "Unknown"
-        cell.SocialPseudo.text = profile.pseudo.uppercased()
-        cell.socialMediaLogo.image = UIImage(imageLiteralResourceName: "empty")
+        if socialArray.isEmpty {
+            // Set the cell to show an empty container when the profiles list is empty
+            cell.socialPlatform.text = ""
+            cell.SocialPseudo.text = ""
+            cell.socialMediaLogo.image = nil
+            cell.contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+            cell.contentView.layer.cornerRadius = 10.0
+            cell.contentView.layer.borderWidth = 1.0
+            cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        } else {
+            // Show the profile details when the profiles list is not empty
+            let profile = socialArray[indexPath.row]
+            DispatchQueue.main.async {
+                cell.socialPlatform.text = self.socialMediaNames[profile.social_media_name] ?? "Unknown"
+                cell.SocialPseudo.text = profile.pseudo.uppercased()
+                guard let socialMediaName = self.socialMediaNames[profile.social_media_name] else { return }
+                let imageName = "\(profile.social_media_name)_logo"
+                cell.socialMediaLogo.image = UIImage(named: imageName)
+            }
+        }
 
         return cell
     }
+
 
 }

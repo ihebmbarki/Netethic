@@ -33,7 +33,13 @@ extension UIImageView {
         guard let string = urlString else {return}
         guard let url = URL(string: string) else {return}
         
-        self.sd_setImage(with: url) { (image, error, type, url) in
+        var secureUrl = string
+        if let range = secureUrl.range(of: "http://") {
+            secureUrl.replaceSubrange(range, with: "https://")
+        }
+        guard let secureURL = URL(string: secureUrl) else { return }
+        
+        self.sd_setImage(with: secureURL) { (image, error, type, url) in
             if onSuccess != nil , error == nil {
                 onSuccess!(image!)
             }

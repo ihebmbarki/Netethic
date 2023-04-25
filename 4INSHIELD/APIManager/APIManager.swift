@@ -91,22 +91,29 @@ class APIManager {
         let child_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/profiles/"
         print("URL: \(child_profile_url)")
         
-        AF.request(child_profile_url, method: .get).response
-        {
-            response in switch response.result {
+        AF.request(child_profile_url, method: .get).responseJSON { response in
+            switch response.result {
             case .success(let data):
-                print("Raw response data: \(data)")
-                do {
-                    profiles = try JSONDecoder().decode([Profile].self, from: response.data!)
+                if let jsonData = try? JSONSerialization.data(withJSONObject: data) {
+                    profiles = try! JSONDecoder().decode([Profile].self, from: jsonData)
                     completion(profiles)
-                } catch let error as NSError {
-                    print("Error: failed to load profile; \(error.localizedDescription)")
+                } else {
+                    print("Error: failed to serialize data")
                 }
             case .failure(let error):
-                print("Response: \(response)")
+                if let statusCode = response.response?.statusCode {
+                    if statusCode == 404 {
+                        print("Error: profile not found")
+                    } else {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                } else {
+                    print("Error: \(error.localizedDescription)")
+                }
             }
-        }        
+        }
     }
+
     
     func fetchChild(withID childID: Int ,completion: @escaping(Child) -> Void) {
         var child: Child?

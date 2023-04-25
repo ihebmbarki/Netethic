@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="width" constant="224" id="gWF-Ge-l5l"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.14117647058823529" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
@@ -52,7 +52,7 @@
                                     <constraint firstAttribute="width" constant="172" id="LMr-VR-e4D"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.54117647058823526" green="0.56862745098039214" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
@@ -82,9 +82,7 @@
             <color key="backgroundColor" red="0.3224783242" green="0.42824769019999998" blue="0.69414657349999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="SocialPseudo" destination="9Du-S2-GKb" id="DT1-gL-eT9"/>
-                <outlet property="childFullName" destination="JcU-8N-Z6a" id="68a-GY-g1t"/>
-                <outlet property="childSocialMediaView" destination="f7K-yo-Jes" id="mwA-D1-u6W"/>
-                <outlet property="childView" destination="f7K-yo-Jes" id="efc-pc-TTm"/>
+                <outlet property="childSocialMediaView" destination="tHI-fk-WHy" id="bXh-M9-oWC"/>
                 <outlet property="socialMediaLogo" destination="e31-d2-ZBQ" id="CBS-IK-gcP"/>
                 <outlet property="socialPlatform" destination="JcU-8N-Z6a" id="eUN-l6-Yhd"/>
             </connections>

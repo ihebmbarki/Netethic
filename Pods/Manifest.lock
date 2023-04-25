@@ -1,30 +1,26 @@
 PODS:
   - DLRadioButton (1.4.12)
   - FLAnimatedImage (1.0.17)
-  - FSCalendar (2.8.4)
-  - SDWebImage (5.15.5):
-    - SDWebImage/Core (= 5.15.5)
-  - SDWebImage/Core (5.15.5)
+  - SDWebImage (5.15.6):
+    - SDWebImage/Core (= 5.15.6)
+  - SDWebImage/Core (5.15.6)
 
 DEPENDENCIES:
   - DLRadioButton (~> 1.4)
   - FLAnimatedImage
-  - FSCalendar
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - DLRadioButton
     - FLAnimatedImage
-    - FSCalendar
     - SDWebImage
 
 SPEC CHECKSUMS:
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
-  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
-  SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
+  SDWebImage: d47d81bea8a77187896b620dc79c3c528e8906b9
 
-PODFILE CHECKSUM: daa1a426f5a857c70fd7625edd43aecb363c514b
+PODFILE CHECKSUM: 55c133179663c9c4d1843f5de83ed32288f2c5d3
 
 COCOAPODS: 1.11.3

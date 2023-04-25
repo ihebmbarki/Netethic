@@ -16,8 +16,14 @@ class ChildSocialMediaTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        childSocialMediaView.roundCorners(20, borderWidth: 0.1)
         socialMediaLogo.layer.cornerRadius = 36/2
+        childSocialMediaView.roundCorners(20, borderWidth: 0.1)
+        childSocialMediaView.backgroundColor = UIColor.white
+        // Set the background color to clear
+        childSocialMediaView.layer.cornerRadius = 10.0
+        childSocialMediaView.layer.borderWidth = 0.5
+        childSocialMediaView.layer.borderColor = UIColor.lightGray.cgColor
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

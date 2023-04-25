@@ -18,6 +18,4 @@ struct Profile: Codable,Identifiable {
     let created_at: String
     let modified_at: String
     let url: String?
-    let meta: [String]
-
 }

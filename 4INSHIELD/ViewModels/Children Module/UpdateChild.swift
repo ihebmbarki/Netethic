@@ -8,9 +8,8 @@
 import UIKit
 import Foundation
 import DLRadioButton
-import FSCalendar
 
-class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
+class UpdateChild: UIViewController {
 
     //IBOutlets
     @IBOutlet weak var childPhoto: UIImageView!
@@ -101,58 +100,13 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
             // Update the text field with the selected date
             let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             self.dateTextField.text = dateFormatter.string(from: datePicker.date)
         }))
 
         // Present the alert controller
         present(alertController, animated: true, completion: nil)
     }
-
-
-    
-//    @objc func showCalendar() {
-//        // Create the alert controller
-//        let alertController = UIAlertController(title: "Pick a date", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-//
-//        // Specify the type of the calendarView explicitly
-//        let calendarView = CalendarView()
-//        calendarView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-//
-//        // Set the delegate and data source of the calendar to the calendarView instance
-//        let calendar = FSCalendar()
-//        calendar.delegate = self
-//        calendar.dataSource = self
-//
-//        alertController.view.addSubview(calendarView)
-//
-//        // Add constraints to center the calendar view
-//        calendarView.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor).isActive = true
-//        calendarView.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor).isActive = true
-//        calendarView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-//        calendarView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//
-//        // Add an action to dismiss the alert controller when a date is selected
-//        alertController.addAction(UIAlertAction(title: "Done", style: .default) { _ in
-//            if let selectedDate = calendarView.selectedDate {
-//                print("Selected date: \(selectedDate)")
-//                self.dateTextField.text = self.dateFormatter.string(from: selectedDate)
-//            }
-//            alertController.dismiss(animated: true, completion: nil)
-//        })
-//
-//        // Add a tap gesture recognizer to dismiss the alert controller when tapping outside of the calendar
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissCalendar(_:)))
-//        alertController.view.superview?.addGestureRecognizer(tapGestureRecognizer)
-//
-//        // Present the alert controller
-//        present(alertController, animated: true, completion: nil)
-//    }
-//
-//    @objc private func dismissCalendar(_ gesture: UITapGestureRecognizer) {
-//        dismiss(animated: true, completion: nil)
-//    }
-//
 
 
 
@@ -166,7 +120,7 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI()
-//        self.getCurrentChildSocialMedia()
+        //        self.getCurrentChildSocialMedia()
     }
 
     func SetUpDesign() {
@@ -225,15 +179,15 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
 //        }
 //    }
 
-//    func verifyProfileList(profileList: [Profile]) {
-//        if profileList.count > 0 {
-//            // profile list is not empty, do nothing.
-//        } else {
-//            let alertController = UIAlertController(title: "4INSHIELD", message: "Your profiles list is empty!", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-//    }
+    func verifyProfileList(profileList: [Profile]) {
+        if profileList.count > 0 {
+            // profile list is not empty, do nothing.
+        } else {
+            let alertController = UIAlertController(title: "4INSHIELD", message: "Your profiles list is empty!", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 
     func configureUI() {
         guard let childID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
@@ -244,19 +198,21 @@ class UpdateChild: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
                     print("Pseudo: \(profile.pseudo)")
                     print("Social Media Name: \(profile.social_media_name)")
                 }
+                // Reload the table view inside the completion block
+                self.socialArray = profiles
+                self.SocialMediaTableView.reloadData()
+                self.verifyProfileList(profileList: profiles)
             }
         }
-//        childPhoto.roundCorners(65/2, borderWidth: 0.5)
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageButtonTapped))
         childPhoto.isUserInteractionEnabled = true
         childPhoto.addGestureRecognizer(tap)
-//        birthdayPicker.tintColor = Colrs.bgColor
-
-//        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.blue], for: .selected)
 
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: Colrs.bgColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: Colrs.bgColor]
     }
+
 
     @objc fileprivate func profileImageButtonTapped() {
         presentPicker()
@@ -442,27 +398,15 @@ extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildSocialMediaCell", for: indexPath) as! ChildSocialMediaTableViewCell
-
-        if socialArray.isEmpty {
-            // Set the cell to show an empty container when the profiles list is empty
-            cell.socialPlatform.text = ""
-            cell.SocialPseudo.text = ""
-            cell.socialMediaLogo.image = nil
-            cell.contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-            cell.contentView.layer.cornerRadius = 10.0
-            cell.contentView.layer.borderWidth = 1.0
-            cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-        } else {
             // Show the profile details when the profiles list is not empty
             let profile = socialArray[indexPath.row]
             DispatchQueue.main.async {
                 cell.socialPlatform.text = self.socialMediaNames[profile.social_media_name] ?? "Unknown"
                 cell.SocialPseudo.text = profile.pseudo.uppercased()
-                guard let socialMediaName = self.socialMediaNames[profile.social_media_name] else { return }
+                guard self.socialMediaNames[profile.social_media_name] != nil else { return }
                 let imageName = "\(profile.social_media_name)_logo"
                 cell.socialMediaLogo.image = UIImage(named: imageName)
             }
-        }
 
         return cell
     }

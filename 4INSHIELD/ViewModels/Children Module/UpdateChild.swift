@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import DLRadioButton
 
-class UpdateChild: UIViewController {
+class UpdateChild: UIViewController, UISearchBarDelegate {
 
     //IBOutlets
     @IBOutlet weak var childPhoto: UIImageView!
@@ -45,7 +45,7 @@ class UpdateChild: UIViewController {
 //    var socialProfilesArrayIDs = [Int]()
 //    var socialMediaIDsArray = [Int]()
 //
-//    var selectedProfileID: Int?
+    var selectedProfileID: Int?
 //    var selectedSocialMediaID: Int?
 //    var selectedPlatformName = ""
 
@@ -60,6 +60,14 @@ class UpdateChild: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //search bar
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "User name"
+        searchBar.searchBarStyle = .minimal
+        searchBar.sizeToFit()
+
+        SocialMediaTableView.tableHeaderView = searchBar
     
         // Set up the button's action
         calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
@@ -112,6 +120,11 @@ class UpdateChild: UIViewController {
 
     //register tableView Cell
     func configureTableView(){
+        SocialMediaTableView.layer.cornerRadius = 10.0
+        SocialMediaTableView.layer.borderWidth = 1.0
+        SocialMediaTableView.layer.borderColor = UIColor.lightGray.cgColor
+        SocialMediaTableView.layer.masksToBounds = true
+
         SocialMediaTableView.delegate = self
         SocialMediaTableView.dataSource = self
         SocialMediaTableView.register(UINib.init(nibName: "Child_SocialMedia_TvCell", bundle: nil), forCellReuseIdentifier: "ChildSocialMediaCell")
@@ -213,7 +226,6 @@ class UpdateChild: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: Colrs.bgColor]
     }
 
-
     @objc fileprivate func profileImageButtonTapped() {
         presentPicker()
     }
@@ -242,7 +254,7 @@ class UpdateChild: UIViewController {
                 print("Error: Unavailable")
             }
         }
-
+        
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
         let remove = UIAlertAction(title: "Delete photo", style: UIAlertAction.Style.destructive) { _ in
 
@@ -395,6 +407,10 @@ extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return socialArray.count
    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedProfile = socialArray[indexPath.row]
+            selectedProfileID = selectedProfile.id
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildSocialMediaCell", for: indexPath) as! ChildSocialMediaTableViewCell
@@ -402,14 +418,67 @@ extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {
             let profile = socialArray[indexPath.row]
             DispatchQueue.main.async {
                 cell.socialPlatform.text = self.socialMediaNames[profile.social_media_name] ?? "Unknown"
-                cell.SocialPseudo.text = profile.pseudo.uppercased()
-                guard self.socialMediaNames[profile.social_media_name] != nil else { return }
-                let imageName = "\(profile.social_media_name)_logo"
-                cell.socialMediaLogo.image = UIImage(named: imageName)
+                cell.SocialPseudo.text = "@" + profile.pseudo
+                
+//                guard self.socialMediaNames[profile.social_media_name] != nil else { return }
+//                let imageName = "\(profile.social_media_name)_logo"
+//                cell.socialMediaLogo.image = UIImage(named: imageName)
+                switch profile.social_media_name {
+                case 1:
+                    cell.socialMediaLogo.image = UIImage(named: "Twitter_logo")
+                case 2:
+                    cell.socialMediaLogo.image = UIImage(named: "instagram_logo")
+                case 3:
+                    cell.socialMediaLogo.image = UIImage(named: "youtube_logo")
+                case 4:
+                    cell.socialMediaLogo.image = UIImage(named: "snapchat_logo")
+                case 5:
+                    cell.socialMediaLogo.image = UIImage(named: "Tumblr_logo")
+                case 6:
+                    cell.socialMediaLogo.image = UIImage(named: "pinterest_logo")
+                case 7:
+                    cell.socialMediaLogo.image = UIImage(named: "reddit_logo")
+                case 8:
+                    cell.socialMediaLogo.image = UIImage(named: "facebook_logo")
+                case 9:
+                    cell.socialMediaLogo.image = UIImage(named: "quora_logo")
+                default:
+                    cell.socialMediaLogo.image = nil // No logo available
+                }
+
             }
 
         return cell
     }
-
-
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+                
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
+            
+            let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this social profile from your list?", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
+                self.socialArray.remove(at: indexPath.row)
+                self.SocialMediaTableView.deleteRows(at: [indexPath], with: .fade)
+                if let profileID = self.selectedProfileID {
+                    APIManager.shareInstance.deleteSocialProfile(profileID: profileID, onSuccess: {
+                        print("Social profile was deleted.. ")
+                        
+                    }, onError: {_ in
+                        print("Error occured while deleting profile ")
+                    })
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.SocialMediaTableView.reloadData()}))
+            self.present(alert, animated: true, completion: nil)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.backgroundColor =  .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
 }
+

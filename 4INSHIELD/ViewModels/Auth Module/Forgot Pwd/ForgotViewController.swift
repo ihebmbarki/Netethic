@@ -16,7 +16,6 @@ class ForgotViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
     }
     
@@ -25,11 +24,13 @@ class ForgotViewController: UIViewController {
         resetBtn.applyGradient()
     }
 
-    
     func resetFields() {
         emailTf.text = ""
     }
     
+    @IBAction func backBtnTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func reserBtnTapped(_ sender: Any) {
         guard let email = emailTf.text else { return }

@@ -13,4 +13,5 @@ struct RegisterModel: Encodable {
     let password: String
     let confirmPassword: String
     let user_agent = "mobile"
+    let user_role = "parent"
 }

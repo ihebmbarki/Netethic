@@ -17,6 +17,22 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func deleteSocialProfile(profileID: Int, onSuccess: @escaping() -> Void, onError: @escaping(Error?) -> Void) {
+        let delete_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/profiles/\(profileID)/"
+        
+        AF.request(delete_profile_url, method: .delete).response
+        {
+            response in switch response.result {
+            case .success( _):
+                print("Social profile was successfully deleted")
+                onSuccess()
+            case .failure(let error):
+                onError(error)
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func updateChild(withID childID: Int, childData: [String:Any], completion: @escaping(Child) -> Void) {
         var child: Child?
         

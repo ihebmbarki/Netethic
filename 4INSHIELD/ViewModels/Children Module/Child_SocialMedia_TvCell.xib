@@ -14,15 +14,15 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChildSocialMediaCell" rowHeight="166" id="tvJ-V7-oQ1" customClass="ChildSocialMediaTableViewCell" customModule="_INSHIELD_Development" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="535" height="166"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="tvJ-V7-oQ1" id="tHI-fk-WHy">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tvJ-V7-oQ1" id="tHI-fk-WHy">
                 <rect key="frame" x="0.0" y="0.0" width="535" height="166"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7K-yo-Jes">
-                        <rect key="frame" x="15" y="5" width="505" height="70"/>
+                        <rect key="frame" x="15" y="5" width="505" height="65"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e31-d2-ZBQ">
-                                <rect key="frame" x="8" y="17.666666666666671" width="36" height="35"/>
+                                <rect key="frame" x="15" y="17.666666666666671" width="36" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -31,12 +31,12 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test test" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcU-8N-Z6a" userLabel="social platform">
-                                <rect key="frame" x="52" y="15.666666666666671" width="224" height="39"/>
+                                <rect key="frame" x="68" y="14.666666666666671" width="209" height="39"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="KDF-3s-SKK"/>
-                                    <constraint firstAttribute="width" constant="224" id="gWF-Ge-l5l"/>
+                                    <constraint firstAttribute="width" constant="209" id="gWF-Ge-l5l"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                 <color key="textColor" red="0.14117647058823529" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,12 +44,12 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pseudo" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Du-S2-GKb">
-                                <rect key="frame" x="299" y="15" width="172" height="40"/>
+                                <rect key="frame" x="285" y="14.333333333333329" width="204" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7xP-7f-W0E"/>
-                                    <constraint firstAttribute="width" constant="172" id="LMr-VR-e4D"/>
+                                    <constraint firstAttribute="width" constant="204" id="LMr-VR-e4D"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                 <color key="textColor" red="0.54117647058823526" green="0.56862745098039214" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,13 +60,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Du-S2-GKb" firstAttribute="centerY" secondItem="JcU-8N-Z6a" secondAttribute="centerY" id="1Zv-n8-ZqX"/>
-                            <constraint firstItem="9Du-S2-GKb" firstAttribute="leading" secondItem="JcU-8N-Z6a" secondAttribute="trailing" constant="23" id="6jc-ex-rdZ"/>
-                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="centerY" secondItem="e31-d2-ZBQ" secondAttribute="centerY" id="Ig2-Oe-pCG"/>
-                            <constraint firstItem="e31-d2-ZBQ" firstAttribute="centerY" secondItem="f7K-yo-Jes" secondAttribute="centerY" id="Lk6-p3-ZXl"/>
-                            <constraint firstAttribute="height" constant="70" id="beI-8S-NAW"/>
-                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="width" secondItem="f7K-yo-Jes" secondAttribute="width" multiplier="0.443564" id="hYW-WI-Mwn"/>
-                            <constraint firstItem="e31-d2-ZBQ" firstAttribute="leading" secondItem="f7K-yo-Jes" secondAttribute="leading" constant="8" id="ovh-ck-tKP"/>
-                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="leading" secondItem="e31-d2-ZBQ" secondAttribute="trailing" constant="8" symbolic="YES" id="tLI-ae-puv"/>
+                            <constraint firstItem="9Du-S2-GKb" firstAttribute="leading" secondItem="JcU-8N-Z6a" secondAttribute="trailing" constant="8" id="6jc-ex-rdZ"/>
+                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="centerY" secondItem="e31-d2-ZBQ" secondAttribute="centerY" constant="-1" id="Ig2-Oe-pCG"/>
+                            <constraint firstItem="e31-d2-ZBQ" firstAttribute="centerY" secondItem="f7K-yo-Jes" secondAttribute="centerY" constant="2.6666666666666714" id="Lk6-p3-ZXl"/>
+                            <constraint firstAttribute="height" constant="65" id="beI-8S-NAW"/>
+                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="width" secondItem="f7K-yo-Jes" secondAttribute="width" multiplier="0.443564" constant="-14.99982" id="hYW-WI-Mwn"/>
+                            <constraint firstItem="e31-d2-ZBQ" firstAttribute="leading" secondItem="f7K-yo-Jes" secondAttribute="leading" constant="15" id="ovh-ck-tKP"/>
+                            <constraint firstItem="JcU-8N-Z6a" firstAttribute="leading" secondItem="e31-d2-ZBQ" secondAttribute="trailing" constant="17" id="tLI-ae-puv"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -74,7 +74,7 @@
                 <constraints>
                     <constraint firstItem="f7K-yo-Jes" firstAttribute="top" secondItem="tHI-fk-WHy" secondAttribute="top" constant="5" id="Jhe-nB-ieL"/>
                     <constraint firstItem="f7K-yo-Jes" firstAttribute="leading" secondItem="tHI-fk-WHy" secondAttribute="leading" constant="15" id="Qnd-Wo-RFE"/>
-                    <constraint firstAttribute="bottom" secondItem="f7K-yo-Jes" secondAttribute="bottom" constant="10" id="aeG-MS-qUT"/>
+                    <constraint firstAttribute="bottom" secondItem="f7K-yo-Jes" secondAttribute="bottom" constant="96" id="aeG-MS-qUT"/>
                     <constraint firstAttribute="trailing" secondItem="f7K-yo-Jes" secondAttribute="trailing" constant="15" id="wSA-IB-NeM"/>
                 </constraints>
             </tableViewCellContentView>

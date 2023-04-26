@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Inter-Regular.ttf">
+        <array key="Inter-VariableFont_slnt,wght.ttf">
             <string>Inter-Regular</string>
         </array>
         <array key="Poppins-Medium.ttf">
@@ -27,45 +27,45 @@
             <objects>
                 <viewController id="5Hr-nD-MVf" customClass="ForgotViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qkU-RA-yhR">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="sU0-7s-BmA">
-                                <rect key="frame" x="0.0" y="-112" width="393" height="245"/>
+                                <rect key="frame" x="0.0" y="-9" width="393" height="245"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="245" id="MxG-TQ-AKm"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4inshield logo blanc" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-we-CIb">
-                                <rect key="frame" x="141" y="-9" width="111" height="87"/>
+                                <rect key="frame" x="141" y="94" width="111" height="87"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forgotLogo" translatesAutoresizingMaskIntoConstraints="NO" id="6yM-4I-SzM">
-                                <rect key="frame" x="77" y="141" width="239" height="203"/>
+                                <rect key="frame" x="77" y="244" width="239" height="203"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="203" id="B7a-RB-cfM"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot your password ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6N-SE-x1w">
-                                <rect key="frame" x="77" y="352" width="239" height="21.666666666666686"/>
+                                <rect key="frame" x="77" y="455" width="239" height="21.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.25490196078431371" green="0.38039215686274508" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpN-hF-zdp">
-                                <rect key="frame" x="46" y="468" width="301" height="84"/>
+                                <rect key="frame" x="46" y="478" width="301" height="84"/>
                                 <string key="text">Enter the email associated with your 4INSHIELD account and we'll send an email with 6 digits PIN code in order to reset your password</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.25490196078431371" green="0.38039215686274508" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWX-HS-LM8">
-                                <rect key="frame" x="32" y="591" width="329" height="34"/>
+                                <rect key="frame" x="32" y="601" width="329" height="34"/>
                                 <color key="textColor" red="0.25490196079999999" green="0.3803921569" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQE-qs-4FM">
-                                <rect key="frame" x="32" y="640" width="329" height="76"/>
+                                <rect key="frame" x="32" y="650" width="329" height="42"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Send code PIN"/>
@@ -102,7 +102,9 @@
                             <constraint firstItem="dc9-we-CIb" firstAttribute="leading" secondItem="88a-KN-ULK" secondAttribute="leading" constant="141" id="ynS-VH-wb3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Cdk-wl-s3i"/>
+                    <navigationItem key="navigationItem" id="Cdk-wl-s3i">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="XgI-Ai-13t"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTf" destination="gWX-HS-LM8" id="lhx-hX-rkS"/>
                         <outlet property="resetBtn" destination="EQE-qs-4FM" id="xXd-Oh-Guj"/>
@@ -1490,10 +1492,10 @@
                                 <buttonConfiguration key="configuration" style="plain" image="Groupe 105"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KAw-hi-PB1">
-                                <rect key="frame" x="16" y="504" width="361" height="179"/>
+                                <rect key="frame" x="16" y="505" width="361" height="178"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="179" id="fgd-Ow-w6x"/>
+                                    <constraint firstAttribute="height" constant="178" id="fgd-Ow-w6x"/>
                                 </constraints>
                             </tableView>
                         </subviews>
@@ -1545,7 +1547,7 @@
                             <constraint firstItem="EJm-g0-C9i" firstAttribute="trailing" secondItem="4Mn-KG-Ehc" secondAttribute="trailing" constant="345" id="oEf-Mu-PB7"/>
                             <constraint firstItem="EJm-g0-C9i" firstAttribute="trailing" secondItem="fAY-nS-jmB" secondAttribute="trailing" constant="250" id="sT7-x6-RVK"/>
                             <constraint firstItem="EJm-g0-C9i" firstAttribute="bottom" secondItem="vIt-2D-cnw" secondAttribute="bottom" constant="638" id="tan-Au-8e4"/>
-                            <constraint firstItem="KAw-hi-PB1" firstAttribute="top" secondItem="lSg-Ys-kcb" secondAttribute="bottom" constant="7.3333333333333144" id="wJo-jn-xCI"/>
+                            <constraint firstItem="KAw-hi-PB1" firstAttribute="top" secondItem="lSg-Ys-kcb" secondAttribute="bottom" constant="8.3333333333333144" id="wJo-jn-xCI"/>
                             <constraint firstItem="rj5-Yf-vN1" firstAttribute="leading" secondItem="EJm-g0-C9i" secondAttribute="leading" id="yFi-AZ-YvG"/>
                             <constraint firstItem="WIs-uX-2wE" firstAttribute="leading" secondItem="a3M-Gu-sNW" secondAttribute="trailing" constant="9" id="ye8-ah-oci"/>
                             <constraint firstItem="Jg3-md-U5i" firstAttribute="trailing" secondItem="zme-Vk-mMI" secondAttribute="trailing" constant="-242" id="zXv-rx-8ku"/>
@@ -1555,7 +1557,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8d-s1-kf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4105" y="2494"/>
+            <point key="canvasLocation" x="4104.580152671756" y="2493.6619718309862"/>
         </scene>
         <!--Congrats-->
         <scene sceneID="eMo-x0-tD4">
@@ -2552,6 +2554,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w1n-Qv-rt9">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2621,13 +2624,14 @@
         <segue reference="95K-iy-Fpk"/>
         <segue reference="Dlj-KX-hUZ"/>
         <segue reference="ZAs-Fa-aEy"/>
-        <segue reference="qfV-vv-igF"/>
+        <segue reference="mWS-Zh-XyT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="4inshield logo blanc" width="512" height="442"/>
         <image name="Group 1000003351" width="359" height="125"/>
         <image name="Groupe 105" width="32.666667938232422" height="33"/>
         <image name="Icon-20" width="20" height="20"/>
+        <image name="back" width="36" height="36"/>
         <image name="background" width="360" height="209"/>
         <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
         <image name="changePwdLogo" width="197" height="140.66667175292969"/>

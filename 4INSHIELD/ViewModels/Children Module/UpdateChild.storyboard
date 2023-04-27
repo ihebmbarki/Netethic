@@ -101,7 +101,7 @@
                                     <fontDescription key="titleFontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="addNewProfileBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="L6N-6c-jRV"/>
+                                    <action selector="addNewProfileBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="bfk-ZC-0iD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PX-Ou-0sv">
@@ -113,7 +113,7 @@
                                     <action selector="changePicTaped:" destination="wyn-el-f4F" eventType="touchUpInside" id="pA7-A4-U5a"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="paz-J7-2VT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="paz-J7-2VT">
                                 <rect key="frame" x="16" y="481" width="361" height="179"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>

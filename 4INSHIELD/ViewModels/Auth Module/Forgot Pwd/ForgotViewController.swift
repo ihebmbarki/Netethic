@@ -10,7 +10,9 @@ import Foundation
 
 class ForgotViewController: UIViewController {
     
-    
+    @IBOutlet weak var forgotPwdTf: UILabel!
+    @IBOutlet weak var descriptionTf: UILabel!
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
     
@@ -32,9 +34,64 @@ class ForgotViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    //MARK: Translation
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
+    }
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                }
+                
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+
+        forgotPwdTf.text = NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot pwd label")
+        descriptionTf.text = NSLocalizedString("tag_reset", tableName: nil, bundle: bundle, value: "", comment: "description label")
+        emailTf.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
+        resetBtn.setTitle(NSLocalizedString("send", tableName: nil, bundle: bundle, value: "", comment: "send code"), for: .normal)
+    }
+    
+    //MARK: Generate code
+    
     @IBAction func reserBtnTapped(_ sender: Any) {
         guard let email = emailTf.text else { return }
-        
+
         APIManager.shareInstance.fetchUsers { users in
             var exist = false
             users.forEach { user in
@@ -69,3 +126,4 @@ class ForgotViewController: UIViewController {
     
     
 }
+

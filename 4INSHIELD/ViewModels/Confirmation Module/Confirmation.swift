@@ -39,8 +39,20 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         
         registerBtn.applyGradient()
     }
-    
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
+    }
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                ChangeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                ChangeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
@@ -68,9 +80,6 @@ class Confirmation: UIViewController, UITextFieldDelegate {
 
         present(languageAlert, animated: true, completion: nil)
     }
-
-
-    
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
             

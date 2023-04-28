@@ -19,7 +19,6 @@ class LanguageManager {
             UserDefaults.standard.synchronize()
         }
     }
-
     
     private init() {}
 

@@ -28,7 +28,19 @@
 "signup_google" = "Sign up with Google";
 "signup_facebook" = "Sign up with Facebook";
 
-
 //MARK: Confirmation
 "code" = "Enter the code sent to your email";
 "Confirm" = "Confirm";
+
+//MARK: Forgot/Reset Password
+"forget" = "Forgot password?";
+"tag_reset" = "Enter your email to receive a reset code";
+"e_mail" = "Email";
+"send" = "Send";
+"code" = "Enter the code sent to your email";
+"code1" = "Validation Code";
+"Confirm" = "Confirm";
+"new_password" = "Enter a new password";
+"new_password1" = "Your new password must be different from previous passwords";
+"Reset passs" = "Reset Password";
+

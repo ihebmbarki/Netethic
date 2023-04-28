@@ -8,7 +8,7 @@
 import UIKit
 
 class SignIn: UIViewController {
-
+    
     //IBOutlets
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var signInLabel: UILabel!
@@ -70,13 +70,12 @@ class SignIn: UIViewController {
         return true
     }
     
-    
     func resetFields() {
         emailTF.text = ""
         passwordTF.text = ""
     }
 
-    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+    func translate() {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
 
@@ -103,7 +102,10 @@ class SignIn: UIViewController {
 
         present(languageAlert, animated: true, completion: nil)
     }
-
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        translate()
+    }
 
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main

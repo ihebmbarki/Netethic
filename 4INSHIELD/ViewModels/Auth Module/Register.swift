@@ -57,8 +57,18 @@ class Register: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateLocalizedStrings()
+        updateLanguageButtonImage()
     }
-
+    
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
 
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         let languages = ["English", "Français"]

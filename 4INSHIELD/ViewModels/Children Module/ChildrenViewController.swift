@@ -91,9 +91,10 @@ class ChildrenViewController: UIViewController {
     
     
     @IBAction func infoBtnTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//        present(alertController, animated: true, completion: nil)
+        self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
     }
 }
 

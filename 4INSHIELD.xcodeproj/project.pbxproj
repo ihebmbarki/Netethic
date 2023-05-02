@@ -12,6 +12,10 @@
 		040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821AE29D6DB1400D7A562 /* OnboardingSlide.swift */; };
 		040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821B129D6E1B600D7A562 /* OnboardingViewController.swift */; };
 		040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */; };
+		040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCCC2A01282700ED3223 /* UserProfile.swift */; };
+		040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040DDCCE2A01285600ED3223 /* Profile.storyboard */; };
+		040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */; };
+		040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */; };
 		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
@@ -97,6 +101,10 @@
 		040821AE29D6DB1400D7A562 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		040821B129D6E1B600D7A562 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		040DDCCC2A01282700ED3223 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		040DDCCE2A01285600ED3223 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnfantsViewController.swift; sourceTree = "<group>"; };
+		040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -201,6 +209,17 @@
 				040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = "Onboarding Module";
+			sourceTree = "<group>";
+		};
+		040DDCCB2A0127A100ED3223 /* Profile Module */ = {
+			isa = PBXGroup;
+			children = (
+				040DDCCC2A01282700ED3223 /* UserProfile.swift */,
+				040DDCCE2A01285600ED3223 /* Profile.storyboard */,
+				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
+				040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */,
+			);
+			path = "Profile Module";
 			sourceTree = "<group>";
 		};
 		04340B1B29C097F10055B394 /* Translation */ = {
@@ -338,6 +357,7 @@
 			children = (
 				040821B029D6E16300D7A562 /* Onboarding Module */,
 				04B2A60B29CB51A00028B7E2 /* Children Module */,
+				040DDCCB2A0127A100ED3223 /* Profile Module */,
 				04A52E0B29C206860097C145 /* Side Menu */,
 				04340B1F29C09B4B0055B394 /* Dashboard Module  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
@@ -586,6 +606,7 @@
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
+				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
@@ -649,6 +670,7 @@
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
+				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */,
@@ -661,9 +683,11 @@
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
+				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,
+				040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,

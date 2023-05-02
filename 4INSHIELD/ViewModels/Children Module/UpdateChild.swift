@@ -327,6 +327,11 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
     }
     
     
+    @IBAction func backBtnTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func updateBtnTapped(_ sender: Any) {
         guard let userID = UserDefaults.standard.object(forKey: "userID") as? Int else { return }
         guard let childID = UserDefaults.standard.object(forKey: "childID") as? Int else { return }

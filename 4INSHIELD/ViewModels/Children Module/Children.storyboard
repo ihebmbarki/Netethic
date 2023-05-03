@@ -23,18 +23,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="88"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List of your children" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15u-TT-Ukm">
-                                            <rect key="frame" x="63.333333333333343" y="17" width="266.33333333333326" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="301" id="0l6-7w-hlH"/>
-                                                <constraint firstAttribute="height" constant="21" id="Gux-kB-Kgj"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <color key="textColor" red="0.2533203363" green="0.38035202029999998" blue="0.66277480129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
-                                            <rect key="frame" x="338" y="10" width="47" height="35"/>
+                                            <rect key="frame" x="335.33333333333331" y="10" width="49.666666666666686" height="35"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
                                             <connections>
@@ -44,11 +34,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="centerY" secondItem="15u-TT-Ukm" secondAttribute="centerY" id="30c-s3-kkF"/>
-                                        <constraint firstItem="15u-TT-Ukm" firstAttribute="centerX" secondItem="PZF-RR-aO5" secondAttribute="centerX" id="FGD-Aw-NsW"/>
-                                        <constraint firstItem="15u-TT-Ukm" firstAttribute="leading" secondItem="PZF-RR-aO5" secondAttribute="leading" constant="63.333333333333343" id="LEa-Zb-HqX"/>
-                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="15u-TT-Ukm" secondAttribute="trailing" constant="8.3333333333333712" id="TOF-nq-gB4"/>
-                                        <constraint firstAttribute="bottom" secondItem="15u-TT-Ukm" secondAttribute="bottom" constant="50" id="ZSU-Py-MJg"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="10" id="QbR-EB-3ny"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
                                     </constraints>
                                 </view>
@@ -63,15 +49,8 @@
                             <constraint firstItem="HTw-er-wuD" firstAttribute="bottom" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="50" id="g3N-lE-p9V"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="qYp-4c-c4m">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="back" id="H9r-k3-GRX"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up.circle.fill" catalog="system" id="syR-DH-fbQ">
-                            <color key="tintColor" red="0.96921208960000005" green="0.3159907079" blue="0.2446699011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="qYp-4c-c4m"/>
                     <connections>
-                        <outlet property="backBtn" destination="H9r-k3-GRX" id="2qi-Tz-pPK"/>
-                        <outlet property="exitBtnLbl" destination="H9r-k3-GRX" id="uEc-Uz-xQn"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
                     </connections>
                 </viewController>
@@ -99,8 +78,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back" width="36" height="36"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="123"/>
     </resources>
 </document>

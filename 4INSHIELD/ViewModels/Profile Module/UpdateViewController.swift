@@ -30,6 +30,7 @@ class UpdateViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setUpDesign()
+        getCurrentUserData()
         
         //Radio Buttons group property
         parent1Btn.otherButtons = [parent2]
@@ -39,6 +40,19 @@ class UpdateViewController: UIViewController {
         parent1Btn.layer.cornerRadius = parent1Btn.frame.width / 2
         parent2.layer.cornerRadius = parent2.frame.width / 2
 
+    }
+    
+    func getCurrentUserData() {
+//        guard let savedUserName = UserDefaults.standard.string(forKey: "userName") else { return }
+        let savedUserName = "kaxavy"
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                self.prenomTf.text = user.first_name
+                self.nomTf.text = user.last_name
+                self.emailTf.text = user.email
+                self.dateTextField.text = user.birthday
+            }
+        }
     }
     
     func setUpDesign() {

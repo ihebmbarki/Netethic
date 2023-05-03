@@ -65,6 +65,8 @@
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
 		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
 		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
+		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
+		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
 		04E54A3F29ACCC3B00B00906 /* Inter in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3E29ACCC3B00B00906 /* Inter */; };
@@ -160,6 +162,8 @@
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
+		04D4F0732A01DAEB0033818F /* childCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = childCell.xib; sourceTree = "<group>"; };
+		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
 		04E54A3E29ACCC3B00B00906 /* Inter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inter; path = ../../../../../Downloads/Inter; sourceTree = "<group>"; };
@@ -216,8 +220,10 @@
 			children = (
 				040DDCCC2A01282700ED3223 /* UserProfile.swift */,
 				040DDCCE2A01285600ED3223 /* Profile.storyboard */,
-				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
 				040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */,
+				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
+				04D4F0732A01DAEB0033818F /* childCell.xib */,
+				04D4F0752A01DC1B0033818F /* ChildTvCell.swift */,
 			);
 			path = "Profile Module";
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
+				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
@@ -684,6 +691,7 @@
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
+				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,

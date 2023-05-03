@@ -23,11 +23,12 @@ class UserProfile: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Load user infos
+        getCurrentUserData()
         // Instantiate child view controllers from storyboard
         enfantsViewController = storyboard?.instantiateViewController(withIdentifier: "EnfantsViewController") as? EnfantsViewController
         updateViewController = storyboard?.instantiateViewController(withIdentifier: "UpdateViewController") as? UpdateViewController
-        
+
         // Add enfantsViewController as default child view controller
         addChild(updateViewController!)
         updateViewController?.view.frame = userView.bounds
@@ -36,12 +37,38 @@ class UserProfile: UIViewController {
         // Underline selected button
         modifierButton.setUnderline()
         enfantsButton.removeUnderline()
+        // Set text color opacity for selected button to 100%
+        modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
+        modifierButton.alpha = 1.0
+
+        // Set text color opacity for unselected button to 70%
+        enfantsButton.setTitleColor(enfantsButton.titleLabel?.textColor?.withAlphaComponent(0.7), for: .normal)
+        enfantsButton.alpha = 0.7
     }
     
     func setUpDesign() {
         let minDimension = min(userPhoto.frame.size.width, userPhoto.frame.size.height)
         userPhoto.layer.cornerRadius = minDimension / 2
         userPhoto.clipsToBounds = true
+    }
+    
+    func getCurrentUserData() {
+//        guard let savedUserName = UserDefaults.standard.string(forKey: "userName") else { return }
+        let savedUserName = "kaxavy"
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                
+                print("User data:", user)
+                
+                if (user.photo ?? "").isEmpty {
+                    self.userPhoto.image = UIImage(imageLiteralResourceName: "empty")
+                } else {
+                    self.userPhoto.loadImage(user.photo)
+                }
+                
+                self.userNameTf.text = user.username.uppercased()
+            }
+        }
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
@@ -61,7 +88,16 @@ class UserProfile: UIViewController {
         // Underline selected button
         enfantsButton.setUnderline()
         modifierButton.removeUnderline()
+        
+        // Set text color opacity for selected button to 100%
+        enfantsButton.setTitleColor(enfantsButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
+        enfantsButton.alpha = 1.0
+        
+        // Set text color opacity for unselected button to 70%
+        modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(0.7), for: .normal)
+        modifierButton.alpha = 0.7
     }
+
     
     @IBAction func modifierButtonTapped(_ sender: UIButton) {
         // Remove current child view controller
@@ -76,6 +112,13 @@ class UserProfile: UIViewController {
         // Underline selected button
         modifierButton.setUnderline()
         enfantsButton.removeUnderline()
+        // Set text color opacity for selected button to 100%
+        modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
+        modifierButton.alpha = 1.0
+        
+        // Set text color opacity for unselected button to 70%
+        enfantsButton.setTitleColor(enfantsButton.titleLabel?.textColor?.withAlphaComponent(0.7), for: .normal)
+        enfantsButton.alpha = 0.7
     }
     
     func removeCurrentChildViewController() {

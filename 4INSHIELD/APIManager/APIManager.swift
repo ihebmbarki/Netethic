@@ -17,6 +17,28 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func fetchCurrentUserData(username: String ,completion: @escaping(User) -> Void) {
+        var user: User?
+        let user_info_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)"
+        AF.request(user_info_url, method: .get).response
+        {
+            response in switch response.result {
+            case .success(let data):
+                print("data:", data as Any)
+                do {
+                    user = try JSONDecoder().decode(User.self, from: response.data!)
+                    //print(children)
+                } catch let error as NSError {
+                    print("Failed to load: \(error.localizedDescription)")
+                }
+                guard let ussr = user else {return}
+                completion(ussr)
+            case .failure(let error):
+                print("Error geting user data: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func deleteSocialProfile(profileID: Int, onSuccess: @escaping() -> Void, onError: @escaping(Error?) -> Void) {
         let delete_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/profiles/\(profileID)/"
         

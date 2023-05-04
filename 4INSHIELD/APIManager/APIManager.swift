@@ -17,6 +17,26 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func updateUserInfo(withuserName userName: String, updateData: [String:Any], completion: @escaping(User) -> Void) {
+        var user: User?
+        let update_user_info = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(userName)/"
+        AF.request(update_user_info, method: .put, parameters: updateData).response
+        {
+            response in switch response.result {
+            case .success( _):
+                do {
+                    user = try JSONDecoder().decode(User.self, from: response.data!)
+                    completion(user!)
+                    print("User informations has been successfully updated")
+                } catch let error as NSError {
+                    print("Failed to load: \(error)")
+                }
+            case .failure(let error):
+                print("Error updating profile info: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func fetchCurrentUserData(username: String ,completion: @escaping(User) -> Void) {
         var user: User?
         let user_info_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)"

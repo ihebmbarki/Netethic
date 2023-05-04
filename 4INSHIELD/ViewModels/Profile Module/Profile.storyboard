@@ -41,6 +41,9 @@
                                 <color key="tintColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Groupe 105"/>
+                                <connections>
+                                    <action selector="changePicTaped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FBk-JH-L1Y"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kw-Iq-kak">
                                 <rect key="frame" x="124" y="197" width="145" height="31"/>

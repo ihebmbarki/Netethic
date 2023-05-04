@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Foundation
 
-class UserProfile: UIViewController {
+class UserProfile: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     // IBOutlets
     @IBOutlet weak var userView: UIView!
@@ -44,6 +45,47 @@ class UserProfile: UIViewController {
         // Set text color opacity for unselected button to 70%
         enfantsButton.setTitleColor(enfantsButton.titleLabel?.textColor?.withAlphaComponent(0.7), for: .normal)
         enfantsButton.alpha = 0.7
+        
+        //Pick profile photo
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageButtonTapped))
+        userPhoto.isUserInteractionEnabled = true
+        userPhoto.addGestureRecognizer(tap)
+    }
+    
+    @objc fileprivate func profileImageButtonTapped() {
+        presentPicker()
+    }
+    
+    func presentPicker() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        let alert = UIAlertController(title: "4INSHIELD", message: "Change your profile picture", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let camera = UIAlertAction(title: "Take a photo", style: UIAlertAction.Style.default) { (_) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                picker.sourceType = .camera
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                print("Unavailable camera in the simulator")
+            }
+            
+        }
+        let library = UIAlertAction(title: "Choose a photo from your gallery", style: UIAlertAction.Style.default) { (_) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+                picker.sourceType = .photoLibrary
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                print("Error: Unavailable")
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+    
+        alert.addAction(camera)
+        alert.addAction(library)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
     }
     
     func setUpDesign() {
@@ -53,8 +95,8 @@ class UserProfile: UIViewController {
     }
     
     func getCurrentUserData() {
-//        guard let savedUserName = UserDefaults.standard.string(forKey: "userName") else { return }
-        let savedUserName = "kaxavy"
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+//        let savedUserName = "kaxavy"
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
                 
@@ -71,9 +113,15 @@ class UserProfile: UIViewController {
         }
     }
     
+    @IBAction func changePicTaped(_ sender: Any) {
+        print("Change profile picture")
+        presentPicker()
+    }
+    
     @IBAction func backBtnTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
     
     @IBAction func enfantsButtonTapped(_ sender: UIButton) {
         // Remove current child view controller

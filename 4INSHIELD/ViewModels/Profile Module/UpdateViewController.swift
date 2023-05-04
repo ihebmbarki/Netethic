@@ -25,10 +25,12 @@ class UpdateViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
     
+    var gender: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //Utilities
         setUpDesign()
         getCurrentUserData()
         
@@ -39,12 +41,16 @@ class UpdateViewController: UIViewController {
         //Set the corner radius
         parent1Btn.layer.cornerRadius = parent1Btn.frame.width / 2
         parent2.layer.cornerRadius = parent2.frame.width / 2
+        
+        // Set up the button's action
+        calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
 
     }
     
+    
     func getCurrentUserData() {
-//        guard let savedUserName = UserDefaults.standard.string(forKey: "userName") else { return }
-        let savedUserName = "kaxavy"
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+//        let savedUserName = "kaxavy"
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
                 self.prenomTf.text = user.first_name
@@ -113,22 +119,102 @@ class UpdateViewController: UIViewController {
         updateBtn.layer.masksToBounds = true
     }
     
+    @objc func showDatePicker() {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
+        
+        // Configure the date picker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.frame = CGRect(x: 0, y: 0, width: 270, height: 216)
+        
+        // Add the date picker to the alert controller
+        alertController.view.addSubview(datePicker)
+        
+        // Add the "Done" button to dismiss the alert controller
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            // Update the text field with the selected date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            self.dateTextField.text = dateFormatter.string(from: datePicker.date)
+        }))
+        
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func radioButtonTapped(_ sender: DLRadioButton) {
         switch sender.tag {
         case 0:
-            print("parent 1")
-        case 1: // female
-            print("parent 2")
+            gender = "M"
+        case 1:
+            gender = "F"
         default:
             break
         }
     }
     
-    
     @IBAction func cancelBtnTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Children", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func updateBtnTapped(_ sender: Any) {
+        guard let userID = UserDefaults.standard.object(forKey: "userID") as? Int else { return }
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+        
+        guard let fName = prenomTf.text, !fName.isEmpty else {
+            let alertController = UIAlertController(title: "Failed", message: "Enter your first name please!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        guard let lName = nomTf.text, !lName.isEmpty else {
+            let alertController = UIAlertController(title: "Failed", message: "Enter your last name please!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        guard let email = emailTf.text, !lName.isEmpty else {
+            let alertController = UIAlertController(title: "Failed", message: "Enter your email please!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+//        guard let numero = numeroTf.text, !lName.isEmpty else {
+//            let alertController = UIAlertController(title: "Failed", message: "Enter your phone number please!", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//            return
+//        }
+        guard let date = dateTextField.text, !lName.isEmpty else {
+            let alertController = UIAlertController(title: "Failed", message: "Enter your birth date please!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        let updateData = [
+            "parent": userID,
+            "first_name": fName ,
+            "last_name": lName ,
+            "email": email ,
+//            "numero": numero ,
+            "birthday": date,
+            "gender": gender,
+        ] as [String : Any]
+        
+        APIManager.shareInstance.updateUserInfo(withuserName: savedUserName, updateData: updateData) { updatedUser in
+            print("updated user \(updatedUser)")
+        }
     }
     
 

@@ -249,7 +249,6 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
                 print("Error: Unavailable")
             }
         }
-        
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
         let remove = UIAlertAction(title: "Delete photo", style: UIAlertAction.Style.destructive) { _ in
             
@@ -322,7 +321,7 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
     }
     
     @IBAction func changePicTaped(_ sender: Any) {
-        print("Change profile pic")
+        print("Change profile picture")
         presentPicker()
     }
     

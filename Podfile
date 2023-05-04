@@ -8,6 +8,6 @@ target '4INSHIELD' do
   # Pods for 4INSHIELD
    pod 'FLAnimatedImage'
    pod 'SDWebImage', '~> 5.0'
-   pod 'DLRadioButton', '~> 1.4'  
+   pod 'DLRadioButton', '~> 1.4'
 
 end

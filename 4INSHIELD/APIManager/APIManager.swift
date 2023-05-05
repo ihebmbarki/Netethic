@@ -12,26 +12,41 @@ import UIKit
 enum APIErrors: Error {
     case custom(message: String)
 }
+enum CustomError: Error {
+    case missingKey(String)
+    case decodingError(Error)
+    case unknownError
+}
 typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
 class APIManager {
     static let shareInstance = APIManager()
     
-    func updateUserInfo(withuserName userName: String, updateData: [String:Any], completion: @escaping(User) -> Void) {
-        var user: User?
+    func updateUserInfo(withuserName userName: String, updateData: [String:Any], completion: @escaping(Result<User, Error>) -> Void) {
         let update_user_info = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(userName)/"
-        AF.request(update_user_info, method: .put, parameters: updateData).response
-        {
-            response in switch response.result {
-            case .success( _):
+        AF.request(update_user_info, method: .patch, parameters: updateData).response { response in
+            switch response.result {
+            case .success(let data):
                 do {
-                    user = try JSONDecoder().decode(User.self, from: response.data!)
-                    completion(user!)
-                    print("User informations has been successfully updated")
-                } catch let error as NSError {
-                    print("Failed to load: \(error)")
+                    let user = try JSONDecoder().decode(User.self, from: data!)
+                    completion(.success(user))
+                    print("User information has been successfully updated")
+                } catch let error as DecodingError {
+                    switch error {
+                    case .keyNotFound(let key, _):
+                        let errorMessage = "Missing key: \(key.stringValue)"
+                        completion(.failure(CustomError.missingKey(errorMessage)))
+                        print(errorMessage)
+                    default:
+                        completion(.failure(CustomError.decodingError(error)))
+                        print("Failed to decode user data: \(error)")
+                    }
+                } catch let error {
+                    completion(.failure(CustomError.decodingError(error)))
+                    print("Failed to decode user data: \(error)")
                 }
             case .failure(let error):
+                completion(.failure(error))
                 print("Error updating profile info: \(error.localizedDescription)")
             }
         }

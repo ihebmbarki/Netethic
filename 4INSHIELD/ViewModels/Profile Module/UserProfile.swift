@@ -109,6 +109,15 @@ class UserProfile: UIViewController, UIImagePickerControllerDelegate & UINavigat
                 }
                 
                 self.userNameTf.text = user.username.uppercased()
+                if (user.photo ?? "").isEmpty {
+                    if user.gender == "M" {
+                        self.userPhoto.image = UIImage(imageLiteralResourceName: "malePic")
+                    } else {
+                        self.userPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
+                    }
+                } else {
+                    self.userPhoto.loadImage(user.photo)
+                }
             }
         }
     }

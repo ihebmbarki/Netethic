@@ -8,9 +8,9 @@
 import UIKit
 import Foundation
 import DLRadioButton
+import PhoneNumberKit
 
-class UpdateViewController: UIViewController {
-
+class UpdateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
@@ -29,10 +29,12 @@ class UpdateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Utilities
         setUpDesign()
         getCurrentUserData()
+        
+        //Set up phone number delegate
+        numeroTf.delegate = self
         
         //Radio Buttons group property
         parent1Btn.otherButtons = [parent2]
@@ -44,9 +46,49 @@ class UpdateViewController: UIViewController {
         
         // Set up the button's action
         calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-
     }
     
+    let phoneNumberKit = PhoneNumberKit()
+    var formattedText: String?
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let fullText = (text as NSString).replacingCharacters(in: range, with: string)
+        do {
+            let phoneNumber = try phoneNumberKit.parse(fullText)
+            let countryCode = phoneNumberKit.mainCountry(forCode: phoneNumber.countryCode)?.uppercased() ?? ""
+            let flag = emojiFlag(for: countryCode)
+            formattedText = "\(flag) +\(phoneNumber.countryCode) \(phoneNumberKit.format(phoneNumber, toType: .national))"
+        } catch {
+            formattedText = fullText
+        }
+        textField.text = formattedText
+        return false
+    }
+
+    func verifyPhoneNumber() {
+        guard let text = numeroTf.text else { return }
+        do {
+            let phoneNumber = try phoneNumberKit.parse(text)
+            print("Country code: \(phoneNumber.countryCode)")
+            print("National number: \(phoneNumber.nationalNumber)")
+            // Now you can use the parsed phone number for verification
+        } catch {
+            print("Error parsing phone number: \(error.localizedDescription)")
+            // Handle the error here
+        }
+    }
+
+    func emojiFlag(for countryCode: String) -> String {
+        let base = UnicodeScalar("🇦").value - UnicodeScalar("A").value
+        var flagString = ""
+        for scalar in countryCode.unicodeScalars {
+            if let scalarValue = UnicodeScalar(base + scalar.value) {
+                flagString.append(Character(scalarValue))
+            }
+        }
+        return flagString
+    }
     
     func getCurrentUserData() {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
@@ -57,6 +99,12 @@ class UpdateViewController: UIViewController {
                 self.nomTf.text = user.last_name
                 self.emailTf.text = user.email
                 self.dateTextField.text = user.birthday
+                
+                if user.gender == "M" {
+                    self.parent1Btn.isSelected = true
+                } else if user.gender ==  "F" {
+                    self.parent2.isSelected = true
+                }
             }
         }
     }
@@ -173,14 +221,16 @@ class UpdateViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return
         }
-        guard let lName = nomTf.text, !lName.isEmpty else {
+        guard let lname = nomTf.text, !lname.isEmpty else {
             let alertController = UIAlertController(title: "Failed", message: "Enter your last name please!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
             return
         }
-        guard let email = emailTf.text, !lName.isEmpty else {
+//        print("Username: \(username)")
+        
+        guard let email = emailTf.text, !email.isEmpty else {
             let alertController = UIAlertController(title: "Failed", message: "Enter your email please!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
@@ -194,7 +244,7 @@ class UpdateViewController: UIViewController {
 //            present(alertController, animated: true, completion: nil)
 //            return
 //        }
-        guard let date = dateTextField.text, !lName.isEmpty else {
+        guard let date = dateTextField.text, !date.isEmpty else {
             let alertController = UIAlertController(title: "Failed", message: "Enter your birth date please!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
@@ -205,15 +255,22 @@ class UpdateViewController: UIViewController {
         let updateData = [
             "parent": userID,
             "first_name": fName ,
-            "last_name": lName ,
+            "last_name": lname ,
             "email": email ,
 //            "numero": numero ,
             "birthday": date,
             "gender": gender,
         ] as [String : Any]
         
-        APIManager.shareInstance.updateUserInfo(withuserName: savedUserName, updateData: updateData) { updatedUser in
-            print("updated user \(updatedUser)")
+        APIManager.shareInstance.updateUserInfo(withuserName: savedUserName, updateData: updateData) { result in
+            switch result {
+            case .success(let updatedUser):
+                print("Updated user: \(updatedUser)")
+                // Handle success case
+            case .failure(let error):
+                print("Error updating user info: \(error.localizedDescription)")
+                // Handle error case, e.g. display error alert to user
+            }
         }
     }
     

@@ -34,6 +34,7 @@
 		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
 		0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */; };
 		0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */; };
+		0476E7752A05675300BEA9EC /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0476E7742A05675300BEA9EC /* PhoneNumberKit */; };
 		0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739529CC922C00FD28DF /* ChildSocialMedia.swift */; };
 		0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739729CC927200FD28DF /* ChildProfileAdded.swift */; };
 		0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479739929CC929C00FD28DF /* ChildDevice.swift */; };
@@ -181,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0476E7752A05675300BEA9EC /* PhoneNumberKit in Frameworks */,
 				0435580329AE39B800D4F012 /* Alamofire in Frameworks */,
 				CE54D4D7B769AB2381A19619 /* Pods_4INSHIELD.framework in Frameworks */,
 			);
@@ -529,6 +531,7 @@
 			name = 4INSHIELD;
 			packageProductDependencies = (
 				0435580229AE39B800D4F012 /* Alamofire */,
+				0476E7742A05675300BEA9EC /* PhoneNumberKit */,
 			);
 			productName = 4INSHIELD;
 			productReference = 04850C4B29ACC3E3001A27FF /* 4INSHIELD_Development.app */;
@@ -561,6 +564,7 @@
 			mainGroup = 04850C4229ACC3E3001A27FF;
 			packageReferences = (
 				0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 04850C4C29ACC3E3001A27FF /* Products */;
 			projectDirPath = "";
@@ -1321,6 +1325,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1328,6 +1340,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		0476E7742A05675300BEA9EC /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

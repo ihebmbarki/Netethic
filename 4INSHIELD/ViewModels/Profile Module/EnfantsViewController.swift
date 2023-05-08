@@ -12,14 +12,130 @@ class EnfantsViewController: UIViewController {
     @IBOutlet weak var childrenTableView: UITableView!
     @IBOutlet weak var addChildBtn: UIButton!
     
+    var childrenArray = [Child]()
+    var selectedChild: Child?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configureTableView()
+        childrenTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.getCurrentUserChildren()
+            guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
+                  let userID = Int(userIDString) else {
+                print("User ID not found")
+                return
+            }
+            let date = Date()
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let dateString = df.string(from: date)
+        }
+    }
+    
+    func getCurrentUserChildren() {
+        guard let username = UserDefaults.standard.string(forKey: "username") else { return }
+        APIManager.shareInstance.fetchCurrentUserChildren(username: username) { children in
+            self.childrenArray = children
+            self.childrenTableView.reloadData()
+            self.verifyChildList(childrenList: children)
+        }
+    }
+    func verifyChildList(childrenList: [Child]) {
+        if childrenList.count > 0 {
+            // Children list is not empty, do nothing.
+        } else {
+            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    //register tableView Cell
+    func configureTableView(){
+        childrenTableView.delegate = self
+        childrenTableView.dataSource = self
+        childrenTableView.register(UINib.init(nibName: "childCell", bundle: nil), forCellReuseIdentifier: "UserChildCell")
+        childrenTableView.separatorStyle = .none
+    }
 
     @IBAction func addChildBtnClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "childInfos")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+        
     }
     
 }
+
+extension EnfantsViewController:  UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return childrenArray.count
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.rowHeight = UITableView.automaticDimension
+        return 100.0
+
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserChildCell", for: indexPath) as! ChildTvCell
+//        // Add border and rounded corners
+//        cell.contentView.layer.cornerRadius = 10
+//        cell.contentView.layer.borderWidth = 1
+//        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+//        cell.backgroundColor = UIColor.clear
+//        cell.contentView.backgroundColor = UIColor.clear
+//        // Ensure that the cell's corners don't get clipped
+//        cell.contentView.clipsToBounds = true
+        
+        let child = childrenArray[indexPath.row]
+        
+        DispatchQueue.main.async {
+            if let photo = child.photo, !photo.isEmpty {
+                var photoUrl = photo
+                if let range = photo.range(of: "http") {
+                    photoUrl.insert("s", at: range.upperBound)
+                }
+                cell.childPhoto.loadImage(photoUrl)
+            } else {
+                if child.gender == "M" {
+                    cell.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
+                } else {
+                    cell.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
+                }
+            }
+            cell.nameLbl.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
+            //Calculate age from birthday
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd" // or whatever format your date string is in
+            if let birthdayDate = dateFormatter.date(from: child.birthday) {
+                let age = self.age(from: birthdayDate)
+                cell.ageLbl.text = "\(age) ans"
+            }
+        }
+        return cell
+    }
+    
+    func age(from birthday: Date) -> Int {
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: Date())
+        let age = ageComponents.year ?? 0
+        return age
+    }
+
+}
+

@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Children View Controller-->
         <scene sceneID="he0-cD-Q6O">
@@ -31,9 +36,17 @@
                                                 <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="nSG-84-xB5"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liste des enfants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-e0-BOn">
+                                            <rect key="frame" x="117" y="14" width="153" height="26"/>
+                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                            <color key="textColor" red="0.25490196079999999" green="0.3803921569" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="65.333333333333314" id="4UZ-e8-h1k"/>
+                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="14" id="5fx-W5-tqb"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="10" id="QbR-EB-3ny"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
                                     </constraints>
@@ -56,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7O-g4-BcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1198" y="-92"/>
+            <point key="canvasLocation" x="1197.709923664122" y="-92.253521126760575"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ng-yE-6V8">

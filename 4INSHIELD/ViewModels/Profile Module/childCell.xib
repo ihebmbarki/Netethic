@@ -80,6 +80,7 @@
             <connections>
                 <outlet property="ageLbl" destination="bfg-6u-L6Y" id="AXf-FU-g5B"/>
                 <outlet property="childPhoto" destination="3YO-li-KEe" id="6m7-5i-cbo"/>
+                <outlet property="childView" destination="8I0-H2-VjI" id="M6b-Ly-OiD"/>
                 <outlet property="nameLbl" destination="1Z5-Cg-bY1" id="G3d-VH-DZm"/>
             </connections>
             <point key="canvasLocation" x="194.6564885496183" y="22.535211267605636"/>

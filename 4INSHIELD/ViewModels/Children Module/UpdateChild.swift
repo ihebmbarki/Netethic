@@ -143,10 +143,7 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
     
     func SetUpDesign() {
         //Set up photo
-//        childPhoto.layer.cornerRadius = childPhoto.frame.size.width / 2
-//        childPhoto.clipsToBounds = true
-        let minDimension = min(childPhoto.frame.size.width, childPhoto.frame.size.height)
-        childPhoto.layer.cornerRadius = minDimension / 2
+        childPhoto.layer.cornerRadius = min(childPhoto.frame.width, childPhoto.frame.height) / 2
         childPhoto.clipsToBounds = true
         
         //Add Padding to Textfields
@@ -267,6 +264,10 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func backBtnTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func radioButtonTapped(_ sender: DLRadioButton) {
         switch sender.tag {
         case 0: // male
@@ -323,11 +324,6 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
     @IBAction func changePicTaped(_ sender: Any) {
         print("Change profile picture")
         presentPicker()
-    }
-    
-    
-    @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
     }
     
     

@@ -87,6 +87,7 @@ class ChildrenViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "ChildTableViewCell", bundle: nil), forCellReuseIdentifier: "ChildCell")
+        tableView.separatorStyle = .none
     }
     
     

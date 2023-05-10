@@ -92,10 +92,9 @@ class ChildrenViewController: UIViewController {
     
     
     @IBAction func infoBtnTapped(_ sender: Any) {
-//        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
-//        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//        present(alertController, animated: true, completion: nil)
-        self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
+        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -133,9 +132,20 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedChild = childrenArray[indexPath.row]
-        print(selectedChild.id)
+        UserDefaults.standard.set(selectedChild.id, forKey: "childID")
+        
+        // Go to dashboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        if let homeNav = vc.viewControllers?.first as? UINavigationController,
+            let homeVC = homeNav.viewControllers.first as? homeVC {
+            homeVC.selectedChild = selectedChild
+        }
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
-    
+
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Foundation
+
 
 class homeVC: UIViewController {
     
-    
+    var selectedChild: Child?
+
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
     private let paddingForRotation: CGFloat = 150
@@ -24,11 +27,31 @@ class homeVC: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
-    
-    
+    @IBOutlet weak var childPhoto: UIImageView!
+    @IBOutlet weak var childCardView: CustomCardView!
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set up child profile pic
+        loadChildInfo()
+        childPhoto.layer.cornerRadius = childPhoto.frame.width / 2
+        childPhoto.layer.masksToBounds = true
+        
+        // Set initial transform to move childCardView offscreen
+        childCardView.transform = CGAffineTransform(translationX: 0, y: childCardView.bounds.height)
+        
+        //Child photo tap gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(childPhotoTapped))
+        childPhoto.addGestureRecognizer(tapGesture)
+        childPhoto.isUserInteractionEnabled = true
+        
+        //Dismiss card view
+        let DismisstapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissCardView))
+        childCardView.addGestureRecognizer(DismisstapGesture)
+        childCardView.isUserInteractionEnabled = true
+
         
         // Side Menu Gestures
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
@@ -69,10 +92,30 @@ class homeVC: UIViewController {
             self.SideBar.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
         ])
-        // Default Main View Controller
-//        showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
-        
     }
+    
+    @objc func childPhotoTapped() {
+        guard let selectedChild = selectedChild else { return }
+        
+        // Update the card view with child info
+        childCardView.childNameLabel.text = "\(selectedChild.first_name) \(selectedChild.last_name)"
+//        childCardView.childAgeLabel.text = "\(selectedChild.age)"
+//        childCardView.childAddressLabel.text = "\(selectedChild.address)"
+        
+        // Animate the card view to appear at the bottom of the screen
+        UIView.animate(withDuration: 0.3) {
+            self.childCardView.transform = CGAffineTransform(translationX: 0, y: -self.childCardView.bounds.height)
+        }
+    }
+
+    @objc func dismissCardView() {
+        // Animate the card view to disappear from the bottom of the screen
+        UIView.animate(withDuration: 0.3) {
+            self.childCardView.transform = .identity
+        }
+    }
+
+
     
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -84,22 +127,38 @@ class homeVC: UIViewController {
         }
     }
     
-    
-    
-    
     @IBAction func revealSideMenu(_ sender: Any) {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
     
+    func loadChildInfo() {
+        guard let selectedChild = selectedChild else { return }
+        if (selectedChild.photo ?? "").isEmpty {
+            if selectedChild.gender == "M" {
+                childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
+            } else {
+                childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
+            }
+        } else {
+            self.childPhoto.loadImage(selectedChild.photo)
+        }
+    }
     
+    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
 }
 
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
-            // Paramètres
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "ParamètresID")
+            // Profile
+            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
 //        case 1:
 //            // Autorisation d’accés
 //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")

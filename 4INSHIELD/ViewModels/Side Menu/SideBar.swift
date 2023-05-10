@@ -19,7 +19,7 @@ class SideBar: UIViewController {
     var delegate: SideBarDelegate?
     var defaultHighlightedCell: Int = 0
     
-    var menu = ["Paramètres","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
+    var menu = ["Modifier mon profil","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
     
     
     override func viewDidLoad() {

@@ -92,15 +92,20 @@ class SocialMedia: UIViewController {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
     
-    
+    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 extension SocialMedia : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
-            // Paramètres
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "ParamètresID")
+            // Profile
+            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
 //        case 1:
 //            // Autorisation d’accés
 //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")

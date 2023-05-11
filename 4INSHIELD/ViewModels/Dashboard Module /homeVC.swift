@@ -12,6 +12,7 @@ import Foundation
 class homeVC: UIViewController {
     
     var selectedChild: Child?
+    var ChildInfoViewController: ChildInfoViewController?
 
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -27,30 +28,52 @@ class homeVC: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
-    @IBOutlet weak var childPhoto: UIImageView!
-    @IBOutlet weak var childCardView: CustomCardView!
- 
+    @IBOutlet weak var childInfoContainerView: UIView!
+    @IBOutlet weak var childButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Set up child profile pic
+        // Instantiate child view controllers from storyboard
+        ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
+        
+//        Set up child profile pic
         loadChildInfo()
-        childPhoto.layer.cornerRadius = childPhoto.frame.width / 2
-        childPhoto.layer.masksToBounds = true
+
+        // Add target action to child button
+        childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
         
-        // Set initial transform to move childCardView offscreen
-        childCardView.transform = CGAffineTransform(translationX: 0, y: childCardView.bounds.height)
-        
-        //Child photo tap gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(childPhotoTapped))
-        childPhoto.addGestureRecognizer(tapGesture)
-        childPhoto.isUserInteractionEnabled = true
-        
-        //Dismiss card view
-        let DismisstapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissCardView))
-        childCardView.addGestureRecognizer(DismisstapGesture)
-        childCardView.isUserInteractionEnabled = true
+        // Set initial child button image
+        if let selectedChild = selectedChild {
+            if (selectedChild.photo ?? "").isEmpty {
+                if selectedChild.gender == "M" {
+                    childButton.setBackgroundImage(UIImage(imageLiteralResourceName: "malePic"), for: .normal)
+                } else {
+                    childButton.setBackgroundImage(UIImage(imageLiteralResourceName: "femalePic"), for: .normal)
+                }
+            } else {
+                if let photoUrl = addSecureScheme(to: selectedChild.photo!) {
+                    if let url = URL(string: photoUrl) {
+                        URLSession.shared.dataTask(with: url) { (data, response, error) in
+                            if let data = data {
+                                DispatchQueue.main.async {
+                                    self.childButton.setBackgroundImage(UIImage(data: data), for: .normal)
+                                }
+                            }
+                        }.resume()
+                    }
+                }
+                // Set the content mode of the imageView to aspectFit
+                childButton.imageView?.contentMode = .scaleAspectFit
+                // Set the corner radius of the imageView to half its width
+                childButton.imageView?.layer.cornerRadius = childButton.frame.width / 2
+                childButton.imageView?.clipsToBounds = true
+            }
+        }
+//        //Dismiss card view
+//        let DismisstapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissCardView))
+//        childCardView.addGestureRecognizer(DismisstapGesture)
+//        childCardView.isUserInteractionEnabled = true
 
         
         // Side Menu Gestures
@@ -93,30 +116,24 @@ class homeVC: UIViewController {
             self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
+    func addSecureScheme(to urlString: String) -> String? {
+        guard let range = urlString.range(of: "http") else {
+            return nil
+        }
+        var secureUrlString = urlString
+        secureUrlString.insert("s", at: range.upperBound)
+        return secureUrlString
+    }
     
-    @objc func childPhotoTapped() {
+    @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
-        
-        // Update the card view with child info
-        childCardView.childNameLabel.text = "\(selectedChild.first_name) \(selectedChild.last_name)"
-//        childCardView.childAgeLabel.text = "\(selectedChild.age)"
-//        childCardView.childAddressLabel.text = "\(selectedChild.address)"
-        
-        // Animate the card view to appear at the bottom of the screen
-        UIView.animate(withDuration: 0.3) {
-            self.childCardView.transform = CGAffineTransform(translationX: 0, y: -self.childCardView.bounds.height)
-        }
+        // Add enfantsViewController as child view controller
+        addChild(ChildInfoViewController!)
+        ChildInfoViewController?.view.frame = childInfoContainerView.bounds
+        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController?.didMove(toParent: self)
     }
 
-    @objc func dismissCardView() {
-        // Animate the card view to disappear from the bottom of the screen
-        UIView.animate(withDuration: 0.3) {
-            self.childCardView.transform = .identity
-        }
-    }
-
-
-    
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -135,14 +152,28 @@ class homeVC: UIViewController {
         guard let selectedChild = selectedChild else { return }
         if (selectedChild.photo ?? "").isEmpty {
             if selectedChild.gender == "M" {
-                childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
+                childButton.setImage(UIImage(imageLiteralResourceName: "malePic"), for: .normal)
             } else {
-                childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
+                childButton.setImage(UIImage(imageLiteralResourceName: "femalePic"), for: .normal)
             }
         } else {
-            self.childPhoto.loadImage(selectedChild.photo)
+            if let url = URL(string: selectedChild.photo!) {
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            self.childButton.setImage(UIImage(data: data), for: .normal)
+                        }
+                    }
+                }.resume()
+            }
         }
+        // Set the content mode of the imageView to aspectFit
+        childButton.imageView?.contentMode = .scaleAspectFit
+        // Set the corner radius of the imageView to half its width
+        childButton.imageView?.layer.cornerRadius = childButton.frame.width / 2
+        childButton.imageView?.clipsToBounds = true
     }
+
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)

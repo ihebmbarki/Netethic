@@ -61,9 +61,9 @@
 		04A52E0D29C206A00097C145 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0C29C206A00097C145 /* SideBar.swift */; };
 		04A52E0F29C207A70097C145 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0E29C207A70097C145 /* homeVC.swift */; };
 		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
+		04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
 		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
-		04BB18412A0B16BC00A8EEA8 /* CustomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BB18402A0B16BC00A8EEA8 /* CustomCardView.swift */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
 		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
 		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
@@ -159,9 +159,9 @@
 		04A52E0C29C206A00097C145 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		04A52E0E29C207A70097C145 /* homeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
+		04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildInfoViewController.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
-		04BB18402A0B16BC00A8EEA8 /* CustomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCardView.swift; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 				04340B2329C09BDF0055B394 /* Phone.swift */,
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
-				04BB18402A0B16BC00A8EEA8 /* CustomCardView.swift */,
+				04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */,
 			);
 			path = "Dashboard Module ";
 			sourceTree = "<group>";
@@ -682,6 +682,7 @@
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
+				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
@@ -715,7 +716,6 @@
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
 				04844B5529E03D9F008AFBF6 /* User.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
-				04BB18412A0B16BC00A8EEA8 /* CustomCardView.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				043C49F729E439FF00B5FF9E /* PinView.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,

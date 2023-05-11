@@ -16,6 +16,7 @@ struct Child: Codable,Identifiable {
     let gender: String
     let meta: String?
     let photo: String?
+    let address: String?
     let created_at: String
     let modified_at: String
     let url: String

@@ -43,3 +43,7 @@
 "new_password" = "Entrez un nouveau mot de passe";
 "new_password1" = "Votre nouveau mot de passe doit être différent des mots de passe précédents";
 "Reset passs" = "Réinitialiser le mot de passe";
+
+//MARK: Children list
+"list_child_item" = "Liste des enfants";
+"alert_message" = "Balayez vers la gauche pour gérer (supprimer ou mettre à jour) votre liste d'enfants";

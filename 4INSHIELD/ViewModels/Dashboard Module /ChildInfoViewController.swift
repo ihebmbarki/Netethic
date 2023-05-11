@@ -26,14 +26,28 @@ class ChildInfoViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         loadChildInfos()
-       }
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Make childPhoto circular
+        self.childPhoto.layer.cornerRadius = self.childPhoto.frame.width / 2
+        self.childPhoto.layer.masksToBounds = true
+        self.childPhoto.contentMode = .scaleAspectFill
+        self.childPhoto.clipsToBounds = true
+    }
 
+    @IBAction func returnBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
     @IBAction func exitButtonTapped(_ sender: UIButton) {
-        removeCurrentChildViewController()
-        print("back")
+        //removeCurrentChildViewController()
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
     }
     
     func age(from birthday: Date) -> Int {
@@ -71,13 +85,5 @@ class ChildInfoViewController: UIViewController {
             }
         }
     }
-
-    func removeCurrentChildViewController() {
-        // Remove current child view controller
-        if ChildInfoViewController != nil && ChildInfoViewController!.view.superview != nil {
-            ChildInfoViewController!.willMove(toParent: nil)
-            ChildInfoViewController!.view.removeFromSuperview()
-            ChildInfoViewController!.removeFromParent()
-        }
-    }
+    
 }

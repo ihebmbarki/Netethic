@@ -44,3 +44,7 @@
 "new_password1" = "Your new password must be different from previous passwords";
 "Reset passs" = "Reset Password";
 
+//MARK: Children list
+"list_child_item" = "Children’s List";
+"alert_message" = "Swipe left to manage (Delete or update) your children list";
+

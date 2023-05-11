@@ -14,6 +14,7 @@ class homeVC: UIViewController {
     var selectedChild: Child?
     var ChildInfoViewController: ChildInfoViewController?
 
+    @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
     private let paddingForRotation: CGFloat = 150
@@ -33,48 +34,49 @@ class homeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        //Set up TopView
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = topView.bounds
+        gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor, UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
+        topView.layer.insertSublayer(gradientLayer, at: 0)
+
         // Instantiate child view controllers from storyboard
         ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
         
 //        Set up child profile pic
         loadChildInfo()
+        guard let selectedChild = selectedChild else { return }
+        // Load child photo
+           if let photo = selectedChild.photo, !photo.isEmpty {
+               var photoUrl = photo
+               if let range = photoUrl.range(of: "http://") {
+                   photoUrl.replaceSubrange(range, with: "https://")
+               }
+               if let url = URL(string: photoUrl) {
+                   URLSession.shared.dataTask(with: url) { (data, response, error) in
+                       if let data = data {
+                           DispatchQueue.main.async {
+                               let imageView = UIImageView(image: UIImage(data: data))
+                               imageView.contentMode = .scaleAspectFill
+                               imageView.translatesAutoresizingMaskIntoConstraints = false
+                               imageView.layer.cornerRadius = 18 // half of 36
+                               imageView.clipsToBounds = true
+                               self.childButton.addSubview(imageView)
+                               NSLayoutConstraint.activate([
+                                   imageView.widthAnchor.constraint(equalToConstant: 36),
+                                   imageView.heightAnchor.constraint(equalToConstant: 36),
+                                   imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                                   imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                               ])
+                           }
+                       }
+                   }.resume()
+               }
+           }
 
         // Add target action to child button
         childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
-        
-        // Set initial child button image
-        if let selectedChild = selectedChild {
-            if (selectedChild.photo ?? "").isEmpty {
-                if selectedChild.gender == "M" {
-                    childButton.setBackgroundImage(UIImage(imageLiteralResourceName: "malePic"), for: .normal)
-                } else {
-                    childButton.setBackgroundImage(UIImage(imageLiteralResourceName: "femalePic"), for: .normal)
-                }
-            } else {
-                if let photoUrl = addSecureScheme(to: selectedChild.photo!) {
-                    if let url = URL(string: photoUrl) {
-                        URLSession.shared.dataTask(with: url) { (data, response, error) in
-                            if let data = data {
-                                DispatchQueue.main.async {
-                                    self.childButton.setBackgroundImage(UIImage(data: data), for: .normal)
-                                }
-                            }
-                        }.resume()
-                    }
-                }
-                // Set the content mode of the imageView to aspectFit
-                childButton.imageView?.contentMode = .scaleAspectFit
-                // Set the corner radius of the imageView to half its width
-                childButton.imageView?.layer.cornerRadius = childButton.frame.width / 2
-                childButton.imageView?.clipsToBounds = true
-            }
-        }
-//        //Dismiss card view
-//        let DismisstapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissCardView))
-//        childCardView.addGestureRecognizer(DismisstapGesture)
-//        childCardView.isUserInteractionEnabled = true
-
         
         // Side Menu Gestures
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
@@ -116,14 +118,6 @@ class homeVC: UIViewController {
             self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
-    func addSecureScheme(to urlString: String) -> String? {
-        guard let range = urlString.range(of: "http") else {
-            return nil
-        }
-        var secureUrlString = urlString
-        secureUrlString.insert("s", at: range.upperBound)
-        return secureUrlString
-    }
     
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
@@ -151,28 +145,59 @@ class homeVC: UIViewController {
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
         if (selectedChild.photo ?? "").isEmpty {
-            if selectedChild.gender == "M" {
-                childButton.setImage(UIImage(imageLiteralResourceName: "malePic"), for: .normal)
-            } else {
-                childButton.setImage(UIImage(imageLiteralResourceName: "femalePic"), for: .normal)
+            childButton.imageView?.image = nil
+            DispatchQueue.main.async {
+                let imageView = UIImageView(image: UIImage(named: selectedChild.gender == "M" ? "malePic" : "femalePic"))
+                imageView.contentMode = .scaleAspectFill
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                self.childButton.addSubview(imageView)
+                NSLayoutConstraint.activate([
+                    imageView.widthAnchor.constraint(equalToConstant: 36),
+                    imageView.heightAnchor.constraint(equalToConstant: 36),
+                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                ])
             }
         } else {
-            if let url = URL(string: selectedChild.photo!) {
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    if let data = data {
-                        DispatchQueue.main.async {
-                            self.childButton.setImage(UIImage(data: data), for: .normal)
+            if let photo = selectedChild.photo, !photo.isEmpty {
+                var photoUrl = photo
+                if let range = photoUrl.range(of: "http://") {
+                    photoUrl.replaceSubrange(range, with: "https://")
+                }
+                if let url = URL(string: photoUrl) {
+                    URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        if let data = data {
+                            DispatchQueue.main.async {
+                                let imageView = UIImageView(image: UIImage(data: data))
+                                imageView.contentMode = .scaleAspectFill
+                                imageView.translatesAutoresizingMaskIntoConstraints = false
+                                imageView.layer.cornerRadius = 18 // half of 36
+                                imageView.clipsToBounds = true
+                                self.childButton.addSubview(imageView)
+                                NSLayoutConstraint.activate([
+                                    imageView.widthAnchor.constraint(equalToConstant: 36),
+                                    imageView.heightAnchor.constraint(equalToConstant: 36),
+                                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                                ])
+                            }
                         }
-                    }
-                }.resume()
+                    }.resume()
+                }
             }
         }
-        // Set the content mode of the imageView to aspectFit
-        childButton.imageView?.contentMode = .scaleAspectFit
-        // Set the corner radius of the imageView to half its width
-        childButton.imageView?.layer.cornerRadius = childButton.frame.width / 2
-        childButton.imageView?.clipsToBounds = true
     }
+
+//    func addSecureScheme(to urlString: String) -> String? {
+//        if let range = urlString.range(of: "http://") {
+//            var url = urlString
+//            url.insert("s", at: range.upperBound)
+//            return url
+//        } else {
+//            return urlString
+//        }
+//    }
+
 
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {

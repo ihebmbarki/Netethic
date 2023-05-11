@@ -29,7 +29,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
-                                            <rect key="frame" x="335.33333333333331" y="10" width="49.666666666666686" height="35"/>
+                                            <rect key="frame" x="335.33333333333331" y="10" width="49.666666666666686" height="34"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
                                             <connections>
@@ -37,18 +37,31 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liste des enfants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-e0-BOn">
-                                            <rect key="frame" x="117" y="14" width="153" height="26"/>
+                                            <rect key="frame" x="117" y="13.999999999999998" width="153" height="25.333333333333329"/>
                                             <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
                                             <color key="textColor" red="0.25490196079999999" green="0.3803921569" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgy-TX-UdW">
+                                            <rect key="frame" x="304" y="18" width="23" height="18"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
+                                            <connections>
+                                                <action selector="changeLanguageBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="i1B-rd-PF8"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="65.333333333333314" id="4UZ-e8-h1k"/>
                                         <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="14" id="5fx-W5-tqb"/>
+                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="leading" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="34" id="Im5-Kt-L0m"/>
+                                        <constraint firstAttribute="bottom" secondItem="tgy-TX-UdW" secondAttribute="bottom" constant="52" id="K3b-LE-Ckh"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="10" id="QbR-EB-3ny"/>
+                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="18" id="b2V-8D-Zke"/>
+                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="centerY" secondItem="EUu-H1-f8n" secondAttribute="centerY" id="hqv-uy-pGB"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="tgy-TX-UdW" secondAttribute="trailing" constant="8.3333333333332575" id="ouK-QS-SYN"/>
                                     </constraints>
                                 </view>
                             </tableView>
@@ -64,6 +77,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="qYp-4c-c4m"/>
                     <connections>
+                        <outlet property="changeLanguageBtn" destination="tgy-TX-UdW" id="kDc-LN-DyI"/>
+                        <outlet property="listLabel" destination="0Gv-e0-BOn" id="6Rc-bD-I9G"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
                     </connections>
                 </viewController>

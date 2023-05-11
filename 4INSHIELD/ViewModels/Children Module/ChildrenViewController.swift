@@ -12,7 +12,9 @@ class ChildrenViewController: UIViewController {
     @IBOutlet weak var exitBtnLbl: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backBtn: UIBarButtonItem!
-    
+    @IBOutlet weak var listLabel: UILabel!
+    @IBOutlet weak var changeLanguageBtn: UIButton!
+
     var childrenArray = [Child]()
     var selectedChild: Child?
     
@@ -23,6 +25,49 @@ class ChildrenViewController: UIViewController {
         // Do any additional setup after loading the view.
 //        getCurrentUserChildren()
         configureTableView()
+    }
+    //MARK: Translation
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                }
+                
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        listLabel.text = NSLocalizedString("list_child_item", tableName: nil, bundle: bundle, value: "", comment: "children's list")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,10 +137,13 @@ class ChildrenViewController: UIViewController {
     
     
     @IBAction func infoBtnTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "4INSHIELD", message: "Swipe left to manage (Delete or update) your children list", preferredStyle: .alert)
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        let message = NSLocalizedString("alert_message", tableName: nil, bundle: bundle, value: "", comment: "Alert message")
+        let alertController = UIAlertController(title: "4INSHIELD", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+
 }
 
 extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {

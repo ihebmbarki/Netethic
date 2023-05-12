@@ -9,5 +9,6 @@ target '4INSHIELD' do
    pod 'FLAnimatedImage'
    pod 'SDWebImage', '~> 5.0'
    pod 'DLRadioButton', '~> 1.4'
+   pod 'FSCalendar'
 
 end

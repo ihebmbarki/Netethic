@@ -7,12 +7,15 @@
 
 import UIKit
 import Foundation
+import FSCalendar
 
 
-class homeVC: UIViewController {
+class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     var selectedChild: Child?
     var ChildInfoViewController: ChildInfoViewController?
+//    var selectedStartDate: Date?
+//    var selectedEndDate: Date?
 
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
@@ -29,51 +32,71 @@ class homeVC: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
+    @IBOutlet weak var BonjourLbl: UILabel!
     @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var childButton: UIButton!
     
+    @IBOutlet weak var dateTF: UITextField!
+    @IBOutlet weak var calendarBtn: UIButton!
+    @IBOutlet weak var calendarView: FSCalendar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //Set up TopView
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = topView.bounds
         gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor, UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
         topView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        //Set up date textfield
+        let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
+        dateTF.layer.borderWidth = 1
+        dateTF.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        dateTF.layer.cornerRadius = dateTF.frame.size.height/2
+        dateTF.layer.masksToBounds = true
+        dateTF.leftView = datePaddingView
+        dateTF.leftViewMode = .always
+        
+        // Set up the button's action
+        calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
 
         // Instantiate child view controllers from storyboard
         ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
         
-//        Set up child profile pic
+        //Set up user name
+        getCurrentUserData()
+        //Set up child profile pic
         loadChildInfo()
         guard let selectedChild = selectedChild else { return }
         // Load child photo
-           if let photo = selectedChild.photo, !photo.isEmpty {
-               var photoUrl = photo
-               if let range = photoUrl.range(of: "http://") {
-                   photoUrl.replaceSubrange(range, with: "https://")
-               }
-               if let url = URL(string: photoUrl) {
-                   URLSession.shared.dataTask(with: url) { (data, response, error) in
-                       if let data = data {
-                           DispatchQueue.main.async {
-                               let imageView = UIImageView(image: UIImage(data: data))
-                               imageView.contentMode = .scaleAspectFill
-                               imageView.translatesAutoresizingMaskIntoConstraints = false
-                               imageView.layer.cornerRadius = 18 // half of 36
-                               imageView.clipsToBounds = true
-                               self.childButton.addSubview(imageView)
-                               NSLayoutConstraint.activate([
-                                   imageView.widthAnchor.constraint(equalToConstant: 36),
-                                   imageView.heightAnchor.constraint(equalToConstant: 36),
-                                   imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                                   imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                               ])
-                           }
-                       }
-                   }.resume()
-               }
-           }
+        if let photo = selectedChild.photo, !photo.isEmpty {
+            var photoUrl = photo
+            if let range = photoUrl.range(of: "http://") {
+                photoUrl.replaceSubrange(range, with: "https://")
+            }
+            if let url = URL(string: photoUrl) {
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            let imageView = UIImageView(image: UIImage(data: data))
+                            imageView.contentMode = .scaleAspectFill
+                            imageView.translatesAutoresizingMaskIntoConstraints = false
+                            imageView.layer.cornerRadius = 18 // half of 36
+                            imageView.clipsToBounds = true
+                            self.childButton.addSubview(imageView)
+                            NSLayoutConstraint.activate([
+                                imageView.widthAnchor.constraint(equalToConstant: 36),
+                                imageView.heightAnchor.constraint(equalToConstant: 36),
+                                imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                                imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                            ])
+                        }
+                    }
+                }.resume()
+            }
+        }
 
         // Add target action to child button
         childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
@@ -142,6 +165,95 @@ class homeVC: UIViewController {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
     
+    func getCurrentUserData() {
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                self.BonjourLbl.text = "Bonjour \(user.username) !"
+            }
+        }
+    }
+    
+    @objc func showDatePicker() {
+        if let calendar = calendarView.subviews.first(where: { $0 is FSCalendar }) {
+            // Calendar is already displayed, so remove it and hide the calendar view
+            calendar.removeFromSuperview()
+            calendarView.isHidden = true
+        } else {
+            // Show the calendar view and create and configure the calendar
+            calendarView.isHidden = false
+
+            let calendar = FSCalendar(frame: calendarView.bounds)
+            calendar.dataSource = self
+            calendar.delegate = self
+            calendar.allowsMultipleSelection = true;
+
+            // Add the calendar to the calendarView
+            calendarView.addSubview(calendar)
+        }
+    }
+
+    // FSCalendarDelegate method for handling date selection
+    private func calendar(_ calendar: FSCalendar, didSelect dates: [Date], at monthPosition: FSCalendarMonthPosition) {
+        guard dates.count > 1 else {
+            return
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let startDateString = dateFormatter.string(from: dates[0])
+        let endDateString = dateFormatter.string(from: dates[1])
+        dateTF.text = "Du \(startDateString) Au \(endDateString)"
+
+        // Remove the calendar from its superview and hide the calendar view
+        calendar.removeFromSuperview()
+        calendarView.isHidden = true
+    }
+
+    
+//    @objc func showDatePicker() {
+//        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+//
+//        let startDatePicker = UIDatePicker()
+//        startDatePicker.datePickerMode = .date
+//        startDatePicker.preferredDatePickerStyle = .compact
+//
+//        let endDatePicker = UIDatePicker()
+//        endDatePicker.datePickerMode = .date
+//        endDatePicker.preferredDatePickerStyle = .compact
+//
+//        alertController.view.addSubview(startDatePicker)
+//        alertController.view.addSubview(endDatePicker)
+//
+//        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+//        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+//
+//        let constraints = [
+//            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 30),
+//            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 8),
+//            startDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -8),
+//
+//            endDatePicker.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
+//            endDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 8),
+//            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -8),
+//            endDatePicker.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
+//        ]
+//
+//        NSLayoutConstraint.activate(constraints)
+//
+//        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd-MM-yyyy"
+//
+//            let startDateString = dateFormatter.string(from: startDatePicker.date)
+//            let endDateString = dateFormatter.string(from: endDatePicker.date)
+//
+//            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
+//        }))
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
+    
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
         if (selectedChild.photo ?? "").isEmpty {
@@ -187,18 +299,6 @@ class homeVC: UIViewController {
             }
         }
     }
-
-//    func addSecureScheme(to urlString: String) -> String? {
-//        if let range = urlString.range(of: "http://") {
-//            var url = urlString
-//            url.insert("s", at: range.upperBound)
-//            return url
-//        } else {
-//            return urlString
-//        }
-//    }
-
-
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
@@ -206,7 +306,6 @@ class homeVC: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
-
 }
 
 extension homeVC : SideBarDelegate {
@@ -428,3 +527,32 @@ extension homeVC: UIGestureRecognizerDelegate {
         }
     }
 }
+
+//extension homeVC: CalendarViewControllerDelegate {
+//    func didSelectDateRange(startDate: Date, endDate: Date) {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy"
+//
+//        let startDateString = dateFormatter.string(from: startDate)
+//        let endDateString = dateFormatter.string(from: endDate)
+//
+//        self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
+//    }
+//}
+
+//extension homeVC: FSCalendarDelegate {
+//    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+//        if calendar.selectedDates.count > 1 {
+//            let startDate = calendar.selectedDates.sorted().first!
+//            let endDate = calendar.selectedDates.sorted().last!
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd-MM-yyyy"
+//
+//            let startDateString = dateFormatter.string(from: startDate)
+//            let endDateString = dateFormatter.string(from: endDate)
+//
+//            dateTF.text = "Du \(startDateString) Au \(endDateString)"
+//        }
+//    }
+//}

@@ -39,10 +39,18 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var calendarView: FSCalendar!
+    @IBOutlet weak var cardsCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Register custom collection view cell class
+        cardsCollectionView.delegate = self
+        cardsCollectionView.dataSource = self
+        let nib = UINib(nibName: "CardCell", bundle: nil)
+        cardsCollectionView.register(nib, forCellWithReuseIdentifier: "CardCell")
         
         //Set up TopView
         let gradientLayer = CAGradientLayer()
@@ -51,13 +59,13 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         topView.layer.insertSublayer(gradientLayer, at: 0)
         
         //Set up date textfield
-        let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
-        dateTF.layer.borderWidth = 1
-        dateTF.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
-        dateTF.layer.cornerRadius = dateTF.frame.size.height/2
-        dateTF.layer.masksToBounds = true
-        dateTF.leftView = datePaddingView
-        dateTF.leftViewMode = .always
+//        let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
+//        dateTF.layer.borderWidth = 1
+//        dateTF.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+//        dateTF.layer.cornerRadius = dateTF.frame.size.height/2
+//        dateTF.layer.masksToBounds = true
+//        dateTF.leftView = datePaddingView
+//        dateTF.leftViewMode = .always
         
         // Set up the button's action
         calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
@@ -174,85 +182,99 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         }
     }
     
-    @objc func showDatePicker() {
-        if let calendar = calendarView.subviews.first(where: { $0 is FSCalendar }) {
-            // Calendar is already displayed, so remove it and hide the calendar view
-            calendar.removeFromSuperview()
-            calendarView.isHidden = true
-        } else {
-            // Show the calendar view and create and configure the calendar
-            calendarView.isHidden = false
-
-            let calendar = FSCalendar(frame: calendarView.bounds)
-            calendar.dataSource = self
-            calendar.delegate = self
-            calendar.allowsMultipleSelection = true;
-
-            // Add the calendar to the calendarView
-            calendarView.addSubview(calendar)
-        }
-    }
-
-    // FSCalendarDelegate method for handling date selection
-    private func calendar(_ calendar: FSCalendar, didSelect dates: [Date], at monthPosition: FSCalendarMonthPosition) {
-        guard dates.count > 1 else {
-            return
-        }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let startDateString = dateFormatter.string(from: dates[0])
-        let endDateString = dateFormatter.string(from: dates[1])
-        dateTF.text = "Du \(startDateString) Au \(endDateString)"
-
-        // Remove the calendar from its superview and hide the calendar view
-        calendar.removeFromSuperview()
-        calendarView.isHidden = true
-    }
+//    @objc func showDatePicker() {
+//        if let calendar = calendarView.subviews.first(where: { $0 is FSCalendar }) {
+//            // Calendar is already displayed, so remove it and hide the calendar view
+//            calendar.removeFromSuperview()
+//            calendarView.isHidden = true
+//        } else {
+//            // Show the calendar view and create and configure the calendar
+//            calendarView.isHidden = false
+//
+//            let calendar = FSCalendar(frame: calendarView.bounds)
+//            calendar.dataSource = self
+//            calendar.delegate = self
+//            calendar.allowsMultipleSelection = true;
+//
+//            // Add the calendar to the calendarView
+//            calendarView.addSubview(calendar)
+//        }
+//    }
+//
+//    // FSCalendarDelegate method for handling date selection
+//    private func calendar(_ calendar: FSCalendar, didSelect dates: [Date], at monthPosition: FSCalendarMonthPosition) {
+//        guard dates.count > 1 else {
+//            return
+//        }
+//
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy"
+//        let startDateString = dateFormatter.string(from: dates[0])
+//        let endDateString = dateFormatter.string(from: dates[1])
+//        dateTF.text = "Du \(startDateString) Au \(endDateString)"
+//
+//        // Remove the calendar from its superview and hide the calendar view
+//        calendar.removeFromSuperview()
+//        calendarView.isHidden = true
+//    }
 
     
-//    @objc func showDatePicker() {
-//        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
-//
-//        let startDatePicker = UIDatePicker()
-//        startDatePicker.datePickerMode = .date
-//        startDatePicker.preferredDatePickerStyle = .compact
-//
-//        let endDatePicker = UIDatePicker()
-//        endDatePicker.datePickerMode = .date
-//        endDatePicker.preferredDatePickerStyle = .compact
-//
-//        alertController.view.addSubview(startDatePicker)
-//        alertController.view.addSubview(endDatePicker)
-//
-//        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
-//        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let constraints = [
-//            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 30),
-//            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 8),
-//            startDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -8),
-//
-//            endDatePicker.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
-//            endDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 8),
-//            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -8),
-//            endDatePicker.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
-//        ]
-//
-//        NSLayoutConstraint.activate(constraints)
-//
-//        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd-MM-yyyy"
-//
-//            let startDateString = dateFormatter.string(from: startDatePicker.date)
-//            let endDateString = dateFormatter.string(from: endDatePicker.date)
-//
-//            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
-//        }))
-//
-//        present(alertController, animated: true, completion: nil)
-//    }
+    @objc func showDatePicker() {
+        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+
+        let startDatePicker = UIDatePicker()
+        startDatePicker.datePickerMode = .date
+        startDatePicker.preferredDatePickerStyle = .compact
+
+        let endDatePicker = UIDatePicker()
+        endDatePicker.datePickerMode = .date
+        endDatePicker.preferredDatePickerStyle = .compact
+
+        alertController.view.addSubview(startDatePicker)
+        alertController.view.addSubview(endDatePicker)
+
+        let spacingView = UIView() // Empty view for spacing
+        spacingView.translatesAutoresizingMaskIntoConstraints = false
+        alertController.view.addSubview(spacingView)
+
+        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+
+        let constraints = [
+            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
+
+            endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
+        ]
+
+        NSLayoutConstraint.activate(constraints)
+
+        // Add spacing constraints
+        NSLayoutConstraint.activate([
+            endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
+            endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
+
+            spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
+            spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
+            spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
+            spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
+        ])
+
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+
+            let startDateString = dateFormatter.string(from: startDatePicker.date)
+            let endDateString = dateFormatter.string(from: endDatePicker.date)
+
+            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
+        }))
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
@@ -528,31 +550,67 @@ extension homeVC: UIGestureRecognizerDelegate {
     }
 }
 
-//extension homeVC: CalendarViewControllerDelegate {
-//    func didSelectDateRange(startDate: Date, endDate: Date) {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy"
-//
-//        let startDateString = dateFormatter.string(from: startDate)
-//        let endDateString = dateFormatter.string(from: endDate)
-//
-//        self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
-//    }
-//}
+extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
 
-//extension homeVC: FSCalendarDelegate {
-//    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        if calendar.selectedDates.count > 1 {
-//            let startDate = calendar.selectedDates.sorted().first!
-//            let endDate = calendar.selectedDates.sorted().last!
-//
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd-MM-yyyy"
-//
-//            let startDateString = dateFormatter.string(from: startDate)
-//            let endDateString = dateFormatter.string(from: endDate)
-//
-//            dateTF.text = "Du \(startDateString) Au \(endDateString)"
-//        }
-//    }
-//}
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // Return the number of items in your data source
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
+            fatalError("Unable to dequeue CustomCollectionViewCell")
+        }
+        
+        // Assign the description and logo based on indexPath or any other logic
+        switch indexPath.item {
+        case 0:
+            cell.cardDesc.text = "HARCÈLEMENT ACTUEL"
+            cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
+        case 1:
+            cell.cardDesc.text = "RISQUE FUTUR HARCÈLEMENT"
+            cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
+        case 2:
+            cell.cardDesc.text = "ÉTAT MENTAL"
+            cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
+        default:
+            break
+        }
+        
+        // Call the getScore function to fetch the score
+        APIManager.shareInstance.getScore { score in
+            // Update the UI on the main thread
+            DispatchQueue.main.async {
+                if let score = score {
+                    let scoreValue = score.global_score
+                    let backgroundImage = self.getBackgroundImage(for: scoreValue)
+                    cell.backgroundColor = UIColor(patternImage: backgroundImage ?? UIImage())
+                }
+            }
+        }
+        return cell
+    }
+    
+    func getBackgroundImage(for score: Int) -> UIImage? {
+        // Return the appropriate background image based on the score
+        if score < 20 {
+            return UIImage(named: "green")
+        } else if score < 50 {
+            return UIImage(named: "orange")
+        } else {
+            return UIImage(named: "red")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+         let width = collectionView.bounds.width - 5
+         let height = collectionView.bounds.height - 5
+         return CGSize(width: width, height: height)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+           return 8.0 // Adjust the spacing as per your requirement
+       }
+}

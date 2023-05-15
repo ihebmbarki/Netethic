@@ -21,6 +21,24 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
 class APIManager {
     static let shareInstance = APIManager()
+
+    func getScore(completion: @escaping (Score?) -> Void) {
+        AF.request(user_score).validate().response { response in
+            switch response.result {
+            case .success(let data):
+                if let jsonData = try? JSONSerialization.data(withJSONObject: data!, options: []),
+                   let score = try? JSONDecoder().decode(Score.self, from: jsonData) {
+                    completion(score)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error getting score: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+
     
     func updateUserInfo(withuserName userName: String, updateData: [String:Any], completion: @escaping(Result<User, Error>) -> Void) {
         let update_user_info = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(userName)/"

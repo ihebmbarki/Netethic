@@ -48,6 +48,9 @@
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
 		04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */; };
+		048903082A125B5500F87A1A /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048903072A125B5500F87A1A /* CardCell.xib */; };
+		0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048903092A12607000F87A1A /* CustomCollectionViewCell.swift */; };
+		049531432A12847C00C610AD /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049531422A12847C00C610AD /* Score.swift */; };
 		0496979629AF769800F65DF4 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979529AF769800F65DF4 /* Loading.swift */; };
 		0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496979729AFAD6C00F65DF4 /* Confirmation.swift */; };
 		049736BE29ACFEB0005C3662 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049736BD29ACFEB0005C3662 /* Register.swift */; };
@@ -143,6 +146,9 @@
 		04850C5529ACC3E4001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04850C5A29ACC3EB001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04850C5C29ACC3EB001A27FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048903072A125B5500F87A1A /* CardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
+		048903092A12607000F87A1A /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		049531422A12847C00C610AD /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		0496979529AF769800F65DF4 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		0496979729AFAD6C00F65DF4 /* Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirmation.swift; sourceTree = "<group>"; };
 		049736BD29ACFEB0005C3662 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
 				04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */,
+				048903072A125B5500F87A1A /* CardCell.xib */,
+				048903092A12607000F87A1A /* CustomCollectionViewCell.swift */,
 			);
 			path = "Dashboard Module ";
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
+				049531422A12847C00C610AD /* Score.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -624,6 +633,7 @@
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
+				048903082A125B5500F87A1A /* CardCell.xib in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
 				04E54A3F29ACCC3B00B00906 /* Inter in Resources */,
 			);
@@ -703,6 +713,7 @@
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,
+				0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */,
 				040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
@@ -711,6 +722,7 @@
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
+				049531432A12847C00C610AD /* Score.swift in Sources */,
 				0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,

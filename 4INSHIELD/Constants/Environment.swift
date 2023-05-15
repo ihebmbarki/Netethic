@@ -34,8 +34,19 @@ class BuildConfiguration {
         }
     }
     
+    var MLENGINE_BASE_URL: String {
+        switch environment {
+        case .debugStaging, .releaseStaging:
+            return "https://mlengine.staging.4indata.fr"
+        case .debugDevelopment, .releaseDevelopment:
+            return "https://mlengine.shield.kaisens.fr"
+        case .debugProduction, .releaseProduction:
+            return "https://mlengine.shield.kaisens.fr"
+        }
+    }
+    
     // Add the following variables
-    let MLENGINE_BASE_URL = "https://mlengine.staging.4indata.fr"
+//    let MLENGINE_BASE_URL = "https://mlengine.staging.4indata.fr"
     let CRAWLSERVER_BASE_URL  = "https://crawlserver.staging.4indata.fr"
     let DEVICESERVER_BASE_URL = "https://deviceserver.staging.4indata.fr"
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"

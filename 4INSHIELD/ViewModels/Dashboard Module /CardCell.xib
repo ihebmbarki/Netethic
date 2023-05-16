@@ -22,18 +22,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="132" height="108"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ÉTAT MENTAL" translatesAutoresizingMaskIntoConstraints="NO" id="Yk5-1n-cge">
-                                <rect key="frame" x="8" y="8" width="27" height="25"/>
+                                <rect key="frame" x="8" y="8" width="30" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="MB4-Fy-SSH"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HARCÈLEMENT ACTUEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSi-iM-UWm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HARCÈLEMENT ACTUEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSi-iM-UWm">
                                 <rect key="frame" x="7.3333333333333357" y="89" width="117.66666666666666" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-L0-KI0">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-L0-KI0">
                                 <rect key="frame" x="7.3333333333333357" y="77" width="117.66666666666666" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="117.66666666666666" id="lPC-53-LQQ"/>
@@ -48,25 +48,24 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Yk5-1n-cge" secondAttribute="trailing" constant="97" id="0Qg-SV-UfD"/>
+                            <constraint firstItem="Yk5-1n-cge" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leadingMargin" id="07x-dD-QlB"/>
                             <constraint firstItem="fyq-L0-KI0" firstAttribute="top" secondItem="rap-QH-Oq6" secondAttribute="bottom" constant="14" id="1fV-eV-Xsm"/>
+                            <constraint firstItem="rap-QH-Oq6" firstAttribute="centerX" secondItem="fRP-bJ-Xxe" secondAttribute="centerX" id="59y-zv-mm3"/>
+                            <constraint firstItem="rap-QH-Oq6" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" constant="27" id="6JW-l4-gv0"/>
                             <constraint firstItem="fyq-L0-KI0" firstAttribute="centerX" secondItem="rap-QH-Oq6" secondAttribute="centerX" id="90A-ne-lnp"/>
-                            <constraint firstItem="fyq-L0-KI0" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" constant="7.3333333333333286" id="Bhy-UB-zo8"/>
-                            <constraint firstItem="rap-QH-Oq6" firstAttribute="centerX" secondItem="fRP-bJ-Xxe" secondAttribute="centerX" id="DDN-M1-xms"/>
-                            <constraint firstItem="Yk5-1n-cge" firstAttribute="top" secondItem="fRP-bJ-Xxe" secondAttribute="top" constant="8" id="KfO-JV-FYy"/>
+                            <constraint firstItem="Yk5-1n-cge" firstAttribute="top" secondItem="fRP-bJ-Xxe" secondAttribute="top" constant="8" id="MiI-Za-amA"/>
                             <constraint firstItem="dSi-iM-UWm" firstAttribute="top" secondItem="fyq-L0-KI0" secondAttribute="bottom" constant="8" id="Rkg-bl-AE5"/>
                             <constraint firstItem="fyq-L0-KI0" firstAttribute="leading" secondItem="dSi-iM-UWm" secondAttribute="leading" id="T3H-lU-9hh"/>
                             <constraint firstItem="rap-QH-Oq6" firstAttribute="top" secondItem="Yk5-1n-cge" secondAttribute="bottom" constant="18" id="U0T-BP-ypm"/>
-                            <constraint firstItem="rap-QH-Oq6" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" constant="27" id="goy-8t-LQy"/>
-                            <constraint firstItem="Yk5-1n-cge" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leadingMargin" id="gus-Ck-sLh"/>
+                            <constraint firstAttribute="trailing" secondItem="Yk5-1n-cge" secondAttribute="trailing" constant="94" id="vdR-eI-ZXu"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="centerY" secondItem="6rK-ry-bir" secondAttribute="centerY" id="6J8-7L-Wse"/>
-                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="centerX" secondItem="6rK-ry-bir" secondAttribute="centerX" id="Kdo-FO-fJW"/>
-                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="leading" secondItem="6rK-ry-bir" secondAttribute="leading" id="iNw-Ur-TIN"/>
-                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="top" secondItem="6rK-ry-bir" secondAttribute="top" id="jBT-KI-BEH"/>
+                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="centerY" secondItem="6rK-ry-bir" secondAttribute="centerY" id="96v-l9-HB3"/>
+                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="leading" secondItem="6rK-ry-bir" secondAttribute="leading" id="EqG-Vq-lja"/>
+                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="top" secondItem="6rK-ry-bir" secondAttribute="top" id="hfj-Rp-ETn"/>
+                    <constraint firstItem="fRP-bJ-Xxe" firstAttribute="centerX" secondItem="6rK-ry-bir" secondAttribute="centerX" id="rIB-5d-mzn"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="132" height="108"/>
@@ -75,6 +74,7 @@
                 <outlet property="cardLogo" destination="Yk5-1n-cge" id="3ms-FA-4sr"/>
                 <outlet property="cardProgress" destination="fyq-L0-KI0" id="Uc0-Rd-vdd"/>
                 <outlet property="cardTitle" destination="rap-QH-Oq6" id="M1J-zb-QHQ"/>
+                <outlet property="containerView" destination="fRP-bJ-Xxe" id="m0A-4K-DhO"/>
             </connections>
             <point key="canvasLocation" x="9.1603053435114496" y="33.098591549295776"/>
         </collectionViewCell>

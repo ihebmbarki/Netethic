@@ -13,4 +13,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cardTitle: UILabel!
     @IBOutlet weak var cardProgress: UIProgressView!
     @IBOutlet weak var cardDesc: UILabel!
-}
+    @IBOutlet weak var containerView: UIView!
+    }
+

@@ -59,13 +59,11 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         topView.layer.insertSublayer(gradientLayer, at: 0)
         
         //Set up date textfield
-//        let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
-//        dateTF.layer.borderWidth = 1
-//        dateTF.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
-//        dateTF.layer.cornerRadius = dateTF.frame.size.height/2
-//        dateTF.layer.masksToBounds = true
-//        dateTF.leftView = datePaddingView
-//        dateTF.leftViewMode = .always
+        dateTF.layer.masksToBounds = false
+//        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
+        dateTF.layer.shadowColor = UIColor.gray.cgColor
+        dateTF.layer.shadowOpacity = 0.5
+        dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
         
         // Set up the button's action
         calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
@@ -586,14 +584,29 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             DispatchQueue.main.async {
                 if let score = score {
                     let scoreValue = score.global_score
-                    let backgroundImage = self.getBackgroundImage(for: scoreValue)
-                    cell.backgroundColor = UIColor(patternImage: backgroundImage ?? UIImage())
+                    if let backgroundImage = self.getBackgroundImage(for: scoreValue) {
+                        cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
+                    } else {
+                        // Handle nil background image
+                        cell.containerView.backgroundColor = .white
+                    }
+                } else {
+                    // Handle nil score
+                    let backgroundImage = self.getBackgroundImage(for: 0)
+                    if let backgroundImage = backgroundImage {
+                        cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
+                    } else {
+                        // Handle nil background image
+                        cell.containerView.backgroundColor = .white
+                    }
+                    
                 }
             }
         }
+    
         return cell
     }
-    
+
     func getBackgroundImage(for score: Int) -> UIImage? {
         // Return the appropriate background image based on the score
         if score < 20 {
@@ -604,13 +617,5 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return UIImage(named: "red")
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         let width = collectionView.bounds.width - 5
-         let height = collectionView.bounds.height - 5
-         return CGSize(width: width, height: height)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-           return 8.0 // Adjust the spacing as per your requirement
-       }
+
 }

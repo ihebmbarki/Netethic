@@ -23,11 +23,10 @@ class APIManager {
     static let shareInstance = APIManager()
 
     func getScore(completion: @escaping (Score?) -> Void) {
-        AF.request(user_score).validate().response { response in
+        AF.request(user_score, method: .get).response { response in
             switch response.result {
             case .success(let data):
-                if let jsonData = try? JSONSerialization.data(withJSONObject: data!, options: []),
-                   let score = try? JSONDecoder().decode(Score.self, from: jsonData) {
+                if let score = try? JSONDecoder().decode(Score.self, from: data!) {
                     completion(score)
                 } else {
                     completion(nil)
@@ -38,7 +37,6 @@ class APIManager {
             }
         }
     }
-
     
     func updateUserInfo(withuserName userName: String, updateData: [String:Any], completion: @escaping(Result<User, Error>) -> Void) {
         let update_user_info = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(userName)/"

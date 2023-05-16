@@ -1783,7 +1783,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sélectionnez une période" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="289-1b-v6J">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sélectionnez une période" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="289-1b-v6J">
                                 <rect key="frame" x="16" y="164" width="361" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="kur-0a-uWW"/>
@@ -1798,14 +1798,15 @@
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3y-mh-ZB1" customClass="FSCalendar" customModule="_INSHIELD_Development" customModuleProvider="target">
                                 <rect key="frame" x="41" y="429" width="300" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-lz-7QC">
                                 <rect key="frame" x="16" y="206" width="361" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b0Q-K4-8pC">
-                                    <size key="itemSize" width="159" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="mM4-E0-neL"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BAQ-mr-gzP">
+                                    <size key="itemSize" width="132" height="108"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1816,6 +1817,7 @@
                         <viewLayoutGuide key="safeArea" id="tVj-Ot-iXm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="NF7-lz-7QC" firstAttribute="leading" secondItem="289-1b-v6J" secondAttribute="leading" id="0b5-wt-7sU"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="leading" secondItem="jzU-ws-2Sr" secondAttribute="leading" id="23P-Rr-hdM"/>
                             <constraint firstItem="289-1b-v6J" firstAttribute="centerX" secondItem="hWe-JT-jZk" secondAttribute="centerX" id="2Bs-kB-YBg"/>
                             <constraint firstItem="9Hg-B7-Q21" firstAttribute="trailing" secondItem="289-1b-v6J" secondAttribute="trailing" id="406-mU-rJd"/>
@@ -1827,13 +1829,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="tcf-ph-qnu" secondAttribute="trailing" constant="-24" id="OXW-Ol-vVb"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="bottom" secondItem="tVj-Ot-iXm" secondAttribute="bottom" id="RbB-12-8Yo"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="top" secondItem="cb8-0F-scN" secondAttribute="top" constant="482" id="SgO-Qk-pu5"/>
+                            <constraint firstItem="NF7-lz-7QC" firstAttribute="top" secondItem="289-1b-v6J" secondAttribute="bottom" constant="8" id="acn-ra-rZd"/>
                             <constraint firstItem="tcf-ph-qnu" firstAttribute="top" secondItem="cb8-0F-scN" secondAttribute="top" id="bkQ-x4-lKX"/>
                             <constraint firstItem="9Hg-B7-Q21" firstAttribute="top" secondItem="289-1b-v6J" secondAttribute="top" id="brs-9G-jZa"/>
                             <constraint firstItem="289-1b-v6J" firstAttribute="leading" secondItem="DTy-zZ-5dd" secondAttribute="leading" id="cwe-fa-y4C"/>
+                            <constraint firstItem="NF7-lz-7QC" firstAttribute="trailing" secondItem="9Hg-B7-Q21" secondAttribute="trailing" id="eEk-xz-62L"/>
                             <constraint firstItem="tVj-Ot-iXm" firstAttribute="trailing" secondItem="DTy-zZ-5dd" secondAttribute="trailing" constant="217" id="gTe-IO-wPW"/>
                             <constraint firstItem="jzU-ws-2Sr" firstAttribute="centerX" secondItem="cb8-0F-scN" secondAttribute="centerX" id="gwV-wL-o24"/>
                             <constraint firstItem="DTy-zZ-5dd" firstAttribute="top" secondItem="tVj-Ot-iXm" secondAttribute="top" id="hnu-IL-hh5"/>
                             <constraint firstItem="9Hg-B7-Q21" firstAttribute="bottom" secondItem="289-1b-v6J" secondAttribute="bottom" id="jSr-5V-s3T"/>
+                            <constraint firstItem="E3y-mh-ZB1" firstAttribute="top" secondItem="NF7-lz-7QC" secondAttribute="bottom" constant="95" id="v1u-Wm-Hug"/>
                             <constraint firstItem="jzU-ws-2Sr" firstAttribute="leading" secondItem="tVj-Ot-iXm" secondAttribute="leading" id="wh9-RR-jh8"/>
                             <constraint firstAttribute="bottom" secondItem="tcf-ph-qnu" secondAttribute="bottom" constant="822" id="zGk-Hg-XIa"/>
                         </constraints>

@@ -1796,10 +1796,10 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="calendar"/>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3y-mh-ZB1" customClass="FSCalendar" customModule="_INSHIELD_Development" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3y-mh-ZB1" customClass="FSCalendar" customModule="_INSHIELD_Development" customModuleProvider="target">
                                 <rect key="frame" x="41" y="429" width="300" height="180"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-lz-7QC">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NF7-lz-7QC">
                                 <rect key="frame" x="16" y="206" width="361" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1862,8 +1862,11 @@
                             <barButtonItem title="Item" image="bell.badge.fill" catalog="system" id="CC3-RI-scs">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="fr_white" id="QVL-ak-r8g">
+                            <barButtonItem id="QVL-ak-r8g">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="changeLanguageBtnTapped:" destination="cdu-QE-tmx" id="qSp-TX-g4k"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -1872,6 +1875,7 @@
                         <outlet property="calendarBtn" destination="9Hg-B7-Q21" id="Dxb-J7-dX4"/>
                         <outlet property="calendarView" destination="E3y-mh-ZB1" id="dkl-UM-qgS"/>
                         <outlet property="cardsCollectionView" destination="NF7-lz-7QC" id="z7X-wN-YJG"/>
+                        <outlet property="changeLanguageBtn" destination="QVL-ak-r8g" id="7Ml-Ly-eXe"/>
                         <outlet property="childButton" destination="KsV-P6-DIY" id="PSO-E4-CXS"/>
                         <outlet property="childInfoContainerView" destination="hWe-JT-jZk" id="QmW-GB-QS9"/>
                         <outlet property="dateTF" destination="289-1b-v6J" id="wug-tO-kGt"/>

@@ -47,3 +47,7 @@
 //MARK: Children list
 "list_child_item" = "Liste des enfants";
 "alert_message" = "Balayez vers la gauche pour gérer (supprimer ou mettre à jour) votre liste d'enfants";
+
+//MARK: Dashboard
+"hello" = "Bonjour";
+"rangeDate" = "Sélectionnez une période";

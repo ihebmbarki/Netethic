@@ -35,6 +35,8 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     @IBOutlet weak var BonjourLbl: UILabel!
     @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var childButton: UIButton!
+    @IBOutlet weak var changeLanguageBtn: UIBarButtonItem!
+    
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
@@ -148,6 +150,65 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         ])
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.updateLanguageButtonImage()
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.updateLanguageButtonImage()
+                }
+                
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.image = UIImage(named: "fr_white")
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.image = UIImage(named: "eng_white")
+            }
+        }
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+
+        let bonjourString = NSLocalizedString("bonjour", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
+        let username = UserDefaults.standard.string(forKey: "username") ?? ""
+        let localizedText = "\(bonjourString) \(username) !"
+
+        BonjourLbl.text = localizedText
+        BonjourLbl.text = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "hello")
+        dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
+
+    }
+
+
+    
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
         // Add enfantsViewController as child view controller
@@ -176,6 +237,7 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
                 self.BonjourLbl.text = "Bonjour \(user.username) !"
+//                self.updateLocalizedStrings()
             }
         }
     }
@@ -599,14 +661,42 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         // Handle nil background image
                         cell.containerView.backgroundColor = .white
                     }
-                    
+                    // Show alert for no data
+                    let alert = UIAlertController(title: "Alert", message: "No Data", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
+                
+                // Call the getMentalState function to fetch the mental state data
+//                APIManager.shareInstance.getMentalState { state in
+//                    // Update the UI on the main thread
+//                    DispatchQueue.main.async {
+//                        if let state = state {
+//                            let countHappy = state.filter { $0 == "happy" }.count
+//                            let countStressed = state.filter { $0 == "stressed" }.count
+//                            
+//                            let text: String
+//                            if countHappy > countStressed {
+//                                text = "happy"
+//                            } else {
+//                                text = "stressed"
+//                            }
+//
+//                            // Update your text label with the determined text value
+//                            cell.cardTitle.text = text
+//                        } else {
+//                            // Handle nil state
+//                            cell.cardTitle.text = "N/A"
+//                        }
+//                    }
+//                }
             }
         }
-    
+        
         return cell
     }
-
+    
+    
     func getBackgroundImage(for score: Int) -> UIImage? {
         // Return the appropriate background image based on the score
         if score < 20 {

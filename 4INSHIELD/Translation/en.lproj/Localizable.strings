@@ -48,3 +48,6 @@
 "list_child_item" = "Children’s List";
 "alert_message" = "Swipe left to manage (Delete or update) your children list";
 
+//MARK: Dashboard
+"hello" = "Hello";
+"rangeDate" = "Select a time period";

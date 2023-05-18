@@ -8,5 +8,5 @@
 import Foundation
 
 struct Score: Codable {
-    let global_score : Int
+    let global_score : Int?
 }

@@ -69,6 +69,7 @@
 		04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A60C29CB52250028B7E2 /* ChildProfile.swift */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
 		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
+		04C604DC2A16595700FDFE8E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C604DB2A16595700FDFE8E /* State.swift */; };
 		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
 		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
@@ -170,6 +171,7 @@
 		04B2A60C29CB52250028B7E2 /* ChildProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfile.swift; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
+		04C604DB2A16595700FDFE8E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
 		04D4F0732A01DAEB0033818F /* childCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = childCell.xib; sourceTree = "<group>"; };
 		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04C604DA2A16591C00FDFE8E /* Mental State */,
 				04844B5329E03D7F008AFBF6 /* Users */,
 				040821AD29D6DAEE00D7A562 /* Onboarding Model */,
 				040821A829D43F1000D7A562 /* SocialMedia & Profile */,
@@ -329,7 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
-				049531422A12847C00C610AD /* Score.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -464,6 +466,15 @@
 				040821AB29D5B91200D7A562 /* Child.swift */,
 			);
 			path = Children;
+			sourceTree = "<group>";
+		};
+		04C604DA2A16591C00FDFE8E /* Mental State */ = {
+			isa = PBXGroup;
+			children = (
+				049531422A12847C00C610AD /* Score.swift */,
+				04C604DB2A16595700FDFE8E /* State.swift */,
+			);
+			path = "Mental State";
 			sourceTree = "<group>";
 		};
 		04D270DC29D31AA40071B4AB /* WizardStep & Journey */ = {
@@ -696,6 +707,7 @@
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
+				04C604DC2A16595700FDFE8E /* State.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
 				049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */,

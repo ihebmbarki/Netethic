@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ÉTAT MENTAL.png",
+      "filename" : "ÉTAT MENTAL@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ÉTAT MENTAL@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "ÉTAT MENTAL@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

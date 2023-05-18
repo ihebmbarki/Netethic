@@ -28,4 +28,3 @@ let generate_newOtp_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/
 let change_pwd_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/change-password/"
 let user_score = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/general/"
 
-let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/mentalstateView/"

@@ -21,44 +21,51 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRP-bJ-Xxe">
                         <rect key="frame" x="0.0" y="0.0" width="132" height="108"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ÉTAT MENTAL" translatesAutoresizingMaskIntoConstraints="NO" id="Yk5-1n-cge">
-                                <rect key="frame" x="8" y="8" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="MB4-Fy-SSH"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HARCÈLEMENT ACTUEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSi-iM-UWm">
-                                <rect key="frame" x="7.3333333333333357" y="89" width="117.66666666666666" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rap-QH-Oq6">
+                                <rect key="frame" x="14" y="60" width="104" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-L0-KI0">
-                                <rect key="frame" x="7.3333333333333357" y="77" width="117.66666666666666" height="4"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yk5-1n-cge">
+                                <rect key="frame" x="3" y="3" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="MB4-Fy-SSH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSi-iM-UWm">
+                                <rect key="frame" x="0.0" y="80" width="132" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="RrS-7E-68Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-L0-KI0">
+                                <rect key="frame" x="7.3333333333333357" y="75" width="117.66666666666666" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="117.66666666666666" id="lPC-53-LQQ"/>
                                 </constraints>
+                                <color key="progressTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="trackTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rap-QH-Oq6">
-                                <rect key="frame" x="27" y="58" width="78" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Yk5-1n-cge" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leadingMargin" id="07x-dD-QlB"/>
-                            <constraint firstItem="fyq-L0-KI0" firstAttribute="top" secondItem="rap-QH-Oq6" secondAttribute="bottom" constant="7" id="1fV-eV-Xsm"/>
-                            <constraint firstItem="rap-QH-Oq6" firstAttribute="centerX" secondItem="fRP-bJ-Xxe" secondAttribute="centerX" id="59y-zv-mm3"/>
-                            <constraint firstItem="rap-QH-Oq6" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" constant="27" id="6JW-l4-gv0"/>
-                            <constraint firstItem="fyq-L0-KI0" firstAttribute="centerX" secondItem="rap-QH-Oq6" secondAttribute="centerX" id="90A-ne-lnp"/>
-                            <constraint firstItem="Yk5-1n-cge" firstAttribute="top" secondItem="fRP-bJ-Xxe" secondAttribute="top" constant="8" id="MiI-Za-amA"/>
-                            <constraint firstItem="dSi-iM-UWm" firstAttribute="top" secondItem="fyq-L0-KI0" secondAttribute="bottom" constant="8" id="Rkg-bl-AE5"/>
-                            <constraint firstItem="fyq-L0-KI0" firstAttribute="leading" secondItem="dSi-iM-UWm" secondAttribute="leading" id="T3H-lU-9hh"/>
-                            <constraint firstItem="rap-QH-Oq6" firstAttribute="top" secondItem="Yk5-1n-cge" secondAttribute="bottom" id="U0T-BP-ypm"/>
+                            <constraint firstItem="Yk5-1n-cge" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leadingMargin" constant="-5" id="07x-dD-QlB"/>
+                            <constraint firstItem="fyq-L0-KI0" firstAttribute="top" secondItem="rap-QH-Oq6" secondAttribute="bottom" constant="3" id="IVx-Xa-2Df"/>
+                            <constraint firstItem="dSi-iM-UWm" firstAttribute="top" secondItem="fyq-L0-KI0" secondAttribute="bottom" constant="1" id="L7f-iF-m8d"/>
+                            <constraint firstItem="Yk5-1n-cge" firstAttribute="top" secondItem="fRP-bJ-Xxe" secondAttribute="top" constant="3" id="MiI-Za-amA"/>
+                            <constraint firstItem="dSi-iM-UWm" firstAttribute="top" secondItem="fyq-L0-KI0" secondAttribute="bottom" constant="1" id="QIf-ou-a9W"/>
+                            <constraint firstAttribute="trailing" secondItem="dSi-iM-UWm" secondAttribute="trailing" id="RYq-mF-as6"/>
+                            <constraint firstItem="dSi-iM-UWm" firstAttribute="centerX" secondItem="fyq-L0-KI0" secondAttribute="centerX" id="dPO-xh-c3U"/>
+                            <constraint firstItem="dSi-iM-UWm" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" id="hB3-YW-0vD"/>
+                            <constraint firstAttribute="bottom" secondItem="dSi-iM-UWm" secondAttribute="bottom" id="mmf-LI-34J"/>
+                            <constraint firstItem="rap-QH-Oq6" firstAttribute="leading" secondItem="fRP-bJ-Xxe" secondAttribute="leading" constant="14" id="qAX-6L-fXs"/>
+                            <constraint firstItem="rap-QH-Oq6" firstAttribute="top" secondItem="Yk5-1n-cge" secondAttribute="bottom" constant="2" id="rI2-Z7-LYf"/>
                             <constraint firstAttribute="trailing" secondItem="Yk5-1n-cge" secondAttribute="trailing" constant="74" id="vdR-eI-ZXu"/>
+                            <constraint firstAttribute="trailing" secondItem="rap-QH-Oq6" secondAttribute="trailing" constant="14" id="zgd-S6-roh"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -77,11 +84,10 @@
                 <outlet property="cardTitle" destination="rap-QH-Oq6" id="M1J-zb-QHQ"/>
                 <outlet property="containerView" destination="fRP-bJ-Xxe" id="m0A-4K-DhO"/>
             </connections>
-            <point key="canvasLocation" x="9.1603053435114496" y="33.098591549295776"/>
+            <point key="canvasLocation" x="-21" y="32"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ÉTAT MENTAL" width="512" height="434"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -22,21 +22,22 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
-//    func getMentalState(completion: @escaping ([Model]?) -> Void) {
-//        AF.request(mental_state, method: .get).response { response in
-//            switch response.result {
-//            case .success(let data):
-//                if let data = data, let yourData = try? JSONDecoder().decode([Model].self, from: data) {
-//                    completion(yourData)
-//                } else {
-//                    completion(nil)
-//                }
-//            case .failure(let error):
-//                print("Error fetching data: \(error.localizedDescription)")
-//                completion(nil)
-//            }
-//        }
-//    }
+    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([State]?) -> Void) {
+        let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        AF.request(mental_state, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                if let data = data, let yourData = try? JSONDecoder().decode([State].self, from: data) {
+                    completion(yourData)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
 
     func getScore(completion: @escaping (Score?) -> Void) {
         AF.request(user_score, method: .get).response { response in

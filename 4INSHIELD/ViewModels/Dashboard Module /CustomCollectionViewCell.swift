@@ -14,7 +14,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cardProgress: UIProgressView!
     @IBOutlet weak var cardDesc: UILabel!
     @IBOutlet weak var containerView: UIView!
-        
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

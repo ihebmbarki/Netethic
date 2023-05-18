@@ -159,28 +159,27 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-        
+
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                    self.updateLanguageButtonImage()
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
-                    self.updateLanguageButtonImage()
                 }
                 
+                self.updateLanguageButtonImage()
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
         }
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         languageAlert.addAction(cancelAction)
-        
+
         present(languageAlert, animated: true, completion: nil)
     }
     
@@ -197,14 +196,12 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
 
-        let bonjourString = NSLocalizedString("bonjour", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
+        let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
         let username = UserDefaults.standard.string(forKey: "username") ?? ""
         let localizedText = "\(bonjourString) \(username) !"
 
         BonjourLbl.text = localizedText
-        BonjourLbl.text = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "hello")
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
-
     }
 
 
@@ -237,7 +234,6 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
                 self.BonjourLbl.text = "Bonjour \(user.username) !"
-//                self.updateLocalizedStrings()
             }
         }
     }
@@ -278,6 +274,8 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
 //        calendarView.isHidden = true
 //    }
 
+    var startDateTimestamp: TimeInterval = 0
+    var endDateTimestamp: TimeInterval = 0
     
     @objc func showDatePicker() {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
@@ -322,19 +320,25 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
         ])
 
         alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
+               let dateFormatter = DateFormatter()
+               dateFormatter.dateFormat = "dd-MM-yyyy"
 
-            let startDateString = dateFormatter.string(from: startDatePicker.date)
-            let endDateString = dateFormatter.string(from: endDatePicker.date)
+               let startDateString = dateFormatter.string(from: startDatePicker.date)
+               let endDateString = dateFormatter.string(from: endDatePicker.date)
+               
+               // Convert start and end date strings to timestamps
+               if let startDate = dateFormatter.date(from: startDateString) {
+                   self.startDateTimestamp = startDate.timeIntervalSince1970
+               }
+               if let endDate = dateFormatter.date(from: endDateString) {
+                   self.endDateTimestamp = endDate.timeIntervalSince1970
+               }
 
-            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
-        }))
+               self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
+           }))
 
-        present(alertController, animated: true, completion: nil)
-    }
-
-
+           present(alertController, animated: true, completion: nil)
+       }
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
@@ -621,90 +625,104 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Dequeue the cell
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
             fatalError("Unable to dequeue CustomCollectionViewCell")
         }
-        
         // Assign the description and logo based on indexPath or any other logic
         switch indexPath.item {
         case 0:
             cell.cardDesc.text = "HARCÈLEMENT ACTUEL"
             cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
-        case 1:
-            cell.cardDesc.text = "RISQUE FUTUR HARCÈLEMENT"
-            cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
-        case 2:
-            cell.cardDesc.text = "ÉTAT MENTAL"
-            cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
-        default:
-            break
-        }
-        
-        // Call the getScore function to fetch the score
-        APIManager.shareInstance.getScore { score in
-            // Update the UI on the main thread
-            DispatchQueue.main.async {
-                if let score = score {
-                    let scoreValue = score.global_score
-                    if let backgroundImage = self.getBackgroundImage(for: scoreValue) {
-                        cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
-                    } else {
-                        // Handle nil background image
-                        cell.containerView.backgroundColor = .white
-                    }
-                } else {
-                    // Handle nil score
-                    let backgroundImage = self.getBackgroundImage(for: 0)
+            
+            // Call the getScore function to fetch the score
+            APIManager.shareInstance.getScore { score in
+                // Update the UI on the main thread
+                DispatchQueue.main.async {
+                    let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
+                    
                     if let backgroundImage = backgroundImage {
                         cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
                     } else {
                         // Handle nil background image
                         cell.containerView.backgroundColor = .white
                     }
-                    // Show alert for no data
-                    let alert = UIAlertController(title: "Alert", message: "No Data", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    
+                    // Update the progress bar with the score value
+                    cell.cardProgress.progress = Float(score?.global_score ?? 0) / 100.0
+                    
+                    // Update the cardTitle label's text based on the score
+                    cell.cardTitle.text = cardTitle
                 }
-                
-                // Call the getMentalState function to fetch the mental state data
-//                APIManager.shareInstance.getMentalState { state in
-//                    // Update the UI on the main thread
-//                    DispatchQueue.main.async {
-//                        if let state = state {
-//                            let countHappy = state.filter { $0 == "happy" }.count
-//                            let countStressed = state.filter { $0 == "stressed" }.count
-//                            
-//                            let text: String
-//                            if countHappy > countStressed {
-//                                text = "happy"
-//                            } else {
-//                                text = "stressed"
-//                            }
-//
-//                            // Update your text label with the determined text value
-//                            cell.cardTitle.text = text
-//                        } else {
-//                            // Handle nil state
-//                            cell.cardTitle.text = "N/A"
-//                        }
-//                    }
-//                }
             }
+
+        case 1:
+            cell.cardDesc.text = "RISQUE FUTUR HARCÈLEMENT"
+            cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
+            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+        case 2:
+               cell.cardDesc.text = "ÉTAT MENTAL"
+               cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
+
+               // Call the getMentalState function to fetch the mental state data
+               APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+                   // Update the UI on the main thread
+                   DispatchQueue.main.async {
+                       if let states = states {
+                           let countHappy = states.filter { $0.mental_state == "happy" }.count
+                           let countStressed = states.filter { $0.mental_state == "stress" }.count
+                           
+                           let text: String
+                           let backgroundImage: UIImage?
+                           
+                           if countHappy > countStressed {
+                               text = "happy"
+                               backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
+                           } else {
+                               text = "stressed"
+                               backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
+                           }
+                           
+                           // Update your text label with the determined text value
+                           cell.cardTitle.text = text
+                           
+                           // Set the background image based on the mental state
+                           cell.containerView.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
+                       } else {
+                           // Handle nil state
+                           cell.cardTitle.text = "N/A"
+                           cell.containerView.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
+                       }
+                   }
+               }
+        default:
+            break
         }
-        
         return cell
     }
+
+    func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
+        if let state = mentalState {
+            if state == "happy" {
+                return UIImage(named: "green")
+            } else if state == "stress" {
+                return UIImage(named: "red")
+            }
+        }
+        return UIImage(named: "green")
+    }
     
-    
-    func getBackgroundImage(for score: Int) -> UIImage? {
-        // Return the appropriate background image based on the score
-        if score < 20 {
-            return UIImage(named: "green")
-        } else if score < 50 {
-            return UIImage(named: "orange")
+    func getBackgroundImage(for score: Int?) -> (UIImage?, String) {
+        if let scoreValue = score {
+            if scoreValue < 20 {
+                return (UIImage(named: "green"), "Non Harcelé")
+            } else if scoreValue >= 20 && scoreValue < 50 {
+                return (UIImage(named: "orange"), "Partiellement Harcelé")
+            } else {
+                return (UIImage(named: "red"), "Harcelé")
+            }
         } else {
-            return UIImage(named: "red")
+            return (UIImage(named: "green"), "Non Harcelé")
         }
     }
 

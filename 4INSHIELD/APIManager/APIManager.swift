@@ -22,6 +22,24 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
+        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/max-score-platform/per-date/?from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&person_id=\(childID)&rule_name=toxicity_rule"
+        
+        AF.request(url, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                if let data = data, let maxScoreData = try? JSONDecoder().decode([String: Int].self, from: data) {
+                    completion(maxScoreData)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching maximum score data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([State]?) -> Void) {
         let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
         AF.request(mental_state, method: .get).response { response in

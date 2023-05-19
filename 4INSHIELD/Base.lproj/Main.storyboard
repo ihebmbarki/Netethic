@@ -1762,6 +1762,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2u-ow-QIj" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="410" width="361" height="340"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashboard_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jzU-ws-2Sr">
                                 <rect key="frame" x="0.0" y="27" width="393" height="129"/>
                                 <constraints>
@@ -1810,19 +1813,29 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harcèlement actuel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-rH-Xo8">
+                                <rect key="frame" x="16" y="368" width="139" height="20"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                <color key="textColor" red="0.12156862745098039" green="0.50196078431372548" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tVj-Ot-iXm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="g2u-ow-QIj" firstAttribute="trailing" secondItem="NF7-lz-7QC" secondAttribute="trailing" id="07B-1V-bcs"/>
                             <constraint firstItem="NF7-lz-7QC" firstAttribute="leading" secondItem="289-1b-v6J" secondAttribute="leading" id="0b5-wt-7sU"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="leading" secondItem="jzU-ws-2Sr" secondAttribute="leading" id="23P-Rr-hdM"/>
                             <constraint firstItem="289-1b-v6J" firstAttribute="centerX" secondItem="hWe-JT-jZk" secondAttribute="centerX" id="2Bs-kB-YBg"/>
                             <constraint firstItem="9Hg-B7-Q21" firstAttribute="trailing" secondItem="289-1b-v6J" secondAttribute="trailing" id="406-mU-rJd"/>
                             <constraint firstItem="DTy-zZ-5dd" firstAttribute="leading" secondItem="cb8-0F-scN" secondAttribute="leadingMargin" id="6bB-sc-Opj"/>
                             <constraint firstItem="289-1b-v6J" firstAttribute="centerX" secondItem="jzU-ws-2Sr" secondAttribute="centerX" id="9iQ-iF-lOL"/>
+                            <constraint firstItem="g2u-ow-QIj" firstAttribute="top" secondItem="QuI-rH-Xo8" secondAttribute="bottom" constant="22" id="CGF-Mx-fzP"/>
                             <constraint firstItem="tcf-ph-qnu" firstAttribute="leading" secondItem="cb8-0F-scN" secondAttribute="leadingMargin" constant="-35" id="H9m-1s-Eaz"/>
                             <constraint firstItem="289-1b-v6J" firstAttribute="top" secondItem="jzU-ws-2Sr" secondAttribute="bottom" constant="8" id="HbD-kX-xTi"/>
                             <constraint firstItem="tVj-Ot-iXm" firstAttribute="bottom" secondItem="jzU-ws-2Sr" secondAttribute="bottom" constant="613" id="ICf-O2-DAi"/>
+                            <constraint firstItem="tVj-Ot-iXm" firstAttribute="bottom" secondItem="g2u-ow-QIj" secondAttribute="bottom" constant="19" id="ISa-uW-Jvy"/>
+                            <constraint firstItem="g2u-ow-QIj" firstAttribute="top" secondItem="NF7-lz-7QC" secondAttribute="bottom" constant="76" id="NGZ-0u-g34"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tcf-ph-qnu" secondAttribute="trailing" constant="-24" id="OXW-Ol-vVb"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="bottom" secondItem="tVj-Ot-iXm" secondAttribute="bottom" id="RbB-12-8Yo"/>
                             <constraint firstItem="hWe-JT-jZk" firstAttribute="top" secondItem="cb8-0F-scN" secondAttribute="top" constant="482" id="SgO-Qk-pu5"/>
@@ -1835,8 +1848,10 @@
                             <constraint firstItem="jzU-ws-2Sr" firstAttribute="centerX" secondItem="cb8-0F-scN" secondAttribute="centerX" id="gwV-wL-o24"/>
                             <constraint firstItem="DTy-zZ-5dd" firstAttribute="top" secondItem="tVj-Ot-iXm" secondAttribute="top" id="hnu-IL-hh5"/>
                             <constraint firstItem="9Hg-B7-Q21" firstAttribute="bottom" secondItem="289-1b-v6J" secondAttribute="bottom" id="jSr-5V-s3T"/>
+                            <constraint firstItem="g2u-ow-QIj" firstAttribute="leading" secondItem="NF7-lz-7QC" secondAttribute="leading" id="m5e-Ms-yJv"/>
                             <constraint firstItem="jzU-ws-2Sr" firstAttribute="leading" secondItem="tVj-Ot-iXm" secondAttribute="leading" id="wh9-RR-jh8"/>
                             <constraint firstAttribute="bottom" secondItem="tcf-ph-qnu" secondAttribute="bottom" constant="822" id="zGk-Hg-XIa"/>
+                            <constraint firstItem="QuI-rH-Xo8" firstAttribute="leading" secondItem="NF7-lz-7QC" secondAttribute="leading" id="zn8-lh-f3N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k74-0x-OQ5">
@@ -1870,6 +1885,7 @@
                         <outlet property="calendarBtn" destination="9Hg-B7-Q21" id="Dxb-J7-dX4"/>
                         <outlet property="cardsCollectionView" destination="NF7-lz-7QC" id="z7X-wN-YJG"/>
                         <outlet property="changeLanguageBtn" destination="QVL-ak-r8g" id="7Ml-Ly-eXe"/>
+                        <outlet property="chartView" destination="g2u-ow-QIj" id="laI-fx-8gt"/>
                         <outlet property="childButton" destination="KsV-P6-DIY" id="PSO-E4-CXS"/>
                         <outlet property="childInfoContainerView" destination="hWe-JT-jZk" id="QmW-GB-QS9"/>
                         <outlet property="dateTF" destination="289-1b-v6J" id="wug-tO-kGt"/>

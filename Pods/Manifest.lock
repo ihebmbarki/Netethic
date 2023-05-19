@@ -1,12 +1,18 @@
 PODS:
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - DLRadioButton (1.4.12)
   - FLAnimatedImage (1.0.17)
   - FSCalendar (2.8.4)
   - SDWebImage (5.15.7):
     - SDWebImage/Core (= 5.15.7)
   - SDWebImage/Core (5.15.7)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
+  - Charts
   - DLRadioButton (~> 1.4)
   - FLAnimatedImage
   - FSCalendar
@@ -14,17 +20,21 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
     - DLRadioButton
     - FLAnimatedImage
     - FSCalendar
     - SDWebImage
+    - SwiftAlgorithms
 
 SPEC CHECKSUMS:
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   SDWebImage: 25bac438318faf37e35650619ebc288a9061d292
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: cdbb4af7c760069a72181d1e04dc961390bd584f
+PODFILE CHECKSUM: 09e9adfddbcf050a414e278715b62b665d85c78c
 
 COCOAPODS: 1.11.3

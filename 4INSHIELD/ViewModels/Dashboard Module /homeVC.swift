@@ -8,9 +8,28 @@
 import UIKit
 import Foundation
 import FSCalendar
+import Charts
 
-
-class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartViewDelegate {
+    
+    let dateFormatter: DateFormatter = {
+          let formatter = DateFormatter()
+          formatter.dateFormat = "dd-MM-yyyy"
+          return formatter
+      }()
+      
+      class DateAxisValueFormatter: NSObject, AxisValueFormatter {
+          let dateFormatter: DateFormatter = {
+              let formatter = DateFormatter()
+              formatter.dateFormat = "dd-MM-yyyy"
+              return formatter
+          }()
+          
+          func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+              let date = Date(timeIntervalSince1970: value)
+              return dateFormatter.string(from: date)
+          }
+      }
     
     var selectedChild: Child?
     var ChildInfoViewController: ChildInfoViewController?
@@ -42,6 +61,9 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var cardsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var chartView: BarChartView!
+
     
     
     override func viewDidLoad() {
@@ -277,68 +299,6 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     var startDateTimestamp: TimeInterval = 0
     var endDateTimestamp: TimeInterval = 0
     
-    @objc func showDatePicker() {
-        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
-
-        let startDatePicker = UIDatePicker()
-        startDatePicker.datePickerMode = .date
-        startDatePicker.preferredDatePickerStyle = .compact
-
-        let endDatePicker = UIDatePicker()
-        endDatePicker.datePickerMode = .date
-        endDatePicker.preferredDatePickerStyle = .compact
-
-        alertController.view.addSubview(startDatePicker)
-        alertController.view.addSubview(endDatePicker)
-
-        let spacingView = UIView() // Empty view for spacing
-        spacingView.translatesAutoresizingMaskIntoConstraints = false
-        alertController.view.addSubview(spacingView)
-
-        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
-
-        let constraints = [
-            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
-            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
-
-            endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
-            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
-        ]
-
-        NSLayoutConstraint.activate(constraints)
-
-        // Add spacing constraints
-        NSLayoutConstraint.activate([
-            endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
-            endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
-
-            spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
-            spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
-            spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
-            spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
-        ])
-
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-               let dateFormatter = DateFormatter()
-               dateFormatter.dateFormat = "dd-MM-yyyy"
-
-               let startDateString = dateFormatter.string(from: startDatePicker.date)
-               let endDateString = dateFormatter.string(from: endDatePicker.date)
-               
-               // Convert start and end date strings to timestamps
-               if let startDate = dateFormatter.date(from: startDateString) {
-                   self.startDateTimestamp = startDate.timeIntervalSince1970
-               }
-               if let endDate = dateFormatter.date(from: endDateString) {
-                   self.endDateTimestamp = endDate.timeIntervalSince1970
-               }
-
-               self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
-           }))
-
-           present(alertController, animated: true, completion: nil)
-       }
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
@@ -661,45 +621,180 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
         case 2:
-               cell.cardDesc.text = "ÉTAT MENTAL"
-               cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
+            cell.cardDesc.text = "ÉTAT MENTAL"
+            cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
 
-               // Call the getMentalState function to fetch the mental state data
-               APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
-                   // Update the UI on the main thread
-                   DispatchQueue.main.async {
-                       if let states = states {
-                           let countHappy = states.filter { $0.mental_state == "happy" }.count
-                           let countStressed = states.filter { $0.mental_state == "stress" }.count
-                           
-                           let text: String
-                           let backgroundImage: UIImage?
-                           
-                           if countHappy > countStressed {
-                               text = "happy"
-                               backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
-                           } else {
-                               text = "stressed"
-                               backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
-                           }
-                           
-                           // Update your text label with the determined text value
-                           cell.cardTitle.text = text
-                           
-                           // Set the background image based on the mental state
-                           cell.containerView.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
-                       } else {
-                           // Handle nil state
-                           cell.cardTitle.text = "N/A"
-                           cell.containerView.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
-                       }
-                   }
-               }
+            // Call the fetchAndProcessMentalState function to fetch and process the mental state data
+            fetchAndProcessMentalState(cell: cell)
         default:
             break
         }
+
         return cell
     }
+    
+    func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
+           // Call the getMentalState function to fetch the mental state data
+           APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+               // Update the UI on the main thread
+               DispatchQueue.main.async {
+                   if let states = states {
+                       let countHappy = states.filter { $0.mental_state == "happy" }.count
+                       let countStressed = states.filter { $0.mental_state == "stress" }.count
+
+                       let text: String
+                       let backgroundImage: UIImage?
+
+                       if countHappy > countStressed {
+                           text = "happy"
+                           backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
+                       } else {
+                           text = "stressed"
+                           backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
+                       }
+
+                       // Update your text label with the determined text value
+                       cell.cardTitle.text = text
+
+                       // Set the background image based on the mental state
+                       cell.containerView.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
+                   } else {
+                       // Handle nil state
+                       cell.cardTitle.text = "N/A"
+                       cell.containerView.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
+                   }
+               }
+           }
+       }
+    
+    func fetchAndProcessMaxScores(completion: @escaping ([String: Int]?) -> Void) {
+        // Fetch the required parameters for the API request (e.g., childID, startDateTimestamp, endDateTimestamp)
+        let childID = selectedChild?.id ?? 0
+        let startDateTimestamp = self.startDateTimestamp ?? 0
+        let endDateTimestamp = self.endDateTimestamp ?? 0
+        
+        // Call the getMaxScoresPerDate function with the parameters
+        APIManager.shareInstance.getMaxScorePerDate(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
+            // Process and handle the maxScoresData as needed
+            
+            // Pass the processed maxScoresData to the completion handler
+            completion(maxScoresData)
+            
+            // Update the chart with the processed data
+            self.updateChart(with: maxScoresData)
+        }
+    }
+
+    func updateChart(with maxScoresData: [String: Int]?) {
+        // Validate and filter out any invalid entries
+        let entries = maxScoresData?.compactMap { key, value -> BarChartDataEntry? in
+            guard let date = dateFormatter.date(from: key) else {
+                return nil
+            }
+            return BarChartDataEntry(x: date.timeIntervalSince1970, y: Double(value))
+        } ?? []
+
+        // Create a data set with the entries
+        let dataSet = BarChartDataSet(entries: entries, label: "Max Scores")
+        dataSet.colors = [UIColor.systemBlue] // Set the bar color
+
+        // Configure the data set
+        dataSet.valueTextColor = UIColor.white // Set the value label color
+        dataSet.valueFont = UIFont.systemFont(ofSize: 12) // Set the value label font size
+
+        // Create a data object with the data set
+        let data = BarChartData(dataSet: dataSet)
+
+        // Configure the chart view
+        chartView.data = data
+        chartView.xAxis.labelPosition = .bottom // Set x-axis label position
+        chartView.xAxis.valueFormatter = DateAxisValueFormatter() // Set custom value formatter for x-axis dates
+
+        // Customize the appearance of the chart
+        chartView.legend.enabled = false // Hide the legend
+        chartView.rightAxis.enabled = false // Hide the right axis
+        chartView.leftAxis.labelTextColor = UIColor.white // Set the left axis label color
+        chartView.leftAxis.axisLineColor = UIColor.white // Set the left axis line color
+        chartView.leftAxis.drawGridLinesEnabled = false // Hide the grid lines on the left axis
+
+        if entries.isEmpty {
+            // Set the chart view's visible range to show zero values
+            chartView.setVisibleXRange(minXRange: 0, maxXRange: 0)
+        }
+
+        // Update the chart view
+        chartView.notifyDataSetChanged()
+    }
+
+    
+    @objc func showDatePicker(cell: CustomCollectionViewCell) {
+        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+
+        let startDatePicker = UIDatePicker()
+        startDatePicker.datePickerMode = .date
+        startDatePicker.preferredDatePickerStyle = .compact
+
+        let endDatePicker = UIDatePicker()
+        endDatePicker.datePickerMode = .date
+        endDatePicker.preferredDatePickerStyle = .compact
+
+        alertController.view.addSubview(startDatePicker)
+        alertController.view.addSubview(endDatePicker)
+
+        let spacingView = UIView() // Empty view for spacing
+        spacingView.translatesAutoresizingMaskIntoConstraints = false
+        alertController.view.addSubview(spacingView)
+
+        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+
+        let constraints = [
+            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
+
+            endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
+        ]
+
+        NSLayoutConstraint.activate(constraints)
+
+        // Add spacing constraints
+        NSLayoutConstraint.activate([
+            endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
+            endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
+
+            spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
+            spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
+            spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
+            spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
+        ])
+
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            
+            let startDateString = dateFormatter.string(from: startDatePicker.date)
+            let endDateString = dateFormatter.string(from: endDatePicker.date)
+            
+            // Convert start and end date strings to timestamps
+            if let startDate = dateFormatter.date(from: startDateString) {
+                self.startDateTimestamp = startDate.timeIntervalSince1970
+            }
+            if let endDate = dateFormatter.date(from: endDateString) {
+                self.endDateTimestamp = endDate.timeIntervalSince1970
+            }
+            
+            self.dateTF.text = "From \(startDateString) to \(endDateString)"
+            
+            // Call the function to fetch and process the max scores data
+            self.fetchAndProcessMaxScores { maxScoresData in
+                // Handle the max scores data or any errors if needed
+                // You can update the chart view here if necessary
+            }
+        }))
+
+        present(alertController, animated: true, completion: nil)
+       }
 
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {

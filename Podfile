@@ -10,5 +10,6 @@ target '4INSHIELD' do
    pod 'SDWebImage', '~> 5.0'
    pod 'DLRadioButton', '~> 1.4'
    pod 'FSCalendar'
+   pod 'Charts'
 
 end

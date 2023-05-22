@@ -13,23 +13,10 @@ import Charts
 class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartViewDelegate {
     
     let dateFormatter: DateFormatter = {
-          let formatter = DateFormatter()
-          formatter.dateFormat = "dd-MM-yyyy"
-          return formatter
-      }()
-      
-      class DateAxisValueFormatter: NSObject, AxisValueFormatter {
-          let dateFormatter: DateFormatter = {
-              let formatter = DateFormatter()
-              formatter.dateFormat = "dd-MM-yyyy"
-              return formatter
-          }()
-          
-          func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-              let date = Date(timeIntervalSince1970: value)
-              return dateFormatter.string(from: date)
-          }
-      }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
     
     var selectedChild: Child?
     var ChildInfoViewController: ChildInfoViewController?
@@ -69,6 +56,8 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure the chart view
+        chartView.xAxis.valueFormatter = DateAxisValueFormatter() // Set custom value formatter for x-axis dates
         
         // Register custom collection view cell class
         cardsCollectionView.delegate = self
@@ -670,8 +659,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     func fetchAndProcessMaxScores(completion: @escaping ([String: Int]?) -> Void) {
         // Fetch the required parameters for the API request (e.g., childID, startDateTimestamp, endDateTimestamp)
         let childID = selectedChild?.id ?? 0
-        let startDateTimestamp = self.startDateTimestamp ?? 0
-        let endDateTimestamp = self.endDateTimestamp ?? 0
+        let startDateTimestamp = self.startDateTimestamp
+        let endDateTimestamp = self.endDateTimestamp
         
         // Call the getMaxScoresPerDate function with the parameters
         APIManager.shareInstance.getMaxScorePerDate(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
@@ -687,40 +676,62 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
     func updateChart(with maxScoresData: [String: Int]?) {
         // Validate and filter out any invalid entries
-        let entries = maxScoresData?.compactMap { key, value -> BarChartDataEntry? in
+        var entries = maxScoresData?.compactMap { key, value -> ChartDataEntry? in
             guard let date = dateFormatter.date(from: key) else {
                 return nil
             }
-            return BarChartDataEntry(x: date.timeIntervalSince1970, y: Double(value))
+            return ChartDataEntry(x: Double(date.timeIntervalSince1970), y: Double(value))
         } ?? []
 
+        if entries.isEmpty {
+            // Handle empty data entries by displaying a zero-value curve
+            let zeroEntry = ChartDataEntry(x: Double(Date().timeIntervalSince1970), y: 0)
+            entries.append(zeroEntry)
+        }
+
         // Create a data set with the entries
-        let dataSet = BarChartDataSet(entries: entries, label: "Max Scores")
-        dataSet.colors = [UIColor.systemBlue] // Set the bar color
+        let dataSet = LineChartDataSet(entries: entries, label: "Max Scores per Date")
+        dataSet.colors = [UIColor.systemBlue] // Set the line color
 
         // Configure the data set
-        dataSet.valueTextColor = UIColor.white // Set the value label color
+        dataSet.drawCircleHoleEnabled = true // Disable circle hole in data points
         dataSet.valueFont = UIFont.systemFont(ofSize: 12) // Set the value label font size
+        dataSet.valueTextColor = UIColor.black // Set the value label color
+        dataSet.drawValuesEnabled = true // Show the value for each data point
 
         // Create a data object with the data set
-        let data = BarChartData(dataSet: dataSet)
+        let data = LineChartData(dataSet: dataSet)
+
+        // Resize the chart view to match the available space
+        chartView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
 
         // Configure the chart view
         chartView.data = data
         chartView.xAxis.labelPosition = .bottom // Set x-axis label position
         chartView.xAxis.valueFormatter = DateAxisValueFormatter() // Set custom value formatter for x-axis dates
+        chartView.xAxis.labelTextColor = UIColor.black // Set x-axis label text color
+        chartView.xAxis.drawLabelsEnabled = true // Enable drawing of x-axis labels
 
         // Customize the appearance of the chart
         chartView.legend.enabled = false // Hide the legend
         chartView.rightAxis.enabled = false // Hide the right axis
-        chartView.leftAxis.labelTextColor = UIColor.white // Set the left axis label color
-        chartView.leftAxis.axisLineColor = UIColor.white // Set the left axis line color
-        chartView.leftAxis.drawGridLinesEnabled = false // Hide the grid lines on the left axis
+        chartView.leftAxis.labelTextColor = UIColor.black // Set the left axis label color
+        chartView.leftAxis.axisLineColor = UIColor.black // Set the left axis line color
+        chartView.leftAxis.drawGridLinesEnabled = true // Show the grid lines on the left axis
+        chartView.leftAxis.gridColor = UIColor.lightGray // Set the grid lines color
+        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12) // Set the left axis label font size
+        chartView.leftAxis.labelCount = 6 // Set the number of labels on the left axis
+        chartView.leftAxis.axisMinimum = 0 // Set the minimum value for the left axis
+        chartView.leftAxis.axisMaximum = 1 // Set the maximum value for the left axis
 
-        if entries.isEmpty {
-            // Set the chart view's visible range to show zero values
-            chartView.setVisibleXRange(minXRange: 0, maxXRange: 0)
-        }
+        // Set the chart view's visible range
+        chartView.setVisibleXRange(minXRange: 1, maxXRange: 7) // Adjust the values as needed
+
+        // Set the title of the chart
+        chartView.chartDescription.text = "Max Score Platform per Date"
+        chartView.chartDescription.textAlign = .right
+        chartView.chartDescription.position = CGPoint(x: chartView.bounds.width - 70, y: 16)
+        chartView.chartDescription.font = .systemFont(ofSize: 14)
 
         // Update the chart view
         chartView.notifyDataSetChanged()
@@ -784,7 +795,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 self.endDateTimestamp = endDate.timeIntervalSince1970
             }
             
-            self.dateTF.text = "From \(startDateString) to \(endDateString)"
+            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
             
             // Call the function to fetch and process the max scores data
             self.fetchAndProcessMaxScores { maxScoresData in
@@ -821,4 +832,17 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         }
     }
 
+}
+
+class DateAxisValueFormatter: NSObject, AxisValueFormatter {
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
+    }
 }

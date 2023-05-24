@@ -7,10 +7,9 @@
 
 import UIKit
 import Foundation
-import FSCalendar
 import Charts
 
-class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartViewDelegate {
+class homeVC: UIViewController, ChartViewDelegate {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -46,19 +45,20 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartV
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
-    @IBOutlet weak var calendarView: FSCalendar!
+//    @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var cardsCollectionView: UICollectionView!
     
-    @IBOutlet weak var chartView: BarChartView!
-
+    @IBOutlet weak var chartView: LineChartView!
     
+    @IBOutlet weak var scoreLbl: UILabel!
+    
+    @IBOutlet weak var current_harLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure the chart view
-        chartView.xAxis.valueFormatter = DateAxisValueFormatter() // Set custom value formatter for x-axis dates
-        
+        scoreLbl.isHidden = true // Set initial visibility to hidden
+
         // Register custom collection view cell class
         cardsCollectionView.delegate = self
         cardsCollectionView.dataSource = self
@@ -193,6 +193,7 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartV
 
         present(languageAlert, animated: true, completion: nil)
     }
+
     
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
@@ -213,9 +214,28 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartV
 
         BonjourLbl.text = localizedText
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
+        
+        current_harLbl.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
+        scoreLbl.text = NSLocalizedString("max_score", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        // Translate the text labels in the collection view cells
+        for cell in cardsCollectionView.visibleCells {
+            if let cell = cell as? CustomCollectionViewCell {
+                if let indexPath = cardsCollectionView.indexPath(for: cell) {
+                    switch indexPath.row {
+                    case 0:
+                        cell.cardDesc.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "HARCÈLEMENT ACTUEL")
+                    case 1:
+                        cell.cardDesc.text = NSLocalizedString("future_har", tableName: nil, bundle: bundle, value: "", comment: "RISQUE FUTUR HARCÈLEMENT")
+                    case 2:
+                        cell.cardDesc.text = NSLocalizedString("etat_mental", tableName: nil, bundle: bundle, value: "", comment: "ÉTAT MENTAL")
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
-
-
     
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
@@ -249,42 +269,6 @@ class homeVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, ChartV
         }
     }
     
-//    @objc func showDatePicker() {
-//        if let calendar = calendarView.subviews.first(where: { $0 is FSCalendar }) {
-//            // Calendar is already displayed, so remove it and hide the calendar view
-//            calendar.removeFromSuperview()
-//            calendarView.isHidden = true
-//        } else {
-//            // Show the calendar view and create and configure the calendar
-//            calendarView.isHidden = false
-//
-//            let calendar = FSCalendar(frame: calendarView.bounds)
-//            calendar.dataSource = self
-//            calendar.delegate = self
-//            calendar.allowsMultipleSelection = true;
-//
-//            // Add the calendar to the calendarView
-//            calendarView.addSubview(calendar)
-//        }
-//    }
-//
-//    // FSCalendarDelegate method for handling date selection
-//    private func calendar(_ calendar: FSCalendar, didSelect dates: [Date], at monthPosition: FSCalendarMonthPosition) {
-//        guard dates.count > 1 else {
-//            return
-//        }
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy"
-//        let startDateString = dateFormatter.string(from: dates[0])
-//        let endDateString = dateFormatter.string(from: dates[1])
-//        dateTF.text = "Du \(startDateString) Au \(endDateString)"
-//
-//        // Remove the calendar from its superview and hide the calendar view
-//        calendar.removeFromSuperview()
-//        calendarView.isHidden = true
-//    }
-
     var startDateTimestamp: TimeInterval = 0
     var endDateTimestamp: TimeInterval = 0
     
@@ -564,6 +548,7 @@ extension homeVC: UIGestureRecognizerDelegate {
 }
 
 extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -578,10 +563,11 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
             fatalError("Unable to dequeue CustomCollectionViewCell")
         }
+        
         // Assign the description and logo based on indexPath or any other logic
         switch indexPath.item {
         case 0:
-            cell.cardDesc.text = "HARCÈLEMENT ACTUEL"
+            cell.cardDesc.text = NSLocalizedString("current_har", comment: "HARCÈLEMENT ACTUEL")
             cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
             
             // Call the getScore function to fetch the score
@@ -606,11 +592,11 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
 
         case 1:
-            cell.cardDesc.text = "RISQUE FUTUR HARCÈLEMENT"
+            cell.cardDesc.text = NSLocalizedString("future_har", comment: "RISQUE FUTUR HARCÈLEMENT")
             cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
         case 2:
-            cell.cardDesc.text = "ÉTAT MENTAL"
+            cell.cardDesc.text = NSLocalizedString("etat_mental", comment: "ÉTAT MENTAL")
             cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
 
             // Call the fetchAndProcessMentalState function to fetch and process the mental state data
@@ -621,6 +607,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
         return cell
     }
+
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
            // Call the getMentalState function to fetch the mental state data
@@ -656,91 +643,111 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
            }
        }
     
-    func fetchAndProcessMaxScores(completion: @escaping ([String: Int]?) -> Void) {
-        // Fetch the required parameters for the API request (e.g., childID, startDateTimestamp, endDateTimestamp)
+    func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
+        // Fetch the required parameters for the API request (e.g., childID)
         let childID = selectedChild?.id ?? 0
-        let startDateTimestamp = self.startDateTimestamp
-        let endDateTimestamp = self.endDateTimestamp
+        
+        // Create a calendar instance to perform date calculations
+        let calendar = Calendar.current
+        
+        // Calculate the number of days between the start and end dates
+        let numberOfDays = calendar.dateComponents([.day], from: startDate, to: endDate).day ?? 0
+        
+        // Create an array to store the dates between the start and end dates
+        var dates: [String] = []
+        
+        // Create a date formatter instance
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        // Iterate through the number of days and add each date to the array
+        if numberOfDays >= 0 {
+            for day in 0...numberOfDays {
+                if let date = calendar.date(byAdding: .day, value: day, to: startDate) {
+                    let dateString = dateFormatter.string(from: date)
+                    dates.append(dateString)
+                }
+            }
+        }
         
         // Call the getMaxScoresPerDate function with the parameters
         APIManager.shareInstance.getMaxScorePerDate(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
             // Process and handle the maxScoresData as needed
             
-            // Pass the processed maxScoresData to the completion handler
-            completion(maxScoresData)
+            // Pass the processed maxScoresData and dates to the completion handler
+            completion(maxScoresData, dates)
             
             // Update the chart with the processed data
-            self.updateChart(with: maxScoresData)
+            self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
         }
     }
 
-    func updateChart(with maxScoresData: [String: Int]?) {
-        // Validate and filter out any invalid entries
-        var entries = maxScoresData?.compactMap { key, value -> ChartDataEntry? in
-            guard let date = dateFormatter.date(from: key) else {
-                return nil
-            }
-            return ChartDataEntry(x: Double(date.timeIntervalSince1970), y: Double(value))
-        } ?? []
-
-        if entries.isEmpty {
-            // Handle empty data entries by displaying a zero-value curve
-            let zeroEntry = ChartDataEntry(x: Double(Date().timeIntervalSince1970), y: 0)
-            entries.append(zeroEntry)
+    func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
+        var entries: [ChartDataEntry] = []
+        
+        for (index, date) in dates.enumerated() {
+            let score = maxScoresData?[date] ?? 0
+            let entry = ChartDataEntry(x: Double(index), y: Double(score))
+            entries.append(entry)
         }
+        
+        let dataSet = LineChartDataSet(entries: entries, label: "Max Score platform per Date")
+        dataSet.mode = .linear
+        dataSet.lineWidth = 2.0
+        dataSet.setColor(UIColor.orange)
+        dataSet.fillColor = UIColor.orange.withAlphaComponent(0.5)
+        dataSet.fillAlpha = 0.5
+        dataSet.drawFilledEnabled = true
+        dataSet.circleRadius = 4.0
+        dataSet.circleColors = [UIColor.orange]
+        dataSet.drawCircleHoleEnabled = true
+        dataSet.circleHoleColor = UIColor.white
 
-        // Create a data set with the entries
-        let dataSet = LineChartDataSet(entries: entries, label: "Max Scores per Date")
-        dataSet.colors = [UIColor.systemBlue] // Set the line color
+        //Add Description
+        let description = Description()
+        description.text = "Max Scores per Date"
+        description.textAlign = .right
+        description.position = CGPoint(x: chartView.bounds.width - 80, y: 16)
+        description.font = UIFont.systemFont(ofSize: 12)
+        description.textColor = UIColor.black
 
-        // Configure the data set
-        dataSet.drawCircleHoleEnabled = true // Disable circle hole in data points
-        dataSet.valueFont = UIFont.systemFont(ofSize: 12) // Set the value label font size
-        dataSet.valueTextColor = UIColor.black // Set the value label color
-        dataSet.drawValuesEnabled = true // Show the value for each data point
-
-        // Create a data object with the data set
+        chartView.chartDescription = description
+        
         let data = LineChartData(dataSet: dataSet)
+        
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: dates)
+        chartView.xAxis.granularity = 1
+        chartView.xAxis.labelCount = dates.count
+        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        chartView.xAxis.labelTextColor = UIColor.black
+        
+        chartView.leftAxis.axisMinimum = 0
+        chartView.xAxis.labelCount = dates.count // Set the label count to the number of dates
+//        chartView.xAxis.labelRotationAngle = -45 // Rotate the labels for better readability
+        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        chartView.leftAxis.labelTextColor = UIColor.black
+        chartView.leftAxis.granularity = 0.2 // Set the granularity of the y-axis to 0.2
+        chartView.leftAxis.axisMaximum = 1.2 // Set the maximum value of the y-axis to ensure proper spacing
+        chartView.extraRightOffset = 40 // Add extra padding on the right side to prevent the dates from being cut off
+        chartView.extraBottomOffset = 10 // Add extra padding at the bottom to prevent collisions with the x-axis labels
 
-        // Resize the chart view to match the available space
-        chartView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-
-        // Configure the chart view
+        chartView.rightAxis.enabled = false
+        chartView.legend.enabled = false
+        chartView.chartDescription.enabled = false
+        
         chartView.data = data
-        chartView.xAxis.labelPosition = .bottom // Set x-axis label position
-        chartView.xAxis.valueFormatter = DateAxisValueFormatter() // Set custom value formatter for x-axis dates
-        chartView.xAxis.labelTextColor = UIColor.black // Set x-axis label text color
-        chartView.xAxis.drawLabelsEnabled = true // Enable drawing of x-axis labels
-
-        // Customize the appearance of the chart
-        chartView.legend.enabled = false // Hide the legend
-        chartView.rightAxis.enabled = false // Hide the right axis
-        chartView.leftAxis.labelTextColor = UIColor.black // Set the left axis label color
-        chartView.leftAxis.axisLineColor = UIColor.black // Set the left axis line color
-        chartView.leftAxis.drawGridLinesEnabled = true // Show the grid lines on the left axis
-        chartView.leftAxis.gridColor = UIColor.lightGray // Set the grid lines color
-        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12) // Set the left axis label font size
-        chartView.leftAxis.labelCount = 6 // Set the number of labels on the left axis
-        chartView.leftAxis.axisMinimum = 0 // Set the minimum value for the left axis
-        chartView.leftAxis.axisMaximum = 1 // Set the maximum value for the left axis
-
-        // Set the chart view's visible range
-        chartView.setVisibleXRange(minXRange: 1, maxXRange: 7) // Adjust the values as needed
-
-        // Set the title of the chart
-        chartView.chartDescription.text = "Max Score Platform per Date"
-        chartView.chartDescription.textAlign = .right
-        chartView.chartDescription.position = CGPoint(x: chartView.bounds.width - 70, y: 16)
-        chartView.chartDescription.font = .systemFont(ofSize: 14)
-
-        // Update the chart view
-        chartView.notifyDataSetChanged()
+        
+        chartView.gridBackgroundColor = UIColor.clear
+        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.leftAxis.drawGridLinesEnabled = true
+        chartView.leftAxis.gridLineDashLengths = [2.0, 2.0]
+        chartView.leftAxis.gridColor = UIColor.lightGray
     }
 
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
-
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
@@ -758,7 +765,6 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 
         startDatePicker.translatesAutoresizingMaskIntoConstraints = false
         endDatePicker.translatesAutoresizingMaskIntoConstraints = false
-
         let constraints = [
             startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
             startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
@@ -766,9 +772,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
             endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
         ]
-
         NSLayoutConstraint.activate(constraints)
-
         // Add spacing constraints
         NSLayoutConstraint.activate([
             endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
@@ -779,33 +783,34 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
-
         alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"
             
-            let startDateString = dateFormatter.string(from: startDatePicker.date)
-            let endDateString = dateFormatter.string(from: endDatePicker.date)
+            let startDate = startDatePicker.date
+            let endDate = endDatePicker.date
+            print(startDate,endDate)
+            print("start and end dates: \(startDate),\(endDate)")
             
-            // Convert start and end date strings to timestamps
-            if let startDate = dateFormatter.date(from: startDateString) {
-                self.startDateTimestamp = startDate.timeIntervalSince1970
-            }
-            if let endDate = dateFormatter.date(from: endDateString) {
-                self.endDateTimestamp = endDate.timeIntervalSince1970
-            }
+            let startDateString = dateFormatter.string(from: startDate)
+            let endDateString = dateFormatter.string(from: endDate)
+            
+            let startDateTimestamp = startDate.timeIntervalSince1970
+            let endDateTimestamp = endDate.timeIntervalSince1970
+            print("time stamps dates: \(startDateTimestamp),\(endDateTimestamp)")
             
             self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
             
+            self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
+            
             // Call the function to fetch and process the max scores data
-            self.fetchAndProcessMaxScores { maxScoresData in
-                // Handle the max scores data or any errors if needed
-                // You can update the chart view here if necessary
+            self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
+                print("Max Scores Data:", maxScoresData)
+                print("Dates:", dates)
             }
         }))
-
         present(alertController, animated: true, completion: nil)
-       }
+    }
 
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {
@@ -832,17 +837,4 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         }
     }
 
-}
-
-class DateAxisValueFormatter: NSObject, AxisValueFormatter {
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
-        return formatter
-    }()
-    
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let date = Date(timeIntervalSince1970: value)
-        return dateFormatter.string(from: date)
-    }
 }

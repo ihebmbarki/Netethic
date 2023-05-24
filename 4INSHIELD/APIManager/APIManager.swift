@@ -23,7 +23,7 @@ class APIManager {
     static let shareInstance = APIManager()
     
     func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
-        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/max-score-platform/per-date/?from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&person_id=\(childID)&rule_name=toxicity_rule"
+        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
         
         AF.request(url, method: .get).response { response in
             switch response.result {
@@ -179,16 +179,16 @@ class APIManager {
             method: .post ,
             headers: headers
         )
-            .response { response in
-                switch response.result {
-                case .success(_):
-                    debugPrint("Your child profile pic has been successfully updated")
-                    break
-                case .failure(let err):
-                    debugPrint("Error while updating the child profile pic ", err.localizedDescription)
-                    break
-                }
+        .response { response in
+            switch response.result {
+            case .success(_):
+                debugPrint("Your child profile pic has been successfully updated")
+                break
+            case .failure(let err):
+                debugPrint("Error while updating the child profile pic ", err.localizedDescription)
+                break
             }
+        }
     }
     
     func deleteChildProfilePic(withID childID: Int) {
@@ -237,7 +237,6 @@ class APIManager {
             }
         }
     }
-
     
     func fetchChild(withID childID: Int ,completion: @escaping(Child) -> Void) {
         var child: Child?

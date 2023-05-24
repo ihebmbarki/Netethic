@@ -51,3 +51,7 @@
 //MARK: Dashboard
 "hello" = "Hello";
 "rangeDate" = "Select a time period";
+"current_har" = "Current Harassment";
+"future_har" = "Future Harassment Risk";
+"etat_mental" = "Mental State ";
+"max_score" = "Max score platform per date";

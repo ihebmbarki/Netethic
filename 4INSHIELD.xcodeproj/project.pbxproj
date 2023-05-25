@@ -20,6 +20,8 @@
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
 		042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A4C4829E5A8640080CADF /* UpdateChild.swift */; };
+		04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04340A582A1FD48100F69B19 /* DangerCardCell.xib */; };
+		04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
 		04340B2429C09BDF0055B394 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2329C09BDF0055B394 /* Phone.swift */; };
 		04340B2629C09C070055B394 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2529C09C070055B394 /* Events.swift */; };
@@ -117,6 +119,8 @@
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		042A4C4829E5A8640080CADF /* UpdateChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChild.swift; sourceTree = "<group>"; };
+		04340A582A1FD48100F69B19 /* DangerCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DangerCardCell.xib; sourceTree = "<group>"; };
+		04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCollectionViewCell.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
 		04340B2329C09BDF0055B394 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
 		04340B2529C09C070055B394 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
@@ -240,6 +244,18 @@
 			path = "Profile Module";
 			sourceTree = "<group>";
 		};
+		04340A572A1FD42700F69B19 /* Child State */ = {
+			isa = PBXGroup;
+			children = (
+				048903072A125B5500F87A1A /* CardCell.xib */,
+				048903092A12607000F87A1A /* CustomCollectionViewCell.swift */,
+				04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */,
+				04340A582A1FD48100F69B19 /* DangerCardCell.xib */,
+				04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */,
+			);
+			path = "Child State";
+			sourceTree = "<group>";
+		};
 		04340B1B29C097F10055B394 /* Translation */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,9 +273,7 @@
 				04340B2329C09BDF0055B394 /* Phone.swift */,
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
-				04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */,
-				048903072A125B5500F87A1A /* CardCell.xib */,
-				048903092A12607000F87A1A /* CustomCollectionViewCell.swift */,
+				04340A572A1FD42700F69B19 /* Child State */,
 			);
 			path = "Dashboard Module ";
 			sourceTree = "<group>";
@@ -643,6 +657,7 @@
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
+				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
 				048903082A125B5500F87A1A /* CardCell.xib in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
@@ -718,6 +733,7 @@
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
+				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,

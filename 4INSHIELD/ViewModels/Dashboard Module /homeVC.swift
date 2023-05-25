@@ -42,16 +42,16 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var childButton: UIButton!
     @IBOutlet weak var changeLanguageBtn: UIBarButtonItem!
     
+    @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
 //    @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var cardsCollectionView: UICollectionView!
+    @IBOutlet weak var dangerCollectionView: UICollectionView!
     
     @IBOutlet weak var chartView: LineChartView!
-    
     @IBOutlet weak var scoreLbl: UILabel!
-    
     @IBOutlet weak var current_harLbl: UILabel!
     
     override func viewDidLoad() {
@@ -225,6 +225,8 @@ class homeVC: UIViewController, ChartViewDelegate {
                     switch indexPath.row {
                     case 0:
                         cell.cardDesc.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "HARCÈLEMENT ACTUEL")
+//                        let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
+//                        cell.cardTitle.text = cardTitle
                     case 1:
                         cell.cardDesc.text = NSLocalizedString("future_har", tableName: nil, bundle: bundle, value: "", comment: "RISQUE FUTUR HARCÈLEMENT")
                     case 2:
@@ -239,12 +241,18 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
-        // Add enfantsViewController as child view controller
+        
+        // Add ChildInfoViewController as child view controller
         addChild(ChildInfoViewController!)
-        ChildInfoViewController?.view.frame = childInfoContainerView.bounds
-        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController?.view.frame = contentView.bounds
+        contentView.addSubview(ChildInfoViewController!.view)
         ChildInfoViewController?.didMove(toParent: self)
+        
+        // Bring ChildInfoViewController to the front
+        view.bringSubviewToFront(contentView)
     }
+
+
 
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -587,7 +595,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     cell.cardProgress.progress = Float(score?.global_score ?? 0) / 100.0
                     
                     // Update the cardTitle label's text based on the score
-                    cell.cardTitle.text = cardTitle
+                    let (_, translatedString) = self.getBackgroundImage(for: score?.global_score)
+                    cell.cardTitle.text = translatedString
                 }
             }
 
@@ -824,17 +833,24 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func getBackgroundImage(for score: Int?) -> (UIImage?, String) {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
         if let scoreValue = score {
             if scoreValue < 20 {
-                return (UIImage(named: "green"), "Non Harcelé")
+                let nonHarceleLocalizedString = NSLocalizedString("non_harcele", tableName: nil, bundle: bundle, value: "", comment: "Non Harcelé")
+                return (UIImage(named: "green"), nonHarceleLocalizedString)
             } else if scoreValue >= 20 && scoreValue < 50 {
-                return (UIImage(named: "orange"), "Partiellement Harcelé")
+                let partiellementHarceleLocalizedString = NSLocalizedString("parc_har", tableName: nil, bundle: bundle, value: "", comment: "Partiellement Harcelé")
+                return (UIImage(named: "orange"), partiellementHarceleLocalizedString)
             } else {
-                return (UIImage(named: "red"), "Harcelé")
+                let harceleLocalizedString = NSLocalizedString("harcled", tableName: nil, bundle: bundle, value: "", comment: "Harcelé")
+                return (UIImage(named: "red"), harceleLocalizedString)
             }
         } else {
-            return (UIImage(named: "green"), "Non Harcelé")
+            let nonHarceleLocalizedString = NSLocalizedString("non_harcele", tableName: nil, bundle: bundle, value: "", comment: "Non Harcelé")
+            return (UIImage(named: "green"), nonHarceleLocalizedString)
         }
     }
+
 
 }

@@ -55,3 +55,6 @@
 "future_har" = "Future Harassment Risk";
 "etat_mental" = "Mental State ";
 "max_score" = "Max score platform per date";
+"harcled" = "Harassed";
+"parc_har" = "Partially Harassed";
+"non_harcele" = "Not Harassed";

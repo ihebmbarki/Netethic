@@ -57,13 +57,24 @@ class homeVC: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scoreLbl.isHidden = true // Set initial visibility to hidden
+        //Set collections tags
+        cardsCollectionView.tag = 1
+        dangerCollectionView.tag = 2
 
-        // Register custom collection view cell class
+        
+        // Set initial visibility to hidden
+        scoreLbl.isHidden = true
+
+        // Register collection view cells classes
         cardsCollectionView.delegate = self
         cardsCollectionView.dataSource = self
         let nib = UINib(nibName: "CardCell", bundle: nil)
         cardsCollectionView.register(nib, forCellWithReuseIdentifier: "CardCell")
+        
+        dangerCollectionView.dataSource = self
+        dangerCollectionView.delegate = self
+        let nib2 = UINib(nibName: "DangerCardCell", bundle: nil)
+        dangerCollectionView.register(nib2, forCellWithReuseIdentifier: "DangerCell")
         
         //Set up TopView
         let gradientLayer = CAGradientLayer()
@@ -247,9 +258,6 @@ class homeVC: UIViewController, ChartViewDelegate {
         ChildInfoViewController?.view.frame = contentView.bounds
         contentView.addSubview(ChildInfoViewController!.view)
         ChildInfoViewController?.didMove(toParent: self)
-        
-        // Bring ChildInfoViewController to the front
-        view.bringSubviewToFront(contentView)
     }
 
 
@@ -556,101 +564,154 @@ extension homeVC: UIGestureRecognizerDelegate {
 }
 
 extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // Return the number of items in your data source
-        return 3
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // Dequeue the cell
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
-            fatalError("Unable to dequeue CustomCollectionViewCell")
+        if collectionView.tag == 1 {
+            return 3
+        } else if collectionView.tag == 2 {
+//            // Fetch the platforms count from the API
+//            APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
+//                // Check if platforms data is available
+//                if let platforms = platforms {
+//                    // Update the dangerCollectionView with the platforms count
+//                    DispatchQueue.main.async {
+//                        collectionView.reloadSections(IndexSet(integer: collectionView.tag))
+//                    }
+//                }
+//            }
+            
+            // Return a default count initially
+            return 3
         }
         
-        // Assign the description and logo based on indexPath or any other logic
-        switch indexPath.item {
-        case 0:
-            cell.cardDesc.text = NSLocalizedString("current_har", comment: "HARCÈLEMENT ACTUEL")
-            cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
+        return 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView.tag == 1 {
+            // Dequeue the cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
+                fatalError("Unable to dequeue CustomCollectionViewCell")
+            }
             
-            // Call the getScore function to fetch the score
-            APIManager.shareInstance.getScore { score in
-                // Update the UI on the main thread
-                DispatchQueue.main.async {
-                    let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
-                    
-                    if let backgroundImage = backgroundImage {
-                        cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
-                    } else {
-                        // Handle nil background image
-                        cell.containerView.backgroundColor = .white
+            // Assign the description and logo based on indexPath or any other logic
+            switch indexPath.item {
+            case 0:
+                cell.cardDesc.text = NSLocalizedString("current_har", comment: "HARCÈLEMENT ACTUEL")
+                cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
+                
+                // Call the getScore function to fetch the score
+                APIManager.shareInstance.getScore { score in
+                    // Update the UI on the main thread
+                    DispatchQueue.main.async {
+                        let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
+                        
+                        if let backgroundImage = backgroundImage {
+                            cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage)
+                        } else {
+                            // Handle nil background image
+                            cell.containerView.backgroundColor = .white
+                        }
+                        
+                        // Update the progress bar with the score value
+                        cell.cardProgress.progress = Float(score?.global_score ?? 0) / 100.0
+                        
+                        // Update the cardTitle label's text based on the score
+                        let (_, translatedString) = self.getBackgroundImage(for: score?.global_score)
+                        cell.cardTitle.text = translatedString
                     }
-                    
-                    // Update the progress bar with the score value
-                    cell.cardProgress.progress = Float(score?.global_score ?? 0) / 100.0
-                    
-                    // Update the cardTitle label's text based on the score
-                    let (_, translatedString) = self.getBackgroundImage(for: score?.global_score)
-                    cell.cardTitle.text = translatedString
+                }
+                
+            case 1:
+                cell.cardDesc.text = NSLocalizedString("future_har", comment: "RISQUE FUTUR HARCÈLEMENT")
+                cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
+                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+            case 2:
+                cell.cardDesc.text = NSLocalizedString("etat_mental", comment: "ÉTAT MENTAL")
+                cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
+                
+                // Call the fetchAndProcessMentalState function to fetch and process the mental state data
+                fetchAndProcessMentalState(cell: cell)
+            default:
+                break
+            }
+            
+            return cell
+            
+        } else if collectionView.tag == 2 {
+            
+            // Handle cells for dangerCollectionView
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
+                fatalError("Unable to dequeue DangerCollectionViewCell")
+            }
+            // Call the APIManager to get the platforms
+            APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
+                // Check if platforms data is available
+                if let platforms = platforms {
+                    // Configure the cell with the platform data
+                    let platform = platforms[indexPath.item]
+                    cell.cardTitle.text = platform.platform
+                    if let logoURL = platform.logo {
+                        let httpsURLString = logoURL.replacingOccurrences(of: "http://", with: "https://")
+                        if let httpsURL = URL(string: httpsURLString) {
+                            URLSession.shared.dataTask(with: httpsURL) { data, response, error in
+                                if let error = error {
+                                    print("Error downloading image: \(error.localizedDescription)")
+                                    return
+                                }
+                                
+                                if let data = data, let image = UIImage(data: data) {
+                                    DispatchQueue.main.async {
+                                        cell.cardLogo.image = image
+                                    }
+                                }
+                            }.resume()
+                        }
+                    } else {
+                        cell.cardLogo.image = nil
+                    }
                 }
             }
-
-        case 1:
-            cell.cardDesc.text = NSLocalizedString("future_har", comment: "RISQUE FUTUR HARCÈLEMENT")
-            cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
-            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
-        case 2:
-            cell.cardDesc.text = NSLocalizedString("etat_mental", comment: "ÉTAT MENTAL")
-            cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
-
-            // Call the fetchAndProcessMentalState function to fetch and process the mental state data
-            fetchAndProcessMentalState(cell: cell)
-        default:
-            break
+            return cell
         }
-
-        return cell
+        
+        return UICollectionViewCell()
     }
-
+    
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
-           // Call the getMentalState function to fetch the mental state data
-           APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
-               // Update the UI on the main thread
-               DispatchQueue.main.async {
-                   if let states = states {
-                       let countHappy = states.filter { $0.mental_state == "happy" }.count
-                       let countStressed = states.filter { $0.mental_state == "stress" }.count
-
-                       let text: String
-                       let backgroundImage: UIImage?
-
-                       if countHappy > countStressed {
-                           text = "happy"
-                           backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
-                       } else {
-                           text = "stressed"
-                           backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
-                       }
-
-                       // Update your text label with the determined text value
-                       cell.cardTitle.text = text
-
-                       // Set the background image based on the mental state
-                       cell.containerView.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
-                   } else {
-                       // Handle nil state
-                       cell.cardTitle.text = "N/A"
-                       cell.containerView.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
-                   }
-               }
-           }
-       }
+        // Call the getMentalState function to fetch the mental state data
+        APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+            // Update the UI on the main thread
+            DispatchQueue.main.async {
+                if let states = states {
+                    let countHappy = states.filter { $0.mental_state == "happy" }.count
+                    let countStressed = states.filter { $0.mental_state == "stress" }.count
+                    
+                    let text: String
+                    let backgroundImage: UIImage?
+                    
+                    if countHappy > countStressed {
+                        text = "happy"
+                        backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
+                    } else {
+                        text = "stressed"
+                        backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
+                    }
+                    
+                    // Update your text label with the determined text value
+                    cell.cardTitle.text = text
+                    
+                    // Set the background image based on the mental state
+                    cell.containerView.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
+                } else {
+                    // Handle nil state
+                    cell.cardTitle.text = "N/A"
+                    cell.containerView.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
+                }
+            }
+        }
+    }
     
     func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
         // Fetch the required parameters for the API request (e.g., childID)
@@ -690,7 +751,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
         }
     }
-
+    
     func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
         var entries: [ChartDataEntry] = []
         
@@ -711,7 +772,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         dataSet.circleColors = [UIColor.orange]
         dataSet.drawCircleHoleEnabled = true
         dataSet.circleHoleColor = UIColor.white
-
+        
         //Add Description
         let description = Description()
         description.text = "Max Scores per Date"
@@ -719,7 +780,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         description.position = CGPoint(x: chartView.bounds.width - 80, y: 16)
         description.font = UIFont.systemFont(ofSize: 12)
         description.textColor = UIColor.black
-
+        
         chartView.chartDescription = description
         
         let data = LineChartData(dataSet: dataSet)
@@ -733,14 +794,14 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         
         chartView.leftAxis.axisMinimum = 0
         chartView.xAxis.labelCount = dates.count // Set the label count to the number of dates
-//        chartView.xAxis.labelRotationAngle = -45 // Rotate the labels for better readability
+        //        chartView.xAxis.labelRotationAngle = -45 // Rotate the labels for better readability
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
         chartView.leftAxis.labelTextColor = UIColor.black
         chartView.leftAxis.granularity = 0.2 // Set the granularity of the y-axis to 0.2
         chartView.leftAxis.axisMaximum = 1.2 // Set the maximum value of the y-axis to ensure proper spacing
         chartView.extraRightOffset = 40 // Add extra padding on the right side to prevent the dates from being cut off
         chartView.extraBottomOffset = 10 // Add extra padding at the bottom to prevent collisions with the x-axis labels
-
+        
         chartView.rightAxis.enabled = false
         chartView.legend.enabled = false
         chartView.chartDescription.enabled = false
@@ -753,31 +814,31 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         chartView.leftAxis.gridLineDashLengths = [2.0, 2.0]
         chartView.leftAxis.gridColor = UIColor.lightGray
     }
-
+    
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
-
+        
         let endDatePicker = UIDatePicker()
         endDatePicker.datePickerMode = .date
         endDatePicker.preferredDatePickerStyle = .compact
-
+        
         alertController.view.addSubview(startDatePicker)
         alertController.view.addSubview(endDatePicker)
-
+        
         let spacingView = UIView() // Empty view for spacing
         spacingView.translatesAutoresizingMaskIntoConstraints = false
         alertController.view.addSubview(spacingView)
-
+        
         startDatePicker.translatesAutoresizingMaskIntoConstraints = false
         endDatePicker.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
             startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
             startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
-
+            
             endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
             endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
         ]
@@ -786,7 +847,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         NSLayoutConstraint.activate([
             endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
             endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
-
+            
             spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
             spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
             spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
@@ -820,7 +881,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         }))
         present(alertController, animated: true, completion: nil)
     }
-
+    
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {
             if state == "happy" {
@@ -851,6 +912,21 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return (UIImage(named: "green"), nonHarceleLocalizedString)
         }
     }
-
-
+    
+    func setPlatformCards(for score : Int?) -> (UIImage?) {
+        if let scoreValue = score {
+            if scoreValue < 30 {
+                return UIImage(named: "green")
+            } else if scoreValue >= 30 && scoreValue < 50 {
+                return UIImage(named: "orange")
+            }
+            else {
+                return UIImage(named: "red")
+            }
+        } else {
+            return UIImage(named: "green")
+        }
+    }
+    
+    
 }

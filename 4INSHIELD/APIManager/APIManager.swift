@@ -21,7 +21,46 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
 class APIManager {
     static let shareInstance = APIManager()
+
+    func getStatusPerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([Danger]?) -> Void) {
+        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/plateform/per_date/?person_id=\(childID)&from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&rule_name=toxicity_rule&plateform_name=platform"
+
+        AF.request(url, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                if let data = data, let yourData = try? JSONDecoder().decode([Danger].self, from: data) {
+                    completion(yourData)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
     
+    func getPlatforms(withID childID: Int, completion: @escaping ([Platform]?) -> Void) {
+        let childPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/person/platforms/\(childID)/"
+
+        AF.request(childPlatformsURL, method: .get).responseData { response in
+            switch response.result {
+            case .success(let responseData):
+                print("Response data: \(String(describing: responseData))")
+                
+                if let platformData = try? JSONDecoder().decode(PlatformData.self, from: responseData) {
+                    completion(platformData.platforms)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error getting platforms: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+
+
     func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
         let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
         

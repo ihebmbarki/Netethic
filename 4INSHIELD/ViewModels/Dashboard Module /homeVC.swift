@@ -205,15 +205,15 @@ class homeVC: UIViewController, ChartViewDelegate {
 
         present(languageAlert, animated: true, completion: nil)
     }
-
     
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
-                changeLanguageBtn.image = UIImage(named: "fr_white")
+                changeLanguageBtn.image = UIImage(named: "fr_white")?.withRenderingMode(.alwaysOriginal)
             } else if selectedLanguage == "en" {
-                changeLanguageBtn.image = UIImage(named: "eng_white")
+                changeLanguageBtn.image = UIImage(named: "eng_white")?.withRenderingMode(.alwaysOriginal)
             }
+
         }
     }
     
@@ -256,12 +256,26 @@ class homeVC: UIViewController, ChartViewDelegate {
         
         // Add ChildInfoViewController as child view controller
         addChild(ChildInfoViewController!)
-        ChildInfoViewController?.view.frame = contentView.bounds
-        contentView.addSubview(ChildInfoViewController!.view)
-        ChildInfoViewController?.didMove(toParent: self)
+        
+        // Add childInfoContainerView to the view hierarchy
+        view.addSubview(childInfoContainerView)
+        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set up constraints for childInfoContainerView
+        NSLayoutConstraint.activate([
+            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400) 
+        ])
+        
+        // Add ChildInfoViewController's view to the childInfoContainerView
+        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+        
+        // Notify ChildInfoViewController that it has been added to its parent view controller
+        ChildInfoViewController!.didMove(toParent: self)
     }
-
-
 
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -288,7 +302,6 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     var startDateTimestamp: TimeInterval = 0
     var endDateTimestamp: TimeInterval = 0
-    
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
@@ -660,6 +673,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 } else {
                     cell.cardLogo.image = nil
                 }
+
             } else {
                 // Handle no data available
                 cell.cardTitle.text = "No Data Available"
@@ -820,7 +834,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     
-    @objc func showDatePicker(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
+    @objc func showDatePicker(cell: CustomCollectionViewCell) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
@@ -857,7 +871,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { [self] _ in
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"
             
@@ -877,48 +891,15 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
             
-            if collectionView == self.cardsCollectionView {
-                // Call the function to fetch and process the max scores data
-                self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
-                    print("Max Scores Data:", maxScoresData)
-                    print("Dates:", dates)
-                    
-                }
-            } else if collectionView == self.dangerCollectionView {
-                // Call the function to retrieve the scores for the other collection view
-                let childID = selectedChild?.id
-                APIManager.shareInstance.getStatusPerDate(childID: childID!, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [self] scores in
-                    // Check if scores are available
-                    if let scores = scores {
-                        let profile = scores[indexPath.item] // Retrieve the profile using indexPath.item
-                        
-                        // Access the score property from the profile
-//                        let score = profile.score
-                        
-                        // Retrieve the cell from the collectionView using the indexPath
-                        if let cell = collectionView.cellForItem(at: indexPath) as? DangerCollectionViewCell {
-                            // Set the platform cards based on the score
-                            let (backgroundImage, status) = setPlatformCards(for: scores[indexPath.item] )
-                            
-                            // Assign the image and status to the cell's container view and title label
-                            DispatchQueue.main.async {
-                                cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage!)
-                                cell.cardTitle.text = status
-                            }
-                        }
-                    } else {
-                        // Handle the case when scores is nil
-                        if let cell = collectionView.cellForItem(at: indexPath) as? DangerCollectionViewCell {
-                            cell.cardTitle.text = "No data"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
-                        }
-                    }
-                }
+            // Call the function to fetch and process the max scores data
+            self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
+                print("Max Scores Data:", maxScoresData)
+                print("Dates:", dates)
             }
         }))
         present(alertController, animated: true, completion: nil)
-    }
 
+    }
     
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {

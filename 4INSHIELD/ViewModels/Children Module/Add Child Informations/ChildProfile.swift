@@ -9,7 +9,6 @@ import UIKit
 
 class ChildProfile: UIViewController {
 
-    
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var genderTF: UITextField!
@@ -46,7 +45,6 @@ class ChildProfile: UIViewController {
         nextBtn.layer.cornerRadius = 10
         
     }
-    
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
@@ -102,9 +100,7 @@ class ChildProfile: UIViewController {
                 } else {
                        print("Error: could not parse response")
                 }
-     
-                
-                    
+                         
                 let date = Date()
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -135,13 +131,11 @@ class ChildProfile: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
-    
 }
 
 extension Date {
    func getFormattedDate(format: String) -> String {
-       //        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+       //dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         let dateformat = DateFormatter()
        dateformat.locale = NSLocale.current
        dateformat.dateFormat = format

@@ -57,34 +57,31 @@ class OnboardingViewController: UIViewController {
             if let username = UserDefaults.standard.string(forKey: "username") {
                 APIManager.shareInstance.getUserWizardStep(withUserName: username) { wizardStep in
                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
+                    // Increment the wizard step value
+                    let newWizardStep = (wizardStep ) + 1
                     // Update the user defaults with the new wizard step value
-                    UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
-                    if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
-                        print("Retrieved wizard step from user defaults: \(wizardStep)")
-                        switch wizardStep {
-                        case 1:
-                            self.goToScreen(withId: "childInfos")
-                        case 2:
-                            self.goToScreen(withId: "ChildSocialMedia")
-                        case 3:
-                            self.goToScreen(withId: "ChildProfileAdded")
-                        case 4:
-                            self.goToScreen(withId: "ChildDevice")
-                        case 5:
-                            self.goToScreen(withId: "Congrats")
-                        default:
-                            // The wizard step value is not set in the user defaults
-                            // Redirect to the onboarding screen
-                            self.goToScreen(withId: "OnboardingSB")
-                        }
-                    } else {
-                        // The wizard step value is not set in the user defaults
+                    UserDefaults.standard.set(newWizardStep, forKey: "wizardStep")
+                    print("Updated wizard step: \(newWizardStep)")
+                    
+                    switch newWizardStep {
+                    case 1:
+                        self.goToScreen(withId: "childInfos")
+                    case 2:
+                        self.goToScreen(withId: "ChildSocialMedia")
+                    case 3:
+                        self.goToScreen(withId: "ChildProfileAdded")
+                    case 4:
+                        self.goToScreen(withId: "ChildDevice")
+                    case 5:
+                        self.goToScreen(withId: "Congrats")
+                    default:
                         // Redirect to the onboarding screen
                         self.goToScreen(withId: "OnboardingSB")
                     }
                 }
+                
                 let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
-                if onboardingSimple == false, let username = UserDefaults.standard.string(forKey: "username") {
+                if onboardingSimple == false {
                     APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: username) { result in
                         switch result {
                         case .success(let value):
@@ -97,13 +94,13 @@ class OnboardingViewController: UIViewController {
                     }
                 }
             }
-            
-        }else {
+        } else {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
+
     
 }
 

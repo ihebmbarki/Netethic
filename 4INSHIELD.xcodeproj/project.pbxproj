@@ -50,7 +50,7 @@
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
 		04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */; };
-		0486591A2A25170C0068C5F6 /* Danger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048659192A25170C0068C5F6 /* Danger.swift */; };
+		0486591A2A25170C0068C5F6 /* Profilee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048659192A25170C0068C5F6 /* Profilee.swift */; };
 		048835932A24B998007A8AC7 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048835922A24B998007A8AC7 /* Platform.swift */; };
 		048903082A125B5500F87A1A /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048903072A125B5500F87A1A /* CardCell.xib */; };
 		0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048903092A12607000F87A1A /* CustomCollectionViewCell.swift */; };
@@ -153,7 +153,7 @@
 		04850C5529ACC3E4001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04850C5A29ACC3EB001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04850C5C29ACC3EB001A27FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		048659192A25170C0068C5F6 /* Danger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Danger.swift; sourceTree = "<group>"; };
+		048659192A25170C0068C5F6 /* Profilee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profilee.swift; sourceTree = "<group>"; };
 		048835922A24B998007A8AC7 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		048903072A125B5500F87A1A /* CardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
 		048903092A12607000F87A1A /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -492,7 +492,7 @@
 			children = (
 				049531422A12847C00C610AD /* Score.swift */,
 				04C604DB2A16595700FDFE8E /* State.swift */,
-				048659192A25170C0068C5F6 /* Danger.swift */,
+				048659192A25170C0068C5F6 /* Profilee.swift */,
 			);
 			path = "Mental State";
 			sourceTree = "<group>";
@@ -752,7 +752,7 @@
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
-				0486591A2A25170C0068C5F6 /* Danger.swift in Sources */,
+				0486591A2A25170C0068C5F6 /* Profilee.swift in Sources */,
 				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,

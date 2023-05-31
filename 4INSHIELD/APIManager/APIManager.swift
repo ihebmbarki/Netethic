@@ -22,14 +22,15 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
 
-    func getStatusPerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([Danger]?) -> Void) {
-        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/plateform/per_date/?person_id=\(childID)&from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&rule_name=toxicity_rule&plateform_name=platform"
+    func getStatusPerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([Int]?) -> Void) {
+        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/?person_id=\(childID)&from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&rule_name=toxicity_rule&plateform_name=plateform_name"
 
         AF.request(url, method: .get).response { response in
             switch response.result {
             case .success(let data):
-                if let data = data, let yourData = try? JSONDecoder().decode([Danger].self, from: data) {
-                    completion(yourData)
+                if let data = data, let scores = try? JSONDecoder().decode([Profilee].self, from: data) {
+                    let scoreValues = scores.compactMap { $0.score }
+                    completion(scoreValues)
                 } else {
                     completion(nil)
                 }
@@ -39,16 +40,16 @@ class APIManager {
             }
         }
     }
+
     
     func getPlatforms(withID childID: Int, completion: @escaping ([Platform]?) -> Void) {
-        let childPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/person/platforms/\(childID)/"
+        let childPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/person/platforms/?person_id=\(childID)/"
 
-        AF.request(childPlatformsURL, method: .get).responseData { response in
+        AF.request(childPlatformsURL, method: .get).responseString { response in
             switch response.result {
             case .success(let responseData):
-                print("Response data: \(String(describing: responseData))")
-                
-                if let platformData = try? JSONDecoder().decode(PlatformData.self, from: responseData) {
+//                print("Response data: \(responseData)")
+                if let responseData = responseData.data(using: .utf8), let platformData = try? JSONDecoder().decode(PlatformData.self, from: responseData) {
                     completion(platformData.platforms)
                 } else {
                     completion(nil)
@@ -62,7 +63,7 @@ class APIManager {
 
 
     func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
-        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
+        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
         
         AF.request(url, method: .get).response { response in
             switch response.result {
@@ -80,7 +81,7 @@ class APIManager {
     }
     
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([State]?) -> Void) {
-        let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
         AF.request(mental_state, method: .get).response { response in
             switch response.result {
             case .success(let data):

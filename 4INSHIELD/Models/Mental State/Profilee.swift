@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct Danger: Codable {
-    let score : Int?
+struct Profilee: Decodable {
+    let uuid: Int
+    let score: Int?
+    let nbData: Double
 }

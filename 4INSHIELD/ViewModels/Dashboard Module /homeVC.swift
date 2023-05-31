@@ -18,9 +18,10 @@ class homeVC: UIViewController, ChartViewDelegate {
     }()
     
     var selectedChild: Child?
+    var platforms: [Platform]?
     var ChildInfoViewController: ChildInfoViewController?
-//    var selectedStartDate: Date?
-//    var selectedEndDate: Date?
+    var startDate: Date?
+    var endDate: Date?
 
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
@@ -564,28 +565,21 @@ extension homeVC: UIGestureRecognizerDelegate {
 }
 
 extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 1 {
-            return 3
-        } else if collectionView.tag == 2 {
-//            // Fetch the platforms count from the API
-//            APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
-//                // Check if platforms data is available
-//                if let platforms = platforms {
-//                    // Update the dangerCollectionView with the platforms count
-//                    DispatchQueue.main.async {
-//                        collectionView.reloadSections(IndexSet(integer: collectionView.tag))
-//                    }
-//                }
-//            }
-            
-            // Return a default count initially
-            return 3
+
+    // Update platforms data and reload collection view section
+       func updatePlatformsData(withPlatforms platforms: [Platform]?, in collectionView: UICollectionView) {
+           self.platforms = platforms
+           DispatchQueue.main.async {
+               collectionView.reloadData() // Reload the entire collection view instead of specific sections
+           }
+       }
+
+    // Fetch platforms data and call updatePlatformsData when data is available
+    func fetchPlatformsData(for collectionView: UICollectionView) {
+        APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
+            self.updatePlatformsData(withPlatforms: platforms, in: collectionView)
         }
-        
-        return 0
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
@@ -638,46 +632,56 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             return cell
             
-        } else if collectionView.tag == 2 {
-            
-            // Handle cells for dangerCollectionView
+        } else   if collectionView.tag == 2 {
+            // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
-            // Call the APIManager to get the platforms
-            APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
-                // Check if platforms data is available
-                if let platforms = platforms {
-                    // Configure the cell with the platform data
-                    let platform = platforms[indexPath.item]
-                    cell.cardTitle.text = platform.platform
-                    if let logoURL = platform.logo {
-                        let httpsURLString = logoURL.replacingOccurrences(of: "http://", with: "https://")
-                        if let httpsURL = URL(string: httpsURLString) {
-                            URLSession.shared.dataTask(with: httpsURL) { data, response, error in
-                                if let error = error {
-                                    print("Error downloading image: \(error.localizedDescription)")
-                                    return
+            
+            if let platforms = self.platforms, indexPath.item < platforms.count {
+                // Configure the cell with the platform data
+                let platform = platforms[indexPath.item]
+                if let logoURL = platform.logo {
+                    let httpsURLString = logoURL.replacingOccurrences(of: "http://", with: "https://")
+                    if let httpsURL = URL(string: httpsURLString) {
+                        URLSession.shared.dataTask(with: httpsURL) { data, response, error in
+                            if let error = error {
+                                print("Error downloading image: \(error.localizedDescription)")
+                                return
+                            }
+                            
+                            if let data = data, let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    cell.cardLogo.image = image
                                 }
-                                
-                                if let data = data, let image = UIImage(data: data) {
-                                    DispatchQueue.main.async {
-                                        cell.cardLogo.image = image
-                                    }
-                                }
-                            }.resume()
-                        }
-                    } else {
-                        cell.cardLogo.image = nil
+                            }
+                        }.resume()
                     }
+                } else {
+                    cell.cardLogo.image = nil
                 }
+            } else {
+                // Handle no data available
+                cell.cardTitle.text = "No Data Available"
+                cell.cardLogo.image = nil
             }
+            
             return cell
         }
         
         return UICollectionViewCell()
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView.tag == 1 {
+            return 3
+        } else if collectionView.tag == 2 {
+            // Return the count of platforms if available, otherwise 0
+            return 3
+        }
+
+        return 0
+    }
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data
@@ -816,7 +820,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     
-    @objc func showDatePicker(cell: CustomCollectionViewCell) {
+    @objc func showDatePicker(cell: UICollectionViewCell, collectionView: UICollectionView, indexPath: IndexPath) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
@@ -853,7 +857,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { [self] _ in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"
             
@@ -873,14 +877,48 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
             
-            // Call the function to fetch and process the max scores data
-            self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
-                print("Max Scores Data:", maxScoresData)
-                print("Dates:", dates)
+            if collectionView == self.cardsCollectionView {
+                // Call the function to fetch and process the max scores data
+                self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
+                    print("Max Scores Data:", maxScoresData)
+                    print("Dates:", dates)
+                    
+                }
+            } else if collectionView == self.dangerCollectionView {
+                // Call the function to retrieve the scores for the other collection view
+                let childID = selectedChild?.id
+                APIManager.shareInstance.getStatusPerDate(childID: childID!, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [self] scores in
+                    // Check if scores are available
+                    if let scores = scores {
+                        let profile = scores[indexPath.item] // Retrieve the profile using indexPath.item
+                        
+                        // Access the score property from the profile
+//                        let score = profile.score
+                        
+                        // Retrieve the cell from the collectionView using the indexPath
+                        if let cell = collectionView.cellForItem(at: indexPath) as? DangerCollectionViewCell {
+                            // Set the platform cards based on the score
+                            let (backgroundImage, status) = setPlatformCards(for: scores[indexPath.item] )
+                            
+                            // Assign the image and status to the cell's container view and title label
+                            DispatchQueue.main.async {
+                                cell.containerView.backgroundColor = UIColor(patternImage: backgroundImage!)
+                                cell.cardTitle.text = status
+                            }
+                        }
+                    } else {
+                        // Handle the case when scores is nil
+                        if let cell = collectionView.cellForItem(at: indexPath) as? DangerCollectionViewCell {
+                            cell.cardTitle.text = "No data"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                        }
+                    }
+                }
             }
         }))
         present(alertController, animated: true, completion: nil)
     }
+
     
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {
@@ -913,18 +951,18 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         }
     }
     
-    func setPlatformCards(for score : Int?) -> (UIImage?) {
+    func setPlatformCards(for score : Int?) -> (UIImage?,String) {
         if let scoreValue = score {
             if scoreValue < 30 {
-                return UIImage(named: "green")
+                return (UIImage(named: "green"),"Statut ordinaire")
             } else if scoreValue >= 30 && scoreValue < 50 {
-                return UIImage(named: "orange")
+                return (UIImage(named: "orange"),"Statut Irrégulier")
             }
             else {
-                return UIImage(named: "red")
+                return (UIImage(named: "red"),"Statut à Risque")
             }
         } else {
-            return UIImage(named: "green")
+            return (UIImage(named: "green"),"Statut ordinaire")
         }
     }
     

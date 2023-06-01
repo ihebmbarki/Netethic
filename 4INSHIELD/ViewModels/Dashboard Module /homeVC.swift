@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import Charts
+import AlamofireImage
 
 class homeVC: UIViewController, ChartViewDelegate {
     
@@ -18,7 +19,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     }()
     
     var selectedChild: Child?
-    var platforms: [Platform]?
+    var platforms: [PlatformDetail] = []
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
     var endDate: Date?
@@ -58,6 +59,18 @@ class homeVC: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Call the API to fetch platforms
+        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
+            guard let self = self else { return }
+            
+            if let platforms = platforms?.platforms {
+                self.platforms = platforms
+                DispatchQueue.main.async {
+                    self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
+                }
+            }
+        }
+        
         //Set collections tags
         cardsCollectionView.tag = 1
         dangerCollectionView.tag = 2
@@ -84,6 +97,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         topView.layer.insertSublayer(gradientLayer, at: 0)
         
         //Set up date textfield
+        dateTF.layer.masksToBounds = false
         dateTF.layer.masksToBounds = false
 //        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
         dateTF.layer.shadowColor = UIColor.gray.cgColor
@@ -355,6 +369,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
+    
+    
+    
 }
 
 extension homeVC : SideBarDelegate {
@@ -578,21 +595,6 @@ extension homeVC: UIGestureRecognizerDelegate {
 }
 
 extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    // Update platforms data and reload collection view section
-       func updatePlatformsData(withPlatforms platforms: [Platform]?, in collectionView: UICollectionView) {
-           self.platforms = platforms
-           DispatchQueue.main.async {
-               collectionView.reloadData() // Reload the entire collection view instead of specific sections
-           }
-       }
-
-    // Fetch platforms data and call updatePlatformsData when data is available
-    func fetchPlatformsData(for collectionView: UICollectionView) {
-        APIManager.shareInstance.getPlatforms(withID: selectedChild!.id) { platforms in
-            self.updatePlatformsData(withPlatforms: platforms, in: collectionView)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
@@ -600,6 +602,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
                 fatalError("Unable to dequeue CustomCollectionViewCell")
             }
+            
+            
             
             // Assign the description and logo based on indexPath or any other logic
             switch indexPath.item {
@@ -645,41 +649,48 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             return cell
             
-        } else   if collectionView.tag == 2 {
+        } else
+        if collectionView.tag == 2 {
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
             
-            if let platforms = self.platforms, indexPath.item < platforms.count {
-                // Configure the cell with the platform data
-                let platform = platforms[indexPath.item]
-                if let logoURL = platform.logo {
-                    let httpsURLString = logoURL.replacingOccurrences(of: "http://", with: "https://")
-                    if let httpsURL = URL(string: httpsURLString) {
-                        URLSession.shared.dataTask(with: httpsURL) { data, response, error in
-                            if let error = error {
-                                print("Error downloading image: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            if let data = data, let image = UIImage(data: data) {
-                                DispatchQueue.main.async {
-                                    cell.cardLogo.image = image
-                                }
-                            }
-                        }.resume()
-                    }
-                } else {
-                    cell.cardLogo.image = nil
-                }
+            let platform = platforms[indexPath.item]
+            let logoURL = platform.logo.absoluteString
 
+            // Check if the URL starts with "http://"
+            if logoURL.hasPrefix("http://") {
+                // Replace "http://" with "https://"
+                let modifiedLogoURL = logoURL.replacingOccurrences(of: "http://", with: "https://")
+                
+                // Create a new URL from the modified string
+                if let url = URL(string: modifiedLogoURL) {
+                    cell.cardLogo.af.setImage(withURL: url)
+                }
             } else {
-                // Handle no data available
-                cell.cardTitle.text = "No Data Available"
-                cell.cardLogo.image = nil
+                cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild!.id, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+                if let score = score {
+                    // Use the score value to determine the cardTitle
+                    if score < 30 {
+                        cell.cardTitle.text = "Statut ordinaire"
+                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                    } else if score >= 30 && score < 50 {
+                        cell.cardTitle.text = "Statut Irrégulier"
+                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+                    } else {
+                        cell.cardTitle.text = "Statut à Risque"
+                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                    }
+                } else {
+                    // Handle error case or set a default value for the cardTitle
+                    cell.cardTitle.text = "No Data"
+                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                }
+            }
             return cell
         }
         
@@ -690,12 +701,13 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         if collectionView.tag == 1 {
             return 3
         } else if collectionView.tag == 2 {
-            // Return the count of platforms if available, otherwise 0
-            return 3
+            print (platforms.count)
+            return platforms.count
+            
         }
-
         return 0
     }
+    
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data

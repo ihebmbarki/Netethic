@@ -33,6 +33,7 @@
 		043C49F729E439FF00B5FF9E /* PinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49F629E439FF00B5FF9E /* PinView.swift */; };
 		043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49F829E43A7D00B5FF9E /* PinTextField.swift */; };
 		043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49FA29E43AC900B5FF9E /* PinConfig.swift */; };
+		0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449F04C2A28F9D600D3327D /* ScoreResponse.swift */; };
 		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
 		0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */; };
 		0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */; };
@@ -50,7 +51,6 @@
 		04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04850C5029ACC3E4001A27FF /* SceneDelegate.swift */; };
 		04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5429ACC3E4001A27FF /* Main.storyboard */; };
 		04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */; };
-		0486591A2A25170C0068C5F6 /* Profilee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048659192A25170C0068C5F6 /* Profilee.swift */; };
 		048835932A24B998007A8AC7 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048835922A24B998007A8AC7 /* Platform.swift */; };
 		048903082A125B5500F87A1A /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048903072A125B5500F87A1A /* CardCell.xib */; };
 		0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048903092A12607000F87A1A /* CustomCollectionViewCell.swift */; };
@@ -133,6 +133,7 @@
 		043C49F629E439FF00B5FF9E /* PinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinView.swift; sourceTree = "<group>"; };
 		043C49F829E43A7D00B5FF9E /* PinTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinTextField.swift; sourceTree = "<group>"; };
 		043C49FA29E43AC900B5FF9E /* PinConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfig.swift; sourceTree = "<group>"; };
+		0449F04C2A28F9D600D3327D /* ScoreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreResponse.swift; sourceTree = "<group>"; };
 		0460DBEF29EEB7A50019EA53 /* FSCalendar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FSCalendar.xcodeproj; path = "4INSHIELD/ViewModels/Children Module/FSCalendar/Example-Objc/FSCalendar.xcodeproj"; sourceTree = "<group>"; };
 		0469863129E6D78100D3CC5F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Child_SocialMedia_TvCell.xib; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		04850C5529ACC3E4001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04850C5A29ACC3EB001A27FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04850C5C29ACC3EB001A27FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		048659192A25170C0068C5F6 /* Profilee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profilee.swift; sourceTree = "<group>"; };
 		048835922A24B998007A8AC7 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		048903072A125B5500F87A1A /* CardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
 		048903092A12607000F87A1A /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -483,6 +483,7 @@
 				04C1363929D1C9D5008F1A58 /* ChildModel.swift */,
 				040821AB29D5B91200D7A562 /* Child.swift */,
 				048835922A24B998007A8AC7 /* Platform.swift */,
+				0449F04C2A28F9D600D3327D /* ScoreResponse.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -492,7 +493,6 @@
 			children = (
 				049531422A12847C00C610AD /* Score.swift */,
 				04C604DB2A16595700FDFE8E /* State.swift */,
-				048659192A25170C0068C5F6 /* Profilee.swift */,
 			);
 			path = "Mental State";
 			sourceTree = "<group>";
@@ -737,6 +737,7 @@
 				043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */,
 				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
+				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
@@ -752,7 +753,6 @@
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
-				0486591A2A25170C0068C5F6 /* Profilee.swift in Sources */,
 				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,

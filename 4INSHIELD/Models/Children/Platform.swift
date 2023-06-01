@@ -8,10 +8,10 @@
 import Foundation
 
 struct Platform: Codable {
-    let platform: String?
-    let logo: String?
+    let platforms: [PlatformDetail]
 }
 
-struct PlatformData: Codable {
-    let platforms: [Platform]
+struct PlatformDetail: Codable {
+    let platform: String
+    let logo: URL
 }

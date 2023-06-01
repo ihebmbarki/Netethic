@@ -11,5 +11,7 @@ target '4INSHIELD' do
    pod 'DLRadioButton', '~> 1.4'
    pod 'FSCalendar'
    pod 'Charts'
+   pod 'AlamofireImage', '~> 4.1'
+
 
 end

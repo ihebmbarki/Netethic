@@ -22,45 +22,52 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
 
-    func getStatusPerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([Int]?) -> Void) {
-        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/?person_id=\(childID)&from_date_timestamp=\(startDateTimestamp)&to_date_timestamp=\(endDateTimestamp)&rule_name=toxicity_rule&plateform_name=plateform_name"
-
-        AF.request(url, method: .get).response { response in
+    func fetchScore(forPlatform platform: String, childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (Int?) -> Void) {
+        let urlString = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/"
+        let parameters: [String: Any] = [
+            "person_id": childID,
+            "from_date_timestamp": startDateTimestamp,
+            "to_date_timestamp": endDateTimestamp,
+            "rule_name": "toxicity_rule",
+            "plateform_name": platform
+        ]
+        
+        AF.request(urlString, method: .get, parameters: parameters).responseDecodable(of: ScoreResponse.self) { response in
             switch response.result {
-            case .success(let data):
-                if let data = data, let scores = try? JSONDecoder().decode([Profilee].self, from: data) {
-                    let scoreValues = scores.compactMap { $0.score }
-                    completion(scoreValues)
-                } else {
-                    completion(nil)
-                }
+            case .success(let scoreResponse):
+                // Extract the global score from the response
+                let globalScore = scoreResponse.globalScore
+                completion(Int(globalScore))
             case .failure(let error):
-                print("Error fetching data: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
                 completion(nil)
             }
         }
     }
 
-    
-    func getPlatforms(withID childID: Int, completion: @escaping ([Platform]?) -> Void) {
-        let childPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/person/platforms/?person_id=\(childID)/"
 
-        AF.request(childPlatformsURL, method: .get).responseString { response in
+
+    func fetchPlatforms(forPerson childID: Int, completion: @escaping (Platform?) -> Void) {
+        var platforms: Platform?
+        let fetchPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/person/platforms/?person_id=\(childID)"
+        
+        AF.request(fetchPlatformsURL, method: .get).response { response in
+            print(response.data)
             switch response.result {
-            case .success(let responseData):
-//                print("Response data: \(responseData)")
-                if let responseData = responseData.data(using: .utf8), let platformData = try? JSONDecoder().decode(PlatformData.self, from: responseData) {
-                    completion(platformData.platforms)
-                } else {
+            case .success:
+                do {
+                    platforms = try JSONDecoder().decode(Platform.self, from: response.data!)
+                    completion(platforms)
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
                     completion(nil)
                 }
             case .failure(let error):
-                print("Error getting platforms: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
                 completion(nil)
             }
         }
     }
-
 
     func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
         let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
@@ -277,6 +284,7 @@ class APIManager {
             }
         }
     }
+
     
     func fetchChild(withID childID: Int ,completion: @escaping(Child) -> Void) {
         var child: Child?

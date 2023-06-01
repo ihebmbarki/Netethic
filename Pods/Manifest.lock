@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (5.7.1)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
   - Charts (4.1.0):
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
@@ -12,6 +15,7 @@ PODS:
   - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
+  - AlamofireImage (~> 4.1)
   - Charts
   - DLRadioButton (~> 1.4)
   - FLAnimatedImage
@@ -20,6 +24,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - AlamofireImage
     - Charts
     - DLRadioButton
     - FLAnimatedImage
@@ -28,6 +34,8 @@ SPEC REPOS:
     - SwiftAlgorithms
 
 SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   Charts: 354f86803d11d9c35de280587fef50d1af063978
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
@@ -35,6 +43,6 @@ SPEC CHECKSUMS:
   SDWebImage: 25bac438318faf37e35650619ebc288a9061d292
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 09e9adfddbcf050a414e278715b62b665d85c78c
+PODFILE CHECKSUM: 83f28c0029749e105150f1d14a5ca1a97762459c
 
 COCOAPODS: 1.11.3

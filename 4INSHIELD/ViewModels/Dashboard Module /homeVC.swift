@@ -53,6 +53,9 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var dangerCollectionView: UICollectionView!
     
     @IBOutlet weak var chartView: LineChartView!
+    
+    @IBOutlet weak var errorLbl: UILabel!
+    
     @IBOutlet weak var scoreLbl: UILabel!
     @IBOutlet weak var current_harLbl: UILabel!
     
@@ -685,6 +688,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         cell.cardTitle.text = "Statut à Risque"
                         cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
                     }
+                    self.errorLbl.isHidden = true
                 } else {
                     // Handle error case or set a default value for the cardTitle
                     cell.cardTitle.text = "No Data"

@@ -33,18 +33,21 @@ class APIManager {
         ]
         
         AF.request(urlString, method: .get, parameters: parameters).responseDecodable(of: ScoreResponse.self) { response in
-            switch response.result {
-            case .success(let scoreResponse):
-                // Extract the global score from the response
-                let globalScore = scoreResponse.globalScore
-                completion(Int(globalScore))
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-                completion(nil)
+            if let statusCode = response.response?.statusCode, statusCode == 500 {
+                completion(nil) // Server error, return nil
+            } else {
+                switch response.result {
+                case .success(let scoreResponse):
+                    // Extract the global score from the response
+                    let globalScore = scoreResponse.globalScore
+                    completion(Int(globalScore))
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    completion(nil)
+                }
             }
         }
     }
-
 
 
     func fetchPlatforms(forPerson childID: Int, completion: @escaping (Platform?) -> Void) {

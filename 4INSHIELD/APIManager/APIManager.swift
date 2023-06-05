@@ -21,6 +21,53 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 
 class APIManager {
     static let shareInstance = APIManager()
+    
+    func fetchProfileImageURL(forUsername username: String, completion: @escaping (URL?) -> Void) {
+        let fetchProfileImageURL = "\(BuildConfiguration.shared.CRAWLSERVER_BASE_URL)/api/user-profile/?username=\(username)"
+        
+        AF.request(fetchProfileImageURL, method: .get).response { response in
+            switch response.result {
+            case .success:
+                do {
+                    let result = try JSONDecoder().decode(UserProfileResponse.self, from: response.data!)
+                    if let imageURL = URL(string: result.profileImage) {
+                        completion(imageURL)
+                    } else {
+                        completion(nil)
+                    }
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
+    func fetchConcernedRelationship(forPerson childID: Int, completion: @escaping (Int?) -> Void) {
+        var concerned_relationship: Int?
+        let fetchConcernedRelationshipURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
+        
+        AF.request(fetchConcernedRelationshipURL, method: .get).response { response in
+            print(response.data)
+            switch response.result {
+            case .success:
+                do {
+                    let result = try JSONDecoder().decode(ToxicPersons.self, from: response.data!)
+                    concerned_relationship = result.concerned_relationship
+                    completion(concerned_relationship)
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
 
     func fetchScore(forPlatform platform: String, childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (Int?) -> Void) {
         let urlString = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/"

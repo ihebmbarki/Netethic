@@ -59,6 +59,15 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var scoreLbl: UILabel!
     @IBOutlet weak var current_harLbl: UILabel!
     
+    @IBOutlet weak var toxicPersonsLbl: UILabel!
+    
+    @IBOutlet weak var imageView1: UIImageView!
+    @IBOutlet weak var imageView2: UIImageView!
+    @IBOutlet weak var imageView3: UIImageView!
+    @IBOutlet weak var imageView4: UIImageView!
+    @IBOutlet weak var imageView5: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +79,47 @@ class homeVC: UIViewController, ChartViewDelegate {
                 self.platforms = platforms
                 DispatchQueue.main.async {
                     self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
+                }
+            }
+        }
+
+        // Call the API to fetch concerned relationship
+        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild!.id) { [weak self] concernedRelationship in
+            guard let self = self else { return }
+            
+            if let toxicCount = concernedRelationship {
+                let toxicPersonsText = String(format: "%02d personnes", toxicCount)
+                DispatchQueue.main.async {
+                    self.toxicPersonsLbl.text = toxicPersonsText
+                }
+            }
+        }
+        
+        // Declare an array to hold the image views
+        var imageViews: [UIImageView] = []
+
+        // Add the image views to the array
+        imageViews.append(imageView1)
+        imageViews.append(imageView2)
+        imageViews.append(imageView3)
+        imageViews.append(imageView4)
+
+        // Call the API to fetch the profile image URLs
+        let username = UserDefaults.standard.string(forKey: "username")!
+        APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURLs in
+            guard let self = self else { return }
+            
+            if let imageURLs = imageURLs {
+                DispatchQueue.global().async {
+                    for (index, imageURL) in imageURLs.enumerated() {
+                        if let imageData = try? Data(contentsOf: imageURL),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                // Update the image view at the corresponding index with the retrieved image
+                                self.imageViews[index].image = image
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -34,6 +34,8 @@
 		043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49F829E43A7D00B5FF9E /* PinTextField.swift */; };
 		043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C49FA29E43AC900B5FF9E /* PinConfig.swift */; };
 		0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449F04C2A28F9D600D3327D /* ScoreResponse.swift */; };
+		044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB27C2A2E484E0008B143 /* ToxicPersons.swift */; };
+		044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB27E2A2E5AAD0008B143 /* UserProfileResponse.swift */; };
 		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
 		0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */; };
 		0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */; };
@@ -134,6 +136,8 @@
 		043C49F829E43A7D00B5FF9E /* PinTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinTextField.swift; sourceTree = "<group>"; };
 		043C49FA29E43AC900B5FF9E /* PinConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfig.swift; sourceTree = "<group>"; };
 		0449F04C2A28F9D600D3327D /* ScoreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreResponse.swift; sourceTree = "<group>"; };
+		044BB27C2A2E484E0008B143 /* ToxicPersons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicPersons.swift; sourceTree = "<group>"; };
+		044BB27E2A2E5AAD0008B143 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		0460DBEF29EEB7A50019EA53 /* FSCalendar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FSCalendar.xcodeproj; path = "4INSHIELD/ViewModels/Children Module/FSCalendar/Example-Objc/FSCalendar.xcodeproj"; sourceTree = "<group>"; };
 		0469863129E6D78100D3CC5F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Child_SocialMedia_TvCell.xib; sourceTree = "<group>"; };
@@ -350,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
+				044BB27E2A2E5AAD0008B143 /* UserProfileResponse.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				040821AB29D5B91200D7A562 /* Child.swift */,
 				048835922A24B998007A8AC7 /* Platform.swift */,
 				0449F04C2A28F9D600D3327D /* ScoreResponse.swift */,
+				044BB27C2A2E484E0008B143 /* ToxicPersons.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -722,6 +728,7 @@
 			files = (
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
+				044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
@@ -774,6 +781,7 @@
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
 				041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */,
 				0469863229E6D78100D3CC5F /* Profile.swift in Sources */,
+				044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */,
 				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);

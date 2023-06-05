@@ -50,14 +50,23 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://deviceserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://deviceserver.shield.kaisens.fr/"
+            return "https://deviceserver.shield.kaisens.fr"
         case .debugProduction, .releaseProduction:
-            return "https://deviceserver.shield.kaisens.fr/"
+            return "https://deviceserver.shield.kaisens.fr"
         }
     }
     
+    var CRAWLSERVER_BASE_URL: String {
+        switch environment {
+        case .debugStaging, .releaseStaging:
+            return "https://crawlserver.staging.4indata.fr"
+        case .debugDevelopment, .releaseDevelopment:
+            return "https://crawlserver.shield.kaisens.fr"
+        case .debugProduction, .releaseProduction:
+            return "https://crawlserver.shield.kaisens.fr"
+        }
+    }
 
-    let CRAWLSERVER_BASE_URL  = "https://crawlserver.staging.4indata.fr"
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"
     let PROFIL_SEARCH = "http://54.36.177.119:8200"
     //Kaxavy

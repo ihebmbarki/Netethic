@@ -8,5 +8,9 @@
 import Foundation
 
 struct ToxicPersons: Codable {
-    let concerned_relationship: Int
+    let toxicRelationships: Int
+
+    private enum CodingKeys: String, CodingKey {
+        case toxicRelationships = "toxic-relationships"
+    }
 }

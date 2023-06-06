@@ -95,32 +95,52 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
         }
         
-        // Declare an array to hold the image views
-        var imageViews: [UIImageView] = []
-
-        // Add the image views to the array
-        imageViews.append(imageView1)
-        imageViews.append(imageView2)
-        imageViews.append(imageView3)
-        imageViews.append(imageView4)
-
-        // Call the API to fetch the profile image URLs
+        // Call the API to fetch the profile image URL
         let username = UserDefaults.standard.string(forKey: "username")!
-        APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURLs in
+        APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
             guard let self = self else { return }
-            
-            if let imageURLs = imageURLs {
-                DispatchQueue.global().async {
-                    for (index, imageURL) in imageURLs.enumerated() {
-                        if let imageData = try? Data(contentsOf: imageURL),
-                           let image = UIImage(data: imageData) {
-                            DispatchQueue.main.async {
-                                // Update the image view at the corresponding index with the retrieved image
-                                self.imageViews[index].image = image
-                            }
-                        }
+
+            if let imageURL = imageURL {
+                URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+                    if let error = error {
+                        print("Error fetching image data: \(error.localizedDescription)")
+                        return
                     }
-                }
+                    
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        print("Invalid response")
+                        return
+                    }
+                    
+                    guard httpResponse.statusCode == 200 else {
+                        print("Invalid response status code: \(httpResponse.statusCode)")
+                        return
+                    }
+                    
+                    guard let data = data, let image = UIImage(data: data) else {
+                        print("Invalid image data")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        // Set the retrieved image to the image views and apply corner radius
+                        self.imageView1.image = image
+                        self.imageView1.layer.cornerRadius = 20
+                        self.imageView1.clipsToBounds = true
+                        
+                        self.imageView2.image = image
+                        self.imageView2.layer.cornerRadius = 20
+                        self.imageView2.clipsToBounds = true
+                        
+                        self.imageView3.image = image
+                        self.imageView3.layer.cornerRadius = 20
+                        self.imageView3.clipsToBounds = true
+                        
+                        self.imageView4.image = image
+                        self.imageView4.layer.cornerRadius = 20
+                        self.imageView4.clipsToBounds = true
+                    }
+                }.resume()
             }
         }
         
@@ -379,6 +399,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                 imageView.contentMode = .scaleAspectFill
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 self.childButton.addSubview(imageView)
+                self.imageView5.image = imageView.image
                 NSLayoutConstraint.activate([
                     imageView.widthAnchor.constraint(equalToConstant: 36),
                     imageView.heightAnchor.constraint(equalToConstant: 36),
@@ -402,6 +423,9 @@ class homeVC: UIViewController, ChartViewDelegate {
                                 imageView.layer.cornerRadius = 18 // half of 36
                                 imageView.clipsToBounds = true
                                 self.childButton.addSubview(imageView)
+                                self.imageView5.image = imageView.image
+                                self.imageView5.layer.cornerRadius = 35 // half of 70
+                                self.imageView5.clipsToBounds = true
                                 NSLayoutConstraint.activate([
                                     imageView.widthAnchor.constraint(equalToConstant: 36),
                                     imageView.heightAnchor.constraint(equalToConstant: 36),

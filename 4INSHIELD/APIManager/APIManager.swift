@@ -28,42 +28,48 @@ class APIManager {
         AF.request(fetchProfileImageURL, method: .get).response { response in
             switch response.result {
             case .success:
-                do {
-                    let result = try JSONDecoder().decode(UserProfileResponse.self, from: response.data!)
-                    if let imageURL = URL(string: result.profileImage) {
+                if let urlString = response.data.flatMap({ String(data: $0, encoding: .utf8) }) {
+                    if let imageURL = URL(string: urlString) {
                         completion(imageURL)
                     } else {
+                        print("Invalid image URL")
                         completion(nil)
                     }
-                } catch let error as NSError {
-                    print("Error: \(error.localizedDescription)")
+                } else {
+                    print("No data received")
                     completion(nil)
                 }
             case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+                print("Error fetching images: \(error.localizedDescription)")
                 completion(nil)
             }
         }
     }
+
     
     func fetchConcernedRelationship(forPerson childID: Int, completion: @escaping (Int?) -> Void) {
-        var concerned_relationship: Int?
+        var concernedRelationship: Int?
         let fetchConcernedRelationshipURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
         
         AF.request(fetchConcernedRelationshipURL, method: .get).response { response in
-            print(response.data)
+            print(response.data!)
             switch response.result {
             case .success:
-                do {
-                    let result = try JSONDecoder().decode(ToxicPersons.self, from: response.data!)
-                    concerned_relationship = result.concerned_relationship
-                    completion(concerned_relationship)
-                } catch let error as NSError {
-                    print("Error: \(error.localizedDescription)")
+                if let data = response.data {
+                    do {
+                        let result = try JSONDecoder().decode(ToxicPersons.self, from: data)
+                        concernedRelationship = result.toxicRelationships
+                        completion(concernedRelationship)
+                    } catch let error as NSError {
+                        print("Error decoding JSON: \(error.localizedDescription)")
+                        completion(nil)
+                    }
+                } else {
+                    print("No data received")
                     completion(nil)
                 }
             case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+                print("Error fetching concerned relationship: \(error.localizedDescription)")
                 completion(nil)
             }
         }

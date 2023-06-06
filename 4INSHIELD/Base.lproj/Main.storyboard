@@ -1879,34 +1879,34 @@
                                                     <constraint firstAttribute="width" constant="25" id="iwL-ZE-bTR"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Group 4" translatesAutoresizingMaskIntoConstraints="NO" id="aOM-sF-ReV">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aOM-sF-ReV">
                                                 <rect key="frame" x="159" y="781.66666666666663" width="70" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="Nts-ch-LuD"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="agL-dw-ttP">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agL-dw-ttP">
                                                 <rect key="frame" x="89" y="854.66666666666663" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="hFm-Jj-Elt"/>
                                                     <constraint firstAttribute="width" constant="40" id="rxI-GL-wnu"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="CAb-Ol-dQN">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAb-Ol-dQN">
                                                 <rect key="frame" x="243" y="741.66666666666663" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="OyR-l2-oJG"/>
                                                     <constraint firstAttribute="width" constant="40" id="VnJ-iu-fpz"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="IlO-Zx-Uu4">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IlO-Zx-Uu4">
                                                 <rect key="frame" x="89" y="741.66666666666663" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="7Vk-qh-L75"/>
                                                     <constraint firstAttribute="width" constant="40" id="t5c-Xo-tiP"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="RTe-lq-y3S">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RTe-lq-y3S">
                                                 <rect key="frame" x="243" y="854.66666666666663" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="i18-bd-FfP"/>
@@ -3028,7 +3028,6 @@
     <resources>
         <image name="4inshield logo blanc" width="512" height="442"/>
         <image name="Group 1000003449" width="188" height="188"/>
-        <image name="Group 4" width="94.666664123535156" height="95"/>
         <image name="Groupe 59" width="38.333332061767578" height="25.666666030883789"/>
         <image name="Tracé 357" width="13.333333015441895" height="18.333333969116211"/>
         <image name="Vector" width="21" height="15"/>
@@ -3047,7 +3046,6 @@
         <image name="fr_white" width="29" height="29"/>
         <image name="google_icon" width="20" height="20.666666030883789"/>
         <image name="home" width="22" height="22"/>
-        <image name="malePic" width="86" height="86"/>
         <image name="menu" width="21.333333969116211" height="15.666666984558105"/>
         <image name="phone" width="18.666666030883789" height="22"/>
         <image name="pinCode" width="161.66667175292969" height="126"/>

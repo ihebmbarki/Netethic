@@ -11,6 +11,6 @@ struct UserProfileResponse: Codable {
     let profileImage: String
     
     enum CodingKeys: String, CodingKey {
-        case profileImage = "profile_image"
+        case profileImage = ""
     }
 }

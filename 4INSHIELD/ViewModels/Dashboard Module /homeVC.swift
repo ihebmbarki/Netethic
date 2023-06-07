@@ -66,6 +66,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var imageView3: UIImageView!
     @IBOutlet weak var imageView4: UIImageView!
     @IBOutlet weak var imageView5: UIImageView!
+    @IBOutlet weak var personsBtn: UIButton!
+    @IBOutlet weak var personsCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
@@ -176,6 +178,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         dateTF.layer.shadowColor = UIColor.gray.cgColor
         dateTF.layer.shadowOpacity = 0.5
         dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
+        
+        //Set up persons button design
+        personsBtn.applyGradient()
+        personsBtn.layer.cornerRadius = personsBtn.frame.height / 2
+        personsBtn.clipsToBounds = true
         
         // Set up the button's action
         calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
@@ -363,6 +370,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Notify ChildInfoViewController that it has been added to its parent view controller
         ChildInfoViewController!.didMove(toParent: self)
     }
+    
+    
+    @IBAction func personsBtnTapped(_ sender: Any) {
+    }
+    
 
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

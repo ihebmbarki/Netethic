@@ -20,6 +20,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     var selectedChild: Child?
     var platforms: [PlatformDetail] = []
+    var toxicPseudos: [String] = []
+    var sharedImage: UIImage?
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
     var endDate: Date?
@@ -97,6 +99,19 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
         }
         
+        // Call the API to fetch toxic persons
+        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
+            if let pseudos = pseudos {
+                // Update your toxic pseudos array
+                self.toxicPseudos = pseudos
+                
+                // Reload the collection view to reflect the changes
+                self.personsCollectionView.reloadData()
+            } else {
+                print("No toxic persons data")
+            }
+        }
+        
         // Call the API to fetch the profile image URL
         let username = UserDefaults.standard.string(forKey: "username")!
         APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
@@ -125,6 +140,8 @@ class homeVC: UIViewController, ChartViewDelegate {
                     }
                     
                     DispatchQueue.main.async {
+                        // Set the retrieved image to the shared variable
+                           self.sharedImage = image
                         // Set the retrieved image to the image views and apply corner radius
                         self.imageView1.image = image
                         self.imageView1.layer.cornerRadius = 20
@@ -149,6 +166,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         //Set collections tags
         cardsCollectionView.tag = 1
         dangerCollectionView.tag = 2
+        personsCollectionView.tag = 3
 
         
         // Set initial visibility to hidden
@@ -164,6 +182,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         dangerCollectionView.delegate = self
         let nib2 = UINib(nibName: "DangerCardCell", bundle: nil)
         dangerCollectionView.register(nib2, forCellWithReuseIdentifier: "DangerCell")
+        
+        personsCollectionView.dataSource = self
+        personsCollectionView.delegate = self
+        let nib3 = UINib(nibName: "ToxicPersonCell", bundle: nil)
+        personsCollectionView.register(nib3, forCellWithReuseIdentifier: "ToxicPersonCell")
         
         //Set up TopView
         let gradientLayer = CAGradientLayer()
@@ -782,7 +805,20 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 }
             }
             return cell
+        } else
+        if collectionView.tag == 3 {
+            // Dequeue the cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as? ToxicPersonCollectionViewCell else {
+                fatalError("Unable to dequeue DangerCollectionViewCell")
+            }
+            
+            let pseudo = toxicPseudos[indexPath.item]
+            cell.cardTitle.text = pseudo
+            cell.cardLogo.image = sharedImage
+
+            return cell
         }
+        
         
         return UICollectionViewCell()
     }
@@ -794,6 +830,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             print (platforms.count)
             return platforms.count
             
+        } else if collectionView.tag == 3 {
+            return toxicPseudos.count
         }
         return 0
     }

@@ -22,6 +22,35 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func fetchToxicPersons(forPerson childID: Int, completion: @escaping ([String]?) -> Void) {
+        var toxicPseudos: [String]?
+        let fetchToxicPersonsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/data/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
+        
+        AF.request(fetchToxicPersonsURL, method: .get).response { response in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
+                    
+                    do {
+                        let result = try JSONDecoder().decode(ToxicProfileResponse.self, from: data)
+                        toxicPseudos = result.profiles.flatMap { $0.toxicRelationships.map { $0.toxicProfilePseudo } }
+                        completion(toxicPseudos)
+                    } catch let error as NSError {
+                        print("Error decoding JSON: \(error.localizedDescription)")
+                        completion(nil)
+                    }
+                } else {
+                    print("No data received")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching toxic persons: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     func fetchProfileImageURL(forUsername username: String, completion: @escaping (URL?) -> Void) {
         let fetchProfileImageURL = "\(BuildConfiguration.shared.CRAWLSERVER_BASE_URL)/api/user-profile/?username=\(username)"
         

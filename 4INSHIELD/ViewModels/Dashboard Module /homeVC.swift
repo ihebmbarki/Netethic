@@ -70,10 +70,14 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var imageView5: UIImageView!
     @IBOutlet weak var personsBtn: UIButton!
     @IBOutlet weak var personsCollectionView: UICollectionView!
+    @IBOutlet weak var humorCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set persons collection invisibility
+        personsCollectionView.isHidden = true
         
         // Call the API to fetch platforms
         APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
@@ -167,6 +171,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         cardsCollectionView.tag = 1
         dangerCollectionView.tag = 2
         personsCollectionView.tag = 3
+        humorCollectionView.tag = 4
 
         
         // Set initial visibility to hidden
@@ -187,6 +192,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         personsCollectionView.delegate = self
         let nib3 = UINib(nibName: "ToxicPersonCell", bundle: nil)
         personsCollectionView.register(nib3, forCellWithReuseIdentifier: "ToxicPersonCell")
+        
+        humorCollectionView.dataSource = self
+        humorCollectionView.delegate = self
+        let nib4 = UINib(nibName: "humorCell", bundle: nil)
+        humorCollectionView.register(nib4, forCellWithReuseIdentifier: "humorCell")
         
         //Set up TopView
         let gradientLayer = CAGradientLayer()
@@ -396,6 +406,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     
     @IBAction func personsBtnTapped(_ sender: Any) {
+        personsBtn.isHidden = true
+        personsCollectionView.isHidden = false
     }
     
 
@@ -809,19 +821,45 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         if collectionView.tag == 3 {
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as? ToxicPersonCollectionViewCell else {
-                fatalError("Unable to dequeue DangerCollectionViewCell")
+                fatalError("Unable to dequeue ToxicPersonCollectionViewCell")
             }
             
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
-            cell.cardLogo.image = sharedImage
-
+            
+            // Set the image to the cardLogo image view
+//            if let image = sharedImage {
+//                // Resize the image to fit within the cardLogo image view
+//                let resizedImage = image.resize(to: CGSize(width: 30, height: 30))
+//
+//                cell.cardLogo.image = resizedImage
+//            } else {
+//                // Set a placeholder image or handle the case when sharedImage is nil
+//                cell.cardLogo.image = UIImage(named: "empty")
+//            }
+//
+//            cell.cardLogo.contentMode = .scaleAspectFit
+//            cell.cardLogo.clipsToBounds = true
+            
+            return cell
+        } else
+        if collectionView.tag == 4 {
+            // Dequeue the cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "humorCell", for: indexPath) as? HumorCollectionViewCell else {
+                fatalError("Unable to dequeue HumorCollectionViewCell")
+            }
+            
+            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+            cell.cardLogo.image = UIImage(named: "pokerface")
+            cell.cardTitle.text = "Lun"
+            
             return cell
         }
-        
+
         
         return UICollectionViewCell()
     }
+
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
@@ -832,7 +870,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
+        } else if collectionView.tag == 4 {
+            return 4
         }
+        
         return 0
     }
     
@@ -1088,4 +1129,14 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     
+}
+extension UIImage {
+    func resize(to size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        
+        self.draw(in: CGRect(origin: .zero, size: size))
+        
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
 }

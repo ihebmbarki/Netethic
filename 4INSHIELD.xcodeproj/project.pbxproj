@@ -66,6 +66,7 @@
 		049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C154B29DD860F0028A314 /* ChildTableViewCell.swift */; };
 		049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C44A729B1E96400AAA582 /* LoginModel.swift */; };
 		049C44AD29B2024100AAA582 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049C44AF29B2024100AAA582 /* Localizable.strings */; };
+		049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */; };
 		049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD9AA29BF705D00DCD577 /* LanguageManager.swift */; };
 		04A52E0D29C206A00097C145 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0C29C206A00097C145 /* SideBar.swift */; };
 		04A52E0F29C207A70097C145 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0E29C207A70097C145 /* homeVC.swift */; };
@@ -76,6 +77,7 @@
 		04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B91C1A2A30ED5700626AF2 /* ToxicPersonCell.xib */; };
 		04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */; };
 		04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */; };
+		04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BCF2962A33A4E800202D6D /* humorCell.xib */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
 		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
 		04C604DC2A16595700FDFE8E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C604DB2A16595700FDFE8E /* State.swift */; };
@@ -177,6 +179,7 @@
 		049C44AA29B2017A00AAA582 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		049C44AE29B2024100AAA582 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049C44B029B2025900AAA582 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumorCollectionViewCell.swift; sourceTree = "<group>"; };
 		049FD9AA29BF705D00DCD577 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		04A52E0C29C206A00097C145 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		04A52E0E29C207A70097C145 /* homeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
@@ -187,6 +190,7 @@
 		04B91C1A2A30ED5700626AF2 /* ToxicPersonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToxicPersonCell.xib; sourceTree = "<group>"; };
 		04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicPersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicProfileResponse.swift; sourceTree = "<group>"; };
+		04BCF2962A33A4E800202D6D /* humorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = humorCell.xib; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04C604DB2A16595700FDFE8E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 				04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */,
 				04B91C1A2A30ED5700626AF2 /* ToxicPersonCell.xib */,
 				04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */,
+				04BCF2962A33A4E800202D6D /* humorCell.xib */,
+				049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */,
 			);
 			path = "Child State";
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
+				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
@@ -764,6 +771,7 @@
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
+				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,

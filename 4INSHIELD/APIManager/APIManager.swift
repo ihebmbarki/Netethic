@@ -30,7 +30,7 @@ class APIManager {
             switch response.result {
             case .success:
                 if let data = response.data {
-                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
+//                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
                     
                     do {
                         let result = try JSONDecoder().decode(ToxicProfileResponse.self, from: data)

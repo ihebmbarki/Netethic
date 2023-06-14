@@ -849,7 +849,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
             
-            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+//            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+            cell.containerView.backgroundColor = .red
             cell.cardLogo.image = UIImage(named: "pokerface")
             cell.cardTitle.text = "Lun"
             

@@ -9,9 +9,9 @@ PODS:
   - DLRadioButton (1.4.12)
   - FLAnimatedImage (1.0.17)
   - FSCalendar (2.8.4)
-  - SDWebImage (5.15.7):
-    - SDWebImage/Core (= 5.15.7)
-  - SDWebImage/Core (5.15.7)
+  - SDWebImage (5.16.0):
+    - SDWebImage/Core (= 5.16.0)
+  - SDWebImage/Core (5.16.0)
   - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
@@ -36,11 +36,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
-  Charts: 354f86803d11d9c35de280587fef50d1af063978
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
-  SDWebImage: 25bac438318faf37e35650619ebc288a9061d292
+  SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
 PODFILE CHECKSUM: 83f28c0029749e105150f1d14a5ca1a97762459c

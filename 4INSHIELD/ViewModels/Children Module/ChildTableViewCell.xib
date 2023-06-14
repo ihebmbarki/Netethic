@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChildCell" rowHeight="166" id="0Et-wk-gO5" customClass="ChildTableViewCell" customModule="_INSHIELD_Development" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="535" height="166"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="0Et-wk-gO5" id="O2c-ow-ax6">
+                <rect key="frame" x="0.0" y="0.0" width="535" height="166"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-cR-wvs">
+                        <rect key="frame" x="15" y="5" width="505" height="70"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Og2-L5-1LV">
+                                <rect key="frame" x="477" y="19.666666666666671" width="20" height="31.333333333333329"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Rjc-gg-5IU"/>
+                                    <constraint firstAttribute="width" constant="20" id="YwM-cW-hf6"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwB-BI-XfM">
+                                <rect key="frame" x="8" y="17.666666666666671" width="36" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="OO0-yb-Mqu"/>
+                                    <constraint firstAttribute="width" constant="36" id="aom-bq-Gfa"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test test" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MS-Hz-x88">
+                                <rect key="frame" x="52" y="15.666666666666671" width="224" height="39"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="224" id="7qT-wB-tAk"/>
+                                    <constraint firstAttribute="height" constant="39" id="TM8-br-1BZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Og2-L5-1LV" firstAttribute="centerY" secondItem="iLE-cR-wvs" secondAttribute="centerY" id="CwO-32-hBm"/>
+                            <constraint firstItem="xwB-BI-XfM" firstAttribute="centerY" secondItem="iLE-cR-wvs" secondAttribute="centerY" id="EUF-nv-skp"/>
+                            <constraint firstItem="9MS-Hz-x88" firstAttribute="width" secondItem="iLE-cR-wvs" secondAttribute="width" multiplier="0.443564" id="GS0-Mg-c6n"/>
+                            <constraint firstAttribute="height" constant="70" id="NPn-vD-6oY"/>
+                            <constraint firstItem="9MS-Hz-x88" firstAttribute="centerY" secondItem="xwB-BI-XfM" secondAttribute="centerY" id="VsN-cK-wst"/>
+                            <constraint firstItem="9MS-Hz-x88" firstAttribute="leading" secondItem="xwB-BI-XfM" secondAttribute="trailing" constant="8" symbolic="YES" id="kyc-sY-7Cq"/>
+                            <constraint firstAttribute="trailing" secondItem="Og2-L5-1LV" secondAttribute="trailing" constant="8" id="uDF-Ek-7kS"/>
+                            <constraint firstItem="xwB-BI-XfM" firstAttribute="leading" secondItem="iLE-cR-wvs" secondAttribute="leading" constant="8" id="uX7-Gf-9d6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="iLE-cR-wvs" secondAttribute="trailing" constant="15" id="RTZ-hm-frn"/>
+                    <constraint firstAttribute="bottom" secondItem="iLE-cR-wvs" secondAttribute="bottom" constant="10" id="aUH-xb-5Dq"/>
+                    <constraint firstItem="iLE-cR-wvs" firstAttribute="top" secondItem="O2c-ow-ax6" secondAttribute="top" constant="5" id="fzA-qK-e2E"/>
+                    <constraint firstItem="iLE-cR-wvs" firstAttribute="leading" secondItem="O2c-ow-ax6" secondAttribute="leading" constant="15" id="prn-af-JOn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="6Wn-bM-fKj"/>
+            <color key="backgroundColor" red="0.3224783242" green="0.42824769019999998" blue="0.69414657349999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <connections>
+                <outlet property="childAvatar" destination="xwB-BI-XfM" id="jhG-h6-VpW"/>
+                <outlet property="childFullName" destination="9MS-Hz-x88" id="2CS-C1-SKw"/>
+                <outlet property="childView" destination="iLE-cR-wvs" id="rdU-2S-CQy"/>
+            </connections>
+            <point key="canvasLocation" x="195" y="23"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  4INSHIELD
+
+  Created by iheb mbarki on 3/3/2023.
+  
+*/
+
+//MARK: Login
+"Welcome" = "Welcome to 4INSHIELD";
+"Welcome2" = "Sign in to continue";
+"e_mail" = "Email";
+"Password" = "Password";
+"forget" = "Forgot password?";
+"Login" = "Login";
+"text_register" = "Don't have an account?";
+"register" = "Sign up";
+"google_connect" = "Login with Google";
+"fb" = "Login with Facebook";
+
+//MARK: Register
+"your_username" = "Username";
+"create_account" = "Create an account";
+"re_type_password" = "Confirm Password";
+"sign_up" = "sign up";
+"text_login" = "Have an account?";
+"Login" = "Sign in";
+"signup_google" = "Sign up with Google";
+"signup_facebook" = "Sign up with Facebook";
+
+//MARK: Confirmation
+"code" = "Enter the code sent to your email";
+"Confirm" = "Confirm";
+
+//MARK: Forgot/Reset Password
+"forget" = "Forgot password?";
+"tag_reset" = "Enter your email to receive a reset code";
+"e_mail" = "Email";
+"send" = "Send";
+"code" = "Enter the code sent to your email";
+"code1" = "Validation Code";
+"Confirm" = "Confirm";
+"new_password" = "Enter a new password";
+"new_password1" = "Your new password must be different from previous passwords";
+"Reset passs" = "Reset Password";
+
+//MARK: Children list
+"list_child_item" = "Children’s List";
+"alert_message" = "Swipe left to manage (Delete or update) your children list";
+
+//MARK: Dashboard
+"hello" = "Hello";
+"rangeDate" = "Select a time period";
+"current_har" = "Current Harassment";
+"future_har" = "Future Harassment Risk";
+"etat_mental" = "Mental State ";
+"max_score" = "Max score platform per date";
+"harcled" = "Harassed";
+"parc_har" = "Partially Harassed";
+"non_harcele" = "Not Harassed";

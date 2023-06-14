@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  4INSHIELD
+
+  Created by iheb mbarki on 3/3/2023.
+  
+*/
+
+//MARK: Login
+"Welcome" = "Bienvenue à 4INSHIELD";
+"Welcome2" = "Connectez-vous pour continuer";
+"e_mail" = "Adresse Email";
+"Password" = "Mot de passe";
+"forget" = "Mot de passe oublié?";
+"Login" = "Connexion";
+"text_register" = "Vous n'avez pas de compte ?";
+"register" = "Inscrivez-vous";
+"google_connect" = "Se connecter avec Google";
+"fb" = "Se connecter avec Facebook";
+
+//MARK: Register
+"your_username" = "Nom d'utilisateur";
+"create_account" = "Créer un compte";
+"re_type_password" = "Retaper le mot de passe";
+"sign_up" = "S'inscrire";
+"text_login" = "Vous avez un compte ?";
+"Login" = "Connectez-vous";
+"signup_google" = "S'inscrire avec Google";
+"signup_facebook" = "S'inscrire avec Facebook";
+
+//MARK: Confirmation
+"code" = "Entrez le code envoyé à votre email";
+"Confirm" = "Confirmer";
+
+//MARK: Forgot/Reset Password
+"forget" = "Mot de passe oublié ?";
+"tag_reset" = "Entrez votre adresse mail pour recevoir le code de réinitialisation";
+"e_mail" = "Adresse Email";
+"send" = "Envoyer";
+"code" = "Entrez le code envoyé à votre email";
+"code1" = "Validation Code";
+"Confirm" = "Confirmer";
+"new_password" = "Entrez un nouveau mot de passe";
+"new_password1" = "Votre nouveau mot de passe doit être différent des mots de passe précédents";
+"Reset passs" = "Réinitialiser le mot de passe";
+
+//MARK: Children list
+"list_child_item" = "Liste des enfants";
+"alert_message" = "Balayez vers la gauche pour gérer (supprimer ou mettre à jour) votre liste d'enfants";
+
+//MARK: Dashboard
+"hello" = "Bonjour";
+"rangeDate" = "Sélectionnez une période";
+"current_har" = "Harcèlement actuel";
+"future_har" = "Risque de harcèlement à venir";
+"etat_mental" = "État mental";
+"max_score" = "Max score platform par date ";
+"harcled" = "harcelé";
+"parc_har" = "Partiellement harcelé";
+"non_harcele" = "Non harcelé";

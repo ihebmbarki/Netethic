@@ -50,7 +50,5 @@ class CustomCell: FSCalendarCell {
     // Customize the appearance of your custom cell as needed
     override func configureAppearance() {
         super.configureAppearance()
-        // Customize the appearance of your cell's UI elements
-        // For example, update the label's text color or background color
     }
 }

@@ -104,21 +104,6 @@ extension Formation : SideBarDelegate {
         case 0:
             // Profile
             self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-//        case 1:
-//            // Autorisation d’accés
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 2:
-//            // Nous contacter
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 3:
-//            // Mentions légales
-//            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
-//        case 4:
-//            // À propos
-//            self.showViewController(viewController: APropos.self, storyboardId: " ")
-//        case 5:
-//            //Déconnexion
-//            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
         default:
             break
         }

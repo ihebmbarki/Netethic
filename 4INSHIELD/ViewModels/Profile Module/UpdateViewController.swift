@@ -10,7 +10,7 @@ import Foundation
 import DLRadioButton
 import PhoneNumberKit
 
-class UpdateViewController: UIViewController, UITextFieldDelegate {
+class UpdateViewController: UIViewController {
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
@@ -51,21 +51,6 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     let phoneNumberKit = PhoneNumberKit()
     var formattedText: String?
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        let fullText = (text as NSString).replacingCharacters(in: range, with: string)
-        do {
-            let phoneNumber = try phoneNumberKit.parse(fullText)
-            let countryCode = phoneNumberKit.mainCountry(forCode: phoneNumber.countryCode)?.uppercased() ?? ""
-            let flag = emojiFlag(for: countryCode)
-            formattedText = "\(flag) +\(phoneNumber.countryCode) \(phoneNumberKit.format(phoneNumber, toType: .national))"
-        } catch {
-            formattedText = fullText
-        }
-        textField.text = formattedText
-        return false
-    }
-
     func verifyPhoneNumber() {
         guard let text = numeroTf.text else { return }
         do {
@@ -92,14 +77,12 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     
     func getCurrentUserData() {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
-//        let savedUserName = "kaxavy"
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
                 self.prenomTf.text = user.first_name
                 self.nomTf.text = user.last_name
                 self.emailTf.text = user.email
                 self.dateTextField.text = user.birthday
-                
                 if user.gender == "M" {
                     self.parent1Btn.isSelected = true
                 } else if user.gender ==  "F" {
@@ -215,40 +198,20 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
         
         guard let fName = prenomTf.text, !fName.isEmpty else {
-            let alertController = UIAlertController(title: "Failed", message: "Enter your first name please!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+            afficherAlert("Failed" ,"first name")
             return
         }
         guard let lname = nomTf.text, !lname.isEmpty else {
-            let alertController = UIAlertController(title: "Failed", message: "Enter your last name please!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+            afficherAlert("Failed" ,"last name")
             return
         }
-//        print("Username: \(username)")
         
         guard let email = emailTf.text, !email.isEmpty else {
-            let alertController = UIAlertController(title: "Failed", message: "Enter your email please!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+            afficherAlert("Failed" ,"email")
             return
         }
-//        guard let numero = numeroTf.text, !lName.isEmpty else {
-//            let alertController = UIAlertController(title: "Failed", message: "Enter your phone number please!", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(okAction)
-//            present(alertController, animated: true, completion: nil)
-//            return
-//        }
-        guard let date = dateTextField.text, !date.isEmpty else {
-            let alertController = UIAlertController(title: "Failed", message: "Enter your birth date please!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+        guard let date = dateTextField.text, !date.isEmpty else {  
+            afficherAlert("Failed" ,"birth date")
             return
         }
         
@@ -257,7 +220,6 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
             "first_name": fName ,
             "last_name": lname ,
             "email": email ,
-//            "numero": numero ,
             "birthday": date,
             "gender": gender,
         ] as [String : Any]
@@ -273,6 +235,30 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
+    func afficherAlert(title: string, msg: string){
+    let alertController = UIAlertController(title: title, message: "Enter your " + msg + " please!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
+}
+
+extension UpdateViewController: UITextFieldDelegate {
+
+     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let fullText = (text as NSString).replacingCharacters(in: range, with: string)
+        do {
+            let phoneNumber = try phoneNumberKit.parse(fullText)
+            let countryCode = phoneNumberKit.mainCountry(forCode: phoneNumber.countryCode)?.uppercased() ?? ""
+            let flag = emojiFlag(for: countryCode)
+            formattedText = "\(flag) +\(phoneNumber.countryCode) \(phoneNumberKit.format(phoneNumber, toType: .national))"
+        } catch {
+            formattedText = fullText
+        }
+        textField.text = formattedText
+        return false
+    }
 
 }

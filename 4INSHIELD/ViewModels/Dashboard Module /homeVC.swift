@@ -21,6 +21,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     var selectedChild: Child?
     var platforms: [PlatformDetail] = []
     var toxicPseudos: [String] = []
+    // Declare a property to store the states array
+    var states: [StateData] = []
     var sharedImage: UIImage?
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
@@ -55,9 +57,9 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var dangerCollectionView: UICollectionView!
     
     @IBOutlet weak var chartView: LineChartView!
+    @IBOutlet weak var humorChart: PieChartView!
     
     @IBOutlet weak var errorLbl: UILabel!
-    
     @IBOutlet weak var scoreLbl: UILabel!
     @IBOutlet weak var current_harLbl: UILabel!
     
@@ -82,6 +84,37 @@ class homeVC: UIViewController, ChartViewDelegate {
 
         //Set label invisibility
         missingDataLbl.isHidden = true
+        
+        //Humor pie chart
+        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
+            guard let self = self else { return }
+
+            print("state:", fetchedState)
+            
+            // Retrieve the happy and stress percentages from the statistic dictionary
+            if let statistic = fetchedState?.statistic {
+                if let happyPercentage = statistic["happy"], let stressPercentage = statistic["stress"] {
+                    
+                    // Create the chart data entries
+                    let happyEntry = PieChartDataEntry(value: happyPercentage, label: "Happy")
+                    let stressEntry = PieChartDataEntry(value: stressPercentage, label: "Stress")
+                    let entries = [happyEntry, stressEntry]
+
+                    // Create the chart dataset
+                    let dataSet = PieChartDataSet(entries: entries, label: "")
+                    dataSet.colors = [UIColor.green, UIColor.red] // Set colors for happy and stress
+
+                    // Create the chart data
+                    let data = PieChartData(dataSet: dataSet)
+                    self.humorChart.data = data
+
+                    // Update the UI on the main thread
+                    DispatchQueue.main.async {
+                        self.humorChart.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
         
         // Call the API to fetch platforms
         APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
@@ -856,12 +889,19 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
-                print("states:", states)
+            APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+                guard let self = self else { return }
+                
+                print("states:", fetchedStates)
+                // Store the fetched states in the property
+                if let fetchedStates = fetchedStates {
+                    self.states = fetchedStates
+                }
+                
                 // Update the UI on the main thread
                 DispatchQueue.main.async {
-                    if let states = states, indexPath.row < states.count {
-                        let state = states[indexPath.row]
+                    if indexPath.row < self.states.count {
+                        let state = self.states[indexPath.row]
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
                         cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
@@ -877,7 +917,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
                         }
                     } else {
-                        // Handle the case when states is nil or index path is out of bounds
+                        // Handle the case when index path is out of bounds
                         cell.cardLogo.image = UIImage(named: "pokerface")
                         cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
                     }
@@ -889,34 +929,18 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         return UICollectionViewCell()
     }
 
-//    func adjustHumorCollectionViewLayout() {
-//        guard let flowLayout = humorCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-//            return
-//        }
-//
-//        let screenWidth = UIScreen.main.bounds.width
-//        let cellWidth = screenWidth / 2.5 // Adjust the divisor as needed to achieve the desired width
-//        let cellHeight = cellWidth * 1.5 // Adjust the multiplier as needed to achieve the desired height
-//
-//        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-//        flowLayout.minimumLineSpacing = 10 // Adjust the line spacing as needed
-//        flowLayout.minimumInteritemSpacing = 10 // Adjust the interitem spacing as needed
-//        humorCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Adjust the content insets as needed
-//        humorCollectionView.reloadData()
-//    }
-
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
             return 3
         } else if collectionView.tag == 2 {
-            print (platforms.count)
+            print(platforms.count)
             return platforms.count
-            
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            return 4
+            // Return the count of the stored states
+//            return states.count
+            return 10
         }
         
         return 0

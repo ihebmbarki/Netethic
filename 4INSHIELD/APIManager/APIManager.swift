@@ -172,6 +172,34 @@ class APIManager {
         }
     }
     
+    func getMentalStateForChart(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
+        let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        
+        AF.request(mentalStateURL, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                print("API response data:", data)
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let state = try decoder.decode(State.self, from: data)
+                        print("Decoded state:", state)
+                        completion(state)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([StateData]?) -> Void) {
         let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
         

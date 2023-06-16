@@ -172,13 +172,25 @@ class APIManager {
         }
     }
     
-    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([State]?) -> Void) {
-        let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
-        AF.request(mental_state, method: .get).response { response in
+    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([StateData]?) -> Void) {
+        let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        
+        AF.request(mentalStateURL, method: .get).response { response in
             switch response.result {
             case .success(let data):
-                if let data = data, let yourData = try? JSONDecoder().decode([State].self, from: data) {
-                    completion(yourData)
+                print("API response data:", data)
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let state = try decoder.decode(State.self, from: data)
+                        let states = state.data
+                        print("Decoded states:", states)
+                        completion(states)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
                 } else {
                     completion(nil)
                 }

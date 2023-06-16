@@ -13,9 +13,8 @@ class HumorCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cardTitle: UILabel!
     @IBOutlet weak var containerView: UIView!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
     
 }

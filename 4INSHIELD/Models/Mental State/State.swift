@@ -8,7 +8,12 @@
 import Foundation
 
 struct State: Codable {
-    let child_id: Int
-    let date: Int
-    let mental_state: String?
+    let data: [StateData]
+    let statistic: [String: Double]
+}
+
+struct StateData: Codable {
+    let child_id: String
+    let date: TimeInterval
+    let mental_state: String
 }

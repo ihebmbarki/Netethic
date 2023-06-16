@@ -69,6 +69,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var imageView4: UIImageView!
     @IBOutlet weak var imageView5: UIImageView!
     @IBOutlet weak var personsBtn: UIButton!
+    @IBOutlet weak var missingDataLbl: UILabel!
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
     
@@ -78,6 +79,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         
         //Set persons collection invisibility
         personsCollectionView.isHidden = true
+
+        //Set label invisibility
+        missingDataLbl.isHidden = true
         
         // Call the API to fetch platforms
         APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
@@ -100,19 +104,6 @@ class homeVC: UIViewController, ChartViewDelegate {
                 DispatchQueue.main.async {
                     self.toxicPersonsLbl.text = toxicPersonsText
                 }
-            }
-        }
-        
-        // Call the API to fetch toxic persons
-        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
-            if let pseudos = pseudos {
-                // Update your toxic pseudos array
-                self.toxicPseudos = pseudos
-                
-                // Reload the collection view to reflect the changes
-                self.personsCollectionView.reloadData()
-            } else {
-                print("No toxic persons data")
             }
         }
         
@@ -408,6 +399,21 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
         personsCollectionView.isHidden = false
+        
+        // Call the API to fetch toxic persons
+        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
+            if let pseudos = pseudos {
+                // Update your toxic pseudos array
+                self.toxicPseudos = pseudos
+                
+                // Reload the collection view to reflect the changes
+                self.personsCollectionView.reloadData()
+            } else {
+                print("No toxic persons data")
+                self.missingDataLbl.isHidden = false
+            }
+        }
+
     }
     
 
@@ -849,17 +855,55 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
             
-//            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-            cell.containerView.backgroundColor = .red
-            cell.cardLogo.image = UIImage(named: "pokerface")
-            cell.cardTitle.text = "Lun"
-            
+            // Call the getMentalState function to fetch the mental state data
+            APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+                print("states:", states)
+                // Update the UI on the main thread
+                DispatchQueue.main.async {
+                    if let states = states, indexPath.row < states.count {
+                        let state = states[indexPath.row]
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                        
+                        if state.mental_state == "happy" {
+                            cell.cardLogo.image = UIImage(named: "smileyface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                        } else if state.mental_state == "stress" {
+                            cell.cardLogo.image = UIImage(named: "angryface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                        } else {
+                            cell.cardLogo.image = UIImage(named: "pokerface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
+                        }
+                    } else {
+                        // Handle the case when states is nil or index path is out of bounds
+                        cell.cardLogo.image = UIImage(named: "pokerface")
+                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
+                    }
+                }
+            }
             return cell
         }
 
-        
         return UICollectionViewCell()
     }
+
+//    func adjustHumorCollectionViewLayout() {
+//        guard let flowLayout = humorCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+//            return
+//        }
+//
+//        let screenWidth = UIScreen.main.bounds.width
+//        let cellWidth = screenWidth / 2.5 // Adjust the divisor as needed to achieve the desired width
+//        let cellHeight = cellWidth * 1.5 // Adjust the multiplier as needed to achieve the desired height
+//
+//        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+//        flowLayout.minimumLineSpacing = 10 // Adjust the line spacing as needed
+//        flowLayout.minimumInteritemSpacing = 10 // Adjust the interitem spacing as needed
+//        humorCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Adjust the content insets as needed
+//        humorCollectionView.reloadData()
+//    }
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -85,8 +85,8 @@
 		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
-		04E54A3D29ACCB9100B00906 /* Poppins in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3C29ACCB9100B00906 /* Poppins */; };
-		04E54A3F29ACCC3B00B00906 /* Inter in Resources */ = {isa = PBXBuildFile; fileRef = 04E54A3E29ACCC3B00B00906 /* Inter */; };
+		877F5CE92A52D5A000EB9F32 /* Replace.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877F5CE82A52D5A000EB9F32 /* Replace.xib */; };
+		877F5CEC2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F5CEB2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift */; };
 		CE54D4D7B769AB2381A19619 /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */; };
 /* End PBXBuildFile section */
 
@@ -198,12 +198,12 @@
 		04D4F0732A01DAEB0033818F /* childCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = childCell.xib; sourceTree = "<group>"; };
 		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
-		04E54A3C29ACCB9100B00906 /* Poppins */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Poppins; path = ../../../../../Downloads/Poppins; sourceTree = "<group>"; };
-		04E54A3E29ACCC3B00B00906 /* Inter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Inter; path = ../../../../../Downloads/Inter; sourceTree = "<group>"; };
 		09886A09EBF4AB1FD7F73F02 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
 		20E3C508248388B138149B07 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
 		3E10FBB495FA6D56D972E778 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
 		612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_4INSHIELD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		877F5CE82A52D5A000EB9F32 /* Replace.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Replace.xib; sourceTree = "<group>"; };
+		877F5CEB2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		9A90DB0AC7D4E892B1DE1203 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		B74199CBACC8292E88850FA9 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		D79C562E99F7AFBEFB72E0FD /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
@@ -314,6 +314,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				877F5CEA2A5329F900EB9F32 /* Abstract */,
 				04B91C1E2A32262400626AF2 /* Toxicity */,
 				04C604DA2A16591C00FDFE8E /* Mental State */,
 				04844B5329E03D7F008AFBF6 /* Users */,
@@ -376,6 +377,7 @@
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
+				877F5CE82A52D5A000EB9F32 /* Replace.xib */,
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
@@ -395,16 +397,14 @@
 		04850C4D29ACC3E3001A27FF /* 4INSHIELD */ = {
 			isa = PBXGroup;
 			children = (
+				87732C3E2A50D6DE004DA6FB /* View */,
 				0496979329AF57CD00F65DF4 /* ViewModels */,
 				043557FB29AE375400D4F012 /* Models */,
 				043557FE29AE380700D4F012 /* APIManager */,
 				043557F829AE359300D4F012 /* Constants */,
-				04E54A3A29ACCB3500B00906 /* Utilities */,
 				04850C4E29ACC3E3001A27FF /* AppDelegate.swift */,
 				04850C5029ACC3E4001A27FF /* SceneDelegate.swift */,
 				040F91D229BA293D00D7C4A0 /* Assets.xcassets */,
-				04850C5429ACC3E4001A27FF /* Main.storyboard */,
-				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
 				04340B1B29C097F10055B394 /* Translation */,
 			);
@@ -417,7 +417,6 @@
 				040821B029D6E16300D7A562 /* Onboarding Module */,
 				04B2A60B29CB51A00028B7E2 /* Children Module */,
 				040DDCCB2A0127A100ED3223 /* Profile Module */,
-				04A52E0B29C206860097C145 /* Side Menu */,
 				04340B1F29C09B4B0055B394 /* Dashboard Module  */,
 				0496979429AF765D00F65DF4 /* Loading Screen  */,
 				04A963B829B0DE7A009EA1CB /* Confirmation Module */,
@@ -544,23 +543,6 @@
 			path = "Auth Module";
 			sourceTree = "<group>";
 		};
-		04E54A3A29ACCB3500B00906 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				04E54A3B29ACCB4000B00906 /* fonts */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		04E54A3B29ACCB4000B00906 /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				04E54A3E29ACCC3B00B00906 /* Inter */,
-				04E54A3C29ACCB9100B00906 /* Poppins */,
-			);
-			path = fonts;
-			sourceTree = "<group>";
-		};
 		22F016510B6F5C33B7CDB5C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +563,24 @@
 				B74199CBACC8292E88850FA9 /* Pods-4INSHIELD.release production.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		87732C3E2A50D6DE004DA6FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04A52E0B29C206860097C145 /* Side Menu */,
+				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
+				04850C5429ACC3E4001A27FF /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		877F5CEA2A5329F900EB9F32 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				877F5CEB2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift */,
+			);
+			path = Abstract;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -683,7 +683,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
-				04E54A3D29ACCB9100B00906 /* Poppins in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
@@ -691,6 +690,7 @@
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
+				877F5CE92A52D5A000EB9F32 /* Replace.xib in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
@@ -698,7 +698,6 @@
 				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
 				048903082A125B5500F87A1A /* CardCell.xib in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
-				04E54A3F29ACCC3B00B00906 /* Inter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,6 +774,7 @@
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
+				877F5CEC2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
 				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,

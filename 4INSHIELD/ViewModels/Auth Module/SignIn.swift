@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignIn: UIViewController {
+class SignIn: KeyboardHandlingBaseVC {
     
     //IBOutlets
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -26,9 +26,11 @@ class SignIn: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the
+        emailTF.delegate = self
+        passwordTF.delegate = self
         
+        emailTF.tag = 1
+        passwordTF.tag = 2
         // Set the initial language based on the saved language
            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
                LanguageManager.shared.currentLanguage = selectedLanguage
@@ -258,3 +260,16 @@ extension UIButton{
         layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
+extension SignIn: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes → then move the cursor to that next text-field. If No → Dismiss the keyboard
+        if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
+}
+

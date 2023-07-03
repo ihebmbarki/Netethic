@@ -28,7 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://webserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://api.shield.kaisens.fr"
+            return "https://webserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"
         }
@@ -39,7 +39,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://mlengine.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://mlengine.shield.kaisens.fr"
+            return "https://mlengine.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://mlengine.shield.kaisens.fr"
         }
@@ -50,7 +50,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://deviceserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://deviceserver.shield.kaisens.fr"
+            return "https://deviceserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://deviceserver.shield.kaisens.fr"
         }
@@ -61,7 +61,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://crawlserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://crawlserver.shield.kaisens.fr"
+            return "https://crawlserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://crawlserver.shield.kaisens.fr"
         }

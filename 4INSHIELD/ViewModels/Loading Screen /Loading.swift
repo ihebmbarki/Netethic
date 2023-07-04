@@ -15,7 +15,7 @@ class Loading: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.gradientColor()
+       // self.view.backgroundColor = UIColor.gradientColor()
         activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -46,3 +46,4 @@ extension UIColor {
     }
     
 }
+

@@ -59,13 +59,18 @@ class SignIn: KeyboardHandlingBaseVC {
         LanguageManager.shared.currentLanguage = "fr"
         updateLocalizedStrings()
     }
-
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func verifyFields() -> Bool {
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
 
         if username.isEmpty || password.isEmpty {
+            showAlert(message: "les champs sont vide")
             return false
         }
         
@@ -210,7 +215,19 @@ class SignIn: KeyboardHandlingBaseVC {
         }
         self.resetFields()
     }
-
+    
+    
+    @IBAction func forgetPwdBtn(_ sender: Any) {
+        goToScreen(withId: "ForgotViewController")
+    }
+    
+    
+    
+    @IBAction func signUpBtn(_ sender: Any) {
+        goToScreen(withId: "Register")
+        print ("register")
+    }
+    
 
 
     
@@ -238,15 +255,15 @@ extension UITextField {
     func setupBorderTF() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
+        //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
     }
 }
 
 extension UIButton{
     
-    func applyGradient () {
+        func applyGradient () {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
+        //gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
         gradientLayer.cornerRadius = layer.cornerRadius
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
@@ -257,7 +274,7 @@ extension UIButton{
     func setupBorderBtn() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
+        //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
 extension SignIn: UITextFieldDelegate {

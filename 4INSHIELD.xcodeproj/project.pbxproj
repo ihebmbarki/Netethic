@@ -85,8 +85,9 @@
 		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
-		877F5CE92A52D5A000EB9F32 /* Replace.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877F5CE82A52D5A000EB9F32 /* Replace.xib */; };
 		877F5CEC2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F5CEB2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift */; };
+		87C7EC8A2A541994002F87AB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC892A541994002F87AB /* Coordinator.swift */; };
+		87C7EC8C2A541BA5002F87AB /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC8B2A541BA5002F87AB /* Storyboard.swift */; };
 		CE54D4D7B769AB2381A19619 /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,8 +203,9 @@
 		20E3C508248388B138149B07 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
 		3E10FBB495FA6D56D972E778 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
 		612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_4INSHIELD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		877F5CE82A52D5A000EB9F32 /* Replace.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Replace.xib; sourceTree = "<group>"; };
 		877F5CEB2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
+		87C7EC892A541994002F87AB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		87C7EC8B2A541BA5002F87AB /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		9A90DB0AC7D4E892B1DE1203 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		B74199CBACC8292E88850FA9 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		D79C562E99F7AFBEFB72E0FD /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
@@ -377,7 +379,6 @@
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
-				877F5CE82A52D5A000EB9F32 /* Replace.xib */,
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
@@ -397,6 +398,7 @@
 		04850C4D29ACC3E3001A27FF /* 4INSHIELD */ = {
 			isa = PBXGroup;
 			children = (
+				87C7EC882A54196A002F87AB /* Coordinators */,
 				87732C3E2A50D6DE004DA6FB /* View */,
 				0496979329AF57CD00F65DF4 /* ViewModels */,
 				043557FB29AE375400D4F012 /* Models */,
@@ -583,6 +585,15 @@
 			path = Abstract;
 			sourceTree = "<group>";
 		};
+		87C7EC882A54196A002F87AB /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				87C7EC892A541994002F87AB /* Coordinator.swift */,
+				87C7EC8B2A541BA5002F87AB /* Storyboard.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -690,7 +701,6 @@
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
-				877F5CE92A52D5A000EB9F32 /* Replace.xib in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
@@ -770,6 +780,7 @@
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
+				87C7EC8C2A541BA5002F87AB /* Storyboard.swift in Sources */,
 				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
@@ -812,6 +823,7 @@
 				044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */,
 				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
+				87C7EC8A2A541994002F87AB /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

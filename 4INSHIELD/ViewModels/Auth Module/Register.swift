@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Register: UIViewController {
+class Register: KeyboardHandlingBaseVC {
     
     //IBOutlets
     @IBOutlet weak var welcomeLbl: UILabel!
@@ -23,9 +23,16 @@ class Register: UIViewController {
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         // Do any additional setup after loading the view.
        
         // Set the initial language based on the saved language
@@ -157,6 +164,13 @@ class Register: UIViewController {
         self.resetFields()
     }
     
+    
+    @IBAction func signInButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "MyWalletViewController")
+        navigationController?.pushViewController(VC, animated: true)
+    }
+    
     @IBAction func signUpGoogleTapped(_ sender: Any) {
     }
     
@@ -171,7 +185,8 @@ extension UITextField {
     
     func setupLeftSideImages(ImageViewNamed: String) {
         let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
-        imageView.image = UIImage(named: ImageViewNamed)
+        imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(named: "AccentColor")
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView

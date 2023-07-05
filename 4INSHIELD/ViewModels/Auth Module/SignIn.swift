@@ -250,7 +250,8 @@ extension UITextField {
     
     func setupLeftSideImage(ImageViewNamed: String) {
         let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
-        imageView.image = UIImage(named: ImageViewNamed)
+        imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(named: "AccentColor")
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView

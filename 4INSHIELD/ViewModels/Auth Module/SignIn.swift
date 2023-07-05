@@ -21,6 +21,11 @@ class SignIn: KeyboardHandlingBaseVC {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var signIn_google: UIButton!
     @IBOutlet weak var signIn_facebook: UIButton!
+      @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+    }
     
 
     

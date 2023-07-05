@@ -31,11 +31,7 @@ class SignIn: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTF.delegate = self
-        passwordTF.delegate = self
-        
-        emailTF.tag = 1
-        passwordTF.tag = 2
+       
         // Set the initial language based on the saved language
            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
                LanguageManager.shared.currentLanguage = selectedLanguage
@@ -74,8 +70,12 @@ class SignIn: KeyboardHandlingBaseVC {
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
 
-        if username.isEmpty || password.isEmpty {
-            showAlert(message: "les champs sont vide")
+        if username.isEmpty  {
+            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
+            return false
+        }
+        if password.isEmpty {
+            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
             return false
         }
         
@@ -132,6 +132,7 @@ class SignIn: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
+       
     }
 
     func goToScreen(withId identifier: String) {
@@ -283,16 +284,5 @@ extension UIButton{
         //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
-extension SignIn: UITextFieldDelegate {
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes → then move the cursor to that next text-field. If No → Dismiss the keyboard
-        if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
-            nextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
-        return false
-    }
-}
 

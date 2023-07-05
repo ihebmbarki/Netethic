@@ -7,7 +7,7 @@
 */
 
 //MARK: Login
-"Welcome" = "Bienvenue à 4INSHIELD";
+"Welcome" = "Bienvenue sur NETETHIC";
 "Welcome2" = "Connectez-vous pour continuer";
 "e_mail" = "Adresse Email";
 "Password" = "Mot de passe";
@@ -58,3 +58,5 @@
 "harcled" = "harcelé";
 "parc_har" = "Partiellement harcelé";
 "non_harcele" = "Non harcelé";
+
+

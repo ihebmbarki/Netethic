@@ -8,13 +8,19 @@
 import UIKit
 import Foundation
 
-class ForgotViewController: UIViewController {
+class ForgotViewController: KeyboardHandlingBaseVC {
     
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
+    
+    @IBOutlet weak var scrollview: UIScrollView!{
+        didSet{
+            scrollview.contentInsetAdjustmentBehavior = .never
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,4 +132,5 @@ class ForgotViewController: UIViewController {
     
     
 }
+
 

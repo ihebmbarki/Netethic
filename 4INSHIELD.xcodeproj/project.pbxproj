@@ -26,7 +26,6 @@
 		04340B2429C09BDF0055B394 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2329C09BDF0055B394 /* Phone.swift */; };
 		04340B2629C09C070055B394 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2529C09C070055B394 /* Events.swift */; };
 		04340B2829C09C2F0055B394 /* Formation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2729C09C2F0055B394 /* Formation.swift */; };
-		043557FA29AE35B900D4F012 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557F929AE35B900D4F012 /* Constant.swift */; };
 		043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FC29AE377700D4F012 /* RegisterModel.swift */; };
 		0435580029AE386B00D4F012 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043557FF29AE386B00D4F012 /* APIManager.swift */; };
 		0435580329AE39B800D4F012 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0435580229AE39B800D4F012 /* Alamofire */; };
@@ -89,6 +88,12 @@
 		87C7EC8A2A541994002F87AB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC892A541994002F87AB /* Coordinator.swift */; };
 		87C7EC8C2A541BA5002F87AB /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC8B2A541BA5002F87AB /* Storyboard.swift */; };
 		CE54D4D7B769AB2381A19619 /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */; };
+		E1906FDF2A56FB54002CAD5C /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */; };
+		E1AE01A92A56C70C00E13385 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01A82A56C70C00E13385 /* BaseApi.swift */; };
+		E1AE01AB2A56C72600E13385 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01AA2A56C72600E13385 /* TargetType.swift */; };
+		E1AE01AF2A56C8F500E13385 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01AE2A56C8F500E13385 /* UsersApi.swift */; };
+		E1AE01B12A56C93200E13385 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01B02A56C93200E13385 /* UsersNetworking.swift */; };
+		E1AE01B32A56EE2000E13385 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01B22A56EE2000E13385 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +140,6 @@
 		04340B2329C09BDF0055B394 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
 		04340B2529C09C070055B394 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		04340B2729C09C2F0055B394 /* Formation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formation.swift; sourceTree = "<group>"; };
-		043557F929AE35B900D4F012 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		043557FC29AE377700D4F012 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		043557FF29AE386B00D4F012 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		043C49F629E439FF00B5FF9E /* PinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinView.swift; sourceTree = "<group>"; };
@@ -209,6 +213,12 @@
 		9A90DB0AC7D4E892B1DE1203 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		B74199CBACC8292E88850FA9 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		D79C562E99F7AFBEFB72E0FD /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
+		E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		E1AE01A82A56C70C00E13385 /* BaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
+		E1AE01AA2A56C72600E13385 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		E1AE01AE2A56C8F500E13385 /* UsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
+		E1AE01B02A56C93200E13385 /* UsersNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
+		E1AE01B22A56EE2000E13385 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,9 +316,9 @@
 			isa = PBXGroup;
 			children = (
 				043C49FE29E43B0000B5FF9E /* KPin */,
-				043557F929AE35B900D4F012 /* Constant.swift */,
 				041910C029C8BAF800C9D17D /* Environment.swift */,
 				041BB32C29E6AC1B00B149F1 /* extensions.swift */,
+				E1AE01B22A56EE2000E13385 /* Constant.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -372,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
+				E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -398,6 +409,7 @@
 		04850C4D29ACC3E3001A27FF /* 4INSHIELD */ = {
 			isa = PBXGroup;
 			children = (
+				E1AE01A52A56C67D00E13385 /* Networking */,
 				87C7EC882A54196A002F87AB /* Coordinators */,
 				87732C3E2A50D6DE004DA6FB /* View */,
 				0496979329AF57CD00F65DF4 /* ViewModels */,
@@ -594,6 +606,33 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		E1AE01A52A56C67D00E13385 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE01A72A56C6F700E13385 /* apis */,
+				E1AE01A62A56C6E900E13385 /* base */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E1AE01A62A56C6E900E13385 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE01A82A56C70C00E13385 /* BaseApi.swift */,
+				E1AE01AA2A56C72600E13385 /* TargetType.swift */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		E1AE01A72A56C6F700E13385 /* apis */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE01AE2A56C8F500E13385 /* UsersApi.swift */,
+				E1AE01B02A56C93200E13385 /* UsersNetworking.swift */,
+			);
+			path = apis;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -762,6 +801,7 @@
 			files = (
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
+				E1906FDF2A56FB54002CAD5C /* LoginResponse.swift in Sources */,
 				044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
@@ -782,7 +822,9 @@
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				87C7EC8C2A541BA5002F87AB /* Storyboard.swift in Sources */,
 				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
+				E1AE01B12A56C93200E13385 /* UsersNetworking.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
+				E1AE01A92A56C70C00E13385 /* BaseApi.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				877F5CEC2A532A1500EB9F32 /* KeyboardHandlingBaseVC.swift in Sources */,
@@ -793,14 +835,15 @@
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,
 				0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */,
+				E1AE01B32A56EE2000E13385 /* Constant.swift in Sources */,
 				040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */,
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
 				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
-				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
+				E1AE01AB2A56C72600E13385 /* TargetType.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				049531432A12847C00C610AD /* Score.swift in Sources */,
 				0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */,
@@ -810,6 +853,7 @@
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				043C49F729E439FF00B5FF9E /* PinView.swift in Sources */,
+				E1AE01AF2A56C8F500E13385 /* UsersApi.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */,
@@ -1399,7 +1443,7 @@
 				04BD774D29C8AC8800E7B44A /* Release Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Development";
+			defaultConfigurationName = "Release Production";
 		};
 		04850C5F29ACC3EB001A27FF /* Build configuration list for PBXNativeTarget "4INSHIELD" */ = {
 			isa = XCConfigurationList;
@@ -1412,7 +1456,7 @@
 				04BD774E29C8AC8800E7B44A /* Release Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Development";
+			defaultConfigurationName = "Release Production";
 		};
 /* End XCConfigurationList section */
 

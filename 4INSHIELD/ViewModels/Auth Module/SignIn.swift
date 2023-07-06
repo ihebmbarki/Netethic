@@ -27,6 +27,8 @@ class SignIn: KeyboardHandlingBaseVC {
         }
     }
     
+    let Api: UsersAPIProrotocol = UsersAPI()
+    
 
     
     override func viewDidLoad() {
@@ -142,7 +144,7 @@ class SignIn: KeyboardHandlingBaseVC {
     }
     
     fileprivate func getLastChildID(username: String) {
-        APIManager.shareInstance.getLastregistredChildID(withUsername: username) { lastChildID in
+        Api.getLastregistredChildID(withUsername: username) { lastChildID in
             UserDefaults.standard.set(lastChildID, forKey: "childID")
         }
     }
@@ -157,13 +159,12 @@ class SignIn: KeyboardHandlingBaseVC {
             let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
             let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
 
-            APIManager.shareInstance.loginAPI(login: login) { result in
+            Api.postLoginAPI(login: login) { result, error  in
                 switch result {
                 case .success(let json):
-                    print(json as AnyObject)
-                    if let jsonDict = json as? [String: Any],
-                       let id = jsonDict["id"] as? Int,
-                       let username = jsonDict["username"] as? String {
+                    if let jsonDict = json ,
+                       let id = json?.id as? Int,
+                       let username = json?.username as? String {
                         // Save id and username to UserDefaults
                         UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
@@ -172,14 +173,14 @@ class SignIn: KeyboardHandlingBaseVC {
                         print("Error: could not parse response")
                     }
                     DispatchQueue.main.async {
-                        APIManager.shareInstance.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
+                        self.Api.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
                             UserDefaults.standard.set(onboardingSimple, forKey: "onboardingSimple")
                             print("Value of onboardingSimple: \(String(describing: onboardingSimple))")
                             if onboardingSimple == false {
                                 self.goToScreen(withId: "OnboardingSB")
                             } else {
                                 // Proceed to wizard screen
-                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                                self.Api.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
                                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
                                     // Update the user defaults with the new wizard step value
                                     UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
@@ -208,6 +209,7 @@ class SignIn: KeyboardHandlingBaseVC {
                                         // The wizard step value is not set in the user defaults
                                         // Redirect to the onboarding screen
                                         self.goToScreen(withId: "OnboardingSB")
+                                        print("no wizard here !!")
                                     }
                                 }
                             }
@@ -216,6 +218,8 @@ class SignIn: KeyboardHandlingBaseVC {
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
+                    print(error.self)
+                    print("il ya un erreur dans cette partie")
                 }
             }
         }

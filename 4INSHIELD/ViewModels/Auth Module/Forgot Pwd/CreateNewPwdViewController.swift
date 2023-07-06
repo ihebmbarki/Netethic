@@ -9,6 +9,8 @@ import UIKit
 
 class CreateNewPwdViewController: UIViewController {
     
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var createPwdLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
@@ -95,7 +97,7 @@ class CreateNewPwdViewController: UIViewController {
         guard let pwd = passwordTf2.text else { return }
 
         DispatchQueue.main.async {
-            APIManager.shareInstance.resetPassword(withEmail: savedUserEmail, newPassword: pwd, completion: { pwdChanged in
+            self.Api.resetPassword(withEmail: savedUserEmail, newPassword: pwd, completion: { pwdChanged in
                 if pwdChanged {
                     let alert = UIAlertController(title: "Good Job!", message: "Your new password is set", preferredStyle: .alert)
                     let nextAction = UIAlertAction(title: "Next", style: .default) { _ in

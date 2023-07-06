@@ -10,12 +10,14 @@ import Foundation
 
 class ForgotViewController: KeyboardHandlingBaseVC {
     
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
-    
+
     @IBOutlet weak var scrollview: UIScrollView!{
         didSet{
             scrollview.contentInsetAdjustmentBehavior = .never
@@ -98,7 +100,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     @IBAction func reserBtnTapped(_ sender: Any) {
         guard let email = emailTf.text else { return }
 
-        APIManager.shareInstance.fetchUsers { users in
+        Api.getUsers { users in
             var exist = false
             users.forEach { user in
                 if user.email == email {
@@ -107,7 +109,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
             }
             if exist {
                 //send the OTP code
-                APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
+                self.Api.postGenerateOTPActivationCode(email: email, completion: { success in
                     if success {
                         print("OTP Code was generated successfully")
                         //Go To reset password view

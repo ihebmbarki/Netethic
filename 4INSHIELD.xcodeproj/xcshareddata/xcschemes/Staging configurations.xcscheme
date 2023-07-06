@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "04850C4A29ACC3E3001A27FF"
-               BuildableName = "4INSHIELD_Development.app"
+               BuildableName = "4INSHIELD_Production.app"
                BlueprintName = "4INSHIELD"
                ReferencedContainer = "container:4INSHIELD.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04850C4A29ACC3E3001A27FF"
-            BuildableName = "4INSHIELD_Development.app"
+            BuildableName = "4INSHIELD_Production.app"
             BlueprintName = "4INSHIELD"
             ReferencedContainer = "container:4INSHIELD.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04850C4A29ACC3E3001A27FF"
-            BuildableName = "4INSHIELD_Development.app"
+            BuildableName = "4INSHIELD_Production.app"
             BlueprintName = "4INSHIELD"
             ReferencedContainer = "container:4INSHIELD.xcodeproj">
          </BuildableReference>

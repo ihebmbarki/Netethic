@@ -16,6 +16,13 @@ class CreateNewPwdViewController: UIViewController {
     @IBOutlet weak var passwordTf1: UITextField!
     @IBOutlet weak var passwordTf2: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()

@@ -158,6 +158,7 @@ class Register: KeyboardHandlingBaseVC {
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
+                print("compte est ajoute avec success ici !!")
             }else {
                 self.showAlert(message: str)
             }

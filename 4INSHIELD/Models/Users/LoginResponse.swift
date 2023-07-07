@@ -36,3 +36,5 @@ struct LoginResponse: Codable {
         case onboardingStepper = "onboarding_stepper"
     }
 }
+
+

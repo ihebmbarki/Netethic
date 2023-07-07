@@ -106,11 +106,14 @@ class ForgotViewController: KeyboardHandlingBaseVC {
                 if user.email == email {
                     exist = true
                 }
+                else {
+                    print(users)
+                }
             }
             if exist {
                 //send the OTP code
                 self.Api.postGenerateOTPActivationCode(email: email, completion: { success in
-                    if success {
+                    if success?.success == "We have sent you a code pin to activate account" {
                         print("OTP Code was generated successfully")
                         //Go To reset password view
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -124,7 +127,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
                 UserDefaults.standard.set(email, forKey: "userEmail")
             } else {
                 print("User \(email) dosen't exists")
-                let alert = UIAlertController(title: "Alert", message: "This email does not exist!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Alert", message: "This \(email) does  \(users) not exist!", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)

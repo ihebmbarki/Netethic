@@ -162,7 +162,7 @@ class SignIn: KeyboardHandlingBaseVC {
             Api.postLoginAPI(login: login) { result, error  in
                 switch result {
                 case .success(let json):
-                    if let jsonDict = json ,
+                    if json?.id != nil ,
                        let id = json?.id as? Int,
                        let username = json?.username as? String {
                         // Save id and username to UserDefaults
@@ -172,11 +172,10 @@ class SignIn: KeyboardHandlingBaseVC {
                     } else {
                         print("Error: could not parse response")
                     }
-                    DispatchQueue.main.async {
-                        self.Api.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
-                            UserDefaults.standard.set(onboardingSimple, forKey: "onboardingSimple")
-                            print("Value of onboardingSimple: \(String(describing: onboardingSimple))")
-                            if onboardingSimple == false {
+                    
+                    UserDefaults.standard.set(json?.onboardingSimple, forKey: "onboardingSimple")
+
+                    if json?.onboardingSimple == false{
                                 self.goToScreen(withId: "OnboardingSB")
                             } else {
                                 // Proceed to wizard screen
@@ -213,9 +212,10 @@ class SignIn: KeyboardHandlingBaseVC {
                                     }
                                 }
                             }
+                           
 
-                        }
-                    }
+                        
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                     print(error.self)

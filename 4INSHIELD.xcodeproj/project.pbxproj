@@ -88,6 +88,7 @@
 		87C7EC8A2A541994002F87AB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC892A541994002F87AB /* Coordinator.swift */; };
 		87C7EC8C2A541BA5002F87AB /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7EC8B2A541BA5002F87AB /* Storyboard.swift */; };
 		CE54D4D7B769AB2381A19619 /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612D4C21E3D1431142580758 /* Pods_4INSHIELD.framework */; };
+		E13BB8292A5824A3000A8DBD /* ResetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BB8282A5824A3000A8DBD /* ResetResponse.swift */; };
 		E1906FDF2A56FB54002CAD5C /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */; };
 		E1AE01A92A56C70C00E13385 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01A82A56C70C00E13385 /* BaseApi.swift */; };
 		E1AE01AB2A56C72600E13385 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AE01AA2A56C72600E13385 /* TargetType.swift */; };
@@ -213,6 +214,7 @@
 		9A90DB0AC7D4E892B1DE1203 /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 		B74199CBACC8292E88850FA9 /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		D79C562E99F7AFBEFB72E0FD /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
+		E13BB8282A5824A3000A8DBD /* ResetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetResponse.swift; sourceTree = "<group>"; };
 		E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		E1AE01A82A56C70C00E13385 /* BaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
 		E1AE01AA2A56C72600E13385 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
 				E1906FDE2A56FB54002CAD5C /* LoginResponse.swift */,
+				E13BB8282A5824A3000A8DBD /* ResetResponse.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -665,7 +668,7 @@
 		04850C4329ACC3E3001A27FF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
@@ -817,6 +820,7 @@
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
 				043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */,
 				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
+				E13BB8292A5824A3000A8DBD /* ResetResponse.swift in Sources */,
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
@@ -1309,6 +1313,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1393,6 +1398,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1443,7 +1449,7 @@
 				04BD774D29C8AC8800E7B44A /* Release Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Production";
+			defaultConfigurationName = "Release Development";
 		};
 		04850C5F29ACC3EB001A27FF /* Build configuration list for PBXNativeTarget "4INSHIELD" */ = {
 			isa = XCConfigurationList;
@@ -1456,7 +1462,7 @@
 				04BD774E29C8AC8800E7B44A /* Release Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Production";
+			defaultConfigurationName = "Release Development";
 		};
 /* End XCConfigurationList section */
 

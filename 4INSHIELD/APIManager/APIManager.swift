@@ -547,21 +547,20 @@ class APIManager {
     }
     
     func fetchCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
-        var children = [Child]()
-        
         let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/childs/"
-        AF.request(serverURL, method: .get).responseJSON { response in
+        AF.request(serverURL, method: .get).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
-                    children = try JSONDecoder().decode([Child].self, from: response.data!)
-                    print("Decoded children: \(children)")
-                } catch let error as NSError {
-                    print("Failed to load: \(error.localizedDescription)")
+                    let children = try JSONDecoder().decode([Child].self, from: data)
+                    completion(children)
+                } catch {
+                    print("Failed to decode children: \(error)")
+                    completion([])
                 }
-                completion(children)
             case .failure(let error):
                 print("Error getting children list: \(error.localizedDescription)")
+                completion([])
             }
         }
     }

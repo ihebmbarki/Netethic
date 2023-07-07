@@ -919,7 +919,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     } else {
                         // Handle the case when index path is out of bounds
                         cell.cardLogo.image = UIImage(named: "pokerface")
-                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
+//                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
                     }
                 }
             }

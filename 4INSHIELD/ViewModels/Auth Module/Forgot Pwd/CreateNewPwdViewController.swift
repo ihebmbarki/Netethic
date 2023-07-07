@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateNewPwdViewController: UIViewController {
+class CreateNewPwdViewController: KeyboardHandlingBaseVC {
     
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var createPwdLbl: UILabel!

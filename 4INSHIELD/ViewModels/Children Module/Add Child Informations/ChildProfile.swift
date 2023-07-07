@@ -16,6 +16,12 @@ class ChildProfile: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

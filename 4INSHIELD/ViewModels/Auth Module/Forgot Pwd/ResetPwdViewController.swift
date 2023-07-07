@@ -9,6 +9,8 @@ import UIKit
 
 class ResetPwdViewController: KeyboardHandlingBaseVC {
 
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var codeLbl: UILabel!
     @IBOutlet weak var enterCodeLbl: UILabel!
@@ -117,7 +119,7 @@ class ResetPwdViewController: KeyboardHandlingBaseVC {
         }
         print("Typed OTP: ", otpCode)
 
-        APIManager.shareInstance.verifyOTPCode(email: savedUserEmail, codeOTP: String(otpCode), completion: { isValidOTP in
+        Api.postVerifyOTPCode(email: savedUserEmail, codeOTP: String(otpCode), completion: { isValidOTP in
             if isValidOTP {
                 print("This is a valid OTP Code")
 

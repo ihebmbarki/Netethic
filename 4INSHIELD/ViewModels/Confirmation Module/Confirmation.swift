@@ -9,7 +9,8 @@ import UIKit
 
 
 class Confirmation: UIViewController, UITextFieldDelegate {
-    
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     //IBOutlets
     
     @IBOutlet weak var ChangeLanguageBtn: UIButton!
@@ -129,15 +130,15 @@ class Confirmation: UIViewController, UITextFieldDelegate {
     @IBAction func ConfirmationBtnTapped(_ sender: Any) {
         let otpCode = "\(firstOtpTf.text!)\(secondOtpTf.text!)\(thirdOtpTf.text!)\(fourthOtpTf.text!)\(fifthOtpTf.text!)\(sixthOtpTf.text!)"
         print("otpCode: \(otpCode)")
-        APIManager.shareInstance.verifyOTPActivationCode(codeOTP: String(otpCode)) { result in
+        Api.postVerifyOTPActivationCode(codeOTP: String(otpCode)) { result in
             switch result {
-            case .success(let email):
+            case result:
                 print("valid OTP Code")
                 
-                APIManager.shareInstance.activateAccount { result in
+                self.Api.postActivateAccount() { result in
                     switch result {
                     case .success(_):
-                        print("Your account associated to this email \(email) is now active!")
+                        
                         DispatchQueue.main.async {
                             let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
                             let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
@@ -148,19 +149,22 @@ class Confirmation: UIViewController, UITextFieldDelegate {
                         }
 
                     case .failure(let error):
-                        print("Your account associated with this email \(email) is not active!")
+                       
                         print("Error: \(error.localizedDescription)")
                     }
                 }
-            case .failure(let error):
-                let errorMessage = error.localizedDescription
-                print("\(errorMessage)")
+            case !result! :
+               
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Error", message: "Failed to confirm", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }
 
+            case .none:
+                print("Error 1")
+            case .some(_):
+                print("Default Error 1")
             }
         }
     }

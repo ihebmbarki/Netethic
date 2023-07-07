@@ -8,7 +8,8 @@
 import UIKit
 
 class Register: KeyboardHandlingBaseVC {
-    
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     //IBOutlets
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var createAccLbl: UILabel!
@@ -151,12 +152,13 @@ class Register: KeyboardHandlingBaseVC {
         
         
         let register = RegisterModel(username: username, email: email, password: password, confirmPassword: confirmPassword)
-        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
+        Api.postRegisterAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
+                print("compte est ajoute avec success ici !!")
             }else {
                 self.showAlert(message: str)
             }

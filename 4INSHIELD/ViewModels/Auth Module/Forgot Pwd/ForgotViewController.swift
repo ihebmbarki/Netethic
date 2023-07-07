@@ -10,12 +10,14 @@ import Foundation
 
 class ForgotViewController: KeyboardHandlingBaseVC {
     
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
-    
+
     @IBOutlet weak var scrollview: UIScrollView!{
         didSet{
             scrollview.contentInsetAdjustmentBehavior = .never
@@ -98,17 +100,20 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     @IBAction func reserBtnTapped(_ sender: Any) {
         guard let email = emailTf.text else { return }
 
-        APIManager.shareInstance.fetchUsers { users in
+        Api.getUsers { users in
             var exist = false
             users.forEach { user in
                 if user.email == email {
                     exist = true
                 }
+                else {
+                    print(users)
+                }
             }
             if exist {
                 //send the OTP code
-                APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
-                    if success {
+                self.Api.postGenerateOTPActivationCode(email: email, completion: { success in
+                    if success?.success == "We have sent you a code pin to activate account" {
                         print("OTP Code was generated successfully")
                         //Go To reset password view
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -122,7 +127,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
                 UserDefaults.standard.set(email, forKey: "userEmail")
             } else {
                 print("User \(email) dosen't exists")
-                let alert = UIAlertController(title: "Alert", message: "This email does not exist!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Alert", message: "This \(email) does  \(users) not exist!", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(okAction)
                 self.present(alert, animated: true, completion: nil)

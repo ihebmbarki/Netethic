@@ -159,72 +159,29 @@ class SignIn: KeyboardHandlingBaseVC {
             let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
             let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
 
-            Api.postLoginAPI(login: login) { result, error  in
+            APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
                 case .success(let json):
-                    if json?.id != nil ,
-                       let id = json?.id as? Int,
-                       let username = json?.username as? String {
+                    print(json as AnyObject)
+                    if let jsonDict = json as? [String: Any],
+                       let id = jsonDict["id"] as? Int,
+                       let username = jsonDict["username"] as? String {
                         // Save id and username to UserDefaults
                         UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
                         print("User ID: \(id)")
+                        self.showAlert(message: "User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
-                    
-                    UserDefaults.standard.set(json?.onboardingSimple, forKey: "onboardingSimple")
-
-                    if json?.onboardingSimple == false{
-                                self.goToScreen(withId: "OnboardingSB")
-                            } else {
-                                // Proceed to wizard screen
-                                self.Api.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
-                                    print("Retrieved wizard step from server: \(String(describing: wizardStep))")
-                                    // Update the user defaults with the new wizard step value
-                                    UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
-                                    if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
-                                        print("Retrieved wizard step from user defaults: \(wizardStep)")
-                                        switch wizardStep {
-                                        case 1:
-                                            self.goToScreen(withId: "childInfos")
-                                        case 2:
-                                            self.goToScreen(withId: "ChildSocialMedia")
-                                        case 3:
-                                            self.goToScreen(withId: "ChildProfileAdded")
-                                        case 4:
-                                            self.goToScreen(withId: "ChildDevice")
-                                        case 5:
-                                            self.goToScreen(withId: "Congrats")
-                                        case 6:
-                                            let storyboard = UIStoryboard(name: "Children", bundle: nil)
-                                            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-                                            vc.modalPresentationStyle = .fullScreen
-                                            self.present(vc, animated: true, completion: nil)
-                                        default:
-                                            self.goToScreen(withId: "OnboardingSB")
-                                        }
-                                    } else {
-                                        // The wizard step value is not set in the user defaults
-                                        // Redirect to the onboarding screen
-                                        self.goToScreen(withId: "OnboardingSB")
-                                        print("no wizard here !!")
-                                    }
-                                }
-                            }
-                           
-
-                        
-                    
                 case .failure(let error):
                     print(error.localizedDescription)
-                    print(error.self)
-                    print("il ya un erreur dans cette partie")
                 }
             }
         }
         self.resetFields()
     }
+
     
     
     @IBAction func forgetPwdBtn(_ sender: Any) {

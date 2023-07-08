@@ -8,7 +8,6 @@
 import UIKit
 
 class Register: KeyboardHandlingBaseVC {
-    let Api: UsersAPIProrotocol = UsersAPI()
 
     //IBOutlets
     @IBOutlet weak var welcomeLbl: UILabel!
@@ -23,6 +22,8 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var register_facebook: UIButton!
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
+    
+    let Api: UsersAPIProrotocol = UsersAPI()
     
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
@@ -122,9 +123,7 @@ class Register: KeyboardHandlingBaseVC {
         register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
     }
     
-    func
-    
-    showAlert(message: String) {
+    func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -152,19 +151,18 @@ class Register: KeyboardHandlingBaseVC {
         
         
         let register = RegisterModel(username: username, email: email, password: password, confirmPassword: confirmPassword)
-        Api.postRegisterAPI(register: register) { (isSuccess, str) in
+        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
-                self.goToConfirmation(withId: "ConfirmationID")
+                self.showAlert(message: "compte est ajoute avec success ici ")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
-                print("compte est ajoute avec success ici !!")
             }else {
                 self.showAlert(message: str)
             }
         }
         self.resetFields()
-    }
+        }
     
     
     @IBAction func signInButton(_ sender: Any) {

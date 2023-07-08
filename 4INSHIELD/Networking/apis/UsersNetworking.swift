@@ -65,7 +65,7 @@ extension usersNetworking: TargetType {
                  .deleteChildProfilePic, .getCurrentChildProfiles, .getChild, .deleteDevice, .deleteChild, .resetPassword,
                  .postVerifyOTPCode,  .getUsers, .postGenerateOTPActivationCode, .getCurrentUserChildren, .putSetOnboardingSimpleTrue,
                  .getUserOnboardingStatus, .getLastregistredChildID, .addSocialMediaProfile, .getUserWizardStep, .saveUserJourney, .postLoginAPI, .postVerifyOTPActivationCode, .postActivateAccount:
-            return "https://webserver.staging.4indata.fr"
+            return BuildConfiguration.shared.WEBERVSER_BASE_URL
             case .getToxicPersons, .getConcernedRelationship, .fetchScore, .getPlatforms, .getMaxScorePerDate:
                 return BuildConfiguration.shared.MLENGINE_BASE_URL
             case .getMentalState, .getScore:

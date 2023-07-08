@@ -17,13 +17,12 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
-
     @IBOutlet weak var scrollview: UIScrollView!{
         didSet{
             scrollview.contentInsetAdjustmentBehavior = .never
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -96,46 +95,47 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     }
     
     //MARK: Generate code
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func reserBtnTapped(_ sender: Any) {
-        guard let email = emailTf.text else { return }
-
-        Api.getUsers { users in
-            var exist = false
-            users.forEach { user in
-                if user.email == email {
-                    exist = true
-                }
-                else {
-                    print(users)
-                }
-            }
-            if exist {
-                //send the OTP code
-                self.Api.postGenerateOTPActivationCode(email: email, completion: { success in
-                    if success?.success == "We have sent you a code pin to activate account" {
-                        print("OTP Code was generated successfully")
-                        //Go To reset password view
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
-                        self.navigationController?.pushViewController(VC, animated: true)
-                    } else {
-                        print("Error was occured while generating OTP Code!")
+        if emailTf.text == ""{
+            self.showAlert(message: "email est vide")
+        }
+        else{
+            
+            APIManager.shareInstance.fetchUsers { users in
+                var exist = false
+                users.forEach { user in
+                    if user.email == self.emailTf.text! {
+                        exist = true
                     }
-                })
-                print("User \(email) exists")
-                UserDefaults.standard.set(email, forKey: "userEmail")
-            } else {
-                print("User \(email) dosen't exists")
-                let alert = UIAlertController(title: "Alert", message: "This \(email) does  \(users) not exist!", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
+                }
+                if exist {
+                    //send the OTP code
+                    APIManager.shareInstance.generateOTPActivationCode(email: self.emailTf.text!, completion: { success in
+                        if success {
+                            print("OTP Code was generated successfully")
+                            //Go To reset password view
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
+                            self.navigationController?.pushViewController(VC, animated: true)
+                        } else {
+                            self.showAlert(message: "Error was occured while generating OTP Code!")
+                        }
+                    })
+                    // print("User \(email) exists")
+                    UserDefaults.standard.set(self.emailTf.text!, forKey: "userEmail")
+                } else {
+                    self.showAlert(message: "User \(self.emailTf.text!) dosen't exists")
+                    
+                }
             }
         }
     }
     
-    
 }
-
 

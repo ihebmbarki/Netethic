@@ -702,7 +702,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="value" name="AccentColor"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <integer key="value" value="5"/>
@@ -715,7 +715,7 @@
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="value" name="AccentColor"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <integer key="value" value="5"/>
@@ -1806,7 +1806,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltr-no-tuv">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="853.66666666666663"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-JT-jZk">
                                         <rect key="frame" x="0.0" y="457" width="393" height="201"/>
@@ -1817,7 +1817,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIE-0O-JXP" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2006.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2003"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashboard_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jzU-ws-2Sr">
                                                 <rect key="frame" x="0.0" y="-57" width="393" height="124"/>
@@ -1880,19 +1880,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rapport général de l'humeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARh-Sr-AHS">
-                                                <rect key="frame" x="8" y="1014.9999999999999" width="183" height="26.666666666666629"/>
+                                                <rect key="frame" x="8" y="1015" width="183" height="23"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="moyenne générale de l’humeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXX-7m-5HU">
-                                                <rect key="frame" x="8" y="1180.6666666666667" width="232" height="16.333333333333258"/>
+                                                <rect key="frame" x="8" y="1177" width="232" height="20"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="g2u-ow-QIj" customClass="LineChartView" customModule="Charts">
-                                                <rect key="frame" x="8" y="292" width="359" height="172.66666666666663"/>
+                                                <rect key="frame" x="8" y="292" width="359" height="169"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Score platform per Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pic-uZ-aC1">
                                                         <rect key="frame" x="40.333333333333343" y="8.0000000000000018" width="194" height="17.666666666666671"/>
@@ -2009,7 +2009,7 @@
                                                 <cells/>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S7P-f7-gt5">
-                                                <rect key="frame" x="17" y="1049.6666666666667" width="360" height="123"/>
+                                                <rect key="frame" x="17" y="1046" width="360" height="123"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="123" id="5Rl-db-oTG"/>
@@ -2029,7 +2029,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgh-sR-OpN" customClass="PieChartView" customModule="Charts">
-                                                <rect key="frame" x="35" y="1214" width="324" height="158.66666666666674"/>
+                                                <rect key="frame" x="35" y="1214" width="324" height="155"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -3252,7 +3252,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="value" name="AccentColor"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <integer key="value" value="5"/>
@@ -3265,7 +3265,7 @@
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.1960784314" green="0.4941176471" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="value" name="AccentColor"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <integer key="value" value="5"/>
@@ -3453,11 +3453,11 @@
         <image name="Tracé 357" width="13.333333015441895" height="18.333333969116211"/>
         <image name="Vector" width="21" height="15"/>
         <image name="background" width="360" height="209"/>
-        <image name="bell.badge.fill" catalog="system" width="123" height="128"/>
+        <image name="bell.badge.fill" catalog="system" width="32" height="32"/>
         <image name="birthday-icon" width="21" height="18.666666030883789"/>
         <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
         <image name="changePwdLogo" width="197" height="140.66667175292969"/>
-        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="chevron.left" catalog="system" width="32" height="32"/>
         <image name="childprofilbg" width="360" height="64"/>
         <image name="dashboard_bg" width="1081" height="341"/>
         <image name="facebook_icon" width="22" height="22"/>

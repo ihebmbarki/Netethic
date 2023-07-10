@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Child: Codable,Identifiable {
+struct Child: Codable, Identifiable {
     let id: Int
-    let parent: Int
+    let parent: Int?
     let first_name: String
     let last_name: String
     let birthday: String
@@ -21,5 +21,4 @@ struct Child: Codable,Identifiable {
     let modified_at: String
     let url: String
     let issync: Bool
-
 }

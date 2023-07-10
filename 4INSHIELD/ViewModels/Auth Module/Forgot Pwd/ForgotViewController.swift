@@ -11,7 +11,7 @@ import Foundation
 class ForgotViewController: KeyboardHandlingBaseVC {
     
     let Api: UsersAPIProrotocol = UsersAPI()
-
+    
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
@@ -22,7 +22,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
             scrollview.contentInsetAdjustmentBehavior = .never
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -32,7 +32,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
         resetBtn.roundCorners(5)
         resetBtn.applyGradient()
     }
-
+    
     func resetFields() {
         emailTf.text = ""
     }
@@ -87,7 +87,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-
+        
         forgotPwdTf.text = NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot pwd label")
         descriptionTf.text = NSLocalizedString("tag_reset", tableName: nil, bundle: bundle, value: "", comment: "description label")
         emailTf.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
@@ -102,6 +102,7 @@ class ForgotViewController: KeyboardHandlingBaseVC {
     }
     
     @IBAction func reserBtnTapped(_ sender: Any) {
+        let email = emailTf.text!
         if emailTf.text == ""{
             self.showAlert(message: "email est vide")
         }
@@ -110,13 +111,15 @@ class ForgotViewController: KeyboardHandlingBaseVC {
             APIManager.shareInstance.fetchUsers { users in
                 var exist = false
                 users.forEach { user in
-                    if user.email == self.emailTf.text! {
+                    if user.email == email {
                         exist = true
+                        print("true email")
+                        print(user.email)
                     }
                 }
                 if exist {
                     //send the OTP code
-                    APIManager.shareInstance.generateOTPActivationCode(email: self.emailTf.text!, completion: { success in
+                    APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
                         if success {
                             print("OTP Code was generated successfully")
                             //Go To reset password view
@@ -127,15 +130,15 @@ class ForgotViewController: KeyboardHandlingBaseVC {
                             self.showAlert(message: "Error was occured while generating OTP Code!")
                         }
                     })
-                    // print("User \(email) exists")
+                    print("User \(email) exists")
                     UserDefaults.standard.set(self.emailTf.text!, forKey: "userEmail")
                 } else {
                     self.showAlert(message: "User \(self.emailTf.text!) dosen't exists")
-                    
+
+
                 }
             }
         }
+        
     }
-    
 }
-

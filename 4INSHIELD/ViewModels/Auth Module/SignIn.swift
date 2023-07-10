@@ -170,9 +170,51 @@ class SignIn: KeyboardHandlingBaseVC {
                         UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
                         print("User ID: \(id)")
-                        self.showAlert(message: "User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
+                    }
+                    DispatchQueue.main.async {
+                        APIManager.shareInstance.getUserOnboardingStatus(withUserName: trimmedUserName) { onboardingSimple in
+                            UserDefaults.standard.set(onboardingSimple, forKey: "onboardingSimple")
+                            print("Value of onboardingSimple: \(String(describing: onboardingSimple))")
+                            if onboardingSimple == false {
+                                self.goToScreen(withId: "OnboardingSB")
+                            } else {
+                                // Proceed to wizard screen
+                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                                    print("Retrieved wizard step from server: \(String(describing: wizardStep))")
+                                    // Update the user defaults with the new wizard step value
+                                    UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
+                                    if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
+                                        print("Retrieved wizard step from user defaults: \(wizardStep)")
+                                        switch wizardStep {
+                                        case 1:
+                                            self.goToScreen(withId: "childInfos")
+                                        case 2:
+                                            self.goToScreen(withId: "ChildSocialMedia")
+                                        case 3:
+                                            self.goToScreen(withId: "ChildProfileAdded")
+                                        case 4:
+                                            self.goToScreen(withId: "ChildDevice")
+                                        case 5:
+                                            self.goToScreen(withId: "Congrats")
+                                        case 6:
+                                            let storyboard = UIStoryboard(name: "Children", bundle: nil)
+                                            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+                                            vc.modalPresentationStyle = .fullScreen
+                                            self.present(vc, animated: true, completion: nil)
+                                        default:
+                                            self.goToScreen(withId: "OnboardingSB")
+                                        }
+                                    } else {
+                                        // The wizard step value is not set in the user defaults
+                                        // Redirect to the onboarding screen
+                                        self.goToScreen(withId: "OnboardingSB")
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

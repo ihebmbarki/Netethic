@@ -531,7 +531,7 @@ class APIManager {
         let data = [
             "email": email
         ]
-        AF.request(generate_newOtp_url, method: .post, parameters: data).response { response in
+        AF.request(generate_newOtp_url, method: .post, parameters: data, encoding: JSONEncoding.default).response { response in
             switch response.result {
             case .success( _):
                 guard let statusCode = (response.response?.statusCode) else {return}
@@ -795,30 +795,29 @@ class APIManager {
     }
     
     func verifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Result<String, APIError>) -> Void) {
-            
-            guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
-                completionHandler(.failure(.custom(message: "User email not found")))
-                return
-            }
-            
-            let data = ["email": email,
-                        "token": codeOTP]
+        guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
+            completionHandler(.failure(.custom(message: "User email not found")))
+            return
+        }
+        
+        let data = ["email": email,
+                    "token": codeOTP]
 
-            AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
-                switch response.result {
-                case .success( _):
-                    guard let statusCode = (response.response?.statusCode) else {return}
-                    if statusCode == 200 {
-                        completionHandler(.success(email))
-                    } else {
-                        completionHandler(.failure(.custom(message: "Invalid OTP code")))
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                    completionHandler(.failure(.custom(message: "Try again")))
+        AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completionHandler(.success(email))
+                } else {
+                    completionHandler(.failure(.custom(message: "Invalid OTP code")))
                 }
+            case .failure(let err):
+                print(err.localizedDescription)
+                completionHandler(.failure(.custom(message: "Try again")))
             }
         }
+    }
     
     func activateAccount(completionHandler: @escaping (Result<Bool, APIError>) -> Void) {
         guard let email = UserDefaults.standard.string(forKey: "userEmail") else {

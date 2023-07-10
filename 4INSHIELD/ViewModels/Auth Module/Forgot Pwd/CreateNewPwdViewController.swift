@@ -104,13 +104,13 @@ class CreateNewPwdViewController: KeyboardHandlingBaseVC {
         guard let pwd = passwordTf2.text else { return }
 
         DispatchQueue.main.async {
-            self.Api.resetPassword(withEmail: savedUserEmail, newPassword: pwd, completion: { pwdChanged in
+            APIManager.shareInstance.resetPassword(withEmail: savedUserEmail, newPassword: pwd, completion: { pwdChanged in
                 if pwdChanged {
                     let alert = UIAlertController(title: "Good Job!", message: "Your new password is set", preferredStyle: .alert)
                     let nextAction = UIAlertAction(title: "Next", style: .default) { _ in
                         //Go To Sign In view
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let VC = storyboard.instantiateViewController(withIdentifier: "SignIn")
+                        let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
                         self.navigationController?.pushViewController(VC, animated: true)
                     }
                     alert.addAction(nextAction)

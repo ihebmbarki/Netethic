@@ -147,14 +147,17 @@ class Register: KeyboardHandlingBaseVC {
         guard let username = self.usernameTF.text else { return }
         guard let email = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
-        guard let confirmPassword = self.confirmPasswordTF.text else { return }
+        guard let firstName = self.usernameTF.text else { return }
+        guard let lastName = self.usernameTF.text else { return }
+
+
         
         
-        let register = RegisterModel(username: username, email: email, password: password, confirmPassword: confirmPassword)
+        let register = RegisterModel(username: username, first_name: firstName, last_name: lastName, email: email, password: password)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
-                self.showAlert(message: "compte est ajoute avec success ici ")
+                self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
             }else {
@@ -162,12 +165,12 @@ class Register: KeyboardHandlingBaseVC {
             }
         }
         self.resetFields()
-        }
+    }
     
     
     @IBAction func signInButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "MyWalletViewController")
+        let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
         navigationController?.pushViewController(VC, animated: true)
     }
     

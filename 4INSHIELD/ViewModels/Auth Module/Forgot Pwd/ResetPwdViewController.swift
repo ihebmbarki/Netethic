@@ -119,7 +119,7 @@ class ResetPwdViewController: KeyboardHandlingBaseVC {
         }
         print("Typed OTP: ", otpCode)
 
-        Api.postVerifyOTPCode(email: savedUserEmail, codeOTP: String(otpCode), completion: { isValidOTP in
+        APIManager.shareInstance.verifyOTPCode(email: savedUserEmail, codeOTP: String(otpCode), completion: { isValidOTP in
             if isValidOTP {
                 print("This is a valid OTP Code")
 

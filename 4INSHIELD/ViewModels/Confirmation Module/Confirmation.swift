@@ -26,6 +26,11 @@ class Confirmation: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sixthOtpTf: UITextField!
     
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,8 +123,7 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    func
-    goToSignIn(withId identifier: String) {
+    func goToSignIn(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let SignIn = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(SignIn, animated: true)
@@ -130,41 +134,38 @@ class Confirmation: UIViewController, UITextFieldDelegate {
     @IBAction func ConfirmationBtnTapped(_ sender: Any) {
         let otpCode = "\(firstOtpTf.text!)\(secondOtpTf.text!)\(thirdOtpTf.text!)\(fourthOtpTf.text!)\(fifthOtpTf.text!)\(sixthOtpTf.text!)"
         print("otpCode: \(otpCode)")
-        Api.postVerifyOTPActivationCode(codeOTP: String(otpCode)) { result in
+        APIManager.shareInstance.verifyOTPActivationCode(codeOTP: String(otpCode)) { result in
             switch result {
-            case result:
+            case .success(let email):
                 print("valid OTP Code")
                 
-                self.Api.postActivateAccount() { result in
+                APIManager.shareInstance.activateAccount { result in
                     switch result {
                     case .success(_):
-                        
+                        print("Your account associated to this email \(email) is now active!")
                         DispatchQueue.main.async {
                             let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
                             let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                                self.goToSignIn(withId: "SignIn")
+                                self.goToSignIn(withId: "signIn")
                             }
                             alertController.addAction(okayAction)
                             self.present(alertController, animated: true, completion: nil)
                         }
 
                     case .failure(let error):
-                       
+                        print("Your account associated with this email \(email) is not active!")
                         print("Error: \(error.localizedDescription)")
                     }
                 }
-            case !result! :
-               
+            case .failure(let error):
+                let errorMessage = error.localizedDescription
+                print("\(errorMessage)")
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Error", message: "Failed to confirm", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                 }
 
-            case .none:
-                print("Error 1")
-            case .some(_):
-                print("Default Error 1")
             }
         }
     }

@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-class ChildProfile: UIViewController {
+class ChildProfile: KeyboardHandlingBaseVC {
 
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!

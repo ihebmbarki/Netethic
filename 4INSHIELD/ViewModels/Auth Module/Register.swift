@@ -22,9 +22,8 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var register_facebook: UIButton!
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
-    
-    let Api: UsersAPIProrotocol = UsersAPI()
-    
+    @IBOutlet weak var genderPickerView: UIPickerView!
+        
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
@@ -32,11 +31,15 @@ class Register: KeyboardHandlingBaseVC {
         }
     }
     
+    let Api: UsersAPIProrotocol = UsersAPI()
+    let gender = ["Homme", "Femme"]
+    var selected = ""
+    var sexe = "M"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        // Do any additional setup after loading the view.
-       
+        genderPickerView.delegate = self
+        genderPickerView.dataSource = self
         // Set the initial language based on the saved language
             if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
                 LanguageManager.shared.currentLanguage = selectedLanguage
@@ -147,13 +150,14 @@ class Register: KeyboardHandlingBaseVC {
         guard let username = self.usernameTF.text else { return }
         guard let email = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
-        guard let firstName = self.usernameTF.text else { return }
-        guard let lastName = self.usernameTF.text else { return }
-
-
+        if selected == "Homme"{
+             sexe = "M"
+        }else{
+            sexe = "F"
+        }
         
         
-        let register = RegisterModel(username: username, first_name: firstName, last_name: lastName, email: email, password: password)
+        let register = RegisterModel(username: username, email: email, password: password, gender: sexe)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
@@ -220,4 +224,21 @@ extension UIButton{
         layer.borderWidth = 1
         layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
+}
+extension Register: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return gender.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return gender[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selected = gender[row] as! String
+    }
+    
+    
 }

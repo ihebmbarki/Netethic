@@ -7,13 +7,20 @@
 import Foundation
 import UIKit
 
-class ChildSocialMedia: UIViewController {
+class ChildSocialMedia: KeyboardHandlingBaseVC {
 
     
     @IBOutlet weak var socialMediaTF: UITextField!
     @IBOutlet weak var socialPseudoTF: UITextField!
     @IBOutlet weak var socialUrlTF: UITextField!
     @IBOutlet weak var sauterBtn: UIButton!
+    
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
     
     var selectedSocialMedia: String?
     var selectedSocialMediaID: Int?

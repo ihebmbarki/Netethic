@@ -7,13 +7,22 @@
 
 import UIKit
 
-class ResetPwdViewController: UIViewController {
+class ResetPwdViewController: KeyboardHandlingBaseVC {
+
+    let Api: UsersAPIProrotocol = UsersAPI()
 
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var codeLbl: UILabel!
     @IBOutlet weak var enterCodeLbl: UILabel!
     @IBOutlet weak var viewOTP: PinView!
     @IBOutlet weak var confrimBtn: UIButton!
+    
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

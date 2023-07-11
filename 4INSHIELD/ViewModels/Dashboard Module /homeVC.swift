@@ -417,7 +417,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400) 
+            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
         ])
         
         // Add ChildInfoViewController's view to the childInfoContainerView

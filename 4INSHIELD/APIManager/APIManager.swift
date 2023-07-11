@@ -172,13 +172,53 @@ class APIManager {
         }
     }
     
-    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([State]?) -> Void) {
-        let mental_state = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
-        AF.request(mental_state, method: .get).response { response in
+    func getMentalStateForChart(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
+        let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        
+        AF.request(mentalStateURL, method: .get).response { response in
             switch response.result {
             case .success(let data):
-                if let data = data, let yourData = try? JSONDecoder().decode([State].self, from: data) {
-                    completion(yourData)
+                print("API response data:", data)
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let state = try decoder.decode(State.self, from: data)
+                        print("Decoded state:", state)
+                        completion(state)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
+    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([StateData]?) -> Void) {
+        let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
+        
+        AF.request(mentalStateURL, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                print("API response data:", data)
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let state = try decoder.decode(State.self, from: data)
+                        let states = state.data
+                        print("Decoded states:", states)
+                        completion(states)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
                 } else {
                     completion(nil)
                 }
@@ -491,7 +531,7 @@ class APIManager {
         let data = [
             "email": email
         ]
-        AF.request(generate_newOtp_url, method: .post, parameters: data).response { response in
+        AF.request(generate_newOtp_url, method: .post, parameters: data, encoding: JSONEncoding.default).response { response in
             switch response.result {
             case .success( _):
                 guard let statusCode = (response.response?.statusCode) else {return}
@@ -507,21 +547,20 @@ class APIManager {
     }
     
     func fetchCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
-        var children = [Child]()
-        
         let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/childs/"
-        AF.request(serverURL, method: .get).responseJSON { response in
+        AF.request(serverURL, method: .get).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
-                    children = try JSONDecoder().decode([Child].self, from: response.data!)
-                    print("Decoded children: \(children)")
-                } catch let error as NSError {
-                    print("Failed to load: \(error.localizedDescription)")
+                    let children = try JSONDecoder().decode([Child].self, from: data)
+                    completion(children)
+                } catch {
+                    print("Failed to decode children: \(error)")
+                    completion([])
                 }
-                completion(children)
             case .failure(let error):
                 print("Error getting children list: \(error.localizedDescription)")
+                completion([])
             }
         }
     }
@@ -756,30 +795,29 @@ class APIManager {
     }
     
     func verifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Result<String, APIError>) -> Void) {
-            
-            guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
-                completionHandler(.failure(.custom(message: "User email not found")))
-                return
-            }
-            
-            let data = ["email": email,
-                        "token": codeOTP]
+        guard let email = UserDefaults.standard.string(forKey: "userEmail") else {
+            completionHandler(.failure(.custom(message: "User email not found")))
+            return
+        }
+        
+        let data = ["email": email,
+                    "token": codeOTP]
 
-            AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
-                switch response.result {
-                case .success( _):
-                    guard let statusCode = (response.response?.statusCode) else {return}
-                    if statusCode == 200 {
-                        completionHandler(.success(email))
-                    } else {
-                        completionHandler(.failure(.custom(message: "Invalid OTP code")))
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                    completionHandler(.failure(.custom(message: "Try again")))
+        AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
+            switch response.result {
+            case .success( _):
+                guard let statusCode = (response.response?.statusCode) else {return}
+                if statusCode == 200 {
+                    completionHandler(.success(email))
+                } else {
+                    completionHandler(.failure(.custom(message: "Invalid OTP code")))
                 }
+            case .failure(let err):
+                print(err.localizedDescription)
+                completionHandler(.failure(.custom(message: "Try again")))
             }
         }
+    }
     
     func activateAccount(completionHandler: @escaping (Result<Bool, APIError>) -> Void) {
         guard let email = UserDefaults.standard.string(forKey: "userEmail") else {

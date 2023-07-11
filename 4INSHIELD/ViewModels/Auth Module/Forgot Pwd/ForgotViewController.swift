@@ -8,13 +8,20 @@
 import UIKit
 import Foundation
 
-class ForgotViewController: UIViewController {
+class ForgotViewController: KeyboardHandlingBaseVC {
+    
+    let Api: UsersAPIProrotocol = UsersAPI()
     
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTf: UITextField!
+    @IBOutlet weak var scrollview: UIScrollView!{
+        didSet{
+            scrollview.contentInsetAdjustmentBehavior = .never
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +32,7 @@ class ForgotViewController: UIViewController {
         resetBtn.roundCorners(5)
         resetBtn.applyGradient()
     }
-
+    
     func resetFields() {
         emailTf.text = ""
     }
@@ -80,7 +87,7 @@ class ForgotViewController: UIViewController {
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-
+        
         forgotPwdTf.text = NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot pwd label")
         descriptionTf.text = NSLocalizedString("tag_reset", tableName: nil, bundle: bundle, value: "", comment: "description label")
         emailTf.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
@@ -88,42 +95,50 @@ class ForgotViewController: UIViewController {
     }
     
     //MARK: Generate code
-    
-    @IBAction func reserBtnTapped(_ sender: Any) {
-        guard let email = emailTf.text else { return }
-
-        APIManager.shareInstance.fetchUsers { users in
-            var exist = false
-            users.forEach { user in
-                if user.email == email {
-                    exist = true
-                }
-            }
-            if exist {
-                //send the OTP code
-                APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
-                    if success {
-                        print("OTP Code was generated successfully")
-                        //Go To reset password view
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
-                        self.navigationController?.pushViewController(VC, animated: true)
-                    } else {
-                        print("Error was occured while generating OTP Code!")
-                    }
-                })
-                print("User \(email) exists")
-                UserDefaults.standard.set(email, forKey: "userEmail")
-            } else {
-                print("User \(email) dosen't exists")
-                let alert = UIAlertController(title: "Alert", message: "This email does not exist!", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
-    
-}
+    @IBAction func reserBtnTapped(_ sender: Any) {
+        let email = emailTf.text!
+        if emailTf.text == ""{
+            self.showAlert(message: "email est vide")
+        }
+        else{
+            
+            APIManager.shareInstance.fetchUsers { users in
+                var exist = false
+                users.forEach { user in
+                    if user.email == email {
+                        exist = true
+                        print("true email")
+                        print(user.email)
+                    }
+                }
+                if exist {
+                    //send the OTP code
+                    APIManager.shareInstance.generateOTPActivationCode(email: email, completion: { success in
+                        if success {
+                            print("OTP Code was generated successfully")
+                            //Go To reset password view
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let VC = storyboard.instantiateViewController(withIdentifier: "ResetPwdPin")
+                            self.navigationController?.pushViewController(VC, animated: true)
+                        } else {
+                            self.showAlert(message: "Error was occured while generating OTP Code!")
+                        }
+                    })
+                    print("User \(email) exists")
+                    UserDefaults.standard.set(self.emailTf.text!, forKey: "userEmail")
+                } else {
+                    self.showAlert(message: "User \(self.emailTf.text!) dosen't exists")
 
+
+                }
+            }
+        }
+        
+    }
+}

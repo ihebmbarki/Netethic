@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Groupe 8.png",
+      "filename" : "phone-number.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Groupe 8@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Groupe 8@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

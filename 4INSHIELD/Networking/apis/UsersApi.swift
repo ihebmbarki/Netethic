@@ -27,8 +27,8 @@ protocol UsersAPIProrotocol {
     func deleteChild(withID childID: Int)
     func resetPassword(withEmail: String, newPassword: String, completion: @escaping(Bool) -> Void)
     func postVerifyOTPCode(email: String, codeOTP: String, completion: @escaping(Bool) -> Void)
-    func getUsers(completion: @escaping([UserResponse]) -> Void)
-    func postGenerateOTPActivationCode(email: String, completion: @escaping(GenerateOTPResponse?) -> Void)
+  //  func getUsers(completion: @escaping([UserResponse]) -> Void)
+   // func postGenerateOTPActivationCode(email: String, completion: @escaping(GenerateOTPResponse?) -> Void)
     func getCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void)
     func putSetOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void)
 //    func getUserOnboardingStatus(withUserName: String, completion: @escaping (Result<Any?, NSError>) -> Void)
@@ -38,7 +38,7 @@ protocol UsersAPIProrotocol {
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void)
     func addChildInfos(regData: ChildModel, completionHandler: @escaping (Result<String, APIErrors>) -> Void)
     func postRegisterAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ())
-    func postLoginAPI(login: LoginModel, completionHandler: @escaping (Result<LoginResponse?, NSError>, String) -> Void)
+   // func postLoginAPI(login: LoginModel, completionHandler: @escaping (Result<LoginResponse?, NSError>, String) -> Void)
     func postVerifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Bool?) -> Void)
     func postActivateAccount(completionHandler: @escaping (Result<Bool?, NSError>) -> Void)
 
@@ -245,37 +245,37 @@ class UsersAPI: BaseAPI<usersNetworking>,UsersAPIProrotocol {
             }
         }
     }
-    func getUsers(completion: @escaping ([UserResponse]) -> Void) {
-        self.fetchData(target: .getUsers, responseClass: [UserResponse].self) { result in
-            print(result)
+//    func getUsers(completion: @escaping ([UserResponse]) -> Void) {
+//        self.fetchData(target: .getUsers, responseClass: [UserResponse].self) { result in
+//            print(result)
+//
+//            switch result {
+//
+//            case .success(let users):
+//                if let users = users {
+//                    completion(users)
+//                } else {
+//                    completion([])
+//                }
+//            case .failure(let error):
+//                print("Error fetching users: \(error)")
+//                completion([])
+//            }
+//        }
+//    }
 
-            switch result {
 
-            case .success(let users):
-                if let users = users {
-                    completion(users)
-                } else {
-                    completion([])
-                }
-            case .failure(let error):
-                print("Error fetching users: \(error)")
-                completion([])
-            }
-        }
-    }
-
-
-    func postGenerateOTPActivationCode(email: String, completion: @escaping (GenerateOTPResponse?) -> Void) {
-        self.fetchData(target: .postGenerateOTPActivationCode(email: email), responseClass: GenerateOTPResponse.self) { result in
-            switch result {
-            case .success(let response):
-                completion(response)
-            case .failure(let error):
-                print("Error generating OTP activation code: \(error)")
-                completion(nil) // Default value in case of failure
-            }
-        }
-    }
+//    func postGenerateOTPActivationCode(email: String, completion: @escaping (GenerateOTPResponse?) -> Void) {
+//        self.fetchData(target: .postGenerateOTPActivationCode(email: email), responseClass: GenerateOTPResponse.self) { result in
+//            switch result {
+//            case .success(let response):
+//                completion(response)
+//            case .failure(let error):
+//                print("Error generating OTP activation code: \(error)")
+//                completion(nil) // Default value in case of failure
+//            }
+//        }
+//    }
 
 //    func getCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
 //        self.fetchData(target: .getCurrentUserChildren, responseClass: JSONDecoder().decode([Child].self, from: response.data!)){(result) in
@@ -335,12 +335,12 @@ class UsersAPI: BaseAPI<usersNetworking>,UsersAPIProrotocol {
             completionHandler(true, "")
         }
     }
-    func postLoginAPI(login: LoginModel, completionHandler:  @escaping (Result<LoginResponse?, NSError>, String) -> ()) {
-        self.fetchData(target: .postLoginAPI(login: login), responseClass: LoginResponse.self) { (result) in
-            completionHandler(result, NSError.description())
-            
-        }
-    }
+//    func postLoginAPI(login: LoginModel, completionHandler:  @escaping (Result<LoginResponse?, NSError>, String) -> ()) {
+//        self.fetchData(target: .postLoginAPI(login: login), responseClass: LoginResponse.self) { (result) in
+//            completionHandler(result, NSError.description())
+//            
+//        }
+//    }
 
     func postVerifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Bool?) -> Void) {
         self.fetchData(target: .postVerifyOTPActivationCode(codeOTP: codeOTP), responseClass: Bool.self){(result) in

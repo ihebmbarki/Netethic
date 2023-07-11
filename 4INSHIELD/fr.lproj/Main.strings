@@ -1,0 +1,102 @@
+
+/* Class = "UILabel"; text = "Connectez-vous à votre compte"; ObjectID = "0Mw-Is-DzV"; */
+"0Mw-Is-DzV.text" = "Connectez-vous à votre compte";
+
+/* Class = "UITextField"; placeholder = "Nom d'utilisateur"; ObjectID = "2dZ-Rc-YPo"; */
+"2dZ-Rc-YPo.placeholder" = "Nom d'utilisateur";
+
+/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "3wG-Ov-Ng4"; */
+"3wG-Ov-Ng4.text" = "BIENVENUE SUR 4INSHIELD";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire avec Facebook"; ObjectID = "5pu-E5-fN6"; */
+"5pu-E5-fN6.configuration.title" = "S’inscrire avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5pu-E5-fN6"; */
+"5pu-E5-fN6.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "70N-do-NMb"; */
+"70N-do-NMb.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Google"; ObjectID = "89e-Md-AUq"; */
+"89e-Md-AUq.configuration.title" = "Se connecter avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "89e-Md-AUq"; */
+"89e-Md-AUq.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "AnP-iP-gr1"; */
+"AnP-iP-gr1.placeholder" = "Email";
+
+/* Class = "UIButton"; configuration.title = "Connectez-vous"; ObjectID = "ECl-ri-KQW"; */
+"ECl-ri-KQW.configuration.title" = "Connectez-vous";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ECl-ri-KQW"; */
+"ECl-ri-KQW.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Inscrivez-vous"; ObjectID = "IJv-yG-F8h"; */
+"IJv-yG-F8h.configuration.title" = "Inscrivez-vous";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IJv-yG-F8h"; */
+"IJv-yG-F8h.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "Iuy-Ng-Hfj"; */
+"Iuy-Ng-Hfj.configuration.title" = "S’inscrire";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Iuy-Ng-Hfj"; */
+"Iuy-Ng-Hfj.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire avec Google"; ObjectID = "IwV-FI-W00"; */
+"IwV-FI-W00.configuration.title" = "S’inscrire avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IwV-FI-W00"; */
+"IwV-FI-W00.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Confirmer le mot de passe"; ObjectID = "N2b-Qz-8wZ"; */
+"N2b-Qz-8wZ.placeholder" = "Confirmer le mot de passe";
+
+/* Class = "UILabel"; text = "Vous avez un compte ?"; ObjectID = "Nxd-j1-IiP"; */
+"Nxd-j1-IiP.text" = "Vous avez un compte ?";
+
+/* Class = "UILabel"; text = "Vous n'avez pas de compte ?"; ObjectID = "RbV-le-gJJ"; */
+"RbV-le-gJJ.text" = "Vous n'avez pas de compte ?";
+
+/* Class = "UIButton"; configuration.title = "Se connecter"; ObjectID = "SGR-x7-yO2"; */
+"SGR-x7-yO2.configuration.title" = "Se connecter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SGR-x7-yO2"; */
+"SGR-x7-yO2.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "Ss1-na-iQH"; */
+"Ss1-na-iQH.text" = "BIENVENUE SUR 4INSHIELD";
+
+/* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "UcV-yP-oXd"; */
+"UcV-yP-oXd.configuration.title" = "S’inscrire";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UcV-yP-oXd"; */
+"UcV-yP-oXd.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "entrez le code envoyé à votre email"; ObjectID = "Vhq-B8-4tV"; */
+"Vhq-B8-4tV.text" = "entrez le code envoyé à votre email";
+
+/* Class = "UILabel"; text = "Créer un compte"; ObjectID = "WWU-0k-jhN"; */
+"WWU-0k-jhN.text" = "Créer un compte";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "YeE-y0-BZG"; */
+"YeE-y0-BZG.placeholder" = "Email";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "dx2-MK-y9U"; */
+"dx2-MK-y9U.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; configuration.title = "Mot de passe oublié ?"; ObjectID = "mdY-P9-cCR"; */
+"mdY-P9-cCR.configuration.title" = "Mot de passe oublié ?";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mdY-P9-cCR"; */
+"mdY-P9-cCR.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Facebook"; ObjectID = "oia-8x-1Sd"; */
+"oia-8x-1Sd.configuration.title" = "Se connecter avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "oia-8x-1Sd"; */
+"oia-8x-1Sd.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "w6R-fu-y3N"; */
+"w6R-fu-y3N.text" = "BIENVENUE SUR 4INSHIELD";

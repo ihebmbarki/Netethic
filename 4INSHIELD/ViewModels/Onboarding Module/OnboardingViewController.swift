@@ -8,8 +8,7 @@ import Foundation
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    let Api: UsersAPIProrotocol = UsersAPI()
-
+    
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -56,7 +55,7 @@ class OnboardingViewController: UIViewController {
         if currentPage == slides.count - 1 {
             // Proceed to wizard screen
             if let username = UserDefaults.standard.string(forKey: "username") {
-                Api.getUserWizardStep(withUserName: username) { wizardStep in
+                APIManager.shareInstance.getUserWizardStep(withUserName: username) { wizardStep in
                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
                     // Increment the wizard step value
                     let newWizardStep = (wizardStep ) + 1
@@ -83,7 +82,7 @@ class OnboardingViewController: UIViewController {
                 
                 let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
                 if onboardingSimple == false {
-                    Api.putSetOnboardingSimpleTrue(forUsername: username) { result in
+                    APIManager.shareInstance.setOnboardingSimpleTrue(forUsername: username) { result in
                         switch result {
                         case .success(let value):
                             print("Response: \(String(describing: value))")

@@ -17,13 +17,10 @@ class EnfantsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         configureTableView()
         childrenTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DispatchQueue.main.async {
@@ -89,19 +86,9 @@ extension EnfantsViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserChildCell", for: indexPath) as! ChildTvCell
-//        // Add border and rounded corners
-//        cell.contentView.layer.cornerRadius = 10
-//        cell.contentView.layer.borderWidth = 1
-//        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-//        cell.backgroundColor = UIColor.clear
-//        cell.contentView.backgroundColor = UIColor.clear
-//        // Ensure that the cell's corners don't get clipped
-//        cell.contentView.clipsToBounds = true
-        
+
         let child = childrenArray[indexPath.row]
         
         DispatchQueue.main.async {

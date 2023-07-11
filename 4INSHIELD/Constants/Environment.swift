@@ -28,7 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://webserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://webserver.dev.netethic.fr/"
+            return "https://api.shield.kaisens.fr"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"
         }
@@ -39,7 +39,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://mlengine.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://mlengine.dev.netethic.fr/"
+            return "https://mlengine.shield.kaisens.fr"
         case .debugProduction, .releaseProduction:
             return "https://mlengine.shield.kaisens.fr"
         }
@@ -50,7 +50,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://deviceserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://deviceserver.dev.netethic.fr/"
+            return "https://deviceserver.shield.kaisens.fr"
         case .debugProduction, .releaseProduction:
             return "https://deviceserver.shield.kaisens.fr"
         }
@@ -61,7 +61,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://crawlserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://crawlserver.dev.netethic.fr/"
+            return "https://crawlserver.shield.kaisens.fr"
         case .debugProduction, .releaseProduction:
             return "https://crawlserver.shield.kaisens.fr"
         }
@@ -73,8 +73,8 @@ class BuildConfiguration {
     let CLIENT_ID = "270449"
     let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
     //Jhon
- //   let CLIENT_ID = "995587"
-   // let CLIENT_SECRET = "e13b6b33ea025c3a0d82282629775aae4d2f740587623faa7fa965ff"
+//    let CLIENT_ID = "995587"
+//    let CLIENT_SECRET = "e13b6b33ea025c3a0d82282629775aae4d2f740587623faa7fa965ff"
     
     init() {
         let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as! String

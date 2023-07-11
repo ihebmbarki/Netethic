@@ -188,7 +188,6 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         if let homeNav = vc.viewControllers?.first as? UINavigationController,
             let homeVC = homeNav.viewControllers.first as? homeVC {
             homeVC.selectedChild = selectedChild
-            print("selected child ID:", selectedChild.id)
         }
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)

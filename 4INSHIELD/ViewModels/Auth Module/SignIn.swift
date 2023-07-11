@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignIn: KeyboardHandlingBaseVC {
+class SignIn: UIViewController {
     
     //IBOutlets
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -21,19 +21,14 @@ class SignIn: KeyboardHandlingBaseVC {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var signIn_google: UIButton!
     @IBOutlet weak var signIn_facebook: UIButton!
-      @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
-    }
-    
-    let Api: UsersAPIProrotocol = UsersAPI()
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+
+        // Do any additional setup after loading the
+        
         // Set the initial language based on the saved language
            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
                LanguageManager.shared.currentLanguage = selectedLanguage
@@ -62,22 +57,13 @@ class SignIn: KeyboardHandlingBaseVC {
         LanguageManager.shared.currentLanguage = "fr"
         updateLocalizedStrings()
     }
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+
     
     func verifyFields() -> Bool {
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
 
-        if username.isEmpty  {
-            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
-            return false
-        }
-        if password.isEmpty {
-            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
+        if username.isEmpty || password.isEmpty {
             return false
         }
         
@@ -134,7 +120,6 @@ class SignIn: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
-       
     }
 
     func goToScreen(withId identifier: String) {
@@ -144,7 +129,7 @@ class SignIn: KeyboardHandlingBaseVC {
     }
     
     fileprivate func getLastChildID(username: String) {
-        Api.getLastregistredChildID(withUsername: username) { lastChildID in
+        APIManager.shareInstance.getLastregistredChildID(withUsername: username) { lastChildID in
             UserDefaults.standard.set(lastChildID, forKey: "childID")
         }
     }
@@ -224,19 +209,6 @@ class SignIn: KeyboardHandlingBaseVC {
         self.resetFields()
     }
 
-    
-    
-    @IBAction func forgetPwdBtn(_ sender: Any) {
-        goToScreen(withId: "ForgotViewController")
-    }
-    
-    
-    
-    @IBAction func signUpBtn(_ sender: Any) {
-        goToScreen(withId: "Register")
-        print ("register")
-    }
-    
 
 
     
@@ -254,8 +226,7 @@ extension UITextField {
     
     func setupLeftSideImage(ImageViewNamed: String) {
         let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
-        imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor(named: "AccentColor")
+        imageView.image = UIImage(named: ImageViewNamed)
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView
@@ -265,15 +236,15 @@ extension UITextField {
     func setupBorderTF() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
+        layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
     }
 }
 
 extension UIButton{
     
-        func applyGradient () {
+    func applyGradient () {
         let gradientLayer = CAGradientLayer()
-        //gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
+        gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
         gradientLayer.cornerRadius = layer.cornerRadius
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
@@ -284,8 +255,6 @@ extension UIButton{
     func setupBorderBtn() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
+        layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
-
-

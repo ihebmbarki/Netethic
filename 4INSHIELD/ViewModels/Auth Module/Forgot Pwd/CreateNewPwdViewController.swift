@@ -7,23 +7,14 @@
 
 import UIKit
 
-class CreateNewPwdViewController: KeyboardHandlingBaseVC {
+class CreateNewPwdViewController: UIViewController {
     
-    let Api: UsersAPIProrotocol = UsersAPI()
-
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var createPwdLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var passwordTf1: UITextField!
     @IBOutlet weak var passwordTf2: UITextField!
-    
-    @IBOutlet weak var scrollView: UIScrollView!{
-        didSet{
-            scrollView.contentInsetAdjustmentBehavior = .never
-
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +101,7 @@ class CreateNewPwdViewController: KeyboardHandlingBaseVC {
                     let nextAction = UIAlertAction(title: "Next", style: .default) { _ in
                         //Go To Sign In view
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
+                        let VC = storyboard.instantiateViewController(withIdentifier: "SignIn")
                         self.navigationController?.pushViewController(VC, animated: true)
                     }
                     alert.addAction(nextAction)

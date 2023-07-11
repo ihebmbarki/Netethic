@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-class ChildProfile: KeyboardHandlingBaseVC {
+class ChildProfile: UIViewController {
 
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -16,12 +16,6 @@ class ChildProfile: KeyboardHandlingBaseVC {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
     
-    @IBOutlet weak var scrollView: UIScrollView!{
-        didSet{
-            scrollView.contentInsetAdjustmentBehavior = .never
-
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

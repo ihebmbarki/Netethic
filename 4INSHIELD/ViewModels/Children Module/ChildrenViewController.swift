@@ -231,7 +231,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         }
         
         updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
-        updateAction.backgroundColor = Colrs.bgColor
+        updateAction.backgroundColor = Colrs.default_color
         
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, updateAction])

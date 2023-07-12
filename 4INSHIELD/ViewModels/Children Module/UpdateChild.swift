@@ -180,7 +180,6 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         cancelBtn.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
-        updateBtn.applyGradient()
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
     }

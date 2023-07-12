@@ -15,6 +15,7 @@ import SDWebImage
 struct Colrs {
     static let redColor = UIColor(red: 239, green: 82, blue: 96, alpha: 1)
     static let bgColor = UIColor(red: 63/255, green: 99/255, blue: 169/255, alpha: 1)
+    static let default_color = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00)
 }
 //Display
 extension UIView {

@@ -16,7 +16,7 @@
 		040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040DDCCE2A01285600ED3223 /* Profile.storyboard */; };
 		040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */; };
 		040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */; };
-		040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* Assets.xcassets */; };
+		040F91D329BA293D00D7C4A0 /* fo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F91D229BA293D00D7C4A0 /* fo.xcassets */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
 		042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A4C4829E5A8640080CADF /* UpdateChild.swift */; };
@@ -126,7 +126,7 @@
 		040DDCCE2A01285600ED3223 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnfantsViewController.swift; sourceTree = "<group>"; };
 		040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
-		040F91D229BA293D00D7C4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		040F91D229BA293D00D7C4A0 /* fo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fo.xcassets; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		042A4C4829E5A8640080CADF /* UpdateChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChild.swift; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 				043557F829AE359300D4F012 /* Constants */,
 				04850C4E29ACC3E3001A27FF /* AppDelegate.swift */,
 				04850C5029ACC3E4001A27FF /* SceneDelegate.swift */,
-				040F91D229BA293D00D7C4A0 /* Assets.xcassets */,
+				040F91D229BA293D00D7C4A0 /* fo.xcassets */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
 				04340B1B29C097F10055B394 /* Translation */,
 			);
@@ -646,8 +646,8 @@
 			);
 			mainGroup = 04850C4229ACC3E3001A27FF;
 			packageReferences = (
-				0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
-				0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */,
+				0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 04850C4C29ACC3E3001A27FF /* Products */;
 			projectDirPath = "";
@@ -705,7 +705,7 @@
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,
-				040F91D329BA293D00D7C4A0 /* Assets.xcassets in Resources */,
+				040F91D329BA293D00D7C4A0 /* fo.xcassets in Resources */,
 				048903082A125B5500F87A1A /* CardCell.xib in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
 			);
@@ -1417,7 +1417,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1425,7 +1425,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */ = {
+		0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
 			requirement = {
@@ -1438,12 +1438,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		0435580229AE39B800D4F012 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		0476E7742A05675300BEA9EC /* PhoneNumberKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */;
+			package = 0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -13,6 +13,7 @@ class ChildProfileAdded: UIViewController {
     @IBOutlet weak var gifImageView: FLAnimatedImageView!
     @IBOutlet weak var addNewProfileBtn: UIButton!
     @IBOutlet weak var editProfileInfoBtn: UIButton!
+    @IBOutlet weak var continueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,9 +10,10 @@ import Foundation
 struct RegisterModel: Encodable {
     let username: String
     let email: String
+    let email_verification_url: String
     let user_agent = "mobile"
     let password: String
-    let birthday = "2002-09-22"
+    let birthday: String
     let gender: String
     let user_type = "parent"
 

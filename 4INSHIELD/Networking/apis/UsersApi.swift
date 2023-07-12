@@ -37,7 +37,7 @@ protocol UsersAPIProrotocol {
     func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void)
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void)
     func addChildInfos(regData: ChildModel, completionHandler: @escaping (Result<String, APIErrors>) -> Void)
-    func postRegisterAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ())
+   // func postRegisterAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ())
    // func postLoginAPI(login: LoginModel, completionHandler: @escaping (Result<LoginResponse?, NSError>, String) -> Void)
     func postVerifyOTPActivationCode(codeOTP: String, completionHandler: @escaping (Bool?) -> Void)
     func postActivateAccount(completionHandler: @escaping (Result<Bool?, NSError>) -> Void)
@@ -329,12 +329,12 @@ class UsersAPI: BaseAPI<usersNetworking>,UsersAPIProrotocol {
 //        self.fetchData(target: .addChildInfos, responseClass: ""){(result) in
 //            completion(result)
 //        }
+////    }
+//    func postRegisterAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
+//        self.fetchData(target: .postRegisterAPI(register: register), responseClass: Bool.self){(result) in
+//            completionHandler(true, "")
+//        }
 //    }
-    func postRegisterAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
-        self.fetchData(target: .postRegisterAPI(register: register), responseClass: Bool.self){(result) in
-            completionHandler(true, "")
-        }
-    }
 //    func postLoginAPI(login: LoginModel, completionHandler:  @escaping (Result<LoginResponse?, NSError>, String) -> ()) {
 //        self.fetchData(target: .postLoginAPI(login: login), responseClass: LoginResponse.self) { (result) in
 //            completionHandler(result, NSError.description())

@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-class ChildProfile: UIViewController {
+class ChildProfile: KeyboardHandlingBaseVC {
 
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -16,6 +16,12 @@ class ChildProfile: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -82,7 +88,7 @@ class ChildProfile: UIViewController {
             return
         }
         
-        let regData = ChildModel(parent: userID, first_name: firstName, last_name: lastName, birthday: stringDate, gender: gender)
+        let regData = ChildModel(parent_id: userID, first_name: firstName, last_name: lastName, birthday: stringDate)
         
         APIManager.shareInstance.addChildInfos(regData: regData) { result in
             switch result {
@@ -142,3 +148,4 @@ extension Date {
         return dateformat.string(from: self)
     }
 }
+

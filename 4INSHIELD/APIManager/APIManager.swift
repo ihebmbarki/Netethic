@@ -736,13 +736,22 @@ class APIManager {
     }
 
     
-    func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
+    func registerAPI(username: String, email: String, password: String, birthday: String, gender: String, completionHandler: @escaping (Bool, String) -> ()){
         
-        let headers: HTTPHeaders = [
-            .contentType("application/json")
-        ]
-        
-        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+//        let headers: HTTPHeaders = [
+//            .contentType("application/json")
+//        ]
+        let params: [String: String] = [
+            "username": username,
+             "email": email,
+             "email_verification_url": email,
+            "user_agent":  "mobile",
+             "password": password,
+             "birthday": birthday,
+             "gender": gender,
+            "user_type": "parent"
+          ]
+        AF.request(register_url, method: .post, parameters: params, encoding: JSONEncoding.default).response { response in
             debugPrint(response)
             switch response.result {
             case.success(let data):

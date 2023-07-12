@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aAE-Gg-NkL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZS-Sh-VBJ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -893,6 +893,7 @@
                     <size key="freeformSize" width="429" height="987"/>
                     <connections>
                         <outlet property="backgroundSV" destination="Q0O-Xm-Bh9" id="i9M-3Y-FyX"/>
+                        <outlet property="birthdayDatePicker" destination="EVt-b7-uug" id="fTd-8q-Nke"/>
                         <outlet property="changeLanguageBtn" destination="lyH-vd-u1L" id="6iz-N6-ldb"/>
                         <outlet property="confirmPasswordTF" destination="K19-lA-wL2" id="aRM-TU-j1z"/>
                         <outlet property="createAccLbl" destination="OND-Nk-vIF" id="J7c-Pa-S1C"/>
@@ -918,14 +919,14 @@
             <objects>
                 <viewController storyboardIdentifier="childInfos" id="G4t-F4-zOB" customClass="ChildProfile" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ofo-XM-vVL">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="866"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05w-Mt-YOm">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="832"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="1166"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Lc-J8-eBx">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="902"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="916"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iGq-Ly-gsS">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="870"/>
@@ -1081,7 +1082,7 @@
                                         <constraints>
                                             <constraint firstItem="iGq-Ly-gsS" firstAttribute="leading" secondItem="1Lc-J8-eBx" secondAttribute="leading" id="0zZ-zH-0XZ"/>
                                             <constraint firstItem="iGq-Ly-gsS" firstAttribute="top" secondItem="1Lc-J8-eBx" secondAttribute="top" id="am7-jW-kfe"/>
-                                            <constraint firstAttribute="bottom" secondItem="iGq-Ly-gsS" secondAttribute="bottom" constant="32" id="f4t-uy-vEi"/>
+                                            <constraint firstAttribute="bottom" secondItem="iGq-Ly-gsS" secondAttribute="bottom" constant="46" id="f4t-uy-vEi"/>
                                             <constraint firstAttribute="trailing" secondItem="iGq-Ly-gsS" secondAttribute="trailing" id="t6P-O7-Xsb"/>
                                         </constraints>
                                     </view>
@@ -1109,7 +1110,7 @@
                     <navigationItem key="navigationItem" id="jgt-2Y-SdL">
                         <nil key="title"/>
                     </navigationItem>
-                    <size key="freeformSize" width="393" height="866"/>
+                    <size key="freeformSize" width="393" height="1200"/>
                     <connections>
                         <outlet property="backgroundSV" destination="05w-Mt-YOm" id="C9C-b5-k5q"/>
                         <outlet property="birthdayDatePicker" destination="pnR-lz-CIq" id="4LP-0q-Vzq"/>
@@ -2030,7 +2031,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltr-no-tuv">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="853.66666666666663"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-JT-jZk">
                                         <rect key="frame" x="0.0" y="457" width="393" height="201"/>
@@ -2041,7 +2042,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIE-0O-JXP" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2006.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2003"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashboard_bg" translatesAutoresizingMaskIntoConstraints="NO" id="jzU-ws-2Sr">
                                                 <rect key="frame" x="0.0" y="-57" width="393" height="124"/>
@@ -2104,19 +2105,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rapport général de l'humeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARh-Sr-AHS">
-                                                <rect key="frame" x="8" y="1014.9999999999999" width="183" height="26.666666666666629"/>
+                                                <rect key="frame" x="8" y="1015" width="183" height="23"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="moyenne générale de l’humeur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXX-7m-5HU">
-                                                <rect key="frame" x="8" y="1180.6666666666667" width="232" height="16.333333333333258"/>
+                                                <rect key="frame" x="8" y="1177" width="232" height="20"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.1215686275" green="0.50196078430000002" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="g2u-ow-QIj" customClass="LineChartView" customModule="Charts">
-                                                <rect key="frame" x="8" y="292" width="359" height="172.66666666666663"/>
+                                                <rect key="frame" x="8" y="292" width="359" height="169"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Score platform per Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pic-uZ-aC1">
                                                         <rect key="frame" x="40.333333333333343" y="8.0000000000000018" width="194" height="17.666666666666671"/>
@@ -2233,7 +2234,7 @@
                                                 <cells/>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S7P-f7-gt5">
-                                                <rect key="frame" x="17" y="1049.6666666666667" width="360" height="123"/>
+                                                <rect key="frame" x="17" y="1046" width="360" height="123"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="123" id="5Rl-db-oTG"/>
@@ -2253,7 +2254,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgh-sR-OpN" customClass="PieChartView" customModule="Charts">
-                                                <rect key="frame" x="35" y="1214" width="324" height="158.66666666666674"/>
+                                                <rect key="frame" x="35" y="1214" width="324" height="155"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -3718,4 +3719,3 @@
         </systemColor>
     </resources>
 </document>
-

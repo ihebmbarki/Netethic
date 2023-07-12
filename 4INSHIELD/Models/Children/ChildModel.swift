@@ -8,9 +8,8 @@
 import Foundation
 
 struct ChildModel: Encodable {
-    let parent: Int
+    let parent_id: Int
     let first_name: String
     let last_name: String
     let birthday: String
-    let gender: String
 }

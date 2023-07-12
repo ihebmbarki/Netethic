@@ -9,7 +9,8 @@ import UIKit
 
 
 class Confirmation: UIViewController, UITextFieldDelegate {
-    
+    let Api: UsersAPIProrotocol = UsersAPI()
+
     //IBOutlets
     
     @IBOutlet weak var ChangeLanguageBtn: UIButton!
@@ -25,6 +26,11 @@ class Confirmation: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sixthOtpTf: UITextField!
     
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,8 +123,7 @@ class Confirmation: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    func
-    goToSignIn(withId identifier: String) {
+    func goToSignIn(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let SignIn = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(SignIn, animated: true)
@@ -141,7 +146,7 @@ class Confirmation: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async {
                             let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
                             let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                                self.goToSignIn(withId: "SignIn")
+                                self.goToSignIn(withId: "signIn")
                             }
                             alertController.addAction(okayAction)
                             self.present(alertController, animated: true, completion: nil)

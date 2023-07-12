@@ -8,7 +8,7 @@
 import UIKit
 
 class Register: KeyboardHandlingBaseVC {
-
+    
     //IBOutlets
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var createAccLbl: UILabel!
@@ -23,30 +23,31 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var genderPickerView: UIPickerView!
-        
+    @IBOutlet weak var birthdayDatePicker: UIDatePicker!
+    
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
-
+            
         }
     }
     
     let Api: UsersAPIProrotocol = UsersAPI()
-    let gender = ["Homme", "Femme"]
-    var selected = ""
-    var sexe = "M"
+    let genderList = ["Homme", "Femme"]
+    var selected: String = "Homme"
+    var sexe: String = "M"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         genderPickerView.delegate = self
         genderPickerView.dataSource = self
         // Set the initial language based on the saved language
-            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
-                LanguageManager.shared.currentLanguage = selectedLanguage
-            }
-
-            // Update localized strings
-            updateLocalizedStrings()
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            LanguageManager.shared.currentLanguage = selectedLanguage
+        }
+        
+        // Update localized strings
+        updateLocalizedStrings()
         
         //Text fields lefrt side images
         usernameTF.setupLeftSideImages(ImageViewNamed: "user")
@@ -63,7 +64,7 @@ class Register: KeyboardHandlingBaseVC {
         //Buttons style
         registerBtn.applyGradients()
         //register_google.setupBorderBtns()
-    //    register_facebook.setupBorderBtns()
+        //    register_facebook.setupBorderBtns()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +82,11 @@ class Register: KeyboardHandlingBaseVC {
             }
         }
     }
-
+    
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-
+        
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
                 if action.title == "English" {
@@ -97,22 +98,22 @@ class Register: KeyboardHandlingBaseVC {
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
                     self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
                 }
-
+                
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
         }
-
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         languageAlert.addAction(cancelAction)
-
+        
         present(languageAlert, animated: true, completion: nil)
     }
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-            
+        
         welcomeLbl.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
         createAccLbl.text = NSLocalizedString("create_account", tableName: nil, bundle: bundle, value: "", comment: "sign up label")
         usernameTF.placeholder = NSLocalizedString("your_username", tableName: nil, bundle: bundle, value: "", comment: "username")
@@ -122,8 +123,8 @@ class Register: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("sign_up", tableName: nil, bundle: bundle, value: "", comment: "sign up"), for: .normal)
         signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
         haveAccLbl.text = NSLocalizedString("text_login", tableName: nil, bundle: bundle, value: "", comment: "text login")
-    /*    register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
-        register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
+        /*    register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
+         register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
     }
     
     func showAlert(message: String) {
@@ -137,7 +138,7 @@ class Register: KeyboardHandlingBaseVC {
         let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(ConfirmationVC, animated: true)
     }
-
+    
     
     func resetFields() {
         usernameTF.text = ""
@@ -150,15 +151,17 @@ class Register: KeyboardHandlingBaseVC {
         guard let username = self.usernameTF.text else { return }
         guard let email = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
+        let date = birthdayDatePicker.date
+        let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
+        
         if selected == "Homme"{
-             sexe = "M"
-        }else{
+            sexe = "M"
+        }
+        if selected == "Femme"{
             sexe = "F"
         }
-        
-        
-        let register = RegisterModel(username: username, email: email, password: password, gender: sexe)
-        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
+      //  let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe)
+        APIManager.shareInstance.registerAPI(username: username, email: email, password: password, birthday: stringDate, gender: sexe){ (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
                 self.goToConfirmation(withId: "ConfirmationID")
@@ -168,24 +171,24 @@ class Register: KeyboardHandlingBaseVC {
                 self.showAlert(message: str)
             }
         }
-        self.resetFields()
     }
-    
-    
-    @IBAction func signInButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
-        navigationController?.pushViewController(VC, animated: true)
-    }
-    
-    @IBAction func signUpGoogleTapped(_ sender: Any) {
-    }
-    
-    
-    @IBAction func signUpFacebookTapped(_ sender: Any) {
-    }
-    
-    
+        
+        
+        
+        @IBAction func signInButton(_ sender: Any) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
+            navigationController?.pushViewController(VC, animated: true)
+        }
+        
+        @IBAction func signUpGoogleTapped(_ sender: Any) {
+        }
+        
+        
+        @IBAction func signUpFacebookTapped(_ sender: Any) {
+        }
+        
+        
 }
 
 extension UITextField {
@@ -231,14 +234,13 @@ extension Register: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gender.count
+        return genderList.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gender[row]
+        return genderList[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selected = gender[row] as! String
+        selected = genderList[row] as! String
     }
-    
     
 }

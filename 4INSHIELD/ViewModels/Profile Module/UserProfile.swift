@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-class UserProfile: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     // IBOutlets
     @IBOutlet weak var userView: UIView!

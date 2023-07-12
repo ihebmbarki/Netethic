@@ -145,6 +145,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="buf-NS-rhF"/>
                     <connections>
+                        <outlet property="backgroundSV" destination="mhf-3Z-eKv" id="Bao-e6-k8j"/>
                         <outlet property="enfantsButton" destination="p7D-Ho-J0f" id="lXp-jV-1HU"/>
                         <outlet property="modifierButton" destination="4a4-Bc-TiG" id="772-Rg-4oV"/>
                         <outlet property="userNameTf" destination="5kw-Iq-kak" id="i7h-NY-jcK"/>
@@ -404,6 +405,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BTb-Q2-gWa"/>
                     <connections>
+                        <outlet property="backgroundSV" destination="Yeb-kK-SnL" id="GHE-Rh-evl"/>
                         <outlet property="calendarButton" destination="54i-gB-ky3" id="o7C-VJ-BRq"/>
                         <outlet property="cancelBtn" destination="bYY-4Y-aWn" id="AnC-yb-CqX"/>
                         <outlet property="dateTextField" destination="Qlp-k3-l2v" id="REb-Z0-K3e"/>

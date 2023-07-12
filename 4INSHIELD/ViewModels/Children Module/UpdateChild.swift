@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import DLRadioButton
 
-class UpdateChild: UIViewController, UISearchBarDelegate {
+class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //IBOutlets
     @IBOutlet weak var childPhoto: UIImageView!

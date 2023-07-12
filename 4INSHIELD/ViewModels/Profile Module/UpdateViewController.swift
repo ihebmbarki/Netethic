@@ -10,7 +10,7 @@ import Foundation
 import DLRadioButton
 import PhoneNumberKit
 
-class UpdateViewController: UIViewController, UITextFieldDelegate {
+class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!

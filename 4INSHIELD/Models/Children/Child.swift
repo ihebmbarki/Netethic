@@ -21,4 +21,5 @@ struct Child: Codable, Identifiable {
     let modified_at: String
     let url: String
     let issync: Bool
+    let childUser: User?
 }

@@ -13,6 +13,7 @@ class EnfantsViewController: UIViewController {
     @IBOutlet weak var addChildBtn: UIButton!
     
     var childrenArray = [Child]()
+    var decodedChildrenArray = [Childd]()
     var selectedChild: Child?
     
     override func viewDidLoad() {
@@ -43,16 +44,16 @@ class EnfantsViewController: UIViewController {
     func getCurrentUserChildren() {
         guard let username = UserDefaults.standard.string(forKey: "username") else { return }
         APIManager.shareInstance.fetchCurrentUserChildren(username: username) { children in
-            self.childrenArray = children
+            self.decodedChildrenArray = children
             self.childrenTableView.reloadData()
             self.verifyChildList(childrenList: children)
         }
     }
-    func verifyChildList(childrenList: [Child]) {
+    func verifyChildList(childrenList: [Childd]) {
         if childrenList.count > 0 {
             // Children list is not empty, do nothing.
         } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }

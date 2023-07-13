@@ -28,7 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://webserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-                        return "https://webserver.dev.netethic.fr"
+                        return "https://webserver.dev.netethic.fr/"
 //            return "https://api.shield.kaisens.fr/"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"

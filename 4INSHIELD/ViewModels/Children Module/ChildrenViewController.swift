@@ -16,7 +16,8 @@ class ChildrenViewController: UIViewController {
     @IBOutlet weak var changeLanguageBtn: UIButton!
 
     var childrenArray = [Child]()
-    var selectedChild: Child?
+    var decodedChildrenArray = [Childd]()
+    var selectedChild: Childd?
     
     
     override func viewDidLoad() {
@@ -102,11 +103,11 @@ class ChildrenViewController: UIViewController {
     func getCurrentUserChildren() {
         guard let username = UserDefaults.standard.string(forKey: "username") else { return }
         APIManager.shareInstance.fetchCurrentUserChildren(username: username) { children in
-            self.childrenArray = children
+            self.decodedChildrenArray = children
             self.tableView.reloadData()
-            //                print("\(children)")
             self.verifyChildList(childrenList: children)
         }
+
     }
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
@@ -116,11 +117,11 @@ class ChildrenViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
-    func verifyChildList(childrenList: [Child]) {
+    func verifyChildList(childrenList: [Childd]) {
         if childrenList.count > 0 {
             // Children list is not empty, do nothing.
         } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -150,36 +151,35 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return childrenArray.count
+        return decodedChildrenArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildCell", for: indexPath) as! ChildTableViewCell
         
-        let child = childrenArray[indexPath.row]
+        let child = decodedChildrenArray[indexPath.row]
+        
+
         
         DispatchQueue.main.async {
-            if let photo = child.photo, !photo.isEmpty {
-                var photoUrl = photo
-                if let range = photo.range(of: "http") {
-                    photoUrl.insert("s", at: range.upperBound)
-                }
-                cell.childAvatar.loadImage(photoUrl)
+            let user = child.user
+            if let photo = user?.photo, !photo.isEmpty {
+                cell.childAvatar.loadImage(photo)
             } else {
-                if child.gender == "M" {
+                if user?.gender == "M" {
                     cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
                 } else {
                     cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
                 }
             }
-            cell.childFullName.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
+            cell.childFullName.text = (user?.first_name.uppercased())! + " " + (user?.last_name.uppercased())!
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedChild = childrenArray[indexPath.row]
+        let selectedChild = decodedChildrenArray[indexPath.row]
         UserDefaults.standard.set(selectedChild.id, forKey: "childID")
         
         // Go to dashboard
@@ -203,16 +203,17 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let child = self.childrenArray[indexPath.row]
+        let child = self.decodedChildrenArray[indexPath.row]
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
             
+            let user = self.selectedChild!.user
             let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
-                self.childrenArray.remove(at: indexPath.row)
+                self.decodedChildrenArray.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
                 APIManager.shareInstance.deleteChild(withID: child.id)
-                print("You have deleted element \(child.first_name)")
+                print("You have deleted element \(user?.first_name)")
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
             self.present(alert, animated: true, completion: nil)

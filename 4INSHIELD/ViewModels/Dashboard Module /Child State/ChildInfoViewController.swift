@@ -63,24 +63,24 @@ class ChildInfoViewController: UIViewController {
         
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
-                self.childNameLabel.text = child.first_name + child.last_name
-                self.childAddressLabel.text = child.address
+                self.childNameLabel.text = child.user!.first_name + child.user!.last_name
+                self.childAddressLabel.text = child.adress
                 //Calculate age from birthday
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd" // or whatever format your date string is in
-                if let birthdayDate = dateFormatter.date(from: child.birthday) {
+                if let birthdayDate = dateFormatter.date(from: child.user!.birthday) {
                     let age = self.age(from: birthdayDate)
                     self.childAgeLabel.text = "\(age) ans"
                 }
                 
-                if (child.photo ?? "").isEmpty {
-                    if child.gender == "M" {
+                if (child.user?.photo ?? "").isEmpty {
+                    if child.user?.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                     } else {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
-                    self.childPhoto.loadImage(child.photo)
+                    self.childPhoto.loadImage(child.user?.photo)
                 }
             }
         }

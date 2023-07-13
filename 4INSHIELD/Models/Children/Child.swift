@@ -23,3 +23,4 @@ struct Child: Codable, Identifiable {
     let issync: Bool
     let childUser: User?
 }
+

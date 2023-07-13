@@ -160,8 +160,8 @@ class Register: KeyboardHandlingBaseVC {
         if selected == "Femme"{
             sexe = "F"
         }
-      //  let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe)
-        APIManager.shareInstance.registerAPI(username: username, email: email, password: password, birthday: stringDate, gender: sexe){ (isSuccess, str) in
+        let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe)
+        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                 //self.showAlert(message: str)
                 self.goToConfirmation(withId: "ConfirmationID")
@@ -171,6 +171,7 @@ class Register: KeyboardHandlingBaseVC {
                 self.showAlert(message: str)
             }
         }
+        self.resetFields()
     }
         
         

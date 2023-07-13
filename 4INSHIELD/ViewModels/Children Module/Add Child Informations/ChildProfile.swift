@@ -15,7 +15,7 @@ class ChildProfile: KeyboardHandlingBaseVC {
     @IBOutlet weak var birthdayDatePicker: UIDatePicker!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
-    
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
@@ -78,17 +78,20 @@ class ChildProfile: KeyboardHandlingBaseVC {
             showAlert(with: "Please enter gender")
             return
         }
-        
+        guard let email = emailTextField.text, !gender.isEmpty else {
+            showAlert(with: "Please enter e-mail")
+            return
+        }
         let date = birthdayDatePicker.date
         let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
         
         guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
               let userID = Int(userIDString) else {
             showAlert(with: "User ID not found")
-            return
+            return  
         }
         
-        let regData = ChildModel(parent_id: userID, first_name: firstName, last_name: lastName, birthday: stringDate)
+        let regData = ChildModel(parent_id: userID, first_name: firstName, last_name: lastName, birthday: stringDate, email: email)
         
         APIManager.shareInstance.addChildInfos(regData: regData) { result in
             switch result {

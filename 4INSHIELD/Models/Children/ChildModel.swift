@@ -12,4 +12,5 @@ struct ChildModel: Encodable {
     let first_name: String
     let last_name: String
     let birthday: String
+    let email: String
 }

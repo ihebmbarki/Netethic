@@ -93,20 +93,20 @@ class UpdateViewController: UIViewController, UITextFieldDelegate {
     func getCurrentUserData() {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
 //        let savedUserName = "kaxavy"
-        DispatchQueue.main.async {
-            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-                self.prenomTf.text = user.first_name
-                self.nomTf.text = user.last_name
-                self.emailTf.text = user.email
-                self.dateTextField.text = user.birthday
-                
-                if user.gender == "M" {
-                    self.parent1Btn.isSelected = true
-                } else if user.gender ==  "F" {
-                    self.parent2.isSelected = true
-                }
-            }
-        }
+//        DispatchQueue.main.async {
+//            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+//                self.prenomTf.text = user.first_name
+//                self.nomTf.text = user.last_name
+//                self.emailTf.text = user.email
+//                self.dateTextField.text = user.birthday
+//
+//                if user.gender == "M" {
+//                    self.parent1Btn.isSelected = true
+//                } else if user.gender ==  "F" {
+//                    self.parent2.isSelected = true
+//                }
+//            }
+//        }
     }
     
     func setUpDesign() {

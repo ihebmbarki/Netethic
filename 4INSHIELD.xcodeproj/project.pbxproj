@@ -86,6 +86,7 @@
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
+		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -206,6 +207,7 @@
 		5D8BFCC8FD1EAEE4CA882CED /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_4INSHIELD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D92C8667F59481504B79D6 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
+		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				04844B5429E03D9F008AFBF6 /* User.swift */,
+				872D05F92A60923E0069E58A /* Userparent.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -660,8 +663,8 @@
 			);
 			mainGroup = 04850C4229ACC3E3001A27FF;
 			packageReferences = (
-				0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
-				0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */,
+				0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 04850C4C29ACC3E3001A27FF /* Products */;
 			projectDirPath = "";
@@ -781,6 +784,7 @@
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
+				872D05FA2A60923E0069E58A /* Userparent.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
 				04C604DC2A16595700FDFE8E /* State.swift in Sources */,
@@ -1433,7 +1437,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1441,7 +1445,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */ = {
+		0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
 			requirement = {
@@ -1454,12 +1458,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		0435580229AE39B800D4F012 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 0435580129AE39B800D4F012 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		0476E7742A05675300BEA9EC /* PhoneNumberKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit.git" */;
+			package = 0476E7732A05675300BEA9EC /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */

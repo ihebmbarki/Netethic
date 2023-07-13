@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 struct RegisterModel: Encodable {
     let username: String
     let email: String
@@ -15,6 +17,7 @@ struct RegisterModel: Encodable {
     let password: String
     let birthday: String
     let gender: String
+    let enabled = "true"
     let user_type = "parent"
 
 
@@ -23,3 +26,4 @@ struct RegisterModel: Encodable {
  //   let confirmPassword: String
    // let user_role = "parent"
 }
+

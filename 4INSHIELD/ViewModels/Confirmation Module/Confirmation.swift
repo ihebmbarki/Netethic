@@ -8,7 +8,7 @@
 import UIKit
 
 
-class Confirmation: UIViewController, UITextFieldDelegate {
+class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
     let Api: UsersAPIProrotocol = UsersAPI()
 
     //IBOutlets

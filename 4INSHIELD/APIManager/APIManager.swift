@@ -734,31 +734,23 @@ class APIManager {
             }
         }
     }
-
-    
-    func registerAPI(username: String, email: String, password: String, birthday: String, gender: String, completionHandler: @escaping (Bool, String) -> ()){
-        
-//        let headers: HTTPHeaders = [
-//            .contentType("application/json")
-//        ]
-        let params: [String: String] = [
-            "username": username,
-             "email": email,
-             "email_verification_url": email,
-            "user_agent":  "mobile",
-             "password": password,
-             "birthday": birthday,
-             "gender": gender,
-            "user_type": "parent"
-          ]
-        AF.request(register_url, method: .post, parameters: params, encoding: JSONEncoding.default).response { response in
-            debugPrint(response)
+      
+    func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
+        let headers: HTTPHeaders = [
+            .contentType("application/json")
+        ]
+        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
+           // debugPrint(response)
             switch response.result {
-            case.success(let data):
-                do {
+                case.success(let data):
+                   do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                    if (200..<300).contains(response.response!.statusCode)  {
-                        completionHandler(true, "user registered successfully")
+                       if (200..<300).contains(response.response!.statusCode)  {
+                         //  print(data)
+//                     let parentId = String(data.parent.id)
+//                      print(parentId)
+                       completionHandler(true, "user registered successfully")
+                
                     }else {
                         completionHandler(false, "try again!")
                     }

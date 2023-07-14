@@ -153,7 +153,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         //Set up firstname textfield
         PrenomTf.layer.borderWidth = 1
-        PrenomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        PrenomTf.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         PrenomTf.layer.cornerRadius = PrenomTf.frame.size.height/2
         PrenomTf.layer.masksToBounds = true
         PrenomTf.leftView = prenomPaddingView
@@ -161,7 +161,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         //Set up lastname textfield
         nomTf.layer.borderWidth = 1
-        nomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        nomTf.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         nomTf.layer.cornerRadius = nomTf.frame.size.height/2
         nomTf.layer.masksToBounds = true
         nomTf.leftView = nomPaddingView
@@ -169,7 +169,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         //Set up date textfield
         dateTextField.layer.borderWidth = 1
-        dateTextField.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        dateTextField.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         dateTextField.layer.cornerRadius = dateTextField.frame.size.height/2
         dateTextField.layer.masksToBounds = true
         dateTextField.leftView = datePaddingView
@@ -177,7 +177,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         //Set up buttons
         cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        cancelBtn.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2

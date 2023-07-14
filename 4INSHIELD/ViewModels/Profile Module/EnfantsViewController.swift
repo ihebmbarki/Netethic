@@ -77,7 +77,7 @@ class EnfantsViewController: UIViewController {
 extension EnfantsViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return childrenArray.count
+        return decodedChildrenArray.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.rowHeight = UITableView.automaticDimension
@@ -90,27 +90,27 @@ extension EnfantsViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserChildCell", for: indexPath) as! ChildTvCell
 
-        let child = childrenArray[indexPath.row]
+        let child = decodedChildrenArray[indexPath.row]
         
         DispatchQueue.main.async {
-            if let photo = child.photo, !photo.isEmpty {
+            if let photo = child.user?.photo, !photo.isEmpty {
                 var photoUrl = photo
                 if let range = photo.range(of: "http") {
                     photoUrl.insert("s", at: range.upperBound)
                 }
                 cell.childPhoto.loadImage(photoUrl)
             } else {
-                if child.gender == "M" {
+                if child.user?.gender == "M" {
                     cell.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                 } else {
                     cell.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                 }
             }
-            cell.nameLbl.text = child.first_name.uppercased() + " " + child.last_name.uppercased()
+            cell.nameLbl.text = (child.user?.first_name.uppercased())! + " " + (child.user?.last_name.uppercased())!
             //Calculate age from birthday
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd" // or whatever format your date string is in
-            if let birthdayDate = dateFormatter.date(from: child.birthday) {
+            if let birthdayDate = dateFormatter.date(from: child.user!.birthday) {
                 let age = self.age(from: birthdayDate)
                 cell.ageLbl.text = "\(age) ans"
             }

@@ -92,21 +92,20 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     
     func getCurrentUserData() {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
-//        let savedUserName = "kaxavy"
-//        DispatchQueue.main.async {
-//            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-//                self.prenomTf.text = user.first_name
-//                self.nomTf.text = user.last_name
-//                self.emailTf.text = user.email
-//                self.dateTextField.text = user.birthday
-//
-//                if user.gender == "M" {
-//                    self.parent1Btn.isSelected = true
-//                } else if user.gender ==  "F" {
-//                    self.parent2.isSelected = true
-//                }
-//            }
-//        }
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                self.prenomTf.text = user.first_name
+                self.nomTf.text = user.last_name
+                self.emailTf.text = user.email
+                self.dateTextField.text = user.birthday
+
+                if user.gender == "M" {
+                    self.parent1Btn.isSelected = true
+                } else if user.gender ==  "F" {
+                    self.parent2.isSelected = true
+                }
+            }
+        }
     }
     
     func setUpDesign() {
@@ -265,7 +264,12 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
             switch result {
             case .success(let updatedUser):
                 print("Updated user: \(updatedUser)")
-                // Handle success case
+                //Success alert
+                let alertController = UIAlertController(title: "Success", message: "Parent informations updated successfully", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+
             case .failure(let error):
                 print("Error updating user info: \(error.localizedDescription)")
                 // Handle error case, e.g. display error alert to user

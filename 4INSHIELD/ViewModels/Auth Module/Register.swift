@@ -31,9 +31,7 @@ class Register: KeyboardHandlingBaseVC {
             
         }
     }
-    
-    let Api: UsersAPIProrotocol = UsersAPI()
-    let genderList = ["Homme", "Femme"]
+        let genderList = ["Homme", "Femme"]
     var selected: String = "Homme"
     var sexe: String = "M"
     

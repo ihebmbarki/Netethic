@@ -9,8 +9,6 @@ import UIKit
 
 class ResetPwdViewController: KeyboardHandlingBaseVC {
 
-    let Api: UsersAPIProrotocol = UsersAPI()
-
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var codeLbl: UILabel!
     @IBOutlet weak var enterCodeLbl: UILabel!

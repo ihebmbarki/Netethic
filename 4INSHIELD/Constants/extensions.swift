@@ -44,6 +44,18 @@ extension UIImageView {
         }
     }
     
+    func loadParentImage(from urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
+        self.image = UIImage()
+        guard let urlString = urlString, let url = URL(string: urlString) else { return }
+        
+        self.sd_setImage(with: url) { (image, error, type, url) in
+            if onSuccess != nil, error == nil {
+                onSuccess!(image!)
+            }
+        }
+    }
+
+    
     func anchor(top:NSLayoutYAxisAnchor? = nil,
                 left:NSLayoutXAxisAnchor? = nil,
                 bottom:NSLayoutYAxisAnchor? = nil,

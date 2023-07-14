@@ -105,7 +105,7 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
                 if (user.photo ?? "").isEmpty {
                     self.userPhoto.image = UIImage(imageLiteralResourceName: "empty")
                 } else {
-                    self.userPhoto.loadImage(user.photo)
+                    self.userPhoto.loadParentImage(from: user.photo)
                 }
                 
                 self.userNameTf.text = user.username.uppercased()
@@ -116,7 +116,7 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
                         self.userPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
-                    self.userPhoto.loadImage(user.photo)
+                    self.userPhoto.loadParentImage(from: user.photo)
                 }
             }
         }

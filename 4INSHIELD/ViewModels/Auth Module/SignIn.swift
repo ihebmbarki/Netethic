@@ -26,9 +26,6 @@ class SignIn: KeyboardHandlingBaseVC {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
-    
-    let Api: UsersAPIProrotocol = UsersAPI()
-    
 
     
     override func viewDidLoad() {

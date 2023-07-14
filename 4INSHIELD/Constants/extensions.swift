@@ -15,6 +15,7 @@ import SDWebImage
 struct Colrs {
     static let redColor = UIColor(red: 239, green: 82, blue: 96, alpha: 1)
     static let bgColor = UIColor(red: 63/255, green: 99/255, blue: 169/255, alpha: 1)
+    static let default_color = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00)
 }
 //Display
 extension UIView {
@@ -28,19 +29,16 @@ extension UIView {
 //Image
 extension UIImageView {
     
-    func loadImage(_ urlString: String?, onSuccess:((UIImage) -> Void)? = nil) {
+    func loadImage(_ urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
         self.image = UIImage()
-        guard let string = urlString else {return}
-        guard let url = URL(string: string) else {return}
+        guard let string = urlString else { return }
         
-        var secureUrl = string
-        if let range = secureUrl.range(of: "http://") {
-            secureUrl.replaceSubrange(range, with: "https://")
-        }
-        guard let secureURL = URL(string: secureUrl) else { return }
+        var photoUrl = "https://webserver.dev.netethic.fr" + string
         
-        self.sd_setImage(with: secureURL) { (image, error, type, url) in
-            if onSuccess != nil , error == nil {
+        guard let url = URL(string: photoUrl) else { return }
+        
+        self.sd_setImage(with: url) { (image, error, type, url) in
+            if onSuccess != nil, error == nil {
                 onSuccess!(image!)
             }
         }

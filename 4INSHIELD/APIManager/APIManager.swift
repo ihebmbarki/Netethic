@@ -313,26 +313,30 @@ class APIManager {
         }
     }
     
-    func updateChild(withID childID: Int, childData: [String:Any], completion: @escaping(Child) -> Void) {
-        var child: Child?
-        
+    func updateChild(withID childID: Int, childData: [String: Any], completion: @escaping (Childd) -> Void) {
+        var child: Childd?
+
         let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
-        AF.request(serverURL, method: .put, parameters: childData).response
-        {
-            response in switch response.result {
-            case .success( _):
-                do {
-                    child = try JSONDecoder().decode(Child.self, from: response.data!)
-                    completion(child!)
-                    print("Your child information has been successfully updated")
-                } catch let error as NSError {
-                    debugPrint("Failed to load: \(error.localizedDescription)")
+        AF.request(serverURL, method: .put, parameters: childData).response { response in
+            switch response.result {
+            case .success:
+                if let data = response.data {
+                    do {
+                        child = try JSONDecoder().decode(Childd.self, from: data)
+                        completion(child!)
+                        print("Your child information has been successfully updated")
+                    } catch {
+                        print("Failed to decode child: \(error)")
+                    }
+                } else {
+                    print("Empty response data")
                 }
             case .failure(let error):
                 print("Error updating child info: \(error.localizedDescription)")
             }
         }
     }
+
     
     func uploadChildPic(withID childID: Int, photo: UIImage) {
         let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/upload_photo/"
@@ -411,15 +415,15 @@ class APIManager {
     }
 
     
-    func fetchChild(withID childID: Int ,completion: @escaping(Child) -> Void) {
-        var child: Child?
+    func fetchChild(withID childID: Int ,completion: @escaping(Childd) -> Void) {
+        var child: Childd?
         let fetch_child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
         AF.request(fetch_child_url, method: .get).response
         {
             response in switch response.result {
             case .success( _):
                 do {
-                    child = try JSONDecoder().decode(Child.self, from: response.data!)
+                    child = try JSONDecoder().decode(Childd.self, from: response.data!)
                     completion(child!)
                 } catch let error as NSError {
                     print("Error: \(error.localizedDescription)")
@@ -546,14 +550,15 @@ class APIManager {
         }
     }
     
-    func fetchCurrentUserChildren(username: String, completion: @escaping ([Child]) -> Void) {
+    func fetchCurrentUserChildren(username: String, completion: @escaping ([Childd]) -> Void) {
         let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/childs/"
         AF.request(serverURL, method: .get).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
-                    let children = try JSONDecoder().decode([Child].self, from: data)
-                    completion(children)
+                    let childrenResponse = try JSONDecoder().decode([Childd].self, from: data)
+                    print("Successfully decoded children")
+                    completion(childrenResponse)
                 } catch {
                     print("Failed to decode children: \(error)")
                     completion([])
@@ -564,6 +569,7 @@ class APIManager {
             }
         }
     }
+
     
     func setOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void) {
         let parameters: [String: Any] = [

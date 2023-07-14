@@ -18,7 +18,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         return formatter
     }()
     
-    var selectedChild: Child?
+    var selectedChild: Childd?
     var platforms: [PlatformDetail] = []
     var toxicPseudos: [String] = []
     // Declare a property to store the states array
@@ -253,7 +253,8 @@ class homeVC: UIViewController, ChartViewDelegate {
         loadChildInfo()
         guard let selectedChild = selectedChild else { return }
         // Load child photo
-        if let photo = selectedChild.photo, !photo.isEmpty {
+        let user = selectedChild.user
+        if let photo = user?.photo, !photo.isEmpty {
             var photoUrl = photo
             if let range = photoUrl.range(of: "http://") {
                 photoUrl.replaceSubrange(range, with: "https://")
@@ -478,10 +479,11 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
-        if (selectedChild.photo ?? "").isEmpty {
+        let user = selectedChild.user
+        if (user?.photo ?? "").isEmpty {
             childButton.imageView?.image = nil
             DispatchQueue.main.async {
-                let imageView = UIImageView(image: UIImage(named: selectedChild.gender == "M" ? "malePic" : "femalePic"))
+                let imageView = UIImageView(image: UIImage(named: user?.gender == "M" ? "malePic" : "femalePic"))
                 imageView.contentMode = .scaleAspectFill
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 self.childButton.addSubview(imageView)
@@ -494,7 +496,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                 ])
             }
         } else {
-            if let photo = selectedChild.photo, !photo.isEmpty {
+            if let photo = user?.photo, !photo.isEmpty {
                 var photoUrl = photo
                 if let range = photoUrl.range(of: "http://") {
                     photoUrl.replaceSubrange(range, with: "https://")

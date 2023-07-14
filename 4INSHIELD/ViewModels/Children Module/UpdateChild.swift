@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import DLRadioButton
 
-class UpdateChild: UIViewController, UISearchBarDelegate {
+class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //IBOutlets
     @IBOutlet weak var childPhoto: UIImageView!
@@ -153,7 +153,7 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         
         //Set up firstname textfield
         PrenomTf.layer.borderWidth = 1
-        PrenomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        PrenomTf.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         PrenomTf.layer.cornerRadius = PrenomTf.frame.size.height/2
         PrenomTf.layer.masksToBounds = true
         PrenomTf.leftView = prenomPaddingView
@@ -161,7 +161,7 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         
         //Set up lastname textfield
         nomTf.layer.borderWidth = 1
-        nomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        nomTf.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         nomTf.layer.cornerRadius = nomTf.frame.size.height/2
         nomTf.layer.masksToBounds = true
         nomTf.leftView = nomPaddingView
@@ -169,7 +169,7 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         
         //Set up date textfield
         dateTextField.layer.borderWidth = 1
-        dateTextField.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        dateTextField.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         dateTextField.layer.cornerRadius = dateTextField.frame.size.height/2
         dateTextField.layer.masksToBounds = true
         dateTextField.leftView = datePaddingView
@@ -177,10 +177,9 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         
         //Set up buttons
         cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        cancelBtn.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
-        updateBtn.applyGradient()
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
     }
@@ -285,12 +284,12 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
         guard let savedChildID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
-                self.PrenomTf.text = child.first_name
-                self.nomTf.text = child.last_name
+                self.PrenomTf.text = child.user?.first_name
+                self.nomTf.text = child.user?.last_name
                 
-                if child.gender == "M" {
+                if child.user?.gender == "M" {
                     self.maleRadioButton.isSelected = true
-                } else if child.gender == "F" {
+                } else if child.user?.gender == "F" {
                     self.femaleRadioButton.isSelected = true
                 } else {
                     self.otherRadioButton.isSelected = true
@@ -298,18 +297,18 @@ class UpdateChild: UIViewController, UISearchBarDelegate {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                if let birthdate = dateFormatter.date(from: child.birthday) {
+                if let birthdate = dateFormatter.date(from: child.user!.birthday) {
                     self.dateTextField.text = dateFormatter.string(from: birthdate)
                 }
                 
-                if (child.photo ?? "").isEmpty {
-                    if child.gender == "M" {
+                if (child.user?.photo ?? "").isEmpty {
+                    if child.user!.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                     } else {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
-                    self.childPhoto.loadImage(child.photo)
+                    self.childPhoto.loadImage(child.user?.photo)
                 }
             }
         }

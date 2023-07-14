@@ -4,6 +4,9 @@
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
 
+# Ignore Mac DS_Store files
+.DS_Store
+
 # CocoaPods - Only use to conserve bandwidth / Save time on Pushing
 #           - Also handy if you have a large number of dependant pods
 #           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE

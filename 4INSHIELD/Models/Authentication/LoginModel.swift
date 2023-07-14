@@ -8,10 +8,10 @@
 import Foundation
 
 
-struct LoginModel: Encodable {
+struct LoginModel: Codable {
     let username: String
     let password: String
-    let onboarding_simple: Bool
+ //   let onboarding_simple: Bool
 //    let client_id = Constant
     let client_id = BuildConfiguration.shared.CLIENT_ID
 //    let client_secret = "fb606ceb76d93b2656b7a734f2ff8538c003e6f01f200a6650fd1a63"

@@ -734,36 +734,62 @@ class APIManager {
             }
         }
     }
-      
+
     func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
-        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
-           // debugPrint(response)
-            switch response.result {
-                case.success(let data):
-                   do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                       if (200..<300).contains(response.response!.statusCode)  {
-                         //  print(data)
-//                     let parentId = String(data.parent.id)
-//                      print(parentId)
-                       completionHandler(true, "user registered successfully")
-                
-                    }else {
+        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseDecodable(of: Userparent.self) { response in
+                switch response.result {
+                case .success(let responseObject):
+                    // Handle the decoded response
+                    print(responseObject.parent.id)
+                    print(responseObject)
+                    do {
+                                       // let json = try JSONSerialization.jsonObject(with: responseObject!, options: [])
+                                           if (200..<300).contains(response.response!.statusCode)  {
+                                             //  print(data)
+                    //                     let parentId = String(data.parent.id)
+                    //                      print(parentId)
+                                           completionHandler(true, "user registered successfully")
+                    
+                                        }else {
+                                            completionHandler(false, "try again!")
+                                        }
+                    }catch{
+                        print(error.localizedDescription)
                         completionHandler(false, "try again!")
-                    }
-                }catch{
-                    print(error.localizedDescription)
-                    completionHandler(false, "try again!")
+                    } case .failure(let error):
+                    // Handle the error
+                    print("Error: \(error)")
                 }
-            case.failure(let err):
-                print(err.localizedDescription)
-                completionHandler(false, "try again!")
-            }
-            
         }
+//        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
+//           // debugPrint(response)
+//            switch response.result {
+//                case.success(let data):
+//                   do {
+//                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+//                       if (200..<300).contains(response.response!.statusCode)  {
+//                         //  print(data)
+////                     let parentId = String(data.parent.id)
+////                      print(parentId)
+//                       completionHandler(true, "user registered successfully")
+//
+//                    }else {
+//                        completionHandler(false, "try again!")
+//                    }
+//                }catch{
+//                    print(error.localizedDescription)
+//                    completionHandler(false, "try again!")
+//                }
+//            case.failure(let err):
+//                print(err.localizedDescription)
+//                completionHandler(false, "try again!")
+//            }
+//
+//        }
     }
     
     func loginAPI(login: LoginModel, completionHandler: @escaping handler){
@@ -778,7 +804,7 @@ class APIManager {
             case.success(let data):
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                    if response.response?.statusCode == 200 {
+                    if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
                         completionHandler(.success(json))
                     }else {
                         completionHandler(.failure(.custom(message: "Check your network connectivity")))

@@ -156,9 +156,10 @@ class SignIn: KeyboardHandlingBaseVC {
 
         if verifyFields() {
             // Check if onboarding has been completed for this user
-            let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
-            let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
-
+            //let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
+//            let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
+            let login = LoginModel(username: username, password: password)
+            
             APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
                 case .success(let json):

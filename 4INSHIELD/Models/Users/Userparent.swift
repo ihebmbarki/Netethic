@@ -14,14 +14,15 @@ struct Parent: Codable {
 }
 
 struct Userparent: Codable {
-    let id: Int
-    let firstName: String?
-    let lastName: String?
+   let id: Int?
+    let first_name: String?
+    let last_name: String?
     let email: String
     let username: String
-    let userAgent: String
+    let user_agent: String
     let parent: Parent
     let gender: String
     let birthday: String
     let photo: String?
 }
+

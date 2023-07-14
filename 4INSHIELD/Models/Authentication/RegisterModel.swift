@@ -19,6 +19,8 @@ struct RegisterModel: Encodable {
     let gender: String
     let enabled = "true"
     let user_type = "parent"
+    let first_name = "test"
+    let last_name = "test"
 
 
   //  let first_name: String

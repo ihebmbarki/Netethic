@@ -223,12 +223,19 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
             UserDefaults.standard.set(child.id, forKey: "childID")
             print(child.id)
-            
+
             let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "updateChild")
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "updateChild") as? UpdateChild {
+                // Set the selected child property in UpdateChildViewController
+                vc.selectedChild = self.decodedChildrenArray[indexPath.row]
+
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                print("Error: Failed to instantiate UpdateChildViewController.")
+            }
         }
+
         
         updateAction.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
         updateAction.backgroundColor = Colrs.default_color

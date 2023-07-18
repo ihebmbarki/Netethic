@@ -5,6 +5,7 @@
 //  Created by iheb mbarki on 22/3/2023.
 //
 import Foundation
+import Alamofire
 import UIKit
 
 class ChildProfile: KeyboardHandlingBaseVC {
@@ -98,31 +99,89 @@ class ChildProfile: KeyboardHandlingBaseVC {
         ApiManagerAdd.shareInstance1.addChildInfos(regData: regData) { isSuccess, str in
             if isSuccess {
                 print(str)
-                let date = Date()
-                let df = DateFormatter()
-                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                let dateString = df.string(from: date)
-                
-                let x = [
-                    "user": userId,
-                    "wizard_step": 1,
-                    "platform": "mobile",
-                    "date": dateString
-                ] as [String : Any]
-                
-                do {
-                    let journey = try UserJourney(from: x as! Decoder)
-                    ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
-                        print(userJourney)
-                    }
-                } catch let error {
-                    print(error.localizedDescription)
-                }
+                self.platform()
+
+//                let date = Date()
+//                let df = DateFormatter()
+//                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//                let dateString = df.string(from: date)
+//
+//                let x = [
+//                    "user": userId,
+//                    "wizard_step": 1,
+//                    "platform": "mobile",
+//                    "date": dateString
+//                ] as [String : Any]
+//
+//                do {
+//                    let journey = try UserJourney(from: x as! Decoder)
+//                    ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
+//                        print(userJourney)
+//                    }
+//                } catch let error {
+//                    print(error.localizedDescription)
+//                }
             } else {
                 print(str)
             }
         }
     }
+    
+    
+    func platform(){
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let dateString = df.string(from: date)
+        
+        
+        guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
+              let userID = Int(userIDString) else {
+            print("User ID not found")
+            return
+        }
+        let wizardParam = Wizard(user: userID, wizardStep: 1, platform: "mobile", date: dateString)
+        //        do {
+        //            let journey = try UserJourney(from: x as! Decoder)
+        //            ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
+        //                print(userJourney)
+        //            }
+        //
+        //        }
+        AF.request(user_journey_url, method: .post, parameters: wizardParam, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
+            .responseJSON(completionHandler: { (response) in
+                
+                debugPrint(response)
+                switch response.result {
+                case .success(let data):
+                    switch response.response?.statusCode {
+                    case 200,201:
+                        /// Handle success, parse JSON data
+                        do {
+                            let jsonData = try JSONDecoder().decode(WizardResponse.self, from: JSONSerialization.data(withJSONObject: data))
+                            
+                            print("save!!!!!")
+                        } catch let error {
+                            /// Handle json decode error
+                            print(error)
+                        }
+                    case 401:
+                        /// Handle 401 error
+                        print("not authorization")
+                    default:
+                        /// Handle unknown error
+                        print("we ran into error")
+                    }
+                case .failure(let error):
+                    /// Handle request failure
+                    print(error.localizedDescription)
+                }
+            })
+    }
+    
+    
+    
+    
     
     func showAlert(with message: String) {
         let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)

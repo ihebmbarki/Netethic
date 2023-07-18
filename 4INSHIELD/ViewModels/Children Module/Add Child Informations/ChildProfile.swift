@@ -12,7 +12,6 @@ class ChildProfile: KeyboardHandlingBaseVC {
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var genderTF: UITextField!
-    @IBOutlet weak var birthdayDatePicker: UIDatePicker!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,10 +21,12 @@ class ChildProfile: KeyboardHandlingBaseVC {
 
         }
     }
+    @IBOutlet weak var birthdayDatePicker: UIDatePicker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         // Set the number of pages in the page control
         pageControl.numberOfPages = 5
 
@@ -36,14 +37,14 @@ class ChildProfile: KeyboardHandlingBaseVC {
         for view in pageControl.subviews {
             if let dot = view as? UIImageView {
                 dot.image = UIImage(systemName: "circle.fill")
-                dot.tintColor = UIColor.gray
+                dot.tintColor = UIColor(named: "AccentColor")
             }
         }
 
         // Set the current page control indicator to a numbered circle
         if let dot = pageControl.subviews[pageControl.currentPage] as? UIImageView {
             dot.image = UIImage(systemName: "\(pageControl.currentPage + 1).circle.fill")
-            dot.tintColor = UIColor.blue
+            dot.tintColor = UIColor(named: "AccentColor")
         }
         
         //Buttons style
@@ -65,76 +66,64 @@ class ChildProfile: KeyboardHandlingBaseVC {
         navigationController?.pushViewController(ChildSocialMedia, animated: true)
     }
 //    UserDefaults.standard.set(id, forKey: "childID")
+   
     @IBAction func nextBtnClicked(_ sender: Any) {
-        guard let firstName = firstNameTF.text, !firstName.isEmpty else {
-            showAlert(with: "Please enter first name")
-            return
-        }
-        guard let lastName = lastNameTF.text, !lastName.isEmpty else {
-            showAlert(with: "Please enter last name")
-            return
-        }
-        guard let gender = genderTF.text, !gender.isEmpty else {
-            showAlert(with: "Please enter gender")
-            return
-        }
-        guard let email = emailTextField.text, !gender.isEmpty else {
-            showAlert(with: "Please enter e-mail")
-            return
-        }
+        
+        let firstName = self.firstNameTF.text ?? "test"
+        guard let lastName = self.lastNameTF.text else { return}
+        guard let gender = self.genderTF.text else { return}
+        guard let email = self.emailTextField.text else { return }
+        
         let date = birthdayDatePicker.date
         let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
-        
-        guard let userIDString = UserDefaults.standard.string(forKey: "userID"),
-              let userID = Int(userIDString) else {
-            showAlert(with: "User ID not found")
-            return  
+            // Utilisez stringDate comme nécessaire
+         //   print("Formatted date: \(stringDate!)")
+     
+    
+//        guard let roleDataID = DataHandler.shared.roleDataID else {
+//            showAlert(message: "User ID not found")
+//            return
+//
+//        }
+        let roleDataID = UserDefaults.standard.integer(forKey: "RoleDataID")
+        print("Value of roleDataID: \(roleDataID)")
+        var userId = Int(roleDataID)
+        if roleDataID != 0 {
+             userId = Int(roleDataID)
+        }else {
+             userId = 131
         }
-        
-        let regData = ChildModel(parent_id: userID, first_name: firstName, last_name: lastName, birthday: stringDate, email: email)
-        
-        APIManager.shareInstance.addChildInfos(regData: regData) { result in
-            switch result {
-            case .success(let json):
-                print(json as AnyObject)
-                if let data = json.data(using: .utf8),
-                   let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let id = jsonDict["id"] as? Int,
-                   let username = jsonDict["username"] as? String {
-                       // Save id and username to UserDefaults
-                       UserDefaults.standard.set(id, forKey: "childID")
-                       UserDefaults.standard.set(username, forKey: "username")
-                       UserDefaults.standard.synchronize()
-                       print("childID: \(id), username: \(username)")
-                } else {
-                       print("Error: could not parse response")
-                }
-                         
+       // let userID = Int(roleDataID)
+        let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: gender, parent_id: userId)
+        ApiManagerAdd.shareInstance1.addChildInfos(regData: regData) { isSuccess, str in
+            if isSuccess {
+                print(str)
                 let date = Date()
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                 let dateString = df.string(from: date)
                 
                 let x = [
-                    "user": userID,
+                    "user": userId,
                     "wizard_step": 1,
                     "platform": "mobile",
                     "date": dateString
                 ] as [String : Any]
+                
                 do {
                     let journey = try UserJourney(from: x as! Decoder)
-                    APIManager.shareInstance.saveUserJourney(journeyData: journey) { userJourney in
+                    ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
                         print(userJourney)
                     }
-                } catch (let error) {
+                } catch let error {
                     print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            } else {
+                print(str)
             }
         }
     }
-
+    
     func showAlert(with message: String) {
         let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

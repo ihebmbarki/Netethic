@@ -49,7 +49,7 @@ class EnfantsViewController: UIViewController {
         if childrenList.count > 0 {
             // Children list is not empty, do nothing.
         } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "NETETHIC", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }

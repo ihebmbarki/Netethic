@@ -23,6 +23,7 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var genderPickerView: UIPickerView!
+    
     @IBOutlet weak var birthdayDatePicker: UIDatePicker!
     
     @IBOutlet weak var scrollView: UIScrollView!{

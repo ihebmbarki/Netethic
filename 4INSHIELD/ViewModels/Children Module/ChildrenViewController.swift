@@ -120,7 +120,7 @@ class ChildrenViewController: UIViewController {
         if childrenList.count > 0 {
             // Children list is not empty, do nothing.
         } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "NETETHIC", message: "Your children list is empty!\nTo add a new child please click on the button (+) at the bottom right", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -139,7 +139,7 @@ class ChildrenViewController: UIViewController {
     @IBAction func infoBtnTapped(_ sender: Any) {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         let message = NSLocalizedString("alert_message", tableName: nil, bundle: bundle, value: "", comment: "Alert message")
-        let alertController = UIAlertController(title: "4INSHIELD", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "NETETHIC", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }

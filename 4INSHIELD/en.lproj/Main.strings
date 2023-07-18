@@ -1,4 +1,3 @@
-
 /* Class = "UILabel"; text = "Connectez-vous pour continuer"; ObjectID = "0Mw-Is-DzV"; */
 "0Mw-Is-DzV.text" = "Connectez-vous pour continuer";
 
@@ -9,7 +8,7 @@
 "2dZ-Rc-YPo.placeholder" = "Nom d'utilisateur";
 
 /* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "3wG-Ov-Ng4"; */
-"3wG-Ov-Ng4.text" = "Bienvenue à 4INSHIELD";
+"3wG-Ov-Ng4.text" = "Bienvenue à NETETHIC";
 
 /* Class = "UILabel"; text = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement "; ObjectID = "4Pw-LW-EQM"; */
 "4Pw-LW-EQM.text" = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement ";
@@ -24,7 +23,7 @@
 "6EY-Iw-Xdz.placeholder" = "*";
 
 /* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "6vS-he-vLf"; */
-"6vS-he-vLf.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+"6vS-he-vLf.text" = "© 2023 Tous Droits Réservés Réalisé par NETETHIC ";
 
 /* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "70N-do-NMb"; */
 "70N-do-NMb.placeholder" = "Mot de passe";
@@ -39,7 +38,7 @@
 "89e-Md-AUq.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "9Yb-HZ-UWt"; */
-"9Yb-HZ-UWt.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+"9Yb-HZ-UWt.text" = "© 2023 Tous Droits Réservés Réalisé par NETETHIC ";
 
 /* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "ATF-sM-Ka3"; */
 "ATF-sM-Ka3.configuration.title" = "Continuer";
@@ -63,7 +62,7 @@
 "DXb-Gu-nuc.placeholder" = "*";
 
 /* Class = "UILabel"; text = "© 2023 All Rights Reserved Made by 4INDATA"; ObjectID = "E5u-ud-NuO"; */
-"E5u-ud-NuO.text" = "© 2023 All Rights Reserved Made by 4INDATA";
+"E5u-ud-NuO.text" = "© 2023 All Rights Reserved Made by NETETHIC";
 
 /* Class = "UIButton"; configuration.title = "Connectez-vous"; ObjectID = "ECl-ri-KQW"; */
 "ECl-ri-KQW.configuration.title" = "Connectez-vous";
@@ -72,7 +71,7 @@
 "ECl-ri-KQW.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "Ebf-lm-pqL"; */
-"Ebf-lm-pqL.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+"Ebf-lm-pqL.text" = "© 2023 Tous Droits Réservés Réalisé par NETETHIC ";
 
 /* Class = "UIButton"; configuration.title = "Inscrivez-vous"; ObjectID = "IJv-yG-F8h"; */
 "IJv-yG-F8h.configuration.title" = "Inscrivez-vous";
@@ -132,7 +131,7 @@
 "SaW-qz-T1M.title" = "Item";
 
 /* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "Ss1-na-iQH"; */
-"Ss1-na-iQH.text" = "Bienvenue à 4INSHIELD";
+"Ss1-na-iQH.text" = "Bienvenue à NETETHIC";
 
 /* Class = "UILabel"; text = "5. Confirmez que le téléphone va être utilisé par un enfant"; ObjectID = "TmF-DW-eCM"; */
 "TmF-DW-eCM.text" = "5. Confirmez que le téléphone va être utilisé par un enfant";
@@ -159,7 +158,7 @@
 "WXf-sC-vkl.text" = "Date de naissaance";
 
 /* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "Wlq-So-h61"; */
-"Wlq-So-h61.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
+"Wlq-So-h61.text" = "© 2023 Tous Droits Réservés Réalisé par NETETHIC ";
 
 /* Class = "UITextField"; placeholder = "Email"; ObjectID = "YeE-y0-BZG"; */
 "YeE-y0-BZG.placeholder" = "Email";
@@ -198,7 +197,7 @@
 "dbz-Ch-2Fa.placeholder" = "Choisissez un profil de réseau social";
 
 /* Class = "UILabel"; text = "3. Vous serez redirigé vers la page de téléchargement de l'application 4INSHIELD"; ObjectID = "dtH-ii-qj1"; */
-"dtH-ii-qj1.text" = "3. Vous serez redirigé vers la page de téléchargement de l'application 4INSHIELD";
+"dtH-ii-qj1.text" = "3. Vous serez redirigé vers la page de téléchargement de l'application NETETHIC";
 
 /* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "dx2-MK-y9U"; */
 "dx2-MK-y9U.placeholder" = "Mot de passe";
@@ -273,7 +272,7 @@
 "vji-bi-msN.text" = "Vous avez complété avec succès le profil de votre enfant. ";
 
 /* Class = "UILabel"; text = "Bienvenue à 4INSHIELD"; ObjectID = "w6R-fu-y3N"; */
-"w6R-fu-y3N.text" = "Bienvenue à 4INSHIELD";
+"w6R-fu-y3N.text" = "Bienvenue à NETETHIC";
 
 /* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "wMN-hu-vat"; */
 "wMN-hu-vat.configuration.title" = "Continuer";
@@ -282,7 +281,7 @@
 "wMN-hu-vat.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Welcome to 4INSHIELD, Lorem ipsum"; ObjectID = "ynN-se-daa"; */
-"ynN-se-daa.text" = "Welcome to 4INSHIELD, Lorem ipsum";
+"ynN-se-daa.text" = "Welcome to NETETHIC, Lorem ipsum";
 
 /* Class = "UITextField"; placeholder = "Entrer l'URL"; ObjectID = "yoF-Vm-NoX"; */
 "yoF-Vm-NoX.placeholder" = "Entrer l'URL";

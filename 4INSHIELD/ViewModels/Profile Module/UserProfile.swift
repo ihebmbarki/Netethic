@@ -61,7 +61,7 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
         picker.allowsEditing = true
         picker.delegate = self
         
-        let alert = UIAlertController(title: "4INSHIELD", message: "Change your profile picture", preferredStyle: UIAlertController.Style.actionSheet)
+        let alert = UIAlertController(title: "NETETHIC", message: "Change your profile picture", preferredStyle: UIAlertController.Style.actionSheet)
         
         let camera = UIAlertAction(title: "Take a photo", style: UIAlertAction.Style.default) { (_) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {

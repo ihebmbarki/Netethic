@@ -14,7 +14,6 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var onboardingView: UICollectionView!
     var slides: [OnboardingSlide] = []
-    
     var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
@@ -37,9 +36,9 @@ class OnboardingViewController: UIViewController {
     
     func populateScrollView() {
         slides = [
-            OnboardingSlide(title: "Protégez vos enfants en ligne", description: "4INSHIELD vous garantie que l’activité en ligne de vos enfants soit sereine et sans danger",bgimage: #imageLiteral(resourceName: "Ellipse 174") , image: #imageLiteral(resourceName: "image 8")),
-            OnboardingSlide(title: "Choisissez votre niveau d’engagement", description: "4INSHIELD vous permet d’être alerté sur la publication des messages haineux et toxiques sur les réseaux sociaux de vos enfants",bgimage: #imageLiteral(resourceName: "Ellipse 174"), image: #imageLiteral(resourceName: "image 8")),
-            OnboardingSlide(title: "Développez de bonnes habitudes numériques", description: "4INSHIELD aide à vos enfants à développer une relation responsable à la technologie", bgimage: #imageLiteral(resourceName: "Ellipse 174"), image: #imageLiteral(resourceName: "image 9"))
+            OnboardingSlide(title: "Protégez vos enfants en ligne", description: "NETETHIC vous garantie que l’activité en ligne de vos enfants soit sereine et sans danger",bgimage: #imageLiteral(resourceName: "Ellipse 174") , image: #imageLiteral(resourceName: "image 8")),
+            OnboardingSlide(title: "Choisissez votre niveau d’engagement", description: "NETETHIC vous permet d’être alerté sur la publication des messages haineux et toxiques sur les réseaux sociaux de vos enfants",bgimage: #imageLiteral(resourceName: "Ellipse 174"), image: #imageLiteral(resourceName: "image 8")),
+            OnboardingSlide(title: "Développez de bonnes habitudes numériques", description: "NETETHIC aide à vos enfants à développer une relation responsable à la technologie", bgimage: #imageLiteral(resourceName: "Ellipse 174"), image: #imageLiteral(resourceName: "image 9"))
         ]
         
         pageControl.numberOfPages = slides.count

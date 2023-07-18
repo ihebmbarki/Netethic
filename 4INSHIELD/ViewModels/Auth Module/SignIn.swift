@@ -7,7 +7,9 @@
 
 import UIKit
 
+
 class SignIn: KeyboardHandlingBaseVC {
+    
     
     //IBOutlets
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -27,13 +29,11 @@ class SignIn: KeyboardHandlingBaseVC {
         }
     }
     
-    let Api: UsersAPIProrotocol = UsersAPI()
-    
+
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         // Set the initial language based on the saved language
            if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
                LanguageManager.shared.currentLanguage = selectedLanguage
@@ -157,8 +157,9 @@ class SignIn: KeyboardHandlingBaseVC {
         if verifyFields() {
             // Check if onboarding has been completed for this user
             let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
-            let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
-
+           let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
+//            let login = LoginModel(username: username, password: password)
+            
             APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
                 case .success(let json):
@@ -167,9 +168,9 @@ class SignIn: KeyboardHandlingBaseVC {
                        let id = jsonDict["id"] as? Int,
                        let username = jsonDict["username"] as? String {
                         // Save id and username to UserDefaults
-                        UserDefaults.standard.set(id, forKey: "userID")
+                      //  UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
-                        print("User ID: \(id)")
+                      //  print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
@@ -180,6 +181,12 @@ class SignIn: KeyboardHandlingBaseVC {
                             if onboardingSimple == false {
                                 self.goToScreen(withId: "OnboardingSB")
                             } else {
+                                let roleDataID = UserDefaults.standard.integer(forKey: "RoleDataID")
+                                print("Value of roleDataID: \(roleDataID)")
+                                
+                                UserDefaults.standard.set(roleDataID, forKey: "RoleDataID")
+
+                                DataHandler.shared.roleDataID = roleDataID
                                 // Proceed to wizard screen
                                 APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
                                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
@@ -189,11 +196,12 @@ class SignIn: KeyboardHandlingBaseVC {
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
                                         switch wizardStep {
                                         case 1:
+                                     
                                             self.goToScreen(withId: "childInfos")
                                         case 2:
                                             self.goToScreen(withId: "ChildSocialMedia")
                                         case 3:
-                                            self.goToScreen(withId: "ChildProfileAdded")
+                                           self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:

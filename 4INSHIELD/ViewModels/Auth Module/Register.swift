@@ -23,6 +23,7 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var genderPickerView: UIPickerView!
+    
     @IBOutlet weak var birthdayDatePicker: UIDatePicker!
     
     @IBOutlet weak var scrollView: UIScrollView!{
@@ -163,7 +164,7 @@ class Register: KeyboardHandlingBaseVC {
         let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
-                //self.showAlert(message: str)
+               // self.showAlert(message: str)
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()

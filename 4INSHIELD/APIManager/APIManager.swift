@@ -30,7 +30,7 @@ class APIManager {
             switch response.result {
             case .success:
                 if let data = response.data {
-//                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
+                    //                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
                     
                     do {
                         let result = try JSONDecoder().decode(ToxicProfileResponse.self, from: data)
@@ -74,7 +74,7 @@ class APIManager {
             }
         }
     }
-
+    
     
     func fetchConcernedRelationship(forPerson childID: Int, completion: @escaping (Int?) -> Void) {
         var concernedRelationship: Int?
@@ -103,7 +103,7 @@ class APIManager {
             }
         }
     }
-
+    
     func fetchScore(forPlatform platform: String, childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (Int?) -> Void) {
         let urlString = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/"
         let parameters: [String: Any] = [
@@ -130,8 +130,8 @@ class APIManager {
             }
         }
     }
-
-
+    
+    
     func fetchPlatforms(forPerson childID: Int, completion: @escaping (Platform?) -> Void) {
         var platforms: Platform?
         let fetchPlatformsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/person/platforms/?person_id=\(childID)"
@@ -153,7 +153,7 @@ class APIManager {
             }
         }
     }
-
+    
     func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
         let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
         
@@ -228,7 +228,7 @@ class APIManager {
             }
         }
     }
-
+    
     func getScore(completion: @escaping (Score?) -> Void) {
         AF.request(user_score, method: .get).response { response in
             switch response.result {
@@ -413,7 +413,7 @@ class APIManager {
             }
         }
     }
-
+    
     
     func fetchChild(withID childID: Int ,completion: @escaping(Childd) -> Void) {
         var child: Childd?
@@ -447,7 +447,7 @@ class APIManager {
             }
         }
     }
-     
+    
     func deleteChild(withID childID: Int) {
         
         let child_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/"
@@ -460,7 +460,7 @@ class APIManager {
                 
                 guard let savedDeviceID = UserDefaults.standard.value(forKey: "savedDeviceID") as? Int else { return }
                 self.deleteDevice(deviceID: savedDeviceID)
-
+                
                 // Remove savedDeviceID from UserDefaults after deleting the device
                 UserDefaults.standard.removeObject(forKey: "savedDeviceID")
                 
@@ -591,10 +591,23 @@ class APIManager {
     func getUserOnboardingStatus(withUserName: String, completion: @escaping (Bool?) -> Void) {
         let onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/"
         
-        AF.request(onboarding_url, method: .get).responseDecodable(of: [String: Bool].self) { response in
+        AF.request(onboarding_url, method: .get).responseDecodable(of: User.self) { response in
             switch response.result {
-            case .success(let onboardingDict):
-                let onboardingSimple = onboardingDict["onboarding_simple"]
+            case .success(let user):
+                let onboardingSimple = user.onboarding_simple
+                let username = user.username
+                let firstName = user.first_name ?? ""
+                let lastName = user.last_name ?? ""
+                let email = user.email
+                let roleData = user.role_data
+                let roleDataID = roleData.id
+                UserDefaults.standard.set(roleDataID, forKey: "RoleDataID")
+                // Use the retrieved data as needed
+                print("Username: \(username)")
+                print("First Name: \(firstName)")
+                print("Last Name: \(lastName)")
+                print("Email: \(email)")
+                print("Role Data: \(roleData)")
                 completion(onboardingSimple)
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -602,40 +615,9 @@ class APIManager {
             }
         }
     }
-
-
-    func getLastregistredChildID(withUsername: String, completion: @escaping(Int) -> Void) {
-        var childs = [Child]()
-        var lastChildID = 0
-        
-        let get_ChildID_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUsername)/childs/"
-        
-        AF.request(get_ChildID_url, method: .get).response
-        { response in
-            switch response.result {
-            case .success(let data):
-                if let data = data {
-                    do {
-                        childs = try JSONDecoder().decode([Child].self, from: data)
-                        let sortedChilds: [Child] = childs.sorted { $0.created_at.compare($1.created_at) == .orderedAscending }
-//                        print("Sorted childs: \(sortedChilds)")
-                        
-                        if let lastChild = sortedChilds.last {
-                            lastChildID = lastChild.id
-                            completion(lastChildID)
-                        }
-                    } catch let error as NSError {
-                        print("Failed to decode JSON: \(error.localizedDescription)")
-                    }
-                } else {
-                    print("Response data is nil")
-                }
-            case .failure(let error):
-                print("API Error getting journey data: \(error)")
-            }
-        }
-    }
     
+    
+  
     func addSocialMediaProfile(socialData: Profil, completionHandler: @escaping (Result<String, APIError>) -> Void) {
         let headers: HTTPHeaders = [
             .contentType("application/json")
@@ -660,117 +642,126 @@ class APIManager {
         }
     }
     
-
+    
     func getUserWizardStep(withUserName: String, completion: @escaping(Int) -> Void) {
-            
-            var userJourneys = [UserJourney]()
-            var lastStep = 0
-            
-            let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/journey/"
-
-            AF.request(user_step_url, method: .get).response
-            {
-                response in
-                print(response)
-                switch response.result {
-                case .success( _):
-                    do {
-                        userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
-                                                
-                        if userJourneys.isEmpty {
-                            lastStep = 0
-                        } else {
-                            guard let lastJourney = userJourneys.last else {return}
-                            lastStep = lastJourney.wizard_step
-                        }
-                        
-                        completion(lastStep)
-                    } catch let error as NSError {
-                        print("Error: \(error.localizedDescription)")
+        
+        var userJourneys = [UserJourney]()
+        var lastStep = 0
+        
+        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/journey/"
+        
+        AF.request(user_step_url, method: .get).response
+        {
+            response in
+            print(response)
+            switch response.result {
+            case .success( _):
+                do {
+                    userJourneys = try JSONDecoder().decode([UserJourney].self, from: response.data!)
+                    
+                    if userJourneys.isEmpty {
+                        lastStep = 0
+                    } else {
+                        guard let lastJourney = userJourneys.last else {return}
+                        lastStep = lastJourney.wizard_step
                     }
-                case .failure(let error):
-                    print("API Error getting journey data: \(error)")
+                    
+                    completion(lastStep)
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
                 }
+            case .failure(let error):
+                print("API Error getting journey data: \(error)")
             }
         }
-
+    }
+    
     func saveUserJourney(journeyData: UserJourney, completionHandler: @escaping (UserJourney) -> Void) {
-            
+        
         var journey: UserJourney?
         let _: HTTPHeaders = [
             .contentType("application/json")
         ]
-            
-            AF.request(user_journey_url, method: .post, parameters: journeyData, encoder: JSONParameterEncoder.default).response { response in
-                switch response.result {
-                case .success( _):
-                    guard let statusCode = (response.response?.statusCode) else {return}
-                    if statusCode == 200 {
-                        do {
-                            journey = try JSONDecoder().decode(UserJourney.self, from: response.data!)
-                            completionHandler(journey!)
-                        } catch let error as NSError {
-                            print("Failed to load: \(error)")
-                        }
-                    }
-                case .failure(let err):
-                    debugPrint("API Error : \(err)")
-                    break
-                }
-            }
-        }
-    
-    func addChildInfos(regData: ChildModel, completionHandler: @escaping (Result<String, APIError>) -> Void){
         
-        let headers: HTTPHeaders = [.contentType("application/json")]
-        
-        AF.request(add_Child_url, method: .post, parameters: regData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-            debugPrint(response)
+        AF.request(user_journey_url, method: .post, parameters: journeyData, encoder: JSONParameterEncoder.default).response { response in
             switch response.result {
             case .success( _):
                 guard let statusCode = (response.response?.statusCode) else {return}
                 if statusCode == 200 {
-                    completionHandler(.success("Child registered successfully"))
-                } else {
-                    completionHandler(.failure(.custom(message: "Failed to register child")))
+                    do {
+                        journey = try JSONDecoder().decode(UserJourney.self, from: response.data!)
+                        completionHandler(journey!)
+                    } catch let error as NSError {
+                        print("Failed to load: \(error)")
+                    }
                 }
             case .failure(let err):
-                print(err.localizedDescription)
-                completionHandler(.failure(.custom(message: "Failed to register child")))
+                debugPrint("API Error : \(err)")
+                break
             }
         }
     }
-      
+    
+    
+
+    
     func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
-        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
-           // debugPrint(response)
-            switch response.result {
-                case.success(let data):
-                   do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                       if (200..<300).contains(response.response!.statusCode)  {
-                         //  print(data)
-//                     let parentId = String(data.parent.id)
-//                      print(parentId)
-                       completionHandler(true, "user registered successfully")
-                
-                    }else {
+        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseDecodable(of: Userparent.self) { response in
+                switch response.result {
+                case .success(let responseObject):
+                    // Handle the decoded response
+                    print(responseObject.parent.id)
+                    print(responseObject)
+                    do {
+                        // let json = try JSONSerialization.jsonObject(with: responseObject!, options: [])
+                        if (200..<300).contains(response.response!.statusCode)  {
+                            //  print(data)
+                            //                     let parentId = String(data.parent.id)
+                            //                      print(parentId)
+                            completionHandler(true, "user registered successfully")
+                            
+                        }else {
+                            completionHandler(false, "try again!")
+                        }
+                    }catch{
+                        print(error.localizedDescription)
                         completionHandler(false, "try again!")
-                    }
-                }catch{
-                    print(error.localizedDescription)
-                    completionHandler(false, "try again!")
+                    } case .failure(let error):
+                    // Handle the error
+                    print("Error: \(error)")
                 }
-            case.failure(let err):
-                print(err.localizedDescription)
-                completionHandler(false, "try again!")
             }
-            
-        }
     }
+    //        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
+    //           // debugPrint(response)
+    //            switch response.result {
+    //                case.success(let data):
+    //                   do {
+    //                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+    //                       if (200..<300).contains(response.response!.statusCode)  {
+    //                         //  print(data)
+    ////                     let parentId = String(data.parent.id)
+    ////                      print(parentId)
+    //                       completionHandler(true, "user registered successfully")
+    //
+    //                    }else {
+    //                        completionHandler(false, "try again!")
+    //                    }
+    //                }catch{
+    //                    print(error.localizedDescription)
+    //                    completionHandler(false, "try again!")
+    //                }
+    //            case.failure(let err):
+    //                print(err.localizedDescription)
+    //                completionHandler(false, "try again!")
+    //            }
+    //
+    //        }
+    
     
     func loginAPI(login: LoginModel, completionHandler: @escaping handler){
         
@@ -784,7 +775,7 @@ class APIManager {
             case.success(let data):
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                    if response.response?.statusCode == 200 {
+                    if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
                         completionHandler(.success(json))
                     }else {
                         completionHandler(.failure(.custom(message: "Check your network connectivity")))
@@ -809,7 +800,7 @@ class APIManager {
         
         let data = ["email": email,
                     "token": codeOTP]
-
+        
         AF.request(otp_url, method: .post, parameters: data, encoder: JSONParameterEncoder.default).response { response in
             switch response.result {
             case .success( _):
@@ -847,7 +838,7 @@ class APIManager {
             }
         }
     }
-    
+}
     struct ErrorResponse: Decodable {
         let message: String
     }
@@ -856,6 +847,5 @@ class APIManager {
         case decodingError
         case serverError
     }
-}
-
+    
 

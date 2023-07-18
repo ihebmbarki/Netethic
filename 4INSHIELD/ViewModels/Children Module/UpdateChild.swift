@@ -187,7 +187,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     func verifyProfileList(profileList: [Profile]) {
         if profileList.count > 0 {
         } else {
-            let alertController = UIAlertController(title: "4INSHIELD", message: "Your profiles list is empty!", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "NETETHIC", message: "Your profiles list is empty!", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -226,7 +226,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         picker.allowsEditing = true
         picker.delegate = self
         
-        let alert = UIAlertController(title: "4INSHIELD", message: "Change your Child's profile pic", preferredStyle: UIAlertController.Style.actionSheet)
+        let alert = UIAlertController(title: "NETETHIC", message: "Change your Child's profile pic", preferredStyle: UIAlertController.Style.actionSheet)
         
         let camera = UIAlertAction(title: "Take a photo", style: UIAlertAction.Style.default) { (_) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {

@@ -326,7 +326,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         presentPicker()
     }
     
-    
     @IBAction func updateBtnTapped(_ sender: Any) {
         guard let userID = UserDefaults.standard.object(forKey: "userID") as? Int else { return }
         guard let childID = UserDefaults.standard.object(forKey: "childID") as? Int else { return }
@@ -366,6 +365,13 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBAction func addNewProfileBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildSocialMedia")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func addUserAccBtnTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UserAccountID")
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }

@@ -820,6 +820,48 @@ class APIManager {
         }
     }
     
+    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
+        let headers: HTTPHeaders = [
+            .contentType("application/json")
+        ]
+        
+        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case .success:
+                if (200..<300).contains(response.response?.statusCode ?? 0) {
+                    completionHandler(true, "Child user registered successfully")
+                } else {
+                    completionHandler(false, "Try again!")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completionHandler(false, "Try again!")
+            }
+        }
+    }
+    
+//    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
+//
+//        AF.request(register_url, method: .post,  parameters: register).response { response in
+//            switch response.result {
+//            case .success(let data):
+//                do {
+//                    if (200..<300).contains(response.response!.statusCode) {
+//                        completionHandler(true, "Child user registered successfully")
+//                    } else {
+//                        completionHandler(false, "Try again!")
+//                    }
+//                } catch {
+//                    print(error.localizedDescription)
+//                    completionHandler(false, "Try again!")
+//                }
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//                completionHandler(false, "Try again!")
+//            }
+//        }
+//    }
+    
     func loginAPI(login: LoginModel, completionHandler: @escaping handler){
         
         let headers: HTTPHeaders = [

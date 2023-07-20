@@ -9,9 +9,7 @@ import UIKit
 import Foundation
 
 class ForgotViewController: KeyboardHandlingBaseVC {
-    
-    let Api: UsersAPIProrotocol = UsersAPI()
-    
+        
     @IBOutlet weak var forgotPwdTf: UILabel!
     @IBOutlet weak var descriptionTf: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!

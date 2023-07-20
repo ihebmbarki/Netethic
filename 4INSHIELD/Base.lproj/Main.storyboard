@@ -2918,7 +2918,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="hTE-sR-pVk">
-                                <rect key="frame" x="-55" y="726" width="360" height="209"/>
+                                <rect key="frame" x="-55" y="799.66666666666663" width="360" height="62"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2023 All Rights Reserved Made by 4INDATA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5u-ud-NuO">
                                 <rect key="frame" x="0.0" y="806" width="250" height="49"/>
@@ -3694,7 +3694,7 @@
         <image name="childprofilbg" width="360" height="64"/>
         <image name="dashboard_bg" width="360" height="137"/>
         <image name="facebook_icon" width="22" height="22"/>
-        <image name="footer" width="360" height="209"/>
+        <image name="footer" width="360" height="62"/>
         <image name="forgotLogo" width="184" height="150.66667175292969"/>
         <image name="formation" width="29" height="28.666666030883789"/>
         <image name="fr_white" width="2137" height="2137"/>

@@ -9,8 +9,6 @@ import UIKit
 
 class CreateNewPwdViewController: KeyboardHandlingBaseVC {
     
-    let Api: UsersAPIProrotocol = UsersAPI()
-
     @IBOutlet weak var changeLanguageBtn: UIButton!
     @IBOutlet weak var createPwdLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!

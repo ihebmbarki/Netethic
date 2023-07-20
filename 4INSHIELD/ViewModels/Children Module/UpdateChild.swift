@@ -34,6 +34,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     var dateFormatter = DateFormatter()
     
     var child: Child?
+    var selectedChild: Childd?
     var image: UIImage?
     var gender: String = ""
     
@@ -325,7 +326,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         presentPicker()
     }
     
-    
     @IBAction func updateBtnTapped(_ sender: Any) {
         guard let userID = UserDefaults.standard.object(forKey: "userID") as? Int else { return }
         guard let childID = UserDefaults.standard.object(forKey: "childID") as? Int else { return }
@@ -369,6 +369,13 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func addUserAccBtnTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UserAccountID")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func cancelBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
@@ -380,25 +387,34 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
 
 extension UpdateChild: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedSelectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             childPhoto.image = editedSelectedImage
             image = editedSelectedImage
         }
-        
+
         if let originalSelectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             childPhoto.image = originalSelectedImage
             image = originalSelectedImage
         }
-        guard let childID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
-        guard let img = self.image else {return}
-        
-        APIManager.shareInstance.uploadChildPic(withID: childID, photo: img)
-        
+
+        guard let img = self.image else { return }
+
+        if let selectedChild = selectedChild, let username = selectedChild.user?.username {
+             print ("selected child : \(selectedChild), username: \(username)")
+            APIManager.shareInstance.fetchCurrentUserData(username: username) { user in
+                let roleId = user.role_data.id
+                print ("Role id : \(roleId)")
+
+                APIManager.shareInstance.uploadChildPic(withID: roleId, photo: img)
+            }
+        } else {
+            print("Error: Selected child or username is nil.")
+        }
+
         picker.dismiss(animated: true, completion: nil)
     }
+
 }
 
 extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {

@@ -297,6 +297,25 @@ class APIManager {
         }
     }
     
+    func fetchCurrentChildData(username: String, completion: @escaping (Userr?, Error?) -> Void) {
+        let child_info_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)"
+        AF.request(child_info_url, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let user = try JSONDecoder().decode(Userr.self, from: data!)
+                    completion(user, nil)
+                } catch let error {
+                    print("Failed to load: \(error.localizedDescription)")
+                    completion(nil, error)
+                }
+            case .failure(let error):
+                print("Error getting child data: \(error.localizedDescription)")
+                completion(nil, error)
+            }
+        }
+    }
+    
     func deleteSocialProfile(profileID: Int, onSuccess: @escaping() -> Void, onError: @escaping(Error?) -> Void) {
         let delete_profile_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/profiles/\(profileID)/"
         
@@ -338,8 +357,8 @@ class APIManager {
     }
 
     
-    func uploadChildPic(withID childID: Int, photo: UIImage) {
-        let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(childID)/upload_photo/"
+    func uploadChildPic(withID roleId: Int, photo: UIImage) {
+        let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(roleId)/upload_photo/"
         guard let imageData = photo.jpegData(compressionQuality: 0.50) else {return}
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
@@ -362,6 +381,35 @@ class APIManager {
                 break
             case .failure(let err):
                 debugPrint("Error while updating the child profile pic ", err.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    func uploadParentChildPic(withUser username: String, photo: UIImage) {
+        let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/upload_photo/"
+        guard let imageData = photo.jpegData(compressionQuality: 0.50) else {return}
+        let headers: HTTPHeaders = [
+            "Content-type": "multipart/form-data"
+        ]
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData,
+                                         withName: "photo",
+                                         fileName: "profilePic.jpeg", mimeType: "image/jpeg"
+                )
+            },
+            to: uploadPic_url,
+            method: .post ,
+            headers: headers
+        )
+        .response { response in
+            switch response.result {
+            case .success(_):
+                debugPrint("Your user profile picture has been successfully updated")
+                break
+            case .failure(let err):
+                debugPrint("Error while updating the user profile picte ", err.localizedDescription)
                 break
             }
         }
@@ -762,6 +810,48 @@ class APIManager {
     //
     //        }
     
+    
+    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
+        let headers: HTTPHeaders = [
+            .contentType("application/json")
+        ]
+        
+        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case .success:
+                if (200..<300).contains(response.response?.statusCode ?? 0) {
+                    completionHandler(true, "Child user registered successfully")
+                } else {
+                    completionHandler(false, "Try again!")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completionHandler(false, "Try again!")
+            }
+        }
+    }
+    
+//    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
+//
+//        AF.request(register_url, method: .post,  parameters: register).response { response in
+//            switch response.result {
+//            case .success(let data):
+//                do {
+//                    if (200..<300).contains(response.response!.statusCode) {
+//                        completionHandler(true, "Child user registered successfully")
+//                    } else {
+//                        completionHandler(false, "Try again!")
+//                    }
+//                } catch {
+//                    print(error.localizedDescription)
+//                    completionHandler(false, "Try again!")
+//                }
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//                completionHandler(false, "Try again!")
+//            }
+//        }
+//    }
     
     func loginAPI(login: LoginModel, completionHandler: @escaping handler){
         

@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class UserProfile: KeyboardHandlingBaseVC {
 
     // IBOutlets
     @IBOutlet weak var userView: UIView!
@@ -17,6 +17,8 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
     
     @IBOutlet weak var enfantsButton: UIButton!
     @IBOutlet weak var modifierButton: UIButton!
+    
+    var image: UIImage?
     
     // Child view controllers
     var enfantsViewController: EnfantsViewController?
@@ -105,7 +107,7 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
                 if (user.photo ?? "").isEmpty {
                     self.userPhoto.image = UIImage(imageLiteralResourceName: "empty")
                 } else {
-                    self.userPhoto.loadImage(user.photo)
+                    self.userPhoto.loadParentImage(from: user.photo)
                 }
                 
                 self.userNameTf.text = user.username.uppercased()
@@ -116,7 +118,7 @@ class UserProfile: KeyboardHandlingBaseVC, UIImagePickerControllerDelegate & UIN
                         self.userPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
-                    self.userPhoto.loadImage(user.photo)
+                    self.userPhoto.loadParentImage(from: user.photo)
                 }
             }
         }
@@ -208,4 +210,28 @@ extension UIButton {
         attributedString.removeAttribute(.underlineStyle, range: NSRange(location: 0, length: attributedString.length))
         self.setAttributedTitle(attributedString, for: .normal)
     }
+}
+
+extension UserProfile: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let editedSelectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            userPhoto.image = editedSelectedImage
+            image = editedSelectedImage
+        }
+
+        if let originalSelectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            userPhoto.image = originalSelectedImage
+            image = originalSelectedImage
+        }
+
+        guard let img = self.image else { return }
+
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+        
+        print("username : \(savedUserName)")
+                APIManager.shareInstance.uploadParentChildPic(withUser: savedUserName, photo: img)
+        picker.dismiss(animated: true, completion: nil)
+    }
+
 }

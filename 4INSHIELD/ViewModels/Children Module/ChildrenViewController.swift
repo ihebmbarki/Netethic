@@ -107,7 +107,6 @@ class ChildrenViewController: UIViewController {
             self.tableView.reloadData()
             self.verifyChildList(childrenList: children)
         }
-
     }
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
@@ -158,24 +157,23 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildCell", for: indexPath) as! ChildTableViewCell
         
         let child = decodedChildrenArray[indexPath.row]
+        let user = child.user
         
-
-        
-        DispatchQueue.main.async {
-            let user = child.user
-            if let photo = user?.photo, !photo.isEmpty {
-                cell.childAvatar.loadImage(photo)
+        if let photo = user?.photo, !photo.isEmpty {
+            cell.childAvatar.loadImage(photo)
+        } else {
+            if user?.gender == "M" {
+                cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
             } else {
-                if user?.gender == "M" {
-                    cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
-                } else {
-                    cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
-                }
+                cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
             }
-            cell.childFullName.text = (user?.first_name.uppercased())! + " " + (user?.last_name.uppercased())!
         }
+        
+        cell.childFullName.text = (user?.first_name.uppercased() ?? "") + " " + (user?.last_name.uppercased() ?? "")
+        
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -206,7 +204,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
             
-            let user = self.selectedChild!.user
+            let user = self.selectedChild?.user
             let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
                 self.decodedChildrenArray.remove(at: indexPath.row)
@@ -218,7 +216,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             self.present(alert, animated: true, completion: nil)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
-        deleteAction.backgroundColor =  .systemRed
+        deleteAction.backgroundColor = .systemRed
         
         let updateAction = UIContextualAction(style: .normal, title: "Update") { (action, view, handler) in
             UserDefaults.standard.set(child.id, forKey: "childID")

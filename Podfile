@@ -6,11 +6,11 @@ target '4INSHIELD' do
   use_frameworks!
 
   # Pods for 4INSHIELD
-   pod 'FLAnimatedImage'
+   pod 'FLAnimatedImage', '~> 1.0'
    pod 'SDWebImage', '~> 5.0'
    pod 'DLRadioButton', '~> 1.4'
    pod 'FSCalendar'
-   pod 'Charts'
+   pod 'DGCharts'
    pod 'AlamofireImage', '~> 4.1'
 
 end

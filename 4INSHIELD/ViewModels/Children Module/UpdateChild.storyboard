@@ -127,8 +127,15 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="deJ-kW-AAC">
                                                         <rect key="frame" x="0.0" y="406" width="393" height="35"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yk-dF-bkk" customClass="DLRadioButton">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TH-vG-x86">
                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="35"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="gWI-ey-QYh"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yk-dF-bkk" customClass="DLRadioButton">
+                                                                <rect key="frame" x="26" y="0.0" width="25" height="35"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="yFR-OP-xw3"/>
                                                                 </constraints>
@@ -148,20 +155,20 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="garçon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Imx-H1-qgo">
-                                                                <rect key="frame" x="26" y="0.0" width="87" height="35"/>
+                                                                <rect key="frame" x="51.999999999999993" y="0.0" width="78.333333333333314" height="35"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" red="0.14117647058823529" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrR-z9-aVe">
-                                                                <rect key="frame" x="114" y="0.0" width="25" height="35"/>
+                                                                <rect key="frame" x="131.33333333333334" y="0.0" width="25" height="35"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="vx1-ey-P2n"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlo-0A-HfU" customClass="DLRadioButton">
-                                                                <rect key="frame" x="140" y="0.0" width="25" height="35"/>
+                                                                <rect key="frame" x="157.33333333333334" y="0.0" width="25" height="35"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="Wqz-P8-MGx"/>
                                                                 </constraints>
@@ -181,13 +188,13 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fille" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gv-Le-6bU">
-                                                                <rect key="frame" x="166" y="0.0" width="87" height="35"/>
+                                                                <rect key="frame" x="183.33333333333334" y="0.0" width="78.333333333333343" height="35"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkH-Kj-woZ" customClass="DLRadioButton">
-                                                                <rect key="frame" x="254" y="0.0" width="25" height="35"/>
+                                                                <rect key="frame" x="262.66666666666669" y="0.0" width="25" height="35"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="2AJ-TS-rZB"/>
                                                                 </constraints>
@@ -207,7 +214,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaU-d2-AMp">
-                                                                <rect key="frame" x="280" y="0.0" width="87" height="35"/>
+                                                                <rect key="frame" x="288.66666666666669" y="0.0" width="78.333333333333314" height="35"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" red="0.14117647059999999" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -256,7 +263,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DJ-BH-oEw">
-                                                                <rect key="frame" x="336" y="4" width="32" height="42"/>
+                                                                <rect key="frame" x="327" y="4" width="32" height="42"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="32" id="Ql3-LI-F0b"/>
                                                                 </constraints>
@@ -270,7 +277,7 @@
                                                             <constraint firstItem="jvl-th-KDJ" firstAttribute="leading" secondItem="U0s-Ag-hRU" secondAttribute="leading" constant="25" id="2Kc-m2-pTH"/>
                                                             <constraint firstAttribute="trailing" secondItem="jvl-th-KDJ" secondAttribute="trailing" constant="25" id="5f0-q4-lHp"/>
                                                             <constraint firstItem="jvl-th-KDJ" firstAttribute="top" secondItem="9DJ-BH-oEw" secondAttribute="top" id="8Ka-KH-61l"/>
-                                                            <constraint firstItem="9DJ-BH-oEw" firstAttribute="trailing" secondItem="jvl-th-KDJ" secondAttribute="trailing" id="Iif-PT-gQZ"/>
+                                                            <constraint firstItem="9DJ-BH-oEw" firstAttribute="trailing" secondItem="jvl-th-KDJ" secondAttribute="trailing" constant="-9" id="Iif-PT-gQZ"/>
                                                             <constraint firstItem="jvl-th-KDJ" firstAttribute="centerY" secondItem="U0s-Ag-hRU" secondAttribute="centerY" id="dGy-O5-hah"/>
                                                             <constraint firstItem="jvl-th-KDJ" firstAttribute="top" secondItem="U0s-Ag-hRU" secondAttribute="top" constant="4" id="dOZ-of-xYz"/>
                                                             <constraint firstAttribute="height" constant="50" id="dYf-Od-RJq"/>
@@ -291,33 +298,23 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="151" id="MsM-Rn-f2j"/>
                                                                 </constraints>
-                                                                <prototypes>
-                                                                    <tableViewCell clipsSubviews="YES" contentMode="bottom" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hr8-G3-fRD">
-                                                                        <rect key="frame" x="0.0" y="50" width="343" height="44"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hr8-G3-fRD" id="OEM-K5-VYl">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
-                                                                            <autoresizingMask key="autoresizingMask"/>
-                                                                            <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-sM-oSv">
-                                                                                    <rect key="frame" x="70" y="5" width="203" height="34.333333333333343"/>
-                                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                    <color key="tintColor" red="0.54117647059999996" green="0.56862745100000001" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <state key="normal" title="Button"/>
-                                                                                    <buttonConfiguration key="configuration" style="plain" image="plus.circle" catalog="system" title="Ajouter un réseau social" imagePadding="3">
-                                                                                        <fontDescription key="titleFontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
-                                                                                    </buttonConfiguration>
-                                                                                    <connections>
-                                                                                        <action selector="addNewProfileBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="bfk-ZC-0iD"/>
-                                                                                    </connections>
-                                                                                </button>
-                                                                            </subviews>
-                                                                        </tableViewCellContentView>
-                                                                    </tableViewCell>
-                                                                </prototypes>
                                                             </tableView>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="olC-Lv-Hxk">
-                                                                <rect key="frame" x="80" y="249.00000000000003" width="230.66666666666663" height="34.333333333333343"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-sM-oSv">
+                                                                <rect key="frame" x="94" y="215" width="203" height="34.333333333333343"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="34.333333333333343" id="fTp-AZ-xEJ"/>
+                                                                </constraints>
+                                                                <color key="tintColor" red="0.54117647059999996" green="0.56862745100000001" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="plus.circle" catalog="system" title="Ajouter un réseau social" imagePadding="3">
+                                                                    <fontDescription key="titleFontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="addNewProfileBtnTapped:" destination="wyn-el-f4F" eventType="touchUpInside" id="bfk-ZC-0iD"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="olC-Lv-Hxk">
+                                                                <rect key="frame" x="80" y="257" width="231" height="34.333333333333314"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="34.333333333333485" id="gAy-tu-uHE"/>
                                                                 </constraints>
@@ -333,12 +330,17 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="olC-Lv-Hxk" secondAttribute="bottom" constant="16.666666666666515" id="6En-dS-k6H"/>
+                                                            <constraint firstItem="ffH-sM-oSv" firstAttribute="leading" secondItem="Gcl-jc-Neh" secondAttribute="leading" constant="94" id="1Bw-3x-ilM"/>
+                                                            <constraint firstAttribute="bottom" secondItem="olC-Lv-Hxk" secondAttribute="bottom" constant="8.6666666666666288" id="6En-dS-k6H"/>
+                                                            <constraint firstItem="ffH-sM-oSv" firstAttribute="top" secondItem="paz-J7-2VT" secondAttribute="bottom" constant="8" id="I67-BF-Alm"/>
+                                                            <constraint firstItem="olC-Lv-Hxk" firstAttribute="top" secondItem="ffH-sM-oSv" secondAttribute="bottom" constant="7.6666666666666572" id="Iar-bV-iJH"/>
+                                                            <constraint firstItem="ffH-sM-oSv" firstAttribute="centerX" secondItem="olC-Lv-Hxk" secondAttribute="centerX" id="Rt4-os-OHe"/>
                                                             <constraint firstItem="GkD-MP-qRE" firstAttribute="leading" secondItem="Gcl-jc-Neh" secondAttribute="leading" constant="25" id="TFJ-bJ-4Yz"/>
                                                             <constraint firstItem="GkD-MP-qRE" firstAttribute="top" secondItem="Gcl-jc-Neh" secondAttribute="topMargin" constant="8" id="Tzx-SP-NJB"/>
                                                             <constraint firstItem="paz-J7-2VT" firstAttribute="top" secondItem="GkD-MP-qRE" secondAttribute="bottom" constant="15.33" id="Wyu-yb-1sM"/>
                                                             <constraint firstAttribute="trailing" secondItem="paz-J7-2VT" secondAttribute="trailing" constant="25" id="Zis-zJ-eZn"/>
                                                             <constraint firstAttribute="trailing" secondItem="GkD-MP-qRE" secondAttribute="trailing" constant="25" id="gPF-iq-kFT"/>
+                                                            <constraint firstItem="olC-Lv-Hxk" firstAttribute="leading" secondItem="Gcl-jc-Neh" secondAttribute="leading" constant="80" id="gpB-NL-Zn9"/>
                                                             <constraint firstItem="paz-J7-2VT" firstAttribute="leading" secondItem="Gcl-jc-Neh" secondAttribute="leading" constant="25" id="uZb-PE-hsv"/>
                                                             <constraint firstAttribute="height" constant="300" id="zE9-1P-T6g"/>
                                                         </constraints>
@@ -347,14 +349,14 @@
                                                         <rect key="frame" x="0.0" y="852" width="393" height="42"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mr2-xj-cML">
-                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="42"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="42"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="25" id="3xc-9x-7In"/>
+                                                                    <constraint firstAttribute="width" constant="160" id="3xc-9x-7In"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-sD-5sE">
-                                                                <rect key="frame" x="29" y="0.0" width="136.66666666666666" height="42"/>
+                                                                <rect key="frame" x="164" y="0.0" width="83" height="42"/>
                                                                 <color key="tintColor" name="AccentColor"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Annuler"/>
@@ -363,7 +365,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZV-PH-uaH">
-                                                                <rect key="frame" x="169.66666666666663" y="0.0" width="194.33333333333337" height="42"/>
+                                                                <rect key="frame" x="251" y="0.0" width="113" height="42"/>
                                                                 <color key="backgroundColor" red="0.33725490196078434" green="0.34901960784313724" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
@@ -426,11 +428,13 @@
                     <connections>
                         <outlet property="PrenomTf" destination="w8V-aA-UG7" id="dWW-zp-EJF"/>
                         <outlet property="SocialMediaTableView" destination="paz-J7-2VT" id="Y1M-hx-g5r"/>
+                        <outlet property="addNewProfileBtn" destination="ffH-sM-oSv" id="HcG-lP-UG1"/>
                         <outlet property="backgroundSV" destination="KXW-gx-XRL" id="csu-hf-LO3"/>
                         <outlet property="calendarButton" destination="9DJ-BH-oEw" id="qlJ-22-p2K"/>
                         <outlet property="cancelBtn" destination="QBZ-sD-5sE" id="IDW-aM-vTZ"/>
                         <outlet property="childPhoto" destination="YIB-qn-mZX" id="AYu-DR-Udx"/>
                         <outlet property="dateTextField" destination="jvl-th-KDJ" id="awO-qS-MLz"/>
+                        <outlet property="ddUserAccBtn" destination="olC-Lv-Hxk" id="i2x-x0-uFF"/>
                         <outlet property="femaleRadioButton" destination="tlo-0A-HfU" id="MKs-eu-nCt"/>
                         <outlet property="maleRadioButton" destination="3yk-dF-bkk" id="RSe-1d-GDH"/>
                         <outlet property="nomTf" destination="Qb6-AP-JEn" id="QNe-5d-TfI"/>

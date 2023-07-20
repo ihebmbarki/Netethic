@@ -22,8 +22,9 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var calendarButton: UIButton!
-    
     @IBOutlet weak var SocialMediaTableView: UITableView!
+    @IBOutlet weak var addNewProfileBtn: UIButton!
+    @IBOutlet weak var ddUserAccBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
     let pickerView = UIPickerView()
@@ -431,15 +432,10 @@ extension UpdateChild:  UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChildSocialMediaCell", for: indexPath) as! ChildSocialMediaTableViewCell
         
         let profile = isSearching ? filteredSocialArray[indexPath.row] : socialArray[indexPath.row]
-        // Show the profile details when the profiles list is not empty
-        //            let profile = socialArray[indexPath.row]
         DispatchQueue.main.async {
             cell.socialPlatform.text = self.socialMediaNames[profile.social_media_name] ?? "Unknown"
             cell.SocialPseudo.text = "@" + profile.pseudo
             
-            //                guard self.socialMediaNames[profile.social_media_name] != nil else { return }
-            //                let imageName = "\(profile.social_media_name)_logo"
-            //                cell.socialMediaLogo.image = UIImage(named: imageName)
             switch profile.social_media_name {
             case 1:
                 cell.socialMediaLogo.image = UIImage(named: "Twitter_logo")

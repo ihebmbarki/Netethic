@@ -7,117 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4D6E1FB-EE90-4C5D-8262-CED39EB9D544"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "4INSHIELD/APIManager/ApiManagerAdd.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "addChildInfos(regData:completionHandler:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D4D6E1FB-EE90-4C5D-8262-CED39EB9D544 - 45faa0df0b1739ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_INSHIELD_Development.ApiManagerAdd.addChildInfos(regData: _INSHIELD_Development.ChildModel, completionHandler: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "4INSHIELD_Development"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaisensdata/Desktop/testDevelop/4INSHIELD/APIManager/ApiManagerAdd.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "880">
-               </Location>
-               <Location
-                  uuid = "D4D6E1FB-EE90-4C5D-8262-CED39EB9D544 - 45faa0df0b1739ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_INSHIELD_Development.ApiManagerAdd.addChildInfos(regData: _INSHIELD_Development.ChildModel, completionHandler: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "4INSHIELD_Development"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaisensdata/Desktop/testDevelop/4INSHIELD/APIManager/ApiManagerAdd.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "868">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EF5E1000-F6F2-41A9-8479-13FB89552291"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "4INSHIELD/APIManager/ApiManagerAdd.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "addChildInfos(regData:completionHandler:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EF5E1000-F6F2-41A9-8479-13FB89552291 - af8c927f68f1f5a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;_INSHIELD_Development.UserRole, Alamofire.AFError&gt;) -&gt; () in _INSHIELD_Development.ApiManagerAdd.addChildInfos(regData: _INSHIELD_Development.ChildModel, completionHandler: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "4INSHIELD_Development"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaisensdata/Desktop/testDevelop/4INSHIELD/APIManager/ApiManagerAdd.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "536">
-               </Location>
-               <Location
-                  uuid = "EF5E1000-F6F2-41A9-8479-13FB89552291 - 72d9ac81e391dfd5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;_INSHIELD_Development.ResponseModel, Alamofire.AFError&gt;) -&gt; () in _INSHIELD_Development.ApiManagerAdd.addChildInfos(regData: _INSHIELD_Development.ChildModel, completionHandler: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "4INSHIELD_Development"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaisensdata/Desktop/testDevelop/4INSHIELD/APIManager/ApiManagerAdd.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "536">
-               </Location>
-               <Location
-                  uuid = "EF5E1000-F6F2-41A9-8479-13FB89552291 - b017d7ccfeaa9476"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Array&lt;_INSHIELD_Development.UserRole&gt;, Alamofire.AFError&gt;) -&gt; () in _INSHIELD_Development.ApiManagerAdd.addChildInfos(regData: _INSHIELD_Development.ChildModel, completionHandler: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "4INSHIELD_Development"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kaisensdata/Desktop/testDevelop/4INSHIELD/APIManager/ApiManagerAdd.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "600">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "803A793B-4709-46E4-BFDD-6D789DA1C85B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -125,8 +14,8 @@
             filePath = "4INSHIELD/APIManager/ApiManagerAdd.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "ApiManagerAdd"
             landmarkType = "3">
             <Locations>

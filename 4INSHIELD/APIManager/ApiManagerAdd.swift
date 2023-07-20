@@ -19,15 +19,14 @@ class ApiManagerAdd {
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
-        
+        //.responseDecodable(of: UserRole.self)
         AF.request(add_Child_url, method: .post, parameters: regData, encoder: JSONParameterEncoder.default, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: UserRole.self) { response in
+            .validate(statusCode: 200..<300).response { response in
                 switch response.result {
                 case .success(let responseObject):
                     // La réponse a été décodée avec succès
-                    print(responseObject.id)
-                   print(responseObject.username)
+                   // print(responseObject.id)
+                   //print(responseObject.username)
                     
                     // Utilisez responseObject et vérifiez si la réponse correspond à vos attentes
                     if (200..<300).contains(response.response?.statusCode ?? 0) {

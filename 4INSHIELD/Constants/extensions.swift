@@ -46,7 +46,12 @@ extension UIImageView {
     
     func loadParentImage(from urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
         self.image = UIImage()
-        guard let urlString = urlString, let url = URL(string: urlString) else { return }
+        guard let urlString = urlString, var url = URL(string: urlString) else { return }
+        
+        // Check if the URL scheme is "http", then replace it with "https"
+        if url.scheme == "http" {
+            url = URL(string: urlString.replacingOccurrences(of: "http://", with: "https://"))!
+        }
         
         self.sd_setImage(with: url) { (image, error, type, url) in
             if onSuccess != nil, error == nil {

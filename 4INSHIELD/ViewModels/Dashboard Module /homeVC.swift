@@ -86,7 +86,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         missingDataLbl.isHidden = true
         
         //Humor pie chart
-        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
+        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
             guard let self = self else { return }
 
             print("state:", fetchedState)
@@ -117,7 +117,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
         
         // Call the API to fetch platforms
-        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
+        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
             guard let self = self else { return }
             
             if let platforms = platforms?.platforms {
@@ -129,7 +129,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
 
         // Call the API to fetch concerned relationship
-        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
+        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild!.id) { [weak self] concernedRelationship in
             guard let self = self else { return }
             
             if let toxicCount = concernedRelationship {
@@ -255,11 +255,10 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Load child photo
         let user = selectedChild?.user
         if let photo = user?.photo, !photo.isEmpty {
-            var photoUrl = photo
-            if let range = photoUrl.range(of: "http://") {
-                photoUrl.replaceSubrange(range, with: "https://")
-            }
+            var photoUrl = "https://webserver.dev.netethic.fr" + photo
+
             if let url = URL(string: photoUrl) {
+                print("child photo: \(url)")
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
                     if let data = data {
                         DispatchQueue.main.async {
@@ -280,6 +279,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                 }.resume()
             }
         }
+
 
         // Add target action to child button
         childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
@@ -891,7 +891,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+            APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
                 guard let self = self else { return }
                 
                 print("states:", fetchedStates)
@@ -951,7 +951,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states {
@@ -985,7 +985,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
         // Fetch the required parameters for the API request (e.g., childID)
-        let childID = selectedChild?.id ?? 0
+        let childID = selectedChild!.id
         
         // Create a calendar instance to perform date calculations
         let calendar = Calendar.current

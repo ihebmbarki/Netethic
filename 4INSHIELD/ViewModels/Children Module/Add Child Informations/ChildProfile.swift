@@ -96,11 +96,8 @@ class ChildProfile: KeyboardHandlingBaseVC {
         }
        // let userID = Int(roleDataID)
         let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: gender, parent_id: userId)
-        ApiManagerAdd.shareInstance1.addChildInfos(regData: regData) { isSuccess, str in
-            if isSuccess {
-                print(str)
-                self.platform()
-
+        self.responseChild(params: regData)
+        
 //                let date = Date()
 //                let df = DateFormatter()
 //                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -121,11 +118,51 @@ class ChildProfile: KeyboardHandlingBaseVC {
 //                } catch let error {
 //                    print(error.localizedDescription)
 //                }
-            } else {
-                print(str)
-            }
-        }
+//            } else {
+//                print(str)
+//            }
+//        }
     }
+    
+    func responseChild(params: ChildModel) {
+       // let headers: HTTPHeaders = ["Content-Type":"application/json"]
+        AF.request(add_Child_url, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
+            .responseJSON(completionHandler: { (response) in
+                
+                debugPrint(response)
+                switch response.result {
+                case .success(let data):
+                    switch response.response?.statusCode {
+                    case 200,201:
+                        /// Handle success, parse JSON data
+                        do {
+                            let jsonData = try JSONDecoder().decode(UserRole.self, from: JSONSerialization.data(withJSONObject: data))
+                            let alertController = UIAlertController(title: "Success", message: "Child social media added successfully!", preferredStyle: .alert)
+                            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                            alertController.addAction(okayAction)
+                            self.present(alertController, animated: true, completion: nil)
+                            print("User child registered successfully")
+                           // self.platform()
+                        } catch let error {
+                            /// Handle json decode error
+                            print(error)
+                        }
+                    case 401:
+                        /// Handle 401 error
+                        print("not authorization")
+                    default:
+                        /// Handle unknown error
+                        print("we ran into error")
+                    }
+                case .failure(let error):
+                    /// Handle request failure
+                    print(error.localizedDescription)
+                }
+            })
+    }
+    
     
     
     func platform(){

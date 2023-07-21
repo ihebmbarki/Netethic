@@ -28,6 +28,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     var startDate: Date?
     var endDate: Date?
 
+    @IBOutlet weak var personIcon: UIImageView!
+    
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -46,9 +48,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var BonjourLbl: UILabel!
     @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var childButton: UIButton!
-    @IBOutlet weak var changeLanguageBtn: UIBarButtonItem!
     
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
@@ -78,7 +79,6 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Set persons collection invisibility
         personsCollectionView.isHidden = true
 
@@ -361,10 +361,16 @@ class homeVC: UIViewController, ChartViewDelegate {
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
-                changeLanguageBtn.image = UIImage(named: "fr_white")?.withRenderingMode(.alwaysOriginal)
-            } else if selectedLanguage == "en" {
-                changeLanguageBtn.image = UIImage(named: "eng_white")?.withRenderingMode(.alwaysOriginal)
-            }
+            changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+        } else if selectedLanguage == "en" {
+            changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+        }
+//
+//            if selectedLanguage == "fr" {
+//                changeLanguageBtn.image = UIImage(named: "fr_white1")?.withRenderingMode(.alwaysOriginal)
+//            } else if selectedLanguage == "en" {
+//                changeLanguageBtn.image = UIImage(named: "eng_white1")?.withRenderingMode(.alwaysOriginal)
+//            }
 
         }
     }
@@ -432,22 +438,21 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
-        personsCollectionView.isHidden = false
-        
-        // Call the API to fetch toxic persons
-        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
-            if let pseudos = pseudos {
-                // Update your toxic pseudos array
-                self.toxicPseudos = pseudos
-                
-                // Reload the collection view to reflect the changes
-                self.personsCollectionView.reloadData()
-            } else {
-                print("No toxic persons data")
-                self.missingDataLbl.isHidden = false
-            }
-        }
-
+         personsCollectionView.isHidden = false
+         
+         // Call the API to fetch toxic persons
+         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
+             if let pseudos = pseudos {
+                 // Update your toxic pseudos array
+                 self.toxicPseudos = pseudos
+                 
+                 // Reload the collection view to reflect the changes
+                 self.personsCollectionView.reloadData()
+             } else {
+                 print("No toxic persons data")
+                 self.missingDataLbl.isHidden = false
+             }
+         }
     }
     
 

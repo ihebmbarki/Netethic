@@ -1716,7 +1716,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2023 Tous Droits Réservés Réalisé par 4INDATA " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebf-lm-pqL">
-                                <rect key="frame" x="48.666666666666657" y="815" width="295.66666666666674" height="15.333333333333371"/>
+                                <rect key="frame" x="48.666666666666657" y="813" width="295.66666666666674" height="15.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2523,7 +2523,7 @@
         <!--Child Info View Controller-->
         <scene sceneID="Jog-Hu-JmL">
             <objects>
-                <viewController storyboardIdentifier="ChildInfoViewController" id="yIc-sp-hDs" customClass="ChildInfoViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChildInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yIc-sp-hDs" customClass="ChildInfoViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lcL-PS-1te">
                         <rect key="frame" x="0.0" y="0.0" width="394" height="287"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2983,10 +2983,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="828"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="N8a-vI-zdT">
-                                <rect key="frame" x="0.0" y="-47" width="250" height="236"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="N8a-vI-zdT">
+                                <rect key="frame" x="0.0" y="-47" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="236" id="b1Z-TZ-QET"/>
+                                    <constraint firstAttribute="height" constant="250" id="b1Z-TZ-QET"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oMS-hl-n24">
@@ -3002,6 +3002,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eKe-rD-3eA" id="yD0-33-9RM"/>
+                                    <outlet property="delegate" destination="eKe-rD-3eA" id="TMU-jf-79l"/>
+                                </connections>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="hTE-sR-pVk">
                                 <rect key="frame" x="0.0" y="765" width="250" height="72"/>
@@ -3016,7 +3020,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4inshield logo blanc" translatesAutoresizingMaskIntoConstraints="NO" id="KGb-6K-uf7">
-                                <rect key="frame" x="22" y="-987.66666666666663" width="206" height="2117.3333333333335"/>
+                                <rect key="frame" x="22" y="-980.66666666666663" width="206" height="2117.3333333333335"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SyD-eg-CpP"/>

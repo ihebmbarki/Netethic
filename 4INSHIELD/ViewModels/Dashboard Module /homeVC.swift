@@ -441,7 +441,7 @@ class homeVC: UIViewController, ChartViewDelegate {
          personsCollectionView.isHidden = false
          
          // Call the API to fetch toxic persons
-         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
+         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 7) { pseudos in
              if let pseudos = pseudos {
                  // Update your toxic pseudos array
                  self.toxicPseudos = pseudos
@@ -842,7 +842,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild!.id, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -896,7 +896,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
                 guard let self = self else { return }
                 
                 print("states:", fetchedStates)
@@ -956,7 +956,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states {

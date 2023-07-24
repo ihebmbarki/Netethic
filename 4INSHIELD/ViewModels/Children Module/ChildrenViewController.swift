@@ -174,6 +174,14 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    func goToScreen(withId identifier: String) {
+
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+          let VC = storyboard.instantiateViewController(withIdentifier: identifier)
+          navigationController?.pushViewController(VC, animated: true)
+
+      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -181,6 +189,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         UserDefaults.standard.set(selectedChild.id, forKey: "childID")
         
         // Go to dashboard
+        self.goToScreen(withId: "TabBarController")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         if let homeNav = vc.viewControllers?.first as? UINavigationController,
@@ -209,7 +218,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
                 self.decodedChildrenArray.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                APIManager.shareInstance.deleteChild(withID: child.id ?? 2)
+                APIManager.shareInstance.deleteChild(withID: child.id)
                 print("You have deleted element \(user?.first_name)")
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))

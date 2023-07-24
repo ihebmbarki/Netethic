@@ -409,6 +409,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         }
     }
     
+    
     @objc func childButtonTapped() {
         guard selectedChild != nil else { return }
         

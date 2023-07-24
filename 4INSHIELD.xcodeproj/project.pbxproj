@@ -76,7 +76,6 @@
 		04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */; };
 		04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */; };
 		04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BCF2962A33A4E800202D6D /* humorCell.xib */; };
-		04BFDD202A6942A30063E04D /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04BFDD1F2A6942A30063E04D /* assets.xcassets */; };
 		04BFDD222A6943E40063E04D /* ChildrenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD212A6943E40063E04D /* ChildrenResponse.swift */; };
 		04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD232A6944060063E04D /* ChildRegisterModel.swift */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
@@ -86,12 +85,13 @@
 		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE42A69595600BDA1F1 /* homeVC.swift */; };
-		04E27AE72A695FFC00BDA1F1 /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
 		870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */; };
 		870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */; };
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
+		8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875206292A6E7EDB00486C0C /* Assets.xcassets */; };
+		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -199,7 +199,6 @@
 		04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicPersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicProfileResponse.swift; sourceTree = "<group>"; };
 		04BCF2962A33A4E800202D6D /* humorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = humorCell.xib; sourceTree = "<group>"; };
-		04BFDD1F2A6942A30063E04D /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = assets.xcassets; path = ../../../Documents/NetEthic/4INSHIELD/assets.xcassets; sourceTree = "<group>"; };
 		04BFDD212A6943E40063E04D /* ChildrenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildrenResponse.swift; path = ../../../../../Downloads/ChildrenResponse.swift; sourceTree = "<group>"; };
 		04BFDD232A6944060063E04D /* ChildRegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildRegisterModel.swift; path = ../../../../../Downloads/ChildRegisterModel.swift; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
@@ -209,7 +208,6 @@
 		04D4F0732A01DAEB0033818F /* childCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = childCell.xib; sourceTree = "<group>"; };
 		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
 		04E27AE42A69595600BDA1F1 /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
-		04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = "../../../../../Documents/NetEthic/4INSHIELD/ViewModels/Children Module/AddUserAccount.swift"; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		43F34BEE839351B11521E6A2 /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
 		5B48EC22A6B71FCC24D0B6B9 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +217,8 @@
 		870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerAdd.swift; sourceTree = "<group>"; };
 		870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildResponseModelElement.swift; sourceTree = "<group>"; };
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
+		875206292A6E7EDB00486C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -400,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
+				875206292A6E7EDB00486C0C /* Assets.xcassets */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
 				7160F104408BB7EFF5A238CD /* Pods */,
@@ -425,7 +426,6 @@
 				043557F829AE359300D4F012 /* Constants */,
 				04850C4E29ACC3E3001A27FF /* AppDelegate.swift */,
 				04850C5029ACC3E4001A27FF /* SceneDelegate.swift */,
-				04BFDD1F2A6942A30063E04D /* assets.xcassets */,
 				04850C5429ACC3E4001A27FF /* Main.storyboard */,
 				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
@@ -515,7 +515,7 @@
 				0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */,
 				042A4C4829E5A8640080CADF /* UpdateChild.swift */,
 				0481480029E997C700A03C61 /* UpdateChild.storyboard */,
-				04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */,
+				8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */,
 			);
 			path = "Children Module";
 			sourceTree = "<group>";
@@ -732,10 +732,10 @@
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
+				8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
-				04BFDD202A6942A30063E04D /* assets.xcassets in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
@@ -795,7 +795,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04E27AE72A695FFC00BDA1F1 /* AddUserAccount.swift in Sources */,
+				8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */,
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
 				044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */,

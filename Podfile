@@ -12,6 +12,7 @@ target '4INSHIELD' do
    pod 'FSCalendar'
    pod 'DGCharts'
    pod 'AlamofireImage', '~> 4.1'
+   pod 'TinyConstraints'
 
 end
 

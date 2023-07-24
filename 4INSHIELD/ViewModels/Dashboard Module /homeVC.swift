@@ -9,9 +9,9 @@ import UIKit
 import Foundation
 import DGCharts
 import AlamofireImage
+import FSCalendar
 
-class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
-    
+class homeVC: UIViewController, ChartViewDelegate {
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
@@ -27,7 +27,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
     var endDate: Date?
-
+    
     @IBOutlet weak var personIcon: UIImageView!
     
     @IBOutlet weak var topView: UIView!
@@ -53,11 +53,12 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
-//    @IBOutlet weak var calendarView: FSCalendar!
+    @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var cardsCollectionView: UICollectionView!
     @IBOutlet weak var dangerCollectionView: UICollectionView!
     
-    @IBOutlet weak var chartView: LineChartView!
+    
+    //@IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var humorChart: PieChartView!
     
     @IBOutlet weak var errorLbl: UILabel!
@@ -76,48 +77,158 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
     
+    @IBOutlet weak var viewLineChart: UIView!
+    
+    @IBOutlet weak var RisqueLabel: UILabel!
+    @IBOutlet weak var viewChartRisque: UIView!
+    
+    @IBOutlet weak var moyenneGnLabel: UILabel!
+    
+    @IBOutlet weak var moyenneGView: UIView!
+    
+    @IBOutlet weak var moyenneGButton: UIButton!
+    
+    //let chartView = LineChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+    //harcelement actuel
+    lazy var chartView: CombinedChartView = {
+        let chartView = CombinedChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+        return chartView
+    }()
+    //harcelement de risque
+    lazy var linechart: LineChartView = {
+        let Linechart = LineChartView()
+        return Linechart
+    }()
+    // moyenne General
+    let pieChartView = PieChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Set persons collection invisibility
-        personsCollectionView.isHidden = true
-
-        //Set label invisibility
-        missingDataLbl.isHidden = true
+        //collection Danger
+        dangerCarte()
+        //harcelement actuel
+        chartView.delegate = self
+        chartView.backgroundColor = .white
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        // Ajoutez le chartView en tant que sous-vue de la vue principale
+        view.addSubview(chartView)
         
-        //Humor pie chart
-        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
-            guard let self = self else { return }
-
-            print("state:", fetchedState)
-            
-            // Retrieve the happy and stress percentages from the statistic dictionary
-            if let statistic = fetchedState?.statistic {
-                if let happyPercentage = statistic["happy"], let stressPercentage = statistic["stress"] {
-                    
-                    // Create the chart data entries
-                    let happyEntry = PieChartDataEntry(value: happyPercentage, label: "Happy")
-                    let stressEntry = PieChartDataEntry(value: stressPercentage, label: "Stress")
-                    let entries = [happyEntry, stressEntry]
-
-                    // Create the chart dataset
-                    let dataSet = PieChartDataSet(entries: entries, label: "")
-                    dataSet.colors = [UIColor.green, UIColor.red] // Set colors for happy and stress
-
-                    // Create the chart data
-                    let data = PieChartData(dataSet: dataSet)
-                    self.humorChart.data = data
-
-                    // Update the UI on the main thread
-                    DispatchQueue.main.async {
-                        self.humorChart.notifyDataSetChanged()
-                    }
-                }
-            }
+        // Configurez les contraintes pour le chartView (si nécessaire)
+        NSLayoutConstraint.activate([
+            chartView.topAnchor.constraint(equalTo: current_harLbl.bottomAnchor, constant: 8), // Espacement de 8 points sous le current_harLbl
+            chartView.leadingAnchor.constraint(equalTo: viewLineChart.leadingAnchor, constant: 8), // Espacement de 8 points depuis la marge gauche de la vueLineChart
+            chartView.trailingAnchor.constraint(equalTo: viewLineChart.trailingAnchor, constant: -8), // Espacement de 8 points depuis la marge droite de la vueLineChart
+            chartView.heightAnchor.constraint(equalToConstant: 150) // Hauteur du chartView de 150 points
+        ])
+        
+        setupCombinedChart()
+        
+        //harcelemnt de risque
+        setupLineChart()
+        setupChartView()
+        dangerCarte()
+        card()
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
+        
+    }
+    //harcelement actuel
+    func setupCombinedChart() {
+        // Sample data for bar chart
+        let barDataEntries: [BarChartDataEntry] = [
+            BarChartDataEntry(x: 0.0, y: 10.0),
+            BarChartDataEntry(x: 1.0, y: 5.0),
+            BarChartDataEntry(x: 2.0, y: 7.0),
+            BarChartDataEntry(x: 3.0, y: 2.0),
+        ]
+        let barDataSet = BarChartDataSet(entries: barDataEntries, label: "Bar Data")
+        barDataSet.colors = ChartColorTemplates.material()
+        
+        // Sample data for line chart
+        let lineDataEntries: [ChartDataEntry] = [
+            ChartDataEntry(x: 0.0, y: 5.0),
+            ChartDataEntry(x: 1.0, y: 2.0),
+            ChartDataEntry(x: 2.0, y: 8.0),
+            ChartDataEntry(x: 3.0, y: 4.0),
+        ]
+        let lineDataSet = LineChartDataSet(entries: lineDataEntries, label: "Line Data")
+        lineDataSet.colors = [.red]
+        
+        // Combine bar and line data into CombinedChartData
+        let combinedData = CombinedChartData()
+        combinedData.barData = BarChartData(dataSet: barDataSet)
+        combinedData.lineData = LineChartData(dataSet: lineDataSet)
+        
+        // Set the data to the chart view
+        chartView.data = combinedData
+        
+        // Customize chart appearance (if needed)
+        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["Mon", "Tue", "Wed", "Thu"])
+        chartView.xAxis.granularity = 1
+        chartView.xAxis.labelPosition = .bottom
+        chartView.rightAxis.enabled = false
+        chartView.chartDescription.text = "Combined Chart (Bar and Line)"
+        chartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        
+        // Customize Y-axis values
+        // chartView.leftAxis.valueFormatter = DefaultValueFormatter(decimals: 0) // Format des valeurs (supprime les décimales)
+    }
+    
+    // harcelemnt de risque
+    func setupLineChart() {
+        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        let percentages = [20, 34, 12, 45, 67, 90, 30]
+        
+        // Create chart entries
+        var dataEntries: [ChartDataEntry] = []
+        for i in 0..<days.count {
+            let dataEntry = ChartDataEntry(x: Double(i), y: Double(percentages[i]))
+            dataEntries.append(dataEntry)
         }
         
+        // Create a line dataset
+        let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
+        
+        // Customize the line dataset
+        lineDataSet.colors = [UIColor.blue]
+        lineDataSet.lineWidth = 2.0
+        lineDataSet.drawFilledEnabled = true
+        lineDataSet.fillColor = UIColor.blue.withAlphaComponent(0.5)
+        
+        // Create line chart data
+        let data = LineChartData(dataSet: lineDataSet)
+        
+        // Set data to the chart view
+        linechart.data = data
+        
+        // Customize chart appearance
+        linechart.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
+        linechart.xAxis.granularity = 1
+        linechart.xAxis.labelPosition = .bottom
+        linechart.rightAxis.enabled = false
+        linechart.leftAxis.axisMaximum = 100
+        linechart.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
+        linechart.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
+        linechart.chartDescription.text = "Line Chart (Gradient Fill)"
+        linechart.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+    }
+    
+    func setupChartView() {
+        view.addSubview(linechart)
+        linechart.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            linechart.topAnchor.constraint(equalTo: RisqueLabel.topAnchor, constant: 20),
+            linechart.leadingAnchor.constraint(equalTo: viewChartRisque.leadingAnchor, constant: 20),
+            linechart.trailingAnchor.constraint(equalTo: viewChartRisque.trailingAnchor, constant: -20),
+            linechart.heightAnchor.constraint(equalToConstant: 200)
+        ])
+    }
+    func dangerCarte(){
+        //Set persons collection invisibility
+        personsCollectionView.isHidden = true
+        
         // Call the API to fetch platforms
-        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
+        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 7) { [weak self] platforms in
             guard let self = self else { return }
             
             if let platforms = platforms?.platforms {
@@ -126,81 +237,144 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
                     self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
                 }
             }
-        }
-
-        // Call the API to fetch concerned relationship
-        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
-            guard let self = self else { return }
             
-            if let toxicCount = concernedRelationship {
-                let toxicPersonsText = String(format: "%02d personnes", toxicCount)
-                DispatchQueue.main.async {
-                    self.toxicPersonsLbl.text = toxicPersonsText
+        }
+        
+        
+    }
+    
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
+        let username = UserDefaults.standard.string(forKey: "username") ?? ""
+        let localizedText = "\(bonjourString) \(username) !"
+        
+        BonjourLbl.text = localizedText
+        dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
+        
+        current_harLbl.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
+        scoreLbl.text = NSLocalizedString("max_score", tableName: nil, bundle: bundle, value: "", comment: "")
+        
+        // Translate the text labels in the collection view cells
+        for cell in cardsCollectionView.visibleCells {
+            if let cell = cell as? CustomCollectionViewCell {
+                if let indexPath = cardsCollectionView.indexPath(for: cell) {
+                    switch indexPath.row {
+                    case 0:
+                        cell.cardDesc.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "HARCÈLEMENT ACTUEL")
+                        //                        let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
+                        //                        cell.cardTitle.text = cardTitle
+                    case 1:
+                        cell.cardDesc.text = NSLocalizedString("future_har", tableName: nil, bundle: bundle, value: "", comment: "RISQUE FUTUR HARCÈLEMENT")
+                    case 2:
+                        cell.cardDesc.text = NSLocalizedString("etat_mental", tableName: nil, bundle: bundle, value: "", comment: "ÉTAT MENTAL")
+                    default:
+                        break
+                    }
                 }
             }
         }
+    }
+    
+    @objc func childButtonTapped() {
+        guard let selectedChild = selectedChild else { return }
         
-        // Call the API to fetch the profile image URL
-        let username = UserDefaults.standard.string(forKey: "username")!
-        APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
-            guard let self = self else { return }
-
-            if let imageURL = imageURL {
-                URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-                    if let error = error {
-                        print("Error fetching image data: \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    guard let httpResponse = response as? HTTPURLResponse else {
-                        print("Invalid response")
-                        return
-                    }
-                    
-                    guard httpResponse.statusCode == 200 else {
-                        print("Invalid response status code: \(httpResponse.statusCode)")
-                        return
-                    }
-                    
-                    guard let data = data, let image = UIImage(data: data) else {
-                        print("Invalid image data")
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        // Set the retrieved image to the shared variable
-                           self.sharedImage = image
-                        // Set the retrieved image to the image views and apply corner radius
-                        self.imageView1.image = image
-                        self.imageView1.layer.cornerRadius = 20
-                        self.imageView1.clipsToBounds = true
-                        
-                        self.imageView2.image = image
-                        self.imageView2.layer.cornerRadius = 20
-                        self.imageView2.clipsToBounds = true
-                        
-                        self.imageView3.image = image
-                        self.imageView3.layer.cornerRadius = 20
-                        self.imageView3.clipsToBounds = true
-                        
-                        self.imageView4.image = image
-                        self.imageView4.layer.cornerRadius = 20
-                        self.imageView4.clipsToBounds = true
-                    }
-                }.resume()
+        // Add ChildInfoViewController as child view controller
+        addChild(ChildInfoViewController!)
+        
+        // Add childInfoContainerView to the view hierarchy
+        view.addSubview(childInfoContainerView)
+        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set up constraints for childInfoContainerView
+        NSLayoutConstraint.activate([
+            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        // Add ChildInfoViewController's view to the childInfoContainerView
+        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+        
+        // Notify ChildInfoViewController that it has been added to its parent view controller
+        ChildInfoViewController!.didMove(toParent: self)
+    }
+    
+    
+    @IBAction func personsBtnTapped(_ sender: Any) {
+        personsBtn.isHidden = true
+        personsCollectionView.isHidden = false
+    }
+    
+    
+    // Keep the state of the side menu (expanded or collapse) in rotation
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
             }
         }
-        
+    }
+    
+    @IBAction func revealSideMenu(_ sender: Any) {
+        //  self.sideMenuState(expanded: self.isExpanded ? false : true)
+    }
+    
+    func getCurrentUserData() {
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                self.BonjourLbl.text = "Bonjour \(user.username) !"
+            }
+        }
+    }
+    
+    var startDateTimestamp: TimeInterval = 0
+    var endDateTimestamp: TimeInterval = 0
+    
+    func loadChildInfo() {
+        //guard let selectedChild = selectedChild else { return }
+        //           if (selectedChild.photo ?? "").isEmpty {
+        //               childButton.imageView?.image = nil
+        DispatchQueue.main.async {
+            let imageView = UIImageView(image: UIImage(named: "malePic"))
+            imageView.contentMode = .scaleAspectFill
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            self.childButton.addSubview(imageView)
+            self.imageView5.image = imageView.image
+            NSLayoutConstraint.activate([
+                imageView.widthAnchor.constraint(equalToConstant: 36),
+                imageView.heightAnchor.constraint(equalToConstant: 36),
+                imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+            ])
+        }
+    }
+    func card(){
         //Set collections tags
         cardsCollectionView.tag = 1
         dangerCollectionView.tag = 2
         personsCollectionView.tag = 3
         humorCollectionView.tag = 4
-
+        
         
         // Set initial visibility to hidden
         scoreLbl.isHidden = true
-
+        
         // Register collection view cells classes
         cardsCollectionView.delegate = self
         cardsCollectionView.dataSource = self
@@ -231,7 +405,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         //Set up date textfield
         dateTF.layer.masksToBounds = false
         dateTF.layer.masksToBounds = false
-//        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
+        //        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
         dateTF.layer.shadowColor = UIColor.gray.cgColor
         dateTF.layer.shadowOpacity = 0.5
         dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -242,8 +416,8 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         personsBtn.clipsToBounds = true
         
         // Set up the button's action
-        calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-
+        // calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        
         // Instantiate child view controllers from storyboard
         ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
         
@@ -251,287 +425,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         getCurrentUserData()
         //Set up child profile pic
         loadChildInfo()
-       // guard let selectedChild = selectedChild else { return }
-        // Load child photo
-        let user = selectedChild?.user
-        if let photo = user?.photo, !photo.isEmpty {
-            var photoUrl = "https://webserver.dev.netethic.fr" + photo
-
-            if let url = URL(string: photoUrl) {
-                print("child photo: \(url)")
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    if let data = data {
-                        DispatchQueue.main.async {
-                            let imageView = UIImageView(image: UIImage(data: data))
-                            imageView.contentMode = .scaleAspectFill
-                            imageView.translatesAutoresizingMaskIntoConstraints = false
-                            imageView.layer.cornerRadius = 18 // half of 36
-                            imageView.clipsToBounds = true
-                            self.childButton.addSubview(imageView)
-                            NSLayoutConstraint.activate([
-                                imageView.widthAnchor.constraint(equalToConstant: 36),
-                                imageView.heightAnchor.constraint(equalToConstant: 36),
-                                imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                                imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                            ])
-                        }
-                    }
-                }.resume()
-            }
-        }
-
-
-        // Add target action to child button
-        childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
         
-        // Side Menu Gestures
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        panGestureRecognizer.delegate = self
-        view.addGestureRecognizer(panGestureRecognizer)
-        
-        // Shadow Background View
-        self.sideMenuShadowView = UIView(frame: self.view.bounds)
-        self.sideMenuShadowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer))
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        tapGestureRecognizer.delegate = self
-        view.addGestureRecognizer(tapGestureRecognizer)
-        if self.revealSideMenuOnTop {
-            view.insertSubview(self.sideMenuShadowView, at: 1)
-        }
-        
-        // Side Menu
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        self.SideBar = storyboard.instantiateViewController(withIdentifier: "sidebarViewController") as? SideBar
-        self.SideBar.defaultHighlightedCell = 0 // Default Highlighted Cell
-        
-        self.SideBar.delegate = self
-        view.insertSubview(self.SideBar!.view, at: self.revealSideMenuOnTop ? 2 : 0)
-        view.bringSubviewToFront(self.SideBar!.view)
-        addChild(self.SideBar!)
-        self.SideBar!.didMove(toParent: self)
-        
-        // Side Menu AutoLayout
-        self.SideBar.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        if self.revealSideMenuOnTop {
-            self.sideMenuTrailingConstraint = self.SideBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -self.sideMenuRevealWidth - self.paddingForRotation)
-            self.sideMenuTrailingConstraint.isActive = true
-        }
-        NSLayoutConstraint.activate([
-            self.SideBar.view.widthAnchor.constraint(equalToConstant: self.sideMenuRevealWidth),
-            self.SideBar.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
-        ])
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateLocalizedStrings()
-        updateLanguageButtonImage()
-    }
-    
-    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
-        let languages = ["English", "Français"]
-        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-
-        for language in languages {
-            let action = UIAlertAction(title: language, style: .default) { action in
-                if action.title == "English" {
-                    LanguageManager.shared.currentLanguage = "en"
-                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                } else if action.title == "Français" {
-                    LanguageManager.shared.currentLanguage = "fr"
-                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
-                }
-                
-                self.updateLanguageButtonImage()
-                self.updateLocalizedStrings()
-                self.view.setNeedsLayout() // Refresh the layout of the view
-            }
-            languageAlert.addAction(action)
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        languageAlert.addAction(cancelAction)
-
-        present(languageAlert, animated: true, completion: nil)
-    }
-    
-    func updateLanguageButtonImage() {
-        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
-            if selectedLanguage == "fr" {
-            changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
-        } else if selectedLanguage == "en" {
-            changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
-        }
-//
-//            if selectedLanguage == "fr" {
-//                changeLanguageBtn.image = UIImage(named: "fr_white1")?.withRenderingMode(.alwaysOriginal)
-//            } else if selectedLanguage == "en" {
-//                changeLanguageBtn.image = UIImage(named: "eng_white1")?.withRenderingMode(.alwaysOriginal)
-//            }
-
-        }
-    }
-    
-    func updateLocalizedStrings() {
-        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-
-        let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
-        let username = UserDefaults.standard.string(forKey: "username") ?? ""
-        let localizedText = "\(bonjourString) \(username) !"
-
-        BonjourLbl.text = localizedText
-        dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
-        
-        current_harLbl.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
-        scoreLbl.text = NSLocalizedString("max_score", tableName: nil, bundle: bundle, value: "", comment: "")
-
-        // Translate the text labels in the collection view cells
-        for cell in cardsCollectionView.visibleCells {
-            if let cell = cell as? CustomCollectionViewCell {
-                if let indexPath = cardsCollectionView.indexPath(for: cell) {
-                    switch indexPath.row {
-                    case 0:
-                        cell.cardDesc.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "HARCÈLEMENT ACTUEL")
-//                        let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
-//                        cell.cardTitle.text = cardTitle
-                    case 1:
-                        cell.cardDesc.text = NSLocalizedString("future_har", tableName: nil, bundle: bundle, value: "", comment: "RISQUE FUTUR HARCÈLEMENT")
-                    case 2:
-                        cell.cardDesc.text = NSLocalizedString("etat_mental", tableName: nil, bundle: bundle, value: "", comment: "ÉTAT MENTAL")
-                    default:
-                        break
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    @objc func childButtonTapped() {
-        guard selectedChild != nil else { return }
-        
-        // Add ChildInfoViewController as child view controller
-        addChild(ChildInfoViewController!)
-        
-        // Add childInfoContainerView to the view hierarchy
-        view.addSubview(childInfoContainerView)
-        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Set up constraints for childInfoContainerView
-        NSLayoutConstraint.activate([
-            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
-        ])
-        
-        // Add ChildInfoViewController's view to the childInfoContainerView
-        childInfoContainerView.addSubview(ChildInfoViewController!.view)
-        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
-        
-        // Notify ChildInfoViewController that it has been added to its parent view controller
-        ChildInfoViewController!.didMove(toParent: self)
-    }
-    
-    
-    @IBAction func personsBtnTapped(_ sender: Any) {
-        personsBtn.isHidden = true
-         personsCollectionView.isHidden = false
-         
-         // Call the API to fetch toxic persons
-         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 7) { pseudos in
-             if let pseudos = pseudos {
-                 // Update your toxic pseudos array
-                 self.toxicPseudos = pseudos
-                 
-                 // Reload the collection view to reflect the changes
-                 self.personsCollectionView.reloadData()
-             } else {
-                 print("No toxic persons data")
-                 self.missingDataLbl.isHidden = false
-             }
-         }
-    }
-    
-
-    // Keep the state of the side menu (expanded or collapse) in rotation
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate { _ in
-            if self.revealSideMenuOnTop {
-                self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
-            }
-        }
-    }
-    
-    @IBAction func revealSideMenu(_ sender: Any) {
-        self.sideMenuState(expanded: self.isExpanded ? false : true)
-    }
-    
-    func getCurrentUserData() {
-        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
-        DispatchQueue.main.async {
-            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-                self.BonjourLbl.text = "Bonjour \(user.username) !"
-            }
-        }
-    }
-    
-    var startDateTimestamp: TimeInterval = 0
-    var endDateTimestamp: TimeInterval = 0
-    
-    func loadChildInfo() {
-        guard let selectedChild = selectedChild else { return }
-        let user = selectedChild.user
-        if (user?.photo ?? "").isEmpty {
-            childButton.imageView?.image = nil
-            DispatchQueue.main.async {
-                let imageView = UIImageView(image: UIImage(named: user?.gender == "M" ? "malePic" : "femalePic"))
-                imageView.contentMode = .scaleAspectFill
-                imageView.translatesAutoresizingMaskIntoConstraints = false
-                self.childButton.addSubview(imageView)
-                self.imageView5.image = imageView.image
-                NSLayoutConstraint.activate([
-                    imageView.widthAnchor.constraint(equalToConstant: 36),
-                    imageView.heightAnchor.constraint(equalToConstant: 36),
-                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                ])
-            }
-        } else {
-            if let photo = user?.photo, !photo.isEmpty {
-                var photoUrl = photo
-                if let range = photoUrl.range(of: "http://") {
-                    photoUrl.replaceSubrange(range, with: "https://")
-                }
-                if let url = URL(string: photoUrl) {
-                    URLSession.shared.dataTask(with: url) { (data, response, error) in
-                        if let data = data {
-                            DispatchQueue.main.async {
-                                let imageView = UIImageView(image: UIImage(data: data))
-                                imageView.contentMode = .scaleAspectFill
-                                imageView.translatesAutoresizingMaskIntoConstraints = false
-                                imageView.layer.cornerRadius = 18 // half of 36
-                                imageView.clipsToBounds = true
-                                self.childButton.addSubview(imageView)
-                                self.imageView5.image = imageView.image
-                                self.imageView5.layer.cornerRadius = 35 // half of 70
-                                self.imageView5.clipsToBounds = true
-                                NSLayoutConstraint.activate([
-                                    imageView.widthAnchor.constraint(equalToConstant: 36),
-                                    imageView.heightAnchor.constraint(equalToConstant: 36),
-                                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                                ])
-                            }
-                        }
-                    }.resume()
-                }
-            }
-        }
     }
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
@@ -540,11 +434,50 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
+    //moyenne general
+    func setupPieChart() {
+        pieChartView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+           // Configurez d'autres propriétés du graphique ici (par exemple, le centre, le rayon, etc.)
+           
+           let entries = [
+               PieChartDataEntry(value: 30, label: "Valeur 1"),
+               PieChartDataEntry(value: 20, label: "Valeur 2"),
+               PieChartDataEntry(value: 50, label: "Valeur 3")
+           ]
+           
+           let dataSet = PieChartDataSet(entries: entries, label: "Label du dataset")
+           dataSet.colors = ChartColorTemplates.material()
+           // Configurez d'autres propriétés du dataSet ici (par exemple, couleurs, valeurs sélectionnées, etc.)
+           
+           let data = PieChartData(dataSet: dataSet)
+           
+           pieChartView.data = data
+           pieChartView.notifyDataSetChanged()
+           
+           // Ajoutez le pieChartView à votre vue pour l'afficher
+           self.view.addSubview(pieChartView)
+           
+           pieChartView.translatesAutoresizingMaskIntoConstraints = false
+
+           // Contraintes pour définir la largeur et la hauteur du pie chart
+           pieChartView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+           pieChartView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+
+           // Contraintes pour positionner le pie chart en bas (bottom) et à la fin (trailing) de la view principale
+        NSLayoutConstraint.activate([
+                pieChartView.topAnchor.constraint(equalTo: self.moyenneGView.topAnchor, constant: 100), // Ajustez le décalage (100) pour définir la position verticale souhaitée
+                pieChartView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 90) // Ajustez le décalage (20) pour définir la position horizontale souhaitée
+            ])
+        
+    }
     
+    @IBAction func moyenneGButton(_ sender: Any) {
+        moyenneGButton.isHidden = true
+        setupPieChart()
+    }
     
     
 }
-
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
@@ -843,7 +776,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild!.id, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -896,59 +829,30 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
             
-            // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
-                guard let self = self else { return }
-                
-                print("states:", fetchedStates)
-                // Store the fetched states in the property
-                if let fetchedStates = fetchedStates {
-                    self.states = fetchedStates
-                }
-                
-                // Update the UI on the main thread
-                DispatchQueue.main.async {
-                    if indexPath.row < self.states.count {
-                        let state = self.states[indexPath.row]
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
-                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
-                        
-                        if state.mental_state == "happy" {
-                            cell.cardLogo.image = UIImage(named: "smileyface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-                        } else if state.mental_state == "stress" {
-                            cell.cardLogo.image = UIImage(named: "angryface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
-                        } else {
-                            cell.cardLogo.image = UIImage(named: "pokerface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
-                        }
-                    } else {
-                        // Handle the case when index path is out of bounds
-                        cell.cardLogo.image = UIImage(named: "pokerface")
-//                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
-                    }
-                }
-            }
+//            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+            cell.containerView.backgroundColor = .red
+            cell.cardLogo.image = UIImage(named: "pokerface")
+            cell.cardTitle.text = "Lun"
+            
             return cell
         }
 
+        
         return UICollectionViewCell()
     }
+
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
             return 3
         } else if collectionView.tag == 2 {
-            print(platforms.count)
+            print (platforms.count)
             return platforms.count
+            
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            // Return the count of the stored states
-//            return states.count
-            return 10
+            return 4
         }
         
         return 0
@@ -991,7 +895,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
         // Fetch the required parameters for the API request (e.g., childID)
-        let childID = selectedChild!.id
+        let childID = selectedChild?.id ?? 0
         
         // Create a calendar instance to perform date calculations
         let calendar = Calendar.current

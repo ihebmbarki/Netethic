@@ -10,7 +10,7 @@ import Foundation
 import DGCharts
 import AlamofireImage
 
-class homeVC: UIViewController, ChartViewDelegate {
+class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

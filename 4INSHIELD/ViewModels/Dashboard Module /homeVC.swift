@@ -7,7 +7,7 @@
 
 import UIKit
 import Foundation
-import Charts
+import DGCharts
 import AlamofireImage
 
 class homeVC: UIViewController, ChartViewDelegate {
@@ -28,6 +28,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     var startDate: Date?
     var endDate: Date?
 
+    @IBOutlet weak var personIcon: UIImageView!
+    
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -46,9 +48,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var BonjourLbl: UILabel!
     @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var childButton: UIButton!
-    @IBOutlet weak var changeLanguageBtn: UIBarButtonItem!
     
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
@@ -78,7 +79,6 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Set persons collection invisibility
         personsCollectionView.isHidden = true
 
@@ -86,7 +86,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         missingDataLbl.isHidden = true
         
         //Humor pie chart
-        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
+        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
             guard let self = self else { return }
 
             print("state:", fetchedState)
@@ -117,7 +117,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
         
         // Call the API to fetch platforms
-        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild!.id) { [weak self] platforms in
+        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
             guard let self = self else { return }
             
             if let platforms = platforms?.platforms {
@@ -129,7 +129,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
 
         // Call the API to fetch concerned relationship
-        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild!.id) { [weak self] concernedRelationship in
+        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
             guard let self = self else { return }
             
             if let toxicCount = concernedRelationship {
@@ -251,9 +251,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         getCurrentUserData()
         //Set up child profile pic
         loadChildInfo()
-        guard let selectedChild = selectedChild else { return }
+       // guard let selectedChild = selectedChild else { return }
         // Load child photo
-        let user = selectedChild.user
+        let user = selectedChild?.user
         if let photo = user?.photo, !photo.isEmpty {
             var photoUrl = photo
             if let range = photoUrl.range(of: "http://") {
@@ -361,10 +361,16 @@ class homeVC: UIViewController, ChartViewDelegate {
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
-                changeLanguageBtn.image = UIImage(named: "fr_white")?.withRenderingMode(.alwaysOriginal)
-            } else if selectedLanguage == "en" {
-                changeLanguageBtn.image = UIImage(named: "eng_white")?.withRenderingMode(.alwaysOriginal)
-            }
+            changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+        } else if selectedLanguage == "en" {
+            changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+        }
+//
+//            if selectedLanguage == "fr" {
+//                changeLanguageBtn.image = UIImage(named: "fr_white1")?.withRenderingMode(.alwaysOriginal)
+//            } else if selectedLanguage == "en" {
+//                changeLanguageBtn.image = UIImage(named: "eng_white1")?.withRenderingMode(.alwaysOriginal)
+//            }
 
         }
     }
@@ -404,7 +410,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     }
     
     @objc func childButtonTapped() {
-        guard let selectedChild = selectedChild else { return }
+        guard selectedChild != nil else { return }
         
         // Add ChildInfoViewController as child view controller
         addChild(ChildInfoViewController!)
@@ -432,22 +438,21 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
-        personsCollectionView.isHidden = false
-        
-        // Call the API to fetch toxic persons
-        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild!.id) { pseudos in
-            if let pseudos = pseudos {
-                // Update your toxic pseudos array
-                self.toxicPseudos = pseudos
-                
-                // Reload the collection view to reflect the changes
-                self.personsCollectionView.reloadData()
-            } else {
-                print("No toxic persons data")
-                self.missingDataLbl.isHidden = false
-            }
-        }
-
+         personsCollectionView.isHidden = false
+         
+         // Call the API to fetch toxic persons
+         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 7) { pseudos in
+             if let pseudos = pseudos {
+                 // Update your toxic pseudos array
+                 self.toxicPseudos = pseudos
+                 
+                 // Reload the collection view to reflect the changes
+                 self.personsCollectionView.reloadData()
+             } else {
+                 print("No toxic persons data")
+                 self.missingDataLbl.isHidden = false
+             }
+         }
     }
     
 
@@ -837,7 +842,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild!.id, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -891,7 +896,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
                 guard let self = self else { return }
                 
                 print("states:", fetchedStates)
@@ -951,7 +956,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: selectedChild!.id, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states {

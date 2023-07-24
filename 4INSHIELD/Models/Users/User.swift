@@ -7,7 +7,7 @@
 
 import Foundation
 struct Role_data: Codable {
-    let id: Int?
+    let id: Int
     let enabled: Bool
     let school: String?
 }

@@ -211,7 +211,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
                 self.decodedChildrenArray.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                APIManager.shareInstance.deleteChild(withID: child.id)
+                APIManager.shareInstance.deleteChild(withID: child.id ?? 2)
                 print("You have deleted element \(user?.first_name)")
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))

@@ -10,7 +10,7 @@ import Foundation
 import DGCharts
 import AlamofireImage
 
-class homeVC: UIViewController, ChartViewDelegate {
+class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -255,11 +255,10 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Load child photo
         let user = selectedChild?.user
         if let photo = user?.photo, !photo.isEmpty {
-            var photoUrl = photo
-            if let range = photoUrl.range(of: "http://") {
-                photoUrl.replaceSubrange(range, with: "https://")
-            }
+            var photoUrl = "https://webserver.dev.netethic.fr" + photo
+
             if let url = URL(string: photoUrl) {
+                print("child photo: \(url)")
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
                     if let data = data {
                         DispatchQueue.main.async {
@@ -280,6 +279,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                 }.resume()
             }
         }
+
 
         // Add target action to child button
         childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
@@ -990,7 +990,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
         // Fetch the required parameters for the API request (e.g., childID)
-        let childID = selectedChild?.id ?? 0
+        let childID = selectedChild!.id
         
         // Create a calendar instance to perform date calculations
         let calendar = Calendar.current

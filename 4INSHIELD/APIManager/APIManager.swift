@@ -597,7 +597,7 @@ class APIManager {
             }
         }
     }
-    
+
     func fetchCurrentUserChildren(username: String, completion: @escaping ([Childd]) -> Void) {
         let serverURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(username)/childs/"
         AF.request(serverURL, method: .get).responseData { response in
@@ -617,7 +617,6 @@ class APIManager {
             }
         }
     }
-
     
     func setOnboardingSimpleTrue(forUsername username: String, completion: @escaping (Result<Any?, Error>) -> Void) {
         let parameters: [String: Any] = [

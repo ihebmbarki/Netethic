@@ -68,7 +68,6 @@
 		049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */; };
 		049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FD9AA29BF705D00DCD577 /* LanguageManager.swift */; };
 		04A52E0D29C206A00097C145 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0C29C206A00097C145 /* SideBar.swift */; };
-		04A52E0F29C207A70097C145 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E0E29C207A70097C145 /* homeVC.swift */; };
 		04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A52E1029C20A3F0097C145 /* SideMenuModel.swift */; };
 		04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */; };
 		04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A963B629B0D055009EA1CB /* VerificationModel.swift */; };
@@ -77,12 +76,17 @@
 		04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */; };
 		04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */; };
 		04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BCF2962A33A4E800202D6D /* humorCell.xib */; };
+		04BFDD202A6942A30063E04D /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04BFDD1F2A6942A30063E04D /* assets.xcassets */; };
+		04BFDD222A6943E40063E04D /* ChildrenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD212A6943E40063E04D /* ChildrenResponse.swift */; };
+		04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD232A6944060063E04D /* ChildRegisterModel.swift */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
 		04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04C241A929ED76C3003C3F97 /* Succes.gif */; };
 		04C604DC2A16595700FDFE8E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C604DB2A16595700FDFE8E /* State.swift */; };
 		04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D270DD29D31AB90071B4AB /* UserJourney.swift */; };
 		04D4F0742A01DAEB0033818F /* childCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D4F0732A01DAEB0033818F /* childCell.xib */; };
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
+		04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE42A69595600BDA1F1 /* homeVC.swift */; };
+		04E27AE72A695FFC00BDA1F1 /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
 		870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */; };
@@ -94,9 +98,6 @@
 		87CC77FE2A5E0AAB008FA7F8 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77FA2A5E0AAB008FA7F8 /* TargetType.swift */; };
 		87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77FB2A5E0AAB008FA7F8 /* BaseApi.swift */; };
 		87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3A42D2A6591A200CE4C43 /* DataHandler.swift */; };
-		87F7D7E02A6AF12400B182AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F7D7DF2A6AF12400B182AD /* Assets.xcassets */; };
-		87FB54BA2A6951F2008304FC /* ChildRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB54B92A6951F2008304FC /* ChildRegisterModel.swift */; };
-		87FB54BC2A6951FE008304FC /* ChildrenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB54BB2A6951FE008304FC /* ChildrenResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,7 +191,6 @@
 		049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumorCollectionViewCell.swift; sourceTree = "<group>"; };
 		049FD9AA29BF705D00DCD577 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		04A52E0C29C206A00097C145 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
-		04A52E0E29C207A70097C145 /* homeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		04A52E1029C20A3F0097C145 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildInfoViewController.swift; sourceTree = "<group>"; };
 		04A963B629B0D055009EA1CB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
@@ -199,12 +199,17 @@
 		04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicPersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicProfileResponse.swift; sourceTree = "<group>"; };
 		04BCF2962A33A4E800202D6D /* humorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = humorCell.xib; sourceTree = "<group>"; };
+		04BFDD1F2A6942A30063E04D /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = assets.xcassets; path = ../../../Documents/NetEthic/4INSHIELD/assets.xcassets; sourceTree = "<group>"; };
+		04BFDD212A6943E40063E04D /* ChildrenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildrenResponse.swift; path = ../../../../../Downloads/ChildrenResponse.swift; sourceTree = "<group>"; };
+		04BFDD232A6944060063E04D /* ChildRegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildRegisterModel.swift; path = ../../../../../Downloads/ChildRegisterModel.swift; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		04C241A929ED76C3003C3F97 /* Succes.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Succes.gif; sourceTree = "<group>"; };
 		04C604DB2A16595700FDFE8E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		04D270DD29D31AB90071B4AB /* UserJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJourney.swift; sourceTree = "<group>"; };
 		04D4F0732A01DAEB0033818F /* childCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = childCell.xib; sourceTree = "<group>"; };
 		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
+		04E27AE42A69595600BDA1F1 /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
+		04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = "../../../../../Documents/NetEthic/4INSHIELD/ViewModels/Children Module/AddUserAccount.swift"; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		43F34BEE839351B11521E6A2 /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
 		5B48EC22A6B71FCC24D0B6B9 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
@@ -220,9 +225,6 @@
 		87CC77FA2A5E0AAB008FA7F8 /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		87CC77FB2A5E0AAB008FA7F8 /* BaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
 		87E3A42D2A6591A200CE4C43 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
-		87F7D7DF2A6AF12400B182AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
-		87FB54B92A6951F2008304FC /* ChildRegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildRegisterModel.swift; path = ../../../../../Downloads/ChildRegisterModel.swift; sourceTree = "<group>"; };
-		87FB54BB2A6951FE008304FC /* ChildrenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildrenResponse.swift; path = ../../../../../Downloads/ChildrenResponse.swift; sourceTree = "<group>"; };
 		8C91D63B941344F1B71064F8 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
 		F1B1F0B8047CCD9090450D7B /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -308,7 +310,7 @@
 		04340B1F29C09B4B0055B394 /* Dashboard Module  */ = {
 			isa = PBXGroup;
 			children = (
-				04A52E0E29C207A70097C145 /* homeVC.swift */,
+				04E27AE42A69595600BDA1F1 /* homeVC.swift */,
 				04340B2029C09B610055B394 /* SocialMedia.swift */,
 				04340B2329C09BDF0055B394 /* Phone.swift */,
 				04340B2529C09C070055B394 /* Events.swift */,
@@ -398,7 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
-				87F7D7DF2A6AF12400B182AD /* Assets.xcassets */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
 				7160F104408BB7EFF5A238CD /* Pods */,
@@ -424,6 +425,7 @@
 				043557F829AE359300D4F012 /* Constants */,
 				04850C4E29ACC3E3001A27FF /* AppDelegate.swift */,
 				04850C5029ACC3E4001A27FF /* SceneDelegate.swift */,
+				04BFDD1F2A6942A30063E04D /* assets.xcassets */,
 				04850C5429ACC3E4001A27FF /* Main.storyboard */,
 				04850C5929ACC3EB001A27FF /* LaunchScreen.storyboard */,
 				04850C5C29ACC3EB001A27FF /* Info.plist */,
@@ -504,8 +506,6 @@
 		04B2A60B29CB51A00028B7E2 /* Children Module */ = {
 			isa = PBXGroup;
 			children = (
-				87FB54B92A6951F2008304FC /* ChildRegisterModel.swift */,
-				87FB54BB2A6951FE008304FC /* ChildrenResponse.swift */,
 				049C154829DD85A80028A314 /* Add Child Informations */,
 				049C154929DD85E30028A314 /* ChildrenViewController.swift */,
 				049C154129DD83B70028A314 /* Children.storyboard */,
@@ -515,6 +515,7 @@
 				0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */,
 				042A4C4829E5A8640080CADF /* UpdateChild.swift */,
 				0481480029E997C700A03C61 /* UpdateChild.storyboard */,
+				04E27AE62A695FFC00BDA1F1 /* AddUserAccount.swift */,
 			);
 			path = "Children Module";
 			sourceTree = "<group>";
@@ -531,6 +532,8 @@
 		04C1363829D1C9BF008F1A58 /* Children */ = {
 			isa = PBXGroup;
 			children = (
+				04BFDD232A6944060063E04D /* ChildRegisterModel.swift */,
+				04BFDD212A6943E40063E04D /* ChildrenResponse.swift */,
 				04C1363929D1C9D5008F1A58 /* ChildModel.swift */,
 				040821AB29D5B91200D7A562 /* Child.swift */,
 				048835922A24B998007A8AC7 /* Platform.swift */,
@@ -729,10 +732,10 @@
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
-				87F7D7E02A6AF12400B182AD /* Assets.xcassets in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
+				04BFDD202A6942A30063E04D /* assets.xcassets in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
@@ -792,8 +795,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E27AE72A695FFC00BDA1F1 /* AddUserAccount.swift in Sources */,
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
-				87FB54BC2A6951FE008304FC /* ChildrenResponse.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
 				044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */,
 				04340B2429C09BDF0055B394 /* Phone.swift in Sources */,
@@ -816,13 +819,14 @@
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
-				87FB54BA2A6951F2008304FC /* ChildRegisterModel.swift in Sources */,
 				87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
+				04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */,
 				87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
+				04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
 				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,
@@ -838,6 +842,7 @@
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */,
 				870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */,
+				04BFDD222A6943E40063E04D /* ChildrenResponse.swift in Sources */,
 				87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */,
 				04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
@@ -854,7 +859,6 @@
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */,
-				04A52E0F29C207A70097C145 /* homeVC.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
@@ -952,7 +956,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1008,7 +1012,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1128,7 +1132,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1218,7 +1222,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1302,7 +1306,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1386,7 +1390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

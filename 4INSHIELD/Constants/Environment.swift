@@ -28,8 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://webserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-           //return  "http://51.38.62.168:8017/"
-            return "http://51.89.21.5:8017/"
+            return "https://webserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"
         }

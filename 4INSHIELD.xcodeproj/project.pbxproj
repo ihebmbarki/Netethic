@@ -92,6 +92,10 @@
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
 		8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875206292A6E7EDB00486C0C /* Assets.xcassets */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
+		87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */; };
+		87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */; };
+		87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */; };
+		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -219,6 +223,10 @@
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
 		875206292A6E7EDB00486C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
+		87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
+		87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircleChartView.swift; sourceTree = "<group>"; };
+		87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -316,6 +324,10 @@
 				04340B2529C09C070055B394 /* Events.swift */,
 				04340B2729C09C2F0055B394 /* Formation.swift */,
 				04340A572A1FD42700F69B19 /* Child State */,
+				87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */,
+				87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */,
+				87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */,
+				87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */,
 			);
 			path = "Dashboard Module ";
 			sourceTree = "<group>";
@@ -815,6 +827,7 @@
 				87CC77FE2A5E0AAB008FA7F8 /* TargetType.swift in Sources */,
 				043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */,
 				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
+				87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */,
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
@@ -828,6 +841,7 @@
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
+				87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
 				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
@@ -854,9 +868,11 @@
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
 				04844B5529E03D9F008AFBF6 /* User.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
+				87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				043C49F729E439FF00B5FF9E /* PinView.swift in Sources */,
 				04D270DE29D31AB90071B4AB /* UserJourney.swift in Sources */,
+				87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */,
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,

@@ -53,7 +53,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
-    @IBOutlet weak var calendarView: FSCalendar!
+   // @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var cardsCollectionView: UICollectionView!
     @IBOutlet weak var dangerCollectionView: UICollectionView!
     
@@ -92,6 +92,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     //harcelement actuel
     lazy var chartView: CombinedChartView = {
         let chartView = CombinedChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+        chartView.noDataText = ""
         return chartView
     }()
     //harcelement de risque
@@ -115,15 +116,15 @@ class homeVC: UIViewController, ChartViewDelegate {
         
         // Configurez les contraintes pour le chartView (si nécessaire)
         NSLayoutConstraint.activate([
-            chartView.topAnchor.constraint(equalTo: current_harLbl.bottomAnchor, constant: 8), // Espacement de 8 points sous le current_harLbl
+            chartView.topAnchor.constraint(equalTo: RisqueLabel.bottomAnchor, constant: 20), // Espacement de 8 points sous le current_harLbl
             chartView.leadingAnchor.constraint(equalTo: viewLineChart.leadingAnchor, constant: 8), // Espacement de 8 points depuis la marge gauche de la vueLineChart
             chartView.trailingAnchor.constraint(equalTo: viewLineChart.trailingAnchor, constant: -8), // Espacement de 8 points depuis la marge droite de la vueLineChart
             chartView.heightAnchor.constraint(equalToConstant: 150) // Hauteur du chartView de 150 points
         ])
         
-        setupCombinedChart()
+        // setupCombinedChart()
         
-        //harcelemnt de risque
+        //harcelemnt de actuel
         setupLineChart()
         setupChartView()
         dangerCarte()
@@ -131,50 +132,10 @@ class homeVC: UIViewController, ChartViewDelegate {
         updateLocalizedStrings()
         updateLanguageButtonImage()
         
-    }
-    //harcelement actuel
-    func setupCombinedChart() {
-        // Sample data for bar chart
-        let barDataEntries: [BarChartDataEntry] = [
-            BarChartDataEntry(x: 0.0, y: 10.0),
-            BarChartDataEntry(x: 1.0, y: 5.0),
-            BarChartDataEntry(x: 2.0, y: 7.0),
-            BarChartDataEntry(x: 3.0, y: 2.0),
-        ]
-        let barDataSet = BarChartDataSet(entries: barDataEntries, label: "Bar Data")
-        barDataSet.colors = ChartColorTemplates.material()
         
-        // Sample data for line chart
-        let lineDataEntries: [ChartDataEntry] = [
-            ChartDataEntry(x: 0.0, y: 5.0),
-            ChartDataEntry(x: 1.0, y: 2.0),
-            ChartDataEntry(x: 2.0, y: 8.0),
-            ChartDataEntry(x: 3.0, y: 4.0),
-        ]
-        let lineDataSet = LineChartDataSet(entries: lineDataEntries, label: "Line Data")
-        lineDataSet.colors = [.red]
-        
-        // Combine bar and line data into CombinedChartData
-        let combinedData = CombinedChartData()
-        combinedData.barData = BarChartData(dataSet: barDataSet)
-        combinedData.lineData = LineChartData(dataSet: lineDataSet)
-        
-        // Set the data to the chart view
-        chartView.data = combinedData
-        
-        // Customize chart appearance (if needed)
-        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["Mon", "Tue", "Wed", "Thu"])
-        chartView.xAxis.granularity = 1
-        chartView.xAxis.labelPosition = .bottom
-        chartView.rightAxis.enabled = false
-        chartView.chartDescription.text = "Combined Chart (Bar and Line)"
-        chartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
-        
-        // Customize Y-axis values
-        // chartView.leftAxis.valueFormatter = DefaultValueFormatter(decimals: 0) // Format des valeurs (supprime les décimales)
     }
     
-    // harcelemnt de risque
+    // harcelemnt de actuel
     func setupLineChart() {
         let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         let percentages = [20, 34, 12, 45, 67, 90, 30]
@@ -186,41 +147,72 @@ class homeVC: UIViewController, ChartViewDelegate {
             dataEntries.append(dataEntry)
         }
         
-        // Create a line dataset
-        let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
-        
-        // Customize the line dataset
-        lineDataSet.colors = [UIColor.blue]
-        lineDataSet.lineWidth = 2.0
-        lineDataSet.drawFilledEnabled = true
-        lineDataSet.fillColor = UIColor.blue.withAlphaComponent(0.5)
-        
-        // Create line chart data
-        let data = LineChartData(dataSet: lineDataSet)
-        
-        // Set data to the chart view
-        linechart.data = data
-        
-        // Customize chart appearance
-        linechart.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
-        linechart.xAxis.granularity = 1
-        linechart.xAxis.labelPosition = .bottom
-        linechart.rightAxis.enabled = false
-        linechart.leftAxis.axisMaximum = 100
-        linechart.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
-        linechart.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
-        linechart.chartDescription.text = "Line Chart (Gradient Fill)"
-        linechart.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        // Check if there are any data entries
+        if dataEntries.isEmpty {
+            // Hide the chart and remove any messages
+            linechart.isHidden = true
+            linechart.noDataText = ""
+        } else {
+            // Show the chart
+            linechart.isHidden = false
+            
+            // Create a line dataset
+            let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
+            
+            // Customize the line dataset
+            lineDataSet.colors = [UIColor.clear] // Set the color of the line to clear (transparent)
+            lineDataSet.circleColors = [UIColor.red] // Set the color of the circles (data points)
+            lineDataSet.circleRadius = 5.0 // Adjust the size of the circles
+            lineDataSet.circleHoleRadius = 2.5 // Adjust the size of the circle hole
+            lineDataSet.drawCircleHoleEnabled = true // Enable drawing circle holes
+            
+            // Create line chart data
+            let data = LineChartData(dataSet: lineDataSet)
+            
+            // Set data to the chart view
+            linechart.data = data
+            
+            // Customize chart appearance
+            linechart.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
+            linechart.xAxis.granularity = 1
+            linechart.xAxis.labelPosition = .bottom
+            linechart.rightAxis.enabled = false
+            linechart.leftAxis.axisMaximum = 100
+            linechart.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
+            linechart.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
+            linechart.legend.enabled = false // Supprimer la légende
+            linechart.xAxis.drawGridLinesEnabled = false // Supprimer les lignes verticales
+            
+            // Customize the chart description (title)
+            linechart.chartDescription.text = "" // Remove the default chart description text
+            linechart.drawMarkers = false // Hide the default description marker
+            
+            // Set the custom title position at the center of the chart
+            let title = "Max score platform by date"
+            let titleLabel = UILabel()
+            titleLabel.text = title
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            titleLabel.textColor = .black
+            titleLabel.sizeToFit()
+            titleLabel.center = CGPoint(x: 168, y: 2)
+            linechart.addSubview(titleLabel)
+            
+            // Set the custom marker for data points (plus symbol)
+            let customMarker = CustomMarkerView(color: UIColor.red, font: UIFont.systemFont(ofSize: 12))
+            linechart.marker = customMarker
+            
+            linechart.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        }
     }
-    
     func setupChartView() {
         view.addSubview(linechart)
+        linechart.noDataText = ""
         linechart.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            linechart.topAnchor.constraint(equalTo: RisqueLabel.topAnchor, constant: 20),
+            linechart.topAnchor.constraint(equalTo: RisqueLabel.topAnchor, constant: 40),
             linechart.leadingAnchor.constraint(equalTo: viewChartRisque.leadingAnchor, constant: 20),
             linechart.trailingAnchor.constraint(equalTo: viewChartRisque.trailingAnchor, constant: -20),
-            linechart.heightAnchor.constraint(equalToConstant: 200)
+            linechart.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     func dangerCarte(){
@@ -416,7 +408,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         personsBtn.clipsToBounds = true
         
         // Set up the button's action
-        // calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
         
         // Instantiate child view controllers from storyboard
         ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
@@ -435,70 +427,36 @@ class homeVC: UIViewController, ChartViewDelegate {
         self.present(vc, animated: true, completion: nil)
     }
     //moyenne general
-    func setupPieChart() {
-        pieChartView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-           // Configurez d'autres propriétés du graphique ici (par exemple, le centre, le rayon, etc.)
-           
-           let entries = [
-               PieChartDataEntry(value: 30, label: "Valeur 1"),
-               PieChartDataEntry(value: 20, label: "Valeur 2"),
-               PieChartDataEntry(value: 50, label: "Valeur 3")
-           ]
-           
-           let dataSet = PieChartDataSet(entries: entries, label: "Label du dataset")
-           dataSet.colors = ChartColorTemplates.material()
-           // Configurez d'autres propriétés du dataSet ici (par exemple, couleurs, valeurs sélectionnées, etc.)
-           
-           let data = PieChartData(dataSet: dataSet)
-           
-           pieChartView.data = data
-           pieChartView.notifyDataSetChanged()
-           
-           // Ajoutez le pieChartView à votre vue pour l'afficher
-           self.view.addSubview(pieChartView)
-           
-           pieChartView.translatesAutoresizingMaskIntoConstraints = false
-
-           // Contraintes pour définir la largeur et la hauteur du pie chart
-           pieChartView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-           pieChartView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-
-           // Contraintes pour positionner le pie chart en bas (bottom) et à la fin (trailing) de la view principale
-        NSLayoutConstraint.activate([
-                pieChartView.topAnchor.constraint(equalTo: self.moyenneGView.topAnchor, constant: 100), // Ajustez le décalage (100) pour définir la position verticale souhaitée
-                pieChartView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 90) // Ajustez le décalage (20) pour définir la position horizontale souhaitée
-            ])
-        
-    }
-    
     @IBAction func moyenneGButton(_ sender: Any) {
-        moyenneGButton.isHidden = true
-        setupPieChart()
+        let CustomAlertViewController = CustomAlertViewController()
+        CustomAlertViewController.modalPresentationStyle = .overCurrentContext
+
+        // Present the half-circle chart as a custom alert view controller
+        present(CustomAlertViewController, animated: true, completion: nil)
     }
-    
-    
 }
+
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
             // Profile
             self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-//        case 1:
-//            // Autorisation d’accés
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 2:
-//            // Nous contacter
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 3:
-//            // Mentions légales
-//            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
-//        case 4:
-//            // À propos
-//            self.showViewController(viewController: APropos.self, storyboardId: " ")
-//        case 5:
-//            //Déconnexion
-//            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
+            //        case 1:
+            //            // Autorisation d’accés
+            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+            //        case 2:
+            //            // Nous contacter
+            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+            //        case 3:
+            //            // Mentions légales
+            //            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
+            //        case 4:
+            //            // À propos
+            //            self.showViewController(viewController: APropos.self, storyboardId: " ")
+            //        case 5:
+            //            //Déconnexion
+            //            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
         default:
             break
         }
@@ -573,7 +531,7 @@ extension UIViewController {
     // With this extension you can access the MainViewController from the child view controllers.
     func revealViewController() -> homeVC? {
         var viewController: UIViewController? = self
-
+        
         if viewController != nil && viewController is homeVC {
             return viewController! as? homeVC
         }
@@ -608,7 +566,7 @@ extension homeVC: UIGestureRecognizerDelegate {
     
     // Dragging Side Menu
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
-                
+        
         let position: CGFloat = sender.translation(in: self.view).x
         let velocity: CGFloat = sender.velocity(in: self.view).x
         
@@ -762,7 +720,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             let platform = platforms[indexPath.item]
             let logoURL = platform.logo.absoluteString
-
+            
             // Check if the URL starts with "http://"
             if logoURL.hasPrefix("http://") {
                 // Replace "http://" with "https://"
@@ -808,18 +766,18 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             cell.cardTitle.text = pseudo
             
             // Set the image to the cardLogo image view
-//            if let image = sharedImage {
-//                // Resize the image to fit within the cardLogo image view
-//                let resizedImage = image.resize(to: CGSize(width: 30, height: 30))
-//
-//                cell.cardLogo.image = resizedImage
-//            } else {
-//                // Set a placeholder image or handle the case when sharedImage is nil
-//                cell.cardLogo.image = UIImage(named: "empty")
-//            }
-//
-//            cell.cardLogo.contentMode = .scaleAspectFit
-//            cell.cardLogo.clipsToBounds = true
+            //            if let image = sharedImage {
+            //                // Resize the image to fit within the cardLogo image view
+            //                let resizedImage = image.resize(to: CGSize(width: 30, height: 30))
+            //
+            //                cell.cardLogo.image = resizedImage
+            //            } else {
+            //                // Set a placeholder image or handle the case when sharedImage is nil
+            //                cell.cardLogo.image = UIImage(named: "empty")
+            //            }
+            //
+            //            cell.cardLogo.contentMode = .scaleAspectFit
+            //            cell.cardLogo.clipsToBounds = true
             
             return cell
         } else
@@ -829,19 +787,21 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
             
-//            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-            cell.containerView.backgroundColor = .red
+            //            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+            cell.containerView.backgroundColor = .systemGreen
+            cell.containerView.layer.cornerRadius = 20
+            cell.containerView.clipsToBounds = true
             cell.cardLogo.image = UIImage(named: "pokerface")
             cell.cardTitle.text = "Lun"
             
             return cell
         }
-
+        
         
         return UICollectionViewCell()
     }
-
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
             return 3
@@ -928,72 +888,72 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             completion(maxScoresData, dates)
             
             // Update the chart with the processed data
-            self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
+            //  self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
         }
     }
     
-    func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
-        var entries: [ChartDataEntry] = []
-        
-        for (index, date) in dates.enumerated() {
-            let score = maxScoresData?[date] ?? 0
-            let entry = ChartDataEntry(x: Double(index), y: Double(score))
-            entries.append(entry)
-        }
-        
-        let dataSet = LineChartDataSet(entries: entries, label: "Max Score platform per Date")
-        dataSet.mode = .linear
-        dataSet.lineWidth = 2.0
-        dataSet.setColor(UIColor.orange)
-        dataSet.fillColor = UIColor.orange.withAlphaComponent(0.5)
-        dataSet.fillAlpha = 0.5
-        dataSet.drawFilledEnabled = true
-        dataSet.circleRadius = 4.0
-        dataSet.circleColors = [UIColor.orange]
-        dataSet.drawCircleHoleEnabled = true
-        dataSet.circleHoleColor = UIColor.white
-        
-        //Add Description
-        let description = Description()
-        description.text = "Max Scores per Date"
-        description.textAlign = .right
-        description.position = CGPoint(x: chartView.bounds.width - 80, y: 16)
-        description.font = UIFont.systemFont(ofSize: 12)
-        description.textColor = UIColor.black
-        
-        chartView.chartDescription = description
-        
-        let data = LineChartData(dataSet: dataSet)
-        
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: dates)
-        chartView.xAxis.granularity = 1
-        chartView.xAxis.labelCount = dates.count
-        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
-        chartView.xAxis.labelTextColor = UIColor.black
-        
-        chartView.leftAxis.axisMinimum = 0
-        chartView.xAxis.labelCount = dates.count // Set the label count to the number of dates
-        //        chartView.xAxis.labelRotationAngle = -45 // Rotate the labels for better readability
-        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
-        chartView.leftAxis.labelTextColor = UIColor.black
-        chartView.leftAxis.granularity = 0.2 // Set the granularity of the y-axis to 0.2
-        chartView.leftAxis.axisMaximum = 1.2 // Set the maximum value of the y-axis to ensure proper spacing
-        chartView.extraRightOffset = 40 // Add extra padding on the right side to prevent the dates from being cut off
-        chartView.extraBottomOffset = 10 // Add extra padding at the bottom to prevent collisions with the x-axis labels
-        
-        chartView.rightAxis.enabled = false
-        chartView.legend.enabled = false
-        chartView.chartDescription.enabled = false
-        
-        chartView.data = data
-        
-        chartView.gridBackgroundColor = UIColor.clear
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.leftAxis.drawGridLinesEnabled = true
-        chartView.leftAxis.gridLineDashLengths = [2.0, 2.0]
-        chartView.leftAxis.gridColor = UIColor.lightGray
-    }
+    //    func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
+    //        var entries: [ChartDataEntry] = []
+    //
+    //        for (index, date) in dates.enumerated() {
+    //            let score = maxScoresData?[date] ?? 0
+    //            let entry = ChartDataEntry(x: Double(index), y: Double(score))
+    //            entries.append(entry)
+    //        }
+    
+    //        let dataSet = LineChartDataSet(entries: entries, label: "Max Score platform per Date")
+    //        dataSet.mode = .linear
+    //        dataSet.lineWidth = 2.0
+    //        dataSet.setColor(UIColor.orange)
+    //        dataSet.fillColor = UIColor.orange.withAlphaComponent(0.5)
+    //        dataSet.fillAlpha = 0.5
+    //        dataSet.drawFilledEnabled = true
+    //        dataSet.circleRadius = 4.0
+    //        dataSet.circleColors = [UIColor.orange]
+    //        dataSet.drawCircleHoleEnabled = true
+    //        dataSet.circleHoleColor = UIColor.white
+    //
+    //        //Add Description
+    //        let description = Description()
+    //      //  description.text = "Max Scores per Date"
+    //        description.textAlign = .right
+    //        description.position = CGPoint(x: chartView.bounds.width - 80, y: 16)
+    //        description.font = UIFont.systemFont(ofSize: 12)
+    //        description.textColor = UIColor.black
+    //
+    //        chartView.chartDescription = description
+    //
+    //        let data = LineChartData(dataSet: dataSet)
+    //
+    //        chartView.xAxis.labelPosition = .bottom
+    //        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: dates)
+    //        chartView.xAxis.granularity = 1
+    //        chartView.xAxis.labelCount = dates.count
+    //        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
+    //        chartView.xAxis.labelTextColor = UIColor.black
+    //
+    //        chartView.leftAxis.axisMinimum = 0
+    //        chartView.xAxis.labelCount = dates.count // Set the label count to the number of dates
+    //        //        chartView.xAxis.labelRotationAngle = -45 // Rotate the labels for better readability
+    //        chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
+    //        chartView.leftAxis.labelTextColor = UIColor.black
+    //        chartView.leftAxis.granularity = 0.2 // Set the granularity of the y-axis to 0.2
+    //        chartView.leftAxis.axisMaximum = 1.2 // Set the maximum value of the y-axis to ensure proper spacing
+    //        chartView.extraRightOffset = 40 // Add extra padding on the right side to prevent the dates from being cut off
+    //        chartView.extraBottomOffset = 10 // Add extra padding at the bottom to prevent collisions with the x-axis labels
+    //
+    //        chartView.rightAxis.enabled = false
+    //        chartView.legend.enabled = false
+    //        chartView.chartDescription.enabled = false
+    //
+    //        chartView.data = data
+    //
+    //        chartView.gridBackgroundColor = UIColor.clear
+    //        chartView.xAxis.drawGridLinesEnabled = false
+    //        chartView.leftAxis.drawGridLinesEnabled = true
+    //        chartView.leftAxis.gridLineDashLengths = [2.0, 2.0]
+    //        chartView.leftAxis.gridColor = UIColor.lightGray
+    //   }
     
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {
@@ -1051,7 +1011,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
             
-            self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
+            //self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
             
             // Call the function to fetch and process the max scores data
             self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
@@ -1060,7 +1020,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
         }))
         present(alertController, animated: true, completion: nil)
-
+        
     }
     
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
@@ -1121,3 +1081,7 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
+
+
+

@@ -48,9 +48,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     @IBOutlet weak var BonjourLbl: UILabel!
     @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var childButton: UIButton!
-    
     @IBOutlet weak var changeLanguageBtn: UIButton!
-    
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var calendarBtn: UIButton!
 //    @IBOutlet weak var calendarView: FSCalendar!
@@ -76,6 +74,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
     
+    let childID = UserDefaults.standard.integer(forKey: "childID")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,10 +85,8 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         missingDataLbl.isHidden = true
         
         //Humor pie chart
-        APIManager.shareInstance.getMentalStateForChart(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
+        APIManager.shareInstance.getMentalStateForChart(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
             guard let self = self else { return }
-
-            print("state:", fetchedState)
             
             // Retrieve the happy and stress percentages from the statistic dictionary
             if let statistic = fetchedState?.statistic {
@@ -102,8 +99,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
 
                     // Create the chart dataset
                     let dataSet = PieChartDataSet(entries: entries, label: "")
-                    dataSet.colors = [UIColor.green, UIColor.red] // Set colors for happy and stress
-
+                    dataSet.colors = [UIColor.green, UIColor.red]
                     // Create the chart data
                     let data = PieChartData(dataSet: dataSet)
                     self.humorChart.data = data
@@ -115,21 +111,21 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
                 }
             }
         }
-        
+
         // Call the API to fetch platforms
-        APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
+        APIManager.shareInstance.fetchPlatforms(forPerson: childID) { [weak self] platforms in
             guard let self = self else { return }
             
             if let platforms = platforms?.platforms {
                 self.platforms = platforms
                 DispatchQueue.main.async {
-                    self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
+                    self.dangerCollectionView.reloadData()
                 }
             }
         }
 
         // Call the API to fetch concerned relationship
-        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
+        APIManager.shareInstance.fetchConcernedRelationship(forPerson: childID) { [weak self] concernedRelationship in
             guard let self = self else { return }
             
             if let toxicCount = concernedRelationship {
@@ -139,7 +135,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
                 }
             }
         }
-        
+
         // Call the API to fetch the profile image URL
         let username = UserDefaults.standard.string(forKey: "username")!
         APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
@@ -196,7 +192,6 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         dangerCollectionView.tag = 2
         personsCollectionView.tag = 3
         humorCollectionView.tag = 4
-
         
         // Set initial visibility to hidden
         scoreLbl.isHidden = true
@@ -231,7 +226,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         //Set up date textfield
         dateTF.layer.masksToBounds = false
         dateTF.layer.masksToBounds = false
-//        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
+//      dateTF.layer.cornerRadius = dateTF.bounds.height / 2
         dateTF.layer.shadowColor = UIColor.gray.cgColor
         dateTF.layer.shadowOpacity = 0.5
         dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -251,14 +246,13 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         getCurrentUserData()
         //Set up child profile pic
         loadChildInfo()
-       // guard let selectedChild = selectedChild else { return }
+        // guard let selectedChild = selectedChild else { return }
         // Load child photo
         let user = selectedChild?.user
         if let photo = user?.photo, !photo.isEmpty {
             var photoUrl = "https://webserver.dev.netethic.fr" + photo
-
+            print("child photo: \(photoUrl)")
             if let url = URL(string: photoUrl) {
-                print("child photo: \(url)")
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
                     if let data = data {
                         DispatchQueue.main.async {
@@ -279,7 +273,6 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
                 }.resume()
             }
         }
-
 
         // Add target action to child button
         childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
@@ -303,7 +296,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         // Side Menu
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.SideBar = storyboard.instantiateViewController(withIdentifier: "sidebarViewController") as? SideBar
-        self.SideBar.defaultHighlightedCell = 0 // Default Highlighted Cell
+//      self.SideBar.defaultHighlightedCell = 0
         
         self.SideBar.delegate = self
         view.insertSubview(self.SideBar!.view, at: self.revealSideMenuOnTop ? 2 : 0)
@@ -365,13 +358,12 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         } else if selectedLanguage == "en" {
             changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
         }
-//
+            
 //            if selectedLanguage == "fr" {
 //                changeLanguageBtn.image = UIImage(named: "fr_white1")?.withRenderingMode(.alwaysOriginal)
 //            } else if selectedLanguage == "en" {
 //                changeLanguageBtn.image = UIImage(named: "eng_white1")?.withRenderingMode(.alwaysOriginal)
 //            }
-
         }
     }
     
@@ -409,7 +401,6 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         }
     }
     
-    
     @objc func childButtonTapped() {
         guard selectedChild != nil else { return }
         
@@ -436,13 +427,12 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         ChildInfoViewController!.didMove(toParent: self)
     }
     
-    
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
          personsCollectionView.isHidden = false
          
          // Call the API to fetch toxic persons
-         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 7) { pseudos in
+         APIManager.shareInstance.fetchToxicPersons(forPerson: childID) { pseudos in
              if let pseudos = pseudos {
                  // Update your toxic pseudos array
                  self.toxicPseudos = pseudos
@@ -455,7 +445,6 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
              }
          }
     }
-    
 
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -486,10 +475,10 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
         let user = selectedChild.user
-        if (user?.photo ?? "").isEmpty {
+        if (user.photo ?? "").isEmpty {
             childButton.imageView?.image = nil
             DispatchQueue.main.async {
-                let imageView = UIImageView(image: UIImage(named: user?.gender == "M" ? "malePic" : "femalePic"))
+                let imageView = UIImageView(image: UIImage(named: user.gender == "M" ? "malePic" : "femalePic"))
                 imageView.contentMode = .scaleAspectFill
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 self.childButton.addSubview(imageView)
@@ -502,7 +491,7 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
                 ])
             }
         } else {
-            if let photo = user?.photo, !photo.isEmpty {
+            if let photo = user.photo, !photo.isEmpty {
                 var photoUrl = photo
                 if let range = photoUrl.range(of: "http://") {
                     photoUrl.replaceSubrange(range, with: "https://")
@@ -536,12 +525,10 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
+        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier)
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
-    
-    
     
 }
 
@@ -675,7 +662,6 @@ extension homeVC: UIGestureRecognizerDelegate {
     
     // Dragging Side Menu
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
-                
         let position: CGFloat = sender.translation(in: self.view).x
         let velocity: CGFloat = sender.velocity(in: self.view).x
         
@@ -773,9 +759,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CustomCollectionViewCell else {
                 fatalError("Unable to dequeue CustomCollectionViewCell")
             }
-            
-            
-            
+                        
             // Assign the description and logo based on indexPath or any other logic
             switch indexPath.item {
             case 0:
@@ -843,7 +827,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: childID, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -897,7 +881,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             // Call the getMentalState function to fetch the mental state data
-            APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+            APIManager.shareInstance.getMentalState(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
                 guard let self = self else { return }
                 
                 print("states:", fetchedStates)
@@ -957,7 +941,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        APIManager.shareInstance.getMentalState(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states {
@@ -990,8 +974,6 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func fetchAndProcessMaxScores(startDate: Date, endDate: Date, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?, [String]) -> Void) {
-        // Fetch the required parameters for the API request (e.g., childID)
-        let childID = selectedChild!.id
         
         // Create a calendar instance to perform date calculations
         let calendar = Calendar.current

@@ -159,17 +159,17 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         let child = decodedChildrenArray[indexPath.row]
         let user = child.user
         
-        if let photo = user?.photo, !photo.isEmpty {
+        if let photo = user.photo, !photo.isEmpty {
             cell.childAvatar.loadImage(photo)
         } else {
-            if user?.gender == "M" {
+            if user.gender == "M" {
                 cell.childAvatar.image = UIImage(imageLiteralResourceName: "malePic")
             } else {
                 cell.childAvatar.image = UIImage(imageLiteralResourceName: "femalePic")
             }
         }
         
-        cell.childFullName.text = (user?.first_name.uppercased() ?? "") + " " + (user?.last_name.uppercased() ?? "")
+        cell.childFullName.text = (user.first_name?.uppercased() ?? "") + " " + (user.last_name?.uppercased() ?? "")
         
         return cell
     }
@@ -195,6 +195,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         if let homeNav = vc.viewControllers?.first as? UINavigationController,
             let homeVC = homeNav.viewControllers.first as? homeVC {
             homeVC.selectedChild = selectedChild
+            print("selected child: \(selectedChild.id)")
         }
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)

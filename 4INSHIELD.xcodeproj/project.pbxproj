@@ -41,6 +41,8 @@
 		044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB27C2A2E484E0008B143 /* ToxicPersons.swift */; };
 		044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB27E2A2E5AAD0008B143 /* UserProfileResponse.swift */; };
 		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
+		047191362A71877F00D53F9E /* LegalMention.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047191352A71877F00D53F9E /* LegalMention.storyboard */; };
+		047191382A7187C800D53F9E /* LegalMentionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047191372A7187C800D53F9E /* LegalMentionVC.swift */; };
 		0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */; };
 		0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */; };
 		0476E7752A05675300BEA9EC /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0476E7742A05675300BEA9EC /* PhoneNumberKit */; };
@@ -163,6 +165,8 @@
 		044BB27E2A2E5AAD0008B143 /* UserProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		0460DBEF29EEB7A50019EA53 /* FSCalendar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FSCalendar.xcodeproj; path = "4INSHIELD/ViewModels/Children Module/FSCalendar/Example-Objc/FSCalendar.xcodeproj"; sourceTree = "<group>"; };
 		0469863129E6D78100D3CC5F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		047191352A71877F00D53F9E /* LegalMention.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LegalMention.storyboard; sourceTree = "<group>"; };
+		047191372A7187C800D53F9E /* LegalMentionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalMentionVC.swift; sourceTree = "<group>"; };
 		0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Child_SocialMedia_TvCell.xib; sourceTree = "<group>"; };
 		0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMediaTableViewCell.swift; sourceTree = "<group>"; };
 		0479739529CC922C00FD28DF /* ChildSocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMedia.swift; sourceTree = "<group>"; };
@@ -394,6 +398,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		047191342A71875800D53F9E /* LegalMentions */ = {
+			isa = PBXGroup;
+			children = (
+				047191352A71877F00D53F9E /* LegalMention.storyboard */,
+				047191372A7187C800D53F9E /* LegalMentionVC.swift */,
+			);
+			path = LegalMentions;
+			sourceTree = "<group>";
+		};
 		04844B4B29DF100C008AFBF6 /* Forgot Pwd */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +506,7 @@
 			children = (
 				04A52E0C29C206A00097C145 /* SideBar.swift */,
 				04A52E1029C20A3F0097C145 /* SideMenuModel.swift */,
+				047191342A71875800D53F9E /* LegalMentions */,
 				044AA23C2A6EF3A500D63736 /* Contact */,
 			);
 			path = "Side Menu";
@@ -752,6 +766,7 @@
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
+				047191362A71877F00D53F9E /* LegalMention.storyboard in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				044AA23F2A6EF87B00D63736 /* Inter in Resources */,
 				044AA2392A6EF38400D63736 /* Contact.storyboard in Resources */,
@@ -842,6 +857,7 @@
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
+				047191382A7187C800D53F9E /* LegalMentionVC.swift in Sources */,
 				87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */,

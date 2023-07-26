@@ -84,6 +84,35 @@ class HalfCircleChartAlertViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
 
+        // Add percentage labels
+                let percentageFormatter = NumberFormatter()
+                percentageFormatter.numberStyle = .decimal
+                percentageFormatter.maximumFractionDigits = 1
+
+                let entries = [
+                    HalfPieChartEntry(value: 52.0, color: .red),
+                    HalfPieChartEntry(value: 49.0, color: .green)
+                ]
+                let totalValue = entries.reduce(0.0) { $0 + $1.value }
+
+                let stressedPercentage = (entries[0].value / totalValue) * 100.0
+                let joyfulPercentage = (entries[1].value / totalValue) * 100.0
+
+                let stressedPercentageLabel = UILabel()
+                stressedPercentageLabel.text = percentageFormatter.string(from: NSNumber(value: stressedPercentage))! + "%"
+                stressedPercentageLabel.textColor = .black
+                stressedPercentageLabel.font = UIFont.systemFont(ofSize: 12)
+                stressedPercentageLabel.textAlignment = .right
+                stackView.addArrangedSubview(stressedPercentageLabel)
+
+                let joyfulPercentageLabel = UILabel()
+                joyfulPercentageLabel.text = percentageFormatter.string(from: NSNumber(value: joyfulPercentage))! + "%"
+                joyfulPercentageLabel.textColor = .black
+                joyfulPercentageLabel.font = UIFont.systemFont(ofSize: 12)
+                joyfulPercentageLabel.textAlignment = .right
+                stackView.addArrangedSubview(joyfulPercentageLabel)
+
+    
         // Add constraints to center the stack view in the main view
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -99,6 +128,7 @@ class HalfCircleChartAlertViewController: UIViewController {
             stressedColorView.leadingAnchor.constraint(equalTo: stressedLabel.trailingAnchor, constant: 8),
             joyfulColorView.leadingAnchor.constraint(equalTo: joyfulLabel.trailingAnchor, constant: 8)
         ])
+        
     }
 
 

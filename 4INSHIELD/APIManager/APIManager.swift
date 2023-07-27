@@ -81,7 +81,7 @@ class APIManager {
         let fetchConcernedRelationshipURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
         
         AF.request(fetchConcernedRelationshipURL, method: .get).response { response in
-            print(response.data!)
+//            print(response.data!)
             switch response.result {
             case .success:
                 if let data = response.data {

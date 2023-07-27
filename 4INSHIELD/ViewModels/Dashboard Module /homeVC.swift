@@ -74,8 +74,9 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
     
-    let childID = UserDefaults.standard.integer(forKey: "childID")
-    
+//    let childID = UserDefaults.standard.integer(forKey: "childID")
+    let childID = 2
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set persons collection invisibility
@@ -354,16 +355,10 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
-            changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
-        } else if selectedLanguage == "en" {
-            changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
-        }
-            
-//            if selectedLanguage == "fr" {
-//                changeLanguageBtn.image = UIImage(named: "fr_white1")?.withRenderingMode(.alwaysOriginal)
-//            } else if selectedLanguage == "en" {
-//                changeLanguageBtn.image = UIImage(named: "eng_white1")?.withRenderingMode(.alwaysOriginal)
-//            }
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+            }
         }
     }
     
@@ -523,33 +518,34 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
         }
     }
     
+    
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier)
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
 
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
+        print("Selected cell at row: \(row)")
         switch row {
         case 0:
             // Profile
             self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-//        case 1:
-//            // Autorisation d’accés
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+        case 1:
+            // Autorisation d’accés
+            self.gotoScreen(storyBoardName: "Autorisation", stbIdentifier: "AutorisationID")
         case 2:
             // Nous contacter
             self.gotoScreen(storyBoardName: "Contact", stbIdentifier: "ContactID")
 //        case 3:
             // Mentions légales
             self.gotoScreen(storyBoardName: "LegalMention", stbIdentifier: "LegalMentionID")
-//        case 4:
-//            // À propos
-//            self.showViewController(viewController: APropos.self, storyboardId: " ")
+        case 4:
+            // À propos
+            self.gotoScreen(storyBoardName: "Apropos", stbIdentifier: "AproposID")
 //        case 5:
 //            //Déconnexion
 //            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")

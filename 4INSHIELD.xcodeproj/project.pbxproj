@@ -43,6 +43,11 @@
 		0469863229E6D78100D3CC5F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469863129E6D78100D3CC5F /* Profile.swift */; };
 		047191362A71877F00D53F9E /* LegalMention.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047191352A71877F00D53F9E /* LegalMention.storyboard */; };
 		047191382A7187C800D53F9E /* LegalMentionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047191372A7187C800D53F9E /* LegalMentionVC.swift */; };
+		0471913B2A729D4800D53F9E /* Autorisation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0471913A2A729D4800D53F9E /* Autorisation.storyboard */; };
+		0471913D2A729D8800D53F9E /* AutorisationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471913C2A729D8800D53F9E /* AutorisationVC.swift */; };
+		047191402A72AC0D00D53F9E /* AproposVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471913F2A72AC0D00D53F9E /* AproposVC.swift */; };
+		047191422A72AC1C00D53F9E /* Apropos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047191412A72AC1C00D53F9E /* Apropos.storyboard */; };
+		047191462A72C6B000D53F9E /* inshield.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 047191452A72C6B000D53F9E /* inshield.mp4 */; };
 		0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */; };
 		0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */; };
 		0476E7752A05675300BEA9EC /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0476E7742A05675300BEA9EC /* PhoneNumberKit */; };
@@ -167,6 +172,11 @@
 		0469863129E6D78100D3CC5F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		047191352A71877F00D53F9E /* LegalMention.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LegalMention.storyboard; sourceTree = "<group>"; };
 		047191372A7187C800D53F9E /* LegalMentionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalMentionVC.swift; sourceTree = "<group>"; };
+		0471913A2A729D4800D53F9E /* Autorisation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Autorisation.storyboard; sourceTree = "<group>"; };
+		0471913C2A729D8800D53F9E /* AutorisationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorisationVC.swift; sourceTree = "<group>"; };
+		0471913F2A72AC0D00D53F9E /* AproposVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AproposVC.swift; sourceTree = "<group>"; };
+		047191412A72AC1C00D53F9E /* Apropos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Apropos.storyboard; sourceTree = "<group>"; };
+		047191452A72C6B000D53F9E /* inshield.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = inshield.mp4; sourceTree = "<group>"; };
 		0473B4E229E81A5E00E160DD /* Child_SocialMedia_TvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Child_SocialMedia_TvCell.xib; sourceTree = "<group>"; };
 		0473B4E429E81B4600E160DD /* ChildSocialMediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMediaTableViewCell.swift; sourceTree = "<group>"; };
 		0479739529CC922C00FD28DF /* ChildSocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSocialMedia.swift; sourceTree = "<group>"; };
@@ -407,6 +417,24 @@
 			path = LegalMentions;
 			sourceTree = "<group>";
 		};
+		047191392A7291A400D53F9E /* Autorisation */ = {
+			isa = PBXGroup;
+			children = (
+				0471913A2A729D4800D53F9E /* Autorisation.storyboard */,
+				0471913C2A729D8800D53F9E /* AutorisationVC.swift */,
+			);
+			path = Autorisation;
+			sourceTree = "<group>";
+		};
+		0471913E2A72ABE600D53F9E /* Apropos */ = {
+			isa = PBXGroup;
+			children = (
+				047191412A72AC1C00D53F9E /* Apropos.storyboard */,
+				0471913F2A72AC0D00D53F9E /* AproposVC.swift */,
+			);
+			path = Apropos;
+			sourceTree = "<group>";
+		};
 		04844B4B29DF100C008AFBF6 /* Forgot Pwd */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +459,7 @@
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
 				044AA2352A6E9C8E00D63736 /* Assets.xcassets */,
+				047191452A72C6B000D53F9E /* inshield.mp4 */,
 				044AA23D2A6EF87800D63736 /* Inter */,
 				044AA23E2A6EF87A00D63736 /* Poppins */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
@@ -506,6 +535,8 @@
 			children = (
 				04A52E0C29C206A00097C145 /* SideBar.swift */,
 				04A52E1029C20A3F0097C145 /* SideMenuModel.swift */,
+				0471913E2A72ABE600D53F9E /* Apropos */,
+				047191392A7291A400D53F9E /* Autorisation */,
 				047191342A71875800D53F9E /* LegalMentions */,
 				044AA23C2A6EF3A500D63736 /* Contact */,
 			);
@@ -762,6 +793,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0471913B2A729D4800D53F9E /* Autorisation.storyboard in Resources */,
+				047191422A72AC1C00D53F9E /* Apropos.storyboard in Resources */,
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
@@ -771,6 +804,7 @@
 				044AA23F2A6EF87B00D63736 /* Inter in Resources */,
 				044AA2392A6EF38400D63736 /* Contact.storyboard in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
+				047191462A72C6B000D53F9E /* inshield.mp4 in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
@@ -886,11 +920,13 @@
 				04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
+				047191402A72AC0D00D53F9E /* AproposVC.swift in Sources */,
 				049531432A12847C00C610AD /* Score.swift in Sources */,
 				870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */,
 				0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */,
 				04340B2629C09C070055B394 /* Events.swift in Sources */,
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
+				0471913D2A729D8800D53F9E /* AutorisationVC.swift in Sources */,
 				04844B5529E03D9F008AFBF6 /* User.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
 				044AA23B2A6EF39F00D63736 /* ContactVC.swift in Sources */,

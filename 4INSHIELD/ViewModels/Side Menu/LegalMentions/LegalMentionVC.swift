@@ -136,4 +136,9 @@ class LegalMentionVC: UIViewController {
         }
     }
     
+    
+    @IBAction func backBtnTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

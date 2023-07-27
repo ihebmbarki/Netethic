@@ -30,6 +30,11 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var personIcon: UIImageView!
     
+    @IBOutlet weak var lineChartView: LineChartView! {
+        didSet {
+            lineChartView.addShadowView(width: 2, height: 3, Opacidade: 0.1, radius: 15, shadowRadius: 5)
+        }
+    }
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -86,20 +91,25 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var moyenneGView: UIView!
     
-    @IBOutlet weak var moyenneGButton: UIButton!
-    
+    @IBOutlet weak var moyenneButton: UIButton!{
+        didSet{
+            moyenneButton.applyGradient()
+            moyenneButton.layer.cornerRadius = moyenneButton.frame.height / 2
+            moyenneButton.clipsToBounds = true
+        }
+    }
     //let chartView = LineChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
     //harcelement actuel
-    lazy var chartView: CombinedChartView = {
-        let chartView = CombinedChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
-        chartView.noDataText = ""
-        return chartView
-    }()
+//    lazy var chartView: CombinedChartView = {
+//        let chartView = CombinedChartView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+//        chartView.noDataText = ""
+//        return chartView
+//    }()
     //harcelement de risque
-    lazy var linechart: LineChartView = {
-        let Linechart = LineChartView()
-        return Linechart
-    }()
+//    lazy var linechart: LineChartView = {
+//        let Linechart = LineChartView()
+//        return Linechart
+//    }()
     // moyenne General
     let pieChartView = PieChartView()
     
@@ -108,19 +118,19 @@ class homeVC: UIViewController, ChartViewDelegate {
         //collection Danger
         dangerCarte()
         //harcelement actuel
-        chartView.delegate = self
-        chartView.backgroundColor = .white
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        // Ajoutez le chartView en tant que sous-vue de la vue principale
-        view.addSubview(chartView)
+//        chartView.delegate = self
+//        chartView.backgroundColor = .white
+//        chartView.translatesAutoresizingMaskIntoConstraints = false
+//        // Ajoutez le chartView en tant que sous-vue de la vue principale
+//        view.addSubview(chartView)
         
         // Configurez les contraintes pour le chartView (si nécessaire)
-        NSLayoutConstraint.activate([
-            chartView.topAnchor.constraint(equalTo: RisqueLabel.bottomAnchor, constant: 20), // Espacement de 8 points sous le current_harLbl
-            chartView.leadingAnchor.constraint(equalTo: viewLineChart.leadingAnchor, constant: 8), // Espacement de 8 points depuis la marge gauche de la vueLineChart
-            chartView.trailingAnchor.constraint(equalTo: viewLineChart.trailingAnchor, constant: -8), // Espacement de 8 points depuis la marge droite de la vueLineChart
-            chartView.heightAnchor.constraint(equalToConstant: 150) // Hauteur du chartView de 150 points
-        ])
+//        NSLayoutConstraint.activate([
+//            chartView.topAnchor.constraint(equalTo: RisqueLabel.bottomAnchor, constant: 20), // Espacement de 8 points sous le current_harLbl
+//            chartView.leadingAnchor.constraint(equalTo: viewLineChart.leadingAnchor, constant: 8), // Espacement de 8 points depuis la marge gauche de la vueLineChart
+//            chartView.trailingAnchor.constraint(equalTo: viewLineChart.trailingAnchor, constant: -8), // Espacement de 8 points depuis la marge droite de la vueLineChart
+//            chartView.heightAnchor.constraint(equalToConstant: 150) // Hauteur du chartView de 150 points
+//        ])
         
         // setupCombinedChart()
         
@@ -131,6 +141,10 @@ class homeVC: UIViewController, ChartViewDelegate {
         card()
         updateLocalizedStrings()
         updateLanguageButtonImage()
+        
+        APIManager.shareInstance.getMentalStateForChart(childID: 7, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
+            guard let self = self else { return }
+        }
         
         
     }
@@ -150,11 +164,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Check if there are any data entries
         if dataEntries.isEmpty {
             // Hide the chart and remove any messages
-            linechart.isHidden = true
-            linechart.noDataText = ""
+            lineChartView.isHidden = true
+            lineChartView.noDataText = ""
         } else {
             // Show the chart
-            linechart.isHidden = false
+            lineChartView.isHidden = false
             
             // Create a line dataset
             let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
@@ -170,54 +184,65 @@ class homeVC: UIViewController, ChartViewDelegate {
             let data = LineChartData(dataSet: lineDataSet)
             
             // Set data to the chart view
-            linechart.data = data
+            lineChartView.data = data
             
             // Customize chart appearance
-            linechart.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
-            linechart.xAxis.granularity = 1
-            linechart.xAxis.labelPosition = .bottom
-            linechart.rightAxis.enabled = false
-            linechart.leftAxis.axisMaximum = 100
-            linechart.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
-            linechart.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
-            linechart.legend.enabled = false // Supprimer la légende
-            linechart.xAxis.drawGridLinesEnabled = false // Supprimer les lignes verticales
+            lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
+            lineChartView.xAxis.granularity = 1
+            lineChartView.xAxis.labelPosition = .bottom
+            lineChartView.rightAxis.enabled = false
+            lineChartView.leftAxis.axisMaximum = 100
+            lineChartView.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
+            lineChartView.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
+            lineChartView.legend.enabled = false // Supprimer la légende
+            lineChartView.xAxis.drawGridLinesEnabled = false // Supprimer les lignes verticales
+            lineChartView.backgroundColor = .white
+            lineChartView.legend.enabled = true            
+            
+            let l = lineChartView.legend
+            l.form = .line
+            l.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
+            l.textColor = .white
+            l.horizontalAlignment = .left
+            l.verticalAlignment = .bottom
+            l.orientation = .horizontal
+            l.drawInside = false
             
             // Customize the chart description (title)
-            linechart.chartDescription.text = "" // Remove the default chart description text
-            linechart.drawMarkers = false // Hide the default description marker
+            lineChartView.chartDescription.text = "" // Remove the default chart description text
+            lineChartView.drawMarkers = false // Hide the default description marker
             
             // Set the custom title position at the center of the chart
-            let title = "Max score platform by date"
-            let titleLabel = UILabel()
-            titleLabel.text = title
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            titleLabel.textColor = .black
-            titleLabel.sizeToFit()
-            titleLabel.center = CGPoint(x: 168, y: 2)
-            linechart.addSubview(titleLabel)
+//            let title = "Max score platform by date"
+//            let titleLabel = UILabel()
+//            titleLabel.text = title
+//            titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+//            titleLabel.textColor = .black
+//            titleLabel.sizeToFit()
+//            titleLabel.center = CGPoint(x: 168, y: 2)
+//            linechart.addSubview(titleLabel)
             
             // Set the custom marker for data points (plus symbol)
             let customMarker = CustomMarkerView(color: UIColor.red, font: UIFont.systemFont(ofSize: 12))
-            linechart.marker = customMarker
+            lineChartView.marker = customMarker
             
-            linechart.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+            lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
         }
     }
     func setupChartView() {
-        view.addSubview(linechart)
-        linechart.noDataText = ""
-        linechart.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            linechart.topAnchor.constraint(equalTo: RisqueLabel.topAnchor, constant: 40),
-            linechart.leadingAnchor.constraint(equalTo: viewChartRisque.leadingAnchor, constant: 20),
-            linechart.trailingAnchor.constraint(equalTo: viewChartRisque.trailingAnchor, constant: -20),
-            linechart.heightAnchor.constraint(equalToConstant: 300)
-        ])
+//        view.addSubview(linechart)
+//        linechart.noDataText = ""
+//        linechart.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            linechart.topAnchor.constraint(equalTo: RisqueLabel.topAnchor, constant: 40),
+//            linechart.leadingAnchor.constraint(equalTo: viewChartRisque.leadingAnchor, constant: 20),
+//            linechart.trailingAnchor.constraint(equalTo: viewChartRisque.trailingAnchor, constant: -20),
+//            linechart.heightAnchor.constraint(equalToConstant: 300)
+//        ])
     }
     func dangerCarte(){
         //Set persons collection invisibility
-        personsCollectionView.isHidden = true
+       // personsCollectionView.isHidden = true
         
         // Call the API to fetch platforms
         APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 7) { [weak self] platforms in
@@ -277,6 +302,10 @@ class homeVC: UIViewController, ChartViewDelegate {
                 }
             }
         }
+    }
+    
+    @IBAction func MoyenneButton(_ sender: Any) {
+        addChild(ChildInfoViewController!)
     }
     
     @objc func childButtonTapped() {
@@ -428,11 +457,9 @@ class homeVC: UIViewController, ChartViewDelegate {
     }
     //moyenne general
     @IBAction func moyenneGButton(_ sender: Any) {
-        let CustomAlertViewController = CustomAlertViewController()
-        CustomAlertViewController.modalPresentationStyle = .overCurrentContext
-
-        // Present the half-circle chart as a custom alert view controller
-        present(CustomAlertViewController, animated: true, completion: nil)
+        let destination = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+            destination.modalPresentationStyle = .overCurrentContext
+            self.present(destination, animated: false, completion: nil)
     }
 }
 
@@ -812,7 +839,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            return 4
+            return 9
         }
         
         return 0
@@ -1081,7 +1108,3 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
-
-
-
-

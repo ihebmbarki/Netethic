@@ -170,3 +170,13 @@ extension String {
     }
 }
 
+extension UIView  {
+    func addShadowView(width:CGFloat=0, height:CGFloat=1, Opacidade:Float=0.11, maskToBounds:Bool=false, radius:CGFloat=25, shadowRadius:CGFloat=12){
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: width, height: height)
+        self.layer.shadowRadius = shadowRadius
+        self.layer.cornerRadius = radius
+        self.layer.shadowOpacity = Opacidade
+        self.layer.masksToBounds = maskToBounds
+    }
+}

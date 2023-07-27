@@ -1,67 +1,70 @@
-
-
-
 import UIKit
 import Charts
 import DGCharts
 
-
 class HalfCircleChartAlertViewController: UIViewController {
 
+    let containerView = UIView()
     let halfPieChartView = HalfPieChartView()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         halfPieChartView.noDataText = ""
-        setupChartExplanation()
-
-              let titleLabel = UILabel()
-              titleLabel.text = "Moyenne général de l'humeur"
-              titleLabel.textColor = .black
-              titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
-              titleLabel.textAlignment = .center
-              view.addSubview(titleLabel)
-
-              // Add constraints for the title label
-              titleLabel.translatesAutoresizingMaskIntoConstraints = false
-              NSLayoutConstraint.activate([
-                  titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 198),
-                  titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                  titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-              ])
-        // Add the half pie chart view to the view
-        halfPieChartView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(halfPieChartView)
-
-        // Add constraints for the half pie chart view to position it in the center
-        NSLayoutConstraint.activate([
-            halfPieChartView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            halfPieChartView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            halfPieChartView.widthAnchor.constraint(equalToConstant: 200),
-            halfPieChartView.heightAnchor.constraint(equalToConstant: 200)
-        ])
+        setupHalfPieChartView()
 
         // Set up the data entries for the half pie chart
         let entries = [
-                  HalfPieChartEntry(value: 52.0, color: .red),
-                  HalfPieChartEntry(value: 49.0, color: .green)
-              ]
-              halfPieChartView.dataEntries = entries
+            HalfPieChartEntry(value: 52.0, color: .red),
+            HalfPieChartEntry(value: 49.0, color: .green)
+        ]
+
+        // Update UI on the main thread
+        DispatchQueue.main.async {
+            self.halfPieChartView.dataEntries = entries
+        }
     }
- 
-    private func setupChartExplanation() {
+
+    private func setupHalfPieChartView() {
+        // Add a container view with a white background
+        containerView.backgroundColor = .white
+        containerView.layer.borderColor = UIColor.white.cgColor
+        containerView.layer.borderWidth = 10
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+
+        // Add constraints to position the container view in the center
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: 362), // Add 4 more points for the border
+            containerView.heightAnchor.constraint(equalToConstant: 362) // Add 4 more points for the border
+        ])
+
+        // Add the half pie chart view to the container view
+        halfPieChartView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(halfPieChartView)
+
+        // Add constraints to position the half pie chart view in the center
+        NSLayoutConstraint.activate([
+            halfPieChartView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            halfPieChartView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            halfPieChartView.widthAnchor.constraint(equalToConstant: 200),
+            halfPieChartView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+
+        // Set up the chart explanation stack view with horizontal axis
         let stackView = UIStackView()
-        stackView.axis = .vertical
+        stackView.axis = .horizontal // Use horizontal axis
         stackView.spacing = 8
         stackView.alignment = .center
-        view.addSubview(stackView)
+        containerView.addSubview(stackView)
 
+        // Add stressed label and color view to the stack view
         let stressedLabel = UILabel()
         stressedLabel.text = "Stressed"
         stressedLabel.textColor = .black
         stressedLabel.font = UIFont.systemFont(ofSize: 12)
-        stressedLabel.textAlignment = .left
+        stressedLabel.textAlignment = .right
         stackView.addArrangedSubview(stressedLabel)
 
         let stressedColorView = UIView()
@@ -69,6 +72,7 @@ class HalfCircleChartAlertViewController: UIViewController {
         stressedColorView.layer.cornerRadius = 6 // To make the small square view rounded
         stackView.addArrangedSubview(stressedColorView)
 
+        // Add joyful label and color view to the stack view
         let joyfulLabel = UILabel()
         joyfulLabel.text = "Joyful"
         joyfulLabel.textColor = .black
@@ -77,65 +81,26 @@ class HalfCircleChartAlertViewController: UIViewController {
         stackView.addArrangedSubview(joyfulLabel)
 
         let joyfulColorView = UIView()
-        joyfulColorView.backgroundColor = .green
+        joyfulColorView.backgroundColor = .systemGreen
         joyfulColorView.layer.cornerRadius = 6 // To make the small square view rounded
         stackView.addArrangedSubview(joyfulColorView)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
 
-        // Add percentage labels
-                let percentageFormatter = NumberFormatter()
-                percentageFormatter.numberStyle = .decimal
-                percentageFormatter.maximumFractionDigits = 1
-
-                let entries = [
-                    HalfPieChartEntry(value: 52.0, color: .red),
-                    HalfPieChartEntry(value: 49.0, color: .green)
-                ]
-                let totalValue = entries.reduce(0.0) { $0 + $1.value }
-
-                let stressedPercentage = (entries[0].value / totalValue) * 100.0
-                let joyfulPercentage = (entries[1].value / totalValue) * 100.0
-
-                let stressedPercentageLabel = UILabel()
-                stressedPercentageLabel.text = percentageFormatter.string(from: NSNumber(value: stressedPercentage))! + "%"
-                stressedPercentageLabel.textColor = .black
-                stressedPercentageLabel.font = UIFont.systemFont(ofSize: 12)
-                stressedPercentageLabel.textAlignment = .right
-                stackView.addArrangedSubview(stressedPercentageLabel)
-
-                let joyfulPercentageLabel = UILabel()
-                joyfulPercentageLabel.text = percentageFormatter.string(from: NSNumber(value: joyfulPercentage))! + "%"
-                joyfulPercentageLabel.textColor = .black
-                joyfulPercentageLabel.font = UIFont.systemFont(ofSize: 12)
-                joyfulPercentageLabel.textAlignment = .right
-                stackView.addArrangedSubview(joyfulPercentageLabel)
-
-    
-        // Add constraints to center the stack view in the main view
+        // Add constraints to center the stack view in the container view
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            stressedLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            joyfulLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            stressedColorView.widthAnchor.constraint(equalToConstant: 12),
-            joyfulColorView.widthAnchor.constraint(equalToConstant: 12),
-            stressedColorView.heightAnchor.constraint(equalToConstant: 12),
-            joyfulColorView.heightAnchor.constraint(equalToConstant: 12),
-            
-            stressedColorView.leadingAnchor.constraint(equalTo: stressedLabel.trailingAnchor, constant: 8),
-            joyfulColorView.leadingAnchor.constraint(equalTo: joyfulLabel.trailingAnchor, constant: 8)
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: halfPieChartView.bottomAnchor, constant: 16) // Add 16 points for spacing
         ])
-        
+
+        // Add constraints to keep the labels and color views aligned
+        NSLayoutConstraint.activate([
+            stressedLabel.trailingAnchor.constraint(equalTo: stressedColorView.leadingAnchor, constant: -8),
+            joyfulLabel.leadingAnchor.constraint(equalTo: joyfulColorView.trailingAnchor, constant: 8),
+            stressedColorView.widthAnchor.constraint(equalToConstant: 12),
+            stressedColorView.heightAnchor.constraint(equalToConstant: 12),
+            joyfulColorView.widthAnchor.constraint(equalToConstant: 12),
+            joyfulColorView.heightAnchor.constraint(equalToConstant: 12)
+        ])
     }
-
-
-    
-  
 }
-
- 
-
-

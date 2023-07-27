@@ -58,7 +58,7 @@ class HalfPieChartView: PieChartView {
                 percentageLabel.text = percentageText
                 percentageLabel.textColor = .black
                 percentageLabel.font = UIFont.systemFont(ofSize: 18)
-                percentageLabel.textAlignment = .left
+                percentageLabel.textAlignment = .right
                 percentageLabel.frame = CGRect(x: labelX - 60, y: labelY - 3, width: 60, height: 30)
                 addSubview(percentageLabel)
 

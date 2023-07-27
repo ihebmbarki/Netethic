@@ -96,6 +96,7 @@
 		87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */; };
 		87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */; };
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
+		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -227,6 +228,7 @@
 		87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircleChartView.swift; sourceTree = "<group>"; };
 		87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
+		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */,
 				87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */,
 				87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */,
+				87A8A5EE2A71544700AF631C /* TestChartViewController.swift */,
 			);
 			path = "Dashboard Module ";
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 				87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,
 				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,
+				87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,

@@ -1,15 +1,16 @@
-//
-//  Phone.swift
-//  4INSHIELD
-//
-//  Created by iheb mbarki on 14/3/2023.
+
 //
 
 import UIKit
 
-class Phone: UIViewController {
+class Phone: UIViewController{
+    
 
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var carteCollectionView: UICollectionView!
+    
+    
     
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -25,11 +26,14 @@ class Phone: UIViewController {
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
-    
+    let carteArray = ["aaaa", "bbbb", "gggg", "ddddd"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        //Registre Cell
+        self.carteCollectionView.register(UINib(nibName: "UsageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsageCollectionViewCell")
         
         // Side Menu Gestures
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
@@ -318,4 +322,22 @@ extension Phone: UIGestureRecognizerDelegate {
             break
         }
     }
+}
+
+
+extension Phone: UICollectionViewDelegate{
+    
+}
+
+extension Phone: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.carteArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let carteCell = carteCollectionView.dequeueReusableCell(withReuseIdentifier: "UsageCollectionViewCell", for: indexPath) as! UsageCollectionViewCell
+        carteCell.setData(text: self.carteArray[indexPath.row])
+        return carteCell
+    }
+    
 }

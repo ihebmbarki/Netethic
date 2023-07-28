@@ -91,7 +91,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
         
         // ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: username) { lastChildID in
         
-        ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: "moncomptedemo") { lastChildID in
+        ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: "asidiki") { lastChildID in
             print("Last child's ID is : \(lastChildID)")
             UserDefaults.standard.set(lastChildID, forKey: "childID")
         }

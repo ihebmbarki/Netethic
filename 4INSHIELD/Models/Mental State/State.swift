@@ -9,11 +9,16 @@ import Foundation
 
 struct State: Codable {
     let data: [StateData]
-    let statistic: [String: Double]
+    let statistic: Statistic
 }
 
 struct StateData: Codable {
     let child_id: String
-    let date: TimeInterval
+    let date: Double
     let mental_state: String
+}
+
+// MARK: - Statistic
+struct Statistic: Codable {
+    let happy, stress: Double
 }

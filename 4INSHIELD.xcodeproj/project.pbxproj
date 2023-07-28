@@ -89,6 +89,8 @@
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
 		870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */; };
 		870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */; };
+		8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */; };
+		8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */; };
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
 		8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875206292A6E7EDB00486C0C /* Assets.xcassets */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
@@ -221,6 +223,8 @@
 		78D92C8667F59481504B79D6 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
 		870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerAdd.swift; sourceTree = "<group>"; };
 		870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildResponseModelElement.swift; sourceTree = "<group>"; };
+		8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageCollectionViewCell.swift; sourceTree = "<group>"; };
+		8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsageCollectionViewCell.xib; sourceTree = "<group>"; };
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
 		875206292A6E7EDB00486C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 		04B2A60B29CB51A00028B7E2 /* Children Module */ = {
 			isa = PBXGroup;
 			children = (
+				8721A63B2A72AD51007FEA50 /* PhoneCell */,
 				049C154829DD85A80028A314 /* Add Child Informations */,
 				049C154929DD85E30028A314 /* ChildrenViewController.swift */,
 				049C154129DD83B70028A314 /* Children.storyboard */,
@@ -607,6 +612,15 @@
 				5D8BFCC8FD1EAEE4CA882CED /* Pods-4INSHIELD.release production.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8721A63B2A72AD51007FEA50 /* PhoneCell */ = {
+			isa = PBXGroup;
+			children = (
+				8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */,
+				8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */,
+			);
+			path = PhoneCell;
 			sourceTree = "<group>";
 		};
 		87CC77F22A5E09DA008FA7F8 /* Abstract */ = {
@@ -751,6 +765,7 @@
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
+				8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
@@ -819,6 +834,7 @@
 				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				872D05FA2A60923E0069E58A /* Userparent.swift in Sources */,
+				8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
 				04C604DC2A16595700FDFE8E /* State.swift in Sources */,

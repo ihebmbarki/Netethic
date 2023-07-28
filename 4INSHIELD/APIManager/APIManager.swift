@@ -81,7 +81,7 @@ class APIManager {
         let fetchConcernedRelationshipURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
         
         AF.request(fetchConcernedRelationshipURL, method: .get).response { response in
-            print(response.data!)
+//            print(response.data!)
             switch response.result {
             case .success:
                 if let data = response.data {
@@ -103,6 +103,7 @@ class APIManager {
             }
         }
     }
+    
     
     func fetchScore(forPlatform platform: String, childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (Int?) -> Void) {
         let urlString = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/"
@@ -200,10 +201,11 @@ class APIManager {
         }
     }
     
-    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([StateData]?) -> Void) {
+    func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
         let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
         
         AF.request(mentalStateURL, method: .get).response { response in
+            debugPrint(response)
             switch response.result {
             case .success(let data):
                 print("API response data:", data)
@@ -212,7 +214,7 @@ class APIManager {
                     do {
                         let decoder = JSONDecoder()
                         let state = try decoder.decode(State.self, from: data)
-                        let states = state.data
+                        let states = state
                         print("Decoded states:", states)
                         completion(states)
                     } catch {

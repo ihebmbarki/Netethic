@@ -74,8 +74,8 @@ class homeVC: KeyboardHandlingBaseVC, ChartViewDelegate {
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
     
-//    let childID = UserDefaults.standard.integer(forKey: "childID")
-    let childID = 2
+    let childID = UserDefaults.standard.integer(forKey: "childID")
+//    let childID = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -547,8 +547,13 @@ extension homeVC : SideBarDelegate {
             // À propos
             self.gotoScreen(storyBoardName: "Apropos", stbIdentifier: "AproposID")
 //        case 5:
-//            //Déconnexion
-//            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
+            //Déconnexion
+            // Clear UserDefaults
+            UserDefaults.standard.removeObject(forKey: "userSessionToken")
+            
+            // Navigate back to sign-in view controller
+            navigationController?.popToRootViewController(animated: true)
+            
         default:
             break
         }

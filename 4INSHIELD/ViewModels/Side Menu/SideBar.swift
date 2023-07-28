@@ -18,7 +18,7 @@ class SideBar: UIViewController {
     var delegate: SideBarDelegate?
     var defaultHighlightedCell: Int = 0
     
-    var menu = ["Paramètres","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
+    var menu = ["Modifier le profil du parent","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +28,11 @@ class SideBar: UIViewController {
         self.sideMenuTableView.dataSource = self
         self.sideMenuTableView.separatorStyle = .none
         
-//        // Set Highlighted Cell
-//        DispatchQueue.main.async {
-//            let defaultRow = IndexPath(row: self.defaultHighlightedCell, section: 0)
-//            self.sideMenuTableView.selectRow(at: defaultRow, animated: false, scrollPosition: .none)
-//        }
+        // Set Highlighted Cell
+        DispatchQueue.main.async {
+            let defaultRow = IndexPath(row: self.defaultHighlightedCell, section: 0)
+            self.sideMenuTableView.selectRow(at: defaultRow, animated: false, scrollPosition: .none)
+        }
         
         sideMenuTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
@@ -60,7 +60,7 @@ extension SideBar: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         self.delegate?.selectedCell(indexPath.row)
         
     }

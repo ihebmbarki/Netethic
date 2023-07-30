@@ -24,4 +24,8 @@ class ToxicPersonCollectionViewCell: UICollectionViewCell {
 //        cardLogo.contentMode = .scaleAspectFit
 
     }
+    func setData(text: String, image: String){
+        self.cardTitle.text = text
+        self.cardLogo.image = UIImage(named: image)
+    }
 }

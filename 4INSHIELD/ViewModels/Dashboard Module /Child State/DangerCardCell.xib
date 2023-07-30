@@ -17,14 +17,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="DangerCell" id="EX7-2Z-LGs" customClass="DangerCollectionViewCell" customModule="_INSHIELD_Development" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="142"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="qvB-DD-oWk">
-                <rect key="frame" x="0.0" y="0.0" width="150" height="142"/>
+                <rect key="frame" x="0.0" y="0.0" width="150" height="108"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="soX-uv-Byd">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="142"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBc-mB-cH1">
                                 <rect key="frame" x="8" y="67" width="116" height="20"/>

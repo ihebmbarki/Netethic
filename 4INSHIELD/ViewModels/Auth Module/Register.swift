@@ -159,7 +159,7 @@ class Register: KeyboardHandlingBaseVC {
         if selected == "Femme"{
             sexe = "F"
         }
-        let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe)
+        let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe, first_name: username, last_name: username)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
                // self.showAlert(message: str)

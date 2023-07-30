@@ -29,3 +29,20 @@ struct Profilee: Codable {
         case nbData = "nb_data"
     }
 }
+
+struct ScorePlateform: Codable {
+    let result: [ResultScore]
+}
+
+// MARK: - Result
+struct ResultScore: Codable {
+    let date: Double
+    let maxScorePlatform: String
+    let maxScore: Int
+
+    enum CodingKeys: String, CodingKey {
+        case date
+        case maxScorePlatform = "max_score_platform"
+        case maxScore = "max_score"
+    }
+}

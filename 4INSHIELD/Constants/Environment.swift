@@ -26,7 +26,7 @@ class BuildConfiguration {
     var WEBERVSER_BASE_URL: String {
         switch environment {
         case .debugStaging, .releaseStaging:
-            return "https://webserver.staging.4indata.fr/"
+            return "http://51.38.62.168:8017/"
         case .debugDevelopment, .releaseDevelopment:
             return "https://webserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:

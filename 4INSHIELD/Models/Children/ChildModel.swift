@@ -5,7 +5,7 @@
 //  Created by iheb mbarki on 27/3/2023.
 //
 
-struct ChildModel: Codable {
+struct ChildModel: Encodable {
     let first_name: String
     let last_name: String
     let birthday: String

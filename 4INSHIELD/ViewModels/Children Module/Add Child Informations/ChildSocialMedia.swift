@@ -88,13 +88,17 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
             print("Username not found")
             return
         }
+//        guard let childID = UserDefaults.standard.string(forKey: "childID")else {
+//            print("childID not found")
+//            return
+//        }
         
         // ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: username) { lastChildID in
         
-        ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: "asidiki") { lastChildID in
-            print("Last child's ID is : \(lastChildID)")
-            UserDefaults.standard.set(lastChildID, forKey: "childID")
-        }
+        //ApiManagerAdd.shareInstance1.getLastregistredChildID(withUsername: "asidiki") { lastChildID in
+            //print("Last child's ID is : \ChildID)")
+        //UserDefaults.standard.set(lastChildID, forKey: "childID")
+       // }
         
         let childID = UserDefaults.standard.integer(forKey: "childID")
         guard let mediaID = self.selectedSocialMediaID else {return}
@@ -127,6 +131,8 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
         //            }
         //
         //        }
+      
+        //pour retour
         AF.request(user_journey_url, method: .post, parameters: wizardParam, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
             .responseJSON(completionHandler: { (response) in
                 
@@ -174,12 +180,15 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
                             let jsonData = try JSONDecoder().decode(Profil.self, from: JSONSerialization.data(withJSONObject: data))
                             let alertController = UIAlertController(title: "Success", message: "Child social media added successfully!", preferredStyle: .alert)
                             let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                                self.dismiss(animated: true, completion: nil)
+                                //self.dismiss(animated: true, completion: nil)
+                                if let childrenListVC = UIStoryboard(name: "Children", bundle: nil).instantiateViewController(withIdentifier: "ChildrenListSB") as? ChildrenViewController {
+                                    self.present(childrenListVC, animated: true, completion: nil)
+                                }
                             }
                             alertController.addAction(okayAction)
                             self.present(alertController, animated: true, completion: nil)
                             print("good")
-                            self.platform()
+                           // self.platform()
                         } catch let error {
                             /// Handle json decode error
                             print(error)

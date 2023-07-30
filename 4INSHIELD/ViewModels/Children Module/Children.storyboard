@@ -17,7 +17,7 @@
         <!--Children View Controller-->
         <scene sceneID="he0-cD-Q6O">
             <objects>
-                <viewController storyboardIdentifier="ChildrenListSB" id="7ll-Og-AKn" customClass="ChildrenViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChildrenListSB" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7ll-Og-AKn" customClass="ChildrenViewController" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJY-yu-HLs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

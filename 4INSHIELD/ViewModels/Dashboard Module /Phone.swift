@@ -5,7 +5,7 @@ import UIKit
 
 class Phone: UIViewController{
     
-
+    
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
     
     @IBOutlet weak var carteCollectionView: UICollectionView!
@@ -26,12 +26,14 @@ class Phone: UIViewController{
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
     
-    let carteArray = ["aaaa", "bbbb", "gggg", "ddddd"]
+    let carteArray1 = ["7", "7", "4", "2"]
+    let imageArray = ["phone-time-card-orange", "phone-time-card-rouge", "phone-time-card-vert", "sleep-phone-time-rouge"]
+    let carteArray2 = ["DUBOIT passe beaucoup trop de temps sur son télephone", "DUBOIT ne dort pas bien", "", "Convenable"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         //Registre Cell
         self.carteCollectionView.register(UINib(nibName: "UsageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsageCollectionViewCell")
         
@@ -75,7 +77,7 @@ class Phone: UIViewController{
             self.SideBar.view.topAnchor.constraint(equalTo: view.topAnchor)
         ])
         // Default Main View Controller
-//        showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
+        //        showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
         
     }
     
@@ -110,21 +112,21 @@ extension Phone : SideBarDelegate {
         case 0:
             // Profile
             self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-//        case 1:
-//            // Autorisation d’accés
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 2:
-//            // Nous contacter
-//            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-//        case 3:
-//            // Mentions légales
-//            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
-//        case 4:
-//            // À propos
-//            self.showViewController(viewController: APropos.self, storyboardId: " ")
-//        case 5:
-//            //Déconnexion
-//            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
+            //        case 1:
+            //            // Autorisation d’accés
+            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+            //        case 2:
+            //            // Nous contacter
+            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+            //        case 3:
+            //            // Mentions légales
+            //            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
+            //        case 4:
+            //            // À propos
+            //            self.showViewController(viewController: APropos.self, storyboardId: " ")
+            //        case 5:
+            //            //Déconnexion
+            //            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
         default:
             break
         }
@@ -199,7 +201,7 @@ extension UIViewController {
     // With this extension you can access the MainViewController from the child view controllers.
     func revealViewController() -> Phone? {
         var viewController: UIViewController? = self
-
+        
         if viewController != nil && viewController is Phone {
             return viewController! as? Phone
         }
@@ -234,7 +236,7 @@ extension Phone: UIGestureRecognizerDelegate {
     
     // Dragging Side Menu
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
-                
+        
         let position: CGFloat = sender.translation(in: self.view).x
         let velocity: CGFloat = sender.velocity(in: self.view).x
         
@@ -326,17 +328,18 @@ extension Phone: UIGestureRecognizerDelegate {
 
 
 extension Phone: UICollectionViewDelegate{
+
     
 }
 
 extension Phone: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.carteArray.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let carteCell = carteCollectionView.dequeueReusableCell(withReuseIdentifier: "UsageCollectionViewCell", for: indexPath) as! UsageCollectionViewCell
-        carteCell.setData(text: self.carteArray[indexPath.row])
+        carteCell.setData(text: self.carteArray1[indexPath.row], image: self.imageArray[indexPath.row], phrase: self.carteArray2[indexPath.row])
         return carteCell
     }
     

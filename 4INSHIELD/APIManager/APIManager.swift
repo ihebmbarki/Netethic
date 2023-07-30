@@ -103,8 +103,6 @@ class APIManager {
             }
         }
     }
-    
-    
     func fetchScore(forPlatform platform: String, childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (Int?) -> Void) {
         let urlString = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/plateform/per_date/"
         let parameters: [String: Any] = [
@@ -132,6 +130,44 @@ class APIManager {
         }
     }
     
+    func fetchScorePlatform(childID: Int, startDateTimestamp: Int, endDateTimestamp: Int, completion: @escaping (ScorePlateform?) -> Void) {
+        let baseURL = BuildConfiguration.shared.MLENGINE_BASE_URL
+        let endpoint = "/api/score/max-score-platform/per-date/"
+        let urlString = baseURL + endpoint
+        
+        let parameters: [String: Any] = [
+            "person_id": childID,
+            "from_date_timestamp": startDateTimestamp,
+            "to_date_timestamp": endDateTimestamp,
+            "rule_name": "toxicity_rule"
+        ]
+        
+        AF.request(urlString, method: .get, parameters: parameters, encoding: URLEncoding.queryString).response { response in
+            debugPrint(response)
+            switch response.result {
+            case .success(let data):
+                print("API response data:", data)
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let scorePlateform = try decoder.decode(ScorePlateform.self, from: data)
+                        let score = scorePlateform // Assurez-vous que scorePlateform est bien de type scorePlateform
+                        print("Decoded scoreResponse:", score)
+                        completion(score)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
     
     func fetchPlatforms(forPerson childID: Int, completion: @escaping (Platform?) -> Void) {
         var platforms: Platform?
@@ -155,23 +191,23 @@ class APIManager {
         }
     }
     
-    func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
-        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
-        
-        AF.request(url, method: .get).response { response in
-            switch response.result {
-            case .success(let data):
-                if let data = data, let maxScoreData = try? JSONDecoder().decode([String: Int].self, from: data) {
-                    completion(maxScoreData)
-                } else {
-                    completion(nil)
-                }
-            case .failure(let error):
-                print("Error fetching maximum score data: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
-    }
+//    func getMaxScorePerDate(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping ([String: Int]?) -> Void) {
+//        let url = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/max-score-platform/per-date/\(startDateTimestamp)/\(endDateTimestamp)/\(childID)/toxicity_rule"
+//        
+//        AF.request(url, method: .get).response { response in
+//            switch response.result {
+//            case .success(let data):
+//                if let data = data, let maxScoreData = try? JSONDecoder().decode([String: Int].self, from: data) {
+//                    completion(maxScoreData)
+//                } else {
+//                    completion(nil)
+//                }
+//            case .failure(let error):
+//                print("Error fetching maximum score data: \(error.localizedDescription)")
+//                completion(nil)
+//            }
+//        }
+//    }
     
     func getMentalStateForChart(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
         let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
@@ -200,36 +236,37 @@ class APIManager {
             }
         }
     }
-    
+  
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
-        let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)&start_date=\(startDateTimestamp)&end_date=\(endDateTimestamp)"
-        
-        AF.request(mentalStateURL, method: .get).response { response in
-            debugPrint(response)
-            switch response.result {
-            case .success(let data):
-                print("API response data:", data)
-                
-                if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        let state = try decoder.decode(State.self, from: data)
-                        let states = state
-                        print("Decoded states:", states)
-                        completion(states)
-                    } catch {
-                        print("Error decoding data:", error)
-                        completion(nil)
-                    }
-                } else {
-                    completion(nil)
-                }
-            case .failure(let error):
-                print("Error fetching data: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
-    }
+           let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)"
+           
+           AF.request(mentalStateURL, method: .get).response { response in
+               debugPrint(response)
+               switch response.result {
+               case .success(let data):
+                   print("API response data:", data)
+                   
+                   if let data = data {
+                       do {
+                           let decoder = JSONDecoder()
+                           let state = try decoder.decode(State.self, from: data)
+                           let states = state
+                           print("Decoded states:", states)
+                           completion(states)
+                       } catch {
+                           print("Error decoding data:", error)
+                           completion(nil)
+                       }
+                   } else {
+                       completion(nil)
+                   }
+               case .failure(let error):
+                   print("Error fetching data: \(error.localizedDescription)")
+                   completion(nil)
+               }
+           }
+       }
+
     
     func getScore(completion: @escaping (Score?) -> Void) {
         AF.request(user_score, method: .get).response { response in

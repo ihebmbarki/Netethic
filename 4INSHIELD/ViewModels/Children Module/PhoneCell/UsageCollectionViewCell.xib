@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,15 +21,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="168"/>
                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lo-8s-h1K">
-                        <rect key="frame" x="79.333333333333329" y="74" width="41.333333333333329" height="20.333333333333329"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lo-8s-h1K">
+                        <rect key="frame" x="87.666666666666671" y="59" width="25" height="50.333333333333343"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="43"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5i-iJ-zK3">
-                        <rect key="frame" x="79" y="131" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5i-iJ-zK3">
+                        <rect key="frame" x="8" y="140" width="183" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF0-bv-J5h">
+                        <rect key="frame" x="155" y="46" width="30" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="W88-Ea-fjw"/>
+                            <constraint firstAttribute="height" constant="30" id="z9q-nu-8w7"/>
+                        </constraints>
+                        <color key="tintColor" name="FailureColorChart"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="i">
+                            <fontDescription key="titleFontDescription" type="system" pointSize="30"/>
+                        </buttonConfiguration>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rQ-GS-hRM">
+                        <rect key="frame" x="111" y="76" width="21" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,11 +57,16 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="iY2-dv-LRn" firstAttribute="top" secondItem="ZF0-bv-J5h" secondAttribute="bottom" constant="-76" id="45B-bT-MuG"/>
                 <constraint firstItem="iY2-dv-LRn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5HE-Hu-w6r"/>
+                <constraint firstItem="ZF0-bv-J5h" firstAttribute="leading" secondItem="iY2-dv-LRn" secondAttribute="trailing" constant="-45" id="ENx-ed-sW5"/>
+                <constraint firstAttribute="trailing" secondItem="y5i-iJ-zK3" secondAttribute="trailing" constant="9" id="Gfq-LT-pXP"/>
                 <constraint firstAttribute="bottom" secondItem="y5i-iJ-zK3" secondAttribute="bottom" constant="16" id="Veh-UY-owE"/>
                 <constraint firstAttribute="trailing" secondItem="iY2-dv-LRn" secondAttribute="trailing" id="cLw-yX-o69"/>
+                <constraint firstItem="iY2-dv-LRn" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="hCT-6O-F93"/>
                 <constraint firstItem="y5i-iJ-zK3" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hHA-Rs-W8J"/>
                 <constraint firstItem="iY2-dv-LRn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hPs-GK-EtM"/>
+                <constraint firstItem="y5i-iJ-zK3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="kiy-fK-ulH"/>
                 <constraint firstItem="3Lo-8s-h1K" firstAttribute="centerX" secondItem="iY2-dv-LRn" secondAttribute="centerX" id="tJ5-3c-CMD"/>
                 <constraint firstAttribute="bottom" secondItem="iY2-dv-LRn" secondAttribute="bottom" id="uvC-Jx-Ped"/>
                 <constraint firstItem="3Lo-8s-h1K" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="xZa-Xo-e16"/>
@@ -49,12 +75,17 @@
             <connections>
                 <outlet property="carteImage" destination="iY2-dv-LRn" id="6E2-NJ-M7h"/>
                 <outlet property="descriptionLabel" destination="y5i-iJ-zK3" id="haS-4z-1jg"/>
+                <outlet property="divLabel" destination="5rQ-GS-hRM" id="5RG-zC-MGi"/>
+                <outlet property="informationButton" destination="ZF0-bv-J5h" id="UYu-Zb-1Vt"/>
                 <outlet property="numberLabel" destination="3Lo-8s-h1K" id="0GZ-h0-ypv"/>
             </connections>
-            <point key="canvasLocation" x="296.94656488549617" y="-6.3380281690140849"/>
+            <point key="canvasLocation" x="296.18320610687022" y="-6.3380281690140849"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="sms-car-rouge" width="2134" height="1934"/>
+        <namedColor name="FailureColorChart">
+            <color red="0.86299997568130493" green="0.32899999618530273" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

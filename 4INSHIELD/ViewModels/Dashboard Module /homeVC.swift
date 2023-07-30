@@ -24,6 +24,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     // Declare a property to store the states array
     var state: State?
     var states: [StateData] = []
+    var score: [ScoreResponse] = []
     var sharedImage: UIImage?
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
@@ -102,6 +103,11 @@ class homeVC: UIViewController, ChartViewDelegate {
             moyenneButton.clipsToBounds = true
         }
     }
+    @IBOutlet weak var personneImage3Label: UILabel!
+    @IBOutlet weak var personneImage2Label: UILabel!
+    @IBOutlet weak var personneImage4Label: UILabel!
+    @IBOutlet weak var personneImage1Label: UILabel!
+    
     let pieChartView = PieChartView()
     
     override func viewDidLoad() {
@@ -114,9 +120,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         missingDataLbl.isHidden = true
         
         //Humor pie chart
-        APIManager.shareInstance.getMentalStateForChart(childID:7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedState in
+        APIManager.shareInstance.getMentalState(childID:7, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
             guard let self = self else { return }
-            
+
             print("state:", fetchedState)
 
                         
@@ -147,13 +153,13 @@ class homeVC: UIViewController, ChartViewDelegate {
             
             // Call the API to fetch the profile image URL
             let username = UserDefaults.standard.string(forKey: "username")!
-            APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
+            APIManager.shareInstance.fetchProfileImageURL(forUsername: "asidiki") { [weak self] imageURL in
                 guard let self = self else { return }
                 
                 if let imageURL = imageURL {
                     URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
                         if let error = error {
-                            print("Error fetching image data: \(error.localizedDescription)")
+                                  print("Error fetching image data: \(error.localizedDescription)")
                             return
                         }
                         
@@ -283,8 +289,8 @@ class homeVC: UIViewController, ChartViewDelegate {
                         }
                     }.resume()
                 }
+                
             }
-            
             
             // Add target action to child button
             childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
@@ -332,13 +338,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         
         updateLocalizedStrings()
         updateLanguageButtonImage()
-        getMentalState()
-        
     }
     
-    func getMentalState() {
+    func getMentalState(startDateT: Int, endDateT: Int) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: 1664367856, endDateTimestamp: 1665145456) { [weak self] fetchedStates in
+        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
             guard let self = self else { return }
             
             print("states:", fetchedStates)
@@ -347,14 +351,45 @@ class homeVC: UIViewController, ChartViewDelegate {
                 self.states = fetchedStates.data
                 self.days = states.map { $0.date}
             }
-            print("mehdi")
+            print("amal")
+             print(fetchedStates?.data.count)
             print(days)
             print(fetchedStates?.statistic)
             self.state = fetchedStates
-            setupLineChart()
         }
     }
     
+    func getScorePlateform(startDateT: Int, endDateT: Int) {
+        // Call the fetchScore function to fetch the score data
+        APIManager.shareInstance.fetchScorePlatform(childID: 7, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
+            print(fetchedScore?.result)
+            var listeDates: [Double] = []
+            var listeMaxScore: [Int] = []
+            for element in fetchedScore?.result ?? [] {
+                listeDates.append(element.date)
+                listeMaxScore.append(element.maxScore)
+            }
+            self?.setupLineChart(listeDates: listeDates, listeMaxScore: listeMaxScore)
+// Store the fetched score data in the property (assuming the score property is of type ScoreResponse)
+//            self.score = scoreData
+            
+            // Assuming the globalScore from ScoreResponse is the data you want to store in days
+//            self.days = scoreData.globalScore
+            
+            // Now you can access the stored score and days properties
+//            print("Score:", self.score)
+//            print("Days:", self.days)
+            
+            // Continue with any other operations using the fetched data
+            // ...
+        }
+        
+    }
+
+
+
+
+
     
     
     @objc func childButtonTapped() {
@@ -385,22 +420,22 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     
     
-    // harcelemnt de actuel
-    func setupLineChart() {
-        let formattedDates = self.days.formatTimestampsToStrings(dateFormat: "yyyy-MM-dd")
+    // hacrcelemnt de actuel
+    func setupLineChart(listeDates: [Double]?, listeMaxScore: [Int]?) {
+        let formattedDates = listeDates?.formatTimestampsToStrings(dateFormat: "yyyy-MM-dd")
         print(formattedDates)
 //        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-        var percentages = [Int]()
+//        var percentages = [Int]()
 
-        for i in 0...formattedDates.count {
-            percentages .append(i)
-        }
+//        for i in 0...formattedDates.count {
+//            percentages .append(i)
+//        }
         
         
         // Create chart entries
         var dataEntries: [ChartDataEntry] = []
-        for i in 0..<formattedDates.count {
-            let dataEntry = ChartDataEntry(x: Double(i), y: Double(percentages[i]))
+        for i in 0..<(formattedDates?.count ?? 0) {
+            let dataEntry = ChartDataEntry(x: Double(i), y: Double(listeMaxScore?[i] ?? 0))
             dataEntries.append(dataEntry)
         }
         
@@ -430,13 +465,14 @@ class homeVC: UIViewController, ChartViewDelegate {
             lineChartView.data = data
             
             // Customize chart appearance
-            lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: formattedDates)
-            lineChartView.xAxis.granularity = 1
+            lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: formattedDates ?? [])
             lineChartView.xAxis.labelPosition = .bottom
             lineChartView.rightAxis.enabled = false
-            lineChartView.leftAxis.axisMaximum = 50
-            lineChartView.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
-            lineChartView.leftAxis.granularity = 10 // Étape de 10 pour les étiquettes de l'axe Y
+            lineChartView.leftAxis.axisMaximum = 1.2
+            lineChartView.leftAxis.axisMinimum = 0
+
+//            lineChartView.leftAxis.labelCount = 11 // Afficher 11 étiquettes sur l'axe Y
+            lineChartView.leftAxis.granularity = 0.2 // Étape de 10 pour les étiquettes de l'axe Y
             lineChartView.legend.enabled = false // Supprimer la légende
             lineChartView.xAxis.drawGridLinesEnabled = false // Supprimer les lignes verticales
             lineChartView.backgroundColor = .white
@@ -556,7 +592,23 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
-        //personsCollectionView.isHidden = false
+        personsCollectionView.isHidden = false
+                
+        // Call the API to fetch toxic persons
+        APIManager.shareInstance.fetchToxicPersons(forPerson: 7) { pseudos in
+            if let pseudos = pseudos {
+                // Update your toxic pseudos array
+                self.toxicPseudos = pseudos
+                
+                                
+                // Reload the collection view to reflect the changes
+                self.personsCollectionView.reloadData()
+            } else {
+                print("No toxic persons data")
+                self.missingDataLbl.isHidden = false
+            }
+        }
+
     }
     
     
@@ -981,7 +1033,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: 7, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -1011,6 +1063,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
+            
+            let carteCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as! ToxicPersonCollectionViewCell
+            carteCell.setData(text: self.toxicPseudos[indexPath.row], image: self.toxicPseudos[indexPath.row])
+            return carteCell
             
             // Set the image to the cardLogo image view
             //            if let image = sharedImage {
@@ -1074,9 +1130,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            // Return the count of the stored states
-            //            return states.count
-            return 10
+            return state?.data.count ?? 0
+          // return 10
         }
         
         return 0
@@ -1084,8 +1139,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
     
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
-        // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        // Call the getMentalState function to fetch the mental state data`
+        
+        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: 1627650500, endDateTimestamp: 1690722500) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states?.data {
@@ -1143,29 +1199,33 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 }
             }
         }
+        print(startDateTimestamp)
+        print(endDateTimestamp)
         
-        // Call the getMaxScoresPerDate function with the parameters
-        APIManager.shareInstance.getMaxScorePerDate(childID: childID, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
-            // Process and handle the maxScoresData as needed
-            
-            // Pass the processed maxScoresData and dates to the completion handler
-            completion(maxScoresData, dates)
+        getScorePlateform(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
+        getMentalState(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
+//        // Call the getMaxScoresPerDate function with the parameters
+//        APIManager.shareInstance.getMaxScorePerDate(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
+//            // Process and handle the maxScoresData as needed
+//
+//            // Pass the processed maxScoresData and dates to the completion handler
+//            completion(maxScoresData, dates)
             
             // Update the chart with the processed data
-            self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
-        }
+//            self.displayMaxScoresLineChart(maxScoresData: maxScoresData, dates: dates)
+//        }
     }
     
-    func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
-        var entries: [ChartDataEntry] = []
-        
-        for (index, date) in dates.enumerated() {
-            let score = maxScoresData?[date] ?? 0
-            let entry = ChartDataEntry(x: Double(index), y: Double(score))
-            entries.append(entry)
-        }
-        setupLineChart()
-    }
+//    func displayMaxScoresLineChart(maxScoresData: [String: Int]?, dates: [String]) {
+//        var entries: [ChartDataEntry] = []
+//
+//        for (index, date) in dates.enumerated() {
+//            let score = maxScoresData?[date] ?? 0
+//            let entry = ChartDataEntry(x: Double(index), y: Double(score))
+//            entries.append(entry)
+//        }
+//        setupLineChart()
+//    }
     
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {

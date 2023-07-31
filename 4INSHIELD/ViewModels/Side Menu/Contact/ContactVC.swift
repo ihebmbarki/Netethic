@@ -56,7 +56,7 @@ class ContactVC: UIViewController {
         //Set up message textfield
         messageTF.layer.borderWidth = 1
         messageTF.layer.borderColor = UIColor(red: 0.34, green: 0.35, blue: 0.90, alpha: 1.00).cgColor
-        messageTF.layer.cornerRadius = messageTF.frame.size.height/2
+        messageTF.layer.cornerRadius = 10
         messageTF.layer.masksToBounds = true
         messageTF.leftView = messagePaddingView
         messageTF.leftViewMode = .always
@@ -66,10 +66,43 @@ class ContactVC: UIViewController {
         sendBtn.layer.masksToBounds = true
     }
     
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    func resetFields() {
+        nameTF.text = ""
+        emailTF.text = ""
+        objectTF.text = ""
+        messageTF.text = ""
+    }
+
     @IBAction func sendBtnTapped(_ sender: Any) {
+        guard let name = self.nameTF.text,
+              let email = self.emailTF.text,
+              let object = self.objectTF.text,
+              let message = self.messageTF.text else { return }
+        
+        let contactForm = ContactForm(subject: object, message: message, username: name, email: email)
+        // Print the contactForm object before sending it
+            print("Contact Form Object: \(contactForm)")
+
+        APIManager.shareInstance.sendContactForm(contactForm: contactForm) { isSuccess, str in
+            if isSuccess {
+                // Successfully sent the contact form
+                self.showAlert(message: str)
+                // Optionally, you can reset the form fields here if needed
+                self.resetFields()
+            } else {
+                // Failed to send the contact form
+                self.showAlert(message: str)
+            }
+        }
     }
     
     @IBAction func backBtn(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
 }

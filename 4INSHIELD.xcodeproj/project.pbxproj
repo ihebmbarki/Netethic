@@ -99,6 +99,7 @@
 		87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */; };
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
+		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -233,6 +234,7 @@
 		87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
+		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCCFD2A77A2C400D0BBD3 /* Phone */,
 				87CC77F22A5E09DA008FA7F8 /* Abstract */,
 				04B91C1E2A32262400626AF2 /* Toxicity */,
 				04C604DA2A16591C00FDFE8E /* Mental State */,
@@ -621,6 +624,14 @@
 				8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */,
 			);
 			path = PhoneCell;
+			sourceTree = "<group>";
+		};
+		87ACCCFD2A77A2C400D0BBD3 /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */,
+			);
+			path = Phone;
 			sourceTree = "<group>";
 		};
 		87CC77F22A5E09DA008FA7F8 /* Abstract */ = {
@@ -899,6 +910,7 @@
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
 				04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */,
+				87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */,
 				041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */,
 				0469863229E6D78100D3CC5F /* Profile.swift in Sources */,
 				044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */,

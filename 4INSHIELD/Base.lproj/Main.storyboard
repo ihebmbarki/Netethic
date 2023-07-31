@@ -3734,10 +3734,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7t-J1-bi5">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="789"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="790.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-tb-IUT">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="757"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="758.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0y1-NF-2gU">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
@@ -3849,7 +3849,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7te-3l-GvL">
-                                                        <rect key="frame" x="0.0" y="573" width="393" height="184"/>
+                                                        <rect key="frame" x="0.0" y="573" width="393" height="185.66666666666663"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vz9-h3-9C6">
                                                                 <rect key="frame" x="208" y="8" width="177" height="40"/>
@@ -3863,7 +3863,7 @@
                                                                         <fragment content="Mot de passe oublié ?">
                                                                             <attributes>
                                                                                 <color key="NSBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <color key="NSColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <color key="NSColor" red="0.2941176593" green="0.3058823645" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                 <font key="NSFont" size="18" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                 <integer key="NSUnderline" value="1"/>
@@ -3892,28 +3892,30 @@
                                                                     <action selector="SignInBtnTapped:" destination="bd8-Gt-Knd" eventType="touchUpInside" id="38I-pv-3hv"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="H6k-p3-Z6F">
-                                                                <rect key="frame" x="305.66666666666669" y="132" width="75.333333333333314" height="33.333333333333343"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6k-p3-Z6F">
+                                                                <rect key="frame" x="253" y="132" width="128" height="35"/>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" titleAlignment="automatic">
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Button">
                                                                     <attributedString key="attributedTitle">
                                                                         <fragment content="Inscrivez-vous">
                                                                             <attributes>
-                                                                                <font key="NSFont" size="8" name="Helvetica"/>
+                                                                                <color key="NSBackgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <color key="NSColor" red="0.2941176593" green="0.3058823645" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                <font key="NSFont" size="20" name="Helvetica"/>
                                                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                 <integer key="NSUnderline" value="1"/>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
-                                                                </buttonConfiguration>
+                                                                </state>
                                                                 <connections>
                                                                     <action selector="signUpBtn:" destination="bd8-Gt-Knd" eventType="touchUpInside" id="ey7-Nn-3Ro"/>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous n'avez pas de compte ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzG-bu-mda">
-                                                                <rect key="frame" x="16" y="139.33333333333337" width="211.33333333333334" height="18.666666666666657"/>
+                                                                <rect key="frame" x="16" y="140.33333333333337" width="211.33333333333334" height="18.666666666666657"/>
                                                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="16"/>
                                                                 <color key="textColor" red="0.13725490200000001" green="0.20392156859999999" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -3934,7 +3936,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggv-OS-779">
-                                                        <rect key="frame" x="0.0" y="777" width="393" height="42"/>
+                                                        <rect key="frame" x="0.0" y="778.66666666666663" width="393" height="42"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="UpQ-TF-J38"/>
                                                         </constraints>
@@ -3946,7 +3948,7 @@
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnY-8J-tuF">
-                                                        <rect key="frame" x="0.0" y="757" width="393" height="42"/>
+                                                        <rect key="frame" x="0.0" y="758.66666666666663" width="393" height="42"/>
                                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="9BK-a0-IqC"/>

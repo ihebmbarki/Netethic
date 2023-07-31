@@ -15,8 +15,8 @@
 "Login" = "Connexion";
 "text_register" = "Vous n'avez pas de compte ?";
 "register" = "Inscrivez-vous";
-"google_connect" = "Se connecter avec Google";
-"fb" = "Se connecter avec Facebook";
+"google_connect" = "Connexion avec Google";
+"fb" = "Connexion avec Facebook";
 
 //MARK: Register
 "your_username" = "Nom d'utilisateur";
@@ -24,7 +24,7 @@
 "re_type_password" = "Retaper le mot de passe";
 "sign_up" = "S'inscrire";
 "text_login" = "Vous avez un compte ?";
-"Login" = "Connectez-vous";
+"Login" = "Connexion";
 "signup_google" = "S'inscrire avec Google";
 "signup_facebook" = "S'inscrire avec Facebook";
 

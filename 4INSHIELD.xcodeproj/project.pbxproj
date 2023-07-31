@@ -91,6 +91,14 @@
 		870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */; };
 		8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */; };
 		8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */; };
+		872963FC2A77D4AA009649B3 /* AproposVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872963FA2A77D4AA009649B3 /* AproposVC.swift */; };
+		872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872963FB2A77D4AA009649B3 /* Apropos.storyboard */; };
+		872964012A77D4C3009649B3 /* AutorisationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872963FF2A77D4C3009649B3 /* AutorisationVC.swift */; };
+		872964022A77D4C3009649B3 /* Autorisation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872964002A77D4C3009649B3 /* Autorisation.storyboard */; };
+		872964062A77D4CF009649B3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872964042A77D4CF009649B3 /* Contact.storyboard */; };
+		872964072A77D4CF009649B3 /* ContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872964052A77D4CF009649B3 /* ContactVC.swift */; };
+		8729640B2A77D4FC009649B3 /* LegalMentionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872964092A77D4FC009649B3 /* LegalMentionVC.swift */; };
+		8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8729640A2A77D4FC009649B3 /* LegalMention.storyboard */; };
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
 		8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875206292A6E7EDB00486C0C /* Assets.xcassets */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
@@ -226,6 +234,14 @@
 		870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildResponseModelElement.swift; sourceTree = "<group>"; };
 		8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsageCollectionViewCell.xib; sourceTree = "<group>"; };
+		872963FA2A77D4AA009649B3 /* AproposVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AproposVC.swift; sourceTree = "<group>"; };
+		872963FB2A77D4AA009649B3 /* Apropos.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Apropos.storyboard; sourceTree = "<group>"; };
+		872963FF2A77D4C3009649B3 /* AutorisationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutorisationVC.swift; sourceTree = "<group>"; };
+		872964002A77D4C3009649B3 /* Autorisation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Autorisation.storyboard; sourceTree = "<group>"; };
+		872964042A77D4CF009649B3 /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
+		872964052A77D4CF009649B3 /* ContactVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactVC.swift; sourceTree = "<group>"; };
+		872964092A77D4FC009649B3 /* LegalMentionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalMentionVC.swift; sourceTree = "<group>"; };
+		8729640A2A77D4FC009649B3 /* LegalMention.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LegalMention.storyboard; sourceTree = "<group>"; };
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
 		875206292A6E7EDB00486C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
@@ -494,6 +510,10 @@
 		04A52E0B29C206860097C145 /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
+				872964082A77D4FC009649B3 /* LegalMentions */,
+				872964032A77D4CF009649B3 /* Contact */,
+				872963FE2A77D4C3009649B3 /* Autorisation */,
+				872963F92A77D4AA009649B3 /* Apropos */,
 				04A52E0C29C206A00097C145 /* SideBar.swift */,
 				04A52E1029C20A3F0097C145 /* SideMenuModel.swift */,
 			);
@@ -624,6 +644,42 @@
 				8721A63D2A72ADF3007FEA50 /* UsageCollectionViewCell.xib */,
 			);
 			path = PhoneCell;
+			sourceTree = "<group>";
+		};
+		872963F92A77D4AA009649B3 /* Apropos */ = {
+			isa = PBXGroup;
+			children = (
+				872963FA2A77D4AA009649B3 /* AproposVC.swift */,
+				872963FB2A77D4AA009649B3 /* Apropos.storyboard */,
+			);
+			path = Apropos;
+			sourceTree = "<group>";
+		};
+		872963FE2A77D4C3009649B3 /* Autorisation */ = {
+			isa = PBXGroup;
+			children = (
+				872963FF2A77D4C3009649B3 /* AutorisationVC.swift */,
+				872964002A77D4C3009649B3 /* Autorisation.storyboard */,
+			);
+			path = Autorisation;
+			sourceTree = "<group>";
+		};
+		872964032A77D4CF009649B3 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				872964042A77D4CF009649B3 /* Contact.storyboard */,
+				872964052A77D4CF009649B3 /* ContactVC.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		872964082A77D4FC009649B3 /* LegalMentions */ = {
+			isa = PBXGroup;
+			children = (
+				872964092A77D4FC009649B3 /* LegalMentionVC.swift */,
+				8729640A2A77D4FC009649B3 /* LegalMention.storyboard */,
+			);
+			path = LegalMentions;
 			sourceTree = "<group>";
 		};
 		87ACCCFD2A77A2C400D0BBD3 /* Phone */ = {
@@ -768,9 +824,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				872964022A77D4C3009649B3 /* Autorisation.storyboard in Resources */,
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
+				872964062A77D4CF009649B3 /* Contact.storyboard in Resources */,
+				872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
 				8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
@@ -778,6 +837,7 @@
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
+				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
@@ -851,6 +911,7 @@
 				04C604DC2A16595700FDFE8E /* State.swift in Sources */,
 				04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */,
 				049FD9AB29BF705D00DCD577 /* LanguageManager.swift in Sources */,
+				8729640B2A77D4FC009649B3 /* LegalMentionVC.swift in Sources */,
 				049C154A29DD85E30028A314 /* ChildrenViewController.swift in Sources */,
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
@@ -883,6 +944,7 @@
 				043557FD29AE377700D4F012 /* RegisterModel.swift in Sources */,
 				041910C129C8BAF800C9D17D /* Environment.swift in Sources */,
 				04A52E1129C20A3F0097C145 /* SideMenuModel.swift in Sources */,
+				872963FC2A77D4AA009649B3 /* AproposVC.swift in Sources */,
 				04340B2129C09B610055B394 /* SocialMedia.swift in Sources */,
 				043557FA29AE35B900D4F012 /* Constant.swift in Sources */,
 				87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */,
@@ -891,6 +953,7 @@
 				87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */,
 				04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
+				872964012A77D4C3009649B3 /* AutorisationVC.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
 				049531432A12847C00C610AD /* Score.swift in Sources */,
 				870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */,
@@ -915,6 +978,7 @@
 				0469863229E6D78100D3CC5F /* Profile.swift in Sources */,
 				044BB27F2A2E5AAD0008B143 /* UserProfileResponse.swift in Sources */,
 				0479739629CC922C00FD28DF /* ChildSocialMedia.swift in Sources */,
+				872964072A77D4CF009649B3 /* ContactVC.swift in Sources */,
 				04B2A60D29CB52250028B7E2 /* ChildProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

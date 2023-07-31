@@ -27,7 +27,7 @@
 "AnP-iP-gr1.placeholder" = "Email";
 
 /* Class = "UIButton"; configuration.title = "Connectez-vous"; ObjectID = "ECl-ri-KQW"; */
-"ECl-ri-KQW.configuration.title" = "Connectez-vous";
+"ECl-ri-KQW.configuration.title" = "Connexion";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ECl-ri-KQW"; */
 "ECl-ri-KQW.normalTitle" = "Button";

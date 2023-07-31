@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--AproposVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AproposID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="AproposVC" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVx-6b-f1v">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJb-tQ-AHT">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="870"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ceh-Ku-dgc">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="870"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-Uk-z9c">
+                                                        <rect key="frame" x="1" y="0.0" width="391" height="120"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="jcV-J6-Qey">
+                                                                <rect key="frame" x="-21" y="-104" width="432" height="230"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLX-gS-ndQ">
+                                                                <rect key="frame" x="14" y="55" width="25" height="25"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system">
+                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="backBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qez-ie-AWJ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="À propos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOL-HR-Uis">
+                                                                <rect key="frame" x="53" y="52" width="82" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="120" id="NQt-kN-hiY"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8kr-uA-scB">
+                                                        <rect key="frame" x="21.666666666666657" y="130" width="350" height="740"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à propos de nous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrZ-LL-Pnq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="20" id="l2U-Fu-Ozi"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                <color key="textColor" name="AccentColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Onl-GD-bkF">
+                                                                <rect key="frame" x="0.0" y="25" width="327" height="190"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="190" id="51C-9a-M7u"/>
+                                                                    <constraint firstAttribute="width" constant="327" id="XAw-aN-bOM"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="I8K-9N-a3L">
+                                                                <rect key="frame" x="0.0" y="220" width="328" height="160"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="328" id="J2e-jx-CJQ"/>
+                                                                    <constraint firstAttribute="height" constant="160" id="RWQ-vi-7e8"/>
+                                                                </constraints>
+                                                                <string key="text">NETETHIC est un logiciel breveté qui protège les enfants et les adolescents dans l'espace numérique. Il s’agit d’une solution innovante qui aide à détecter la cyberintimidation et le cyberharcèlement dès les premiers signes. Le but est de rendre Internet plus sûr et d’en faire un meilleur espace de navigation. Tout en fonctionnant sur les réseaux sociaux publics de vos enfant, NETETHIC peut être intégré à leur téléphone portable ou à leur tablette. L’application respecte la vie privée des enfants en gardant confidentielles toutes les informations toxiques communiquées. Comment ça marche?</string>
+                                                                <color key="textColor" red="0.0078431372549019607" green="0.039215686274509803" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nos algorithmes" translatesAutoresizingMaskIntoConstraints="NO" id="rfO-vz-W7I">
+                                                                <rect key="frame" x="0.0" y="385" width="350" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="mpz-oe-8eQ"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="o9e-v5-G9E">
+                                                                <rect key="frame" x="0.0" y="440" width="340" height="60"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="340" id="cQw-ay-Jc8"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="ya0-VR-OJT"/>
+                                                                </constraints>
+                                                                <string key="text">Nos algorithmes de compréhension de contenu détectent les signaux de harcèlement faibles et analysent le contenu Web de l'enfant en temps réel.</string>
+                                                                <color key="textColor" red="0.0078431372550000003" green="0.039215686270000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rapport" translatesAutoresizingMaskIntoConstraints="NO" id="daL-0x-TkD">
+                                                                <rect key="frame" x="0.0" y="505" width="350" height="50"/>
+                                                            </imageView>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="31P-So-l57">
+                                                                <rect key="frame" x="0.0" y="560" width="328" height="60"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="vrs-PK-Yxi"/>
+                                                                    <constraint firstAttribute="width" constant="328" id="ygg-2O-Kfs"/>
+                                                                </constraints>
+                                                                <string key="text">Nous vous fournissons des rapports réguliers sur les activités numériques de vos enfants (ex. qualité du sommeil, état de santé mentale, possibilité de géolocalisation, etc.) </string>
+                                                                <color key="textColor" red="0.0078431372550000003" green="0.039215686270000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-xD-P9c">
+                                                                <rect key="frame" x="0.0" y="625" width="350" height="50"/>
+                                                            </imageView>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="En cas de problème, les parents reçoivent une notification lorsque des conditions d'alerte sont détectées." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lv5-gQ-eNX">
+                                                                <rect key="frame" x="0.0" y="680" width="328" height="60"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" id="f8G-S7-6bT"/>
+                                                                    <constraint firstAttribute="width" constant="328" id="oks-pn-owe"/>
+                                                                </constraints>
+                                                                <color key="textColor" red="0.0078431372550000003" green="0.039215686270000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="xxr-xD-P9c" firstAttribute="height" secondItem="rfO-vz-W7I" secondAttribute="height" id="NMA-WR-kWl"/>
+                                                            <constraint firstItem="daL-0x-TkD" firstAttribute="height" secondItem="rfO-vz-W7I" secondAttribute="height" id="mAy-2R-Oaa"/>
+                                                            <constraint firstAttribute="width" constant="350" id="wwU-Cm-HlW"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Ceh-Ku-dgc" firstAttribute="top" secondItem="tJb-tQ-AHT" secondAttribute="top" id="YM2-j1-ssf"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ceh-Ku-dgc" secondAttribute="trailing" id="f8r-DB-Rae"/>
+                                            <constraint firstItem="Ceh-Ku-dgc" firstAttribute="width" secondItem="tJb-tQ-AHT" secondAttribute="width" id="rcx-uS-P4I"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ceh-Ku-dgc" secondAttribute="bottom" id="vdW-qE-lhz"/>
+                                            <constraint firstItem="Ceh-Ku-dgc" firstAttribute="leading" secondItem="tJb-tQ-AHT" secondAttribute="leading" id="voK-pL-5WL"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tJb-tQ-AHT" firstAttribute="width" secondItem="vVx-6b-f1v" secondAttribute="width" id="07Y-TX-CVV"/>
+                                    <constraint firstAttribute="bottom" secondItem="tJb-tQ-AHT" secondAttribute="bottom" id="NqM-M7-Gki"/>
+                                    <constraint firstItem="tJb-tQ-AHT" firstAttribute="leading" secondItem="vVx-6b-f1v" secondAttribute="leading" id="WB2-M0-4VV"/>
+                                    <constraint firstItem="tJb-tQ-AHT" firstAttribute="top" secondItem="vVx-6b-f1v" secondAttribute="top" id="Zbx-8S-1bA"/>
+                                    <constraint firstAttribute="trailing" secondItem="tJb-tQ-AHT" secondAttribute="trailing" id="pTc-OS-ypx"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="CFk-zi-pii"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="fCX-2R-vfi"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vVx-6b-f1v" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="95p-Yx-A8X"/>
+                            <constraint firstItem="vVx-6b-f1v" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="KcM-Q5-4z8"/>
+                            <constraint firstAttribute="bottom" secondItem="vVx-6b-f1v" secondAttribute="bottom" id="ctX-va-tZX"/>
+                            <constraint firstAttribute="trailing" secondItem="vVx-6b-f1v" secondAttribute="trailing" id="qLK-oH-8NR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Now-yh-a1C"/>
+                    <connections>
+                        <outlet property="PlayerView" destination="Onl-GD-bkF" id="jHL-6d-1uw"/>
+                        <outlet property="playerView" destination="Onl-GD-bkF" id="vrM-PE-vUv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956.48854961832058" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AbE-YK-Sif">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ZXq-Ul-KyN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o0D-cw-sFD">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="i31-c9-WED"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="18R-Tj-bBp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.770992366412212" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Nos algorithmes" width="2134" height="2134"/>
+        <image name="background" width="360" height="209"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="notification" width="2134" height="2134"/>
+        <image name="rapport" width="2134" height="2134"/>
+        <namedColor name="AccentColor">
+            <color red="0.33700001239776611" green="0.34900000691413879" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

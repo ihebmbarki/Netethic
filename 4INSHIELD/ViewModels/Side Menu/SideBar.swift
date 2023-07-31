@@ -13,14 +13,12 @@ protocol SideBarDelegate {
 
 class SideBar: UIViewController {
     
-    
     @IBOutlet weak var sideMenuTableView: UITableView!
     
     var delegate: SideBarDelegate?
     var defaultHighlightedCell: Int = 0
     
-    var menu = ["Modifier mon profil","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
-    
+    var menu = ["Modifier le profil du parent","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +35,7 @@ class SideBar: UIViewController {
         }
         
         sideMenuTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
     }
-    
 }
 
 // MARK: - UITableViewDelegate
@@ -50,14 +46,12 @@ extension SideBar: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource
-
 extension SideBar: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menu.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         
         cell.textLabel?.text = menu[indexPath.row]
         cell.textLabel?.textColor = UIColor(red: 0.14, green: 0.20, blue: 0.33, alpha: 1.00)
@@ -66,7 +60,7 @@ extension SideBar: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         self.delegate?.selectedCell(indexPath.row)
         
     }

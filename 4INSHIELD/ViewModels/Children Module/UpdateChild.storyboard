@@ -300,7 +300,7 @@
                                                                 </constraints>
                                                             </tableView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-sM-oSv">
-                                                                <rect key="frame" x="94" y="215" width="203" height="34.333333333333343"/>
+                                                                <rect key="frame" x="94" y="215" width="226" height="34.333333333333343"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="34.333333333333343" id="fTp-AZ-xEJ"/>
                                                                 </constraints>
@@ -314,7 +314,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="olC-Lv-Hxk">
-                                                                <rect key="frame" x="80" y="257" width="231" height="34.333333333333314"/>
+                                                                <rect key="frame" x="80" y="257" width="254" height="34.333333333333314"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="34.333333333333485" id="gAy-tu-uHE"/>
                                                                 </constraints>
@@ -501,7 +501,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3od-7x-XMI">
                                         <rect key="frame" x="25" y="181" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retapez le mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPY-Ax-mDy">
                                         <rect key="frame" x="25" y="228" width="343" height="20"/>
@@ -512,7 +512,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOh-8C-5Ip">
                                         <rect key="frame" x="25" y="253" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uEG-bu-A1y">
                                         <rect key="frame" x="5" y="300" width="383" height="42"/>

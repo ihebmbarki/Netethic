@@ -286,12 +286,12 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         guard let savedChildID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
-                self.PrenomTf.text = child.user.first_name
-                self.nomTf.text = child.user.last_name
+                self.PrenomTf.text = child.user?.first_name
+                self.nomTf.text = child.user?.last_name
                 
-                if child.user.gender == "M" {
+                if child.user!.gender == "M" {
                     self.maleRadioButton.isSelected = true
-                } else if child.user.gender == "F" {
+                } else if child.user!.gender == "F" {
                     self.femaleRadioButton.isSelected = true
                 } else {
                     self.otherRadioButton.isSelected = true
@@ -299,18 +299,18 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                if let birthdate = dateFormatter.date(from: child.user.birthday) {
+                if let birthdate = dateFormatter.date(from: child.user!.birthday) {
                     self.dateTextField.text = dateFormatter.string(from: birthdate)
                 }
                 
-                if (child.user.photo)!.isEmpty {
-                    if child.user.gender == "M" {
+                if (child.user?.photo)!.isEmpty {
+                    if child.user!.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                     } else {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
-                    self.childPhoto.loadImage(child.user.photo)
+                    self.childPhoto.loadImage(child.user?.photo)
                 }
             }
         }
@@ -401,7 +401,7 @@ extension UpdateChild: UIImagePickerControllerDelegate, UINavigationControllerDe
 
         guard let img = self.image else { return }
 
-        if let selectedChild = selectedChild, let username = selectedChild.user.username {
+        if let selectedChild = selectedChild, let username = selectedChild.user?.username {
              print ("selected child : \(selectedChild), username: \(username)")
             APIManager.shareInstance.fetchCurrentUserData(username: username) { user in
                 let roleId = user.role_data.id

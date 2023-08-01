@@ -23,28 +23,29 @@ class SignIn: KeyboardHandlingBaseVC {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var signIn_google: UIButton!
     @IBOutlet weak var signIn_facebook: UIButton!
-      @IBOutlet weak var scrollView: UIScrollView! {
+    @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
+    var iconClick = false
+    let imageicon = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the initial language based on the saved language
-           if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
-               LanguageManager.shared.currentLanguage = selectedLanguage
-           }
-
-           // Update localized strings
-           updateLocalizedStrings()
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            LanguageManager.shared.currentLanguage = selectedLanguage
+        }
+        
+        // Update localized strings
+        updateLocalizedStrings()
         
         //Text fields left side image
-        emailTF.setupLeftSideImage(ImageViewNamed: "mail")
+        emailTF.setupLeftSideImage(ImageViewNamed: "Vector")
         passwordTF.setupLeftSideImage(ImageViewNamed: "password")
+        signInBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
         
         //text fields border style
         emailTF.setupBorderTF()
@@ -53,8 +54,11 @@ class SignIn: KeyboardHandlingBaseVC {
         
         //Buttons style
         signInBtn.applyGradient()
+        signInBtn.setupBorderBtn()
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
+        visualiserPassword()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +75,7 @@ class SignIn: KeyboardHandlingBaseVC {
     func verifyFields() -> Bool {
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
-
+        
         if username.isEmpty  {
             showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
             return false
@@ -88,11 +92,11 @@ class SignIn: KeyboardHandlingBaseVC {
         emailTF.text = ""
         passwordTF.text = ""
     }
-
+    
     func translate() {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-
+        
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
                 if action.title == "English" {
@@ -104,29 +108,29 @@ class SignIn: KeyboardHandlingBaseVC {
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
                     self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
                 }
-
+                
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
         }
-
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         languageAlert.addAction(cancelAction)
-
+        
         present(languageAlert, animated: true, completion: nil)
     }
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         translate()
     }
-
+    
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         
         welcomeLabel.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
         signInLabel.text = NSLocalizedString("Welcome2", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
-        emailTF.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
+        emailTF.placeholder = NSLocalizedString("Connexion", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         dontHaveAccLabel.text = NSLocalizedString("text_register", tableName: nil, bundle: bundle, value: "", comment: "no account ?")
         forgotPwdBtn.setTitle(NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot password"), for: .normal)
@@ -134,31 +138,31 @@ class SignIn: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
-       
+        
     }
-
+    
     func goToScreen(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(VC, animated: true)
     }
     
-//    fileprivate func getLastChildID(username: String) {
-//        Api.getLastregistredChildID(withUsername: username) { lastChildID in
-//            UserDefaults.standard.set(lastChildID, forKey: "childID")
-//        }
-//    }
+    //    fileprivate func getLastChildID(username: String) {
+    //        Api.getLastregistredChildID(withUsername: username) { lastChildID in
+    //            UserDefaults.standard.set(lastChildID, forKey: "childID")
+    //        }
+    //    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
         guard let username = self.emailTF.text else { return }
         let trimmedUserName = username.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let password = self.passwordTF.text else { return }
-
+        
         if verifyFields() {
             // Check if onboarding has been completed for this user
             let onboardingSimple = UserDefaults.standard.bool(forKey: "onboardingSimple")
-           let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
-//            let login = LoginModel(username: username, password: password)
+            let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
+            //            let login = LoginModel(username: username, password: password)
             
             APIManager.shareInstance.loginAPI(login: login) { result in
                 switch result {
@@ -168,9 +172,9 @@ class SignIn: KeyboardHandlingBaseVC {
                        let id = jsonDict["id"] as? Int,
                        let username = jsonDict["username"] as? String {
                         // Save id and username to UserDefaults
-                      //  UserDefaults.standard.set(id, forKey: "userID")
+                        //  UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
-                      //  print("User ID: \(id)")
+                        //  print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
@@ -185,7 +189,7 @@ class SignIn: KeyboardHandlingBaseVC {
                                 print("Value of roleDataID: \(roleDataID)")
                                 
                                 UserDefaults.standard.set(roleDataID, forKey: "RoleDataID")
-
+                                
                                 DataHandler.shared.roleDataID = roleDataID
                                 // Proceed to wizard screen
                                 APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
@@ -196,12 +200,12 @@ class SignIn: KeyboardHandlingBaseVC {
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
                                         switch wizardStep {
                                         case 1:
-                                     
+                                            
                                             self.goToScreen(withId: "childInfos")
                                         case 2:
                                             self.goToScreen(withId: "ChildSocialMedia")
                                         case 3:
-                                           self.goToScreen(withId: "ChildProfileAdded")
+                                            self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:
@@ -221,7 +225,7 @@ class SignIn: KeyboardHandlingBaseVC {
                                     }
                                 }
                             }
-
+                            
                         }
                     }
                 case .failure(let error):
@@ -231,7 +235,34 @@ class SignIn: KeyboardHandlingBaseVC {
         }
         self.resetFields()
     }
-
+    
+    func visualiserPassword(){
+        imageicon.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
+        imageicon.tintColor = .black
+        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 40))
+        imageViewContainerView.addSubview(imageicon)
+        passwordTF.rightView = imageViewContainerView
+        passwordTF.rightViewMode = .always
+        
+         
+        let tapGestureRecongnizer = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer: )))
+        imageicon.isUserInteractionEnabled = true
+        imageicon.addGestureRecognizer(tapGestureRecongnizer)
+    }
+    
+    @objc func imageTaped(tapGestureRecongnizer: UITapGestureRecognizer){
+        let tappedImage = tapGestureRecongnizer.view as!UIImageView
+        if iconClick{
+            iconClick = false
+            tappedImage.image = UIImage(named: "openeye")
+            passwordTF.isSecureTextEntry = false
+        }
+        else{
+            iconClick = true
+            tappedImage.image = UIImage(named: "closeeye")
+            passwordTF.isSecureTextEntry = true
+        }
+    }
     
     
     @IBAction func forgetPwdBtn(_ sender: Any) {
@@ -264,7 +295,7 @@ extension UITextField {
         let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
         imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: "AccentColor")
-        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 34, height: 30))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView
         leftViewMode = .always
@@ -273,6 +304,7 @@ extension UITextField {
     func setupBorderTF() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
+        layer.borderColor = UIColor(named: "gris")?.cgColor
         //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
     }
 }
@@ -290,7 +322,7 @@ extension UIButton{
     }
     
     func setupBorderBtn() {
-        layer.cornerRadius = 5
+        layer.cornerRadius = 26
         layer.borderWidth = 1
         //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }

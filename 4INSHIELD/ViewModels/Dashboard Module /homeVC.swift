@@ -623,7 +623,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func revealSideMenu(_ sender: Any) {
-        //  self.sideMenuState(expanded: self.isExpanded ? false : true)
+          self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
     
     func getCurrentUserData() {

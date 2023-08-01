@@ -60,21 +60,35 @@ class LegalMentionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Hide the text views initially by setting their height constraints to 0
-        textViewHeightConstraint.constant = 0
-        textViewHeightConstraint2.constant = 0
-        textViewHeightConstraint3.constant = 0
-        textViewHeightConstraint4.constant = 0
-        textViewHeightConstraint5.constant = 0
-        textViewHeightConstraint6.constant = 0
-        textViewHeightConstraint7.constant = 0
-        textViewHeightConstraint8.constant = 0
-        textViewHeightConstraint9.constant = 0
-        textViewHeightConstraint10.constant = 0
-        textViewHeightConstraint11.constant = 0
+        setUpDesign()
+        
+        // Create an array to hold the textViewHeightConstraint constants
+         let textViewHeightConstraints: [NSLayoutConstraint] = [
+             textViewHeightConstraint, textViewHeightConstraint2, textViewHeightConstraint3,
+             textViewHeightConstraint4, textViewHeightConstraint5, textViewHeightConstraint6,
+             textViewHeightConstraint7, textViewHeightConstraint8, textViewHeightConstraint9,
+             textViewHeightConstraint10, textViewHeightConstraint11
+         ]
+         // Set all textViewHeightConstraint constants to 0 using a loop
+         for constraint in textViewHeightConstraints {
+             constraint.constant = 0
+         }
 
     }
     
+    func setUpDesign() {
+        // Loop through the expandButtons and set the corner radius
+        let expandButtons: [UIButton] = [
+            expandButton1, expandButton2, expandButton3, expandButton4, expandButton5,
+            expandButton6, expandButton7, expandButton8, expandButton9, expandButton10,
+            expandButton11
+        ]
+        let cornerRadius: CGFloat = 5.0
+        for button in expandButtons {
+            button.layer.cornerRadius = cornerRadius
+            button.clipsToBounds = true
+        }
+    }
   
     @IBAction func toggleTextView(_ sender: UIButton) {
         // Find the appropriate text view and height constraint based on the button tapped
@@ -122,7 +136,8 @@ class LegalMentionVC: UIViewController {
         // Toggle the visibility of the text view by changing its height constraint
         if heightConstraint.constant == 0 {
             // Expand the text view
-            heightConstraint.constant = 200 // Set your desired height here
+            textView.sizeToFit() // Resize the text view to fit its content
+            heightConstraint.constant = textView.contentSize.height // Set the height constraint to the content size
             sender.setImage(chevronUpImage, for: .normal) // Set the chevron up image
         } else {
             // Collapse the text view

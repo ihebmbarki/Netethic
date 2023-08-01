@@ -92,7 +92,6 @@ class ContactVC: UIViewController {
             if isSuccess {
                 // Successfully sent the contact form
                 self.showAlert(message: str)
-                // Optionally, you can reset the form fields here if needed
                 self.resetFields()
             } else {
                 // Failed to send the contact form

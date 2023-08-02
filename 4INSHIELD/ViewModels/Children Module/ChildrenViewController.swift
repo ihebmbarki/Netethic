@@ -169,7 +169,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.childFullName.text = (user?.first_name?.uppercased() ?? "" ) + " " + ((user?.last_name?.uppercased())! )
+        cell.childFullName.text = (user?.first_name.uppercased() ?? "" ) + " " + ((user?.last_name.uppercased())! )
         
         return cell
     }

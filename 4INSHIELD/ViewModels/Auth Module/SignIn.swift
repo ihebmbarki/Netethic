@@ -30,7 +30,8 @@ class SignIn: KeyboardHandlingBaseVC {
     }
     var iconClick = false
     let imageicon = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
-    
+    let alertImage = UIImage(named: "yey")
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,16 +78,31 @@ class SignIn: KeyboardHandlingBaseVC {
     }
     
     func verifyFields() -> Bool {
+        
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
         
-        if username.isEmpty  {
-            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
-            return false
+        if username.isEmpty   {
+            if LanguageManager.shared.currentLanguage == "fr"{
+                showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
+                return false
+            }
+        }
+        if username.isEmpty   {
+            if LanguageManager.shared.currentLanguage == "en"{
+                showAlert(message: "Your email is not verified! Please verify your email address.")
+            }
+        }
+        if LanguageManager.shared.currentLanguage == "fr"{
+            if password.isEmpty {
+                showAlert(message: "Votre mot de passe n'est pas vérifié ! Veuillez vérifier votre mot de passe")
+                return false
+            }
         }
         if password.isEmpty {
-            showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
-            return false
+            if LanguageManager.shared.currentLanguage == "en"{
+                showAlert(message: "Your password is not verified! Please verify your password.")
+            }
         }
         
         return true
@@ -196,28 +212,74 @@ class SignIn: KeyboardHandlingBaseVC {
                                 
                                 DataHandler.shared.roleDataID = roleDataID
                                 // Proceed to wizard screen
-                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { [self] wizardStep in
                                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
                                     // Update the user defaults with the new wizard step value
                                     UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
                                     if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
+                                        //self.showAlert(title: "Alerte", message: "Succès")
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
                                         switch wizardStep {
                                         case 1:
-                                            self.goToScreen(withId: "childInfos")
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "childInfos")
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "childInfos")
+                                            }
+                                     
+                                            //self.goToScreen(withId: "childInfos")
                                         case 2:
-                                            self.goToScreen(withId: "ChildSocialMedia")
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildSocialMedia")
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildSocialMedia")
+                                            }
+                                           // self.goToScreen(withId: "ChildSocialMedia")
                                         case 3:
-                                            self.goToScreen(withId: "ChildProfileAdded")
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildProfileAdded")
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildProfileAdded")
+                                            }
+                                           // self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
-                                            self.goToScreen(withId: "ChildDevice")
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildDevice")
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildDevice")
+                                            }
+                                           // self.goToScreen(withId: "ChildDevice")
                                         case 5:
-                                            self.goToScreen(withId: "Congrats")
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "Congrats")
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "Congrats")
+                                            }
+                                            //self.goToScreen(withId: "Congrats")
                                         case 6:
-                                            let storyboard = UIStoryboard(name: "Children", bundle: nil)
-                                            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-                                            vc.modalPresentationStyle = .fullScreen
-                                            self.present(vc, animated: true, completion: nil)
+                                            if LanguageManager.shared.currentLanguage == "fr"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction(title: "yeeey ", message: "Succès ", image: alertImage!)
+                                            }
+                                            if LanguageManager.shared.currentLanguage == "en"{
+                                                let alertImage = UIImage(named: "yey")
+                                                self.showAlertWithImageAndAction(title: "yeeey ", message: "Success ", image: alertImage!)
+                                            }
                                         default:
                                             self.goToScreen(withId: "OnboardingSB")
                                         }
@@ -232,13 +294,51 @@ class SignIn: KeyboardHandlingBaseVC {
                         }
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    // Affichez une alerte pour les différentes erreurs gérées
+                    switch error {
+                    case .custom(let message):
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            self.showAlert(title:"Alerte" ,message: "Informations d'identification non valides ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Alert", message: "Invalid credentials ")
+                        }
+                    case .networkError:
+                        
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            self.showAlert(title:"Connexion Internet" ,message: "Votre connexion Internet n'est pas vérifié ! Veuillez vérifier votre Internet.  ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Network Error", message: "Your Network is not verified! Please verify your Network.")
+                        }
+                                            case .statusCodeError(let message, let statusCode):
+                        self.showAlert(title: "Status Code Error", message: "Error with status code: \(statusCode ?? -1), Message: \(message)")
+                    case .parsingError:
+                        self.showAlert(title: "Parsing Error", message: "There was an error parsing the response.")
+                        
+                    case .decodingError:
+                        print("response decoding change")
+                    case .serverError:
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            self.showAlert(title:"Alerte" ,message: "Le serveur est temporairement indisponible, , veuillez réessayer plus tard. ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Alert", message: "The server is temporarily unavailable, Please try again later. ")
+                        }
+                    }
                 }
             }
         }
         self.resetFields()
     }
-    
+
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        // Assuming your view controller is named "self"
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     func visualiserPassword(){
         imageicon.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
         imageicon.tintColor = .black
@@ -266,6 +366,63 @@ class SignIn: KeyboardHandlingBaseVC {
             passwordTF.isSecureTextEntry = true
         }
     }
+    func showAlertWithImageAndAction1(title: String, message: String, image: UIImage, name: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Créez un bouton personnalisé avec l'image
+        let imageButton = UIButton(type: .system)
+        imageButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        imageButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Ajustez la taille de l'image ici
+        imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+        
+        // Ajoutez le bouton personnalisé à l'alerte
+        alertController.view.addSubview(imageButton)
+        
+        // Ajoutez un bouton OK pour fermer l'alerte et naviguer vers la prochaine interface
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            
+            self.goToScreen(withId: name)
+        }
+        alertController.addAction(okAction)
+        
+        // Présentez l'alerte
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertWithImageAndAction(title: String, message: String, image: UIImage) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Créez un bouton personnalisé avec l'image
+        let imageButton = UIButton(type: .system)
+        imageButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        imageButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Ajustez la taille de l'image ici
+        imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+        
+        // Ajoutez le bouton personnalisé à l'alerte
+        alertController.view.addSubview(imageButton)
+        
+        // Ajoutez un bouton OK pour fermer l'alerte et naviguer vers la prochaine interface
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            
+            let storyboard = UIStoryboard(name: "Children", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+        alertController.addAction(okAction)
+        
+        // Présentez l'alerte
+        present(alertController, animated: true, completion: nil)
+    }
+    @objc func imageButtonTapped() {
+        // Gérez l'action lorsque l'image est cliquée ici
+        let storyboard = UIStoryboard(name: "Children", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    
     
     
     @IBAction func forgetPwdBtn(_ sender: Any) {

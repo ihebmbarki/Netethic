@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FSCalendar
+import DropDown
 
 class Register: KeyboardHandlingBaseVC {
     
@@ -22,24 +24,57 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var register_facebook: UIButton!
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
-    @IBOutlet weak var genderPickerView: UIPickerView!
     
-    @IBOutlet weak var birthdayDatePicker: UIDatePicker!
+    var selectedGender : String?
     
+    
+    @IBOutlet weak var genderLabel: UILabel!
+    
+    
+    @IBOutlet weak var genderView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
             
         }
     }
-        let genderList = ["Homme", "Femme"]
-    var selected: String = "Homme"
+    
+    @IBOutlet weak var calenderButton: UIButton!
+    @IBOutlet weak var calenderTextField: UITextField!
+    
+    
     var sexe: String = "M"
+    var iconClick = false
+    let imageicon1 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
+    let imageicon2 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
+    let menu: DropDown = {
+        let menu = DropDown()
+        menu.dataSource = [
+            "    Homme",
+            "    Femme"
+        ]
+        return menu
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        genderPickerView.delegate = self
-        genderPickerView.dataSource = self
+        
+        registerBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
+        registerBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -250)
+        
+        menu.anchorView = genderView
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        genderView.addGestureRecognizer(gesture)
+        menu.selectionAction = { index, title in
+            print(index)
+            print(title)
+            self.genderLabel.text = title
+        }
+        
+        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
         // Set the initial language based on the saved language
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             LanguageManager.shared.currentLanguage = selectedLanguage
@@ -50,20 +85,41 @@ class Register: KeyboardHandlingBaseVC {
         
         //Text fields lefrt side images
         usernameTF.setupLeftSideImages(ImageViewNamed: "user")
-        emailTF.setupLeftSideImages(ImageViewNamed: "mail")
+        emailTF.setupLeftSideImages(ImageViewNamed: "mail1")
         passwordTF.setupLeftSideImages(ImageViewNamed: "password")
         confirmPasswordTF.setupLeftSideImages(ImageViewNamed: "password")
+        calenderTextField.setupLeftSideImage(ImageViewNamed: "calendar")
+        calenderButton.setImage(UIImage(named: "calendar")!.withTintColor(UIColor(named: "AccentColor")!, renderingMode: .alwaysTemplate), for: .normal)
+        calenderButton.contentVerticalAlignment = .center
+        
+        
+        
         
         //text fields style
         usernameTF.setupBorderTFs()
         emailTF.setupBorderTFs()
         passwordTF.setupBorderTFs()
         confirmPasswordTF.setupBorderTFs()
+        calenderTextField.setupBorderTF()
+        
+        genderLabel.layer.borderWidth = 1
+        genderLabel.layer.cornerRadius = 5
+        genderLabel.layer.borderColor = UIColor(named: "gris")?.cgColor
+        
+        
         
         //Buttons style
         registerBtn.applyGradients()
+        registerBtn.setupBorderBtn()
         //register_google.setupBorderBtns()
         //    register_facebook.setupBorderBtns()
+        
+        visualiserPassword1()
+        visualiserPassword2()
+
+    }
+    @objc func didTapTopItem(){
+        menu.show()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,12 +131,72 @@ class Register: KeyboardHandlingBaseVC {
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
-                changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
             } else if selectedLanguage == "en" {
-                changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
             }
         }
     }
+    
+    
+    func visualiserPassword1(){
+        imageicon1.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
+        imageicon1.tintColor = .black
+        let imageViewContainerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 40))
+        imageViewContainerView1.addSubview(imageicon1)
+        passwordTF.rightView = imageViewContainerView1
+        passwordTF.rightViewMode = .always
+        
+         
+        let tapGestureRecongnizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer1: )))
+        imageicon1.isUserInteractionEnabled = true
+        imageicon1.addGestureRecognizer(tapGestureRecongnizer1)
+    }
+    
+    @objc func imageTaped(tapGestureRecongnizer1: UITapGestureRecognizer){
+        let tappedImage1 = tapGestureRecongnizer1.view as!UIImageView
+        if iconClick{
+            iconClick = false
+            tappedImage1.image = UIImage(named: "openeye")
+            passwordTF.isSecureTextEntry = false
+
+        }
+        else{
+            iconClick = true
+            tappedImage1.image = UIImage(named: "closeeye")
+            passwordTF.isSecureTextEntry = true
+        }
+    }
+    
+    func visualiserPassword2(){
+        imageicon2.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
+        imageicon2.tintColor = .black
+        let imageViewContainerView2 = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 40))
+        imageViewContainerView2.addSubview(imageicon2)
+        confirmPasswordTF.rightView = imageViewContainerView2
+        confirmPasswordTF.rightViewMode = .always
+        
+         
+        let tapGestureRecongnizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer2: )))
+        imageicon2.isUserInteractionEnabled = true
+        imageicon2.addGestureRecognizer(tapGestureRecongnizer2)
+    }
+    
+    @objc func imageTaped(tapGestureRecongnizer2: UITapGestureRecognizer){
+        let tappedImage2 = tapGestureRecongnizer2.view as!UIImageView
+        if iconClick{
+            iconClick = false
+            tappedImage2.image = UIImage(named: "openeye")
+            confirmPasswordTF.isSecureTextEntry = false
+
+        }
+        else{
+            iconClick = true
+            tappedImage2.image = UIImage(named: "closeeye")
+            confirmPasswordTF.isSecureTextEntry = true
+        }
+    }
+    
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         let languages = ["English", "Français"]
@@ -91,11 +207,11 @@ class Register: KeyboardHandlingBaseVC {
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
-                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
                 }
                 
                 self.updateLocalizedStrings()
@@ -146,19 +262,46 @@ class Register: KeyboardHandlingBaseVC {
         confirmPasswordTF.text = ""
     }
     
+    @objc func showDatePicker() {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
+        
+        // Configure the date picker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.frame = CGRect(x: 0, y: 0, width: 270, height: 216)
+        
+        // Add the date picker to the alert controller
+        alertController.view.addSubview(datePicker)
+        
+        // Add the "Done" button to dismiss the alert controller
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            // Update the text field with the selected date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            print(dateFormatter.string(from: datePicker.date))
+            
+            self.calenderTextField.text = dateFormatter.string(from: datePicker.date)
+        }))
+        
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func registerBtnTapped(_ sender: Any) {
         guard let username = self.usernameTF.text else { return }
         guard let email = self.emailTF.text else { return }
         guard let password = self.passwordTF.text else { return }
-        let date = birthdayDatePicker.date
-        let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
+        selectedGender = genderLabel.text
         
-        if selected == "Homme"{
+        if selectedGender == "Homme"{
             sexe = "M"
         }
-        if selected == "Femme"{
+        if selectedGender == "Femme"{
             sexe = "F"
         }
+        let stringDate = calenderTextField.text ?? "2002-02-02"
         let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe, first_name: username, last_name: username)
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
             if isSuccess {
@@ -188,25 +331,31 @@ class Register: KeyboardHandlingBaseVC {
         @IBAction func signUpFacebookTapped(_ sender: Any) {
         }
         
+    @IBAction func calenderButton(_ sender: Any) {
+    }
+    
         
 }
 
 extension UITextField {
     
     func setupLeftSideImages(ImageViewNamed: String) {
-        let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
         imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: "AccentColor")
-        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView
         leftViewMode = .always
+        
+     
     }
     
     func setupBorderTFs() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
+        layer.borderColor = UIColor(named: "gris")?.cgColor
+
     }
 }
 
@@ -228,19 +377,4 @@ extension UIButton{
         layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
-extension Register: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return genderList.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return genderList[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selected = genderList[row] as! String
-    }
-    
-}
+

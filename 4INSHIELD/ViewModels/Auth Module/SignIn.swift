@@ -45,8 +45,10 @@ class SignIn: KeyboardHandlingBaseVC {
         //Text fields left side image
         emailTF.setupLeftSideImage(ImageViewNamed: "Vector")
         passwordTF.setupLeftSideImage(ImageViewNamed: "password")
-        signInBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
         
+        signInBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
+        signInBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -36 )
+
         //text fields border style
         emailTF.setupBorderTF()
         passwordTF.setupBorderTF()
@@ -55,10 +57,12 @@ class SignIn: KeyboardHandlingBaseVC {
         //Buttons style
         signInBtn.applyGradient()
         signInBtn.setupBorderBtn()
+        
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
         visualiserPassword()
         
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +106,7 @@ class SignIn: KeyboardHandlingBaseVC {
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
@@ -292,10 +296,10 @@ class SignIn: KeyboardHandlingBaseVC {
 extension UITextField {
     
     func setupLeftSideImage(ImageViewNamed: String) {
-        let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 16, height: 16))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 20, height: 20))
         imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: "AccentColor")
-        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 34, height: 30))
+        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
         imageViewContainerView.addSubview(imageView)
         leftView = imageViewContainerView
         leftViewMode = .always
@@ -322,7 +326,7 @@ extension UIButton{
     }
     
     func setupBorderBtn() {
-        layer.cornerRadius = 26
+        layer.cornerRadius = 20
         layer.borderWidth = 1
         //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }

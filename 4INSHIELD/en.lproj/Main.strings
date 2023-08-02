@@ -101,7 +101,7 @@
 "N0u-Vi-eTt.text" = "1. Prenez le téléphone portable de votre enfant";
 
 /* Class = "UITextField"; placeholder = "Retaper le mot de passe"; ObjectID = "N2b-Qz-8wZ"; */
-"N2b-Qz-8wZ.placeholder" = "Retaper le mot de passe";
+"N2b-Qz-8wZ.placeholder" = "Mot de passe";
 
 /* Class = "UITextField"; placeholder = "Prénom"; ObjectID = "Nf4-SW-HUT"; */
 "Nf4-SW-HUT.placeholder" = "Prénom";

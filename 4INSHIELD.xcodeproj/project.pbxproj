@@ -76,6 +76,9 @@
 		04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */; };
 		04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */; };
 		04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BCF2962A33A4E800202D6D /* humorCell.xib */; };
+		04BECF342A781E75005B1745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04BECF322A781E75005B1745 /* Assets.xcassets */; };
+		04BECF352A781E75005B1745 /* inshield.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04BECF332A781E75005B1745 /* inshield.mp4 */; };
+		04BECF3A2A78315B005B1745 /* ContactForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BECF392A78315B005B1745 /* ContactForm.swift */; };
 		04BFDD222A6943E40063E04D /* ChildrenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD212A6943E40063E04D /* ChildrenResponse.swift */; };
 		04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFDD232A6944060063E04D /* ChildRegisterModel.swift */; };
 		04C1363A29D1C9D5008F1A58 /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C1363929D1C9D5008F1A58 /* ChildModel.swift */; };
@@ -100,7 +103,6 @@
 		8729640B2A77D4FC009649B3 /* LegalMentionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872964092A77D4FC009649B3 /* LegalMentionVC.swift */; };
 		8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8729640A2A77D4FC009649B3 /* LegalMention.storyboard */; };
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
-		8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 875206292A6E7EDB00486C0C /* Assets.xcassets */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
 		87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */; };
 		87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */; };
@@ -215,6 +217,9 @@
 		04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicPersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToxicProfileResponse.swift; sourceTree = "<group>"; };
 		04BCF2962A33A4E800202D6D /* humorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = humorCell.xib; sourceTree = "<group>"; };
+		04BECF322A781E75005B1745 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Desktop/ParentApp/Assets.xcassets; sourceTree = "<group>"; };
+		04BECF332A781E75005B1745 /* inshield.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = inshield.mp4; path = ../../Desktop/ParentApp/inshield.mp4; sourceTree = "<group>"; };
+		04BECF392A78315B005B1745 /* ContactForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactForm.swift; sourceTree = "<group>"; };
 		04BFDD212A6943E40063E04D /* ChildrenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildrenResponse.swift; path = ../../../../../Downloads/ChildrenResponse.swift; sourceTree = "<group>"; };
 		04BFDD232A6944060063E04D /* ChildRegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildRegisterModel.swift; path = ../../../../../Downloads/ChildRegisterModel.swift; sourceTree = "<group>"; };
 		04C1363929D1C9D5008F1A58 /* ChildModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
@@ -243,7 +248,6 @@
 		872964092A77D4FC009649B3 /* LegalMentionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalMentionVC.swift; sourceTree = "<group>"; };
 		8729640A2A77D4FC009649B3 /* LegalMention.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LegalMention.storyboard; sourceTree = "<group>"; };
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
-		875206292A6E7EDB00486C0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
 		87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircleChartView.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04BECF382A78314B005B1745 /* SideBar */,
 				87ACCCFD2A77A2C400D0BBD3 /* Phone */,
 				87CC77F22A5E09DA008FA7F8 /* Abstract */,
 				04B91C1E2A32262400626AF2 /* Toxicity */,
@@ -438,7 +443,8 @@
 			isa = PBXGroup;
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
-				875206292A6E7EDB00486C0C /* Assets.xcassets */,
+				04BECF322A781E75005B1745 /* Assets.xcassets */,
+				04BECF332A781E75005B1745 /* inshield.mp4 */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
 				7160F104408BB7EFF5A238CD /* Pods */,
@@ -570,6 +576,14 @@
 				04B91C1F2A32263D00626AF2 /* ToxicProfileResponse.swift */,
 			);
 			path = Toxicity;
+			sourceTree = "<group>";
+		};
+		04BECF382A78314B005B1745 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				04BECF392A78315B005B1745 /* ContactForm.swift */,
+			);
+			path = SideBar;
 			sourceTree = "<group>";
 		};
 		04C1363829D1C9BF008F1A58 /* Children */ = {
@@ -831,14 +845,15 @@
 				872964062A77D4CF009649B3 /* Contact.storyboard in Resources */,
 				872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
-				8752062A2A6E7EDB00486C0C /* Assets.xcassets in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
+				04BECF352A781E75005B1745 /* inshield.mp4 in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
+				04BECF342A781E75005B1745 /* Assets.xcassets in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,
@@ -970,6 +985,7 @@
 				040821AC29D5B91200D7A562 /* Child.swift in Sources */,
 				04844B5229E026B7008AFBF6 /* CreateNewPwdViewController.swift in Sources */,
 				04A52E0D29C206A00097C145 /* SideBar.swift in Sources */,
+				04BECF3A2A78315B005B1745 /* ContactForm.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
 				04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */,

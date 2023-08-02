@@ -22,6 +22,27 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func sendContactForm(contactForm: ContactForm, completionHandler: @escaping (Bool, String) -> ()) {
+        let headers: HTTPHeaders = [
+            .contentType("application/json")
+        ]
+        
+        AF.request(contactFormURL, method: .post, parameters: contactForm, encoder: JSONParameterEncoder.default, headers: headers)
+            .response { response in
+                switch response.result {
+                case .success(_):
+                    if (200..<300).contains(response.response?.statusCode ?? 0) {
+                        completionHandler(true, "Message sent successfully")
+                    } else  {
+                        completionHandler(false, "error: \(String(describing: response.error?.localizedDescription))")
+                    }
+                case .failure(let error):
+                    print("Error: \(error)")
+                    completionHandler(false, "error: \(error.localizedDescription)")
+                }
+            }
+    }
+     
     func fetchToxicPersons(forPerson childID: Int, completion: @escaping ([String]?) -> Void) {
         var toxicPseudos: [String]?
         let fetchToxicPersonsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/data/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"
@@ -30,8 +51,6 @@ class APIManager {
             switch response.result {
             case .success:
                 if let data = response.data {
-                    //                    print(String(data: data, encoding: .utf8)) // Print response data for debugging
-                    
                     do {
                         let result = try JSONDecoder().decode(ToxicProfileResponse.self, from: data)
                         toxicPseudos = result.profiles.flatMap { $0.toxicRelationships.map { $0.toxicProfilePseudo } }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -17,9 +17,6 @@
         <array key="Inter-Medium.ttf">
             <string>Inter-Medium</string>
         </array>
-        <array key="Poppins-Regular.ttf">
-            <string>Poppins-Regular</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Legal MentionVC-->
@@ -30,45 +27,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQ2-lP-ejB">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852.00000000000023"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQ2-lP-ejB">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6k-rw-R8c">
-                                        <rect key="frame" x="0.0" y="-59" width="393" height="1219"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6k-rw-R8c">
+                                        <rect key="frame" x="0.0" y="159" width="393" height="672"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c0o-ac-FcK">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="1121"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c0o-ac-FcK">
+                                                <rect key="frame" x="0.0" y="-162" width="393" height="814"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QQ-zQ-M3M">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="137"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0t-10-4p9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="160"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-4q-ndu">
-                                                                <rect key="frame" x="-42" y="-93" width="476" height="230"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="1dN-Hy-QcR">
+                                                                <rect key="frame" x="-21" y="-104" width="432" height="230"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             </imageView>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJE-r2-z5x">
-                                                                <rect key="frame" x="8" y="70" width="25" height="25"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pR-pa-qLA">
+                                                                <rect key="frame" x="14" y="55" width="25" height="25"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system">
                                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="backBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Juk-iT-nmN"/>
-                                                                </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mentions légales" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-bq-s2d">
-                                                                <rect key="frame" x="51" y="68" width="169" height="28"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mentions légales" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkU-nT-fbE">
+                                                                <rect key="frame" x="53" y="52" width="184" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="160" id="waH-AV-s1d"/>
+                                                        </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cY2-Jb-Uod">
-                                                        <rect key="frame" x="0.0" y="137" width="393" height="42"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY2-Jb-Uod">
+                                                        <rect key="frame" x="0.0" y="160" width="393" height="42"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COS-oO-efz">
                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="42"/>
@@ -85,9 +82,12 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="wwM-j4-ptS" firstAttribute="height" secondItem="COS-oO-efz" secondAttribute="height" id="4T6-VU-1Us"/>
+                                                        </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-i5-0yQ">
-                                                        <rect key="frame" x="0.0" y="179" width="393" height="60"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-i5-0yQ">
+                                                        <rect key="frame" x="0.0" y="202" width="393" height="60"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3E3-04-RGT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="60"/>
@@ -96,7 +96,7 @@
                                                                     <constraint firstAttribute="width" constant="25" id="ED3-K5-bgc"/>
                                                                 </constraints>
                                                             </view>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1eZ-Wv-h2d">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eZ-Wv-h2d">
                                                                 <rect key="frame" x="25" y="0.0" width="368" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -110,29 +110,29 @@ Please read these terms and conditions carefully before using Our Application.</
                                                             </textView>
                                                         </subviews>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rgz-Wp-Yv0">
-                                                        <rect key="frame" x="0.0" y="239" width="393" height="20"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgz-Wp-Yv0">
+                                                        <rect key="frame" x="0.0" y="262" width="393" height="20"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="5Sh-yZ-8Io"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DhN-cF-gNe">
-                                                        <rect key="frame" x="0.0" y="259" width="393" height="862"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DhN-cF-gNe">
+                                                        <rect key="frame" x="0.0" y="282" width="393" height="532"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dvd-Cc-luI">
-                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="862"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="532"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="DNV-17-bai"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="QCG-9w-uGv">
-                                                                <rect key="frame" x="20" y="0.0" width="353" height="862"/>
+                                                                <rect key="frame" x="20" y="0.0" width="353" height="532"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttv-Rr-UJB">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ttv-Rr-UJB">
                                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888246323635" green="0.49514695586129842" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="35" id="Nzb-cJ-Y11"/>
                                                                         </constraints>
@@ -151,26 +151,74 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Nvj-9V-Z9v"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eod-CX-IBT">
-                                                                        <rect key="frame" x="0.0" y="42" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eod-CX-IBT">
+                                                                        <rect key="frame" x="0.0" y="42" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="IDX-pI-L9E"/>
+                                                                            <constraint firstAttribute="height" id="36u-zK-RAt"/>
                                                                         </constraints>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                        <color key="textColor" systemColor="labelColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <attributedString key="attributedText">
+                                                                            <fragment>
+                                                                                <string key="content">Interpretation 
+
+</string>
+                                                                                <attributes>
+                                                                                    <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                            <fragment>
+                                                                                <string key="content">Words that start with a capitalized letter are defined under the following conditions. The words defined below shall have the same meaning regardless of whether they appear in their singular or plural form.
+
+</string>
+                                                                                <attributes>
+                                                                                    <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                            <fragment content="Definitions">
+                                                                                <attributes>
+                                                                                    <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                            <fragment>
+                                                                                <mutableString key="content">
+
+For the purposes of these Terms and Conditions:
+Application means the software program provided by the Company downloaded by You on any electronic device, named NETETHIC.
+Application Store means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) in which the Application has been downloaded.
+Affiliate means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
+
+Country refers to: France.
+Company (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to 4INDATA, 9-11 Avenue du Val-de-Fontenay, 94120 Fontenay-sous-Bois.
+Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.
+Service refers to the Application.
+Terms and Conditions (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.
+Third-party Social Media Service means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.
+You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</mutableString>
+                                                                                <attributes>
+                                                                                    <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDL-n1-aeZ">
-                                                                        <rect key="frame" x="0.0" y="79" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="35" id="hV5-uK-VdY"/>
-                                                                        </constraints>
+                                                                        <rect key="frame" x="0.0" y="49" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Acknowledgment" imagePadding="175" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Acknowledgment" imagePadding="170" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -184,23 +232,37 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="a8W-qa-4jO"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fYZ-pH-nTt">
-                                                                        <rect key="frame" x="0.0" y="121" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYZ-pH-nTt">
+                                                                        <rect key="frame" x="0.0" y="91" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                        <color key="textColor" systemColor="labelColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="YaM-6D-lnr"/>
+                                                                        </constraints>
+                                                                        <attributedString key="attributedText">
+                                                                            <fragment>
+                                                                                <mutableString key="content">These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
+Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions.
+These Terms and Conditions apply to all visitors, users and others who access or use the Service.
+By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
+You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.
+Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Company’s Privacy Policy.
+Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service. </mutableString>
+                                                                                <attributes>
+                                                                                    <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                                        <tabStops/>
+                                                                                    </paragraphStyle>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRt-Vt-5tN">
-                                                                        <rect key="frame" x="0.0" y="158" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="35" id="Xgq-7p-973"/>
-                                                                        </constraints>
+                                                                        <rect key="frame" x="0.0" y="98" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Links to Other Websites" imagePadding="125" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Links to Other Websites" imagePadding="120" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -214,20 +276,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PAd-em-HSZ"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oev-qc-yYP">
-                                                                        <rect key="frame" x="0.0" y="200" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oev-qc-yYP">
+                                                                        <rect key="frame" x="0.0" y="140" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="FDE-wO-9Rj"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rrj-0l-QrA">
-                                                                        <rect key="frame" x="0.0" y="237" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="147" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Termination" imagePadding="220" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Termination" imagePadding="213" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -241,20 +305,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6gs-ae-KaM"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XmJ-eh-H96">
-                                                                        <rect key="frame" x="0.0" y="279" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmJ-eh-H96">
+                                                                        <rect key="frame" x="0.0" y="189" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="Tgy-cH-UAM"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-7P-E7e">
-                                                                        <rect key="frame" x="0.0" y="316" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="196" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Limitation of Liability" imagePadding="150" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Limitation of Liability" imagePadding="145" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -268,20 +334,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qpx-md-LF2"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3e2-5h-ufK">
-                                                                        <rect key="frame" x="0.0" y="358" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3e2-5h-ufK">
+                                                                        <rect key="frame" x="0.0" y="238" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="BXS-dF-LcZ"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFs-W5-6Sx">
-                                                                        <rect key="frame" x="0.0" y="395" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="245" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer" imagePadding="10" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer" imagePadding="2" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -295,20 +363,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8Oi-69-wmJ"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q7O-af-RAK">
-                                                                        <rect key="frame" x="0.0" y="437" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7O-af-RAK">
+                                                                        <rect key="frame" x="0.0" y="287" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="Oe6-RQ-vjy"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSQ-3l-nM7">
-                                                                        <rect key="frame" x="0.0" y="474" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="294" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Governing Law" imagePadding="195" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Governing Law" imagePadding="190" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -322,20 +392,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rs7-Nz-CfU"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Lrg-xu-ZTf">
-                                                                        <rect key="frame" x="0.0" y="516" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lrg-xu-ZTf">
+                                                                        <rect key="frame" x="0.0" y="336" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="5sb-1H-8E9"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mS9-vj-ojH">
-                                                                        <rect key="frame" x="0.0" y="553" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="343" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Disputes Resolution" imagePadding="155" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Disputes Resolution" imagePadding="150" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -349,20 +421,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="b11-ny-s1z"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AI4-Mz-vBL">
-                                                                        <rect key="frame" x="0.0" y="595" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AI4-Mz-vBL">
+                                                                        <rect key="frame" x="0.0" y="385" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="pgc-OR-V05"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0i-6J-MdZ">
-                                                                        <rect key="frame" x="0.0" y="632" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="392" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="European Union (EU) Users" imagePadding="100" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="European Union (EU) Users" imagePadding="95" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -376,20 +450,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KJB-PU-c8K"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8fx-g1-VwK">
-                                                                        <rect key="frame" x="0.0" y="674" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fx-g1-VwK">
+                                                                        <rect key="frame" x="0.0" y="434" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="nf7-w2-53a"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0X-3p-SO5">
-                                                                        <rect key="frame" x="0.0" y="711" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="441" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="US Legal Compliance" imagePadding="145" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="US Legal Compliance" imagePadding="140" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -403,20 +479,22 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SSw-4y-Ldf"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ltu-wZ-uoN">
-                                                                        <rect key="frame" x="0.0" y="753" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltu-wZ-uoN">
+                                                                        <rect key="frame" x="0.0" y="483" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="tcv-bK-t7m"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgi-YJ-E0m">
-                                                                        <rect key="frame" x="0.0" y="790" width="353" height="35"/>
-                                                                        <color key="backgroundColor" red="0.48903888249999999" green="0.49514695590000002" blue="0.5" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <rect key="frame" x="0.0" y="490" width="353" height="35"/>
+                                                                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Severability and Waiver" imagePadding="130" titleAlignment="leading">
+                                                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="Severability and Waiver" imagePadding="125" titleAlignment="leading">
                                                                             <imageReference key="image" image="chevron.down" catalog="system" symbolScale="default" renderingMode="hierarchical-single">
                                                                                 <hierarchicalColors>
                                                                                     <color red="0.43529411764705883" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -430,10 +508,12 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                             <action selector="toggleTextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JqI-D3-vif"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="76F-oB-YMa">
-                                                                        <rect key="frame" x="0.0" y="832" width="353" height="30"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76F-oB-YMa">
+                                                                        <rect key="frame" x="0.0" y="532" width="353" height="0.0"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="m1E-qC-8CR"/>
+                                                                        </constraints>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -442,26 +522,18 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                 <constraints>
                                                                     <constraint firstItem="mS9-vj-ojH" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="00Q-W1-svT"/>
                                                                     <constraint firstItem="oSQ-3l-nM7" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="1gf-XB-E6j"/>
-                                                                    <constraint firstItem="Lrg-xu-ZTf" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="5p5-rk-wNm"/>
                                                                     <constraint firstItem="2dC-7P-E7e" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="Asw-LS-nfh"/>
+                                                                    <constraint firstItem="RRt-Vt-5tN" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="CC7-bi-z3d"/>
                                                                     <constraint firstItem="h0X-3p-SO5" firstAttribute="height" secondItem="A0i-6J-MdZ" secondAttribute="height" id="DIg-7x-7EL"/>
-                                                                    <constraint firstItem="Oev-qc-yYP" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="K6s-O7-FcY"/>
-                                                                    <constraint firstItem="AI4-Mz-vBL" firstAttribute="height" secondItem="Lrg-xu-ZTf" secondAttribute="height" id="KGz-iB-VXO"/>
                                                                     <constraint firstItem="A0i-6J-MdZ" firstAttribute="height" secondItem="mS9-vj-ojH" secondAttribute="height" id="LKs-kV-Qo4"/>
                                                                     <constraint firstItem="Bgi-YJ-E0m" firstAttribute="height" secondItem="h0X-3p-SO5" secondAttribute="height" id="RXg-fl-Gwi"/>
-                                                                    <constraint firstItem="76F-oB-YMa" firstAttribute="height" secondItem="ltu-wZ-uoN" secondAttribute="height" id="SGz-pn-uDk"/>
-                                                                    <constraint firstItem="8fx-g1-VwK" firstAttribute="height" secondItem="AI4-Mz-vBL" secondAttribute="height" id="UC9-G5-8kx"/>
-                                                                    <constraint firstItem="XmJ-eh-H96" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="diT-L9-6Rx"/>
                                                                     <constraint firstItem="fFs-W5-6Sx" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="hCt-vl-iba"/>
                                                                     <constraint firstItem="Rrj-0l-QrA" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="hhT-QL-Umy"/>
-                                                                    <constraint firstItem="fYZ-pH-nTt" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="kQF-S3-WSt"/>
-                                                                    <constraint firstItem="3e2-5h-ufK" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="ncq-D8-26Q"/>
-                                                                    <constraint firstItem="q7O-af-RAK" firstAttribute="height" secondItem="eod-CX-IBT" secondAttribute="height" id="qJQ-O0-9Ak"/>
-                                                                    <constraint firstItem="ltu-wZ-uoN" firstAttribute="height" secondItem="8fx-g1-VwK" secondAttribute="height" id="xV6-qy-aGb"/>
+                                                                    <constraint firstItem="uDL-n1-aeZ" firstAttribute="height" secondItem="Ttv-Rr-UJB" secondAttribute="height" id="t1Q-E7-sEl"/>
                                                                 </constraints>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCe-ed-GDk">
-                                                                <rect key="frame" x="373" y="0.0" width="20" height="862"/>
+                                                                <rect key="frame" x="373" y="0.0" width="20" height="532"/>
                                                                 <viewLayoutGuide key="safeArea" id="cTt-Rx-egx"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -475,20 +547,21 @@ Please read these terms and conditions carefully before using Our Application.</
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="width" secondItem="D6k-rw-R8c" secondAttribute="width" id="4IU-pd-myH"/>
-                                            <constraint firstAttribute="trailing" secondItem="c0o-ac-FcK" secondAttribute="trailing" id="FzU-9o-Ayf"/>
-                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="top" secondItem="D6k-rw-R8c" secondAttribute="top" id="OiH-K4-mMU"/>
-                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="leading" secondItem="D6k-rw-R8c" secondAttribute="leading" multiplier="1.1" id="UZ5-gv-cwG"/>
-                                            <constraint firstAttribute="bottom" secondItem="c0o-ac-FcK" secondAttribute="bottom" id="e43-Aa-OXc"/>
+                                            <constraint firstAttribute="bottom" secondItem="c0o-ac-FcK" secondAttribute="bottom" constant="20" symbolic="YES" id="6M5-hc-2Ek"/>
+                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="width" secondItem="D6k-rw-R8c" secondAttribute="width" id="K41-78-Fda"/>
+                                            <constraint firstItem="x0t-10-4p9" firstAttribute="width" secondItem="D6k-rw-R8c" secondAttribute="width" id="OcA-On-AdK"/>
+                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="leading" secondItem="D6k-rw-R8c" secondAttribute="leading" id="lqR-Ga-nEK"/>
+                                            <constraint firstAttribute="trailing" secondItem="c0o-ac-FcK" secondAttribute="trailing" id="rTZ-7Q-rPl"/>
+                                            <constraint firstItem="c0o-ac-FcK" firstAttribute="top" secondItem="D6k-rw-R8c" secondAttribute="top" constant="-162" id="sRL-Nk-ODo"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="leading" secondItem="hQ2-lP-ejB" secondAttribute="leading" id="CJY-VB-Slp"/>
-                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="width" secondItem="hQ2-lP-ejB" secondAttribute="width" id="SpK-xU-fmR"/>
-                                    <constraint firstAttribute="trailing" secondItem="D6k-rw-R8c" secondAttribute="trailing" id="VQf-ek-vsi"/>
-                                    <constraint firstAttribute="bottom" secondItem="D6k-rw-R8c" secondAttribute="bottom" constant="2.2737367544323206e-13" id="fnP-GT-9RU"/>
-                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="top" secondItem="hQ2-lP-ejB" secondAttribute="top" id="seX-zX-Vec"/>
+                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="bottom" secondItem="hQ2-lP-ejB" secondAttribute="bottom" id="7NZ-6v-WKc"/>
+                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="leading" secondItem="hQ2-lP-ejB" secondAttribute="leading" id="FEt-s6-PGA"/>
+                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="trailing" secondItem="hQ2-lP-ejB" secondAttribute="trailing" id="PCg-EE-AOh"/>
+                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="top" secondItem="hQ2-lP-ejB" secondAttribute="top" constant="159" id="dv1-qw-51h"/>
+                                    <constraint firstItem="D6k-rw-R8c" firstAttribute="width" secondItem="hQ2-lP-ejB" secondAttribute="width" id="p1W-kT-Ypd"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="3Bt-aD-p1S"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="XuE-U8-h5B"/>
@@ -497,10 +570,13 @@ Please read these terms and conditions carefully before using Our Application.</
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="hQ2-lP-ejB" secondAttribute="bottom" id="NDr-dS-3Ar"/>
-                            <constraint firstAttribute="trailing" secondItem="hQ2-lP-ejB" secondAttribute="trailing" id="NHg-Hk-C5S"/>
-                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="bn5-NG-h2T"/>
-                            <constraint firstItem="D6k-rw-R8c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oDf-RP-Y9c"/>
+                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="0uJ-VG-O6O"/>
+                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Gz0-hn-dkQ"/>
+                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="34" id="QlN-Bw-kxM"/>
+                            <constraint firstAttribute="bottom" secondItem="hQ2-lP-ejB" secondAttribute="bottom" id="aL6-4s-h2C"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="top" secondItem="hQ2-lP-ejB" secondAttribute="top" constant="59" id="oGm-fz-MOd"/>
+                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="vOF-EE-ofS"/>
+                            <constraint firstItem="hQ2-lP-ejB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="whn-6m-PRA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CJv-dw-njR"/>
@@ -527,29 +603,20 @@ Please read these terms and conditions carefully before using Our Application.</
                         <outlet property="textView7" destination="Lrg-xu-ZTf" id="hqn-t0-EBt"/>
                         <outlet property="textView8" destination="AI4-Mz-vBL" id="ge2-vI-0ei"/>
                         <outlet property="textView9" destination="8fx-g1-VwK" id="e96-cM-8jO"/>
-                        <outlet property="textViewHeightConstraint" destination="eod-CX-IBT" id="kfz-pe-zdN"/>
-                        <outlet property="textViewHeightConstraint10" destination="ltu-wZ-uoN" id="1TR-9R-XWB"/>
-                        <outlet property="textViewHeightConstraint11" destination="76F-oB-YMa" id="0RC-xG-HPy"/>
-                        <outlet property="textViewHeightConstraint2" destination="fYZ-pH-nTt" id="YLa-pt-c4m"/>
-                        <outlet property="textViewHeightConstraint3" destination="Oev-qc-yYP" id="eaF-fD-BDE"/>
-                        <outlet property="textViewHeightConstraint4" destination="XmJ-eh-H96" id="Pdt-wN-ekd"/>
-                        <outlet property="textViewHeightConstraint5" destination="3e2-5h-ufK" id="GlX-Qt-fQ1"/>
-                        <outlet property="textViewHeightConstraint6" destination="q7O-af-RAK" id="mIv-mr-gdP"/>
-                        <outlet property="textViewHeightConstraint7" destination="Lrg-xu-ZTf" id="0vR-Nd-cUg"/>
-                        <outlet property="textViewHeightConstraint8" destination="AI4-Mz-vBL" id="5LT-3R-j6j"/>
-                        <outlet property="textViewHeightConstraint9" destination="8fx-g1-VwK" id="1UC-6y-1ZA"/>
+                        <outlet property="textViewHeightConstraint" destination="36u-zK-RAt" id="hcX-PO-yJE"/>
+                        <outlet property="textViewHeightConstraint10" destination="tcv-bK-t7m" id="1YI-Cn-GqZ"/>
+                        <outlet property="textViewHeightConstraint11" destination="m1E-qC-8CR" id="4n6-WL-dIB"/>
+                        <outlet property="textViewHeightConstraint2" destination="YaM-6D-lnr" id="g3Q-Mv-E0e"/>
+                        <outlet property="textViewHeightConstraint3" destination="FDE-wO-9Rj" id="Rfq-Oy-OVV"/>
+                        <outlet property="textViewHeightConstraint4" destination="Tgy-cH-UAM" id="Oy7-1I-9Bn"/>
+                        <outlet property="textViewHeightConstraint5" destination="BXS-dF-LcZ" id="kST-n2-09s"/>
+                        <outlet property="textViewHeightConstraint6" destination="Oe6-RQ-vjy" id="1N4-Q1-1RJ"/>
+                        <outlet property="textViewHeightConstraint7" destination="5sb-1H-8E9" id="0hA-CE-tVj"/>
+                        <outlet property="textViewHeightConstraint8" destination="pgc-OR-V05" id="5ib-bI-UEZ"/>
+                        <outlet property="textViewHeightConstraint9" destination="nf7-w2-53a" id="zOy-uy-E90"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="zd7-p1-Cp1">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <color key="textColor" systemColor="labelColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
             </objects>
             <point key="canvasLocation" x="933.58778625954199" y="3.5211267605633805"/>
         </scene>

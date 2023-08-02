@@ -27,5 +27,4 @@ let set_Onboarding_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/us
 let generate_newOtp_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/generate-new-totp-token/"
 let change_pwd_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/auth/change-password/"
 let user_score = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/score/general/"
-
-
+let contactFormURL = "\(BuildConfiguration.shared.CRAWLSERVER_BASE_URL)/api/support/contact_form/"

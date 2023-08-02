@@ -13,6 +13,7 @@ class AproposVC: UIViewController {
 
     @IBOutlet weak var playerView: UIView!
     var player: AVPlayer?
+    var isPlaying = true // Keep track of the video player's playing status
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +32,10 @@ class AproposVC: UIViewController {
         layer.videoGravity = .resizeAspectFill
         playerView.layer.addSublayer(layer)
 
-        // Add a play button in the middle of the playerView
+        // Add a play/pause button in the middle of the playerView
         let playButton = UIButton(type: .system)
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playButton.tintColor = .white
+        setPlayButtonImage(isPlaying: isPlaying) // Set the initial play button image
+        playButton.tintColor = .white // Change the play button color to white
         playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
         playerView.addSubview(playButton)
 
@@ -49,13 +50,26 @@ class AproposVC: UIViewController {
     }
 
     @objc func playButtonTapped() {
-        player?.play()
+        if isPlaying {
+            player?.pause()
+        } else {
+            player?.play()
+        }
+        isPlaying.toggle() // Toggle the playing status
+        setPlayButtonImage(isPlaying: isPlaying) // Update the play button image
     }
     
+    //Update the play button image based on the current playing status
+    func setPlayButtonImage(isPlaying: Bool) {
+        let playButton = UIButton(type: .system)
+        if isPlaying {
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
+    }
+
     @IBAction func backBtnTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
-    
 }
-

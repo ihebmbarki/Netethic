@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -28,7 +28,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="870"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-Uk-z9c">
-                                                        <rect key="frame" x="1" y="0.0" width="391" height="120"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="jcV-J6-Qey">
                                                                 <rect key="frame" x="-21" y="-104" width="432" height="230"/>
@@ -54,15 +54,12 @@
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="120" id="NQt-kN-hiY"/>
-                                                        </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8kr-uA-scB">
-                                                        <rect key="frame" x="21.666666666666657" y="130" width="350" height="740"/>
+                                                        <rect key="frame" x="21.666666666666657" y="160" width="350" height="710"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à propos de nous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrZ-LL-Pnq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="À PROPOS DE NOUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrZ-LL-Pnq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="l2U-Fu-Ozi"/>
                                                                 </constraints>
@@ -71,15 +68,11 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Onl-GD-bkF">
-                                                                <rect key="frame" x="0.0" y="25" width="327" height="190"/>
+                                                                <rect key="frame" x="0.0" y="25" width="328" height="160"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="190" id="51C-9a-M7u"/>
-                                                                    <constraint firstAttribute="width" constant="327" id="XAw-aN-bOM"/>
-                                                                </constraints>
                                                             </view>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="I8K-9N-a3L">
-                                                                <rect key="frame" x="0.0" y="220" width="328" height="160"/>
+                                                                <rect key="frame" x="0.0" y="190" width="328" height="160"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="328" id="J2e-jx-CJQ"/>
@@ -91,13 +84,13 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nos algorithmes" translatesAutoresizingMaskIntoConstraints="NO" id="rfO-vz-W7I">
-                                                                <rect key="frame" x="0.0" y="385" width="350" height="50"/>
+                                                                <rect key="frame" x="0.0" y="355" width="350" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="mpz-oe-8eQ"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="o9e-v5-G9E">
-                                                                <rect key="frame" x="0.0" y="440" width="340" height="60"/>
+                                                                <rect key="frame" x="0.0" y="410" width="340" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="340" id="cQw-ay-Jc8"/>
@@ -109,10 +102,10 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rapport" translatesAutoresizingMaskIntoConstraints="NO" id="daL-0x-TkD">
-                                                                <rect key="frame" x="0.0" y="505" width="350" height="50"/>
+                                                                <rect key="frame" x="0.0" y="475" width="350" height="50"/>
                                                             </imageView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="31P-So-l57">
-                                                                <rect key="frame" x="0.0" y="560" width="328" height="60"/>
+                                                                <rect key="frame" x="0.0" y="530" width="328" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" id="vrs-PK-Yxi"/>
@@ -124,10 +117,10 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-xD-P9c">
-                                                                <rect key="frame" x="0.0" y="625" width="350" height="50"/>
+                                                                <rect key="frame" x="0.0" y="595" width="350" height="50"/>
                                                             </imageView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="En cas de problème, les parents reçoivent une notification lorsque des conditions d'alerte sont détectées." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lv5-gQ-eNX">
-                                                                <rect key="frame" x="0.0" y="680" width="328" height="60"/>
+                                                                <rect key="frame" x="0.0" y="650" width="328" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" id="f8G-S7-6bT"/>
@@ -140,6 +133,8 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="xxr-xD-P9c" firstAttribute="height" secondItem="rfO-vz-W7I" secondAttribute="height" id="NMA-WR-kWl"/>
+                                                            <constraint firstItem="Onl-GD-bkF" firstAttribute="width" secondItem="I8K-9N-a3L" secondAttribute="width" id="OSZ-3F-gMS"/>
+                                                            <constraint firstItem="Onl-GD-bkF" firstAttribute="height" secondItem="I8K-9N-a3L" secondAttribute="height" id="f6A-by-gvm"/>
                                                             <constraint firstItem="daL-0x-TkD" firstAttribute="height" secondItem="rfO-vz-W7I" secondAttribute="height" id="mAy-2R-Oaa"/>
                                                             <constraint firstAttribute="width" constant="350" id="wwU-Cm-HlW"/>
                                                         </constraints>
@@ -149,7 +144,9 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="870" id="N5j-UQ-lLO"/>
                                             <constraint firstItem="Ceh-Ku-dgc" firstAttribute="top" secondItem="tJb-tQ-AHT" secondAttribute="top" id="YM2-j1-ssf"/>
+                                            <constraint firstItem="R7m-Uk-z9c" firstAttribute="width" secondItem="tJb-tQ-AHT" secondAttribute="width" id="dfh-yL-1ni"/>
                                             <constraint firstAttribute="trailing" secondItem="Ceh-Ku-dgc" secondAttribute="trailing" id="f8r-DB-Rae"/>
                                             <constraint firstItem="Ceh-Ku-dgc" firstAttribute="width" secondItem="tJb-tQ-AHT" secondAttribute="width" id="rcx-uS-P4I"/>
                                             <constraint firstAttribute="bottom" secondItem="Ceh-Ku-dgc" secondAttribute="bottom" id="vdW-qE-lhz"/>

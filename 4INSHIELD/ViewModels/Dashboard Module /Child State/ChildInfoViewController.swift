@@ -63,7 +63,7 @@ class ChildInfoViewController: UIViewController {
         
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
-                self.childNameLabel.text = child.user!.first_name + child.user!.last_name
+                self.childNameLabel.text = (child.user?.first_name)! + (child.user?.last_name)!
                 self.childAddressLabel.text = child.adress
                 //Calculate age from birthday
                 let dateFormatter = DateFormatter()

@@ -18,6 +18,7 @@
 		040DDCD32A0150DD00ED3223 /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */; };
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
+		0425E18F2A7A859300CA86EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425E18E2A7A859300CA86EA /* Assets.xcassets */; };
 		042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A4C4829E5A8640080CADF /* UpdateChild.swift */; };
 		04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04340A582A1FD48100F69B19 /* DangerCardCell.xib */; };
 		04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */; };
@@ -114,7 +115,6 @@
 		87CC77FE2A5E0AAB008FA7F8 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77FA2A5E0AAB008FA7F8 /* TargetType.swift */; };
 		87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77FB2A5E0AAB008FA7F8 /* BaseApi.swift */; };
 		87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3A42D2A6591A200CE4C43 /* DataHandler.swift */; };
-		87F4B2222A7A6BFA00646FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F4B2212A7A6BFA00646FD1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +153,7 @@
 		040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		0425E18E2A7A859300CA86EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		042A4C4829E5A8640080CADF /* UpdateChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChild.swift; sourceTree = "<group>"; };
 		04340A582A1FD48100F69B19 /* DangerCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DangerCardCell.xib; sourceTree = "<group>"; };
 		04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -259,7 +260,6 @@
 		87CC77FB2A5E0AAB008FA7F8 /* BaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
 		87E3A42D2A6591A200CE4C43 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		87F4B2202A7A6A8800646FD1 /* inshield.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = inshield.mp4; sourceTree = "<group>"; };
-		87F4B2212A7A6BFA00646FD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../Downloads/parent-app-feature-correctRegister-Assets.xcassets/Assets.xcassets"; sourceTree = "<group>"; };
 		8C91D63B941344F1B71064F8 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
 		F1B1F0B8047CCD9090450D7B /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -442,8 +442,8 @@
 			isa = PBXGroup;
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
-				87F4B2212A7A6BFA00646FD1 /* Assets.xcassets */,
 				87F4B2202A7A6A8800646FD1 /* inshield.mp4 */,
+				0425E18E2A7A859300CA86EA /* Assets.xcassets */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
 				7160F104408BB7EFF5A238CD /* Pods */,
@@ -851,7 +851,7 @@
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
-				87F4B2222A7A6BFA00646FD1 /* Assets.xcassets in Resources */,
+				0425E18F2A7A859300CA86EA /* Assets.xcassets in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,

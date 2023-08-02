@@ -27,6 +27,18 @@
 "Login" = "Sign in";
 "signup_google" = "Sign up with Google";
 "signup_facebook" = "Sign up with Facebook";
+"pick_date" = "Choose a date";
+"success_signUp" = "Registration completed successfully!
+Please check your registered email for the activation link.";
+"error_server" = "Server error. Please try again later.";
+"registration_failure_message" = "Data not found.";
+"network_error_message" = "The data could not be read. Please try again.";
+"unknown_error_message" = "An unknown error occurred. Please try again.";
+"missing_user" = "Enter your username";
+"missing_email" = "Enter your email address";
+"missing_password" = "Enter your password";
+"missing_genre" = "Enter your gender";
+"missing_date" = "Enter your birthdate";
 
 //MARK: Confirmation
 "code" = "Enter the code sent to your email";

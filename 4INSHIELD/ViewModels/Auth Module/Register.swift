@@ -55,7 +55,6 @@ class Register: KeyboardHandlingBaseVC {
         ]
         return menu
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +115,7 @@ class Register: KeyboardHandlingBaseVC {
         
         visualiserPassword1()
         visualiserPassword2()
-
+        
     }
     @objc func didTapTopItem(){
         menu.show()
@@ -147,7 +146,7 @@ class Register: KeyboardHandlingBaseVC {
         passwordTF.rightView = imageViewContainerView1
         passwordTF.rightViewMode = .always
         
-         
+        
         let tapGestureRecongnizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer1: )))
         imageicon1.isUserInteractionEnabled = true
         imageicon1.addGestureRecognizer(tapGestureRecongnizer1)
@@ -159,7 +158,7 @@ class Register: KeyboardHandlingBaseVC {
             iconClick = false
             tappedImage1.image = UIImage(named: "openeye")
             passwordTF.isSecureTextEntry = false
-
+            
         }
         else{
             iconClick = true
@@ -176,7 +175,7 @@ class Register: KeyboardHandlingBaseVC {
         confirmPasswordTF.rightView = imageViewContainerView2
         confirmPasswordTF.rightViewMode = .always
         
-         
+        
         let tapGestureRecongnizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer2: )))
         imageicon2.isUserInteractionEnabled = true
         imageicon2.addGestureRecognizer(tapGestureRecongnizer2)
@@ -188,7 +187,7 @@ class Register: KeyboardHandlingBaseVC {
             iconClick = false
             tappedImage2.image = UIImage(named: "openeye")
             confirmPasswordTF.isSecureTextEntry = false
-
+            
         }
         else{
             iconClick = true
@@ -235,6 +234,7 @@ class Register: KeyboardHandlingBaseVC {
         emailTF.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
         passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "Password")
         confirmPasswordTF.placeholder = NSLocalizedString("re_type_password", tableName: nil, bundle: bundle, value: "", comment: "Confirm Password")
+        calenderTextField.placeholder = NSLocalizedString("pick_date", tableName: nil, bundle: bundle, value: "", comment: "birthday")
         registerBtn.setTitle(NSLocalizedString("sign_up", tableName: nil, bundle: bundle, value: "", comment: "sign up"), for: .normal)
         signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
         haveAccLbl.text = NSLocalizedString("text_login", tableName: nil, bundle: bundle, value: "", comment: "text login")
@@ -242,8 +242,9 @@ class Register: KeyboardHandlingBaseVC {
          register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
     }
     
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+    func showAlert(messageKey: String) {
+        let localizedMessage = NSLocalizedString(messageKey, comment: "")
+        let alert = UIAlertController(title: "Alert", message: localizedMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -290,51 +291,68 @@ class Register: KeyboardHandlingBaseVC {
     }
     
     @IBAction func registerBtnTapped(_ sender: Any) {
-        guard let username = self.usernameTF.text else { return }
-        guard let email = self.emailTF.text else { return }
-        guard let password = self.passwordTF.text else { return }
-        selectedGender = genderLabel.text
-        
-        if selectedGender == "Homme"{
-            sexe = "M"
+        guard let username = self.usernameTF.text, !username.isEmpty else {
+            showAlert(messageKey: "missing_user")
+            return
         }
-        if selectedGender == "Femme"{
+        guard let email = self.emailTF.text, !email.isEmpty else {
+            showAlert(messageKey: "missing_email")
+            return
+        }
+        guard let password = self.passwordTF.text, !password.isEmpty else {
+            showAlert(messageKey: "missing_password")
+            return
+        }
+        guard let selectedGender = genderLabel.text, !selectedGender.isEmpty else {
+            showAlert(messageKey: "missing_genre")
+            return
+        }
+        
+        if selectedGender == "Homme" {
+            sexe = "M"
+        } else if selectedGender == "Femme" {
             sexe = "F"
         }
-        let stringDate = calenderTextField.text ?? "2002-02-02"
+
+        guard let stringDate = calenderTextField.text, !stringDate.isEmpty else {
+            showAlert(messageKey: "missing_date" )
+              return
+          }
+
         let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe, first_name: username, last_name: username)
-        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, str) in
+
+        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, messageKey) in
             if isSuccess {
-               // self.showAlert(message: str)
+                // Show the success alert first
+                self.showAlert(messageKey: messageKey)
+                // Upon tapping OK, navigate to the confirmation screen
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
-            }else {
-                self.showAlert(message: str)
+                self.resetFields()
+            } else {
+                self.showAlert(messageKey: messageKey)
             }
         }
-        self.resetFields()
     }
-        
-        
-        
-        @IBAction func signInButton(_ sender: Any) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
-            navigationController?.pushViewController(VC, animated: true)
-        }
-        
-        @IBAction func signUpGoogleTapped(_ sender: Any) {
-        }
-        
-        
-        @IBAction func signUpFacebookTapped(_ sender: Any) {
-        }
-        
+    
+    @IBAction func signInButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
+        navigationController?.pushViewController(VC, animated: true)
+    }
+    
+    @IBAction func signUpGoogleTapped(_ sender: Any) {
+    }
+    
+    
+    @IBAction func signUpFacebookTapped(_ sender: Any) {
+    }
+    
     @IBAction func calenderButton(_ sender: Any) {
     }
     
-        
+    
 }
 
 extension UITextField {
@@ -348,14 +366,14 @@ extension UITextField {
         leftView = imageViewContainerView
         leftViewMode = .always
         
-     
+        
     }
     
     func setupBorderTFs() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
         layer.borderColor = UIColor(named: "gris")?.cgColor
-
+        
     }
 }
 
@@ -363,7 +381,7 @@ extension UIButton{
     
     func applyGradients () {
         let gradientLayer = CAGradientLayer()
-   //     gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
+        //     gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor,UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
         gradientLayer.cornerRadius = layer.cornerRadius
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)

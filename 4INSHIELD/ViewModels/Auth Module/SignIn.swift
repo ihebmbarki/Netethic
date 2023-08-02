@@ -200,7 +200,6 @@ class SignIn: KeyboardHandlingBaseVC {
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
                                         switch wizardStep {
                                         case 1:
-                                            
                                             self.goToScreen(withId: "childInfos")
                                         case 2:
                                             self.goToScreen(withId: "ChildSocialMedia")

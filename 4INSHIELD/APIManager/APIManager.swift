@@ -11,6 +11,11 @@ import UIKit
 
 enum APIErrors: Error {
     case custom(message: String)
+    case decodingError
+    case serverError
+    case networkError
+    case parsingError
+    case statusCodeError(message: String, statusCode: Int?)
 }
 enum CustomError: Error {
     case missingKey(String)
@@ -925,15 +930,19 @@ class APIManager {
                     if response.response?.statusCode == 200 || response.response?.statusCode == 201 {
                         completionHandler(.success(json))
                     }else {
-                        completionHandler(.failure(.custom(message: "Check your network connectivity")))
+                        completionHandler(.failure(.custom(message: "Your email is not verified! Please verify your email address.")))
                     }
                 }catch{
                     print(error.localizedDescription)
-                    completionHandler(.failure(.custom(message: "Try again")))
+                    completionHandler(.failure(.custom(message: "Try kkkkkkkkk")))
                 }
-            case.failure(let err):
-                print(err.localizedDescription)
-                completionHandler(.failure(.custom(message: "Try again")))
+            case.failure(let error):
+                if let statusCode = response.response?.statusCode {                           // Appel du completionHandler avec l'erreur d'Alamofire et le code de statut HTTP
+                           completionHandler(.failure(.statusCodeError(message: error.localizedDescription, statusCode: statusCode)))
+                       } else {
+                           completionHandler(.failure(.networkError))
+                       }
+               
             }
             
         }
@@ -984,15 +993,20 @@ class APIManager {
                 completionHandler(.failure(.custom(message: "Try again")))
             }
         }
+       
     }
 }
     struct ErrorResponse: Decodable {
         let message: String
+        let statuCode : Int?
     }
     enum APIError: Error {
         case custom(message: String)
         case decodingError
         case serverError
+        case networkError
+        case parsingError
+        case statusCodeError(message: String, statusCode: Int?)
     }
     
 

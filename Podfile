@@ -14,6 +14,8 @@ target '4INSHIELD' do
   pod 'AlamofireImage', '~> 4.1'
   pod 'TinyConstraints'
   pod 'DropDown'
+  pod 'MHLoadingButton'
+
 end
 
 post_install do |installer|

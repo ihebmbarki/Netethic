@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class SignIn: KeyboardHandlingBaseVC {
     
@@ -23,6 +23,7 @@ class SignIn: KeyboardHandlingBaseVC {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var signIn_google: UIButton!
     @IBOutlet weak var signIn_facebook: UIButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.contentInsetAdjustmentBehavior = .never
@@ -35,6 +36,7 @@ class SignIn: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingIndicator.isHidden =  true
         // Set the initial language based on the saved language
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             LanguageManager.shared.currentLanguage = selectedLanguage
@@ -62,6 +64,9 @@ class SignIn: KeyboardHandlingBaseVC {
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
         visualiserPassword()
+        
+        
+ 
         
 
     }
@@ -174,6 +179,10 @@ class SignIn: KeyboardHandlingBaseVC {
     //    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
+        //Activiat Loading Button and Animating
+        self.loadingIndicator.isHidden =  false
+        loadingIndicator.startAnimating()
+   
         guard let username = self.emailTF.text else { return }
         let trimmedUserName = username.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let password = self.passwordTF.text else { return }
@@ -194,6 +203,8 @@ class SignIn: KeyboardHandlingBaseVC {
                         // Save id and username to UserDefaults
                         //  UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
+                        self.signInBtn.isEnabled = true
+
                         //  print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
@@ -212,74 +223,58 @@ class SignIn: KeyboardHandlingBaseVC {
                                 
                                 DataHandler.shared.roleDataID = roleDataID
                                 // Proceed to wizard screen
-                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { [self] wizardStep in
+//                                APIManager.shareInstance.getUserWizardStep(withUserName: trimmedUserName) { [self] wizardStep in
+                                self.getUserWizardStep(withUserName: trimmedUserName) { wizardStep in
+                                    print(wizardStep)
+                        
                                     print("Retrieved wizard step from server: \(String(describing: wizardStep))")
                                     // Update the user defaults with the new wizard step value
                                     UserDefaults.standard.set(wizardStep, forKey: "wizardStep")
                                     if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
                                         //self.showAlert(title: "Alerte", message: "Succès")
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
+                                        self.loadingIndicator.stopAnimating()
                                         switch wizardStep {
                                         case 1:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "childInfos")
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "childInfos")
-                                            }
-                                     
-                                            //self.goToScreen(withId: "childInfos")
+                                            self.goToScreen(withId: "childInfos")
                                         case 2:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildSocialMedia")
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildSocialMedia")
-                                            }
-                                           // self.goToScreen(withId: "ChildSocialMedia")
+                                            self.goToScreen(withId: "ChildSocialMedia")
                                         case 3:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildProfileAdded")
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildProfileAdded")
-                                            }
-                                           // self.goToScreen(withId: "ChildProfileAdded")
+//                                            if LanguageManager.shared.currentLanguage == "fr"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildProfileAdded")
+//                                            }
+//                                            if LanguageManager.shared.currentLanguage == "en"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildProfileAdded")
+//                                            }
+                                            self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildDevice")
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildDevice")
-                                            }
-                                           // self.goToScreen(withId: "ChildDevice")
+//                                            if LanguageManager.shared.currentLanguage == "fr"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildDevice")
+//                                            }
+//                                            if LanguageManager.shared.currentLanguage == "en"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildDevice")
+//                                            }
+                                            self.goToScreen(withId: "ChildDevice")
                                         case 5:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "Congrats")
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "Congrats")
-                                            }
-                                            //self.goToScreen(withId: "Congrats")
+//                                            if LanguageManager.shared.currentLanguage == "fr"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "Congrats")
+//                                            }
+//                                            if LanguageManager.shared.currentLanguage == "en"{
+//                                                let alertImage = UIImage(named: "yey")
+//                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "Congrats")
+//                                            }
+                                            self.goToScreen(withId: "Congrats")
                                         case 6:
-                                            if LanguageManager.shared.currentLanguage == "fr"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction(title: "yeeey ", message: "Succès ", image: alertImage!)
-                                            }
-                                            if LanguageManager.shared.currentLanguage == "en"{
-                                                let alertImage = UIImage(named: "yey")
-                                                self.showAlertWithImageAndAction(title: "yeeey ", message: "Success ", image: alertImage!)
-                                            }
+                                                let storyboard = UIStoryboard(name: "Children", bundle: nil)
+                                                let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+                                                vc.modalPresentationStyle = .fullScreen
+                                                self.present(vc, animated: true, completion: nil)
+    
                                         default:
                                             self.goToScreen(withId: "OnboardingSB")
                                         }
@@ -294,7 +289,9 @@ class SignIn: KeyboardHandlingBaseVC {
                         }
                     }
                 case .failure(let error):
-                    // Affichez une alerte pour les différentes erreurs gérées
+                    self.loadingIndicator.stopAnimating()
+                    self.loadingIndicator.isHidden =  true
+                
                     switch error {
                     case .custom(let message):
                         if LanguageManager.shared.currentLanguage == "fr"{
@@ -306,15 +303,20 @@ class SignIn: KeyboardHandlingBaseVC {
                     case .networkError:
                         
                         if LanguageManager.shared.currentLanguage == "fr"{
-                            self.showAlert(title:"Connexion Internet" ,message: "Votre connexion Internet n'est pas vérifié ! Veuillez vérifier votre Internet.  ")
+                            self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
                         }
                         if LanguageManager.shared.currentLanguage == "en"{
-                            self.showAlert(title: "Network Error", message: "Your Network is not verified! Please verify your Network.")
+                            self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
                         }
-                                            case .statusCodeError(let message, let statusCode):
+                    case .statusCodeError(let message, let statusCode):
                         self.showAlert(title: "Status Code Error", message: "Error with status code: \(statusCode ?? -1), Message: \(message)")
                     case .parsingError:
-                        self.showAlert(title: "Parsing Error", message: "There was an error parsing the response.")
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                        }
                         
                     case .decodingError:
                         print("response decoding change")
@@ -444,7 +446,30 @@ class SignIn: KeyboardHandlingBaseVC {
     
     @IBAction func signInFacebookTapped(_ sender: Any) {
     }
-    
+
+    func getUserWizardStep(withUserName: String, completion: @escaping (Int) -> Void) {
+        let user_step_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/users/\(withUserName)/journey/"
+        
+        AF.request(user_step_url, method: .get).responseDecodable(of: [UserJourney].self) { response in
+            switch response.result {
+            case .success(let userJourneys):
+                if userJourneys.isEmpty {
+                    completion(0)
+                } else {
+                    if let lastJourney = userJourneys.last {
+                        print (lastJourney.wizard_step)
+                        completion(lastJourney.wizard_step)
+                    } else {
+                        completion(0)
+                    }
+                }
+            case .failure(let error):
+                print("API Error getting journey data: \(error)")
+                completion(0)
+            }
+        }
+    }
+
     
 
 }

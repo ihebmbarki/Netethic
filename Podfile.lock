@@ -9,6 +9,7 @@ PODS:
   - DropDown (2.3.13)
   - FLAnimatedImage (1.0.17)
   - FSCalendar (2.8.4)
+  - MHLoadingButton (0.1.3)
   - SDWebImage (5.17.0):
     - SDWebImage/Core (= 5.17.0)
   - SDWebImage/Core (5.17.0)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - DropDown
   - FLAnimatedImage (~> 1.0)
   - FSCalendar
+  - MHLoadingButton
   - SDWebImage (~> 5.0)
   - TinyConstraints
 
@@ -33,6 +35,7 @@ SPEC REPOS:
     - DropDown
     - FLAnimatedImage
     - FSCalendar
+    - MHLoadingButton
     - SDWebImage
     - TinyConstraints
 
@@ -44,9 +47,10 @@ SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  MHLoadingButton: 13bab47a3ce9d88df15638b7a5b73a8ac9f21077
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
   TinyConstraints: 7b7ccc0c485bb3bb47082138ff28bc33cd49897f
 
-PODFILE CHECKSUM: 6b6abedfe2adcf2a234267b34fbf48086e4feb35
+PODFILE CHECKSUM: f567f61c4fedda45c80759e13024364214e9c0f5
 
 COCOAPODS: 1.12.1

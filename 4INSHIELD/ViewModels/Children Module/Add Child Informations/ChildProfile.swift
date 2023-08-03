@@ -23,7 +23,7 @@ class ChildProfile: KeyboardHandlingBaseVC {
         }
     }
     @IBOutlet weak var birthdayDatePicker: UIDatePicker!
-    
+    var userParentID = Int()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -88,6 +88,7 @@ class ChildProfile: KeyboardHandlingBaseVC {
         let roleDataID = UserDefaults.standard.integer(forKey: "RoleDataID")
         print("Value of roleDataID: \(roleDataID)")
         var userId = Int(roleDataID)
+        
         if roleDataID != 0 {
             userId = Int(roleDataID)
         }else {
@@ -108,7 +109,9 @@ class ChildProfile: KeyboardHandlingBaseVC {
             .responseDecodable(of: UserRole.self) { response in
                 switch response.result {
                 case .success(let user):
-                    print("User ID: \(user.child.id)")
+                    switch response.response?.statusCode {
+                    case 200,201:
+                    print("User child ID: \(user.child.id)")
                     UserDefaults.standard.set(user.child.id, forKey: "childID")
                     let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
                     let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
@@ -117,11 +120,31 @@ class ChildProfile: KeyboardHandlingBaseVC {
                     alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
                     print("User child registered successfully")
-                    
+                        self.platform()
+                    case 401:
+                        /// Handle 401 error
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                        }
+                    default:
+                        /// Handle unknown error
+                        print("we ran into error")
+                    }
                 case .failure(let error):
                     print("Error: \(error)")
+                    /// Handle request failure
+                    if LanguageManager.shared.currentLanguage == "fr"{
+                        self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                    }
+                    if LanguageManager.shared.currentLanguage == "en"{
+                        self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                    }
                 }
-            }
+                    }
+            
         
         //                let date = Date()
         //                let df = DateFormatter()
@@ -208,7 +231,7 @@ class ChildProfile: KeyboardHandlingBaseVC {
             print("User ID not found")
             return
         }
-        let wizardParam = Wizard(user: userID, wizardStep: 1, platform: "mobile", date: dateString)
+        let wizardParam = Wizard(user: userID, wizardStep: 2, platform: "mobile", date: dateString)
         //        do {
         //            let journey = try UserJourney(from: x as! Decoder)
         //            ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
@@ -235,6 +258,13 @@ class ChildProfile: KeyboardHandlingBaseVC {
                         }
                     case 401:
                         /// Handle 401 error
+                        if LanguageManager.shared.currentLanguage == "fr"{
+        
+                            self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                        }
                         print("not authorization")
                     default:
                         /// Handle unknown error
@@ -242,7 +272,12 @@ class ChildProfile: KeyboardHandlingBaseVC {
                     }
                 case .failure(let error):
                     /// Handle request failure
-                    print(error.localizedDescription)
+                    if LanguageManager.shared.currentLanguage == "fr"{
+                        self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                    }
+                    if LanguageManager.shared.currentLanguage == "en"{
+                        self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                    }
                 }
             })
     }
@@ -251,8 +286,8 @@ class ChildProfile: KeyboardHandlingBaseVC {
     
     
     
-    func showAlert(with message: String) {
-        let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }

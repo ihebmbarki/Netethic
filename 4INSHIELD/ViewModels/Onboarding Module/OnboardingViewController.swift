@@ -32,6 +32,7 @@ class OnboardingViewController: UIViewController {
         
         nextBtn.applyGradient()
         // Do any additional setup after loading the view.
+        
     }
     
     func populateScrollView() {
@@ -42,7 +43,25 @@ class OnboardingViewController: UIViewController {
         ]
         
         pageControl.numberOfPages = slides.count
+        pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
+        collectionView.isPagingEnabled = true
     }
+    @objc func pageControlValueChanged(sender: UIPageControl) {
+           let selectedPageIndex = sender.currentPage
+
+           // Scroll the UICollectionView to the selected page
+           let indexPath = IndexPath(item: selectedPageIndex, section: 0)
+           collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+
+           // Update the current page index in the UICollectionView
+           currentPage = selectedPageIndex
+           // Update the UIPageControl to reflect the current page
+           pageControl.currentPage = currentPage
+       }
+
+
+
+    
     
     func goToScreen(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -126,8 +145,15 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
-        currentPage = Int(scrollView.contentOffset.x / width)
+//        currentPage = Int(scrollView.contentOffset.x / width)
+        let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        // Update the current page index
+        currentPage = pageIndex
+        // Update the UIPageControl to reflect the current page
+        pageControl.currentPage = currentPage
     }
+
+    
 }
 
 extension UserDefaults {
@@ -145,3 +171,6 @@ extension UserDefaults {
         }
     }
 }
+
+
+

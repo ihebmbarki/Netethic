@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "thumbnail.png",
+      "filename" : "icons8-error-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "thumbnail 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "thumbnail 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

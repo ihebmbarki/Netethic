@@ -813,6 +813,7 @@ class APIManager {
         ]
         AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers)
             .responseDecodable(of: Userparent.self) { response in
+                print(response.data)
                 switch response.result {
                 case .success(_):
                     if (200..<300).contains(response.response!.statusCode) {

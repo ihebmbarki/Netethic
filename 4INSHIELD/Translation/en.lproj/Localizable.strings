@@ -25,6 +25,7 @@
 "sign_up" = "sign up";
 "text_login" = "Have an account?";
 "Login" = "Sign in";
+"Login1" = "Sign in";
 "signup_google" = "Sign up with Google";
 "signup_facebook" = "Sign up with Facebook";
 "pick_date" = "Choose a date";

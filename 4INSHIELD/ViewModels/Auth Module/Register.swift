@@ -25,25 +25,18 @@ class Register: KeyboardHandlingBaseVC {
     @IBOutlet weak var haveAccLbl: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     
-    var selectedGender : String?
+    @IBOutlet weak var usernameError: UILabel!
+    @IBOutlet weak var emailError: UILabel!
+    @IBOutlet weak var passwordError: UILabel!
+    @IBOutlet weak var confirmpwdError: UILabel!
     
-    
-    @IBOutlet weak var genderLabel: UILabel!
-    
-    
-    @IBOutlet weak var genderView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
             
         }
     }
-    
-    @IBOutlet weak var calenderButton: UIButton!
-    @IBOutlet weak var calenderTextField: UITextField!
-    
-    
-    var sexe: String = "M"
+        
     var iconClick = false
     let imageicon1 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let imageicon2 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
@@ -59,26 +52,18 @@ class Register: KeyboardHandlingBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
-        registerBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -250)
+        resetForm()
         
-        menu.anchorView = genderView
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem))
-        gesture.numberOfTapsRequired = 1
-        gesture.numberOfTouchesRequired = 1
-        genderView.addGestureRecognizer(gesture)
-        menu.selectionAction = { index, title in
-            print(index)
-            print(title)
-            self.genderLabel.text = title
-        }
-        
-        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-        // Set the initial language based on the saved language
-        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
-            LanguageManager.shared.currentLanguage = selectedLanguage
-        }
-        
+//        // Create a white chevron.right image
+//          if let chevronImage = UIImage(systemName: "chevron.right")?.withTintColor(.white, renderingMode: .alwaysOriginal) {
+//              registerBtn.setImage(chevronImage, for: .normal)
+//          }
+//          registerBtn.semanticContentAttribute = .forceRightToLeft
+//
+//        // Adjust the image and title insets
+//        registerBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 20)
+//        registerBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -20)
+
         // Update localized strings
         updateLocalizedStrings()
         
@@ -87,36 +72,234 @@ class Register: KeyboardHandlingBaseVC {
         emailTF.setupLeftSideImages(ImageViewNamed: "mail1")
         passwordTF.setupLeftSideImages(ImageViewNamed: "password")
         confirmPasswordTF.setupLeftSideImages(ImageViewNamed: "password")
-        calenderTextField.setupLeftSideImage(ImageViewNamed: "calendar")
-        calenderButton.setImage(UIImage(named: "calendar")!.withTintColor(UIColor(named: "AccentColor")!, renderingMode: .alwaysTemplate), for: .normal)
-        calenderButton.contentVerticalAlignment = .center
-        
-        
-        
         
         //text fields style
         usernameTF.setupBorderTFs()
         emailTF.setupBorderTFs()
         passwordTF.setupBorderTFs()
         confirmPasswordTF.setupBorderTFs()
-        calenderTextField.setupBorderTF()
-        
-        genderLabel.layer.borderWidth = 1
-        genderLabel.layer.cornerRadius = 5
-        genderLabel.layer.borderColor = UIColor(named: "gris")?.cgColor
-        
-        
         
         //Buttons style
         registerBtn.applyGradients()
         registerBtn.setupBorderBtn()
         //register_google.setupBorderBtns()
-        //    register_facebook.setupBorderBtns()
+        //register_facebook.setupBorderBtns()
         
         visualiserPassword1()
         visualiserPassword2()
         
     }
+
+    func resetForm() {
+        registerBtn.isEnabled = false
+
+        usernameError.isHidden = true
+        emailError.isHidden = true
+        passwordError.isHidden = true
+        confirmpwdError.isHidden = true
+
+//        usernameError.text = "Required"
+//        emailError.text = "Required"
+//        passwordError.text = "Required"
+//        confirmpwdError.text = "Required"
+
+        usernameTF.text = ""
+        emailTF.text = ""
+        passwordTF.text = ""
+        confirmPasswordTF .text = ""
+    }
+    
+    @IBAction func usernameChanged(_ sender: Any) {
+        if let username = usernameTF.text {
+             if let errorMessage = invalidUserName(username) {
+                 usernameError.text = errorMessage
+                 usernameError.isHidden = false
+                 usernameTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+             } else {
+                 usernameError.isHidden = true
+                 usernameTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+             }
+         }
+         
+         checkForValidForm()
+    }
+    
+    func invalidUserName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+
+            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
+            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+            if !predicate.evaluate(with: value)
+            {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Nom d'utilisateur non valide"
+
+            }
+                if LanguageManager.shared.currentLanguage == "en"{
+                    return "Invalid username"
+                }
+                
+            }
+            
+            return nil
+        }
+    
+    @IBAction func emailChanged(_ sender: Any) {
+        if let email = emailTF.text {
+            if let errorMessage = invalidEmail(email) {
+                emailError.text = errorMessage
+                emailError.isHidden = false
+                emailTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+            } else {
+                emailError.isHidden = true
+                emailTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+            }
+        }
+        
+        checkForValidForm()
+    }
+    
+    func invalidEmail(_ value: String) -> String?
+    {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr"{
+            return "Ce champ ne peut pas être vide. "
+            }
+            if LanguageManager.shared.currentLanguage == "en"{
+            return "This field cannot be blank."
+            }
+        }
+        
+        let reqularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Votre email n'est pas valide !"
+            } else {
+                return "Your email is not valid!"
+            }
+        }
+        
+        return nil
+    }
+    
+    @IBAction func passwordChanged(_ sender: Any) {
+        if let password = passwordTF.text {
+             if let errorMessage = invalidPassword(password) {
+                 passwordError.text = errorMessage
+                 passwordError.isHidden = false
+                 passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+             } else {
+                 passwordError.isHidden = true
+                 passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+             }
+         }
+         
+         checkForValidForm()
+    }
+    
+    func invalidPassword(_ value: String) -> String?
+    {
+        if value.count < 8 {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Le mot de passe doit comporter au moins 8 caractères."
+            } else {
+                return "Password must be at least 8 characters."
+            }
+        }
+        
+        if containsDigit(value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Le mot de passe doit contenir au moins 1 chiffre."
+            } else {
+                return "Password must contain at least 1 digit."
+            }
+        }
+        
+        if containsLowerCase(value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Le mot de passe doit contenir au moins 1 caractère minuscule."
+            } else {
+                return "Password must contain at least 1 lowercase character."
+            }
+        }
+        
+        if containsUpperCase(value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Le mot de passe doit contenir au moins un caractère majuscule."
+            } else {
+                return "Password must contain at least 1 uppercase character."
+            }
+        }
+        
+        return nil
+    }
+    
+    func containsDigit(_ value: String) -> Bool
+    {
+        let reqularExpression = ".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return !predicate.evaluate(with: value)
+    }
+    
+    func containsLowerCase(_ value: String) -> Bool
+    {
+        let reqularExpression = ".*[a-z]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return !predicate.evaluate(with: value)
+    }
+    
+    func containsUpperCase(_ value: String) -> Bool
+    {
+        let reqularExpression = ".*[A-Z]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return !predicate.evaluate(with: value)
+    }
+    
+    @IBAction func confirmpwdChanged(_ sender: Any) {
+        if let password = passwordTF.text,
+           let confirmPassword = confirmPasswordTF.text {
+            
+            if password == confirmPassword {
+                confirmpwdError.isHidden = true
+                confirmPasswordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+            } else {
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    confirmpwdError.text = "Les 2 mots de passe ne correspondent pas."
+                    confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                } else {
+                    confirmpwdError.text = "Passwords do not match."
+                    confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                }
+                confirmpwdError.isHidden = false
+            }
+        }
+        
+        checkForValidForm()
+    }
+    
+    func checkForValidForm()
+    {
+        if emailError.isHidden && passwordError.isHidden && usernameError.isHidden && confirmpwdError.isHidden
+        {
+            registerBtn.isEnabled = true
+        }
+        else
+        {
+            registerBtn.isEnabled = false
+        }
+    }
+    
+    
     @objc func didTapTopItem(){
         menu.show()
     }
@@ -137,7 +320,6 @@ class Register: KeyboardHandlingBaseVC {
         }
     }
     
-    
     func visualiserPassword1(){
         imageicon1.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
         imageicon1.tintColor = .black
@@ -145,7 +327,6 @@ class Register: KeyboardHandlingBaseVC {
         imageViewContainerView1.addSubview(imageicon1)
         passwordTF.rightView = imageViewContainerView1
         passwordTF.rightViewMode = .always
-        
         
         let tapGestureRecongnizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer1: )))
         imageicon1.isUserInteractionEnabled = true
@@ -158,7 +339,6 @@ class Register: KeyboardHandlingBaseVC {
             iconClick = false
             tappedImage1.image = UIImage(named: "openeye")
             passwordTF.isSecureTextEntry = false
-            
         }
         else{
             iconClick = true
@@ -175,7 +355,6 @@ class Register: KeyboardHandlingBaseVC {
         confirmPasswordTF.rightView = imageViewContainerView2
         confirmPasswordTF.rightViewMode = .always
         
-        
         let tapGestureRecongnizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer2: )))
         imageicon2.isUserInteractionEnabled = true
         imageicon2.addGestureRecognizer(tapGestureRecongnizer2)
@@ -187,7 +366,6 @@ class Register: KeyboardHandlingBaseVC {
             iconClick = false
             tappedImage2.image = UIImage(named: "openeye")
             confirmPasswordTF.isSecureTextEntry = false
-            
         }
         else{
             iconClick = true
@@ -212,7 +390,6 @@ class Register: KeyboardHandlingBaseVC {
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
                     self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
                 }
-                
                 self.updateLocalizedStrings()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
@@ -234,9 +411,13 @@ class Register: KeyboardHandlingBaseVC {
         emailTF.placeholder = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "email")
         passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "Password")
         confirmPasswordTF.placeholder = NSLocalizedString("re_type_password", tableName: nil, bundle: bundle, value: "", comment: "Confirm Password")
-        calenderTextField.placeholder = NSLocalizedString("pick_date", tableName: nil, bundle: bundle, value: "", comment: "birthday")
         registerBtn.setTitle(NSLocalizedString("sign_up", tableName: nil, bundle: bundle, value: "", comment: "sign up"), for: .normal)
-        signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
+        
+        let underlinedAttribute: [NSAttributedString.Key: Any] = [ .underlineStyle: NSUnderlineStyle.single.rawValue ]
+        let attributedTitle = NSAttributedString(
+            string: NSLocalizedString("Login1", tableName: nil, bundle: bundle, value: "", comment: "Login"), attributes: underlinedAttribute)
+
+        signInBtn.setAttributedTitle(attributedTitle, for: .normal)
         haveAccLbl.text = NSLocalizedString("text_login", tableName: nil, bundle: bundle, value: "", comment: "text login")
         /*    register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
          register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
@@ -256,70 +437,12 @@ class Register: KeyboardHandlingBaseVC {
     }
     
     
-    func resetFields() {
-        usernameTF.text = ""
-        emailTF.text = ""
-        passwordTF.text = ""
-        confirmPasswordTF.text = ""
-    }
-    
-    @objc func showDatePicker() {
-        // Create the alert controller
-        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
-        
-        // Configure the date picker
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.frame = CGRect(x: 0, y: 0, width: 270, height: 216)
-        
-        // Add the date picker to the alert controller
-        alertController.view.addSubview(datePicker)
-        
-        // Add the "Done" button to dismiss the alert controller
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-            // Update the text field with the selected date
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            print(dateFormatter.string(from: datePicker.date))
-            
-            self.calenderTextField.text = dateFormatter.string(from: datePicker.date)
-        }))
-        
-        // Present the alert controller
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func registerBtnTapped(_ sender: Any) {
-        guard let username = self.usernameTF.text, !username.isEmpty else {
-            showAlert(messageKey: "missing_user")
-            return
-        }
-        guard let email = self.emailTF.text, !email.isEmpty else {
-            showAlert(messageKey: "missing_email")
-            return
-        }
-        guard let password = self.passwordTF.text, !password.isEmpty else {
-            showAlert(messageKey: "missing_password")
-            return
-        }
-        guard let selectedGender = genderLabel.text, !selectedGender.isEmpty else {
-            showAlert(messageKey: "missing_genre")
-            return
-        }
-        
-        if selectedGender == "Homme" {
-            sexe = "M"
-        } else if selectedGender == "Femme" {
-            sexe = "F"
-        }
+        guard let username = self.usernameTF.text, !username.isEmpty else { return }
+        guard let email = self.emailTF.text, !email.isEmpty else { return }
+        guard let password = self.passwordTF.text, !password.isEmpty else { return }
 
-        guard let stringDate = calenderTextField.text, !stringDate.isEmpty else {
-            showAlert(messageKey: "missing_date" )
-              return
-          }
-
-        let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password, birthday: stringDate, gender: sexe, first_name: username, last_name: username)
+        let register = RegisterModel(email: email, username: username, password: password, email_verification_url: email)
 
         APIManager.shareInstance.registerAPI(register: register) { (isSuccess, messageKey) in
             if isSuccess {
@@ -329,7 +452,7 @@ class Register: KeyboardHandlingBaseVC {
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
-                self.resetFields()
+                self.resetForm()
             } else {
                 self.showAlert(messageKey: messageKey)
             }
@@ -347,9 +470,6 @@ class Register: KeyboardHandlingBaseVC {
     
     
     @IBAction func signUpFacebookTapped(_ sender: Any) {
-    }
-    
-    @IBAction func calenderButton(_ sender: Any) {
     }
     
     
@@ -372,7 +492,7 @@ extension UITextField {
     func setupBorderTFs() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = UIColor(named: "gris")?.cgColor
+        layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         
     }
 }
@@ -391,8 +511,8 @@ extension UIButton{
     
     func setupBorderBtns() {
         layer.cornerRadius = 5
-        layer.borderWidth = 1
-        layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
+//        layer.borderWidth = 1
+//        layer.borderColor = UIColor(named: "grisBorder")?.cgColor
     }
 }
 

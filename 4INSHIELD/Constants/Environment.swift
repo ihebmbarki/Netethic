@@ -28,7 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "http://51.38.62.168:8017/"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://webserver.dev.netethic.fr/"
+            return "http://54.36.177.119:8017/"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"
         }
@@ -61,7 +61,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "https://crawlserver.staging.4indata.fr"
         case .debugDevelopment, .releaseDevelopment:
-            return "http://51.89.21.5:8017/"
+            return "https://crawlserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
             return "https://crawlserver.shield.kaisens.fr"
         }

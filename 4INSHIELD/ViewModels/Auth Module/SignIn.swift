@@ -326,8 +326,8 @@ extension UIButton{
     
     func setupBorderBtn() {
         layer.cornerRadius = 20
-        layer.borderWidth = 1
-        //layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
+//        layer.borderWidth = 1
+//        layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }
 }
 

@@ -100,7 +100,7 @@ class Register: KeyboardHandlingBaseVC {
         emailTF.setupBorderTFs()
         passwordTF.setupBorderTFs()
         confirmPasswordTF.setupBorderTFs()
-        calenderTextField.setupBorderTF()
+        calenderTextField.setupBorderTFs()
         
         genderLabel.layer.borderWidth = 1
         genderLabel.layer.cornerRadius = 5

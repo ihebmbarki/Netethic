@@ -15,7 +15,7 @@ target '4INSHIELD' do
   pod 'TinyConstraints'
   pod 'DropDown'
   pod 'MHLoadingButton'
-
+  pod "FlexibleSteppedProgressBar"
 end
 
 post_install do |installer|

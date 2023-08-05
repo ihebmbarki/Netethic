@@ -108,7 +108,8 @@
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
-		87B3C57D2A7AA11B007B9214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87B3C57C2A7AA11B007B9214 /* Assets.xcassets */; };
+		87C0352E2A7D2CD9001C2BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87C0352D2A7D2CD9001C2BF3 /* Assets.xcassets */; };
+		87C035312A7D5945001C2BF3 /* ProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -252,7 +253,8 @@
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
-		87B3C57C2A7AA11B007B9214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		87C0352D2A7D2CD9001C2BF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarViewController.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				040821B129D6E1B600D7A562 /* OnboardingViewController.swift */,
 				040821B329D6E1F000D7A562 /* OnboardingCollectionViewCell.swift */,
+				87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */,
 			);
 			path = "Onboarding Module";
 			sourceTree = "<group>";
@@ -441,8 +444,8 @@
 		04850C4229ACC3E3001A27FF = {
 			isa = PBXGroup;
 			children = (
-				87B3C57C2A7AA11B007B9214 /* Assets.xcassets */,
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
+				87C0352D2A7D2CD9001C2BF3 /* Assets.xcassets */,
 				87F4B2202A7A6A8800646FD1 /* inshield.mp4 */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
@@ -851,7 +854,7 @@
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
-				87B3C57D2A7AA11B007B9214 /* Assets.xcassets in Resources */,
+				87C0352E2A7D2CD9001C2BF3 /* Assets.xcassets in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
 				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,
@@ -936,6 +939,7 @@
 				0449F04D2A28F9D600D3327D /* ScoreResponse.swift in Sources */,
 				0479739829CC927200FD28DF /* ChildProfileAdded.swift in Sources */,
 				049DF5B62A33A7D200CDD486 /* HumorCollectionViewCell.swift in Sources */,
+				87C035312A7D5945001C2BF3 /* ProgressBarViewController.swift in Sources */,
 				87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */,
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */,

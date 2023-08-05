@@ -6,14 +6,15 @@
 //
 import Foundation
 import Alamofire
+import FlexibleSteppedProgressBar
+
 import UIKit
 
-class ChildProfile: KeyboardHandlingBaseVC {
+class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var genderTF: UITextField!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!{
@@ -24,34 +25,35 @@ class ChildProfile: KeyboardHandlingBaseVC {
     }
     @IBOutlet weak var birthdayDatePicker: UIDatePicker!
     var userParentID = Int()
+//    let progressBarVC = ProgressBarViewController()
+    
+    
+    @IBOutlet weak var progressFirstView: UIView!
+    
+    @IBOutlet weak var logoImage: UIImageView!
+    var progressBar: FlexibleSteppedProgressBar!
+    var progressBarWithoutLastState: FlexibleSteppedProgressBar!
+    var progressBarWithDifferentDimensions: FlexibleSteppedProgressBar!
+    
+    var backgroundColor = UIColor(named: "AccentColor")
+    var progressColor = UIColor(named: "AccentColor")
+    var textColorHere = UIColor.white
+    
+    var maxIndex = -1
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        // Set the number of pages in the page control
-        pageControl.numberOfPages = 5
-        
-        // Set the current page of the page control
-        pageControl.currentPage = 0
-        
-        // Set the default page control indicators to circles
-        for view in pageControl.subviews {
-            if let dot = view as? UIImageView {
-                dot.image = UIImage(systemName: "circle.fill")
-                dot.tintColor = UIColor(named: "AccentColor")
-            }
-        }
-        
-        // Set the current page control indicator to a numbered circle
-        if let dot = pageControl.subviews[pageControl.currentPage] as? UIImageView {
-            dot.image = UIImage(systemName: "\(pageControl.currentPage + 1).circle.fill")
-            dot.tintColor = UIColor(named: "AccentColor")
-        }
+//        setupProgressBar()
+//        setupProgressBarWithoutLastState()
+        setupProgressBarWithDifferentDimensions()
         
         //Buttons style
         nextBtn.applyGradient()
         nextBtn.layer.cornerRadius = 10
         
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+
     }
     
     func showAlert(message: String) {
@@ -291,6 +293,80 @@ class ChildProfile: KeyboardHandlingBaseVC {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    
+
+
+    func setupProgressBarWithDifferentDimensions() {
+        progressBarWithDifferentDimensions = FlexibleSteppedProgressBar()
+        progressBarWithDifferentDimensions.translatesAutoresizingMaskIntoConstraints = false
+        self.progressFirstView.addSubview(progressBarWithDifferentDimensions)
+        
+        // iOS9+ auto layout code
+        let horizontalConstraint = progressBarWithDifferentDimensions.centerXAnchor.constraint(equalTo: self.progressFirstView.centerXAnchor)
+        let verticalConstraint = progressBarWithDifferentDimensions.topAnchor.constraint(
+            equalTo: progressFirstView.topAnchor,
+            constant: 240
+        )
+        let widthConstraint = progressBarWithDifferentDimensions.widthAnchor.constraint(equalToConstant: 300)
+        let heightConstraint = progressBarWithDifferentDimensions.heightAnchor.constraint(equalToConstant: 150)
+        NSLayoutConstraint.activate([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
+        
+        
+        progressBarWithDifferentDimensions.numberOfPoints = 5
+        progressBarWithDifferentDimensions.lineHeight = 6
+        progressBarWithDifferentDimensions.radius = 14
+        progressBarWithDifferentDimensions.progressRadius = 14
+        progressBarWithDifferentDimensions.progressLineHeight = 6
+        progressBarWithDifferentDimensions.delegate = self
+        progressBarWithDifferentDimensions.useLastState = true
+        progressBarWithDifferentDimensions.lastStateCenterColor = progressColor
+        progressBarWithDifferentDimensions.selectedBackgoundColor = progressColor ?? .blue
+        progressBarWithDifferentDimensions.selectedOuterCircleStrokeColor = backgroundColor
+        progressBarWithDifferentDimensions.lastStateOuterCircleStrokeColor = backgroundColor
+        progressBarWithDifferentDimensions.currentSelectedCenterColor = progressColor ?? .blue
+        progressBarWithDifferentDimensions.stepTextColor = textColorHere
+        progressBarWithDifferentDimensions.currentSelectedTextColor = progressColor
+        progressBarWithDifferentDimensions.completedTillIndex = 1
+    }
+    
+    
+    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
+                     didSelectItemAtIndex index: Int) {
+        progressBar.currentIndex = index
+        if index > maxIndex {
+            maxIndex = index
+            progressBar.completedTillIndex = maxIndex
+        }
+    }
+    
+    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
+                     canSelectItemAtIndex index: Int) -> Bool {
+        return true
+    }
+    
+    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
+                     textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
+        if progressBar == self.progressBar || progressBar == self.progressBarWithoutLastState {
+        } else if progressBar == progressBarWithDifferentDimensions {
+            if position == FlexibleSteppedProgressBarTextLocation.center {
+                switch index {
+                    
+                case 0: return "1"
+                case 1: return "2"
+                case 2: return "3"
+                case 3: return "4"
+                case 4: return "5"
+                default: return "Date"
+                    
+                }
+            }
+        }
+        return ""
+    }
+  
+    
+    
 }
 
 extension Date {

@@ -28,7 +28,7 @@ class BuildConfiguration {
         case .debugStaging, .releaseStaging:
             return "http://51.38.62.168:8017/"
         case .debugDevelopment, .releaseDevelopment:
-            return "https://webserver.dev.netethic.fr/"
+            return "http://51.89.21.5:8017/"
         case .debugProduction, .releaseProduction:
             return "https://api.shield.kaisens.fr"
         }
@@ -70,11 +70,12 @@ class BuildConfiguration {
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"
     let PROFIL_SEARCH = "http://54.36.177.119:8200"
     //Kaxavy
-   let CLIENT_ID = "270449"
-    let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
+//   let CLIENT_ID = "270449"
+//    let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
     //Jhon
- // let CLIENT_ID = "995587"
-  //  let CLIENT_SECRET = "e13b6b33ea025c3a0d82282629775aae4d2f740587623faa7fa965ff"
+    //devlop
+  let CLIENT_ID = "568280"
+    let CLIENT_SECRET = "4bde50918d5b19eb6ca4a83ed4c7d9cd101aa3a10b6c1fe62df57fbc"
     
     init() {
         let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as! String

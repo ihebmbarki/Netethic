@@ -17,7 +17,10 @@
 "register" = "Inscrivez-vous";
 "google_connect" = "Connexion avec Google";
 "fb" = "Connexion avec Facebook";
-
+"userName1" = "Ce champ ne peut pas être vide.";
+"userName2" = "Nom d'utilisateur non valide";
+"password1" = "Ce champ ne peut pas être vide.";
+"password2" = "Mot de passe non valide";
 //MARK: Register
 "your_username" = "Nom d'utilisateur";
 "create_account" = "Créer un compte";

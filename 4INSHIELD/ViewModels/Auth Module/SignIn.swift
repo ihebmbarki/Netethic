@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 
 class SignIn: KeyboardHandlingBaseVC {
+
     
     
     //IBOutlets
@@ -29,6 +30,10 @@ class SignIn: KeyboardHandlingBaseVC {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
+    
+    @IBOutlet weak var passwordErrorLabel: UILabel!
+    @IBOutlet weak var userErrorLabel: UILabel!
+    
     var iconClick = false
     let imageicon = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let alertImage = UIImage(named: "yey")
@@ -36,7 +41,10 @@ class SignIn: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingIndicator.isHidden =  true
+
+        resetForm()
+        signInBtn.isEnabled = false
+        loadingIndicator.hidesWhenStopped = true
         // Set the initial language based on the saved language
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             LanguageManager.shared.currentLanguage = selectedLanguage
@@ -64,11 +72,6 @@ class SignIn: KeyboardHandlingBaseVC {
         signIn_google.setupBorderBtn()
         signIn_facebook.setupBorderBtn()
         visualiserPassword()
-        
-        
- 
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +79,21 @@ class SignIn: KeyboardHandlingBaseVC {
         LanguageManager.shared.currentLanguage = "fr"
         updateLocalizedStrings()
     }
+    func resetForm()
+        {
+            signInBtn.isEnabled = true
+            
+            userErrorLabel.isHidden = true
+            passwordErrorLabel.isHidden = true
+            
+            userErrorLabel.text = "Required"
+            passwordErrorLabel.text = "Required"
+            
+//            emailTF.text = ""
+//            passwordTF.text = ""
+        }
+    
+    
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -86,32 +104,10 @@ class SignIn: KeyboardHandlingBaseVC {
         
         guard let username =  emailTF.text else { return false }
         guard let password =  passwordTF.text else { return false }
-        
-        if username.isEmpty   {
-            if LanguageManager.shared.currentLanguage == "fr"{
-                showAlert(message: "Votre email n'est pas vérifié ! Veuillez vérifier votre e-mail. ")
-                return false
-            }
-        }
-        if username.isEmpty   {
-            if LanguageManager.shared.currentLanguage == "en"{
-                showAlert(message: "Your email is not verified! Please verify your email address.")
-            }
-        }
-        if LanguageManager.shared.currentLanguage == "fr"{
-            if password.isEmpty {
-                showAlert(message: "Votre mot de passe n'est pas vérifié ! Veuillez vérifier votre mot de passe")
-                return false
-            }
-        }
-        if password.isEmpty {
-            if LanguageManager.shared.currentLanguage == "en"{
-                showAlert(message: "Your password is not verified! Please verify your password.")
-            }
-        }
-        
+               
         return true
     }
+   
     
     func resetFields() {
         emailTF.text = ""
@@ -131,7 +127,7 @@ class SignIn: KeyboardHandlingBaseVC {
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
-                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
                 }
                 
                 self.updateLocalizedStrings()
@@ -152,8 +148,11 @@ class SignIn: KeyboardHandlingBaseVC {
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-        
         welcomeLabel.text = NSLocalizedString("Welcome", tableName: nil, bundle: bundle, value: "", comment: "welcome label")
+        userErrorLabel.text = NSLocalizedString("userName1", tableName: nil, bundle: bundle, value: "", comment: "erreur1 label")
+        userErrorLabel.text = NSLocalizedString("userName2", tableName: nil, bundle: bundle, value: "", comment: "erreur2 label")
+        passwordErrorLabel.text = NSLocalizedString("password1", tableName: nil, bundle: bundle, value: "", comment: "password erreur1 label")
+        passwordErrorLabel.text = NSLocalizedString("password2", tableName: nil, bundle: bundle, value: "", comment: "password erreur2 label")
         signInLabel.text = NSLocalizedString("Welcome2", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         emailTF.placeholder = NSLocalizedString("Connexion", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
@@ -179,10 +178,10 @@ class SignIn: KeyboardHandlingBaseVC {
     //    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
-        //Activiat Loading Button and Animating
-        self.loadingIndicator.isHidden =  false
+//        Activiat Loading Button and Animating
         loadingIndicator.startAnimating()
-   
+        // loadingIndicator.startAnimating()
+        resetForm()
         guard let username = self.emailTF.text else { return }
         let trimmedUserName = username.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let password = self.passwordTF.text else { return }
@@ -201,7 +200,7 @@ class SignIn: KeyboardHandlingBaseVC {
                        let id = jsonDict["id"] as? Int,
                        let username = jsonDict["username"] as? String {
                         // Save id and username to UserDefaults
-                        //  UserDefaults.standard.set(id, forKey: "userID")
+                          UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
                         self.signInBtn.isEnabled = true
 
@@ -233,11 +232,12 @@ class SignIn: KeyboardHandlingBaseVC {
                                     if let wizardStep = UserDefaults.standard.object(forKey: "wizardStep") as? Int {
                                         //self.showAlert(title: "Alerte", message: "Succès")
                                         print("Retrieved wizard step from user defaults: \(wizardStep)")
-                                        self.loadingIndicator.stopAnimating()
                                         switch wizardStep {
                                         case 1:
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "childInfos")
                                         case 2:
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "ChildSocialMedia")
                                         case 3:
 //                                            if LanguageManager.shared.currentLanguage == "fr"{
@@ -248,6 +248,7 @@ class SignIn: KeyboardHandlingBaseVC {
 //                                                let alertImage = UIImage(named: "yey")
 //                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildProfileAdded")
 //                                            }
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
 //                                            if LanguageManager.shared.currentLanguage == "fr"{
@@ -258,6 +259,7 @@ class SignIn: KeyboardHandlingBaseVC {
 //                                                let alertImage = UIImage(named: "yey")
 //                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildDevice")
 //                                            }
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:
 //                                            if LanguageManager.shared.currentLanguage == "fr"{
@@ -268,19 +270,23 @@ class SignIn: KeyboardHandlingBaseVC {
 //                                                let alertImage = UIImage(named: "yey")
 //                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "Congrats")
 //                                            }
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "Congrats")
                                         case 6:
+                                            self.loadingIndicator.stopAnimating()
                                                 let storyboard = UIStoryboard(name: "Children", bundle: nil)
                                                 let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
                                                 vc.modalPresentationStyle = .fullScreen
                                                 self.present(vc, animated: true, completion: nil)
     
                                         default:
+                                            self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "OnboardingSB")
                                         }
                                     } else {
                                         // The wizard step value is not set in the user defaults
                                         // Redirect to the onboarding screen
+                                        self.loadingIndicator.stopAnimating()
                                         self.goToScreen(withId: "OnboardingSB")
                                     }
                                 }
@@ -289,10 +295,8 @@ class SignIn: KeyboardHandlingBaseVC {
                         }
                     }
                 case .failure(let error):
-                    self.loadingIndicator.stopAnimating()
-                    self.loadingIndicator.isHidden =  true
-                
-                    switch error {
+            
+                switch error {
                     case .custom(let message):
                         if LanguageManager.shared.currentLanguage == "fr"{
                             self.showAlert(title:"Alerte" ,message: "Informations d'identification non valides ")
@@ -300,6 +304,7 @@ class SignIn: KeyboardHandlingBaseVC {
                         if LanguageManager.shared.currentLanguage == "en"{
                             self.showAlert(title: "Alert", message: "Invalid credentials ")
                         }
+                    self.loadingIndicator.stopAnimating()
                     case .networkError:
                         
                         if LanguageManager.shared.currentLanguage == "fr"{
@@ -308,6 +313,7 @@ class SignIn: KeyboardHandlingBaseVC {
                         if LanguageManager.shared.currentLanguage == "en"{
                             self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
                         }
+                    self.loadingIndicator.stopAnimating()
                     case .statusCodeError(let message, let statusCode):
                         self.showAlert(title: "Status Code Error", message: "Error with status code: \(statusCode ?? -1), Message: \(message)")
                     case .parsingError:
@@ -317,7 +323,7 @@ class SignIn: KeyboardHandlingBaseVC {
                         if LanguageManager.shared.currentLanguage == "en"{
                             self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
                         }
-                        
+                    self.loadingIndicator.stopAnimating()
                     case .decodingError:
                         print("response decoding change")
                     case .serverError:
@@ -327,6 +333,7 @@ class SignIn: KeyboardHandlingBaseVC {
                         if LanguageManager.shared.currentLanguage == "en"{
                             self.showAlert(title: "Alert", message: "The server is temporarily unavailable, Please try again later. ")
                         }
+                    self.loadingIndicator.stopAnimating()
                     }
                 }
             }
@@ -423,6 +430,7 @@ class SignIn: KeyboardHandlingBaseVC {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
+    
 
     
     
@@ -437,9 +445,154 @@ class SignIn: KeyboardHandlingBaseVC {
         goToScreen(withId: "Register")
         print ("register")
     }
-    
+    func invalidUserName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
 
+            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
+            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+            if !predicate.evaluate(with: value)
+            {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Nom d'utilisateur non valide"
 
+            }
+                if LanguageManager.shared.currentLanguage == "en"{
+                    return "Invalid username"
+                }
+                
+            }
+            
+            return nil
+        }
+
+    @IBAction func userChanged(_ sender: Any) {
+        if let user = emailTF.text
+                {
+                    if let errorMessage = invalidUserName(user)
+                    {
+                        userErrorLabel.text = errorMessage
+                        userErrorLabel.isHidden = false
+                        emailTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                        emailTF.setupRightSideImage(image: "error", colorName: "redControl")
+                    }
+                    else
+                    {
+                        userErrorLabel.isHidden = true
+                        emailTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                        emailTF.setupRightSideImage(image: "done", colorName: "vertDone")
+
+                    }
+                }
+                
+                checkForValidForm()
+    }
+    func checkForValidForm()
+    {
+        if userErrorLabel.isHidden && passwordErrorLabel.isHidden
+        {
+            signInBtn.isEnabled = true
+        }
+        else
+        {
+            signInBtn.isEnabled = false
+        }
+    }
+    @IBAction func passwordChanged(_ sender: Any) {
+        if let password = passwordTF.text {
+            if let errorMessage = invalidPassword(password)
+            {
+                passwordErrorLabel.text = errorMessage
+                passwordErrorLabel.isHidden = false
+                passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+//                passwordTF.setupRightSideImage(image: "error", colorName: "redControl")
+            }
+            else
+            {
+                passwordErrorLabel.isHidden = true
+                passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
+
+            }
+            
+            checkForValidForm()
+        }
+    }
+        func containsDigit(_ value: String) -> Bool {
+                let reqularExpression = ".*[0-9]+.*"
+                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+                return !predicate.evaluate(with: value)
+            }
+        func invalidPassword(_ value: String) -> String? {
+                if value.isEmpty {
+                    if LanguageManager.shared.currentLanguage == "fr"{
+                    return "Ce champ ne peut pas être vide. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en"{
+                    return "This field cannot be blank."
+                    }
+                }
+            
+            
+            
+            if LanguageManager.shared.currentLanguage == "fr"{
+                if value.count < 8
+                {
+                    return "Mot de passe non valide"
+                }
+                if containsDigit(value)
+                {
+                    return "Mot de passe non valide"
+                }
+                if containsLowerCase(value)
+                {
+                    return "Mot de passe non valide"
+                }
+                //                if containsUpperCase(value)
+                //                {
+                //                    return "Password must contain at least 1 uppercase character"
+                //                }
+            }
+            if LanguageManager.shared.currentLanguage == "en"{
+                if value.count < 8
+                {
+                    return "Invalid password"
+                }
+                if containsDigit(value)
+                {
+                    return "Invalid password"
+                }
+                if containsLowerCase(value)
+                {
+                    return "Invalid password"
+                }
+                //                if containsUpperCase(value)
+                //                {
+                //                    return "Password must contain at least 1 uppercase character"
+                //                }
+            }
+                return nil
+            }
+        func containsLowerCase(_ value: String) -> Bool
+            {
+                let reqularExpression = ".*[a-z]+.*"
+                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+                return !predicate.evaluate(with: value)
+            }
+            
+//            func containsUpperCase(_ value: String) -> Bool
+//            {
+//                let reqularExpression = ".*[A-Z]+.*"
+//                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+//                return !predicate.evaluate(with: value)
+//            }
     
     @IBAction func signInGoogleTapped(_ sender: Any) {
     }
@@ -485,11 +638,20 @@ extension UITextField {
         leftView = imageViewContainerView
         leftViewMode = .always
     }
+    func setupRightSideImage(image: String, colorName: String) {
+        let imageView = UIImageView(frame: CGRect(x: 12, y: 8, width: 20, height: 20))
+        imageView.image = UIImage(named: image)?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(named: colorName)
+        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        imageViewContainerView.addSubview(imageView)
+        rightView = imageViewContainerView
+        rightViewMode = .always
+    }
     
     func setupBorderTF() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = UIColor(named: "gris")?.cgColor
+        layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
     }
 }

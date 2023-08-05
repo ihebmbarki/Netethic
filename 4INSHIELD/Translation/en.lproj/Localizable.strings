@@ -17,6 +17,10 @@
 "register" = "Sign up";
 "google_connect" = "Login with Google";
 "fb" = "Login with Facebook";
+"userName1" = "This field cannot be blank.";
+"userName2" = "Invalid username";
+"password1" = "This field cannot be blank.";
+"password2" = "Invalid password";
 
 //MARK: Register
 "your_username" = "Username";

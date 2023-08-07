@@ -816,33 +816,62 @@ class APIManager {
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
+        
         AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers)
-            .responseDecodable(of: Userparent.self) { response in
-                print(response.data)
+            .response { response in
+                print(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
                 switch response.result {
-                case .success(_):
-                    if (200..<300).contains(response.response!.statusCode) {
-                        completionHandler(true, "success_signUp")
+                case .success:
+                    if (200..<300).contains(response.response?.statusCode ?? 0) {
+                        var successMessage = "success_signUp"
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            successMessage = "L'inscription a été effectuée avec succès !Veuillez vérifier votre e-mail d'inscription pour le lien d'activation."
+                        } else {
+                            successMessage = "Registration completed successfully! Please check your registered email for the activation link."
+                        }
+                        completionHandler(true, successMessage)
                     } else {
-                        completionHandler(false, "registration_failure_message")
+                        var errorMessage = "registration_failure_message"
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            errorMessage = "Les données sont introuvables."
+                        } else {
+                            errorMessage = "Data not found."
+                        }
+                        completionHandler(false, errorMessage)
                     }
                 case .failure(let error):
-                    // Handle different types of network errors
                     if let statusCode = response.response?.statusCode {
                         if statusCode >= 500 {
-                            // Get the server error message from the response data directly
                             if let data = response.data, let serverErrorString = String(data: data, encoding: .utf8) {
                                 completionHandler(false, serverErrorString)
                             } else {
-                                completionHandler(false, "error_server")
+                                var errorMessage = "error_server"
+                                if LanguageManager.shared.currentLanguage == "fr" {
+                                    errorMessage = "Erreur serveur. Veuillez réessayer plus tard."
+                                } else {
+                                    errorMessage = "Server error. Please try again later."
+                                }
+                                completionHandler(false, errorMessage)
                             }
                         } else {
-                            completionHandler(false, "network_error_message")
-                            print("error: \(error.localizedDescription)")
+                            var errorMessage = "network_error_message"
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                errorMessage = "Une erreur de réseau est survenue."
+                            } else {
+                                errorMessage = "A network error occurred. Check your internet connection."
+                            }
+                            completionHandler(false, errorMessage)
                         }
                     } else {
-                        completionHandler(false, "unknown_error_message")
+                        var errorMessage = "unknown_error_message"
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            errorMessage = "Une erreur s'est produite. Veuillez réessayer."
+                        } else {
+                            errorMessage = "An error occurred. Please try again."
+                        }
+                        completionHandler(false, errorMessage)
                     }
+                    print("error: \(error.localizedDescription)")
                 }
             }
     }

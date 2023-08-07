@@ -8,10 +8,9 @@
 import Foundation
 
 struct RegisterModel: Encodable {
-    let email: String
     let username: String
+    let email: String
     let password: String
-    let email_verification_url: String
-    let user_agent: String = "mobile"
-    let user_role: String = "parent"
+    let user_agent = "mobile"
+    let user_type = "parent"
 }

@@ -39,11 +39,10 @@ Please check your registered email for the activation link.";
 "registration_failure_message" = "Data not found.";
 "network_error_message" = "The data could not be read. Please try again.";
 "unknown_error_message" = "An unknown error occurred. Please try again.";
-"missing_user" = "Enter your username";
-"missing_email" = "Enter your email address";
-"missing_password" = "Enter your password";
-"missing_genre" = "Enter your gender";
-"missing_date" = "Enter your birthdate";
+"username_error" = "Invalid username";
+"email_error" = "Your email is not valid!";
+"password_error" = "Password must be at least 8 characters.";
+"Confirm_password_error" = "Passwords do not match.";
 
 //MARK: Confirmation
 "code" = "Enter the code sent to your email";

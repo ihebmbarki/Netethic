@@ -38,11 +38,10 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "registration_failure_message" = "Les données sont introuvables.";
 "network_error_message" = "Les données n’ont pas pu être lues. Veuillez réessayer.";
 "unknown_error_message" = "Une erreur inconnue s'est produite. Veuillez réessayer.";
-"missing_user" = "Saisissez votre nom d'utilisateur";
-"missing_email" = "Saisissez votre adresse e-mail";
-"missing_password" = "Saisissez votre mot de passe";
-"missing_genre" = "Saisissez votre genre";
-"missing_date" = "Saisissez votre date de naissance";
+"username_error" = "Nom d'utilisateur non valide";
+"email_error" = "Votre email n'est pas valide !";
+"password_error" = "Le mot de passe doit comporter au moins 8 caractères.";
+"Confirm_password_error" = "Les 2 mots de passe ne correspondent pas.";
 
 //MARK: Confirmation
 "code" = "Entrez le code envoyé à votre email";

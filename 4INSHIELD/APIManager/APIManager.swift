@@ -811,42 +811,43 @@ class APIManager {
             }
         }
     }
-    
-    
 
-    
-    func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()){
+    func registerAPI(register: RegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
         AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers)
             .responseDecodable(of: Userparent.self) { response in
+                print(response.data)
                 switch response.result {
-                case .success(let responseObject):
-                    // Handle the decoded response
-                    print(responseObject.parent.id)
-                    print(responseObject)
-                    do {
-                        // let json = try JSONSerialization.jsonObject(with: responseObject!, options: [])
-                        if (200..<300).contains(response.response!.statusCode)  {
-                            //  print(data)
-                            //                     let parentId = String(data.parent.id)
-                            //                      print(parentId)
-                            completionHandler(true, "user registered successfully")
-                            
-                        }else {
-                            completionHandler(false, "try again!")
+                case .success(_):
+                    if (200..<300).contains(response.response!.statusCode) {
+                        completionHandler(true, "success_signUp")
+                    } else {
+                        completionHandler(false, "registration_failure_message")
+                    }
+                case .failure(let error):
+                    // Handle different types of network errors
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode >= 500 {
+                            // Get the server error message from the response data directly
+                            if let data = response.data, let serverErrorString = String(data: data, encoding: .utf8) {
+                                completionHandler(false, serverErrorString)
+                            } else {
+                                completionHandler(false, "error_server")
+                            }
+                        } else {
+                            completionHandler(false, "network_error_message")
+                            print("error: \(error.localizedDescription)")
                         }
-                    }catch{
-                        print(error.localizedDescription)
-                        completionHandler(false, "try again!")
-                    } case .failure(let error):
-                    // Handle the error
-                    print("Error: \(error)")
+                    } else {
+                        completionHandler(false, "unknown_error_message")
+                    }
                 }
             }
     }
-    //        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
+
+    //AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response {  response in
     //           // debugPrint(response)
     //            switch response.result {
     //                case.success(let data):
@@ -871,7 +872,6 @@ class APIManager {
     //            }
     //
     //        }
-    
     
     func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
         let headers: HTTPHeaders = [

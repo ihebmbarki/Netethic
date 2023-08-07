@@ -7,20 +7,11 @@
 
 import Foundation
 
-
-
 struct RegisterModel: Encodable {
-    let username: String
     let email: String
-    let user_agent = "mobile"
+    let username: String
     let password: String
-    let user_type = "parent"
-
-
-
-//   let first_name: String
-//    let last_name: String
- //   let confirmPassword: String
-   // let user_role = "parent"
+    let email_verification_url: String
+    let user_agent: String = "mobile"
+    let user_role: String = "parent"
 }
-

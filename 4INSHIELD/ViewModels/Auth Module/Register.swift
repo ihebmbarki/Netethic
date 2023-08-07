@@ -82,8 +82,6 @@ class Register: KeyboardHandlingBaseVC {
         //Buttons style
         registerBtn.applyGradients()
         registerBtn.setupBorderBtn()
-        registerBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
-        registerBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -250)
         //register_google.setupBorderBtns()
         //register_facebook.setupBorderBtns()
         
@@ -440,17 +438,17 @@ class Register: KeyboardHandlingBaseVC {
     
     
     @IBAction func registerBtnTapped(_ sender: Any) {
-        guard let username = usernameTF.text, !username.isEmpty,
-              let email = emailTF.text, !email.isEmpty,
-              let password = passwordTF.text, !password.isEmpty else {
-                  return
-              }
+        guard let username = self.usernameTF.text, !username.isEmpty else { return }
+        guard let email = self.emailTF.text, !email.isEmpty else { return }
+        guard let password = self.passwordTF.text, !password.isEmpty else { return }
 
-        let register = RegisterModel(username: username, email: email, password: password)
+        let register = RegisterModel(email: email, username: username, password: password, email_verification_url: email)
 
-        APIManager.shareInstance.registerAPI(register: register) { isSuccess, messageKey in
+        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, messageKey) in
             if isSuccess {
+                // Show the success alert first
                 self.showAlert(messageKey: messageKey)
+                // Upon tapping OK, navigate to the confirmation screen
                 self.goToConfirmation(withId: "ConfirmationID")
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
@@ -460,7 +458,6 @@ class Register: KeyboardHandlingBaseVC {
             }
         }
     }
-
     
     @IBAction func signInButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

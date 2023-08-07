@@ -14,7 +14,7 @@ struct ChildModel: Encodable {
     let parent_id: Int
     
 }
-
+// MARK: - UserRole
 struct UserRole: Codable {
     let id: Int
     let username, email, firstName, lastName: String
@@ -43,14 +43,13 @@ struct ChildRole: Codable {
 // MARK: - Parent
 struct ParentRole: Codable {
     let id: Int
-    let username, firstName, lastName, email: String
-    let gender, birthday, createdAt, modifiedAt: String
+    let username, firstName, email, gender: String
+    let photo, createdAt, modifiedAt: String
 
     enum CodingKeys: String, CodingKey {
         case id, username
         case firstName = "first_name"
-        case lastName = "last_name"
-        case email, gender, birthday
+        case email, gender, photo
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
     }

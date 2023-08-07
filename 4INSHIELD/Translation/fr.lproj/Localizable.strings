@@ -7,7 +7,7 @@
 */
 
 //MARK: Login
-"Welcome" = "Bienvenue à NETETHIC";
+"Welcome" = "Bienvenue à netethic";
 "Welcome2" = "Connectez-vous pour continuer";
 "e_mail" = "Adresse Email";
 "Password" = "Mot de passe";
@@ -28,8 +28,21 @@
 "sign_up" = "S'inscrire";
 "text_login" = "Vous avez un compte ?";
 "Login" = "Connexion";
+"Login1" = "Connectez-vous";
 "signup_google" = "S'inscrire avec Google";
 "signup_facebook" = "S'inscrire avec Facebook";
+"pick_date" = "Choisissez une date";
+"success_signUp" = "L'inscription a été effectuée avec succès !
+Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
+"error_server" = "Erreur serveur. Veuillez réessayer plus tard.";
+"registration_failure_message" = "Les données sont introuvables.";
+"network_error_message" = "Les données n’ont pas pu être lues. Veuillez réessayer.";
+"unknown_error_message" = "Une erreur inconnue s'est produite. Veuillez réessayer.";
+"missing_user" = "Saisissez votre nom d'utilisateur";
+"missing_email" = "Saisissez votre adresse e-mail";
+"missing_password" = "Saisissez votre mot de passe";
+"missing_genre" = "Saisissez votre genre";
+"missing_date" = "Saisissez votre date de naissance";
 
 //MARK: Confirmation
 "code" = "Entrez le code envoyé à votre email";
@@ -61,3 +74,12 @@
 "harcled" = "harcelé";
 "parc_har" = "Partiellement harcelé";
 "non_harcele" = "Non harcelé";
+ 
+//MARK: Child Profile
+"First_name" = "Prénom";
+"Last_name" = "Nom";
+"birthday" = "Date de naissance ";
+"Gender" = "Genre";
+"Next" = "Suivant";
+"LabelText" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant" ;
+

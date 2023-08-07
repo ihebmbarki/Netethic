@@ -6,6 +6,7 @@
 //
 import Foundation
 import Alamofire
+import FSCalendar
 import FlexibleSteppedProgressBar
 
 import UIKit
@@ -23,10 +24,14 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
             
         }
     }
-    @IBOutlet weak var birthdayDatePicker: UIDatePicker!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
+    @IBOutlet weak var calenderButton: UIButton!
+    @IBOutlet weak var birthdayTextField: UITextField!
     var userParentID = Int()
 //    let progressBarVC = ProgressBarViewController()
     
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     @IBOutlet weak var progressFirstView: UIView!
     
@@ -48,8 +53,42 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         
         //Buttons style
         nextBtn.applyGradient()
-        nextBtn.layer.cornerRadius = 10
+        nextBtn.layer.cornerRadius = 15
+        nextBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
+        nextBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -250)
         
+        birthdayTextField.setupRightSideImage(image: "calendar", colorName: "AccentColor")
+//        calenderButton.setImage(UIImage(named: "calendar")!.withTintColor(UIColor(named: "AccentColor")!, renderingMode: .alwaysTemplate), for: .normal)
+//        calenderButton.contentVerticalAlignment = .center
+        
+        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        
+    }
+    @objc func showDatePicker() {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
+        
+        // Configure the date picker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.frame = CGRect(x: 0, y: 0, width: 270, height: 216)
+        
+        // Add the date picker to the alert controller
+        alertController.view.addSubview(datePicker)
+        
+        // Add the "Done" button to dismiss the alert controller
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            // Update the text field with the selected date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            print(dateFormatter.string(from: datePicker.date))
+            
+            self.birthdayTextField.text = dateFormatter.string(from: datePicker.date)
+        }))
+        
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,12 +111,10 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     @IBAction func nextBtnClicked(_ sender: Any) {
         
         let firstName = self.firstNameTF.text ?? "test"
-        guard let lastName = self.lastNameTF.text else { return}
-        guard let gender = self.genderTF.text else { return}
-        guard let email = self.emailTextField.text else { return }
-        
-        let date = birthdayDatePicker.date
-        let stringDate = date.getFormattedDate(format: "yyyy-MM-dd")
+         let lastName = self.lastNameTF.text ?? "test"
+         let gender = self.genderTF.text ?? "M"
+         let email = self.emailTextField.text ?? "test@test.com"
+
         // Utilisez stringDate comme nécessaire
         //   print("Formatted date: \(stringDate!)")
         
@@ -96,6 +133,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         }else {
             userId = 131
         }
+        let stringDate = birthdayTextField.text ?? "2002-02-02"
         // let userID = Int(roleDataID)
         let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: gender, parent_id: userId)
         //self.responseChild(params: regData)
@@ -118,6 +156,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                     let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
                     let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
                         self.goToScreen(identifier: "ChildSocialMedia")
+                        self.progressBarWithDifferentDimensions.completedTillIndex = 1
                     }
                     alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -133,6 +172,8 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                         }
                     default:
                         /// Handle unknown error
+                    print(response.response?.statusCode)
+
                         print("we ran into error")
                     }
                 case .failure(let error):
@@ -146,73 +187,9 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                     }
                 }
                     }
-            
         
-        //                let date = Date()
-        //                let df = DateFormatter()
-        //                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        //                let dateString = df.string(from: date)
-        //
-        //                let x = [
-        //                    "user": userId,
-        //                    "wizard_step": 1,
-        //                    "platform": "mobile",
-        //                    "date": dateString
-        //                ] as [String : Any]
-        //
-        //                do {
-        //                    let journey = try UserJourney(from: x as! Decoder)
-        //                    ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
-        //                        print(userJourney)
-        //                    }
-        //                } catch let error {
-        //                    print(error.localizedDescription)
-        //                }
-        //            } else {
-        //                print(str)
-        //            }
-        //        }
     }
-    
-    //    func responseChild(params: ChildModel) {
-    //       // let headers: HTTPHeaders = ["Content-Type":"application/json"]
-    //        AF.request(add_Child_url, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
-    //            .responseJSON(completionHandler: { (response) in
-    //
-    //                debugPrint(response)
-    //                switch response.result {
-    //                case .success(let data):
-    //                    switch response.response?.statusCode {
-    //                    case 200,201:
-    //                        /// Handle success, parse JSON data
-    //                        do {
-    //                            let jsonData = try JSONDecoder().decode(UserRole.self, from: JSONSerialization.data(withJSONObject: data))
-    //                            let alertController = UIAlertController(title: "Success", message: "Child social media added successfully!", preferredStyle: .alert)
-    //                            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-    //                                self.dismiss(animated: true, completion: nil)
-    //                            }
-    //                            alertController.addAction(okayAction)
-    //                            self.present(alertController, animated: true, completion: nil)
-    //                            print("User child registered successfully")
-    //                           // self.platform()
-    //                        } catch let error {
-    //                            /// Handle json decode error
-    //                            print(error)
-    //                        }
-    //                    case 401:
-    //                        /// Handle 401 error
-    //                        print("not authorization")
-    //                    default:
-    //                        /// Handle unknown error
-    //                        print("we ran into error")
-    //                    }
-    //                case .failure(let error):
-    //                    /// Handle request failure
-    //                    print(error.localizedDescription)
-    //                }
-    //            })
-    //    }
-    //
+
     
 
     func goToScreen(identifier: String) {
@@ -306,7 +283,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         let horizontalConstraint = progressBarWithDifferentDimensions.centerXAnchor.constraint(equalTo: self.progressFirstView.centerXAnchor)
         let verticalConstraint = progressBarWithDifferentDimensions.topAnchor.constraint(
             equalTo: progressFirstView.topAnchor,
-            constant: 240
+            constant: 168
         )
         let widthConstraint = progressBarWithDifferentDimensions.widthAnchor.constraint(equalToConstant: 300)
         let heightConstraint = progressBarWithDifferentDimensions.heightAnchor.constraint(equalToConstant: 150)
@@ -327,23 +304,23 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         progressBarWithDifferentDimensions.currentSelectedCenterColor = progressColor ?? .blue
         progressBarWithDifferentDimensions.stepTextColor = textColorHere
         progressBarWithDifferentDimensions.currentSelectedTextColor = progressColor
-        progressBarWithDifferentDimensions.completedTillIndex = 1
+        progressBarWithDifferentDimensions.completedTillIndex = 0
     }
     
     
-    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
-                     didSelectItemAtIndex index: Int) {
-        progressBar.currentIndex = index
-        if index > maxIndex {
-            maxIndex = index
-            progressBar.completedTillIndex = maxIndex
-        }
-    }
+//    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
+//                     didSelectItemAtIndex index: Int) {
+//        progressBar.currentIndex = index
+//        if index > maxIndex {
+//            maxIndex = index
+//            progressBar.completedTillIndex = maxIndex
+//        }
+//    }
     
-    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
-                     canSelectItemAtIndex index: Int) -> Bool {
-        return true
-    }
+//    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
+//                     canSelectItemAtIndex index: Int) -> Bool {
+//        return true
+//    }
     
     func progressBar(_ progressBar: FlexibleSteppedProgressBar,
                      textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
@@ -365,6 +342,56 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         return ""
     }
   
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+
+        firstNameTF.placeholder = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "First_name")
+        lastNameTF.placeholder = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "Last_name")
+        birthdayTextField.placeholder = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "birthday")
+        genderTF.placeholder = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "Gender")
+        nextBtn.setTitle(NSLocalizedString("Next", tableName: nil, bundle: bundle, value: "", comment: "Next"), for: .normal)
+        welcomeLabel.text = NSLocalizedString("LabelText", tableName: nil, bundle: bundle, value: "", comment: "LabelText")
+    }
+    
+    @IBAction func languageButton(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white"), for: .normal)
+                }
+                
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    @IBAction func backButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
     
 }

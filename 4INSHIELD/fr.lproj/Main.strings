@@ -6,7 +6,7 @@
 "2dZ-Rc-YPo.placeholder" = "Nom d'utilisateur";
 
 /* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "3wG-Ov-Ng4"; */
-"3wG-Ov-Ng4.text" = "BIENVENUE SUR NETETHIC";
+"3wG-Ov-Ng4.text" = "BIENVENUE SUR netethic";
 
 /* Class = "UIButton"; configuration.title = "S’inscrire avec Facebook"; ObjectID = "5pu-E5-fN6"; */
 "5pu-E5-fN6.configuration.title" = "S’inscrire avec Facebook";
@@ -66,7 +66,7 @@
 "SGR-x7-yO2.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "Ss1-na-iQH"; */
-"Ss1-na-iQH.text" = "BIENVENUE SUR NETETHIC";
+"Ss1-na-iQH.text" = "BIENVENUE SUR netethic";
 
 /* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "UcV-yP-oXd"; */
 "UcV-yP-oXd.configuration.title" = "S’inscrire";
@@ -99,4 +99,4 @@
 "oia-8x-1Sd.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "w6R-fu-y3N"; */
-"w6R-fu-y3N.text" = "BIENVENUE SUR NETETHIC";
+"w6R-fu-y3N.text" = "BIENVENUE SUR netethic";

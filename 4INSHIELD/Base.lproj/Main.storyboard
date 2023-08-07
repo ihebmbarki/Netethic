@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aAE-Gg-NkL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G4t-F4-zOB">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -974,10 +974,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="1166"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Lc-J8-eBx">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="853"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="869"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iGq-Ly-gsS">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="841"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="857"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="596-zo-gAN">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="266"/>
@@ -1054,29 +1054,29 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VrB-GS-a5E">
-                                                        <rect key="frame" x="0.0" y="378" width="393" height="229"/>
+                                                        <rect key="frame" x="0.0" y="378" width="393" height="245"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Prénom" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5R7-QI-ayG">
-                                                                <rect key="frame" x="32.666666666666657" y="0.0" width="328" height="48"/>
+                                                                <rect key="frame" x="32.666666666666657" y="0.0" width="328" height="52"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="48" id="LEr-Re-zZe"/>
+                                                                    <constraint firstAttribute="height" constant="52" id="LEr-Re-zZe"/>
                                                                     <constraint firstAttribute="width" constant="328" id="dNK-TP-Of0"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kTF-gS-Uw8">
-                                                                <rect key="frame" x="32.666666666666657" y="60" width="328" height="49"/>
+                                                                <rect key="frame" x="32.666666666666657" y="64" width="328" height="53"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Genre" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OEL-0x-5SC">
-                                                                <rect key="frame" x="32.666666666666657" y="121" width="328" height="48"/>
+                                                                <rect key="frame" x="32.666666666666657" y="129" width="328" height="52"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCC-6J-6ev">
-                                                                <rect key="frame" x="32.666666666666657" y="181" width="328" height="48"/>
+                                                                <rect key="frame" x="32.666666666666657" y="193" width="328" height="52"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -1092,18 +1092,18 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVi-bP-VdP">
-                                                        <rect key="frame" x="0.0" y="607" width="393" height="62"/>
+                                                        <rect key="frame" x="0.0" y="623" width="393" height="62"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date de naissance" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-C1-IQd">
-                                                                <rect key="frame" x="32.666666666666657" y="12" width="328" height="46"/>
+                                                                <rect key="frame" x="32.666666666666657" y="12" width="328" height="52"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="46" id="ZSm-F2-9Ch"/>
+                                                                    <constraint firstAttribute="height" constant="52" id="ZSm-F2-9Ch"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWY-Gp-1yb">
-                                                                <rect key="frame" x="314.66666666666669" y="19" width="32" height="32"/>
+                                                                <rect key="frame" x="314.66666666666669" y="22" width="32" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="32" id="UXw-re-Py3"/>
                                                                     <constraint firstAttribute="height" constant="32" id="q5l-1z-qs6"/>
@@ -1121,7 +1121,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qB-9p-wkt">
-                                                        <rect key="frame" x="0.0" y="669" width="393" height="120"/>
+                                                        <rect key="frame" x="0.0" y="685" width="393" height="120"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMo-t1-uoQ">
                                                                 <rect key="frame" x="55.666666666666657" y="36" width="282" height="52"/>
@@ -1146,7 +1146,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXS-Qg-sEd">
-                                                        <rect key="frame" x="0.0" y="789" width="393" height="52"/>
+                                                        <rect key="frame" x="0.0" y="805" width="393" height="52"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2023 All Rights Reserved Made by Data4Ethic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsP-hi-jR4">
                                                                 <rect key="frame" x="59.666666666666657" y="19" width="274" height="14.333333333333336"/>
@@ -1814,7 +1814,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2023 Tous Droits Réservés Réalisé par 4INDATA " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebf-lm-pqL">
-                                <rect key="frame" x="48.666666666666657" y="813" width="295.66666666666674" height="15.333333333333371"/>
+                                <rect key="frame" x="48.666666666666657" y="815" width="295.66666666666674" height="15.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

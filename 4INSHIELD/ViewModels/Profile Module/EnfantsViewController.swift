@@ -106,7 +106,7 @@ extension EnfantsViewController:  UITableViewDataSource, UITableViewDelegate {
                     cell.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                 }
             }
-            cell.nameLbl.text = ((child.user!.first_name?.uppercased() ?? "")) + " " + (child.user!.last_name?.uppercased() ?? "")
+            cell.nameLbl.text = ((child.user!.first_name.uppercased() ?? "")) + " " + (child.user!.last_name.uppercased() ?? "")
             //Calculate age from birthday
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd" // or whatever format your date string is in

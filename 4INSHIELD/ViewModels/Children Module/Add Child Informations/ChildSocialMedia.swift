@@ -123,7 +123,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
             print("User ID not found")
             return
         }
-        let wizardParam = Wizard(user: userID, wizardStep: 2, platform: "mobile", date: dateString)
+        let wizardParam = Wizard(user: userID, wizardStep: 3, platform: "mobile", date: dateString)
         //        do {
         //            let journey = try UserJourney(from: x as! Decoder)
         //            ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
@@ -188,7 +188,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC {
                             alertController.addAction(okayAction)
                             self.present(alertController, animated: true, completion: nil)
                             print("good")
-                           // self.platform()
+                            self.platform()
                         } catch let error {
                             /// Handle json decode error
                             print(error)

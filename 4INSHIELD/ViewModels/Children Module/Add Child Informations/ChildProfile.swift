@@ -24,6 +24,12 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
             
         }
     }
+    
+    @IBOutlet weak var errorBirthdayLabel: UILabel!
+    @IBOutlet weak var errorEmaillabel: UILabel!
+    @IBOutlet weak var errorGenderLabel: UILabel!
+    @IBOutlet weak var errorLastNameLabel: UILabel!
+    @IBOutlet weak var errofFirstNameLabel: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
     
     @IBOutlet weak var calenderButton: UIButton!
@@ -51,6 +57,12 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
 //        setupProgressBarWithoutLastState()
         setupProgressBarWithDifferentDimensions()
         
+        firstNameTF.setupBorderTFs()
+        lastNameTF.setupBorderTFs()
+        genderTF.setupBorderTFs()
+        emailTextField.setupBorderTFs()
+        birthdayTextField.setupBorderTFs()
+        
         //Buttons style
         nextBtn.applyGradient()
         nextBtn.layer.cornerRadius = 15
@@ -62,8 +74,18 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
 //        calenderButton.contentVerticalAlignment = .center
         
         calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        resetForm()
         
     }
+    func resetForm(){
+           errofFirstNameLabel.isHidden = true
+            errorLastNameLabel.isHidden = true
+            errorGenderLabel.isHidden = true
+            errorEmaillabel.isHidden = true
+            errorBirthdayLabel.isHidden = true
+//            emailTF.text = ""
+//            passwordTF.text = ""
+        }
     @objc func showDatePicker() {
         // Create the alert controller
         let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
@@ -360,6 +382,14 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         genderTF.placeholder = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "Gender")
         nextBtn.setTitle(NSLocalizedString("Next", tableName: nil, bundle: bundle, value: "", comment: "Next"), for: .normal)
         welcomeLabel.text = NSLocalizedString("LabelText", tableName: nil, bundle: bundle, value: "", comment: "LabelText")
+        errofFirstNameLabel.text = NSLocalizedString("erreurFirstName1", tableName: nil, bundle: bundle, value: "", comment: "erreurFirstName1")
+        errofFirstNameLabel.text = NSLocalizedString("erreurFirstName2", tableName: nil, bundle: bundle, value: "", comment: "erreurFirstName2")
+        errorLastNameLabel.text = NSLocalizedString("erreurLastName1", tableName: nil, bundle: bundle, value: "", comment: "erreurFirstName1")
+        errorLastNameLabel.text = NSLocalizedString("erreurLastName2", tableName: nil, bundle: bundle, value: "", comment: "erreurFirstName2")
+        errorEmaillabel.text = NSLocalizedString("erreurEmail1", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail1")
+        errorEmaillabel.text = NSLocalizedString("erreurEmail2", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail2")
+        errorBirthdayLabel.text = NSLocalizedString("erreurBirthday1", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail1")
+        errorBirthdayLabel.text = NSLocalizedString("erreurBirthday2", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail2")
     }
     
     @IBAction func languageButton(_ sender: Any) {
@@ -392,8 +422,174 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    func invalidBirthday(_ value: String) -> String? {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Ce champs ne peut pas être vide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "This field cannot be blank."
+            }
+        }
+
+        let regularExpression = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Format de date invalide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "Invalid date format."
+            }
+        }
+
+        // Additional validation for valid date can be added here if needed.
+
+        return nil
+    }
+
+    @IBAction func birthdayChanged(_ sender: Any) {
+        if let birthday = birthdayTextField.text {
+             if let errorMessage = invalidBirthday(birthday) {
+                 errorBirthdayLabel.text = errorMessage
+                 errorBirthdayLabel.isHidden = false
+                 birthdayTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+//                 firstNameTF.setupRightSideImage(image: "error", colorName: "redControl")
+             } else {
+                 errorBirthdayLabel.isHidden = true
+                 birthdayTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+//                 firstNameTF.setupRightSideImage(image: "done", colorName: "vertDone")
+
+             }
+         }
+        
+    }
     
     
+    func invalidFirstName(_ value: String) -> String? {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Ce champ ne peut pas être vide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "This field cannot be blank."
+            }
+        }
+
+        let regularExpression = "^[a-zA-Z]{1,20}$" // Assuming first name should only contain letters and have a length of 1 to 20 characters.
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Prénom non valide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "Invalid first name."
+            }
+        }
+        
+        return nil
+    }
+
+    @IBAction func firstNameTextField(_ sender: Any) {
+        if let firstName = firstNameTF.text {
+             if let errorMessage = invalidFirstName(firstName) {
+                 errofFirstNameLabel.text = errorMessage
+                 errofFirstNameLabel.isHidden = false
+                 firstNameTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 firstNameTF.setupRightSideImage(image: "error", colorName: "redControl")
+             } else {
+                 errofFirstNameLabel.isHidden = true
+                 firstNameTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                 firstNameTF.setupRightSideImage(image: "done", colorName: "vertDone")
+
+             }
+         }
+
+    }
+    
+
+    @IBAction func emailTextField(_ sender: Any) {
+        if let email = emailTextField.text {
+            if let errorMessage = invalidEmail(email) {
+                errorEmaillabel.text = errorMessage
+                errorEmaillabel.isHidden = false
+                errorEmaillabel.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                emailTextField.setupRightSideImage(image: "error", colorName: "redControl")
+                emailTextField.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                errorEmaillabel.isHidden = true
+                emailTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                emailTextField.setupRightSideImage(image: "done", colorName: "vertDone")
+
+            }
+        }
+        
+//        checkForValidForm()
+    }
+    func invalidEmail(_ value: String) -> String?
+    {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr"{
+            return "Ce champ ne peut pas être vide. "
+            }
+            if LanguageManager.shared.currentLanguage == "en"{
+            return "This field cannot be blank."
+            }
+        }
+        
+        let reqularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Votre Email n'est pas valide"
+            } else {
+                return "Your email is not valid"
+            }
+        }
+        
+        return nil
+    }
+    
+    @IBAction func genderTextField(_ sender: Any) {
+    }
+    func invalidLastName(_ value: String) -> String? {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Ce champ ne peut pas être vide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "This field cannot be blank."
+            }
+        }
+
+        let regularExpression = "^[a-zA-Z]{1,20}$" // Assuming first name should only contain letters and have a length of 1 to 20 characters.
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Nom non valide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "Invalid Last name."
+            }
+        }
+        
+        return nil
+    }
+    @IBAction func lastNameTextField(_ sender: Any) {
+        if let lastName = lastNameTF.text {
+             if let errorMessage = invalidLastName(lastName) {
+                 errorLastNameLabel.text = errorMessage
+                 errorLastNameLabel.isHidden = false
+                 lastNameTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 lastNameTF.setupRightSideImage(image: "error", colorName: "redControl")             } else {
+                 errorLastNameLabel.isHidden = true
+                 lastNameTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                 lastNameTF.setupRightSideImage(image: "done", colorName: "vertDone")
+
+             }
+         }
+    }
 }
 
 extension Date {

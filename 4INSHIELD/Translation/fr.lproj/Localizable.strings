@@ -82,4 +82,11 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "Gender" = "Genre";
 "Next" = "Suivant";
 "LabelText" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant" ;
-
+"erreurFirstName1" = "Ce champ ne peut pas être vide." ;
+"erreurFirstName2" = "Prénom non valide" ;
+"erreurLastName1" = "Ce champ ne peut pas être vide." ;
+"erreurLastName2" = "Nom non valide" ;
+"erreurEmail1" = "Ce champs ne peut pas être vide." ;
+"erreurEmail2" = "Votre Email n'est pas valide" ;
+"erreurBirthday1" = "Ce champs ne peut pas être vide." ;
+"erreurBirthday2" = "Format de date invalide." ;

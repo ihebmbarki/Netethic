@@ -688,15 +688,14 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
     }
     
-    
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
-    //moyenne general
     
+    //moyenne general
     @IBAction func moyenneButton(_ sender: Any) {
         let destination = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
         destination.modalPresentationStyle = .overCurrentContext
@@ -735,30 +734,35 @@ class homeVC: UIViewController, ChartViewDelegate {
     
 }
 
-
-
-
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
             // Profile
             self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-            //        case 1:
-            //            // Autorisation d’accés
-            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-            //        case 2:
-            //            // Nous contacter
-            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-            //        case 3:
-            //            // Mentions légales
-            //            self.showViewController(viewController: MentionsLegales.self, storyboardId: " ")
-            //        case 4:
-            //            // À propos
-            //            self.showViewController(viewController: APropos.self, storyboardId: " ")
-            //        case 5:
-            //            //Déconnexion
-            //            self.showViewController(viewController: BooksViewController.self, storyboardId: " ")
+        case 1:
+            // Autorisation d’accés
+            self.gotoScreen(storyBoardName: "Autorisation", stbIdentifier: "AutorisationID")
+        case 2:
+            // Nous contacter
+            self.gotoScreen(storyBoardName: "Contact", stbIdentifier: "ContactID")
+        case 3:
+            // Mentions légales
+            self.gotoScreen(storyBoardName: "LegalMention", stbIdentifier: "LegalMentionID")
+        case 4:
+            // À propos
+            self.gotoScreen(storyBoardName: "Apropos", stbIdentifier: "AproposID")
+        case 5:
+            // Déconnexion
+            // Clear user defaults
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
+            
+            // Dismiss the current presented view controlle
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "signIn")
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         default:
             break
         }
@@ -766,6 +770,7 @@ extension homeVC : SideBarDelegate {
         // Collapse side menu with animation
         DispatchQueue.main.async { self.sideMenuState(expanded: false) }
     }
+
     
     func showViewController<T: UIViewController>(viewController: T.Type, storyboardId: String) -> () {
         // Remove the previous View
@@ -805,28 +810,40 @@ extension homeVC : SideBarDelegate {
                 self.isExpanded = true
             }
             // Animate Shadow (Fade In)
-            UIView.animate(withDuration: 0.5) { self.sideMenuShadowView.alpha = 0.6 }
+            if let shadowView = self.sideMenuShadowView {
+                UIView.animate(withDuration: 0.5) {
+                    shadowView.alpha = 0.6
+                }
+            }
         }
         else {
             self.animateSideMenu(targetPosition: self.revealSideMenuOnTop ? (-self.sideMenuRevealWidth - self.paddingForRotation) : 0) { _ in
                 self.isExpanded = false
             }
             // Animate Shadow (Fade Out)
-            UIView.animate(withDuration: 0.5) { self.sideMenuShadowView.alpha = 0.0 }
+            if let shadowView = self.sideMenuShadowView {
+                UIView.animate(withDuration: 0.5) {
+                    shadowView.alpha = 0.0
+                }
+            }
         }
     }
     
     func animateSideMenu(targetPosition: CGFloat, completion: @escaping (Bool) -> ()) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: .layoutSubviews, animations: {
             if self.revealSideMenuOnTop {
-                self.sideMenuTrailingConstraint.constant = targetPosition
-                self.view.layoutIfNeeded()
+                if let constraint = self.sideMenuTrailingConstraint {
+                    constraint.constant = targetPosition
+                    self.view.layoutIfNeeded()
+                }
             }
             else {
                 self.view.subviews[1].frame.origin.x = targetPosition
             }
         }, completion: completion)
     }
+    
+    
 }
 
 extension UIViewController {

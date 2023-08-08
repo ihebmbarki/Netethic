@@ -11,12 +11,14 @@ import Foundation
 class UserProfile: KeyboardHandlingBaseVC {
 
     // IBOutlets
+    @IBOutlet weak var profileLbl: UILabel!
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var userPhoto: UIImageView!
     @IBOutlet weak var userNameTf: UILabel!
     
     @IBOutlet weak var enfantsButton: UIButton!
     @IBOutlet weak var modifierButton: UIButton!
+    
     
     var image: UIImage?
     
@@ -130,7 +132,7 @@ class UserProfile: KeyboardHandlingBaseVC {
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     

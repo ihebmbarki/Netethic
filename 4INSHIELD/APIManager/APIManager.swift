@@ -32,7 +32,11 @@ class APIManager {
             .contentType("application/json")
         ]
         
-        AF.request(contactFormURL, method: .post, parameters: contactForm, encoder: JSONParameterEncoder.default, headers: headers)
+        let userID = UserDefaults.standard.object(forKey: "userID")
+
+        let completeContactForm = ContactForm(id: userID as! Int, subject: contactForm.subject, message: contactForm.message, username: contactForm.username, email: contactForm.email)
+        
+        AF.request(contactFormURL, method: .post, parameters: completeContactForm, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 switch response.result {
                 case .success(_):
@@ -47,6 +51,7 @@ class APIManager {
                 }
             }
     }
+
      
     func fetchToxicPersons(forPerson childID: Int, completion: @escaping ([String]?) -> Void) {
         var toxicPseudos: [String]?

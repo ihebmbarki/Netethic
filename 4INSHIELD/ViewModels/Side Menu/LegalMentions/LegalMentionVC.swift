@@ -150,10 +150,10 @@ class LegalMentionVC: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
+    
     
 }

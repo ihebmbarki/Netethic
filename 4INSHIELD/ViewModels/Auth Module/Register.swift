@@ -53,10 +53,7 @@ class Register: KeyboardHandlingBaseVC {
         super.viewDidLoad()
         
         resetForm()
-        
-        registerBtn.setImage(UIImage(named: "next")!.withTintColor(.white, renderingMode: .alwaysTemplate), for: .normal)
-        registerBtn.imageEdgeInsets = UIEdgeInsets(top : 0, left : 0 , bottom : 0, right : -36 )
-
+           
         // Update localized strings
         updateLocalizedStrings()
         
@@ -466,7 +463,7 @@ class Register: KeyboardHandlingBaseVC {
             if isSuccess {
                 self.showAlert(messageKey: messageKey)
                 
-                self.dismiss(animated: true) 
+                self.dismiss(animated: true)
                 // Delay the presentation of the Confirmation view controller
                 self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ConfirmationID")
                 

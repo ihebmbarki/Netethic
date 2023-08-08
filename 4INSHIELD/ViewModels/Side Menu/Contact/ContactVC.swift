@@ -84,7 +84,9 @@ class ContactVC: UIViewController {
               let object = self.objectTF.text,
               let message = self.messageTF.text else { return }
         
-        let contactForm = ContactForm(subject: object, message: message, username: name, email: email)
+        let userID = UserDefaults.standard.object(forKey: "userID")
+
+        let contactForm = ContactForm(id: userID as! Int, subject: object, message: message, username: name, email: email)
         // Print the contactForm object before sending it
             print("Contact Form Object: \(contactForm)")
 
@@ -101,7 +103,7 @@ class ContactVC: UIViewController {
     }
     
     @IBAction func backBtn(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
 }

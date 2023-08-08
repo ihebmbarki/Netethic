@@ -40,6 +40,9 @@ class Register: KeyboardHandlingBaseVC {
     var iconClick = false
     let imageicon1 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let imageicon2 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
+   
+    var selectedGender : String?
+    var sexe: String = "M"
     let menu: DropDown = {
         let menu = DropDown()
         menu.dataSource = [
@@ -51,7 +54,6 @@ class Register: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         resetForm()
         
 //        // Create a white chevron.right image
@@ -490,7 +492,7 @@ extension UITextField {
     }
     
     func setupBorderTFs() {
-        layer.cornerRadius = 5
+        layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         
@@ -510,7 +512,7 @@ extension UIButton{
     }
     
     func setupBorderBtns() {
-        layer.cornerRadius = 5
+        layer.cornerRadius = 15
 //        layer.borderWidth = 1
 //        layer.borderColor = UIColor(named: "grisBorder")?.cgColor
     }

@@ -90,3 +90,7 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "erreurEmail2" = "Votre Email n'est pas valide" ;
 "erreurBirthday1" = "Ce champs ne peut pas être vide." ;
 "erreurBirthday2" = "Format de date invalide." ;
+"gender1" = "Garçon";
+"gender2" = "Fille";
+"gender3" = "Non précisé";
+"footer" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";

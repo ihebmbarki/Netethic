@@ -31,6 +31,7 @@ class SignIn: KeyboardHandlingBaseVC {
         }
     }
     
+    @IBOutlet weak var footerLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var userErrorLabel: UILabel!
     
@@ -162,6 +163,7 @@ class SignIn: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
+        footerLabel.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "footer")
         
     }
     
@@ -521,8 +523,8 @@ class SignIn: KeyboardHandlingBaseVC {
                 passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
 
             }
-            
             checkForValidForm()
+
         }
     }
         func containsDigit(_ value: String) -> Bool {
@@ -649,7 +651,7 @@ extension UITextField {
     }
     
     func setupBorderTF() {
-        layer.cornerRadius = 5
+        layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
@@ -669,7 +671,7 @@ extension UIButton{
     }
     
     func setupBorderBtn() {
-        layer.cornerRadius = 20
+        layer.cornerRadius = 15
 //        layer.borderWidth = 1
 //        layer.borderColor = UIColor(red: 0.83, green: 0.83, blue: 0.83, alpha: 1.00).cgColor
     }

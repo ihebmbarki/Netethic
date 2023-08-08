@@ -8,6 +8,8 @@ import Foundation
 import Alamofire
 import FSCalendar
 import FlexibleSteppedProgressBar
+import DropDown
+
 
 import UIKit
 
@@ -27,7 +29,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     
     @IBOutlet weak var errorBirthdayLabel: UILabel!
     @IBOutlet weak var errorEmaillabel: UILabel!
-    @IBOutlet weak var errorGenderLabel: UILabel!
+ 
     @IBOutlet weak var errorLastNameLabel: UILabel!
     @IBOutlet weak var errofFirstNameLabel: UILabel!
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -37,6 +39,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     var userParentID = Int()
 //    let progressBarVC = ProgressBarViewController()
     
+    @IBOutlet weak var footerLabel: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
     
     @IBOutlet weak var progressFirstView: UIView!
@@ -51,12 +54,36 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     var textColorHere = UIColor.white
     
     var maxIndex = -1
+    
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var genderView: UIView!
+    var selectedGender : String?
+    var sexe: String = "M"
+    let menu1: DropDown = {
+           let menu1 = DropDown()
+           menu1.dataSource = [
+               "Garçon",
+               "Fille",
+               "Non précisé"
+           ]
+           return menu1
+       }()
+    let menu2: DropDown = {
+           let menu2 = DropDown()
+           menu2.dataSource = [
+               "Boy",
+               "Girl",
+               "Unspecified"
+           ]
+           return menu2
+       }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setupProgressBar()
 //        setupProgressBarWithoutLastState()
         setupProgressBarWithDifferentDimensions()
-        
+
         firstNameTF.setupBorderTFs()
         lastNameTF.setupBorderTFs()
         genderTF.setupBorderTFs()
@@ -72,21 +99,77 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         birthdayTextField.setupRightSideImage(image: "calendar", colorName: "AccentColor")
 //        calenderButton.setImage(UIImage(named: "calendar")!.withTintColor(UIColor(named: "AccentColor")!, renderingMode: .alwaysTemplate), for: .normal)
 //        calenderButton.contentVerticalAlignment = .center
-        
-        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(calendarImageTapped))
+           birthdayTextField.rightView?.addGestureRecognizer(tapGesture)
+//        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
         resetForm()
-        
+        menu1.anchorView = genderView
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem1))
+            gesture.numberOfTapsRequired = 1
+            gesture.numberOfTouchesRequired = 1
+            genderView.addGestureRecognizer(gesture)
+            menu1.selectionAction = { index, title in
+                print(index)
+                print(title)
+                self.genderLabel.text = title
+            }
     }
+    func listeDeroulante(){
+        let genre = genderLabel.text
+        // liste déroulanteFr
+        if LanguageManager.shared.currentLanguage == "fr" {
+     
+        menu1.anchorView = genderView
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem1))
+            gesture.numberOfTapsRequired = 1
+            gesture.numberOfTouchesRequired = 1
+            genderView.addGestureRecognizer(gesture)
+            menu1.selectionAction = { index, title in
+                print(index)
+                print(title)
+                self.genderLabel.text = title
+            }
+            if genre == "Boy" {self.genderLabel.text = "Garçon" }
+            if genre == "Girl" {self.genderLabel.text = "Fille" }
+            if genre == "Unspecified" {self.genderLabel.text = "Non précisé" }
+
+        }
+        // liste déroulanteEn
+        if LanguageManager.shared.currentLanguage == "en" {
+        menu2.anchorView = genderView
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem2))
+            gesture.numberOfTapsRequired = 1
+            gesture.numberOfTouchesRequired = 1
+            genderView.addGestureRecognizer(gesture)
+            menu2.selectionAction = { index, title in
+                print(index)
+                print(title)
+                self.genderLabel.text = title
+            }
+            if genre == "Garçon" {self.genderLabel.text = "Boy" }
+            if genre == "Fille" {self.genderLabel.text = "Girl" }
+            if genre == "Non précisé" {self.genderLabel.text = "Unspecified" }
+        }
+    }
+
+    @objc func didTapTopItem1(){
+            menu1.show()
+     }
+    @objc func didTapTopItem2(){
+            menu2.show()
+     }
+
     func resetForm(){
            errofFirstNameLabel.isHidden = true
             errorLastNameLabel.isHidden = true
-            errorGenderLabel.isHidden = true
             errorEmaillabel.isHidden = true
             errorBirthdayLabel.isHidden = true
 //            emailTF.text = ""
 //            passwordTF.text = ""
         }
-    @objc func showDatePicker() {
+    
+
+    @objc func calendarImageTapped() {
         // Create the alert controller
         let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
         
@@ -157,14 +240,25 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         }
         let stringDate = birthdayTextField.text ?? "2002-02-02"
         // let userID = Int(roleDataID)
-        let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: gender, parent_id: userId)
+        selectedGender = genderLabel.text
+                
+                if selectedGender == "Garçon"{
+                    sexe = "M"
+                }
+                if selectedGender == "Fille"{
+                    sexe = "F"
+                }
+                if selectedGender == "Non précisé"{
+                    sexe = "O"
+                }
+        let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: sexe, parent_id: userId)
         //self.responseChild(params: regData)
         let parameters: [String: Any] = [
             "first_name": firstName,
             "last_name": lastName,
             "email": email,
             "birthday": stringDate,
-            "gender": gender,
+            "gender": sexe,
             "parent_id": userId
         ]
         AF.request(add_Child_url, method: .post, parameters: parameters)
@@ -379,7 +473,6 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         firstNameTF.placeholder = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "First_name")
         lastNameTF.placeholder = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "Last_name")
         birthdayTextField.placeholder = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "birthday")
-        genderTF.placeholder = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "Gender")
         nextBtn.setTitle(NSLocalizedString("Next", tableName: nil, bundle: bundle, value: "", comment: "Next"), for: .normal)
         welcomeLabel.text = NSLocalizedString("LabelText", tableName: nil, bundle: bundle, value: "", comment: "LabelText")
         errofFirstNameLabel.text = NSLocalizedString("erreurFirstName1", tableName: nil, bundle: bundle, value: "", comment: "erreurFirstName1")
@@ -390,6 +483,11 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         errorEmaillabel.text = NSLocalizedString("erreurEmail2", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail2")
         errorBirthdayLabel.text = NSLocalizedString("erreurBirthday1", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail1")
         errorBirthdayLabel.text = NSLocalizedString("erreurBirthday2", tableName: nil, bundle: bundle, value: "", comment: "erreurEmail2")
+        genderLabel.text = NSLocalizedString("gender1", tableName: nil, bundle: bundle, value: "", comment: "gender1")
+        genderLabel.text = NSLocalizedString("gender2", tableName: nil, bundle: bundle, value: "", comment: "gender2")
+        genderLabel.text = NSLocalizedString("gender3", tableName: nil, bundle: bundle, value: "", comment: "gender3")
+        footerLabel.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "footer")
+        
     }
     
     @IBAction func languageButton(_ sender: Any) {
@@ -409,9 +507,11 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                 }
                 
                 self.updateLocalizedStrings()
+                self.listeDeroulante()
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
+            listeDeroulante()
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

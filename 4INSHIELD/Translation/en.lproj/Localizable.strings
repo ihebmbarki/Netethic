@@ -95,3 +95,19 @@ Please check your registered email for the activation link.";
 "gender2" = "Girl ";
 "gender3" = "Unspecified";
 "footer" = "© 2023 All Rights Reserved Made by Data4Ethic";
+
+//MARK: Child socialMedia
+"label1" = "Please enter your child’s social media account information ";
+"label2" = "This information will help us protect your child from online abuse and cyberbullying";`
+"Pseudo" = "Enter pseudonym";
+"Url" = "Enter URL";
+"nextButton" = "Next";
+"sauterButton" = "skip";
+"pseudo1" = "This field cannot be blank.";
+"pseudo2" = "Pseudonym  is not valid";
+"url1" = "This field cannot be blank.";
+"url2" = "URL is not valid";
+"footer" = "© 2023 All Rights Reserved Made by Data4Ethic";
+//MARK: Child Device
+"ajoutDevice" = "Please add your child’s devices  ";
+"information" = "The information from your child's device will help you monitor their mental health, sleep quality, whereabouts, and apps of interest, etc. ";`

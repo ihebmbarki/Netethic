@@ -80,6 +80,7 @@ class SignIn: KeyboardHandlingBaseVC {
         LanguageManager.shared.currentLanguage = "fr"
         updateLocalizedStrings()
     }
+    
     func resetForm()
         {
             signInBtn.isEnabled = true
@@ -164,7 +165,6 @@ class SignIn: KeyboardHandlingBaseVC {
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
         footerLabel.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "footer")
-        
     }
     
     func goToScreen(withId identifier: String) {

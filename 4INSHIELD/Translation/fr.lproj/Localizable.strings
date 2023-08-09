@@ -94,3 +94,19 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "gender2" = "Fille";
 "gender3" = "Non précisé";
 "footer" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+
+//MARK: Child socialMedia
+"label1" = "Veuillez saisir les informations du compte de réseau social de votre enfant";
+"label2" = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement ";`
+"Pseudo" = "Entrer le pseudo";
+"Url" = "Entrer l'URL";
+"nextButton" = "Suivant";
+"sauterButton" = "Sauter";
+"pseudo1" = "Ce champ ne peut pas être vide.";
+"pseudo2" = "Votre Pseudo n'est pas valide";
+"url1" = "Ce champ ne peut pas être vide.";
+"url2" = "L'URL n'est pas valide";
+"footer" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+//MARK: Child Device
+"ajoutDevice" = "Veuillez ajouter les appareils de votre enfant  ";
+"information" = "Les informations fournies par l'appareil de votre enfant vous aideront à veiller sur sa santé mentale, la qualité de son sommeil, ses allées et venues, les applications qui l'intéressent, etc. ";`

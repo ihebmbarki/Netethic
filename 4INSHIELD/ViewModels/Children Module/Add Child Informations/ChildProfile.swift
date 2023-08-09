@@ -220,15 +220,6 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
          let gender = self.genderTF.text ?? "M"
          let email = self.emailTextField.text ?? "test@test.com"
 
-        // Utilisez stringDate comme nécessaire
-        //   print("Formatted date: \(stringDate!)")
-        
-        
-        //        guard let roleDataID = DataHandler.shared.roleDataID else {
-        //            showAlert(message: "User ID not found")
-        //            return
-        //
-        //        }
         let roleDataID = UserDefaults.standard.integer(forKey: "RoleDataID")
         print("Value of roleDataID: \(roleDataID)")
         var userId = Int(roleDataID)
@@ -327,13 +318,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
             return
         }
         let wizardParam = Wizard(user: userID, wizardStep: 2, platform: "mobile", date: dateString)
-        //        do {
-        //            let journey = try UserJourney(from: x as! Decoder)
-        //            ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
-        //                print(userJourney)
-        //            }
-        //
-        //        }
+     
         AF.request(user_journey_url, method: .post, parameters: wizardParam, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
             .responseJSON(completionHandler: { (response) in
                 
@@ -424,19 +409,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     }
     
     
-//    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
-//                     didSelectItemAtIndex index: Int) {
-//        progressBar.currentIndex = index
-//        if index > maxIndex {
-//            maxIndex = index
-//            progressBar.completedTillIndex = maxIndex
-//        }
-//    }
-    
-//    func progressBar(_ progressBar: FlexibleSteppedProgressBar,
-//                     canSelectItemAtIndex index: Int) -> Bool {
-//        return true
-//    }
+
     
     func progressBar(_ progressBar: FlexibleSteppedProgressBar,
                      textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {

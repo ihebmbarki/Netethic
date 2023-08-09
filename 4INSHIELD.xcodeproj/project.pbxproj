@@ -101,6 +101,7 @@
 		8729640B2A77D4FC009649B3 /* LegalMentionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872964092A77D4FC009649B3 /* LegalMentionVC.swift */; };
 		8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8729640A2A77D4FC009649B3 /* LegalMention.storyboard */; };
 		872D05FA2A60923E0069E58A /* Userparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D05F92A60923E0069E58A /* Userparent.swift */; };
+		874A73092A83FEAF00B17A85 /* wizardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
 		87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */; };
 		87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */; };
@@ -246,6 +247,7 @@
 		872964092A77D4FC009649B3 /* LegalMentionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalMentionVC.swift; sourceTree = "<group>"; };
 		8729640A2A77D4FC009649B3 /* LegalMention.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LegalMention.storyboard; sourceTree = "<group>"; };
 		872D05F92A60923E0069E58A /* Userparent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userparent.swift; sourceTree = "<group>"; };
+		874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wizardStepViewController.swift; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
 		87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircleChartView.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				0479739729CC927200FD28DF /* ChildProfileAdded.swift */,
 				0479739929CC929C00FD28DF /* ChildDevice.swift */,
 				0479739B29CC92D100FD28DF /* Congrats.swift */,
+				874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */,
 			);
 			path = "Add Child Informations";
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 				870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */,
 				04BFDD222A6943E40063E04D /* ChildrenResponse.swift in Sources */,
 				87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */,
+				874A73092A83FEAF00B17A85 /* wizardStepViewController.swift in Sources */,
 				04B91C202A32263D00626AF2 /* ToxicProfileResponse.swift in Sources */,
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				872964012A77D4C3009649B3 /* AutorisationVC.swift in Sources */,

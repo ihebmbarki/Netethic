@@ -14,10 +14,17 @@ import DropDown
 class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     
     
+    
+    @IBOutlet weak var footerLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var sauterBtn: UIButton!
     
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var footerLabel: UILabel!
+    
+    
+    @IBOutlet weak var footer: UILabel!
+    
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
@@ -28,6 +35,8 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     
     @IBOutlet weak var errorPseudoLabel: UILabel!
     
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var changerLanguageButton: UIButton!
     @IBOutlet weak var errorUrlLabel: UILabel!
     @IBOutlet weak var pseudoTextField: UITextField!
     @IBOutlet weak var urlTextField: UITextField!
@@ -40,13 +49,13 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     //    var socialMediaList = [Int : String]()
     var mediaID: Int = 0
     let menu: DropDown = {
-           let menu = DropDown()
-           menu.dataSource = [
+        let menu = DropDown()
+        menu.dataSource = [
             "Twitter", "Instagram", "Youtube", "Snapchat","Tumblr","Pinterest","Reddit","Facebook","Quora"
-           ]
-           return menu
-       }()
-//    var socialMediaList:[Int : String] = [1:"twitter", 2:"instagram", 3:"youtube", 4:"snapchat",5:"tumblr",6:"pinterest",7:"reddit",8:"facebook",9:"quora"]
+        ]
+        return menu
+    }()
+    //    var socialMediaList:[Int : String] = [1:"twitter", 2:"instagram", 3:"youtube", 4:"snapchat",5:"tumblr",6:"pinterest",7:"reddit",8:"facebook",9:"quora"]
     
     var progressBar: FlexibleSteppedProgressBar!
     var progressBarWithoutLastState: FlexibleSteppedProgressBar!
@@ -57,13 +66,13 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     var textColorHere = UIColor.white
     var maxIndex = -1
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //appel Progressbar
         setupProgressBarWithDifferentDimensions()
-//        TextField border
+        //        TextField border
         urlTextField.setupBorderTF()
         pseudoTextField.setupBorderTF()
         socialMediaTextField.setupBorderTF()
@@ -78,41 +87,83 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         //controle de saisie
         
         resetForm()
-//        nextButton.isHidden = false
+        nextButton.isEnabled = false
         // liste déroulante
         menu.anchorView = socialMediaView
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem))
-            gesture.numberOfTapsRequired = 1
-            gesture.numberOfTouchesRequired = 1
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
         socialMediaView.addGestureRecognizer(gesture)
-            menu.selectionAction = { index, title in
-                print(index)
-                self.mediaID = index + 1
-                print(title)
-                self.socialMediaLabel.text = title
-            }
+        menu.selectionAction = { index, title in
+            print(index)
+            self.mediaID = index + 1
+            print(title)
+            self.socialMediaLabel.text = title
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        LanguageManager.shared.currentLanguage = "fr"
+        updateLocalizedStrings()
     }
     
     @objc func didTapTopItem(){
-         menu.show()
-     }
+        menu.show()
+    }
     // MARK: - Actions
     @objc func action() {
         view.endEditing(true)
     }
     func resetForm(){
-//        nextButton.isEnabled = true
-           errorUrlLabel.isHidden = true
-            errorPseudoLabel.isHidden = true
-        }
+        //        nextButton.isEnabled = true
+        errorUrlLabel.isHidden = true
+        errorPseudoLabel.isHidden = true
+    }
+    func goToScreen(withId identifier: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: identifier)
+        navigationController?.pushViewController(VC, animated: true)
+    }
+
     
     func showAlert(with message: String) {
         let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changerLanguageButton.setImage(UIImage(named: "fr_white"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changerLanguageButton.setImage(UIImage(named: "eng_white"), for: .normal)
+            }
+        }
+    }
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        firstLabel.text = NSLocalizedString("label1", tableName: nil, bundle: bundle, value: "", comment: "")
+        secondLabel.text = NSLocalizedString("label2", tableName: nil, bundle: bundle, value: "", comment: "")
+        errorUrlLabel.text = NSLocalizedString("url1", tableName: nil, bundle: bundle, value: "", comment: "url1")
+        errorUrlLabel.text = NSLocalizedString("url2", tableName: nil, bundle: bundle, value: "", comment: "url2")
+        errorPseudoLabel.text = NSLocalizedString("pseudo1", tableName: nil, bundle: bundle, value: "", comment: "pseudo1")
+        errorPseudoLabel.text = NSLocalizedString("pseudo2", tableName: nil, bundle: bundle, value: "", comment: "pseudo2")
+        footer.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "")
+        if LanguageManager.shared.currentLanguage == "fr" {
+            pseudoTextField.placeholder = "Entrez le pseudo"
+            urlTextField.placeholder = "Entrez l'URL"
+            self.nextButton.setTitle("Suivant", for: .normal)
+            self.sauterBtn.setTitle("Sauter", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "en" {
+            pseudoTextField.placeholder = "Enter pseudonym"
+            urlTextField.placeholder = "Enter URL"
+            self.nextButton.setTitle("Next", for: .normal)
+            self.sauterBtn.setTitle("Skip", for: .normal)
+        }
+    }
     
-
+    
     @IBAction func nextButton(_ sender: Any) {
         print("cliquekkkkkkkkkk")
         let childID = UserDefaults.standard.integer(forKey: "childID")
@@ -121,7 +172,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         if mediaID == 0 {mediaID = 1}
         let params = profil1(child: childID, social_media_name: mediaID, pseudo: pseudo, url: url)
         self.response(params: params)
-   
+        
     }
     
     func platform(){
@@ -137,15 +188,6 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
             return
         }
         let wizardParam = Wizard(user: userID, wizardStep: 3, platform: "mobile", date: dateString)
-        //        do {
-        //            let journey = try UserJourney(from: x as! Decoder)
-        //            ApiManagerAdd.shareInstance1.saveUserJourney(journeyData: journey) { userJourney in
-        //                print(userJourney)
-        //            }
-        //
-        //        }
-      
-        //pour retour
         AF.request(user_journey_url, method: .post, parameters: wizardParam, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<500)
             .responseJSON(completionHandler: { (response) in
                 
@@ -190,17 +232,42 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                         /// Handle success, parse JSON data
                         do {
                             let jsonData = try JSONDecoder().decode(Profil.self, from: JSONSerialization.data(withJSONObject: data))
-                            let alertController = UIAlertController(title: "Success", message: "Child social media added successfully!", preferredStyle: .alert)
-                            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                                //self.dismiss(animated: true, completion: nil)
-                                if let childrenListVC = UIStoryboard(name: "Children", bundle: nil).instantiateViewController(withIdentifier: "ChildrenListSB") as? ChildrenViewController {
-                                    self.present(childrenListVC, animated: true, completion: nil)
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                
+                                let alertController = UIAlertController(title: "Succès ", message: "Le réseau social  a été ajouté avec succès", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                    //self.dismiss(animated: true, completion: nil)
+                                    if let childrenListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChildDevice") as? ChildrenViewController {
+                                        self.present(childrenListVC, animated: true, completion: nil)
+                                    }
+                                    
+                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                    
                                 }
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
+                                print("good")
+                                self.platform()
                             }
-                            alertController.addAction(okayAction)
-                            self.present(alertController, animated: true, completion: nil)
-                            print("good")
-                            self.platform()
+                            
+                            if LanguageManager.shared.currentLanguage == "en" {
+                                
+                                let alertController = UIAlertController(title: "Success", message: "Social media has been successfully added. ", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                    //self.dismiss(animated: true, completion: nil)
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+                                    vc.modalPresentationStyle = .fullScreen
+                                    self.present(vc, animated: true, completion: nil)
+                                    
+                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                    
+                                }
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
+                                print("good")
+                                self.platform()
+                            }
                         } catch let error {
                             /// Handle json decode error
                             print(error)
@@ -249,7 +316,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         progressBarWithDifferentDimensions.currentSelectedCenterColor = progressColor ?? .blue
         progressBarWithDifferentDimensions.stepTextColor = textColorHere
         progressBarWithDifferentDimensions.currentSelectedTextColor = progressColor
-        progressBarWithDifferentDimensions.completedTillIndex = 1
+        progressBarWithDifferentDimensions.completedTillIndex = 2
     }
     func progressBar(_ progressBar: FlexibleSteppedProgressBar,
                      textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
@@ -288,7 +355,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
             if LanguageManager.shared.currentLanguage == "fr" {
                 return "L'URL n'est pas valide"
             } else {
-                return "The URL is not valid"
+                return "URL is not valid"
             }
         }
         
@@ -312,85 +379,103 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
             if LanguageManager.shared.currentLanguage == "fr" {
                 return "Votre Pseudo n'est pas valide"
             } else {
-                return "The Pseudo is not valid"
+                return "Pseudonym is not valid"
             }
         }
         
         return nil
     }
-
+    
     func checkForValidForm()
     {
         if errorUrlLabel.isHidden && errorPseudoLabel.isHidden
         {
-            nextButton.isEnabled = false
+            nextButton.isEnabled = true
         }
         else
         {
-            nextButton.isEnabled = true
+            nextButton.isEnabled = false
         }
     }
     @IBAction func urlChanged(_ sender: Any) {
         if let url = urlTextField.text {
-             if let errorMessage = invalidUrl(url) {
-                 errorUrlLabel.text = errorMessage
-                 errorUrlLabel.isHidden = false
-                 urlTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
-                 urlTextField.setupRightSideImage(image: "error", colorName: "redControl")             } else {
-                 errorUrlLabel.isHidden = true
-                 urlTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
-                 urlTextField.setupRightSideImage(image: "done", colorName: "vertDone")
-
-             }
-//            checkForValidForm()
-         }
+            if let errorMessage = invalidUrl(url) {
+                errorUrlLabel.text = errorMessage
+                errorUrlLabel.isHidden = false
+                urlTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                urlTextField.setupRightSideImage(image: "error", colorName: "redControl")             } else {
+                    errorUrlLabel.isHidden = true
+                    urlTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                    urlTextField.setupRightSideImage(image: "done", colorName: "vertDone")
+                    
+                }
+            checkForValidForm()
+        }
     }
     
     @IBAction func pseudoChanged(_ sender: Any) {
         if let pseudo = pseudoTextField.text {
-             if let errorMessage = invalidPseudo(pseudo) {
-                 errorPseudoLabel.text = errorMessage
-                 errorPseudoLabel.isHidden = false
-                 pseudoTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
-                 pseudoTextField.setupRightSideImage(image: "error", colorName: "redControl")
-                 
-                } else {
-                     errorPseudoLabel.isHidden = true
-                     pseudoTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
-                     pseudoTextField.setupRightSideImage(image: "done", colorName: "vertDone")
-             }
-//            checkForValidForm()
-         }
+            if let errorMessage = invalidPseudo(pseudo) {
+                errorPseudoLabel.text = errorMessage
+                errorPseudoLabel.isHidden = false
+                pseudoTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                pseudoTextField.setupRightSideImage(image: "error", colorName: "redControl")
+                
+            } else {
+                errorPseudoLabel.isHidden = true
+                pseudoTextField.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                pseudoTextField.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+            checkForValidForm()
+        }
+    }
+    
+    @IBAction func backButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func translate() {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changerLanguageButton.setImage(UIImage(named: "eng_white1"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changerLanguageButton.setImage(UIImage(named: "fr_white1"), for: .normal)
+                }
+                
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    @IBAction func changerLanguageButton(_ sender: Any) {
+        translate()
+        
+    }
+    
+    @IBAction func sauterButton(_ sender: Any) {
+        print("sauter")
+//            goToScreen(withId: "ChildDevice")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
-
-
-//extension ChildSocialMedia: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return socialMediaList.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return socialMediaList[row+1]
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//
-//        if let _ = socialMediaList[row+1] {//Prevent "Index out of range" error
-//            selectedSocialMedia = socialMediaList[row+1]
-//            socialMediaTF.text = selectedSocialMedia
-//            selectedSocialMediaID = socialMediaList.findKey(forValue : socialMediaList[row+1]!)
-////            print(selectedSocialMediaID)
-//        }
-//
-//    }
-//}
 
 // for searching key by value you firstly add the extension
 extension Dictionary where Value: Equatable {

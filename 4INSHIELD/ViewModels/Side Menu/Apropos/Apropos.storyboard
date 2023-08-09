@@ -41,6 +41,9 @@
                                                                 <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system">
                                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="backBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1AZ-j2-Yge"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="À propos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOL-HR-Uis">
                                                                 <rect key="frame" x="53" y="52" width="82" height="30"/>
@@ -173,7 +176,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Now-yh-a1C"/>
                     <connections>
-                        <outlet property="PlayerView" destination="Onl-GD-bkF" id="jHL-6d-1uw"/>
                         <outlet property="playerView" destination="Onl-GD-bkF" id="vrM-PE-vUv"/>
                     </connections>
                 </viewController>

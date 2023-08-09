@@ -28,15 +28,11 @@ class APIManager {
     static let shareInstance = APIManager()
     
     func sendContactForm(contactForm: ContactForm, completionHandler: @escaping (Bool, String) -> ()) {
-        let headers: HTTPHeaders = [
-            .contentType("application/json")
-        ]
-        
         let userID = UserDefaults.standard.object(forKey: "userID")
 
-        let completeContactForm = ContactForm(id: userID as! Int, subject: contactForm.subject, message: contactForm.message, username: contactForm.username, email: contactForm.email)
+        let completeContactForm = ContactForm(id_user: userID as! Int, subject: contactForm.subject, message: contactForm.message, username: contactForm.username, email: contactForm.email)
         
-        AF.request(contactFormURL, method: .post, parameters: completeContactForm, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request(contactFormURL, method: .post, parameters: completeContactForm, encoder: JSONParameterEncoder.default)
             .response { response in
                 switch response.result {
                 case .success(_):
@@ -52,7 +48,6 @@ class APIManager {
             }
     }
 
-     
     func fetchToxicPersons(forPerson childID: Int, completion: @escaping ([String]?) -> Void) {
         var toxicPseudos: [String]?
         let fetchToxicPersonsURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/data/count/concerned-relationship/?person_id=\(childID)&rule_name=toxicity_rule"

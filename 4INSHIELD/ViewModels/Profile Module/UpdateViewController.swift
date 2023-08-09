@@ -14,13 +14,18 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
-    @IBOutlet weak var numeroTf: UITextField!
     
     @IBOutlet weak var parent1Btn: DLRadioButton!
     @IBOutlet weak var parent2: DLRadioButton!
+    @IBOutlet weak var prent3: DLRadioButton!
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var calendarButton: UIButton!
+    
+    @IBOutlet weak var nameError: UILabel!
+    @IBOutlet weak var lastnameError: UILabel!
+    @IBOutlet weak var emailError: UILabel!
+    @IBOutlet weak var dateError: UILabel!
     
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
@@ -29,23 +34,204 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        resetForm()
+        
         //Utilities
         setUpDesign()
         getCurrentUserData()
-        
-        //Set up phone number delegate
-        numeroTf.delegate = self
+        self.emailTf.isEnabled = false
         
         //Radio Buttons group property
-        parent1Btn.otherButtons = [parent2]
-        parent2.otherButtons = [parent1Btn]
+        parent1Btn.otherButtons = [parent2, prent3]
+        parent2.otherButtons = [parent1Btn, prent3]
+        prent3.otherButtons = [parent1Btn, parent2]
 
         //Set the corner radius
         parent1Btn.layer.cornerRadius = parent1Btn.frame.width / 2
         parent2.layer.cornerRadius = parent2.frame.width / 2
+        prent3.layer.cornerRadius = prent3.frame.width / 2
         
         // Set up the button's action
         calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+    }
+    
+    func resetForm() {
+        updateBtn.isEnabled = false
+
+        nameError.isHidden = true
+        lastnameError.isHidden = true
+        emailError.isHidden = true
+        dateError.isHidden = true
+
+//        usernameError.text = "Required"
+//        emailError.text = "Required"
+//        passwordError.text = "Required"
+//        confirmpwdError.text = "Required"
+    }
+    
+    func checkForValidForm()
+    {
+        if nameError.isHidden && lastnameError.isHidden && emailError.isHidden && dateError.isHidden
+        {
+            updateBtn.isEnabled = true
+        }
+        else
+        {
+            updateBtn.isEnabled = false
+        }
+    }
+    
+    @IBAction func nameChanged(_ sender: Any) {
+        if let firstname = prenomTf.text {
+             if let errorMessage = invalidName(firstname) {
+                 nameError.text = errorMessage
+                 nameError.isHidden = false
+                 prenomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 prenomTf.setupRightSideImage(image: "error", colorName: "redControl")
+             } else {
+                 nameError.isHidden = true
+                 prenomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                 prenomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+             }
+         }
+         
+         checkForValidForm()
+    }
+    
+    func invalidName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+//            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
+//            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+//            if !predicate.evaluate(with: value)
+//            {
+//                if LanguageManager.shared.currentLanguage == "fr"{
+//                return "Nom d'utilisateur non valide"
+//
+//            }
+//                if LanguageManager.shared.currentLanguage == "en"{
+//                    return "Invalid name"
+//                }
+//
+//            }
+            return nil
+        }
+    
+    @IBAction func lastnameChanged(_ sender: Any) {
+        if let lastname = nomTf.text {
+             if let errorMessage = invalidlastName(lastname) {
+                 lastnameError.text = errorMessage
+                 lastnameError.isHidden = false
+                 nomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 nomTf.setupRightSideImage(image: "error", colorName: "redControl")
+             } else {
+                 lastnameError.isHidden = true
+                 nomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                 nomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+             }
+         }
+         checkForValidForm()
+    }
+    
+    func invalidlastName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+//            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
+//            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+//            if !predicate.evaluate(with: value)
+//            {
+//                if LanguageManager.shared.currentLanguage == "fr"{
+//                return "Nom d'utilisateur non valide"
+//
+//            }
+//                if LanguageManager.shared.currentLanguage == "en"{
+//                    return "Invalid username"
+//                }
+//
+//            }
+            return nil
+        }
+    
+    @IBAction func emailChanged(_ sender: Any) {
+        if let email = emailTf.text {
+            if let errorMessage = invalidEmail(email) {
+                emailError.text = errorMessage
+                emailError.isHidden = false
+                emailTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                emailTf.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                emailError.isHidden = true
+                emailTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                emailTf.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidEmail(_ value: String) -> String?
+    {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr"{
+            return "Ce champ ne peut pas être vide. "
+            }
+            if LanguageManager.shared.currentLanguage == "en"{
+            return "This field cannot be blank."
+            }
+        }
+        
+        let reqularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        
+        if !predicate.evaluate(with: value) {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Votre email n'est pas valide !"
+            } else {
+                return "Your email is not valid!"
+            }
+        }
+        return nil
+    }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        if let date = dateTextField.text {
+            if let errorMessage = invalidDate(date) {
+                dateError.text = errorMessage
+                dateError.isHidden = false
+                dateTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+            } else {
+                dateError.isHidden = true
+                dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidDate(_ value: String) -> String?
+    {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr"{
+            return "Ce champ ne peut pas être vide. "
+            }
+            if LanguageManager.shared.currentLanguage == "en"{
+            return "This field cannot be blank."
+            }
+        }
+        return nil
     }
     
     let phoneNumberKit = PhoneNumberKit()
@@ -64,19 +250,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         }
         textField.text = formattedText
         return false
-    }
-
-    func verifyPhoneNumber() {
-        guard let text = numeroTf.text else { return }
-        do {
-            let phoneNumber = try phoneNumberKit.parse(text)
-            print("Country code: \(phoneNumber.countryCode)")
-            print("National number: \(phoneNumber.nationalNumber)")
-            // Now you can use the parsed phone number for verification
-        } catch {
-            print("Error parsing phone number: \(error.localizedDescription)")
-            // Handle the error here
-        }
     }
 
     func emojiFlag(for countryCode: String) -> String {
@@ -103,6 +276,8 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
                     self.parent1Btn.isSelected = true
                 } else if user.gender ==  "F" {
                     self.parent2.isSelected = true
+                } else {
+                    self.prent3.isSelected = true
                 }
             }
         }
@@ -113,12 +288,11 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         let prenomPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         let nomPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         let emailPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
-        let numeroPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         let datePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         
         //Set up firstname textfield
         prenomTf.layer.borderWidth = 1
-        prenomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        prenomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         prenomTf.layer.cornerRadius = prenomTf.frame.size.height/2
         prenomTf.layer.masksToBounds = true
         prenomTf.leftView = prenomPaddingView
@@ -126,7 +300,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         
         //Set up lastname textfield
         nomTf.layer.borderWidth = 1
-        nomTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        nomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         nomTf.layer.cornerRadius = nomTf.frame.size.height/2
         nomTf.layer.masksToBounds = true
         nomTf.leftView = nomPaddingView
@@ -134,7 +308,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         
         //Set up date textfield
         dateTextField.layer.borderWidth = 1
-        dateTextField.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         dateTextField.layer.cornerRadius = dateTextField.frame.size.height/2
         dateTextField.layer.masksToBounds = true
         dateTextField.leftView = datePaddingView
@@ -142,23 +316,15 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         
         //Set up email textfield
         emailTf.layer.borderWidth = 1
-        emailTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        emailTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         emailTf.layer.cornerRadius = emailTf.frame.size.height/2
         emailTf.layer.masksToBounds = true
         emailTf.leftView = emailPaddingView
         emailTf.leftViewMode = .always
         
-        //Set up numero textfield
-        numeroTf.layer.borderWidth = 1
-        numeroTf.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
-        numeroTf.layer.cornerRadius = numeroTf.frame.size.height/2
-        numeroTf.layer.masksToBounds = true
-        numeroTf.leftView = numeroPaddingView
-        numeroTf.leftViewMode = .always
-        
         //Set up buttons
         cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(red: 50/255, green: 126/255, blue: 192/255, alpha: 1).cgColor
+        cancelBtn.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
@@ -184,6 +350,8 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             self.dateTextField.text = dateFormatter.string(from: datePicker.date)
+            self.dateError.isHidden = true
+            self.dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         }))
         
         // Present the alert controller
@@ -196,6 +364,8 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
             gender = "M"
         case 1:
             gender = "F"
+        case 2:
+            gender = "O"
         default:
             break
         }
@@ -235,13 +405,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
             present(alertController, animated: true, completion: nil)
             return
         }
-//        guard let numero = numeroTf.text, !lName.isEmpty else {
-//            let alertController = UIAlertController(title: "Failed", message: "Enter your phone number please!", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(okAction)
-//            present(alertController, animated: true, completion: nil)
-//            return
-//        }
         guard let date = dateTextField.text, !date.isEmpty else {
             let alertController = UIAlertController(title: "Failed", message: "Enter your birth date please!", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)

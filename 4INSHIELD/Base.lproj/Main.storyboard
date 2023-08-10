@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Kc-lr-0jG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bd8-Gt-Knd">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -3932,7 +3932,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7t-J1-bi5">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="953.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="919.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-tb-IUT">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="911.66666666666663"/>
@@ -4224,7 +4224,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="nXL-tb-IUT" secondAttribute="trailing" id="Ohl-Nu-hCv"/>
-                                            <constraint firstAttribute="bottom" secondItem="nXL-tb-IUT" secondAttribute="bottom" constant="42" id="YEj-4c-4pH"/>
+                                            <constraint firstAttribute="bottom" secondItem="nXL-tb-IUT" secondAttribute="bottom" constant="8" id="YEj-4c-4pH"/>
                                             <constraint firstItem="nXL-tb-IUT" firstAttribute="top" secondItem="O7t-J1-bi5" secondAttribute="top" id="gQU-vF-2F9"/>
                                             <constraint firstItem="nXL-tb-IUT" firstAttribute="leading" secondItem="O7t-J1-bi5" secondAttribute="leading" id="oq5-tC-R0W"/>
                                         </constraints>

@@ -40,9 +40,6 @@ class Register: KeyboardHandlingBaseVC {
     var iconClick = false
     let imageicon1 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let imageicon2 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
-   
-    var selectedGender : String?
-    var sexe: String = "M"
     let menu: DropDown = {
         let menu = DropDown()
         menu.dataSource = [
@@ -54,18 +51,9 @@ class Register: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetForm()
         
-//        // Create a white chevron.right image
-//          if let chevronImage = UIImage(systemName: "chevron.right")?.withTintColor(.white, renderingMode: .alwaysOriginal) {
-//              registerBtn.setImage(chevronImage, for: .normal)
-//          }
-//          registerBtn.semanticContentAttribute = .forceRightToLeft
-//
-//        // Adjust the image and title insets
-//        registerBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 20)
-//        registerBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -20)
-
+        resetForm()
+           
         // Update localized strings
         updateLocalizedStrings()
         
@@ -117,9 +105,11 @@ class Register: KeyboardHandlingBaseVC {
                  usernameError.text = errorMessage
                  usernameError.isHidden = false
                  usernameTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 usernameTF.setupRightSideImage(image: "error", colorName: "redControl")
              } else {
                  usernameError.isHidden = true
                  usernameTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                 usernameTF.setupRightSideImage(image: "done", colorName: "vertDone")
              }
          }
          
@@ -160,9 +150,11 @@ class Register: KeyboardHandlingBaseVC {
                 emailError.text = errorMessage
                 emailError.isHidden = false
                 emailTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                emailTF.setupRightSideImage(image: "error", colorName: "redControl")
             } else {
                 emailError.isHidden = true
                 emailTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                emailTF.setupRightSideImage(image: "done", colorName: "vertDone")
             }
         }
         
@@ -200,9 +192,11 @@ class Register: KeyboardHandlingBaseVC {
                  passwordError.text = errorMessage
                  passwordError.isHidden = false
                  passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                 passwordTF.setupRightSideImage(image: "error", colorName: "redControl")
              } else {
                  passwordError.isHidden = true
                  passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                 passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
              }
          }
          
@@ -274,13 +268,16 @@ class Register: KeyboardHandlingBaseVC {
             if password == confirmPassword {
                 confirmpwdError.isHidden = true
                 confirmPasswordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+                confirmPasswordTF.setupRightSideImage(image: "done", colorName: "vertDone")
             } else {
                 if LanguageManager.shared.currentLanguage == "fr" {
                     confirmpwdError.text = "Les 2 mots de passe ne correspondent pas."
                     confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                    confirmPasswordTF.setupRightSideImage(image: "error", colorName: "redControl")
                 } else {
                     confirmpwdError.text = "Passwords do not match."
                     confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                    confirmPasswordTF.setupRightSideImage(image: "error", colorName: "redControl")
                 }
                 confirmpwdError.isHidden = false
             }
@@ -421,6 +418,10 @@ class Register: KeyboardHandlingBaseVC {
 
         signInBtn.setAttributedTitle(attributedTitle, for: .normal)
         haveAccLbl.text = NSLocalizedString("text_login", tableName: nil, bundle: bundle, value: "", comment: "text login")
+        usernameError.text = NSLocalizedString("username_error", tableName: nil, bundle: bundle, value: "", comment: "text login")
+        emailError.text = NSLocalizedString("email_error", tableName: nil, bundle: bundle, value: "", comment: "text login")
+        passwordError.text = NSLocalizedString("password_error", tableName: nil, bundle: bundle, value: "", comment: "text login")
+        confirmpwdError.text = NSLocalizedString("Confirm_password_error", tableName: nil, bundle: bundle, value: "", comment: "text login")
         /*    register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
          register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
     }
@@ -433,25 +434,39 @@ class Register: KeyboardHandlingBaseVC {
     }
     
     func goToConfirmation(withId identifier: String) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(ConfirmationVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let ConfirmationVC = storyboard.instantiateViewController(withIdentifier: identifier)
+            self.navigationController?.pushViewController(ConfirmationVC, animated: true)
+        }
     }
     
-    
+    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+
     @IBAction func registerBtnTapped(_ sender: Any) {
-        guard let username = self.usernameTF.text, !username.isEmpty else { return }
-        guard let email = self.emailTF.text, !email.isEmpty else { return }
-        guard let password = self.passwordTF.text, !password.isEmpty else { return }
+        guard let username = usernameTF.text, !username.isEmpty,
+              let email = emailTF.text, !email.isEmpty,
+              let password = passwordTF.text, !password.isEmpty else {
+                  return
+              }
 
-        let register = RegisterModel(email: email, username: username, password: password, email_verification_url: email)
+        let register = RegisterModel(username: username, email: email, password: password)
 
-        APIManager.shareInstance.registerAPI(register: register) { (isSuccess, messageKey) in
+        APIManager.shareInstance.registerAPI(register: register) { isSuccess, messageKey in
             if isSuccess {
-                // Show the success alert first
                 self.showAlert(messageKey: messageKey)
-                // Upon tapping OK, navigate to the confirmation screen
-                self.goToConfirmation(withId: "ConfirmationID")
+                
+                self.dismiss(animated: true)
+                // Delay the presentation of the Confirmation view controller
+                self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ConfirmationID")
+                
                 UserDefaults.standard.set(email, forKey: "userEmail")
                 UserDefaults.standard.synchronize()
                 self.resetForm()
@@ -492,7 +507,7 @@ extension UITextField {
     }
     
     func setupBorderTFs() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = 5
         layer.borderWidth = 1
         layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         
@@ -512,7 +527,7 @@ extension UIButton{
     }
     
     func setupBorderBtns() {
-        layer.cornerRadius = 15
+        layer.cornerRadius = 5
 //        layer.borderWidth = 1
 //        layer.borderColor = UIColor(named: "grisBorder")?.cgColor
     }

@@ -33,6 +33,10 @@ class homeVC: UIViewController, ChartViewDelegate {
     var days: [Double] = []
 
     
+    @IBOutlet weak var messageRappotLabel: UILabel!
+    @IBOutlet weak var loadingPersonIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var messageLineChart: UILabel!
     @IBOutlet weak var personIcon: UIImageView!
     
     @IBOutlet weak var lineChartView: LineChartView! {
@@ -40,6 +44,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             lineChartView.addShadowView(width: 2, height: 3, Opacidade: 0.1, radius: 15, shadowRadius: 5)
         }
     }
+    
+    @IBOutlet weak var loadingPlatformIndicator: UIActivityIndicatorView!
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
@@ -107,39 +113,65 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var personneImage2Label: UILabel!
     @IBOutlet weak var personneImage4Label: UILabel!
     @IBOutlet weak var personneImage1Label: UILabel!
-    
+    @IBOutlet weak var maxScoreLabel: UILabel!
     let pieChartView = PieChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Set persons collection invisibility
-        personsCollectionView.isHidden = true
-        
-        //Set label invisibility
+        print(selectedChild?.id)
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+        loadingPlatformIndicator.startAnimating()
+        loadingPlatformIndicator.isHidden = false
+
         missingDataLbl.isHidden = true
+        messageLineChart.isHidden = true
+        errorLbl.isHidden = true
+   
+
+        //Set persons collection invisibility
+        personsCollectionView.isHidden = false
         
+   
+
         //Humor pie chart
-        APIManager.shareInstance.getMentalState(childID:7, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
+        APIManager.shareInstance.getMentalState(childID:selectedChild?.id ?? 2, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
             guard let self = self else { return }
 
             print("state:", fetchedState)
 
                         
             // Call the API to fetch platforms
-            APIManager.shareInstance.fetchPlatforms(forPerson: 7) { [weak self] platforms in
-                guard let self = self else { return }
-                
+            APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
+                guard let self = self else {
+                    return
+                }
+              
                 if let platforms = platforms?.platforms {
+                    loadingPlatformIndicator.stopAnimating()
+                    loadingPlatformIndicator.isHidden = false
                     self.platforms = platforms
                     DispatchQueue.main.async {
                         self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
                     }
                 }
+                else{
+                    loadingPlatformIndicator.stopAnimating()
+                    loadingPlatformIndicator.isHidden = true
+                  
+                    errorLbl.isHidden = false
+                    print("erreur platform")
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.errorLbl.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.errorLbl.text = " There Is No Data to Display at this Moment."
+                    }
+                }
             }
             
             // Call the API to fetch concerned relationship
-            APIManager.shareInstance.fetchConcernedRelationship(forPerson: 7) { [weak self] concernedRelationship in
+            APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
                 guard let self = self else { return }
                 
                 if let toxicCount = concernedRelationship {
@@ -153,7 +185,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             
             // Call the API to fetch the profile image URL
             let username = UserDefaults.standard.string(forKey: "username")!
-            APIManager.shareInstance.fetchProfileImageURL(forUsername: "asidiki") { [weak self] imageURL in
+            APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
                 guard let self = self else { return }
                 
                 if let imageURL = imageURL {
@@ -342,7 +374,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func getMentalState(startDateT: Int, endDateT: Int) {
         // Call the getMentalState function to fetch the mental state data
-        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { [weak self] fetchedStates in
             guard let self = self else { return }
             
             print("states:", fetchedStates)
@@ -361,7 +393,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func getScorePlateform(startDateT: Int, endDateT: Int) {
         // Call the fetchScore function to fetch the score data
-        APIManager.shareInstance.fetchScorePlatform(childID: 7, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
+        APIManager.shareInstance.fetchScorePlatform(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
             print(fetchedScore?.result)
             var listeDates: [Double] = []
             var listeMaxScore: [Int] = []
@@ -370,27 +402,10 @@ class homeVC: UIViewController, ChartViewDelegate {
                 listeMaxScore.append(element.maxScore)
             }
             self?.setupLineChart(listeDates: listeDates, listeMaxScore: listeMaxScore)
-// Store the fetched score data in the property (assuming the score property is of type ScoreResponse)
-//            self.score = scoreData
-            
-            // Assuming the globalScore from ScoreResponse is the data you want to store in days
-//            self.days = scoreData.globalScore
-            
-            // Now you can access the stored score and days properties
-//            print("Score:", self.score)
-//            print("Days:", self.days)
-            
-            // Continue with any other operations using the fetched data
-            // ...
+
         }
         
     }
-
-
-
-
-
-    
     
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
@@ -424,12 +439,6 @@ class homeVC: UIViewController, ChartViewDelegate {
     func setupLineChart(listeDates: [Double]?, listeMaxScore: [Int]?) {
         let formattedDates = listeDates?.formatTimestampsToStrings(dateFormat: "yyyy-MM-dd")
         print(formattedDates)
-//        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-//        var percentages = [Int]()
-
-//        for i in 0...formattedDates.count {
-//            percentages .append(i)
-//        }
         
         
         // Create chart entries
@@ -442,12 +451,23 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Check if there are any data entries
         if dataEntries.isEmpty {
             // Hide the chart and remove any messages
-            lineChartView.isHidden = true
-            lineChartView.noDataText = ""
+            lineChartView.isHidden = false
+//            lineChartView.noDataText = ""
+            print("no data")
+            loadingIndicator.stopAnimating()
+            loadingIndicator.isHidden = true
+            messageLineChart.isHidden = false
+         
+            if LanguageManager.shared.currentLanguage == "fr" {
+                messageLineChart.text = " Il n'y a pas de données à afficher pour le moment. "
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                messageLineChart.text = " There Is No Data to Display at this Moment."
+            }
         } else {
             // Show the chart
-            lineChartView.isHidden = false
-            
+            lineChartView.isHidden = true
+            maxScoreLabel.isHidden = false
             // Create a line dataset
             let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
             
@@ -535,8 +555,10 @@ class homeVC: UIViewController, ChartViewDelegate {
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
         
         current_harLbl.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
-        scoreLbl.text = NSLocalizedString("max_score", tableName: nil, bundle: bundle, value: "", comment: "")
-        
+        errorLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
+        missingDataLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
+        messageLineChart.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
+       
         // Translate the text labels in the collection view cells
         for cell in cardsCollectionView.visibleCells {
             if let cell = cell as? CustomCollectionViewCell {
@@ -592,10 +614,12 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
+        loadingPersonIndicator.startAnimating()
+        loadingPersonIndicator.isHidden = false
         personsCollectionView.isHidden = false
                 
         // Call the API to fetch toxic persons
-        APIManager.shareInstance.fetchToxicPersons(forPerson: 7) { pseudos in
+        APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 2) { [self] pseudos in
             if let pseudos = pseudos {
                 // Update your toxic pseudos array
                 self.toxicPseudos = pseudos
@@ -605,7 +629,17 @@ class homeVC: UIViewController, ChartViewDelegate {
                 self.personsCollectionView.reloadData()
             } else {
                 print("No toxic persons data")
-                self.missingDataLbl.isHidden = false
+                self.loadingPersonIndicator.stopAnimating()
+                self.loadingPersonIndicator.isHidden = true
+                missingDataLbl.isHidden = false
+               
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    self.missingDataLbl.text = " Il n'y a pas de données à afficher pour le moment. "
+                }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    self.missingDataLbl.text = " There is No Data to Display at this Moment."
+                }
+
             }
         }
 
@@ -1029,6 +1063,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
         } else
         if collectionView.tag == 2 {
+       
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
@@ -1050,7 +1085,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: 7, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 2, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if let score = score {
                     // Use the score value to determine the cardTitle
                     if score < 30 {
@@ -1063,11 +1098,13 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         cell.cardTitle.text = "Statut à Risque"
                         cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
                     }
-                    self.errorLbl.isHidden = true
+                    
+                   
                 } else {
                     // Handle error case or set a default value for the cardTitle
-                    cell.cardTitle.text = "No Data"
+                    cell.cardTitle.text = "No Data Platform"
                     cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+               
                 }
             }
             return cell
@@ -1110,11 +1147,14 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 
                 // Update the UI on the main thread
                 DispatchQueue.main.async {
+                    
                     if indexPath.row < self.states.count {
+                        print("oooooo")
                         let state = self.states[indexPath.row]
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
                         cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                        
                         
                         if state.mental_state == "happy" {
                             cell.cardLogo.image = UIImage(named: "smileyface")
@@ -1124,12 +1164,13 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
                         } else {
                             cell.cardLogo.image = UIImage(named: "pokerface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
                         }
                     } else {
                         // Handle the case when index path is out of bounds
                         cell.cardLogo.image = UIImage(named: "pokerface")
-                        //  cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horangee")!)
+                        print("no data rapport")
+                          cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
                     }
             }
             return cell
@@ -1147,7 +1188,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            return state?.data.count ?? 0
+            return state?.data.count ?? 5
           // return 10
         }
         
@@ -1158,7 +1199,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data`
         
-        APIManager.shareInstance.getMentalState(childID: 7, startDateTimestamp: 1627650500, endDateTimestamp: 1690722500) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: 1627650500, endDateTimestamp: 1690722500) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states?.data {

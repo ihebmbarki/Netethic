@@ -124,8 +124,9 @@ class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
     
     func goToSignIn(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let SignIn = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(SignIn, animated: true)
+        let vc = storyboard.instantiateViewController(withIdentifier: identifier)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     

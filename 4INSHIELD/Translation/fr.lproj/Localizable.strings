@@ -73,6 +73,8 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "harcled" = "harcelé";
 "parc_har" = "Partiellement harcelé";
 "non_harcele" = "Non harcelé";
+"msgerreur" = "Il n'y a pas de données à afficher pour le moment.";
+
  
 //MARK: Child Profile
 "First_name" = "Prénom";
@@ -109,3 +111,4 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 //MARK: Child Device
 "ajoutDevice" = "Veuillez ajouter les appareils de votre enfant  ";
 "information" = "Les informations fournies par l'appareil de votre enfant vous aideront à veiller sur sa santé mentale, la qualité de son sommeil, ses allées et venues, les applications qui l'intéressent, etc. ";`
+

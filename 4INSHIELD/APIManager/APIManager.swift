@@ -992,6 +992,7 @@ class APIManager {
                 guard let statusCode = (response.response?.statusCode) else {return}
                 if statusCode == 200 {
                     completionHandler(.success(email))
+                    print("code valide")
                 } else {
                     completionHandler(.failure(.custom(message: "Invalid OTP code")))
                 }

@@ -19,6 +19,7 @@ class ChildInfoViewController: UIViewController {
     @IBOutlet weak var childAddressLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

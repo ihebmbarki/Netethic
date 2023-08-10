@@ -74,6 +74,8 @@ Please check your registered email for the activation link.";
 "harcled" = "Harassed";
 "parc_har" = "Partially Harassed";
 "non_harcele" = "Not Harassed";
+"msgerreur" = " There is No Data to Display at this Moment..";
+
 
 //MARK: Child Profile
 "First_name" = "First Name";
@@ -110,3 +112,5 @@ Please check your registered email for the activation link.";
 //MARK: Child Device
 "ajoutDevice" = "Please add your child’s devices  ";
 "information" = "The information from your child's device will help you monitor their mental health, sleep quality, whereabouts, and apps of interest, etc. ";`
+
+

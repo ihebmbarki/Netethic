@@ -31,7 +31,12 @@ class SignIn: KeyboardHandlingBaseVC {
         }
     }
     
-    @IBOutlet weak var footerLabel: UILabel!
+    @IBOutlet weak var mainView: FooterView!{
+        didSet{
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+    }
+    
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var userErrorLabel: UILabel!
     
@@ -164,7 +169,13 @@ class SignIn: KeyboardHandlingBaseVC {
         registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
-        footerLabel.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "footer")
+        if LanguageManager.shared.currentLanguage == "fr"{
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+        if LanguageManager.shared.currentLanguage == "en"{
+            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+
     }
     
     func goToScreen(withId identifier: String) {

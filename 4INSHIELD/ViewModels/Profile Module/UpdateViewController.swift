@@ -10,7 +10,7 @@ import Foundation
 import DLRadioButton
 import PhoneNumberKit
 
-class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
+class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteAlertDelegate {
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
@@ -29,6 +29,8 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
+    @IBOutlet weak var deleteView: UIView!
+    @IBOutlet weak var deleteBtn: UIButton!
     
     var gender: String = ""
     
@@ -36,6 +38,17 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         super.viewDidLoad()
         
         resetForm()
+        
+        //Setup deleteview
+        deleteView.layer.cornerRadius = 5.0
+        deleteView.clipsToBounds = true
+        deleteView.layer.borderWidth = 0.5
+        deleteView.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+        deleteView.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
+        deleteView.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+        deleteView.layer.shadowOpacity = 0.5
+        deleteView.layer.shadowRadius = 0.0
+        deleteView.layer.masksToBounds = false
         
         //Utilities
         setUpDesign()
@@ -323,10 +336,16 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
         emailTf.leftViewMode = .always
         
         //Set up buttons
-        cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+        cancelBtn.layer.borderWidth = 0.5
+        cancelBtn.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+        cancelBtn.layer.shadowOpacity = 0.5
+        cancelBtn.layer.shadowRadius = 0.0
+        cancelBtn.layer.masksToBounds = false
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
+        
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
     }
@@ -441,4 +460,15 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate {
     }
     
 
+    @IBAction func deleteAccBtnTapped(_ sender: Any) {
+        let deleteCustomAlert = self.storyboard?.instantiateViewController(identifier: "deleteCustomAlertID") as! CustomDeleteAlertView
+        deleteCustomAlert.delegate  = self
+        deleteCustomAlert.modalPresentationStyle = .overCurrentContext
+        deleteCustomAlert.providesPresentationContextTransitionStyle = true
+        deleteCustomAlert.definesPresentationContext = true
+        deleteCustomAlert.modalTransitionStyle = .coverVertical
+        self.present(deleteCustomAlert, animated: true, completion: nil)
+    }
+    
+    
 }

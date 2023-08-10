@@ -639,7 +639,7 @@ extension UITextField {
         leftViewMode = .always
     }
     func setupRightSideImage(image: String, colorName: String) {
-        let imageView = UIImageView(frame: CGRect(x: 12, y: 8, width: 20, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 12, y: 9, width: 20, height: 20))
         imageView.image = UIImage(named: image)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: colorName)
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))

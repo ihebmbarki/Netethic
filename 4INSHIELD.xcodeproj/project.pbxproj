@@ -89,6 +89,7 @@
 		04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4F0752A01DC1B0033818F /* ChildTvCell.swift */; };
 		04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE42A69595600BDA1F1 /* homeVC.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
+		04FA918E2A8523FA0013B7E8 /* CustomDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA918D2A8523FA0013B7E8 /* CustomDeleteAlertView.swift */; };
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
 		870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */; };
 		870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */; };
@@ -231,6 +232,7 @@
 		04D4F0752A01DC1B0033818F /* ChildTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTvCell.swift; sourceTree = "<group>"; };
 		04E27AE42A69595600BDA1F1 /* homeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeVC.swift; sourceTree = "<group>"; };
 		04E54A3829ACC95300B00906 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		04FA918D2A8523FA0013B7E8 /* CustomDeleteAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeleteAlertView.swift; sourceTree = "<group>"; };
 		43F34BEE839351B11521E6A2 /* Pods-4INSHIELD.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release staging.xcconfig"; sourceTree = "<group>"; };
 		5B48EC22A6B71FCC24D0B6B9 /* Pods-4INSHIELD.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug production.xcconfig"; sourceTree = "<group>"; };
 		5D8BFCC8FD1EAEE4CA882CED /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
 				04D4F0732A01DAEB0033818F /* childCell.xib */,
 				04D4F0752A01DC1B0033818F /* ChildTvCell.swift */,
+				04FA918D2A8523FA0013B7E8 /* CustomDeleteAlertView.swift */,
 			);
 			path = "Profile Module";
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				04A963B729B0D055009EA1CB /* VerificationModel.swift in Sources */,
 				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
+				04FA918E2A8523FA0013B7E8 /* CustomDeleteAlertView.swift in Sources */,
 				872D05FA2A60923E0069E58A /* Userparent.swift in Sources */,
 				8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,

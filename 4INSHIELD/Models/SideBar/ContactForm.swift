@@ -8,6 +8,7 @@
 import Foundation
 
 struct ContactForm: Encodable {
+    let id_user: Int
     let subject: String
     let message: String
     let username: String

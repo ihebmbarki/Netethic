@@ -24,7 +24,12 @@ class AproposVC: UIViewController {
         super.viewDidAppear(animated)
 
         // Create a player
-        player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "inshield", ofType: "mp4")!))
+        if let videoURL = Bundle.main.url(forResource: "inshield", withExtension: "mp4") {
+            player = AVPlayer(url: videoURL)
+        } else {
+            // Handle the case where the video file is not found
+            print("Video file 'inshield.mp4' not found.")
+        }
 
         // Create a layer
         let layer = AVPlayerLayer(player: player)
@@ -70,6 +75,7 @@ class AproposVC: UIViewController {
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
+    
 }

@@ -82,11 +82,16 @@ class ContactVC: UIViewController {
         guard let name = self.nameTF.text,
               let email = self.emailTF.text,
               let object = self.objectTF.text,
-              let message = self.messageTF.text else { return }
+              let message = self.messageTF.text,
+              let userID = UserDefaults.standard.object(forKey: "userID") as? Int else {
+//                showAlert(message: "Please fill in all required fields.")
+                return
+        }
         
-        let contactForm = ContactForm(subject: object, message: message, username: name, email: email)
+        let contactForm = ContactForm(id_user: userID, subject: object, message: message, username: name, email: email)
+        
         // Print the contactForm object before sending it
-            print("Contact Form Object: \(contactForm)")
+        print("Contact Form Object: \(contactForm)")
 
         APIManager.shareInstance.sendContactForm(contactForm: contactForm) { isSuccess, str in
             if isSuccess {
@@ -101,7 +106,7 @@ class ContactVC: UIViewController {
     }
     
     @IBAction func backBtn(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
 }

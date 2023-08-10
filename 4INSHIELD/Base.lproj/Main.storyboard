@@ -703,7 +703,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="qUV-zS-aaW"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                                 <color key="textColor" name="redControl"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -728,7 +728,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="be0-B2-ieR"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                 <color key="textColor" name="redControl"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -753,7 +753,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="kU4-h5-eIe"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                 <color key="textColor" name="redControl"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -770,7 +770,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="Pqm-6h-Uxc"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                                 <color key="textColor" name="redControl"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -791,52 +791,48 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iry-bY-koh">
                                                         <rect key="frame" x="0.0" y="821" width="424" height="140"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-91-Cvx">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-91-Cvx">
                                                                 <rect key="frame" x="48" y="0.0" width="328" height="52"/>
                                                                 <color key="backgroundColor" name="AccentColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="52" id="Y1w-G7-8vq"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="S’inscrire">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="titleColor" red="0.98039215686274506" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="registerBtnTapped:" destination="jea-gb-NUc" eventType="touchUpInside" id="usZ-Wv-jff"/>
                                                                 </connections>
                                                             </button>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iNX-gh-Wzi">
-                                                                <rect key="frame" x="48" y="67" width="328" height="28.666666666666671"/>
+                                                                <rect key="frame" x="48" y="62" width="328" height="35"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Eu-rn-mzw">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="180" height="28.666666666666668"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous avez un compte ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Eu-rn-mzw">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="180" id="Mig-sm-Kf3"/>
+                                                                            <constraint firstAttribute="width" constant="160" id="Mig-sm-Kf3"/>
                                                                         </constraints>
-                                                                        <attributedString key="attributedText">
-                                                                            <fragment content="Vous avez un compte ?">
-                                                                                <attributes>
-                                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="NSFont" metaFont="system" size="14"/>
-                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                </attributes>
-                                                                            </fragment>
-                                                                        </attributedString>
+                                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                                        <color key="textColor" red="0.13725490196078433" green="0.20392156862745098" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fi8-9x-Hhq">
-                                                                        <rect key="frame" x="185" y="0.0" width="143" height="28.666666666666668"/>
+                                                                        <rect key="frame" x="165" y="0.0" width="163" height="35"/>
                                                                         <color key="tintColor" name="AccentColor"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" title="Button">
                                                                             <attributedString key="attributedTitle">
                                                                                 <fragment content="Connectez-vous">
                                                                                     <attributes>
-                                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                                        <font key="NSOriginalFont" metaFont="system" size="14"/>
+                                                                                        <color key="NSBackgroundColor" red="0.75407000000000002" green="0.75409000000000004" blue="0.75407999999999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="NSColor" red="0.29411999999999999" green="0.30587999999999999" blue="0.86275000000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                        <font key="NSFont" size="20" name="Helvetica"/>
+                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                                                         <integer key="NSUnderline" value="1"/>
+                                                                                        <color key="NSUnderlineColor" red="0.29411999999999999" green="0.30587999999999999" blue="0.86275000000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                     </attributes>
                                                                                 </fragment>
                                                                             </attributedString>
@@ -847,6 +843,11 @@
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TBw-ga-jOs">
+                                                                <rect key="frame" x="268" y="19" width="15" height="15"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="tintColor" red="0.98039215686274506" green="0.97647058823529409" blue="1" alpha="0.50415210850191439" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -854,7 +855,7 @@
                                                             <constraint firstAttribute="height" constant="140" id="byl-BX-3qS"/>
                                                             <constraint firstItem="fi8-9x-Hhq" firstAttribute="trailing" secondItem="FoQ-91-Cvx" secondAttribute="trailing" id="fj9-kr-jIx"/>
                                                             <constraint firstItem="FoQ-91-Cvx" firstAttribute="top" secondItem="iry-bY-koh" secondAttribute="top" id="jPi-rY-Xxy"/>
-                                                            <constraint firstItem="iNX-gh-Wzi" firstAttribute="top" secondItem="FoQ-91-Cvx" secondAttribute="bottom" constant="15.000000000000014" id="t4g-AO-b4g"/>
+                                                            <constraint firstItem="iNX-gh-Wzi" firstAttribute="top" secondItem="FoQ-91-Cvx" secondAttribute="bottom" constant="10" id="t4g-AO-b4g"/>
                                                             <constraint firstItem="6Eu-rn-mzw" firstAttribute="leading" secondItem="FoQ-91-Cvx" secondAttribute="leading" id="w0C-Ll-POL"/>
                                                         </constraints>
                                                     </view>
@@ -4078,7 +4079,7 @@
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Connexion">
-                                                                    <color key="titleColor" red="0.97933279419999997" green="0.97807776489999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="titleColor" red="0.98039215686274506" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="SignInBtnTapped:" destination="bd8-Gt-Knd" eventType="touchUpInside" id="38I-pv-3hv"/>
@@ -4795,6 +4796,7 @@
         <image name="changePwdLogo" width="197" height="140.66667175292969"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="childprofilbg" width="360" height="64"/>
         <image name="facebook_icon" width="22" height="22"/>
         <image name="femalePic" width="86" height="86"/>

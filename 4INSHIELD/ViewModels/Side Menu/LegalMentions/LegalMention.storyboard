@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PD4-ir-ScZ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -22,7 +22,7 @@
         <!--Legal MentionVC-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="LegalMentionID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="LegalMentionVC" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="LegalMentionVC" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,14 +43,6 @@
                                                                 <rect key="frame" x="-21" y="-104" width="432" height="230"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             </imageView>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pR-pa-qLA">
-                                                                <rect key="frame" x="14" y="55" width="25" height="25"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system">
-                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </buttonConfiguration>
-                                                            </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mentions légales" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkU-nT-fbE">
                                                                 <rect key="frame" x="53" y="52" width="184" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -189,7 +181,7 @@ Please read these terms and conditions carefully before using Our Application.</
                                                                                 </attributes>
                                                                             </fragment>
                                                                             <fragment>
-                                                                                <mutableString key="content">
+                                                                                <string key="content">
 
 For the purposes of these Terms and Conditions:
 Application means the software program provided by the Company downloaded by You on any electronic device, named NETETHIC.
@@ -202,7 +194,7 @@ Device means any device that can access the Service such as a computer, a cellph
 Service refers to the Application.
 Terms and Conditions (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.
 Third-party Social Media Service means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.
-You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</mutableString>
+You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</string>
                                                                                 <attributes>
                                                                                     <font key="NSFont" size="13" name="HelveticaNeue"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
@@ -240,13 +232,13 @@ You means the individual accessing or using the Service, or the company, or othe
                                                                         </constraints>
                                                                         <attributedString key="attributedText">
                                                                             <fragment>
-                                                                                <mutableString key="content">These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
+                                                                                <string key="content">These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
 Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions.
 These Terms and Conditions apply to all visitors, users and others who access or use the Service.
 By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
 You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.
 Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Company’s Privacy Policy.
-Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service. </mutableString>
+Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service. </string>
                                                                                 <attributes>
                                                                                     <font key="NSFont" size="13" name="HelveticaNeue"/>
                                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="1" defaultTabInterval="28" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
@@ -555,6 +547,16 @@ Our Privacy Policy describes Our policies and procedures on the collection, use 
                                             <constraint firstItem="c0o-ac-FcK" firstAttribute="top" secondItem="D6k-rw-R8c" secondAttribute="top" constant="-162" id="sRL-Nk-ODo"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYh-us-hKm">
+                                        <rect key="frame" x="9" y="52" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vqz-Be-Ime"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="D6k-rw-R8c" firstAttribute="bottom" secondItem="hQ2-lP-ejB" secondAttribute="bottom" id="7NZ-6v-WKc"/>
@@ -623,7 +625,7 @@ Our Privacy Policy describes Our policies and procedures on the collection, use 
         <!--Navigation Controller-->
         <scene sceneID="BKy-Cr-Fek">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="PD4-ir-ScZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LegalMentionID" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="PD4-ir-ScZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZYU-Rg-6Bd">

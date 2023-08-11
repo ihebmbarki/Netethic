@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhf-3Z-eKv">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhf-3Z-eKv">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0a-WQ-cdS" userLabel="ContentView">
@@ -813,7 +813,7 @@
     <resources>
         <image name="Groupe 105" width="32.666667938232422" height="33"/>
         <image name="background" width="360" height="209"/>
-        <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
+        <image name="calendar" width="19" height="19"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="pokerface" width="39.333332061767578" height="39.333332061767578"/>

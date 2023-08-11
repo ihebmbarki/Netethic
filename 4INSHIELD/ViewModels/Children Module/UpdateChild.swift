@@ -12,9 +12,13 @@ import DLRadioButton
 class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //IBOutlets
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var childPhoto: UIImageView!
     @IBOutlet weak var PrenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
+    @IBOutlet weak var firstnameErrorLbl: UILabel!
+    @IBOutlet weak var lastnameErorLbl: UILabel!
+    @IBOutlet weak var dateErrorLbl: UILabel!
     
     @IBOutlet weak var maleRadioButton: DLRadioButton!
     @IBOutlet weak var femaleRadioButton: DLRadioButton!
@@ -54,6 +58,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        resetForm()
         //search bar
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -81,6 +86,123 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         //        getCurrentChildSocialMedia()
         configureTableView()
         
+    }
+    
+    func resetForm() {
+        updateBtn.isEnabled = false
+
+        firstnameErrorLbl.isHidden = true
+        lastnameErorLbl.isHidden = true
+        dateErrorLbl.isHidden = true
+
+    }
+    
+    func checkForValidForm()
+    {
+        if firstnameErrorLbl.isHidden && lastnameErorLbl.isHidden && dateErrorLbl.isHidden
+        {
+            updateBtn.isEnabled = true
+        }
+        else
+        {
+            updateBtn.isEnabled = false
+        }
+    }
+    
+    @IBAction func firstnameChanged(_ sender: Any) {
+        if let firstname = PrenomTf.text {
+            if let errorMessage = invalidfirstName(firstname) {
+                firstnameErrorLbl.text = errorMessage
+                firstnameErrorLbl.isHidden = false
+                PrenomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                PrenomTf.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                firstnameErrorLbl.isHidden = true
+                PrenomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                PrenomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidfirstName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+            return nil
+        }
+    
+    @IBAction func laastnameChanged(_ sender: Any) {
+        if let lastname = nomTf.text {
+            if let errorMessage = invalidlastName(lastname) {
+                lastnameErorLbl.text = errorMessage
+                lastnameErorLbl.isHidden = false
+                nomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                nomTf.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                lastnameErorLbl.isHidden = true
+                nomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                nomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidlastName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+            return nil
+        }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        if let date = dateTextField.text {
+            if let errorMessage = invalidDate(date) {
+                dateErrorLbl.text = errorMessage
+                dateErrorLbl.isHidden = false
+                dateTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+            } else {
+                dateErrorLbl.isHidden = true
+                dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidDate(_ value: String) -> String? {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Ce champ ne peut pas être vide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "This field cannot be blank."
+            }
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if dateFormatter.date(from: value) == nil {
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    return "Format de date invalide."
+                }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    return "Invalid date format."
+                }
+            }
+        }
+        return nil
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -114,6 +236,8 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             self.dateTextField.text = dateFormatter.string(from: datePicker.date)
+            self.dateErrorLbl.isHidden = true
+            self.dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         }))
         
         // Present the alert controller
@@ -126,8 +250,8 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     func configureTableView(){
         SocialMediaTableView.layer.cornerRadius = 10.0
         SocialMediaTableView.layer.borderWidth = 1.0
-        SocialMediaTableView.layer.borderColor = UIColor.lightGray.cgColor
         SocialMediaTableView.layer.masksToBounds = true
+        SocialMediaTableView.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         
         SocialMediaTableView.delegate = self
         SocialMediaTableView.dataSource = self
@@ -176,11 +300,18 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         dateTextField.layer.masksToBounds = true
         dateTextField.leftView = datePaddingView
         dateTextField.leftViewMode = .always
-        
+                
         //Set up buttons
-        cancelBtn.layer.borderWidth = 1
+        cancelBtn.layer.borderWidth = 0.5
+        cancelBtn.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+        cancelBtn.layer.shadowOpacity = 0.5
+        cancelBtn.layer.shadowRadius = 0.0
+        cancelBtn.layer.masksToBounds = false
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
+        
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
     }
@@ -265,7 +396,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func radioButtonTapped(_ sender: DLRadioButton) {
@@ -302,7 +433,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
                     self.dateTextField.text = dateFormatter.string(from: birthdate)
                 }
                 
-                if (child.user?.photo)!.isEmpty {
+                if (child.user?.photo ?? "").isEmpty {
                     if child.user!.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                     } else {

@@ -419,11 +419,16 @@ class APIManager {
             case .success:
                 if let data = response.data {
                     do {
-                        child = try JSONDecoder().decode(Childd.self, from: data)
-                        completion(child!)
-                        print("Your child information has been successfully updated")
+                        let jsonDecoder = JSONDecoder()
+                        let topLevelResponse = try jsonDecoder.decode(TopLevelResponse.self, from: data)
+                        if let updatedChild = topLevelResponse.child {
+                            completion(updatedChild)
+                            print("Your child information has been successfully updated")
+                        } else {
+                            print("Failed to decode child information from response")
+                        }
                     } catch {
-                        print("Failed to decode child: \(error)")
+                        print("Failed to decode response: \(error)")
                     }
                 } else {
                     print("Empty response data")
@@ -433,7 +438,6 @@ class APIManager {
             }
         }
     }
-
     
     func uploadChildPic(withID roleId: Int, photo: UIImage) {
         let uploadPic_url = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(roleId)/upload_photo/"

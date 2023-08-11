@@ -426,12 +426,15 @@ class Register: KeyboardHandlingBaseVC {
          register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
     }
     
-    func showAlert(messageKey: String) {
+    func showAlert(messageKey: String, completion: (() -> Void)? = nil) {
         let localizedMessage = NSLocalizedString(messageKey, comment: "")
         let alert = UIAlertController(title: "Alert", message: localizedMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            completion?() // Call the completion handler when "OK" is tapped
+        })
         self.present(alert, animated: true, completion: nil)
     }
+
     
     func goToConfirmation(withId identifier: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -461,20 +464,18 @@ class Register: KeyboardHandlingBaseVC {
 
         APIManager.shareInstance.registerAPI(register: register) { isSuccess, messageKey in
             if isSuccess {
-                self.showAlert(messageKey: messageKey)
-                
-                self.dismiss(animated: true)
-                // Delay the presentation of the Confirmation view controller
-                self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ConfirmationID")
-                
-                UserDefaults.standard.set(email, forKey: "userEmail")
-                UserDefaults.standard.synchronize()
-                self.resetForm()
+                self.showAlert(messageKey: messageKey) {
+                    self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ConfirmationID")
+                    UserDefaults.standard.set(email, forKey: "userEmail")
+                    UserDefaults.standard.synchronize()
+                    self.resetForm()
+                }
             } else {
                 self.showAlert(messageKey: messageKey)
             }
         }
     }
+
     
     @IBAction func signInButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

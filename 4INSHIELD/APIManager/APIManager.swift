@@ -27,6 +27,21 @@ typealias handler = (Swift.Result<Any?, APIErrors>) -> Void
 class APIManager {
     static let shareInstance = APIManager()
     
+    func deleteUser(forUsername username: String, completion: @escaping (Result<Void, Error>) -> Void) {
+         let childURL = "\(BuildConfiguration.shared.WEBERVSER_BASE_URL)/api/childs/\(username)/"
+         
+         AF.request(childURL, method: .delete).response { response in
+             switch response.result {
+             case .success:
+                 print("User deleted successfully")
+                 completion(.success(()))
+             case .failure(let error):
+                 print("Error: \(error.localizedDescription)")
+                 completion(.failure(error))
+             }
+         }
+     }
+    
     func sendContactForm(contactForm: ContactForm, completionHandler: @escaping (Bool, String) -> ()) {
         let userID = UserDefaults.standard.object(forKey: "userID")
 

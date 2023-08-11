@@ -132,7 +132,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         SocialMediaTableView.delegate = self
         SocialMediaTableView.dataSource = self
         SocialMediaTableView.register(UINib.init(nibName: "Child_SocialMedia_TvCell", bundle: nil), forCellReuseIdentifier: "ChildSocialMediaCell")
-        //SocialMediaTableView.rowHeight = UITableView.automaticDimension
+        // SocialMediaTableView.rowHeight = UITableView.automaticDimension
         //SocialMediaTableView.estimatedRowHeight = 30 // Set this to your custom cell's height
         
     }

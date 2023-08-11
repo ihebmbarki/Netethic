@@ -111,6 +111,7 @@
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
 		87B8D3B32A86460000F794FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87B8D3B22A86460000F794FC /* Assets.xcassets */; };
+		87B8D3BB2A864B1700F794FC /* CustomDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */; };
 		87C035312A7D5945001C2BF3 /* ProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
@@ -258,6 +259,7 @@
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
 		87B8D3B22A86460000F794FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDeleteAlertView.swift; sourceTree = "<group>"; };
 		87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarViewController.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				040DDCCC2A01282700ED3223 /* UserProfile.swift */,
 				040DDCCE2A01285600ED3223 /* Profile.storyboard */,
+				87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */,
 				040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */,
 				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
 				04D4F0732A01DAEB0033818F /* childCell.xib */,
@@ -996,6 +999,7 @@
 				04BECF3A2A78315B005B1745 /* ContactForm.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
+				87B8D3BB2A864B1700F794FC /* CustomDeleteAlertView.swift in Sources */,
 				04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */,
 				87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */,
 				041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */,

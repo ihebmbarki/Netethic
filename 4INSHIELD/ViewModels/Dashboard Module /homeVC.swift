@@ -139,7 +139,12 @@ class homeVC: UIViewController, ChartViewDelegate {
             guard let self = self else { return }
 
             print("state:", fetchedState)
-
+            if let states = fetchedState?.data{
+                self.states = states
+                DispatchQueue.main.async {
+                    self.humorCollectionView.reloadData()
+                }
+            }
                         
             // Call the API to fetch platforms
             APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
@@ -395,6 +400,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         // Call the fetchScore function to fetch the score data
         APIManager.shareInstance.fetchScorePlatform(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
             print(fetchedScore?.result)
+            print("")
             var listeDates: [Double] = []
             var listeMaxScore: [Int] = []
             for element in fetchedScore?.result ?? [] {
@@ -1068,7 +1074,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
-            
+            loadingPlatformIndicator.stopAnimating()
+            loadingPlatformIndicator.isHidden = false
             let platform = platforms[indexPath.item]
             let logoURL = platform.logo.absoluteString
             
@@ -1143,36 +1150,34 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "humorCell", for: indexPath) as? HumorCollectionViewCell else {
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
-
-                
-                // Update the UI on the main thread
-                DispatchQueue.main.async {
-                    
-                    if indexPath.row < self.states.count {
-                        print("oooooo")
-                        let state = self.states[indexPath.row]
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
-                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+        
+                    // Update the UI on the main thread
+                    DispatchQueue.main.async {
                         
-                        
-                        if state.mental_state == "happy" {
-                            cell.cardLogo.image = UIImage(named: "smileyface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-                        } else if state.mental_state == "stress" {
-                            cell.cardLogo.image = UIImage(named: "angryface")
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
-                        } else {
+                        if indexPath.row < self.states.count {
+                            print("oooooo")
+                            let state = self.states[indexPath.row]
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                            cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                            if state.mental_state == "happy" {
+                                cell.cardLogo.image = UIImage(named: "smileyface")
+                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                            } else if state.mental_state == "stress" {
+                                cell.cardLogo.image = UIImage(named: "angryface")
+                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                            } else {
+                                cell.cardLogo.image = UIImage(named: "pokerface")
+                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
+                            }
+                        }
+                        else {
+                            // Handle the case when index path is out of bounds
                             cell.cardLogo.image = UIImage(named: "pokerface")
+                            print("no data rapport")
                             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
                         }
-                    } else {
-                        // Handle the case when index path is out of bounds
-                        cell.cardLogo.image = UIImage(named: "pokerface")
-                        print("no data rapport")
-                          cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
-                    }
-            }
+                }
             return cell
         }
         
@@ -1188,7 +1193,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         } else if collectionView.tag == 3 {
             return toxicPseudos.count
         } else if collectionView.tag == 4 {
-            return state?.data.count ?? 5
+            print(states.count)
+            return states.count
           // return 10
         }
         

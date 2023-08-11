@@ -48,7 +48,7 @@ class BuildConfiguration {
     var DEVICESERVER_BASE_URL: String {
         switch environment {
         case .debugStaging, .releaseStaging:
-            return "https://deviceserver.staging.4indata.fr"
+            return "https://deviceserver.staging.4indata.fr/"
         case .debugDevelopment, .releaseDevelopment:
             return "https://deviceserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:
@@ -70,12 +70,12 @@ class BuildConfiguration {
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"
     let PROFIL_SEARCH = "http://54.36.177.119:8200"
     //Kaxavy
-//   let CLIENT_ID = "270449"
-//    let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
+   let CLIENT_ID = "270449"
+    let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
     //Jhon
     //devlop
-  let CLIENT_ID = "568280"
-    let CLIENT_SECRET = "4bde50918d5b19eb6ca4a83ed4c7d9cd101aa3a10b6c1fe62df57fbc"
+//  let CLIENT_ID = "568280"
+//    let CLIENT_SECRET = "4bde50918d5b19eb6ca4a83ed4c7d9cd101aa3a10b6c1fe62df57fbc"
     
     init() {
         let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as! String

@@ -262,7 +262,7 @@ class APIManager {
     }
   
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
-           let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)"
+           let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)api/mentalstateView/?child_id=\(childID)"
            
            AF.request(mentalStateURL, method: .get).response { response in
                debugPrint(response)

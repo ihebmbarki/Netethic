@@ -460,7 +460,7 @@ class Register: KeyboardHandlingBaseVC {
                   return
               }
 
-        let register = RegisterModel(username: username, email: email, email_verification_url: email, password: password)
+        let register = RegisterModel(username: username, email: email, password: password)
 
         APIManager.shareInstance.registerAPI(register: register) { isSuccess, messageKey in
             if isSuccess {

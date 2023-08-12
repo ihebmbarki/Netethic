@@ -69,7 +69,7 @@ class BuildConfiguration {
 
     let RECOMMENDATION_URL = "http://54.36.177.119:8000"
     let PROFIL_SEARCH = "http://54.36.177.119:8200"
-    //Kaxavy
+    //KaxavyStaging
    let CLIENT_ID = "270449"
     let CLIENT_SECRET = "4fc5b6906261b1fc6fa228d8606a287567add4cb231458a89e7c23f0"
     //Jhon

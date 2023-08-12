@@ -10,6 +10,8 @@ import Foundation
 import DGCharts
 import AlamofireImage
 import FSCalendar
+import ANActivityIndicator
+
 
 class homeVC: UIViewController, ChartViewDelegate {
     let dateFormatter: DateFormatter = {
@@ -117,6 +119,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     let pieChartView = PieChartView()
     
     override func viewDidLoad() {
+        showIndicator()
+        
         super.viewDidLoad()
         print(selectedChild?.id)
         loadingIndicator.startAnimating()
@@ -129,8 +133,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         errorLbl.isHidden = true
    
 
+        dateWeek()
         //Set persons collection invisibility
-        personsCollectionView.isHidden = false
+        personsCollectionView.isHidden = true
         
    
 
@@ -153,8 +158,6 @@ class homeVC: UIViewController, ChartViewDelegate {
                 }
               
                 if let platforms = platforms?.platforms {
-                    loadingPlatformIndicator.stopAnimating()
-                    loadingPlatformIndicator.isHidden = false
                     self.platforms = platforms
                     DispatchQueue.main.async {
                         self.dangerCollectionView.reloadData() // Reload the collection view after the platforms are fetched and populated
@@ -175,14 +178,83 @@ class homeVC: UIViewController, ChartViewDelegate {
                 }
             }
             
+            APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 2) { [self] pseudos in
+                if let pseudos = pseudos {
+                    // Update your toxic pseudos array
+                    self.loadingPersonIndicator.stopAnimating()
+                    self.loadingPersonIndicator.isHidden = true
+                    self.toxicPseudos = pseudos
+                    if self.toxicPseudos.count > 4 {
+                        self.personneImage1Label.text = self.toxicPseudos[0]
+                        self.personneImage2Label.text = self.toxicPseudos[1]
+                        self.personneImage3Label.text = self.toxicPseudos[2]
+                        self.personneImage4Label.text = self.toxicPseudos[3]
+                    }
+                    if self.toxicPseudos.count == 3 {
+                        self.personneImage1Label.text = self.toxicPseudos[0]
+                        self.personneImage2Label.text = self.toxicPseudos[1]
+                        self.personneImage3Label.text = self.toxicPseudos[2]
+                    }
+                    if self.toxicPseudos.count == 2 {
+                        self.personneImage1Label.text = self.toxicPseudos[0]
+                        self.personneImage2Label.text = self.toxicPseudos[1]
+                    }
+                    if self.toxicPseudos.count == 1 {
+                        self.personneImage1Label.text = self.toxicPseudos[0]
+                    }
+                }
+            }
+            
             // Call the API to fetch concerned relationship
             APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
                 guard let self = self else { return }
                 
                 if let toxicCount = concernedRelationship {
                     let toxicPersonsText = String(format: "%02d personnes", toxicCount)
+                    if toxicCount == 0{
+                        imageView1.isHidden = true
+                        personneImage1Label.isHidden = true
+                        imageView2.isHidden = true
+                        personneImage2Label.isHidden = true
+                        imageView3.isHidden = true
+                        personneImage3Label.isHidden = true
+                        imageView3.isHidden = true
+                        personneImage4Label.isHidden = true
+                        imageView4.isHidden = true
+                        
+                        loadingPersonIndicator.stopAnimating()
+                        loadingPersonIndicator.isHidden = true
+                        personsBtn.isHidden = true
+                        missingDataLbl.isHidden = false
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            self.missingDataLbl.text = " Il n'y a pas de données à afficher pour le moment. "
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                            self.missingDataLbl.text = " There is No Data to Display at this Moment."
+                        }
+                    }
+                    if toxicCount == 1{
+                        imageView2.isHidden = true
+                        personneImage2Label.isHidden = true
+                        imageView3.isHidden = true
+                        personneImage3Label.isHidden = true
+                        imageView3.isHidden = true
+                        personneImage4Label.isHidden = true
+                        imageView4.isHidden = true
+                    }
+                    if toxicCount == 2{
+                        imageView3.isHidden = true
+                        personneImage3Label.isHidden = true
+                        imageView4.isHidden = true
+                        personneImage4Label.isHidden = true
+                    }
+                    if toxicCount == 3{
+                        personneImage4Label.isHidden = true
+                        imageView4.isHidden = true
+                    }
                     DispatchQueue.main.async {
                         self.toxicPersonsLbl.text = toxicPersonsText
+                        self.personsCollectionView.reloadData()
                     }
                 }
             }
@@ -192,7 +264,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             let username = UserDefaults.standard.string(forKey: "username")!
             APIManager.shareInstance.fetchProfileImageURL(forUsername: username) { [weak self] imageURL in
                 guard let self = self else { return }
-                
+            
                 if let imageURL = imageURL {
                     URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
                         if let error = error {
@@ -214,26 +286,28 @@ class homeVC: UIViewController, ChartViewDelegate {
                             print("Invalid image data")
                             return
                         }
-                        
+                 
                         DispatchQueue.main.async {
                             // Set the retrieved image to the shared variable
                             self.sharedImage = image
                             // Set the retrieved image to the image views and apply corner radius
                             self.imageView1.image = image
-                            self.imageView1.layer.cornerRadius = 20
+                            self.imageView1.layer.cornerRadius = self.imageView1.frame.height / 2
                             self.imageView1.clipsToBounds = true
                             
                             self.imageView2.image = image
-                            self.imageView2.layer.cornerRadius = 20
+                            self.imageView2.layer.cornerRadius = self.imageView2.frame.height / 2
                             self.imageView2.clipsToBounds = true
                             
                             self.imageView3.image = image
-                            self.imageView3.layer.cornerRadius = 20
+                            self.imageView3.layer.cornerRadius = self.imageView3.frame.height / 2
                             self.imageView3.clipsToBounds = true
                             
                             self.imageView4.image = image
-                            self.imageView4.layer.cornerRadius = 20
+                            self.imageView4.layer.cornerRadius = self.imageView4.frame.height / 2
                             self.imageView4.clipsToBounds = true
+                            
+                            self.personsCollectionView.reloadData()
                         }
                     }.resume()
                 }
@@ -303,17 +377,18 @@ class homeVC: UIViewController, ChartViewDelegate {
             // Load child photo
             if let photo = selectedChild.user?.photo, !photo.isEmpty {
                 var photoUrl = photo
-                if let range = photoUrl.range(of: "http://") {
-                    photoUrl.replaceSubrange(range, with: "https://")
-                }
-                if let url = URL(string: photoUrl) {
+            // Concaténation de l'URL de base avec la partie de l'URL de la photo
+                let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photoUrl
+                print("URL complète : \(fullPhotoUrl)")
+
+                if let url = URL(string: fullPhotoUrl) {
                     URLSession.shared.dataTask(with: url) { (data, response, error) in
                         if let data = data {
                             DispatchQueue.main.async {
                                 let imageView = UIImageView(image: UIImage(data: data))
                                 imageView.contentMode = .scaleAspectFill
                                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                                imageView.layer.cornerRadius = 18 // half of 36
+                                imageView.layer.cornerRadius = 20 // half of 36
                                 imageView.clipsToBounds = true
                                 self.childButton.addSubview(imageView)
                                 NSLayoutConstraint.activate([
@@ -620,23 +695,23 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBAction func personsBtnTapped(_ sender: Any) {
         personsBtn.isHidden = true
-        loadingPersonIndicator.startAnimating()
-        loadingPersonIndicator.isHidden = false
+   
         personsCollectionView.isHidden = false
-                
+        self.loadingPersonIndicator.isHidden = false
+        self.loadingPersonIndicator.startAnimating()
         // Call the API to fetch toxic persons
         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 2) { [self] pseudos in
             if let pseudos = pseudos {
                 // Update your toxic pseudos array
-                self.toxicPseudos = pseudos
-                
-                                
+                self.loadingPersonIndicator.stopAnimating()
+                self.loadingPersonIndicator.isHidden = true
                 // Reload the collection view to reflect the changes
                 self.personsCollectionView.reloadData()
             } else {
                 print("No toxic persons data")
                 self.loadingPersonIndicator.stopAnimating()
                 self.loadingPersonIndicator.isHidden = true
+                personsCollectionView.isHidden = false
                 missingDataLbl.isHidden = false
                
                 if LanguageManager.shared.currentLanguage == "fr" {
@@ -670,7 +745,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-                self.BonjourLbl.text = "Bonjour \(user.username) !"
+                self.BonjourLbl.text = "Bonjour \(user.first_name) !"
             }
         }
     }
@@ -679,15 +754,15 @@ class homeVC: UIViewController, ChartViewDelegate {
     var endDateTimestamp: TimeInterval = 0
     
     func loadChildInfo() {
-        guard let selectedChild = selectedChild else { return }
+        guard let selectedChild = selectedChild else {return }
         if (selectedChild.user?.photo ?? "").isEmpty {
             childButton.imageView?.image = nil
             DispatchQueue.main.async {
                 let imageView = UIImageView(image: UIImage(named: selectedChild.user?.gender == "M" ? "malePic" : "femalePic"))
                 imageView.contentMode = .scaleAspectFill
                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                self.childButton.addSubview(imageView)
                 self.imageView5.image = imageView.image
+                self.childButton.addSubview(imageView)
                 NSLayoutConstraint.activate([
                     imageView.widthAnchor.constraint(equalToConstant: 36),
                     imageView.heightAnchor.constraint(equalToConstant: 36),
@@ -698,21 +773,23 @@ class homeVC: UIViewController, ChartViewDelegate {
         } else {
             if let photo = selectedChild.user?.photo, !photo.isEmpty {
                 var photoUrl = photo
-                if let range = photoUrl.range(of: "http://") {
-                    photoUrl.replaceSubrange(range, with: "https://")
-                }
-                if let url = URL(string: photoUrl) {
+                
+                // Concaténation de l'URL de base avec la partie de l'URL de la photo
+                let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photoUrl
+                print("URL complète : \(fullPhotoUrl)")
+                
+                if let url = URL(string: fullPhotoUrl) {
                     URLSession.shared.dataTask(with: url) { (data, response, error) in
                         if let data = data {
                             DispatchQueue.main.async {
                                 let imageView = UIImageView(image: UIImage(data: data))
                                 imageView.contentMode = .scaleAspectFill
                                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                                imageView.layer.cornerRadius = 18 // half of 36
+                                imageView.layer.cornerRadius = 36 // half of 36
                                 imageView.clipsToBounds = true
                                 self.childButton.addSubview(imageView)
                                 self.imageView5.image = imageView.image
-                                self.imageView5.layer.cornerRadius = 35 // half of 70
+                                self.imageView5.layer.cornerRadius = self.imageView5.frame.size.width / 2 
                                 self.imageView5.clipsToBounds = true
                                 NSLayoutConstraint.activate([
                                     imageView.widthAnchor.constraint(equalToConstant: 36),
@@ -882,7 +959,6 @@ extension homeVC : SideBarDelegate {
             }
         }, completion: completion)
     }
-    
     
 }
 
@@ -1069,13 +1145,13 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
         } else
         if collectionView.tag == 2 {
-       
+            loadingPlatformIndicator.stopAnimating()
+            loadingPlatformIndicator.isHidden = true
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
-            loadingPlatformIndicator.stopAnimating()
-            loadingPlatformIndicator.isHidden = false
+          
             let platform = platforms[indexPath.item]
             let logoURL = platform.logo.absoluteString
             
@@ -1088,8 +1164,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 if let url = URL(string: modifiedLogoURL) {
                     cell.cardLogo.af.setImage(withURL: url)
                 }
-            } else {
-                cell.cardLogo.af.setImage(withURL: platform.logo)
+//            } else {
+//                cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
             APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 2, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
@@ -1109,9 +1185,20 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                    
                 } else {
                     // Handle error case or set a default value for the cardTitle
-                    cell.cardTitle.text = "No Data Platform"
-                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
-               
+//                    cell.cardTitle.text = "No Data Platform"
+//                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                    self.loadingPlatformIndicator.stopAnimating()
+                    self.loadingPlatformIndicator.isHidden = true
+                  
+                    self.errorLbl.isHidden = false
+                    print("erreur platform")
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.errorLbl.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.errorLbl.text = " There Is No Data to Display at this Moment."
+                    }
+
                 }
             }
             return cell
@@ -1121,9 +1208,11 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as? ToxicPersonCollectionViewCell else {
                 fatalError("Unable to dequeue ToxicPersonCollectionViewCell")
             }
-            
+            loadingPlatformIndicator.stopAnimating()
+            loadingPlatformIndicator.isHidden = true
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
+
             
             let carteCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as! ToxicPersonCollectionViewCell
             carteCell.setData(text: self.toxicPseudos[indexPath.row], image: self.toxicPseudos[indexPath.row])
@@ -1146,6 +1235,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return cell
         } else
         if collectionView.tag == 4 {
+            hideIndicator()
+            
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "humorCell", for: indexPath) as? HumorCollectionViewCell else {
                 fatalError("Unable to dequeue HumorCollectionViewCell")
@@ -1268,6 +1359,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         
         getScorePlateform(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
         getMentalState(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
+        viewDidLoad()
 //        // Call the getMaxScoresPerDate function with the parameters
 //        APIManager.shareInstance.getMaxScorePerDate(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
 //            // Process and handle the maxScoresData as needed
@@ -1291,6 +1383,38 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 //        setupLineChart()
 //    }
     
+    func dateWeek() {
+        // Récupérer la date actuelle (sysdate)
+        let currentDate = Date()
+
+        // Récupérer la date d'une semaine avant la date actuelle
+        let calendar = Calendar.current
+        if let oneWeekAgo = calendar.date(byAdding: .day, value: -7, to: currentDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            // Formater les dates sans heure
+            dateFormatter.timeStyle = .none
+            dateFormatter.dateStyle = .medium
+            
+            let currentDateFormatted = dateFormatter.string(from: currentDate)
+            let oneWeekAgoFormatted = dateFormatter.string(from: oneWeekAgo)
+            
+            let currentDateTimestamp = currentDate.timeIntervalSince1970
+            let oneWeekAgoTimestamp = oneWeekAgo.timeIntervalSince1970
+            
+                print("Date actuelle: \(currentDateFormatted)")
+                print("Timestamp actuel: \(currentDateTimestamp)")
+                print("Date d'une semaine avant: \(oneWeekAgoFormatted)")
+                print("Timestamp d'une semaine avant: \(oneWeekAgoTimestamp)")
+                
+            self.dateTF.text = "Du \(currentDateFormatted) Au \(oneWeekAgoFormatted)"
+            getScorePlateform(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
+            getMentalState(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
+        } else {
+            print("Erreur lors de la récupération de la date d'une semaine avant.")
+        }
+    }
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
@@ -1345,7 +1469,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             let endDateTimestamp = endDate.timeIntervalSince1970
             print("time stamps dates: \(startDateTimestamp),\(endDateTimestamp)")
             
-            self.dateTF.text = "Du \(startDateString) Au \(endDateString)"
+            self.dateTF.text = "Du \(startDateString) Au  \(endDateString)"
             
             self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
             

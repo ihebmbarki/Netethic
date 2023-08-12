@@ -2269,7 +2269,7 @@
                                                                     <constraint firstAttribute="height" constant="30" id="MIH-Rg-Jfh"/>
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                <state key="normal" image="person.crop.circle.dashed" catalog="system"/>
+                                                                <state key="normal" image="person.circle" catalog="system"/>
                                                                 <connections>
                                                                     <action selector="childButton:" destination="cdu-QE-tmx" eventType="touchUpInside" id="Eny-s8-Gsh"/>
                                                                 </connections>
@@ -2539,46 +2539,40 @@
                                                                     <constraint firstAttribute="height" constant="192" id="CfG-nK-vYH"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Omar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHf-EB-HVZ">
-                                                                <rect key="frame" x="59" y="262" width="42.333333333333343" height="20.333333333333314"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHf-EB-HVZ">
+                                                                <rect key="frame" x="80" y="262" width="0.0" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u59-Ah-cCW">
-                                                                <rect key="frame" x="297" y="151" width="32.333333333333314" height="20.333333333333343"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u59-Ah-cCW">
+                                                                <rect key="frame" x="313" y="151" width="0.0" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="formation" translatesAutoresizingMaskIntoConstraints="NO" id="FFp-c9-yWY">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FFp-c9-yWY">
                                                                 <rect key="frame" x="293" y="108.33333333333326" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="CTA-Dp-1hk"/>
                                                                     <constraint firstAttribute="width" constant="40" id="qBs-Uf-vM3"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="OjH-kI-NOv">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OjH-kI-NOv">
                                                                 <rect key="frame" x="60" y="214.33333333333326" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="95m-3W-Jjl"/>
                                                                     <constraint firstAttribute="height" constant="40" id="kbe-t8-blx"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="formation" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-19-AGe">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-19-AGe">
                                                                 <rect key="frame" x="60" y="108.33333333333326" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="dBR-ss-6UE"/>
                                                                     <constraint firstAttribute="width" constant="40" id="o72-K1-W0O"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="femalePic" translatesAutoresizingMaskIntoConstraints="NO" id="iuL-lo-K1s">
-                                                                <rect key="frame" x="161.66666666666666" y="153" width="70" height="86"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="70" id="eTP-wU-bCl"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="malePic" translatesAutoresizingMaskIntoConstraints="NO" id="qK6-ba-r2m">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qK6-ba-r2m">
                                                                 <rect key="frame" x="293" y="214.33333333333326" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="lhF-iW-N9A"/>
@@ -2592,8 +2586,8 @@
                                                                     <constraint firstAttribute="height" constant="90" id="laa-1f-dpp"/>
                                                                 </constraints>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LcE-6m-vKU">
-                                                                    <size key="itemSize" width="132" height="80"/>
-                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="itemSize" width="132" height="90"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="120"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
@@ -2603,6 +2597,9 @@
                                                                     <color key="color" name="AccentColor"/>
                                                                 </activityIndicatorView>
                                                                 <cells/>
+                                                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CJk-Rp-2KG">
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </collectionReusableView>
                                                             </collectionView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhA-i9-Gw5">
                                                                 <rect key="frame" x="20" y="291.33333333333326" width="353" height="52"/>
@@ -2622,18 +2619,32 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erik" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-Lt-qpb">
-                                                                <rect key="frame" x="66" y="153" width="28.333333333333329" height="20.333333333333343"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crQ-Lt-qpb">
+                                                                <rect key="frame" x="80" y="153" width="0.0" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joseph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXr-Ul-my0">
-                                                                <rect key="frame" x="285.33333333333331" y="261" width="55.666666666666686" height="20.333333333333314"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXr-Ul-my0">
+                                                                <rect key="frame" x="313" y="261" width="0.0" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iuL-lo-K1s">
+                                                                <rect key="frame" x="161.66666666666666" y="162.33333333333334" width="70" height="67.333333333333314"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="70" id="VGO-TE-Swa"/>
+                                                                    <constraint firstAttribute="width" constant="70" id="eTP-wU-bCl"/>
+                                                                </constraints>
+                                                                <imageReference key="image" image="person.and.background.dotted" catalog="system" symbolScale="medium" renderingMode="hierarchical">
+                                                                    <hierarchicalColors>
+                                                                        <color name="AccentColor"/>
+                                                                        <color name="AccentColor"/>
+                                                                        <color name="AccentColor"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -4264,6 +4275,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" name="AccentColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="O7t-J1-bi5" firstAttribute="leading" secondItem="Q5x-LG-3uP" secondAttribute="leading" id="9hB-K9-Q8w"/>
@@ -4829,7 +4841,6 @@
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="childprofilbg" width="360" height="296"/>
         <image name="facebook_icon" width="22" height="22"/>
-        <image name="femalePic" width="86" height="86"/>
         <image name="footer" width="360" height="209"/>
         <image name="forgotLogo" width="184" height="150.66667175292969"/>
         <image name="formation" width="29" height="28.666666030883789"/>
@@ -4838,11 +4849,11 @@
         <image name="google_icon" width="20" height="20.666666030883789"/>
         <image name="home" width="22" height="22"/>
         <image name="localisation" width="512" height="512"/>
-        <image name="malePic" width="86" height="86"/>
         <image name="menu" width="21.333333969116211" height="15.666666984558105"/>
         <image name="next" width="14" height="14"/>
         <image name="person.2.fill" catalog="system" width="128" height="81"/>
-        <image name="person.crop.circle.dashed" catalog="system" width="128" height="123"/>
+        <image name="person.and.background.dotted" catalog="system" width="128" height="94"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="phone" width="30" height="30"/>
         <image name="pinCode" width="161.66667175292969" height="126"/>
         <image name="qr" width="512" height="512"/>

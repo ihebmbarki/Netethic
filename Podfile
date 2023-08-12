@@ -16,6 +16,8 @@ target '4INSHIELD' do
   pod 'DropDown'
   pod 'MHLoadingButton'
   pod "FlexibleSteppedProgressBar"
+  pod 'ANActivityIndicator'
+
 end
 
 post_install do |installer|

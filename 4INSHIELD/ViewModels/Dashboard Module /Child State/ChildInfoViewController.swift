@@ -81,6 +81,8 @@ class ChildInfoViewController: UIViewController {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
+                 
+
                     self.childPhoto.loadImage(child.user?.photo)
                 }
             }
@@ -88,3 +90,6 @@ class ChildInfoViewController: UIViewController {
     }
     
 }
+
+
+

@@ -33,7 +33,7 @@ extension UIImageView {
         self.image = UIImage()
         guard let string = urlString else { return }
         
-        var photoUrl = "https://webserver.dev.netethic.fr" + string
+        var photoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + string
         
         guard let url = URL(string: photoUrl) else { return }
         

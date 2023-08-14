@@ -19,6 +19,7 @@ class ChildInfoViewController: UIViewController {
     @IBOutlet weak var childAddressLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,6 +81,8 @@ class ChildInfoViewController: UIViewController {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "femalePic")
                     }
                 } else {
+                 
+
                     self.childPhoto.loadImage(child.user?.photo)
                 }
             }
@@ -87,3 +90,6 @@ class ChildInfoViewController: UIViewController {
     }
     
 }
+
+
+

@@ -41,7 +41,7 @@ install_framework()
 
   if [ -L "${source}" ]; then
     echo "Symlinked..."
-    source="$(readlink "${source}")"
+    source="$(readlink -f "${source}")"
   fi
 
   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then
@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug Development" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
@@ -189,6 +190,7 @@ if [[ "$CONFIGURATION" == "Debug Development" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework"
 fi
 if [[ "$CONFIGURATION" == "Debug Production" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
@@ -202,6 +204,7 @@ if [[ "$CONFIGURATION" == "Debug Production" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework"
 fi
 if [[ "$CONFIGURATION" == "Debug Staging" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
@@ -215,6 +218,7 @@ if [[ "$CONFIGURATION" == "Debug Staging" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework"
 fi
 if [[ "$CONFIGURATION" == "Release Development" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
@@ -228,6 +232,7 @@ if [[ "$CONFIGURATION" == "Release Development" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework"
 fi
 if [[ "$CONFIGURATION" == "Release Production" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
@@ -241,6 +246,7 @@ if [[ "$CONFIGURATION" == "Release Production" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework"
 fi
 if [[ "$CONFIGURATION" == "Release Staging" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ANActivityIndicator/ANActivityIndicator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"

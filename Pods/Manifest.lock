@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.7.1)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
+  - ANActivityIndicator (1.2.0)
   - DGCharts (5.0.0):
     - DGCharts/Core (= 5.0.0)
   - DGCharts/Core (5.0.0)
@@ -18,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage (~> 4.1)
+  - ANActivityIndicator
   - DGCharts
   - DLRadioButton (~> 1.4)
   - DropDown
@@ -32,6 +34,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
+    - ANActivityIndicator
     - DGCharts
     - DLRadioButton
     - DropDown
@@ -45,6 +48,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  ANActivityIndicator: 44a996931d0c554cf157b31056603b23bbdbe76a
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
@@ -55,6 +59,6 @@ SPEC CHECKSUMS:
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
   TinyConstraints: 7b7ccc0c485bb3bb47082138ff28bc33cd49897f
 
-PODFILE CHECKSUM: 888e40f7553ecf2c8f81876750cd79dce5a67c41
+PODFILE CHECKSUM: c9dd8e895d6538428bdda70b2ab30eb2c3be34e6
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

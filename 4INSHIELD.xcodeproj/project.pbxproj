@@ -110,8 +110,9 @@
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
-		87B8D3B32A86460000F794FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87B8D3B22A86460000F794FC /* Assets.xcassets */; };
-		87B8D3BB2A864B1700F794FC /* CustomDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */; };
+		87BDF8B72A84E0EF001210F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87BDF8B62A84E0EF001210F0 /* Assets.xcassets */; };
+		87BDF8BB2A85174F001210F0 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF8B92A85174F001210F0 /* FooterView.swift */; };
+		87BDF8BC2A85174F001210F0 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87BDF8BA2A85174F001210F0 /* FooterView.xib */; };
 		87C035312A7D5945001C2BF3 /* ProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
@@ -258,8 +259,9 @@
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
-		87B8D3B22A86460000F794FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
-		87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDeleteAlertView.swift; sourceTree = "<group>"; };
+		87BDF8B62A84E0EF001210F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		87BDF8B92A85174F001210F0 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		87BDF8BA2A85174F001210F0 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		87C035302A7D5945001C2BF3 /* ProgressBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarViewController.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
@@ -317,7 +319,6 @@
 			children = (
 				040DDCCC2A01282700ED3223 /* UserProfile.swift */,
 				040DDCCE2A01285600ED3223 /* Profile.storyboard */,
-				87B8D3BA2A864B1700F794FC /* CustomDeleteAlertView.swift */,
 				040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */,
 				040DDCD02A0150CA00ED3223 /* EnfantsViewController.swift */,
 				04D4F0732A01DAEB0033818F /* childCell.xib */,
@@ -451,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				04C241A929ED76C3003C3F97 /* Succes.gif */,
-				87B8D3B22A86460000F794FC /* Assets.xcassets */,
+				87BDF8B62A84E0EF001210F0 /* Assets.xcassets */,
 				046B6D712A82B1C0004AF800 /* inshield.mp4 */,
 				04850C4D29ACC3E3001A27FF /* 4INSHIELD */,
 				04850C4C29ACC3E3001A27FF /* Products */,
@@ -489,6 +490,7 @@
 		0496979329AF57CD00F65DF4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				87BDF8B82A85174F001210F0 /* Footer */,
 				040821B029D6E16300D7A562 /* Onboarding Module */,
 				04B2A60B29CB51A00028B7E2 /* Children Module */,
 				040DDCCB2A0127A100ED3223 /* Profile Module */,
@@ -713,6 +715,16 @@
 			path = Phone;
 			sourceTree = "<group>";
 		};
+		87BDF8B82A85174F001210F0 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				87BDF8B92A85174F001210F0 /* FooterView.swift */,
+				87BDF8BA2A85174F001210F0 /* FooterView.xib */,
+			);
+			name = Footer;
+			path = "../../../../Downloads/Test 5/Test/Footer";
+			sourceTree = "<group>";
+		};
 		87CC77F22A5E09DA008FA7F8 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,7 +863,7 @@
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
-				87B8D3B32A86460000F794FC /* Assets.xcassets in Resources */,
+				87BDF8B72A84E0EF001210F0 /* Assets.xcassets in Resources */,
 				872964062A77D4CF009649B3 /* Contact.storyboard in Resources */,
 				872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
@@ -860,6 +872,7 @@
 				046B6D722A82B1C0004AF800 /* inshield.mp4 in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */,
+				87BDF8BC2A85174F001210F0 /* FooterView.xib in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
@@ -981,6 +994,7 @@
 				049736BE29ACFEB0005C3662 /* Register.swift in Sources */,
 				872964012A77D4C3009649B3 /* AutorisationVC.swift in Sources */,
 				04850C5129ACC3E4001A27FF /* SceneDelegate.swift in Sources */,
+				87BDF8BB2A85174F001210F0 /* FooterView.swift in Sources */,
 				049531432A12847C00C610AD /* Score.swift in Sources */,
 				870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */,
 				0473B4E529E81B4600E160DD /* ChildSocialMediaTableViewCell.swift in Sources */,
@@ -999,7 +1013,6 @@
 				04BECF3A2A78315B005B1745 /* ContactForm.swift in Sources */,
 				0435580029AE386B00D4F012 /* APIManager.swift in Sources */,
 				048835932A24B998007A8AC7 /* Platform.swift in Sources */,
-				87B8D3BB2A864B1700F794FC /* CustomDeleteAlertView.swift in Sources */,
 				04B91C1D2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift in Sources */,
 				87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */,
 				041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */,

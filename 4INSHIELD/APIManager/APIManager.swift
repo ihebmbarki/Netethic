@@ -277,7 +277,7 @@ class APIManager {
     }
   
     func getMentalState(childID: Int, startDateTimestamp: TimeInterval, endDateTimestamp: TimeInterval, completion: @escaping (State?) -> Void) {
-           let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/mentalstateView/?child_id=\(childID)"
+           let mentalStateURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)api/mentalstateView/?child_id=\(childID)"
            
            AF.request(mentalStateURL, method: .get).response { response in
                debugPrint(response)
@@ -1007,6 +1007,7 @@ class APIManager {
                 guard let statusCode = (response.response?.statusCode) else {return}
                 if statusCode == 200 {
                     completionHandler(.success(email))
+                    print("code valide")
                 } else {
                     completionHandler(.failure(.custom(message: "Invalid OTP code")))
                 }

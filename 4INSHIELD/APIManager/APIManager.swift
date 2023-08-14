@@ -720,19 +720,9 @@ class APIManager {
             switch response.result {
             case .success(let user):
                 let onboardingSimple = user.onboarding_simple
-                let username = user.username
-                let firstName = user.first_name ?? ""
-                let lastName = user.last_name ?? ""
-                let email = user.email
-                let roleData = user.role_data
-                let roleDataID = roleData.id
+                let roleDataID = user.role_data.id
+                print(roleDataID)
                 UserDefaults.standard.set(roleDataID, forKey: "RoleDataID")
-                // Use the retrieved data as needed
-                print("Username: \(username)")
-                print("First Name: \(firstName)")
-                print("Last Name: \(lastName)")
-                print("Email: \(email)")
-                print("Role Data: \(roleData)")
                 completion(onboardingSimple)
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -740,6 +730,7 @@ class APIManager {
             }
         }
     }
+
     
     
   

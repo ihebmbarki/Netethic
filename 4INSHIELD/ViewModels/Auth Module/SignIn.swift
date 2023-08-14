@@ -40,10 +40,10 @@ class SignIn: KeyboardHandlingBaseVC {
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var userErrorLabel: UILabel!
     
+    
     var iconClick = false
     let imageicon = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let alertImage = UIImage(named: "yey")
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,14 +181,11 @@ class SignIn: KeyboardHandlingBaseVC {
     func goToScreen(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(VC, animated: true)
+//        navigationController?.pushViewController(VC, animated: true)
+        self.present(VC, animated: true, completion: nil)
+
     }
     
-    //    fileprivate func getLastChildID(username: String) {
-    //        Api.getLastregistredChildID(withUsername: username) { lastChildID in
-    //            UserDefaults.standard.set(lastChildID, forKey: "childID")
-    //        }
-    //    }
     
     @IBAction func SignInBtnTapped(_ sender: Any) {
 //        Activiat Loading Button and Animating
@@ -205,7 +202,7 @@ class SignIn: KeyboardHandlingBaseVC {
             let login = LoginModel(username: username, password: password, onboarding_simple: onboardingSimple)
             //            let login = LoginModel(username: username, password: password)
             
-            APIManager.shareInstance.loginAPI(login: login) { result in
+            APIManager.shareInstance.loginAPI(login: login) { [self] result in
                 switch result {
                 case .success(let json):
                     print(json as AnyObject)
@@ -215,9 +212,10 @@ class SignIn: KeyboardHandlingBaseVC {
                         // Save id and username to UserDefaults
                           UserDefaults.standard.set(id, forKey: "userID")
                         UserDefaults.standard.set(username, forKey: "username")
+                        self.getCurrentUserData()
                         self.signInBtn.isEnabled = true
 
-                        //  print("User ID: \(id)")
+                          print("User ID: \(id)")
                     } else {
                         print("Error: could not parse response")
                     }
@@ -353,7 +351,17 @@ class SignIn: KeyboardHandlingBaseVC {
         }
         self.resetFields()
     }
-
+    func getCurrentUserData() {
+        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+        DispatchQueue.main.async {
+            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+                if let firstName = user.first_name {
+                    UserDefaults.standard.set(user.first_name, forKey: "firstName")
+                   print("La variable déballée vaut \(firstName)")
+                }
+            }
+        }
+    }
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -620,7 +628,7 @@ class SignIn: KeyboardHandlingBaseVC {
             switch response.result {
             case .success(let userJourneys):
                 if userJourneys.isEmpty {
-                    completion(0)
+                    completion(1)
                 } else {
                     if let lastJourney = userJourneys.last {
                         print (lastJourney.wizard_step)

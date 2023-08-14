@@ -18,7 +18,8 @@ class SideBar: UIViewController {
     var delegate: SideBarDelegate?
     var defaultHighlightedCell: Int = 0
     
-    var menu = ["Modifier le profil du parent","Autorisation d’accés","Nous contacter","Mentions légales","À propos","Déconnexion"]
+    var menu = ["Paramètres","Contactez-nous","Mentions légales"," À propos de nous","Aide & support","Déconnexion"]
+    var menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +51,36 @@ extension SideBar: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menu.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            
+            let imageName = menuImages[indexPath.row] // Get the corresponding image name
+            let image = UIImage(named: imageName)
+            
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: 10, y: 10, width: 24, height: 24) // Customize the frame as needed
+            cell.contentView.addSubview(imageView)
+            
         
-        cell.textLabel?.text = menu[indexPath.row]
-        cell.textLabel?.textColor = UIColor(red: 0.14, green: 0.20, blue: 0.33, alpha: 1.00)
+            let label = UILabel()
+                    label.text = menu[indexPath.row]
+                    label.textColor = UIColor(red: 0.14, green: 0.20, blue: 0.33, alpha: 1.00)
+                    label.font = UIFont.boldSystemFont(ofSize: 14) // Set the font to bold
+                    label.frame = CGRect(x: 40, y: 10, width: cell.contentView.bounds.width - 50, height: 24) // Customize the frame as needed
+                    cell.contentView.addSubview(label)
+                    
+                    let separatorView = UIView(frame: CGRect(x: 0, y: cell.contentView.bounds.height - 1, width: cell.contentView.bounds.width, height: 1))
+                    separatorView.backgroundColor = UIColor.white // Customize the separator color as needed
+                    cell.contentView.addSubview(separatorView)
+            
+            return cell
+        }
         
-        return cell
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.delegate?.selectedCell(indexPath.row)
+            
+        }
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.delegate?.selectedCell(indexPath.row)
-        
-    }
-}
+

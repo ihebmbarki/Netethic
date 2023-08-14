@@ -89,6 +89,7 @@
 		04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E27AE42A69595600BDA1F1 /* homeVC.swift */; };
 		04E54A3929ACC95300B00906 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E54A3829ACC95300B00906 /* SignIn.swift */; };
 		22513341EC430140A7A887BA /* Pods_4INSHIELD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */; };
+		8700D8CF2A8A160400DF7077 /* CustomDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8700D8CE2A8A160400DF7077 /* CustomDeleteAlertView.swift */; };
 		870FA9E42A6690D5007DE80B /* ApiManagerAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */; };
 		870FA9E82A66AF33007DE80B /* ChildResponseModelElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */; };
 		8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */; };
@@ -238,6 +239,7 @@
 		5D8BFCC8FD1EAEE4CA882CED /* Pods-4INSHIELD.release production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release production.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release production.xcconfig"; sourceTree = "<group>"; };
 		5E630202BD024BDD241DA90A /* Pods_4INSHIELD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_4INSHIELD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D92C8667F59481504B79D6 /* Pods-4INSHIELD.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug staging.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug staging.xcconfig"; sourceTree = "<group>"; };
+		8700D8CE2A8A160400DF7077 /* CustomDeleteAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDeleteAlertView.swift; sourceTree = "<group>"; };
 		870FA9E32A6690D5007DE80B /* ApiManagerAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerAdd.swift; sourceTree = "<group>"; };
 		870FA9E72A66AF33007DE80B /* ChildResponseModelElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildResponseModelElement.swift; sourceTree = "<group>"; };
 		8721A63C2A72ADF3007FEA50 /* UsageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 		040DDCCB2A0127A100ED3223 /* Profile Module */ = {
 			isa = PBXGroup;
 			children = (
+				8700D8CE2A8A160400DF7077 /* CustomDeleteAlertView.swift */,
 				040DDCCC2A01282700ED3223 /* UserProfile.swift */,
 				040DDCCE2A01285600ED3223 /* Profile.storyboard */,
 				040DDCD22A0150DD00ED3223 /* UpdateViewController.swift */,
@@ -975,6 +978,7 @@
 				04D4F0762A01DC1C0033818F /* ChildTvCell.swift in Sources */,
 				87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */,
 				0496979829AFAD6C00F65DF4 /* Confirmation.swift in Sources */,
+				8700D8CF2A8A160400DF7077 /* CustomDeleteAlertView.swift in Sources */,
 				04E54A3929ACC95300B00906 /* SignIn.swift in Sources */,
 				043C49F929E43A7D00B5FF9E /* PinTextField.swift in Sources */,
 				0489030A2A12607000F87A1A /* CustomCollectionViewCell.swift in Sources */,

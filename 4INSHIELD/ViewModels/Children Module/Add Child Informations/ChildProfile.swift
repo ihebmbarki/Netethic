@@ -216,10 +216,10 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     @IBAction func nextBtnClicked(_ sender: Any) {
         
         let firstName = self.firstNameTF.text ?? "test"
-         let lastName = self.lastNameTF.text ?? "test"
-         let gender = self.genderTF.text ?? "M"
-         let email = self.emailTextField.text ?? "test@test.com"
-
+        let lastName = self.lastNameTF.text ?? "test"
+        let gender = self.genderTF.text ?? "M"
+        let email = self.emailTextField.text ?? "test@test.com"
+        
         let roleDataID = UserDefaults.standard.integer(forKey: "RoleDataID")
         print("Value of roleDataID: \(roleDataID)")
         var userId = Int(roleDataID)
@@ -227,23 +227,22 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         if roleDataID != 0 {
             userId = Int(roleDataID)
         }else {
-            userId = 131
+            userId = 75
         }
         let stringDate = birthdayTextField.text ?? "2002-02-02"
         // let userID = Int(roleDataID)
         selectedGender = genderLabel.text
-                
-                if selectedGender == "Garçon"{
-                    sexe = "M"
-                }
-                if selectedGender == "Fille"{
-                    sexe = "F"
-                }
-                if selectedGender == "Non précisé"{
-                    sexe = "O"
-                }
+        
+        if selectedGender == "Garçon"{
+            sexe = "M"
+        }
+        if selectedGender == "Fille"{
+            sexe = "F"
+        }
+        if selectedGender == "Non précisé"{
+            sexe = "O"
+        }
         let regData = ChildModel(first_name: firstName, last_name: lastName, birthday: stringDate, email: email, gender: sexe, parent_id: userId)
-        //self.responseChild(params: regData)
         let parameters: [String: Any] = [
             "first_name": firstName,
             "last_name": lastName,
@@ -252,57 +251,74 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
             "gender": sexe,
             "parent_id": userId
         ]
+        
         AF.request(add_Child_url, method: .post, parameters: parameters)
-            .responseDecodable(of: UserRole.self) { response in
+            .response { response in
                 switch response.result {
-                case .success(let user):
-                    switch response.response?.statusCode {
-                    case 200,201:
-                    print("User child ID: \(user.child.id)")
-                    UserDefaults.standard.set(user.child.id, forKey: "childID")
-                    let alertController = UIAlertController(title: "Success", message: "Child added successfully!", preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                        self.goToScreen(identifier: "ChildSocialMedia")
-                        self.progressBarWithDifferentDimensions.completedTillIndex = 1
-                    }
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    print("User child registered successfully")
-                        self.platform()
-                    case 401:
-                        /// Handle 401 error
-                        if LanguageManager.shared.currentLanguage == "fr"{
-                            self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                case .success(let data):
+                    if let data = data {
+                        print("Response Data: \(String(data: data, encoding: .utf8) ?? "")")
+                        do {
+                            let userRole = try JSONDecoder().decode(UserRole.self, from: data)
+                            // Handle the decoded data as needed
+                            print("User child ID: \(userRole.child)")
+                            UserDefaults.standard.set(userRole.child.id, forKey: "childID")
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                let alertController = UIAlertController(title: "Success", message: "Les informations de profil de votre enfant ont été ajoutées avec succès ", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                    self.goToScreen(identifier: "ChildSocialMedia")
+                                    self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                }
+                                
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
+                                print("User child registered successfully")
+                                self.platform()
+                            }
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                let alertController = UIAlertController(title: "Success", message: "Your child’s profile information has been successfully added ", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                    self.goToScreen(identifier: "ChildSocialMedia")
+                                    self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                }
+                                
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
+                                print("User child registered successfully")
+                                self.platform()
+                            }
+                        } catch {
+                            print("Decoding error: \(error)")
+                            // Handle decoding error
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                self.showAlert(title: "Alerte", message: "Désolé, quelque chose s'est mal passé.")
+                            }
+                            if LanguageManager.shared.currentLanguage == "en" {
+                                self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
+                            }
                         }
-                        if LanguageManager.shared.currentLanguage == "en"{
-                            self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
-                        }
-                    default:
-                        /// Handle unknown error
-                    print(response.response?.statusCode)
-
-                        print("we ran into error")
                     }
                 case .failure(let error):
                     print("Error: \(error)")
-                    /// Handle request failure
-                    if LanguageManager.shared.currentLanguage == "fr"{
-                        self.showAlert(title:"Alerte" ,message: "Désolé, qulque chose s'est mal passé.   ")
+                    // Handle request failure
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.showAlert(title: "Alerte", message: "Désolé, quelque chose s'est mal passé.")
                     }
-                    if LanguageManager.shared.currentLanguage == "en"{
+                    if LanguageManager.shared.currentLanguage == "en" {
                         self.showAlert(title: "Alert", message: "Sorry, something went wrong.")
                     }
                 }
-                    }
+            }
         
     }
-
     
 
     func goToScreen(identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let ChildSocialMedia = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(ChildSocialMedia, animated: true)
+//        navigationController?.pushViewController(ChildSocialMedia, animated: true)
+        self.present(ChildSocialMedia, animated: true, completion: nil)
+
     }
     
     func platform(){

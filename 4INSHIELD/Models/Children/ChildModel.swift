@@ -5,16 +5,17 @@
 //  Created by iheb mbarki on 27/3/2023.
 //
 
-struct ChildModel: Encodable {
+struct ChildModel: Codable {
     let first_name: String
     let last_name: String
     let birthday: String
     let email: String
     let gender: String
     let parent_id: Int
-    
 }
-// MARK: - UserRole
+
+
+//response
 struct UserRole: Codable {
     let id: Int
     let username, email, firstName, lastName: String
@@ -43,13 +44,15 @@ struct ChildRole: Codable {
 // MARK: - Parent
 struct ParentRole: Codable {
     let id: Int
-    let username, firstName, email, gender: String
-    let photo, createdAt, modifiedAt: String
+    let username, firstName, lastName, email: String?
+    let gender, birthday: String?
+    let createdAt, modifiedAt: String
 
     enum CodingKeys: String, CodingKey {
         case id, username
         case firstName = "first_name"
-        case email, gender, photo
+        case lastName = "last_name"
+        case email, gender, birthday
         case createdAt = "created_at"
         case modifiedAt = "modified_at"
     }

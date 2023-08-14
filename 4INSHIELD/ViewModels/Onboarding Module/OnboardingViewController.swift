@@ -66,7 +66,9 @@ class OnboardingViewController: UIViewController {
     func goToScreen(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(VC, animated: true)
+//        navigationController?.pushViewController(VC, animated: true)
+        self.present(VC, animated: true, completion: nil)
+
     }
     
     @IBAction func nextBtnTapped(_ sender: Any) {

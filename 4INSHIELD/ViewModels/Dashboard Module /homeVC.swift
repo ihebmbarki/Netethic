@@ -14,6 +14,8 @@ import ANActivityIndicator
 
 
 class homeVC: UIViewController, ChartViewDelegate {
+
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
@@ -31,6 +33,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
     var endDate: Date?
+    let signIn = SignIn()
     
     var days: [Double] = []
 
@@ -40,13 +43,14 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var messageLineChart: UILabel!
     @IBOutlet weak var personIcon: UIImageView!
+    @IBOutlet weak var loadingIndicatorCarte: UIActivityIndicatorView!
     
     @IBOutlet weak var lineChartView: LineChartView! {
         didSet {
             lineChartView.addShadowView(width: 2, height: 3, Opacidade: 0.1, radius: 15, shadowRadius: 5)
         }
     }
-    
+
     @IBOutlet weak var loadingPlatformIndicator: UIActivityIndicatorView!
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
@@ -99,7 +103,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var RisqueLabel: UILabel!
     @IBOutlet weak var viewChartRisque: UIView!
-    
+ 
     @IBOutlet weak var moyenneGnLabel: UILabel!
     
     @IBOutlet weak var moyenneGView: UIView!
@@ -117,9 +121,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var personneImage1Label: UILabel!
     @IBOutlet weak var maxScoreLabel: UILabel!
     let pieChartView = PieChartView()
-    
     override func viewDidLoad() {
-        showIndicator()
         
         super.viewDidLoad()
         print(selectedChild?.id)
@@ -127,6 +129,8 @@ class homeVC: UIViewController, ChartViewDelegate {
         loadingIndicator.isHidden = false
         loadingPlatformIndicator.startAnimating()
         loadingPlatformIndicator.isHidden = false
+        loadingIndicatorCarte.startAnimating()
+        loadingIndicatorCarte.isHidden = false
 
         missingDataLbl.isHidden = true
         messageLineChart.isHidden = true
@@ -370,7 +374,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
             
             //Set up user name
-            getCurrentUserData()
+            guard let firstName = UserDefaults.standard.string(forKey: "firstName") else { return }
+            self.BonjourLbl.text = "Bonjour \(firstName) !"
             //Set up child profile pic
             loadChildInfo()
             guard let selectedChild = selectedChild else { return }
@@ -741,69 +746,42 @@ class homeVC: UIViewController, ChartViewDelegate {
           self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
     
-    func getCurrentUserData() {
-        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
-        DispatchQueue.main.async {
-            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-                self.BonjourLbl.text = "Bonjour \(user.first_name) !"
-            }
-        }
-    }
+//    func getCurrentUserData() {
+//        guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
+//        DispatchQueue.main.async {
+//            APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
+//                if let firstName = user.first_name {
+//                   print("La variable déballée vaut \(firstName)")
+//                    self.BonjourLbl.text = "Bonjour \(firstName) !"
+//                }
+//            }
+//        }
+//    }
     
     var startDateTimestamp: TimeInterval = 0
     var endDateTimestamp: TimeInterval = 0
     
     func loadChildInfo() {
-        guard let selectedChild = selectedChild else {return }
-        if (selectedChild.user?.photo ?? "").isEmpty {
-            childButton.imageView?.image = nil
-            DispatchQueue.main.async {
-                let imageView = UIImageView(image: UIImage(named: selectedChild.user?.gender == "M" ? "malePic" : "femalePic"))
-                imageView.contentMode = .scaleAspectFill
-                imageView.translatesAutoresizingMaskIntoConstraints = false
-                self.imageView5.image = imageView.image
-                self.childButton.addSubview(imageView)
-                NSLayoutConstraint.activate([
-                    imageView.widthAnchor.constraint(equalToConstant: 36),
-                    imageView.heightAnchor.constraint(equalToConstant: 36),
-                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                ])
-            }
-        } else {
-            if let photo = selectedChild.user?.photo, !photo.isEmpty {
-                var photoUrl = photo
-                
-                // Concaténation de l'URL de base avec la partie de l'URL de la photo
-                let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photoUrl
-                print("URL complète : \(fullPhotoUrl)")
-                
-                if let url = URL(string: fullPhotoUrl) {
-                    URLSession.shared.dataTask(with: url) { (data, response, error) in
-                        if let data = data {
-                            DispatchQueue.main.async {
-                                let imageView = UIImageView(image: UIImage(data: data))
-                                imageView.contentMode = .scaleAspectFill
-                                imageView.translatesAutoresizingMaskIntoConstraints = false
-                                imageView.layer.cornerRadius = 36 // half of 36
-                                imageView.clipsToBounds = true
-                                self.childButton.addSubview(imageView)
-                                self.imageView5.image = imageView.image
-                                self.imageView5.layer.cornerRadius = self.imageView5.frame.size.width / 2 
-                                self.imageView5.clipsToBounds = true
-                                NSLayoutConstraint.activate([
-                                    imageView.widthAnchor.constraint(equalToConstant: 36),
-                                    imageView.heightAnchor.constraint(equalToConstant: 36),
-                                    imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
-                                    imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
-                                ])
-                            }
-                        }
-                    }.resume()
-                }
+        guard let selectedChild = selectedChild else { return }
+        
+        childButton.imageView?.image = nil
+        
+        let imageName = selectedChild.user?.gender == "M" ? "malePic" : "femalePic"
+        let image = UIImage(named: imageName)
+        
+        childButton.setImage(image, for: .normal) // Set the image for the button
+        imageView5.image = image // Set the image for imageView5
+        
+        if let photo = selectedChild.user?.photo, !photo.isEmpty {
+            let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photo
+            childButton.imageView?.loadImage(fullPhotoUrl) { [weak self] image in
+                self?.imageView5.image = image
+                self?.imageView5.layer.cornerRadius = (self?.imageView5.frame.size.width ?? 0) / 2
+                self?.imageView5.clipsToBounds = true
             }
         }
     }
+
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
@@ -854,9 +832,9 @@ class homeVC: UIViewController, ChartViewDelegate {
 extension homeVC : SideBarDelegate {
     func selectedCell(_ row: Int) {
         switch row {
-        case 0:
+        case 0: break
             // Profile
-            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
+//            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
         case 1:
             // Autorisation d’accés
             self.gotoScreen(storyBoardName: "Autorisation", stbIdentifier: "AutorisationID")
@@ -1106,7 +1084,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
                 
                 // Call the getScore function to fetch the score
-                APIManager.shareInstance.getScore { score in
+                APIManager.shareInstance.getScore { [self] score in
+                    self.loadingIndicatorCarte.stopAnimating()
+                    loadingIndicatorCarte.isHidden = true
                     // Update the UI on the main thread
                     DispatchQueue.main.async {
                         let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
@@ -1128,10 +1108,14 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 }
                 
             case 1:
+                self.loadingIndicatorCarte.stopAnimating()
+                loadingIndicatorCarte.isHidden = true
                 cell.cardDesc.text = NSLocalizedString("future_har", comment: "RISQUE FUTUR HARCÈLEMENT")
                 cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
                 cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
             case 2:
+                self.loadingIndicatorCarte.stopAnimating()
+                loadingIndicatorCarte.isHidden = true
                 cell.cardDesc.text = NSLocalizedString("etat_mental", comment: "ÉTAT MENTAL")
                 cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
                 
@@ -1235,7 +1219,6 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return cell
         } else
         if collectionView.tag == 4 {
-            hideIndicator()
             
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "humorCell", for: indexPath) as? HumorCollectionViewCell else {

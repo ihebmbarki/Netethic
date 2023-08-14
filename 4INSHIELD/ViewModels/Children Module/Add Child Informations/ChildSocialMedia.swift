@@ -249,7 +249,21 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                                 print("good")
                                 self.platform()
                             }
-                            
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                
+                                let alertController = UIAlertController(title: "Success", message: "Un profil de réseau social a été ajouté avec succès  ", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Okay", style: .default) {
+                                    _ in
+                                    //self.dismiss(animated: true, completion: nil)
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+                                    vc.modalPresentationStyle = .fullScreen
+                                    self.present(vc, animated: true, completion: nil)
+                                    
+                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                    
+                                }
+                            }
                             if LanguageManager.shared.currentLanguage == "en" {
                                 
                                 let alertController = UIAlertController(title: "Success", message: "Social media has been successfully added. ", preferredStyle: .alert)

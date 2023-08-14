@@ -36,7 +36,13 @@ class Register: KeyboardHandlingBaseVC {
             
         }
     }
+    
         
+    @IBOutlet weak var Main: FooterView!{
+            didSet{
+                Main.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+    }
     var iconClick = false
     let imageicon1 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
     let imageicon2 = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
@@ -424,6 +430,12 @@ class Register: KeyboardHandlingBaseVC {
         confirmpwdError.text = NSLocalizedString("Confirm_password_error", tableName: nil, bundle: bundle, value: "", comment: "text login")
         /*    register_google.setTitle(NSLocalizedString("signup_google", tableName: nil, bundle: bundle, value: "", comment: "sign up google"), for: .normal)
          register_facebook.setTitle(NSLocalizedString("signup_facebook", tableName: nil, bundle: bundle, value: "", comment: "sign up facebook"), for: .normal) */
+        if LanguageManager.shared.currentLanguage == "fr"{
+            Main.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+        if LanguageManager.shared.currentLanguage == "en"{
+            Main.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
     }
     
     func showAlert(messageKey: String, completion: (() -> Void)? = nil) {

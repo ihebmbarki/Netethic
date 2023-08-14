@@ -41,12 +41,14 @@ class ChildInfoViewController: UIViewController {
 
     @IBAction func returnBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+
+
     }
     
 
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         //removeCurrentChildViewController()
-        willMove(toParent: nil)
+//        willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
     }

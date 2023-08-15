@@ -67,7 +67,7 @@ Please check your registered email for the activation link.";
 //MARK: Dashboard
 "hello" = "Hello";
 "rangeDate" = "Select a time period";
-"current_har" = "Current Harassment";
+"current_har" = "Current trend";
 "future_har" = "Future Harassment Risk";
 "etat_mental" = "Mental State ";
 "max_score" = "Max score platform per date";
@@ -75,7 +75,13 @@ Please check your registered email for the activation link.";
 "parc_har" = "Partially Harassed";
 "non_harcele" = "Not Harassed";
 "msgerreur" = " There is No Data to Display at this Moment..";
-
+"danger" = "Level of danger related to online activities";
+"personneToxique" = "Entourage to watch";
+"number" = "individuals";
+"tousPersonneBt" = "All persons";
+"rapport" = "General mood on a daily basis";
+"moyenne" = "Average general mood";
+"moyenneBt" = "General average";
 
 //MARK: Child Profile
 "First_name" = "First Name";
@@ -113,4 +119,5 @@ Please check your registered email for the activation link.";
 "ajoutDevice" = "Please add your child’s devices  ";
 "information" = "The information from your child's device will help you monitor their mental health, sleep quality, whereabouts, and apps of interest, etc. ";`
 
-
+//SideBar:
+"param" = "Settings";

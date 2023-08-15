@@ -393,7 +393,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     @IBAction func cancelBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

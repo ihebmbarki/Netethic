@@ -10,8 +10,13 @@ class Phone: UIViewController{
     
     @IBOutlet weak var carteCollectionView: UICollectionView!
     
+    @IBOutlet weak var childButton: UIButton!
     
+    @IBOutlet weak var DateTF: UITextField!
+    @IBOutlet weak var bonjourLabel: UILabel!
+    @IBOutlet weak var changeLangageButton: UIButton!
     
+    @IBOutlet weak var calenderButton: UIButton!
     private var SideBar: SideBar!
     private var sideMenuRevealWidth: CGFloat = 260
     private let paddingForRotation: CGFloat = 150
@@ -30,10 +35,12 @@ class Phone: UIViewController{
     let imageArray = ["phone-time-card-orange", "phone-time-card-rouge", "phone-time-card-vert", "sleep-phone-time-rouge"]
     let carteArray2 = ["DUBOIT passe beaucoup trop de temps sur son télephone", "DUBOIT ne dort pas bien", "", "Convenable"]
     
+    var selectedChild: Childd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(selectedChild?.id)
+        addConstant()
         //Registre Cell
         self.carteCollectionView.register(UINib(nibName: "UsageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsageCollectionViewCell")
         
@@ -92,8 +99,66 @@ class Phone: UIViewController{
     }
     
     
+    func addConstant(){
+//        Set up first name
+        guard let firstName = UserDefaults.standard.string(forKey: "firstName") else { return }
+        self.bonjourLabel.text = "Bonjour \(firstName) !"
+        //Set up child profile pic
+        loadChildInfo()
+        // Load child photo
+        if let photoUrl = UserDefaults.standard.string(forKey: "photoUrl") as? String {
+            print("Retrieved integer:", photoUrl)
+        
+        // Concaténation de l'URL de base avec la partie de l'URL de la photo
+            let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photoUrl
+            print("URL complète : \(fullPhotoUrl)")
+
+            if let url = URL(string: fullPhotoUrl) {
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            let imageView = UIImageView(image: UIImage(data: data))
+                            imageView.contentMode = .scaleAspectFill
+                            imageView.translatesAutoresizingMaskIntoConstraints = false
+                            imageView.layer.cornerRadius = 20 // half of 36
+                            imageView.clipsToBounds = true
+                            self.childButton.addSubview(imageView)
+                            NSLayoutConstraint.activate([
+                                imageView.widthAnchor.constraint(equalToConstant: 36),
+                                imageView.heightAnchor.constraint(equalToConstant: 36),
+                                imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                                imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                            ])
+                        }
+                    }
+                }.resume()
+            }
+            
+        }
+        else {
+            print("No photo url")
+        }
+    }
     
+    func loadChildInfo() {
+        guard let selectedChild = selectedChild else { return }
+
+        if let imageName = UserDefaults.standard.string(forKey: "imageName") as? String {
+            print("imageName:", imageName)
+            let image = UIImage(named: imageName)
+            childButton.setImage(image, for: .normal) // Set the image for the button
+        }
+    }
     
+    @IBAction func calenderButton(_ sender: Any) {
+    }
+    
+    @IBAction func changeLangageButton(_ sender: Any) {
+    }
+    
+    @IBAction func childButton(_ sender: Any) {
+        
+    }
     @IBAction func revealSideMenu(_ sender: Any) {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
     }
@@ -101,7 +166,7 @@ class Phone: UIViewController{
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
 }

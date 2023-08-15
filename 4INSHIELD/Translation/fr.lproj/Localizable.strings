@@ -66,7 +66,7 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 //MARK: Dashboard
 "hello" = "Bonjour";
 "rangeDate" = "Sélectionnez une période";
-"current_har" = "Harcèlement actuel";
+"current_har" = "Tendance actuelle";
 "future_har" = "Risque de harcèlement à venir";
 "etat_mental" = "État mental";
 "max_score" = "Max score platform par date ";
@@ -74,7 +74,13 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "parc_har" = "Partiellement harcelé";
 "non_harcele" = "Non harcelé";
 "msgerreur" = "Il n'y a pas de données à afficher pour le moment.";
-
+"danger" = "Niveau de danger lié aux activités en ligne";
+"personneToxique" = "Entourage à surveiller";
+"number" = "personnes";
+"tousPersonneBt" = "Toutes les personnes";
+"rapport" = "Humeur générale au quotidienr";
+"moyenne" = "Humeur générale moyenne";
+"moyenneBt" = "Moyenne général";
  
 //MARK: Child Profile
 "First_name" = "Prénom";
@@ -112,3 +118,5 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "ajoutDevice" = "Veuillez ajouter les appareils de votre enfant  ";
 "information" = "Les informations fournies par l'appareil de votre enfant vous aideront à veiller sur sa santé mentale, la qualité de son sommeil, ses allées et venues, les applications qui l'intéressent, etc. ";`
 
+//SideBar: 
+"param" = "Paramètres";

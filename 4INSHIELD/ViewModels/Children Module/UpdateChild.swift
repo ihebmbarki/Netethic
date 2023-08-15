@@ -365,21 +365,21 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBAction func addNewProfileBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildSocialMedia")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func addUserAccBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UserAccountID")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -182,6 +182,7 @@ class SignIn: KeyboardHandlingBaseVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: identifier)
 //        navigationController?.pushViewController(VC, animated: true)
+        VC.modalPresentationStyle = .overFullScreen
         self.present(VC, animated: true, completion: nil)
 
     }
@@ -287,8 +288,8 @@ class SignIn: KeyboardHandlingBaseVC {
                                             self.loadingIndicator.stopAnimating()
                                                 let storyboard = UIStoryboard(name: "Children", bundle: nil)
                                                 let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-                                                vc.modalPresentationStyle = .fullScreen
-                                                self.present(vc, animated: true, completion: nil)
+                                            vc.modalPresentationStyle = .overFullScreen
+                                            self.present(vc, animated: true, completion: nil)
     
                                         default:
                                             self.loadingIndicator.stopAnimating()
@@ -436,7 +437,7 @@ class SignIn: KeyboardHandlingBaseVC {
             
             let storyboard = UIStoryboard(name: "Children", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true, completion: nil)
         }
         alertController.addAction(okAction)
@@ -448,7 +449,7 @@ class SignIn: KeyboardHandlingBaseVC {
         // Gérez l'action lorsque l'image est cliquée ici
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

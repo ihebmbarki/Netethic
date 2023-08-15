@@ -1,102 +1,495 @@
 
-/* Class = "UILabel"; text = "Connectez-vous à votre compte"; ObjectID = "0Mw-Is-DzV"; */
-"0Mw-Is-DzV.text" = "Connectez-vous à votre compte";
+/* Class = "UILabel"; text = "Veuillez saisir les informations du compte de réseau social de votre enfant"; ObjectID = "0Tb-3I-bAj"; */
+"0Tb-3I-bAj.text" = "Veuillez saisir les informations du compte de réseau social de votre enfant";
 
-/* Class = "UITextField"; placeholder = "Nom d'utilisateur"; ObjectID = "2dZ-Rc-YPo"; */
-"2dZ-Rc-YPo.placeholder" = "Nom d'utilisateur";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0jc-Hr-aNw"; */
+"0jc-Hr-aNw.normalTitle" = "Button";
 
-/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "3wG-Ov-Ng4"; */
-"3wG-Ov-Ng4.text" = "BIENVENUE SUR netethic";
+/* Class = "UILabel"; text = "Entrez le code envoyé à votre email"; ObjectID = "0qb-S7-1yX"; */
+"0qb-S7-1yX.text" = "Entrez le code envoyé à votre email";
 
-/* Class = "UIButton"; configuration.title = "S’inscrire avec Facebook"; ObjectID = "5pu-E5-fN6"; */
-"5pu-E5-fN6.configuration.title" = "S’inscrire avec Facebook";
+/* Class = "UILabel"; text = "Code de validation"; ObjectID = "0uz-YR-BYT"; */
+"0uz-YR-BYT.text" = "Code de validation";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5pu-E5-fN6"; */
-"5pu-E5-fN6.normalTitle" = "Button";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1GZ-Nd-yh9"; */
+"1GZ-Nd-yh9.normalTitle" = "Button";
 
-/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "70N-do-NMb"; */
-"70N-do-NMb.placeholder" = "Mot de passe";
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "1c5-t6-cZ1"; */
+"1c5-t6-cZ1.text" = "En cours de traitement";
 
-/* Class = "UIButton"; configuration.title = "Se connecter avec Google"; ObjectID = "89e-Md-AUq"; */
-"89e-Md-AUq.configuration.title" = "Se connecter avec Google";
+/* Class = "UILabel"; text = "Required"; ObjectID = "2S0-A8-r9s"; */
+"2S0-A8-r9s.text" = "Required";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "89e-Md-AUq"; */
-"89e-Md-AUq.normalTitle" = "Button";
+/* Class = "UILabel"; text = "Vous avez complété avec succès le profil de votre enfant. "; ObjectID = "33v-Qw-c0j"; */
+"33v-Qw-c0j.text" = "Vous avez complété avec succès le profil de votre enfant. ";
 
-/* Class = "UITextField"; placeholder = "Email"; ObjectID = "AnP-iP-gr1"; */
-"AnP-iP-gr1.placeholder" = "Email";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3J6-4a-ODL"; */
+"3J6-4a-ODL.normalTitle" = "Button";
 
-/* Class = "UIButton"; configuration.title = "Connectez-vous"; ObjectID = "ECl-ri-KQW"; */
-"ECl-ri-KQW.configuration.title" = "Connexion";
+/* Class = "UILabel"; text = "Label"; ObjectID = "4rk-dV-vTW"; */
+"4rk-dV-vTW.text" = "Label";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ECl-ri-KQW"; */
-"ECl-ri-KQW.normalTitle" = "Button";
+/* Class = "UILabel"; text = "Label"; ObjectID = "5Pp-dG-ssC"; */
+"5Pp-dG-ssC.text" = "Label";
 
-/* Class = "UIButton"; configuration.title = "Inscrivez-vous"; ObjectID = "IJv-yG-F8h"; */
-"IJv-yG-F8h.configuration.title" = "Inscrivez-vous";
+/* Class = "UITextField"; placeholder = "Prénom"; ObjectID = "5R7-QI-ayG"; */
+"5R7-QI-ayG.placeholder" = "Prénom";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IJv-yG-F8h"; */
-"IJv-yG-F8h.normalTitle" = "Button";
+/* Class = "UILabel"; text = "Max score platform par date"; ObjectID = "60p-8i-5Uc"; */
+"60p-8i-5Uc.text" = "Max score platform par date";
 
-/* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "Iuy-Ng-Hfj"; */
-"Iuy-Ng-Hfj.configuration.title" = "S’inscrire";
+/* Class = "UILabel"; text = "Vous avez un compte ?"; ObjectID = "6Eu-rn-mzw"; */
+"6Eu-rn-mzw.text" = "Vous avez un compte ?";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Iuy-Ng-Hfj"; */
-"Iuy-Ng-Hfj.normalTitle" = "Button";
+/* Class = "UITabBarItem"; title = "Informations scolaires"; ObjectID = "6YI-UO-6WD"; */
+"6YI-UO-6WD.title" = "Informations scolaires";
 
-/* Class = "UIButton"; configuration.title = "S’inscrire avec Google"; ObjectID = "IwV-FI-W00"; */
-"IwV-FI-W00.configuration.title" = "S’inscrire avec Google";
+/* Class = "UILabel"; text = "Humeur générale moyenne"; ObjectID = "7LS-Rn-Rjw"; */
+"7LS-Rn-Rjw.text" = "Humeur générale moyenne";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IwV-FI-W00"; */
-"IwV-FI-W00.normalTitle" = "Button";
+/* Class = "UITabBarItem"; title = "Nos Solutions"; ObjectID = "8Gr-CV-u9R"; */
+"8Gr-CV-u9R.title" = "Nos Solutions";
 
-/* Class = "UITextField"; placeholder = "Confirmer le mot de passe"; ObjectID = "N2b-Qz-8wZ"; */
-"N2b-Qz-8wZ.placeholder" = "Confirmer le mot de passe";
+/* Class = "UIButton"; configuration.title = "Confirmer"; ObjectID = "95U-hU-Xj8"; */
+"95U-hU-Xj8.configuration.title" = "Confirmer";
 
-/* Class = "UILabel"; text = "Vous avez un compte ?"; ObjectID = "Nxd-j1-IiP"; */
-"Nxd-j1-IiP.text" = "Vous avez un compte ?";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "95U-hU-Xj8"; */
+"95U-hU-Xj8.normalTitle" = "Button";
 
-/* Class = "UILabel"; text = "Vous n'avez pas de compte ?"; ObjectID = "RbV-le-gJJ"; */
-"RbV-le-gJJ.text" = "Vous n'avez pas de compte ?";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "9bu-Pc-KdM"; */
+"9bu-Pc-KdM.normalTitle" = "Button";
 
-/* Class = "UIButton"; configuration.title = "Se connecter"; ObjectID = "SGR-x7-yO2"; */
-"SGR-x7-yO2.configuration.title" = "Se connecter";
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "9u4-N3-tP6"; */
+"9u4-N3-tP6.placeholder" = "*";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SGR-x7-yO2"; */
-"SGR-x7-yO2.normalTitle" = "Button";
+/* Class = "UILabel"; text = "personnes"; ObjectID = "APL-vr-k0e"; */
+"APL-vr-k0e.text" = "personnes";
 
-/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "Ss1-na-iQH"; */
-"Ss1-na-iQH.text" = "BIENVENUE SUR netethic";
+/* Class = "UILabel"; text = "Bienvenue sur netethic"; ObjectID = "AqQ-US-l37"; */
+"AqQ-US-l37.text" = "Bienvenue sur netethic";
 
-/* Class = "UIButton"; configuration.title = "S’inscrire"; ObjectID = "UcV-yP-oXd"; */
-"UcV-yP-oXd.configuration.title" = "S’inscrire";
+/* Class = "UILabel"; text = "Les informations fournies par l'appareil de votre enfant vous aideront à surveiller sa santé mentale, la qualité de son sommeil, sa localisation, et les applications qui l'intéressent, etc."; ObjectID = "Atv-Tg-Fh2"; */
+"Atv-Tg-Fh2.text" = "Les informations fournies par l'appareil de votre enfant vous aideront à surveiller sa santé mentale, la qualité de son sommeil, sa localisation, et les applications qui l'intéressent, etc.";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UcV-yP-oXd"; */
-"UcV-yP-oXd.normalTitle" = "Button";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Db0-fW-Kg2"; */
+"Db0-fW-Kg2.normalTitle" = "Button";
 
-/* Class = "UILabel"; text = "entrez le code envoyé à votre email"; ObjectID = "Vhq-B8-4tV"; */
-"Vhq-B8-4tV.text" = "entrez le code envoyé à votre email";
+/* Class = "UILabel"; text = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement "; ObjectID = "EIG-Dz-xh1"; */
+"EIG-Dz-xh1.text" = "Ces informations nous aideront à protéger votre enfant contre les contenus en ligne abusifs et le cyberharcèlement ";
 
-/* Class = "UILabel"; text = "Créer un compte"; ObjectID = "WWU-0k-jhN"; */
-"WWU-0k-jhN.text" = "Créer un compte";
+/* Class = "UIButton"; configuration.title = "Envoyer"; ObjectID = "EQE-qs-4FM"; */
+"EQE-qs-4FM.configuration.title" = "Envoyer";
 
-/* Class = "UITextField"; placeholder = "Email"; ObjectID = "YeE-y0-BZG"; */
-"YeE-y0-BZG.placeholder" = "Email";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "EQE-qs-4FM"; */
+"EQE-qs-4FM.normalTitle" = "Button";
 
-/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "dx2-MK-y9U"; */
-"dx2-MK-y9U.placeholder" = "Mot de passe";
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par 4INDATA "; ObjectID = "Ebf-lm-pqL"; */
+"Ebf-lm-pqL.text" = "© 2023 Tous Droits Réservés Réalisé par 4INDATA ";
 
-/* Class = "UIButton"; configuration.title = "Mot de passe oublié ?"; ObjectID = "mdY-P9-cCR"; */
-"mdY-P9-cCR.configuration.title" = "Mot de passe oublié ?";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "F5Z-fE-3I2"; */
+"F5Z-fE-3I2.normalTitle" = "Button";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mdY-P9-cCR"; */
-"mdY-P9-cCR.normalTitle" = "Button";
+/* Class = "UILabel"; text = "Connectez-vous pour continuer"; ObjectID = "FYQ-ED-fZt"; */
+"FYQ-ED-fZt.text" = "Connectez-vous pour continuer";
 
-/* Class = "UIButton"; configuration.title = "Se connecter avec Facebook"; ObjectID = "oia-8x-1Sd"; */
-"oia-8x-1Sd.configuration.title" = "Se connecter avec Facebook";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Fcv-B1-p6i"; */
+"Fcv-B1-p6i.normalTitle" = "Button";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "oia-8x-1Sd"; */
-"oia-8x-1Sd.normalTitle" = "Button";
+/* Class = "UIButton"; normalTitle = "S’inscrire"; ObjectID = "FoQ-91-Cvx"; */
+"FoQ-91-Cvx.normalTitle" = "S’inscrire";
 
-/* Class = "UILabel"; text = "BIENVENUE SUR 4INSHIELD"; ObjectID = "w6R-fu-y3N"; */
-"w6R-fu-y3N.text" = "BIENVENUE SUR netethic";
+/* Class = "UILabel"; text = "© 2023 All Rights Reserved Made by 4INDATA"; ObjectID = "Fr0-zb-ZQK"; */
+"Fr0-zb-ZQK.text" = "© 2023 All Rights Reserved Made by 4INDATA";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "G5U-gN-sCL"; */
+"G5U-gN-sCL.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "Gby-x5-GaH"; */
+"Gby-x5-GaH.placeholder" = "*";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "H6k-p3-Z6F"; */
+"H6k-p3-Z6F.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Réinitialiser le mot de passe"; ObjectID = "HVe-Ct-Poq"; */
+"HVe-Ct-Poq.configuration.title" = "Réinitialiser le mot de passe";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "HVe-Ct-Poq"; */
+"HVe-Ct-Poq.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HoR-7Z-gmH"; */
+"HoR-7Z-gmH.text" = "Label";
+
+/* Class = "UILabel"; text = "Harcèlement"; ObjectID = "ItX-mh-iMB"; */
+"ItX-mh-iMB.text" = "Harcèlement";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "JRb-ez-Z4V"; */
+"JRb-ez-Z4V.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "JdX-j0-q55"; */
+"JdX-j0-q55.placeholder" = "*";
+
+/* Class = "UIButton"; normalTitle = "Suivant"; ObjectID = "Juh-8t-Pn2"; */
+"Juh-8t-Pn2.normalTitle" = "Suivant";
+
+/* Class = "UITextField"; placeholder = "Entrer l'URL"; ObjectID = "Jws-F1-6Cs"; */
+"Jws-F1-6Cs.placeholder" = "Entrer l'URL";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "K19-lA-wL2"; */
+"K19-lA-wL2.placeholder" = "Mot de passe";
+
+/* Class = "UILabel"; text = "Votre nouveau mot de passe doit être différent des mots de passe précédents"; ObjectID = "K2G-zO-9mA"; */
+"K2G-zO-9mA.text" = "Votre nouveau mot de passe doit être différent des mots de passe précédents";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "KjR-4j-VaH"; */
+"KjR-4j-VaH.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Réseaux sociaux"; ObjectID = "L1N-tj-KS4"; */
+"L1N-tj-KS4.title" = "Réseaux sociaux";
+
+/* Class = "UILabel"; text = "Merci pour votre confiance "; ObjectID = "LcW-ro-awa"; */
+"LcW-ro-awa.text" = "Merci pour votre confiance ";
+
+/* Class = "UITextField"; placeholder = "Sélectionnez une période"; ObjectID = "Mrk-y7-yTK"; */
+"Mrk-y7-yTK.placeholder" = "Sélectionnez une période";
+
+/* Class = "UILabel"; text = "Aaa"; ObjectID = "NnO-Ez-BUc"; */
+"NnO-Ez-BUc.text" = "Aaa";
+
+/* Class = "UILabel"; text = "Bienvenue sur NETETHIC"; ObjectID = "OJa-dZ-Zvp"; */
+"OJa-dZ-Zvp.text" = "Bienvenue sur NETETHIC";
+
+/* Class = "UILabel"; text = "Créer un compte"; ObjectID = "OND-Nk-vIF"; */
+"OND-Nk-vIF.text" = "Créer un compte";
+
+/* Class = "UITextField"; placeholder = "Adresse Email"; ObjectID = "P3R-Gp-E75"; */
+"P3R-Gp-E75.placeholder" = "Adresse Email";
+
+/* Class = "UIButton"; configuration.title = "Aller au tableau de board"; ObjectID = "P6Q-I9-blA"; */
+"P6Q-I9-blA.configuration.title" = "Aller au tableau de board";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "P6Q-I9-blA"; */
+"P6Q-I9-blA.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Google"; ObjectID = "Q4t-1I-RAi"; */
+"Q4t-1I-RAi.configuration.title" = "Se connecter avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Q4t-1I-RAi"; */
+"Q4t-1I-RAi.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Mot de passe oublié ?"; ObjectID = "Q6N-SE-x1w"; */
+"Q6N-SE-x1w.text" = "Mot de passe oublié ?";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Q9u-qu-FMX"; */
+"Q9u-qu-FMX.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "QCl-nm-UyW"; */
+"QCl-nm-UyW.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QzD-f8-cFd"; */
+"QzD-f8-cFd.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "RAU-uG-sSI"; */
+"RAU-uG-sSI.placeholder" = "*";
+
+/* Class = "UIButton"; configuration.title = "Passer"; ObjectID = "RU8-RJ-iTT"; */
+"RU8-RJ-iTT.configuration.title" = "Passer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RU8-RJ-iTT"; */
+"RU8-RJ-iTT.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Connexion"; ObjectID = "Rxe-p2-GAi"; */
+"Rxe-p2-GAi.normalTitle" = "Connexion";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SBf-lM-mmZ"; */
+"SBf-lM-mmZ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "SLP-hK-nIt"; */
+"SLP-hK-nIt.text" = "Label";
+
+/* Class = "UILabel"; text = "Required"; ObjectID = "Syt-TG-rC2"; */
+"Syt-TG-rC2.text" = "Required";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "TW6-31-Wlb"; */
+"TW6-31-Wlb.text" = "Label";
+
+/* Class = "UILabel"; text = "Entrez un nouveau mot de passe"; ObjectID = "UBo-jV-JQA"; */
+"UBo-jV-JQA.text" = "Entrez un nouveau mot de passe";
+
+/* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "UC0-sw-B2W"; */
+"UC0-sw-B2W.configuration.title" = "Continuer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UC0-sw-B2W"; */
+"UC0-sw-B2W.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Félicitations!"; ObjectID = "USi-mW-vFm"; */
+"USi-mW-vFm.text" = "Félicitations!";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "Us6-nB-kZI"; */
+"Us6-nB-kZI.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VYU-AS-09w"; */
+"VYU-AS-09w.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Nombre de personne toxique"; ObjectID = "Vtx-wS-5A4"; */
+"Vtx-wS-5A4.text" = "Nombre de personne toxique";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "W8v-K3-8cB"; */
+"W8v-K3-8cB.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Date de naissance"; ObjectID = "Wvl-C1-IQd"; */
+"Wvl-C1-IQd.placeholder" = "Date de naissance";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wya-B9-YlW"; */
+"Wya-B9-YlW.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Veuillez entrer les informations requises pour compléter le profil de votre enfant"; ObjectID = "XeA-KG-aVE"; */
+"XeA-KG-aVE.text" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "XzW-eE-inW"; */
+"XzW-eE-inW.text" = "Twitter";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "YHc-od-NvS"; */
+"YHc-od-NvS.placeholder" = "Mot de passe";
+
+/* Class = "UILabel"; text = "Veuillez ajouter les appareils de votre enfant"; ObjectID = "Ydt-fI-Kn4"; */
+"Ydt-fI-Kn4.text" = "Veuillez ajouter les appareils de votre enfant";
+
+/* Class = "UIButton"; configuration.title = "Paramètres "; ObjectID = "ZFB-m8-NNi"; */
+"ZFB-m8-NNi.configuration.title" = "Paramètres ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZFB-m8-NNi"; */
+"ZFB-m8-NNi.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Entrez votre adresse mail pour recevoir le code de réinitialisation"; ObjectID = "ZpN-hF-zdp"; */
+"ZpN-hF-zdp.text" = "Entrez votre adresse mail pour recevoir le code de réinitialisation";
+
+/* Class = "UITabBarItem"; title = "Tableau de board"; ObjectID = "a8e-Cp-Whk"; */
+"a8e-Cp-Whk.title" = "Tableau de board";
+
+/* Class = "UITextField"; placeholder = "Sélectionnez une période"; ObjectID = "aKK-MW-KzP"; */
+"aKK-MW-KzP.placeholder" = "Sélectionnez une période";
+
+/* Class = "UITabBarItem"; title = "Phone"; ObjectID = "aXm-ef-M5B"; */
+"aXm-ef-M5B.title" = "Phone";
+
+/* Class = "UITextField"; placeholder = "Retaper le mot de passe"; ObjectID = "am8-wR-zaN"; */
+"am8-wR-zaN.placeholder" = "Retaper le mot de passe";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "cIV-hG-dn3"; */
+"cIV-hG-dn3.text" = "En cours de traitement";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "cSh-T4-ooB"; */
+"cSh-T4-ooB.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "caq-hu-RTT"; */
+"caq-hu-RTT.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Nom d'utilisateur"; ObjectID = "caz-XX-GKq"; */
+"caz-XX-GKq.placeholder" = "Nom d'utilisateur";
+
+/* Class = "UILabel"; text = "Profil"; ObjectID = "d1J-qa-PcD"; */
+"d1J-qa-PcD.text" = "Profil";
+
+/* Class = "UIButton"; normalTitle = "Suivant"; ObjectID = "dH9-sa-jc0"; */
+"dH9-sa-jc0.normalTitle" = "Suivant";
+
+/* Class = "UITextField"; placeholder = "Nom d'utilisateur"; ObjectID = "dIw-uN-oiz"; */
+"dIw-uN-oiz.placeholder" = "Nom d'utilisateur";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "dXG-d5-XDI"; */
+"dXG-d5-XDI.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dvo-gV-Z6S"; */
+"dvo-gV-Z6S.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "eBe-CN-Er8"; */
+"eBe-CN-Er8.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eWu-aG-2RO"; */
+"eWu-aG-2RO.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ea9-ft-r9C"; */
+"ea9-ft-r9C.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "ekL-Md-aJG"; */
+"ekL-Md-aJG.placeholder" = "*";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic"; ObjectID = "f3q-AD-0F2"; */
+"f3q-AD-0F2.text" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+
+/* Class = "UILabel"; text = "Niveau de danger lié aux activités en ligne"; ObjectID = "f6r-MC-x72"; */
+"f6r-MC-x72.text" = "Niveau de danger lié aux activités en ligne";
+
+/* Class = "UILabel"; text = "En cours de traitement"; ObjectID = "fGA-GN-vAf"; */
+"fGA-GN-vAf.text" = "En cours de traitement";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fga-cf-yto"; */
+"fga-cf-yto.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fi8-9x-Hhq"; */
+"fi8-9x-Hhq.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Adresse Email"; ObjectID = "gWX-HS-LM8"; */
+"gWX-HS-LM8.placeholder" = "Adresse Email";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Google"; ObjectID = "ggv-OS-779"; */
+"ggv-OS-779.configuration.title" = "Se connecter avec Google";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ggv-OS-779"; */
+"ggv-OS-779.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "hRh-SM-R6d"; */
+"hRh-SM-R6d.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Facebook"; ObjectID = "hnY-8J-tuF"; */
+"hnY-8J-tuF.configuration.title" = "Se connecter avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "hnY-8J-tuF"; */
+"hnY-8J-tuF.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Humeur générale au quotidien"; ObjectID = "iGK-CZ-OWS"; */
+"iGK-CZ-OWS.text" = "Humeur générale au quotidien";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"; ObjectID = "j48-nz-zey"; */
+"j48-nz-zey.text" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jF3-Tx-Qv9"; */
+"jF3-Tx-Qv9.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Confirmer"; ObjectID = "jF8-Kr-8RC"; */
+"jF8-Kr-8RC.configuration.title" = "Confirmer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jF8-Kr-8RC"; */
+"jF8-Kr-8RC.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Moyenne générale de l'humeur"; ObjectID = "jRc-Nx-l0W"; */
+"jRc-Nx-l0W.text" = "Moyenne générale de l'humeur";
+
+/* Class = "UITextField"; placeholder = "Entrez le pseudo"; ObjectID = "jUe-UT-oBb"; */
+"jUe-UT-oBb.placeholder" = "Entrez le pseudo";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic"; ObjectID = "k6u-bq-G0u"; */
+"k6u-bq-G0u.text" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+
+/* Class = "UITextField"; placeholder = "Nom"; ObjectID = "kTF-gS-Uw8"; */
+"kTF-gS-Uw8.placeholder" = "Nom";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kp9-zc-c10"; */
+"kp9-zc-c10.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "lfi-9J-NcQ"; */
+"lfi-9J-NcQ.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Se connecter avec Facebook"; ObjectID = "lhq-zG-3wS"; */
+"lhq-zG-3wS.configuration.title" = "Se connecter avec Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "lhq-zG-3wS"; */
+"lhq-zG-3wS.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "lyH-vd-u1L"; */
+"lyH-vd-u1L.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Entrez le code envoyé à votre email"; ObjectID = "n4d-Gi-Cv5"; */
+"n4d-Gi-Cv5.text" = "Entrez le code envoyé à votre email";
+
+/* Class = "UIButton"; normalTitle = "Suivant"; ObjectID = "nMo-t1-uoQ"; */
+"nMo-t1-uoQ.normalTitle" = "Suivant";
+
+/* Class = "UILabel"; text = "Veuillez suivre les étapes suivantes:\\n1. Prenez le téléphone portable de votre enfant \n\\n 2.  Scannez ce code QR avec l'appareil photo de l'appareil de votre enfant\n3. Vous serez redirigé vers la page de téléchargement de l'application NETETHIC\n 4. Une fois l'application est installée, connectez-vous ! \\n                                                          5. Confirmez que le téléphone va être utilisé par un enfant"; ObjectID = "oej-HK-n6N"; */
+"oej-HK-n6N.text" = "Veuillez suivre les étapes suivantes:\\n1. Prenez le téléphone portable de votre enfant \n\\n 2.  Scannez ce code QR avec l'appareil photo de l'appareil de votre enfant\n3. Vous serez redirigé vers la page de téléchargement de l'application NETETHIC\n 4. Une fois l'application est installée, connectez-vous ! \\n                                                          5. Confirmez que le téléphone va être utilisé par un enfant";
+
+/* Class = "UILabel"; text = "Félicitations!"; ObjectID = "ov9-uh-QXG"; */
+"ov9-uh-QXG.text" = "Félicitations!";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic"; ObjectID = "q5l-sx-ZNa"; */
+"q5l-sx-ZNa.text" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "qUU-oq-GJ0"; */
+"qUU-oq-GJ0.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Suivant"; ObjectID = "r99-bN-uPu"; */
+"r99-bN-uPu.configuration.title" = "Suivant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "r99-bN-uPu"; */
+"r99-bN-uPu.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rzl-mc-88D"; */
+"rzl-mc-88D.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Moyenne général"; ObjectID = "s0u-bD-E5e"; */
+"s0u-bD-E5e.configuration.title" = "Moyenne général";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "s0u-bD-E5e"; */
+"s0u-bD-E5e.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Ajouter un autre enfant"; ObjectID = "s23-Up-M8M"; */
+"s23-Up-M8M.configuration.title" = "Ajouter un autre enfant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "s23-Up-M8M"; */
+"s23-Up-M8M.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Garçon"; ObjectID = "sKK-hm-cV1"; */
+"sKK-hm-cV1.text" = "Garçon";
+
+/* Class = "UILabel"; text = "Bienvenue à netethic"; ObjectID = "t66-aw-hNT"; */
+"t66-aw-hNT.text" = "Bienvenue à netethic";
+
+/* Class = "UILabel"; text = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic"; ObjectID = "tsP-hi-jR4"; */
+"tsP-hi-jR4.text" = "© 2023 Tous Droits Réservés Réalisé par Data4Ethic";
+
+/* Class = "UITextField"; placeholder = "*"; ObjectID = "uCj-WF-Jct"; */
+"uCj-WF-Jct.placeholder" = "*";
+
+/* Class = "UITextField"; placeholder = "E-mail"; ObjectID = "vCC-6J-6ev"; */
+"vCC-6J-6ev.placeholder" = "E-mail";
+
+/* Class = "UILabel"; text = "Vous avez complété avec succès le profil de votre enfant. "; ObjectID = "vji-bi-msN"; */
+"vji-bi-msN.text" = "Vous avez complété avec succès le profil de votre enfant. ";
+
+/* Class = "UIButton"; configuration.title = "Sauter"; ObjectID = "vtE-pJ-Yys"; */
+"vtE-pJ-Yys.configuration.title" = "Sauter";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vtE-pJ-Yys"; */
+"vtE-pJ-Yys.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Vous n'avez pas de compte ?"; ObjectID = "vzG-bu-mda"; */
+"vzG-bu-mda.text" = "Vous n'avez pas de compte ?";
+
+/* Class = "UIButton"; configuration.title = "Continuer"; ObjectID = "wMN-hu-vat"; */
+"wMN-hu-vat.configuration.title" = "Continuer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wMN-hu-vat"; */
+"wMN-hu-vat.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wrG-e9-1eK"; */
+"wrG-e9-1eK.text" = "Label";
+
+/* Class = "UIButton"; configuration.title = "Ajouter un autre enfant"; ObjectID = "xSK-w3-UiB"; */
+"xSK-w3-UiB.configuration.title" = "Ajouter un autre enfant";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xSK-w3-UiB"; */
+"xSK-w3-UiB.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xkO-7T-aaC"; */
+"xkO-7T-aaC.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xq2-dI-YPo"; */
+"xq2-dI-YPo.text" = "Label";
+
+/* Class = "UILabel"; text = "Profil"; ObjectID = "yZd-Lj-LOs"; */
+"yZd-Lj-LOs.text" = "Profil";
+
+/* Class = "UIButton"; configuration.title = "Toutes les personnes"; ObjectID = "yhA-i9-Gw5"; */
+"yhA-i9-Gw5.configuration.title" = "Toutes les personnes";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yhA-i9-Gw5"; */
+"yhA-i9-Gw5.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Welcome to 4INSHIELD, Lorem ipsum"; ObjectID = "ynN-se-daa"; */
+"ynN-se-daa.text" = "Welcome to 4INSHIELD, Lorem ipsum";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ysF-Br-bCb"; */
+"ysF-Br-bCb.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Tendance actuelle"; ObjectID = "zMb-bZ-CTW"; */
+"zMb-bZ-CTW.text" = "Tendance actuelle";

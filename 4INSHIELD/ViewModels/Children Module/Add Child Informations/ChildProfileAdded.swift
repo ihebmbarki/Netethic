@@ -254,8 +254,10 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
         print("add")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "childInfos")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
+//        navigationController?.pushViewController(vc, animated: true)
+
     }
     
     @IBAction func changeLangageButton(_ sender: Any) {
@@ -268,7 +270,7 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
     @IBAction func backButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -276,7 +278,7 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
         platform()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "wizardStepViewController")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
         
     }

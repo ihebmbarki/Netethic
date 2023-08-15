@@ -113,7 +113,7 @@ class ChildrenViewController: UIViewController {
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -200,7 +200,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
             homeVC.selectedChild = selectedChild
             print("selected child: \(selectedChild.id)")
         }
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
 
@@ -240,7 +240,7 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
                 // Set the selected child property in UpdateChildViewController
                 vc.selectedChild = self.decodedChildrenArray[indexPath.row]
 
-                vc.modalPresentationStyle = .fullScreen
+                vc.modalPresentationStyle = .overFullScreen
                 self.present(vc, animated: true, completion: nil)
             } else {
                 print("Error: Failed to instantiate UpdateChildViewController.")

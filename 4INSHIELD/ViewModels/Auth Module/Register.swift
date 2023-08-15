@@ -460,7 +460,7 @@ class Register: KeyboardHandlingBaseVC {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier)
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true, completion: nil)
         }
     }
@@ -477,6 +477,7 @@ class Register: KeyboardHandlingBaseVC {
         APIManager.shareInstance.registerAPI(register: register) { isSuccess, messageKey in
             if isSuccess {
                 self.showAlert(messageKey: messageKey) {
+                    self.goToConfirmation(withId: "ConfirmationID")
                     self.gotoScreen(storyBoardName: "Main", stbIdentifier: "ConfirmationID")
                     UserDefaults.standard.set(email, forKey: "userEmail")
                     UserDefaults.standard.synchronize()

@@ -92,7 +92,7 @@ class Events: UIViewController {
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

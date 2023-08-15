@@ -172,6 +172,10 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         if mediaID == 0 {mediaID = 1}
         let params = profil1(child: childID, social_media_name: mediaID, pseudo: pseudo, url: url)
         self.response(params: params)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
         
     }
     
@@ -238,8 +242,8 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                                 let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
                                     //self.dismiss(animated: true, completion: nil)
                                     if let childrenListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChildDevice") as? ChildrenViewController {
-                                        self.present(childrenListVC, animated: true, completion: nil)
-                                    }
+                                        childrenListVC.modalPresentationStyle = .overFullScreen
+                                        self.present(childrenListVC, animated: true, completion: nil)                                    }
                                     
                                     self.progressBarWithDifferentDimensions.completedTillIndex = 2
                                     
@@ -257,7 +261,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                                     //self.dismiss(animated: true, completion: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-                                    vc.modalPresentationStyle = .fullScreen
+                                    vc.modalPresentationStyle = .overFullScreen
                                     self.present(vc, animated: true, completion: nil)
                                     
                                     self.progressBarWithDifferentDimensions.completedTillIndex = 2
@@ -271,7 +275,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                                     //self.dismiss(animated: true, completion: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-                                    vc.modalPresentationStyle = .fullScreen
+                                    vc.modalPresentationStyle = .overFullScreen
                                     self.present(vc, animated: true, completion: nil)
                                     
                                     self.progressBarWithDifferentDimensions.completedTillIndex = 2
@@ -486,6 +490,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
         vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
 }

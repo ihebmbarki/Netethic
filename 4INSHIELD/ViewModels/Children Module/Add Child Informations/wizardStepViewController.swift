@@ -168,7 +168,7 @@ class wizardStepViewController: UIViewController, FlexibleSteppedProgressBarDele
     @IBAction func dashboardButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     

@@ -67,8 +67,8 @@ class OnboardingViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: identifier)
 //        navigationController?.pushViewController(VC, animated: true)
+        VC.modalPresentationStyle = .overFullScreen
         self.present(VC, animated: true, completion: nil)
-
     }
     
     @IBAction func nextBtnTapped(_ sender: Any) {

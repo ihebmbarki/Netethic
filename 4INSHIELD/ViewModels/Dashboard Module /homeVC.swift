@@ -50,7 +50,12 @@ class homeVC: UIViewController, ChartViewDelegate {
             lineChartView.addShadowView(width: 2, height: 3, Opacidade: 0.1, radius: 15, shadowRadius: 5)
         }
     }
-
+    @IBOutlet weak var moyenneGlabel: UILabel!
+    @IBOutlet weak var rapportLabel: UILabel!
+    @IBOutlet weak var nombrePersonneLabel: UILabel!
+    
+    @IBOutlet weak var percentageLabel: UILabel!
+    @IBOutlet weak var dangerLabel: UILabel!
     @IBOutlet weak var loadingPlatformIndicator: UIActivityIndicatorView!
     @IBOutlet weak var topView: UIView!
     private var SideBar: SideBar!
@@ -94,7 +99,13 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var imageView3: UIImageView!
     @IBOutlet weak var imageView4: UIImageView!
     @IBOutlet weak var imageView5: UIImageView!
-    @IBOutlet weak var personsBtn: UIButton!
+    @IBOutlet weak var personsBtn: UIButton!{
+        didSet{
+            personsBtn.applyGradient()
+            personsBtn.layer.cornerRadius = moyenneButton.frame.height / 2
+            personsBtn.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var missingDataLbl: UILabel!
     @IBOutlet weak var personsCollectionView: UICollectionView!
     @IBOutlet weak var humorCollectionView: UICollectionView!
@@ -121,6 +132,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var personneImage1Label: UILabel!
     @IBOutlet weak var maxScoreLabel: UILabel!
     let pieChartView = PieChartView()
+    let subSideBar = SubSideBarViewController()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -136,6 +149,14 @@ class homeVC: UIViewController, ChartViewDelegate {
         messageLineChart.isHidden = true
         errorLbl.isHidden = true
    
+        imageView1.isHidden = true
+        personneImage1Label.isHidden = true
+        imageView2.isHidden = true
+        personneImage2Label.isHidden = true
+        imageView3.isHidden = true
+        personneImage3Label.isHidden = true
+        personneImage4Label.isHidden = true
+        imageView4.isHidden = true
 
         dateWeek()
         //Set persons collection invisibility
@@ -210,58 +231,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
             
             // Call the API to fetch concerned relationship
-            APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
-                guard let self = self else { return }
-                
-                if let toxicCount = concernedRelationship {
-                    let toxicPersonsText = String(format: "%02d personnes", toxicCount)
-                    if toxicCount == 0{
-                        imageView1.isHidden = true
-                        personneImage1Label.isHidden = true
-                        imageView2.isHidden = true
-                        personneImage2Label.isHidden = true
-                        imageView3.isHidden = true
-                        personneImage3Label.isHidden = true
-                        imageView3.isHidden = true
-                        personneImage4Label.isHidden = true
-                        imageView4.isHidden = true
-                        
-                        loadingPersonIndicator.stopAnimating()
-                        loadingPersonIndicator.isHidden = true
-                        personsBtn.isHidden = true
-                        missingDataLbl.isHidden = false
-                        if LanguageManager.shared.currentLanguage == "fr" {
-                            self.missingDataLbl.text = " Il n'y a pas de données à afficher pour le moment. "
-                        }
-                        if LanguageManager.shared.currentLanguage == "en" {
-                            self.missingDataLbl.text = " There is No Data to Display at this Moment."
-                        }
-                    }
-                    if toxicCount == 1{
-                        imageView2.isHidden = true
-                        personneImage2Label.isHidden = true
-                        imageView3.isHidden = true
-                        personneImage3Label.isHidden = true
-                        imageView3.isHidden = true
-                        personneImage4Label.isHidden = true
-                        imageView4.isHidden = true
-                    }
-                    if toxicCount == 2{
-                        imageView3.isHidden = true
-                        personneImage3Label.isHidden = true
-                        imageView4.isHidden = true
-                        personneImage4Label.isHidden = true
-                    }
-                    if toxicCount == 3{
-                        personneImage4Label.isHidden = true
-                        imageView4.isHidden = true
-                    }
-                    DispatchQueue.main.async {
-                        self.toxicPersonsLbl.text = toxicPersonsText
-                        self.personsCollectionView.reloadData()
-                    }
-                }
-            }
+            addConcernedRelationship()
             
             
             // Call the API to fetch the profile image URL
@@ -373,7 +343,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             // Instantiate child view controllers from storyboard
             ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
             
-            //Set up user name
+            //Set up first name
             guard let firstName = UserDefaults.standard.string(forKey: "firstName") else { return }
             self.BonjourLbl.text = "Bonjour \(firstName) !"
             //Set up child profile pic
@@ -385,6 +355,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             // Concaténation de l'URL de base avec la partie de l'URL de la photo
                 let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photoUrl
                 print("URL complète : \(fullPhotoUrl)")
+                
+                UserDefaults.standard.set(photoUrl, forKey: "photoUrl")
 
                 if let url = URL(string: fullPhotoUrl) {
                     URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -519,7 +491,66 @@ class homeVC: UIViewController, ChartViewDelegate {
         ChildInfoViewController!.didMove(toParent: self)
     }
     
-    
+    func addConcernedRelationship(){
+        APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
+            guard let self = self else { return }
+            if let toxicCount = concernedRelationship {
+                let toxicPersonsText = String(format: "%02d personnes", toxicCount)
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    let toxicPersonsText = String(format: "%02d personnes", toxicCount)
+                }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    let toxicPersonsText = String(format: "%02d individuals", toxicCount)
+                }
+                if toxicCount == 0{
+                    
+                    loadingPersonIndicator.stopAnimating()
+                    loadingPersonIndicator.isHidden = true
+                    personsBtn.isHidden = true
+                    missingDataLbl.isHidden = false
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.missingDataLbl.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.missingDataLbl.text = " There is No Data to Display at this Moment."
+                    }
+                }
+                if toxicCount == 1{
+                    imageView1.isHidden = false
+                    personneImage1Label.isHidden = false
+                  
+                }
+                if toxicCount == 2{
+                    imageView1.isHidden = false
+                    personneImage1Label.isHidden = false
+                    imageView2.isHidden = false
+                    personneImage2Label.isHidden = false
+                }
+                if toxicCount == 3{
+                    imageView1.isHidden = false
+                    personneImage1Label.isHidden = false
+                    imageView2.isHidden = false
+                    personneImage2Label.isHidden = false
+                    imageView3.isHidden = false
+                    personneImage3Label.isHidden = false
+                }
+                if toxicCount >= 4{
+                    imageView1.isHidden = false
+                    personneImage1Label.isHidden = false
+                    imageView2.isHidden = false
+                    personneImage2Label.isHidden = false
+                    imageView3.isHidden = false
+                    personneImage3Label.isHidden = false
+                    imageView4.isHidden = false
+                    personneImage4Label.isHidden = false
+                }
+                DispatchQueue.main.async {
+                    self.toxicPersonsLbl.text = toxicPersonsText
+                    self.personsCollectionView.reloadData()
+                }
+            }
+        }
+    }
     
     // hacrcelemnt de actuel
     func setupLineChart(listeDates: [Double]?, listeMaxScore: [Int]?) {
@@ -632,19 +663,27 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-        
+        addConcernedRelationship()
         let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
-        let username = UserDefaults.standard.string(forKey: "username") ?? ""
-        let localizedText = "\(bonjourString) \(username) !"
+        let firstName = UserDefaults.standard.string(forKey: "firstName") ?? ""
+        let localizedText = "\(bonjourString) \(firstName) !"
         
         BonjourLbl.text = localizedText
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
         
-        current_harLbl.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
+        RisqueLabel.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
         errorLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
         missingDataLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
         messageLineChart.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
-       
+        dangerLabel.text = NSLocalizedString("danger", tableName: nil, bundle: bundle, value: "", comment: "")
+        nombrePersonneLabel.text = NSLocalizedString("personneToxique", tableName: nil, bundle: bundle, value: "", comment: "")
+        percentageLabel.text = NSLocalizedString("number", tableName: nil, bundle: bundle, value: "", comment: "")
+        rapportLabel.text = NSLocalizedString("rapport", tableName: nil, bundle: bundle, value: "", comment: "")
+        moyenneGnLabel.text = NSLocalizedString("moyenne", tableName: nil, bundle: bundle, value: "", comment: "")
+        personsBtn.setTitle(NSLocalizedString("tousPersonneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        moyenneButton.setTitle(NSLocalizedString("moyenneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        dateWeek()
+        addConcernedRelationship()
         // Translate the text labels in the collection view cells
         for cell in cardsCollectionView.visibleCells {
             if let cell = cell as? CustomCollectionViewCell {
@@ -763,30 +802,35 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func loadChildInfo() {
         guard let selectedChild = selectedChild else { return }
-        
-        childButton.imageView?.image = nil
+
         
         let imageName = selectedChild.user?.gender == "M" ? "malePic" : "femalePic"
         let image = UIImage(named: imageName)
-        
+        UserDefaults.standard.set(imageName, forKey: "imageName")
+
+
+
         childButton.setImage(image, for: .normal) // Set the image for the button
-        imageView5.image = image // Set the image for imageView5
-        
+
         if let photo = selectedChild.user?.photo, !photo.isEmpty {
-            let fullPhotoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + photo
-            childButton.imageView?.loadImage(fullPhotoUrl) { [weak self] image in
+            // Load the image for imageView5 from URL
+            let fullPhotoUrl =  photo
+            imageView5.loadImage(fullPhotoUrl) { [weak self] image in
                 self?.imageView5.image = image
                 self?.imageView5.layer.cornerRadius = (self?.imageView5.frame.size.width ?? 0) / 2
                 self?.imageView5.clipsToBounds = true
+                self?.imageView5.contentMode = .scaleAspectFit // Or another appropriate mode
+
             }
         }
     }
+
 
     
     func gotoScreen(storyBoardName: String, stbIdentifier: String) {
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -807,10 +851,12 @@ class homeVC: UIViewController, ChartViewDelegate {
             let action = UIAlertAction(title: language, style: .default) { action in
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
+                    self.subSideBar.langue = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.subSideBar.langue = "en"
                 }
                 
                 self.updateLanguageButtonImage()
@@ -856,7 +902,7 @@ extension homeVC : SideBarDelegate {
             // Dismiss the current presented view controlle
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "signIn")
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true, completion: nil)
         default:
             break
@@ -1153,24 +1199,43 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             
             APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 2, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
-                if let score = score {
-                    // Use the score value to determine the cardTitle
-                    if score < 30 {
-                        cell.cardTitle.text = "Statut ordinaire"
-                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
-                    } else if score >= 30 && score < 50 {
-                        cell.cardTitle.text = "Statut Irrégulier"
-                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
-                    } else {
-                        cell.cardTitle.text = "Statut à Risque"
-                        cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    if let score = score {
+                        // Use the score value to determine the cardTitle
+                        if score < 30 {
+                            cell.cardTitle.text = "Statut ordinaire"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                        } else if score >= 30 && score < 50 {
+                            cell.cardTitle.text = "Statut Irrégulier"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+                        } else {
+                            cell.cardTitle.text = "Statut à Risque"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                        }
                     }
-                    
-                   
-                } else {
+                }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    if let score = score {
+                        // Use the score value to determine the cardTitle
+                        if score < 30 {
+                            cell.cardTitle.text = "ordinary statute"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                        } else if score >= 30 && score < 50 {
+                            cell.cardTitle.text = "irregular status"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+                        } else {
+                            cell.cardTitle.text = "Risk status"
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                        }
+                    }
+                }
+                
+                
+                else {
                     // Handle error case or set a default value for the cardTitle
 //                    cell.cardTitle.text = "No Data Platform"
 //                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                    self.dangerCollectionView.isHidden = true
                     self.loadingPlatformIndicator.stopAnimating()
                     self.loadingPlatformIndicator.isHidden = true
                   
@@ -1227,24 +1292,49 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         
                     // Update the UI on the main thread
                     DispatchQueue.main.async {
-                        
-                        if indexPath.row < self.states.count {
-                            print("oooooo")
-                            let state = self.states[indexPath.row]
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
-                            cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
-                            if state.mental_state == "happy" {
-                                cell.cardLogo.image = UIImage(named: "smileyface")
-                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-                            } else if state.mental_state == "stress" {
-                                cell.cardLogo.image = UIImage(named: "angryface")
-                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
-                            } else {
-                                cell.cardLogo.image = UIImage(named: "pokerface")
-                                cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            if indexPath.row < self.states.count {
+                                print("oooooo")
+                                let state = self.states[indexPath.row]
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                                cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                                if state.mental_state == "happy" {
+                                    cell.cardLogo.image = UIImage(named: "smileyface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                                } else if state.mental_state == "stress" {
+                                    cell.cardLogo.image = UIImage(named: "angryface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                                } else {
+                                    cell.cardLogo.image = UIImage(named: "pokerface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
+                                }
                             }
                         }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                            if indexPath.row < self.states.count {
+                                print("oooooo")
+                                let state = self.states[indexPath.row]
+                                
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.locale = Locale(identifier: "en") // Set locale to English
+                                dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                                
+                                cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                                
+                                if state.mental_state == "happy" {
+                                    cell.cardLogo.image = UIImage(named: "smileyface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                                } else if state.mental_state == "stress" {
+                                    cell.cardLogo.image = UIImage(named: "angryface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                                } else {
+                                    cell.cardLogo.image = UIImage(named: "pokerface")
+                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
+                                }
+                            }
+                        }
+
                         else {
                             // Handle the case when index path is out of bounds
                             cell.cardLogo.image = UIImage(named: "pokerface")
@@ -1390,8 +1480,12 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 print("Timestamp actuel: \(currentDateTimestamp)")
                 print("Date d'une semaine avant: \(oneWeekAgoFormatted)")
                 print("Timestamp d'une semaine avant: \(oneWeekAgoTimestamp)")
-                
-            self.dateTF.text = "Du \(currentDateFormatted) Au \(oneWeekAgoFormatted)"
+            if LanguageManager.shared.currentLanguage == "fr" {
+                self.dateTF.text = "Du \(currentDateFormatted) Au \(oneWeekAgoFormatted)"
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                self.dateTF.text = "From \(currentDateFormatted) to \(oneWeekAgoFormatted)"
+            }
             getScorePlateform(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
             getMentalState(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
         } else {

@@ -30,19 +30,19 @@ extension UIView {
 extension UIImageView {
     
     func loadImage(_ urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
-        self.image = UIImage()
         guard let string = urlString else { return }
         
-        var photoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + string
+        let photoUrl = BuildConfiguration.shared.WEBERVSER_BASE_URL + string
         
         guard let url = URL(string: photoUrl) else { return }
         
         self.sd_setImage(with: url) { (image, error, type, url) in
-            if onSuccess != nil, error == nil {
-                onSuccess!(image!)
+            if let image = image, error == nil {
+                onSuccess?(image)
             }
         }
     }
+
     
     func loadParentImage(from urlString: String?, onSuccess: ((UIImage) -> Void)? = nil) {
         self.image = UIImage()

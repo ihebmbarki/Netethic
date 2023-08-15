@@ -317,8 +317,8 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let ChildSocialMedia = storyboard.instantiateViewController(withIdentifier: identifier)
 //        navigationController?.pushViewController(ChildSocialMedia, animated: true)
+        ChildSocialMedia.modalPresentationStyle = .overFullScreen
         self.present(ChildSocialMedia, animated: true, completion: nil)
-
     }
     
     func platform(){

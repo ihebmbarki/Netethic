@@ -966,7 +966,7 @@
         <!--Child Profile-->
         <scene sceneID="5ZP-Fp-wae">
             <objects>
-                <viewController storyboardIdentifier="childInfos" id="G4t-F4-zOB" customClass="ChildProfile" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="G4t-F4-zOB" customClass="ChildProfile" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ofo-XM-vVL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2198,7 +2198,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvo-gV-Z6S">
-                                                                <rect key="frame" x="338.66666666666669" y="139" width="46.333333333333314" height="38"/>
+                                                                <rect key="frame" x="342" y="139" width="43" height="38"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="38" id="r6D-RA-BMT"/>
                                                                 </constraints>
@@ -3381,7 +3381,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Db0-fW-Kg2">
-                                                                <rect key="frame" x="342.66666666666669" y="109" width="46.333333333333314" height="38"/>
+                                                                <rect key="frame" x="346" y="109" width="43" height="38"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="38" id="3iw-si-9sQ"/>
                                                                 </constraints>
@@ -3523,7 +3523,7 @@
         <!--Navigation Controller-->
         <scene sceneID="BN6-l4-LDm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CEB-hn-W5f" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="childInfos" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CEB-hn-W5f" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PAk-pA-fPE">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -4259,7 +4259,7 @@
         <image name="background" width="360" height="209"/>
         <image name="bell.badge.fill" catalog="system" width="123" height="128"/>
         <image name="birthday-icon" width="21" height="18.666666030883789"/>
-        <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
+        <image name="calendar" width="19" height="19"/>
         <image name="changePwdLogo" width="197" height="140.66667175292969"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>

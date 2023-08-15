@@ -82,3 +82,15 @@ Please check your registered email for the activation link.";
 "Gender" = "Gender";
 "Next" = "Next";
 "LabelText" = "Please enter the required information to complete your child’s profile";
+
+"boy" = "Boy";
+"girl" = "Girl";
+"other" = "Not precised";
+"edit_child" = "Edit child's profile";
+"social_media_child" = "Children's social networks";
+
+"add_media" = "Add a social network";
+"add_another_profile" = "Add a new profile";
+"update" = "Update";
+"cancel" = "Cancel";
+"create" = "Create";

@@ -82,3 +82,13 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "Next" = "Suivant";
 "LabelText" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant" ;
 
+"boy" = "Garçon";
+"girl" = "Fille";
+"other" = "Non précisé";
+"edit_child" = "Modifier le profil de l'enfant";
+"social_media_child" = "Les réseaux sociaux des enfants";
+"add_media" = " Ajoutez un réseau social";
+"add_another_profile" = "Ajouter un nouveau profil";
+"update" = "Modifier";
+"cancel" = "Annuler";
+"create" = "Créer";

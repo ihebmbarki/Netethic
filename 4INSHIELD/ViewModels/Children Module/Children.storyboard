@@ -4,15 +4,11 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Poppins-SemiBold.ttf">
-            <string>Poppins-SemiBold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Children View Controller-->
         <scene sceneID="he0-cD-Q6O">
@@ -23,61 +19,76 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-dI-PCp">
-                                <rect key="frame" x="0.0" y="103" width="393" height="665"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="625"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="PZF-RR-aO5">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="88"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
-                                            <rect key="frame" x="335.33333333333331" y="10" width="49.666666666666686" height="34"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
-                                            <connections>
-                                                <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="nSG-84-xB5"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liste des enfants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-e0-BOn">
-                                            <rect key="frame" x="132.66666666666663" y="14" width="137.33333333333337" height="21"/>
-                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mes enfants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-e0-BOn">
+                                            <rect key="frame" x="114" y="18" width="164" height="30"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                             <color key="textColor" name="AccentColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgy-TX-UdW">
-                                            <rect key="frame" x="304" y="18" width="23" height="18"/>
+                                            <rect key="frame" x="303" y="18" width="24" height="18"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
                                                 <action selector="changeLanguageBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="i1B-rd-PF8"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
+                                            <rect key="frame" x="335" y="16" width="49.666666666666686" height="34"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
+                                            <connections>
+                                                <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="nSG-84-xB5"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="65.333333333333314" id="4UZ-e8-h1k"/>
-                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="14" id="5fx-W5-tqb"/>
-                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="leading" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="34" id="Im5-Kt-L0m"/>
                                         <constraint firstAttribute="bottom" secondItem="tgy-TX-UdW" secondAttribute="bottom" constant="52" id="K3b-LE-Ckh"/>
-                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="10" id="QbR-EB-3ny"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="16" id="QbR-EB-3ny"/>
+                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="18" id="Y1I-Pb-gFT"/>
                                         <constraint firstItem="tgy-TX-UdW" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="18" id="b2V-8D-Zke"/>
-                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="centerY" secondItem="EUu-H1-f8n" secondAttribute="centerY" id="hqv-uy-pGB"/>
+                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="leading" secondItem="PZF-RR-aO5" secondAttribute="leading" constant="114" id="cZE-Yb-Jbc"/>
+                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="centerY" secondItem="EUu-H1-f8n" secondAttribute="centerY" constant="-6" id="hqv-uy-pGB"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="tgy-TX-UdW" secondAttribute="trailing" constant="8.3333333333332575" id="ouK-QS-SYN"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="115" id="yY1-gJ-dRf"/>
                                     </constraints>
                                 </view>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2u-yP-yJg">
+                                <rect key="frame" x="205" y="736" width="176" height="35"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ajouter un enfant" imagePadding="3">
+                                    <imageReference key="image" image="plus" catalog="system" symbolScale="medium"/>
+                                    <color key="baseForegroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addChildBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="DcZ-kI-0li"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HTw-er-wuD"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="o2u-yP-yJg" firstAttribute="leading" secondItem="HTw-er-wuD" secondAttribute="leading" constant="205" id="4d5-J6-Llg"/>
                             <constraint firstAttribute="trailing" secondItem="0Cu-dI-PCp" secondAttribute="trailing" id="Ua8-6g-0X5"/>
+                            <constraint firstItem="o2u-yP-yJg" firstAttribute="top" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="8" id="Vps-AW-sdV"/>
                             <constraint firstItem="0Cu-dI-PCp" firstAttribute="leading" secondItem="nJY-yu-HLs" secondAttribute="leading" id="dQ4-F7-dyU"/>
                             <constraint firstItem="0Cu-dI-PCp" firstAttribute="top" secondItem="HTw-er-wuD" secondAttribute="top" id="dhx-Li-P6G"/>
-                            <constraint firstItem="HTw-er-wuD" firstAttribute="bottom" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="50" id="g3N-lE-p9V"/>
+                            <constraint firstItem="HTw-er-wuD" firstAttribute="bottom" secondItem="0Cu-dI-PCp" secondAttribute="bottom" constant="90" id="g3N-lE-p9V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qYp-4c-c4m"/>
                     <connections>
+                        <outlet property="addChildBtn" destination="o2u-yP-yJg" id="btX-5U-V7O"/>
                         <outlet property="changeLanguageBtn" destination="tgy-TX-UdW" id="kDc-LN-DyI"/>
                         <outlet property="listLabel" destination="0Gv-e0-BOn" id="6Rc-bD-I9G"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
@@ -108,6 +119,7 @@
     </scenes>
     <resources>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
             <color red="0.33700001239776611" green="0.34900000691413879" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

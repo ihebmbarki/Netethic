@@ -20,6 +20,19 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBOutlet weak var lastnameErorLbl: UILabel!
     @IBOutlet weak var dateErrorLbl: UILabel!
     
+    @IBOutlet weak var changeLanguageBtn: UIButton!
+    
+    @IBOutlet weak var prenomLbl: UILabel!
+    @IBOutlet weak var socialText: UILabel!
+    @IBOutlet weak var nomLbl: UILabel!
+    @IBOutlet weak var genreLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    
+    @IBOutlet weak var garçonLbl: UILabel!
+    @IBOutlet weak var filleLbl: UILabel!
+    @IBOutlet weak var nonPreciseLbl: UILabel!
+    
+
     @IBOutlet weak var maleRadioButton: DLRadioButton!
     @IBOutlet weak var femaleRadioButton: DLRadioButton!
     @IBOutlet weak var otherRadioButton: DLRadioButton!
@@ -27,10 +40,13 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var SocialMediaTableView: UITableView!
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var socialView: UIView!
     @IBOutlet weak var addNewProfileBtn: UIButton!
     @IBOutlet weak var ddUserAccBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
+    
     let pickerView = UIPickerView()
     let datePicker = UIDatePicker()
     var index = 0
@@ -59,6 +75,10 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         super.viewDidLoad()
         
         resetForm()
+        
+        // Update localized strings
+        updateLocalizedStrings()
+        
         //search bar
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -87,6 +107,16 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         configureTableView()
         
     }
+
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+            }
+        }
+    }
     
     func resetForm() {
         updateBtn.isEnabled = false
@@ -94,7 +124,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         firstnameErrorLbl.isHidden = true
         lastnameErorLbl.isHidden = true
         dateErrorLbl.isHidden = true
-
     }
     
     func checkForValidForm()
@@ -248,11 +277,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //register tableView Cell
     func configureTableView(){
-        SocialMediaTableView.layer.cornerRadius = 10.0
-        SocialMediaTableView.layer.borderWidth = 1.0
-        SocialMediaTableView.layer.masksToBounds = true
-        SocialMediaTableView.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
-        
         SocialMediaTableView.delegate = self
         SocialMediaTableView.dataSource = self
         SocialMediaTableView.register(UINib.init(nibName: "Child_SocialMedia_TvCell", bundle: nil), forCellReuseIdentifier: "ChildSocialMediaCell")
@@ -264,7 +288,9 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI()
-        //self.getCurrentChildSocialMedia()
+//        self.getCurrentChildSocialMedia()
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
     }
     
     func SetUpDesign() {
@@ -314,6 +340,12 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
+        
+        socialView.layer.cornerRadius = 10.0
+        socialView.layer.borderWidth = 1.0
+        socialView.layer.masksToBounds = true
+        socialView.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+        
     }
     
     func verifyProfileList(profileList: [Profile]) {
@@ -395,6 +427,60 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+
+        if LanguageManager.shared.currentLanguage == "en" {
+            languageAlert.title = "Choose Language"
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            languageAlert.title = "Choisir la langue"
+        }
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+                }
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        titleLbl.text = NSLocalizedString("edit_child", tableName: nil, bundle: bundle, value: "", comment: "")
+        prenomLbl.text = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        nomLbl.text = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
+        dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
+        
+        garçonLbl.text = NSLocalizedString("boy", tableName: nil, bundle: bundle, value: "", comment: "")
+        filleLbl.text = NSLocalizedString("girl", tableName: nil, bundle: bundle, value: "", comment: "")
+        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
+        socialText.text = NSLocalizedString("social_media_child", tableName: nil, bundle: bundle, value: "", comment: "")
+        addNewProfileBtn.setTitle(NSLocalizedString("add_media", tableName: nil, bundle: bundle, value: "", comment: "add media"), for: .normal)
+        ddUserAccBtn.setTitle(NSLocalizedString("add_another_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+    }
+    
     @IBAction func backBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -418,7 +504,12 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
                 self.PrenomTf.text = child.user?.first_name
                 self.nomTf.text = child.user?.last_name
-                
+                //Show child name for socials
+                if let firstName = child.user?.first_name {
+                    self.nameLbl.text = firstName
+                } else {
+                    self.nameLbl.text = " "
+                }
                 if child.user!.gender == "M" {
                     self.maleRadioButton.isSelected = true
                 } else if child.user!.gender == "F" {

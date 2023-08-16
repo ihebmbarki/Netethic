@@ -101,6 +101,10 @@ class SocialMedia: UIViewController {
 }
 
 extension SocialMedia : SideBarDelegate {
+    func changeLangage(langue: String) {
+        
+    }
+    
     func selectedCell(_ row: Int) {
         switch row {
         case 0:

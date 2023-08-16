@@ -111,6 +111,9 @@
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
+		87B5A17E2A8CDBB800476E6E /* IndicatorActivite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */; };
+		87B5A1812A8CED0D00476E6E /* IndicatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5A17F2A8CED0D00476E6E /* IndicatorCollectionViewCell.swift */; };
+		87B5A1822A8CED0D00476E6E /* IndicatorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */; };
 		87BDF8B72A84E0EF001210F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87BDF8B62A84E0EF001210F0 /* Assets.xcassets */; };
 		87BDF8BB2A85174F001210F0 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BDF8B92A85174F001210F0 /* FooterView.swift */; };
 		87BDF8BC2A85174F001210F0 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87BDF8BA2A85174F001210F0 /* FooterView.xib */; };
@@ -122,6 +125,8 @@
 		87CC77FF2A5E0AAB008FA7F8 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77FB2A5E0AAB008FA7F8 /* BaseApi.swift */; };
 		87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E3A42D2A6591A200CE4C43 /* DataHandler.swift */; };
 		87E9FD392A8B6CE700B300DA /* SubSideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E9FD382A8B6CE700B300DA /* SubSideBarViewController.swift */; };
+		87ED64972A8D8A9500091C61 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ED64952A8D8A9500091C61 /* SideMenuTableViewCell.swift */; };
+		87ED64982A8D8A9500091C61 /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ED64962A8D8A9500091C61 /* SideMenuTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,6 +264,9 @@
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
+		87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorActivite.swift; sourceTree = "<group>"; };
+		87B5A17F2A8CED0D00476E6E /* IndicatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCollectionViewCell.swift; sourceTree = "<group>"; };
+		87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndicatorCollectionViewCell.xib; sourceTree = "<group>"; };
 		87BDF8B62A84E0EF001210F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		87BDF8B92A85174F001210F0 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		87BDF8BA2A85174F001210F0 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
@@ -273,6 +281,8 @@
 		87E9FD3A2A8C235E00B300DA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		87E9FD3B2A8C235E00B300DA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		87E9FD3C2A8C239200B300DA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		87ED64952A8D8A9500091C61 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		87ED64962A8D8A9500091C61 /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
 		8C91D63B941344F1B71064F8 /* Pods-4INSHIELD.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.debug development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.debug development.xcconfig"; sourceTree = "<group>"; };
 		F1B1F0B8047CCD9090450D7B /* Pods-4INSHIELD.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-4INSHIELD.release development.xcconfig"; path = "Target Support Files/Pods-4INSHIELD/Pods-4INSHIELD.release development.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -344,6 +354,8 @@
 				04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */,
 				04BCF2962A33A4E800202D6D /* humorCell.xib */,
 				049DF5B52A33A7D200CDD486 /* HumorCollectionViewCell.swift */,
+				87B5A17F2A8CED0D00476E6E /* IndicatorCollectionViewCell.swift */,
+				87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */,
 			);
 			path = "Child State";
 			sourceTree = "<group>";
@@ -389,6 +401,7 @@
 		043557FB29AE375400D4F012 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				87B5A17C2A8CDB8800476E6E /* TabBar */,
 				04BECF382A78314B005B1745 /* SideBar */,
 				87ACCCFD2A77A2C400D0BBD3 /* Phone */,
 				87CC77F22A5E09DA008FA7F8 /* Abstract */,
@@ -539,6 +552,8 @@
 				04A52E0C29C206A00097C145 /* SideBar.swift */,
 				04A52E1029C20A3F0097C145 /* SideMenuModel.swift */,
 				87E9FD382A8B6CE700B300DA /* SubSideBarViewController.swift */,
+				87ED64952A8D8A9500091C61 /* SideMenuTableViewCell.swift */,
+				87ED64962A8D8A9500091C61 /* SideMenuTableViewCell.xib */,
 			);
 			path = "Side Menu";
 			sourceTree = "<group>";
@@ -721,6 +736,14 @@
 			path = Phone;
 			sourceTree = "<group>";
 		};
+		87B5A17C2A8CDB8800476E6E /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		87BDF8B82A85174F001210F0 /* Footer */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +891,7 @@
 				872964022A77D4C3009649B3 /* Autorisation.storyboard in Resources */,
 				0481480129E997C700A03C61 /* UpdateChild.storyboard in Resources */,
 				04B91C1B2A30ED5700626AF2 /* ToxicPersonCell.xib in Resources */,
+				87B5A1822A8CED0D00476E6E /* IndicatorCollectionViewCell.xib in Resources */,
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				87BDF8B72A84E0EF001210F0 /* Assets.xcassets in Resources */,
 				872964062A77D4CF009649B3 /* Contact.storyboard in Resources */,
@@ -879,6 +903,7 @@
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
 				8721A63F2A72ADF3007FEA50 /* UsageCollectionViewCell.xib in Resources */,
 				87BDF8BC2A85174F001210F0 /* FooterView.xib in Resources */,
+				87ED64982A8D8A9500091C61 /* SideMenuTableViewCell.xib in Resources */,
 				04850C5B29ACC3EB001A27FF /* LaunchScreen.storyboard in Resources */,
 				8729640C2A77D4FC009649B3 /* LegalMention.storyboard in Resources */,
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
@@ -939,6 +964,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87B5A17E2A8CDBB800476E6E /* IndicatorActivite.swift in Sources */,
 				8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */,
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
@@ -974,6 +1000,7 @@
 				87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */,
 				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */,
+				87ED64972A8D8A9500091C61 /* SideMenuTableViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
 				04BFDD242A6944060063E04D /* ChildRegisterModel.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
@@ -1010,6 +1037,7 @@
 				049C154C29DD860F0028A314 /* ChildTableViewCell.swift in Sources */,
 				04844B5529E03D9F008AFBF6 /* User.swift in Sources */,
 				04340B2829C09C2F0055B394 /* Formation.swift in Sources */,
+				87B5A1812A8CED0D00476E6E /* IndicatorCollectionViewCell.swift in Sources */,
 				87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */,
 				040821B229D6E1B600D7A562 /* OnboardingViewController.swift in Sources */,
 				043C49F729E439FF00B5FF9E /* PinView.swift in Sources */,

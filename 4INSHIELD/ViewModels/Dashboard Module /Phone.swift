@@ -2,9 +2,16 @@
 //
 
 import UIKit
+import FSCalendar
 
 class Phone: UIViewController{
     
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
     
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
     
@@ -36,11 +43,16 @@ class Phone: UIViewController{
     let carteArray2 = ["DUBOIT passe beaucoup trop de temps sur son télephone", "DUBOIT ne dort pas bien", "", "Convenable"]
     
     var selectedChild: Childd?
+    var startDate: Date?
+    var endDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(selectedChild?.id)
         addConstant()
+        dateWeek()
+        setupdateTF()
+        calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
         //Registre Cell
         self.carteCollectionView.register(UINib(nibName: "UsageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsageCollectionViewCell")
         
@@ -97,7 +109,14 @@ class Phone: UIViewController{
             }
         }
     }
-    
+    func setupdateTF(){
+        //Set up date textfield
+        DateTF.layer.masksToBounds = false
+        DateTF.layer.masksToBounds = false
+        DateTF.layer.shadowColor = UIColor.gray.cgColor
+        DateTF.layer.shadowOpacity = 0.5
+        DateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
     
     func addConstant(){
 //        Set up first name
@@ -149,6 +168,100 @@ class Phone: UIViewController{
             childButton.setImage(image, for: .normal) // Set the image for the button
         }
     }
+    func dateWeek() {
+        // Récupérer la date actuelle (sysdate)
+        let currentDate = Date()
+
+        // Récupérer la date d'une semaine avant la date actuelle
+        let calendar = Calendar.current
+        if let oneWeekAgo = calendar.date(byAdding: .day, value: -7, to: currentDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            // Formater les dates sans heure
+            dateFormatter.timeStyle = .none
+            dateFormatter.dateStyle = .medium
+            
+            let currentDateFormatted = dateFormatter.string(from: currentDate)
+            let oneWeekAgoFormatted = dateFormatter.string(from: oneWeekAgo)
+            
+            let currentDateTimestamp = currentDate.timeIntervalSince1970
+            let oneWeekAgoTimestamp = oneWeekAgo.timeIntervalSince1970
+            
+                print("Date actuelle: \(currentDateFormatted)")
+                print("Timestamp actuel: \(currentDateTimestamp)")
+                print("Date d'une semaine avant: \(oneWeekAgoFormatted)")
+                print("Timestamp d'une semaine avant: \(oneWeekAgoTimestamp)")
+            if LanguageManager.shared.currentLanguage == "fr" {
+                self.DateTF.text = "Du \(currentDateFormatted) Au \(oneWeekAgoFormatted)"
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                self.DateTF.text = "From \(currentDateFormatted) to \(oneWeekAgoFormatted)"
+            }
+       
+        } else {
+            print("Erreur lors de la récupération de la date d'une semaine avant.")
+        }
+    }
+    
+    @objc func showDatePicker() {
+        let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+        let startDatePicker = UIDatePicker()
+        startDatePicker.datePickerMode = .date
+        startDatePicker.preferredDatePickerStyle = .compact
+        
+        let endDatePicker = UIDatePicker()
+        endDatePicker.datePickerMode = .date
+        endDatePicker.preferredDatePickerStyle = .compact
+        
+        alertController.view.addSubview(startDatePicker)
+        alertController.view.addSubview(endDatePicker)
+        
+        let spacingView = UIView() // Empty view for spacing
+        spacingView.translatesAutoresizingMaskIntoConstraints = false
+        alertController.view.addSubview(spacingView)
+        
+        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
+            
+            endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        // Add spacing constraints
+        NSLayoutConstraint.activate([
+            endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
+            endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
+            
+            spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
+            spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
+            spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
+            spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
+        ])
+        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            
+            let startDate = startDatePicker.date
+            let endDate = endDatePicker.date
+            print(startDate,endDate)
+            print("start and end dates: \(startDate),\(endDate)")
+            
+            let startDateString = dateFormatter.string(from: startDate)
+            let endDateString = dateFormatter.string(from: endDate)
+            
+            let startDateTimestamp = startDate.timeIntervalSince1970
+            let endDateTimestamp = endDate.timeIntervalSince1970
+            print("time stamps dates: \(startDateTimestamp),\(endDateTimestamp)")
+            
+            self.DateTF.text = "Du \(startDateString) Au  \(endDateString)"
+        }))
+        present(alertController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func calenderButton(_ sender: Any) {
     }
@@ -172,6 +285,10 @@ class Phone: UIViewController{
 }
 
 extension Phone : SideBarDelegate {
+    func changeLangage(langue: String) {
+    
+    }
+    
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
@@ -409,3 +526,4 @@ extension Phone: UICollectionViewDataSource{
     }
     
 }
+

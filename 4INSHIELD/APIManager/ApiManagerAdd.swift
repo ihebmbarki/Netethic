@@ -106,59 +106,34 @@ class ApiManagerAdd {
             }
     }
     
-//      func addSocialMediaProfile(socialData: Profil, completionHandler: @escaping (Result<String, APIError>) -> Void) {
-//          let headers: HTTPHeaders = [
-//              .contentType("application/json")
-//          ]
-//          let socialData: HTTPHeaders = [
-//              "child": 2,
-//              "social_media_name": 1,
-//              "pseudo": "rrommmmm2",
-//              "url": "kmmmmmmmmlp3"
-//          ]
-//
-//          AF.request(add_Child_Profile,method: .post, parameters: socialData, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-//              print(response.result)
-//              switch response.result {
-//              case .success(let data):
-//                  do {
-//                      
-//                      let profile = try JSONDecoder().decode(Profil.self, from: data!)
-//                      print(profile)
-//                      completionHandler(.success("Child social media registered successfully"))
-//                      print( "Child social media registered successfully")
-//                      
-//                  } catch {
-//                      print("Failed to register child's social media")
-//                      completionHandler(.failure(.custom(message: "Failed to register child's social media")))
-//                  }
-//                            //        }
-////                  guard let statusCode = (response.response?.statusCode) else {return}
-////                  if statusCode == 201 {
-////                      do {
-////                          let profile = try JSONDecoder().decode(Profil.self, from: response.data!)
-////                          completionHandler(.success("Child social media registered successfully"))
-////
-////                      } catch {
-////                          completionHandler(.failure(.custom(message: "Failed to register child's social media")))
-////                      }
-//          //        }
-//              case .failure(let err):
-//                  print("Error sending data to the API: \(err.localizedDescription)")
-//              }
-//          }
-//      }
-//    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    func getIndicatorActivityData(personID: Int, fromDateTimestamp: TimeInterval, toDateTimestamp: TimeInterval, completion: @escaping ([IndicatorActiviteElement]?) -> Void) {
+        let indicatorActivityURL = "\(BuildConfiguration.shared.MLENGINE_BASE_URL)/api/score/per-type/"
+        
+        let parameters: [String: Any] = [
+            "person_id": personID,
+            "from_date_timestamp": fromDateTimestamp,
+            "to_date_timestamp": toDateTimestamp
+        ]
+        
+        AF.request(indicatorActivityURL, method: .get, parameters: parameters).response { response in
+            print(response)
+            switch response.result {
+            case .success(let data):
+                do {
+                    let indicatorActivity = try JSONDecoder().decode([IndicatorActiviteElement].self, from: data!)
+                    completion(indicatorActivity)
+                } catch let error as NSError {
+                    print("Error decoding JSON: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("API Error getting indicator activity data: \(error)")
+                completion(nil)
+            }
+        }
+    }
+
     
     
     

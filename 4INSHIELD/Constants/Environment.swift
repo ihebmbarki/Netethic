@@ -37,7 +37,7 @@ class BuildConfiguration {
     var MLENGINE_BASE_URL: String {
         switch environment {
         case .debugStaging, .releaseStaging:
-            return "https://mlengine.staging.4indata.fr"
+            return "https://mlengine.staging.4indata.fr/"
         case .debugDevelopment, .releaseDevelopment:
             return "https://mlengine.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:

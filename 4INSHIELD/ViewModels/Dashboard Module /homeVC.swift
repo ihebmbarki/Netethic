@@ -21,7 +21,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         formatter.dateFormat = "dd-MM-yyyy"
         return formatter
     }()
-    
+    weak var delegateSide: SideBarDelegate?
     var selectedChild: Childd?
     var platforms: [PlatformDetail] = []
     var toxicPseudos: [String] = []
@@ -29,6 +29,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     var state: State?
     var states: [StateData] = []
     var score: [ScoreResponse] = []
+    var indicator: [IndicatorActiviteElement] = []
     var sharedImage: UIImage?
     var ChildInfoViewController: ChildInfoViewController?
     var startDate: Date?
@@ -131,12 +132,20 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var personneImage4Label: UILabel!
     @IBOutlet weak var personneImage1Label: UILabel!
     @IBOutlet weak var maxScoreLabel: UILabel!
+    
+    @IBOutlet weak var erroIndicatorLabel: UILabel!
+    
+    @IBOutlet weak var indicateurActivityindicator: UIActivityIndicatorView!
+    @IBOutlet weak var rapportActivityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var indicateurCollectionView: UICollectionView!
     let pieChartView = PieChartView()
     let subSideBar = SubSideBarViewController()
-    
+    var background = String()
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        setupDateTF()
         print(selectedChild?.id)
         loadingIndicator.startAnimating()
         loadingIndicator.isHidden = false
@@ -148,7 +157,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         missingDataLbl.isHidden = true
         messageLineChart.isHidden = true
         errorLbl.isHidden = true
-   
+        
         imageView1.isHidden = true
         personneImage1Label.isHidden = true
         imageView2.isHidden = true
@@ -157,12 +166,13 @@ class homeVC: UIViewController, ChartViewDelegate {
         personneImage3Label.isHidden = true
         personneImage4Label.isHidden = true
         imageView4.isHidden = true
-
+        
+        rapportActivityIndicator.startAnimating()
         dateWeek()
         //Set persons collection invisibility
         personsCollectionView.isHidden = true
         
-   
+
 
         //Humor pie chart
         APIManager.shareInstance.getMentalState(childID:selectedChild?.id ?? 2, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
@@ -292,6 +302,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             dangerCollectionView.tag = 2
             personsCollectionView.tag = 3
             humorCollectionView.tag = 4
+            indicateurCollectionView.tag = 5
             
             
             // Set initial visibility to hidden
@@ -318,19 +329,17 @@ class homeVC: UIViewController, ChartViewDelegate {
             let nib4 = UINib(nibName: "humorCell", bundle: nil)
             humorCollectionView.register(nib4, forCellWithReuseIdentifier: "humorCell")
             
+            indicateurCollectionView.delegate = self
+            indicateurCollectionView.dataSource = self
+            let nib5 = UINib(nibName: "IndicatorCollectionViewCell", bundle: nil)
+            indicateurCollectionView.register(nib5, forCellWithReuseIdentifier: "IndicatorCollectionViewCell")
             //Set up TopView
             let gradientLayer = CAGradientLayer()
             gradientLayer.frame = topView.bounds
             gradientLayer.colors = [UIColor(red: 0.25, green: 0.56, blue: 0.80, alpha: 1.00).cgColor, UIColor(red: 0.24, green: 0.76, blue: 0.95, alpha: 1.00).cgColor]
             topView.layer.insertSublayer(gradientLayer, at: 0)
             
-            //Set up date textfield
-            dateTF.layer.masksToBounds = false
-            dateTF.layer.masksToBounds = false
-            //        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
-            dateTF.layer.shadowColor = UIColor.gray.cgColor
-            dateTF.layer.shadowOpacity = 0.5
-            dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
+    
             
             //Set up persons button design
             personsBtn.applyGradient()
@@ -464,7 +473,31 @@ class homeVC: UIViewController, ChartViewDelegate {
         }
         
     }
-    
+    func getIndicatorActivite(startDateTimestamp: Double, endDateTimestamp: Double){
+        ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: 1660645240, toDateTimestamp: 1692181240) { indicatorActivity in
+            if let indicatorActivity = indicatorActivity {
+                // Traitez les données indicatorActivity ici
+                print(indicatorActivity)
+                    self.indicator = indicatorActivity
+                    DispatchQueue.main.async {
+                        self.indicateurCollectionView.reloadData()
+                    }
+                }
+                else{
+//                    loadingPlatformIndicator.stopAnimating()
+//                    loadingPlatformIndicator.isHidden = true
+                  
+                    self.erroIndicatorLabel.isHidden = false
+                    print("Aucune donnée disponible ou erreur est survenue")
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.erroIndicatorLabel.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.erroIndicatorLabel.text = " There Is No Data to Display at this Moment."
+                    }
+                }
+            }
+    }
     @objc func childButtonTapped() {
         guard let selectedChild = selectedChild else { return }
         
@@ -704,7 +737,15 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
         }
     }
-    
+    func setupDateTF(){
+        //Set up date textfield
+        dateTF.layer.masksToBounds = false
+        dateTF.layer.masksToBounds = false
+        //        dateTF.layer.cornerRadius = dateTF.bounds.height / 2
+        dateTF.layer.shadowColor = UIColor.gray.cgColor
+        dateTF.layer.shadowOpacity = 0.5
+        dateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
     func MoyenneButton(_ sender: Any) {
         addChild(ChildInfoViewController!)
     }
@@ -846,21 +887,24 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBAction func changeButton(_ sender: Any) {
         let languages = ["English", "Français"]
         let languageAlert = UIAlertController(title: "Choisir la langue", message: nil, preferredStyle: .actionSheet)
-        
+      
         for language in languages {
             let action = UIAlertAction(title: language, style: .default) { action in
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
+                    self.delegateSide?.changeLangage(langue: "en")
                     self.subSideBar.langue = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
-                    self.subSideBar.langue = "en"
+                    self.delegateSide?.changeLangage(langue: "fr")
+                    self.subSideBar.langue = "fr"
                 }
-                
+                        NotificationCenter.default.post(name: NSNotification.Name("NotificationFromB"), object: nil, userInfo: ["message": LanguageManager.shared.currentLanguage])
                 self.updateLanguageButtonImage()
                 self.updateLocalizedStrings()
+                
                 self.view.setNeedsLayout() // Refresh the layout of the view
             }
             languageAlert.addAction(action)
@@ -876,6 +920,11 @@ class homeVC: UIViewController, ChartViewDelegate {
 }
 
 extension homeVC : SideBarDelegate {
+    func changeLangage(langue: String) {
+        print(langue)
+        delegateSide?.changeLangage(langue: langue)
+    }
+    
     func selectedCell(_ row: Int) {
         switch row {
         case 0: break
@@ -1181,7 +1230,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
-          
+            
             let platform = platforms[indexPath.item]
             let logoURL = platform.logo.absoluteString
             
@@ -1194,8 +1243,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 if let url = URL(string: modifiedLogoURL) {
                     cell.cardLogo.af.setImage(withURL: url)
                 }
-//            } else {
-//                cell.cardLogo.af.setImage(withURL: platform.logo)
+                //            } else {
+                //                cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
             APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 2, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
@@ -1233,12 +1282,12 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 
                 else {
                     // Handle error case or set a default value for the cardTitle
-//                    cell.cardTitle.text = "No Data Platform"
-//                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                    //                    cell.cardTitle.text = "No Data Platform"
+                    //                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
                     self.dangerCollectionView.isHidden = true
                     self.loadingPlatformIndicator.stopAnimating()
                     self.loadingPlatformIndicator.isHidden = true
-                  
+                    
                     self.errorLbl.isHidden = false
                     print("erreur platform")
                     if LanguageManager.shared.currentLanguage == "fr" {
@@ -1247,7 +1296,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     if LanguageManager.shared.currentLanguage == "en" {
                         self.errorLbl.text = " There Is No Data to Display at this Moment."
                     }
-
+                    
                 }
             }
             return cell
@@ -1261,7 +1310,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             loadingPlatformIndicator.isHidden = true
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
-
+            
             
             let carteCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as! ToxicPersonCollectionViewCell
             carteCell.setData(text: self.toxicPseudos[indexPath.row], image: self.toxicPseudos[indexPath.row])
@@ -1284,69 +1333,159 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return cell
         } else
         if collectionView.tag == 4 {
-            
+            self.rapportActivityIndicator.startAnimating()
             // Dequeue the cell
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "humorCell", for: indexPath) as? HumorCollectionViewCell else {
                 fatalError("Unable to dequeue HumorCollectionViewCell")
             }
-        
-                    // Update the UI on the main thread
-                    DispatchQueue.main.async {
-                        if LanguageManager.shared.currentLanguage == "fr" {
-                            if indexPath.row < self.states.count {
-                                print("oooooo")
-                                let state = self.states[indexPath.row]
-                                let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
-                                cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
-                                if state.mental_state == "happy" {
-                                    cell.cardLogo.image = UIImage(named: "smileyface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-                                } else if state.mental_state == "stress" {
-                                    cell.cardLogo.image = UIImage(named: "angryface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
-                                } else {
-                                    cell.cardLogo.image = UIImage(named: "pokerface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
-                                }
-                            }
-                        }
-                        if LanguageManager.shared.currentLanguage == "en" {
-                            if indexPath.row < self.states.count {
-                                print("oooooo")
-                                let state = self.states[indexPath.row]
-                                
-                                let dateFormatter = DateFormatter()
-                                dateFormatter.locale = Locale(identifier: "en") // Set locale to English
-                                dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
-                                
-                                cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
-                                
-                                if state.mental_state == "happy" {
-                                    cell.cardLogo.image = UIImage(named: "smileyface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
-                                } else if state.mental_state == "stress" {
-                                    cell.cardLogo.image = UIImage(named: "angryface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
-                                } else {
-                                    cell.cardLogo.image = UIImage(named: "pokerface")
-                                    cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
-                                }
-                            }
-                        }
+            
+            // Update the UI on the main thread
+            DispatchQueue.main.async {
+                
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    self.rapportActivityIndicator.stopAnimating()
+                    self.rapportActivityIndicator.isHidden = true
+                    if indexPath.row < self.states.count {
+                        self.messageRappotLabel.text = ""
 
-                        else {
-                            // Handle the case when index path is out of bounds
+                        print("oooooo")
+                        let state = self.states[indexPath.row]
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                        if state.mental_state == "happy" {
+                            cell.cardLogo.image = UIImage(named: "smileyface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                        } else if state.mental_state == "stress" {
+                            cell.cardLogo.image = UIImage(named: "angryface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                        } else {
                             cell.cardLogo.image = UIImage(named: "pokerface")
-                            print("no data rapport")
                             cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
                         }
+                    }
                 }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    self.rapportActivityIndicator.stopAnimating()
+                    self.rapportActivityIndicator.isHidden = true
+                    if indexPath.row < self.states.count {
+                        self.messageRappotLabel.isHidden = true
+
+                        print("oooooo")
+                        let state = self.states[indexPath.row]
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.locale = Locale(identifier: "en") // Set locale to English
+                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                        
+                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
+                        
+                        if state.mental_state == "happy" {
+                            cell.cardLogo.image = UIImage(named: "smileyface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hgreen")!)
+                        } else if state.mental_state == "stress" {
+                            cell.cardLogo.image = UIImage(named: "angryface")
+                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Hred")!)
+                        } else {
+//                            cell.cardLogo.image = UIImage(named: "pokerface")
+//                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "Horange")!)
+                            self.rapportActivityIndicator.stopAnimating()
+                            self.rapportActivityIndicator.isHidden = true
+//                            self.messageRappotLabel.isHidden = false
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                self.messageRappotLabel.text = " Il n'y a pas de données à afficher pour le moment. "
+                            }
+                            if LanguageManager.shared.currentLanguage == "en" {
+                                self.messageRappotLabel.text = " There Is No Data to Display at this Moment."
+                            }
+                        }
+                    }
+                }
+                
+                else {
+                    // Handle the case when index path is out of bounds
+                    self.rapportActivityIndicator.stopAnimating()
+                    self.rapportActivityIndicator.isHidden = true
+                    self.messageRappotLabel.isHidden = false
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.messageRappotLabel.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.messageRappotLabel.text = " There Is No Data to Display at this Moment."
+                    }
+                }
+            }
             return cell
         }
+        else
+        if collectionView.tag == 5 {
+            let cell = indicateurCollectionView.dequeueReusableCell(withReuseIdentifier: "IndicatorCollectionViewCell", for: indexPath) as! IndicatorCollectionViewCell
+                
+            cell.layer.cornerRadius = 10 // Ajustez la valeur selon vos besoins
+                  
+                  // Ajouter une ombre
+                  cell.layer.shadowColor = UIColor.black.cgColor
+                  cell.layer.shadowOpacity = 0.3
+                  cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+                  cell.layer.shadowRadius = 3
+            
+            ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: 1660645240, toDateTimestamp: 1692181240) { indicatorActivity in
+                if let indicatorActivity = indicatorActivity {
+                    // Traitez les données indicatorActivity ici
+                    print(indicatorActivity)
+                    if indexPath.item < indicatorActivity.count {
+                        let indicatorData = indicatorActivity[indexPath.item]
+                        self.erroIndicatorLabel.isHidden = true
+                        // Utilisez les propriétés de indicatorData pour configurer la cellule
+                        let icon = indicatorData.icon
+                        let toxicityRate = String(format: "%.2f", indicatorData.toxicityRate)
+                        let name = indicatorData.nameFr
+                        if indicatorData.toxicityRate > 0.4 {
+                            self.background = "red"
+                            } else if indicatorData.toxicityRate > 0.2 {
+                                self.background = "orange"
+                            } else {
+                                self.background = "green"
+                            }
+                            
+                        cell.setData(background: self.background, icon: icon, toxicity: toxicityRate, name: name)
+                    }else{
+                        self.indicateurCollectionView.isHidden = true
+                        self.erroIndicatorLabel.isHidden = false
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            self.erroIndicatorLabel.text = " Il n'y a pas de données à afficher pour le moment. "
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                            self.erroIndicatorLabel.text = " There Is No Data to Display at this Moment."
+                        }
+                    }
+                } else {
+                    // Gérez le cas où il n'y a pas de données ou une erreur est survenue
+                    self.indicateurCollectionView.isHidden = true
+                    self.erroIndicatorLabel.isHidden = false
+                    print("Aucune donnée disponible ou erreur est survenue")
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        self.erroIndicatorLabel.text = " Il n'y a pas de données à afficher pour le moment. "
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        self.erroIndicatorLabel.text = " There Is No Data to Display at this Moment."
+                    }
+                 
+                }
+            }
+    
+            
+            return cell
+        }
+
         
         return UICollectionViewCell()
     }
+
+
+
+
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
@@ -1360,6 +1499,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             print(states.count)
             return states.count
           // return 10
+        } else if collectionView.tag == 5{
+            return 4
         }
         
         return 0
@@ -1369,7 +1510,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     func fetchAndProcessMentalState(cell: CustomCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data`
         
-        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: 1627650500, endDateTimestamp: 1690722500) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states?.data {
@@ -1432,6 +1573,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         
         getScorePlateform(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
         getMentalState(startDateT: Int(startDateTimestamp), endDateT: Int(endDateTimestamp))
+        getIndicatorActivite(startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp)
         viewDidLoad()
 //        // Call the getMaxScoresPerDate function with the parameters
 //        APIManager.shareInstance.getMaxScorePerDate(childID: 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData in
@@ -1488,10 +1630,13 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             }
             getScorePlateform(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
             getMentalState(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
+            getIndicatorActivite(startDateTimestamp: currentDateTimestamp, endDateTimestamp: oneWeekAgoTimestamp)
+      
         } else {
             print("Erreur lors de la récupération de la date d'une semaine avant.")
         }
     }
+
     
     @objc func showDatePicker(cell: CustomCollectionViewCell) {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)

@@ -99,6 +99,10 @@ class Formation: UIViewController {
 }
 
 extension Formation : SideBarDelegate {
+    func changeLangage(langue: String) {
+        
+    }
+    
     func selectedCell(_ row: Int) {
         switch row {
         case 0:

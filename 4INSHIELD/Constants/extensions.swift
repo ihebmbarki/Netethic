@@ -9,7 +9,14 @@ import Foundation
 import UIKit
 import SDWebImage
 
+//partage date
 
+class SharedDateModel {
+    static let shared = SharedDateModel()
+    
+    var startDate: Date?
+    var endDate: Date?
+}
 
 //Colors
 struct Colrs {
@@ -173,5 +180,12 @@ extension UIView  {
         self.layer.cornerRadius = radius
         self.layer.shadowOpacity = Opacidade
         self.layer.masksToBounds = maskToBounds
+    }
+}
+extension Date {
+    func calculateDaysBetweenDates(endDate: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: self, to: endDate)
+        return components.day ?? 0
     }
 }

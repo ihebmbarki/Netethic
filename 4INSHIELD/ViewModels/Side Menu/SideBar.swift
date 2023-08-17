@@ -26,8 +26,8 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
  
     let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main , value: "", comment: "Bonjour greeting")
 //    var menufr = ["Paramétres", "Contactez-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
-    var menufr = ["1", "2", "3 ", "4", "5", "6"]
-    var menuang = ["7", "8", "9 ", "10", "11", "12"]
+    var menufr = ["Paramétres", "Contactez-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
+    var menuang = ["Settings", "Contact Us", "Legal Notice", "About", "Help & support ", "Log out"]
     var menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
     var langue = String()
     override func viewDidLoad() {
@@ -52,12 +52,12 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
                 print("Received notification: \(message)")
                 print(message)
                 langue = message
-                menufr.removeAll()
-                menuang.removeAll()
-                menuImages.removeAll()
+//                menufr.removeAll()
+//                menuang.removeAll()
+//                menuImages.removeAll()
                 sideMenuTableView.reloadData()
-                menufr = ["1", "2", "3 ", "4", "5", "6"]
-                menuang = ["7", "8", "9 ", "10", "11", "12"]
+                menufr = ["Paramétres", "Contactez-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
+                menuang = ["Settings", "Contact Us", "Legal Notice", "About", "Help & support ", "Log out"]
                 menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
                 sideMenuTableView.reloadData()
 
@@ -94,7 +94,7 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
         }else if langue == "en"{
             return menuang.count
         }
-        return 0
+        return 6
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,7 +104,7 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
         
 //        let imageName = menuImages[indexPath.row]
 //        let image = UIImage(named: imageName)
-
+        cell.titleLabel.text = menufr[indexPath.row]
         cell.iconImage.image = UIImage(named: menuImages[indexPath.row])
 
         if langue == "fr"{
@@ -114,6 +114,9 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
         if langue == "en"{
             cell.titleLabel.text = menuang[indexPath.row]
         }
+            
+
+        
 
 
 

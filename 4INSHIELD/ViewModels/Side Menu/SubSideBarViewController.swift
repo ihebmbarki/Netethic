@@ -25,7 +25,8 @@ class SubSideBarViewController: UIViewController, UITableViewDelegate, UITableVi
             self.subSideMenuTableView.selectRow(at: defaultRow, animated: false, scrollPosition: .none)
         }
         
-        subSideMenuTableView.register(UITableViewCell.self, forCellReuseIdentifier: "subCell")
+        subSideMenuTableView.register(UINib.init(nibName: "SubSideTableViewCell", bundle: nil), forCellReuseIdentifier: "SubSideTableViewCell")
+        subSideMenuTableView.separatorStyle = .none
     }
     
     override func viewWillLayoutSubviews() {
@@ -63,28 +64,28 @@ class SubSideBarViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "subCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubSideTableViewCell", for: indexPath) as! SubSideTableViewCell
         
         
         // Set the text color, font, and style for the text label
 
-            cell.textLabel?.text = subMenu1[indexPath.row]
-            cell.textLabel?.textColor = UIColor.black // Set text color to black
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14) // Set bold font style for text
-        
-        if langue == "en" {
-            cell.textLabel?.text = subMenu2[indexPath.row]
-            cell.textLabel?.textColor = UIColor.black // Set text color to black
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14) // Set bold font style for text
+        cell.titleLabel.text = subMenu1[indexPath.row]
+
+        if langue == "fr"{
+            cell.titleLabel.text = subMenu1[indexPath.row]
+   
+        }else
+        if langue == "en"{
+            cell.titleLabel.text = subMenu2[indexPath.row]
         }
         return cell
     }
-    
+
     // Adjust cell appearance when displaying
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.textColor = UIColor.black
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.textLabel?.textColor = UIColor.black
+//        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+//    }
     
     // MARK: - UITableViewDelegate
     

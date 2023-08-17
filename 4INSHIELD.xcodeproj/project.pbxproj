@@ -111,6 +111,9 @@
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
+		87ACEBB42A8E1E0D0000D256 /* SubSideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACEBB22A8E1E0D0000D256 /* SubSideTableViewCell.swift */; };
+		87ACEBB52A8E1E0D0000D256 /* SubSideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ACEBB32A8E1E0D0000D256 /* SubSideTableViewCell.xib */; };
+		87ACEBBA2A8E43A20000D256 /* UsagePhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACEBB92A8E43A20000D256 /* UsagePhone.swift */; };
 		87B5A17E2A8CDBB800476E6E /* IndicatorActivite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */; };
 		87B5A1812A8CED0D00476E6E /* IndicatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5A17F2A8CED0D00476E6E /* IndicatorCollectionViewCell.swift */; };
 		87B5A1822A8CED0D00476E6E /* IndicatorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */; };
@@ -264,6 +267,9 @@
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
+		87ACEBB22A8E1E0D0000D256 /* SubSideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSideTableViewCell.swift; sourceTree = "<group>"; };
+		87ACEBB32A8E1E0D0000D256 /* SubSideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubSideTableViewCell.xib; sourceTree = "<group>"; };
+		87ACEBB92A8E43A20000D256 /* UsagePhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsagePhone.swift; sourceTree = "<group>"; };
 		87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorActivite.swift; sourceTree = "<group>"; };
 		87B5A17F2A8CED0D00476E6E /* IndicatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndicatorCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -697,6 +703,8 @@
 			children = (
 				872963FA2A77D4AA009649B3 /* AproposVC.swift */,
 				872963FB2A77D4AA009649B3 /* Apropos.storyboard */,
+				87ACEBB22A8E1E0D0000D256 /* SubSideTableViewCell.swift */,
+				87ACEBB32A8E1E0D0000D256 /* SubSideTableViewCell.xib */,
 			);
 			path = Apropos;
 			sourceTree = "<group>";
@@ -736,9 +744,18 @@
 			path = Phone;
 			sourceTree = "<group>";
 		};
+		87ACEBB62A8E3CCF0000D256 /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				87ACEBB92A8E43A20000D256 /* UsagePhone.swift */,
+			);
+			path = Phone;
+			sourceTree = "<group>";
+		};
 		87B5A17C2A8CDB8800476E6E /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				87ACEBB62A8E3CCF0000D256 /* Phone */,
 				87B5A17D2A8CDBB800476E6E /* IndicatorActivite.swift */,
 			);
 			path = TabBar;
@@ -898,6 +915,7 @@
 				872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
+				87ACEBB52A8E1E0D0000D256 /* SubSideTableViewCell.xib in Resources */,
 				049C44AD29B2024100AAA582 /* Localizable.strings in Resources */,
 				046B6D722A82B1C0004AF800 /* inshield.mp4 in Resources */,
 				049C154229DD83B70028A314 /* Children.storyboard in Resources */,
@@ -974,6 +992,7 @@
 				04A7510D2A0BCD510099619C /* ChildInfoViewController.swift in Sources */,
 				040821B429D6E1F000D7A562 /* OnboardingCollectionViewCell.swift in Sources */,
 				872D05FA2A60923E0069E58A /* Userparent.swift in Sources */,
+				87ACEBBA2A8E43A20000D256 /* UsagePhone.swift in Sources */,
 				8721A63E2A72ADF3007FEA50 /* UsageCollectionViewCell.swift in Sources */,
 				0479739C29CC92D100FD28DF /* Congrats.swift in Sources */,
 				040DDCCD2A01282700ED3223 /* UserProfile.swift in Sources */,
@@ -987,6 +1006,7 @@
 				87CC77FE2A5E0AAB008FA7F8 /* TargetType.swift in Sources */,
 				043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */,
 				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
+				87ACEBB42A8E1E0D0000D256 /* SubSideTableViewCell.swift in Sources */,
 				87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */,
 				042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */,
 				87E9FD392A8B6CE700B300DA /* SubSideBarViewController.swift in Sources */,

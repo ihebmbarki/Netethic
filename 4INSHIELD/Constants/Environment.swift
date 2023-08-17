@@ -48,7 +48,7 @@ class BuildConfiguration {
     var DEVICESERVER_BASE_URL: String {
         switch environment {
         case .debugStaging, .releaseStaging:
-            return "https://deviceserver.staging.4indata.fr/"
+            return "http://deviceserver.staging.4indata.fr/"
         case .debugDevelopment, .releaseDevelopment:
             return "https://deviceserver.dev.netethic.fr/"
         case .debugProduction, .releaseProduction:

@@ -134,7 +134,44 @@ class ApiManagerAdd {
         }
     }
 
-    
+    func getPhoneUsageForChart(childID: Int, statisticsData: Bool, completion: @escaping (Phoneuse?) -> Void) {
+        let usageURL = "\(BuildConfiguration.shared.DEVICESERVER_BASE_URL)/api/usage_duration_daily/"
+        
+        var urlComponents = URLComponents(string: usageURL)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "child_id", value: "\(childID)"),
+            URLQueryItem(name: "statistics_data", value: "\(statisticsData)")
+        ]
+        
+        guard let finalURL = urlComponents?.url else {
+            completion(nil)
+            return
+        }
+        
+        AF.request(finalURL, method: .get).response { response in
+            switch response.result {
+            case .success(let data):
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let phoneUsage = try decoder.decode(Phoneuse.self, from: data)
+                        completion(phoneUsage)
+                    } catch {
+                        print("Error decoding data:", error)
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+
+
+
     
     
     

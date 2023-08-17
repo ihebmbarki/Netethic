@@ -142,6 +142,9 @@ class homeVC: UIViewController, ChartViewDelegate {
     let pieChartView = PieChartView()
     let subSideBar = SubSideBarViewController()
     var background = String()
+    
+    var sharedDateModel = SharedDateModel.shared
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -172,9 +175,12 @@ class homeVC: UIViewController, ChartViewDelegate {
         //Set persons collection invisibility
         personsCollectionView.isHidden = true
         
-
+        //partage date
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDateTF), name: Notification.Name("DatesSelected"), object: nil)
 
         //Humor pie chart
+        let childID = selectedChild?.id
+        UserDefaults.standard.set("childID", forKey: "childID")
         APIManager.shareInstance.getMentalState(childID:selectedChild?.id ?? 2, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
             guard let self = self else { return }
 
@@ -348,7 +354,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             
             // Set up the button's action
             calendarBtn.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-            
+
+
             // Instantiate child view controllers from storyboard
             ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
             
@@ -737,6 +744,10 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
         }
     }
+    deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+    
     func setupDateTF(){
         //Set up date textfield
         dateTF.layer.masksToBounds = false
@@ -1628,6 +1639,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             if LanguageManager.shared.currentLanguage == "en" {
                 self.dateTF.text = "From \(currentDateFormatted) to \(oneWeekAgoFormatted)"
             }
+            self.sharedDateModel.startDate = currentDate
+            self.sharedDateModel.endDate = oneWeekAgo
             getScorePlateform(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
             getMentalState(startDateT: Int(currentDateTimestamp), endDateT: Int(oneWeekAgoTimestamp))
             getIndicatorActivite(startDateTimestamp: currentDateTimestamp, endDateTimestamp: oneWeekAgoTimestamp)
@@ -1636,10 +1649,22 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             print("Erreur lors de la récupération de la date d'une semaine avant.")
         }
     }
+    @objc func updateDateTF() {
+            if let startDate = sharedDateModel.startDate, let endDate = sharedDateModel.endDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                dateFormatter.dateStyle = .medium
+                
+                let startDateString = dateFormatter.string(from: startDate)
+                let endDateString = dateFormatter.string(from: endDate)
+                
+                dateTF.text = "Du \(startDateString) Au \(endDateString)"
+            }
+        }
 
-    
-    @objc func showDatePicker(cell: CustomCollectionViewCell) {
+    @objc func showDatePicker() {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+        
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
@@ -1676,34 +1701,28 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
         alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            
             let startDate = startDatePicker.date
             let endDate = endDatePicker.date
-            print(startDate,endDate)
-            print("start and end dates: \(startDate),\(endDate)")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
             
             let startDateString = dateFormatter.string(from: startDate)
             let endDateString = dateFormatter.string(from: endDate)
             
-            let startDateTimestamp = startDate.timeIntervalSince1970
-            let endDateTimestamp = endDate.timeIntervalSince1970
-            print("time stamps dates: \(startDateTimestamp),\(endDateTimestamp)")
+            self.dateTF.text = "Du \(startDateString) Au \(endDateString)" // Update the text field
             
-            self.dateTF.text = "Du \(startDateString) Au  \(endDateString)"
+            // Update the sharedDateModel with the selected start and end dates
+            self.sharedDateModel.startDate = startDate
+            self.sharedDateModel.endDate = endDate
             
-            self.scoreLbl.isHidden = !self.scoreLbl.isHidden // Toggle the visibility
-            
-            // Call the function to fetch and process the max scores data
-            self.fetchAndProcessMaxScores(startDate: startDate, endDate: endDate, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { maxScoresData, dates in
-                print("Max Scores Data:", maxScoresData)
-                print("Dates:", dates)
-            }
+            // Post a notification to indicate that dates have been selected
+            NotificationCenter.default.post(name: Notification.Name("DatesSelected"), object: nil)
         }))
-        present(alertController, animated: true, completion: nil)
         
+        present(alertController, animated: true, completion: nil)
     }
+
     
     func getBackgroundImageST(forMentalState mentalState: String?) -> UIImage? {
         if let state = mentalState {

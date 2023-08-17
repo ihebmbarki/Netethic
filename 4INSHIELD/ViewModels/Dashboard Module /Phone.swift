@@ -13,6 +13,7 @@ class Phone: UIViewController{
         return formatter
     }()
     
+    @IBOutlet weak var childInfoContainerView: UIView!
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
     
     @IBOutlet weak var carteCollectionView: UICollectionView!
@@ -37,7 +38,7 @@ class Phone: UIViewController{
     
     private var draggingIsEnabled: Bool = false
     private var panBaseLocation: CGFloat = 0.0
-    
+    var ChildInfoViewController: ChildInfoViewController?
     let carteArray1 = ["7", "7", "4", "2"]
     let imageArray = ["phone-time-card-orange", "phone-time-card-rouge", "phone-time-card-vert", "sleep-phone-time-rouge"]
     let carteArray2 = ["DUBOIT passe beaucoup trop de temps sur son télephone", "DUBOIT ne dort pas bien", "", "Convenable"]
@@ -45,14 +46,21 @@ class Phone: UIViewController{
     var selectedChild: Childd?
     var startDate: Date?
     var endDate: Date?
-    
+    var typeCarte = String()
+    var nbJour = Int()
+    var sharedDateModel = SharedDateModel.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print(selectedChild?.id)
         addConstant()
         dateWeek()
         setupdateTF()
+        //partage date
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDateTF), name: Notification.Name("DatesSelected"), object: nil)
+        
         calenderButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
         //Registre Cell
         self.carteCollectionView.register(UINib(nibName: "UsageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsageCollectionViewCell")
         
@@ -70,6 +78,9 @@ class Phone: UIViewController{
         view.addGestureRecognizer(tapGestureRecognizer)
         if self.revealSideMenuOnTop {
             view.insertSubview(self.sideMenuShadowView, at: 1)
+            let childID = UserDefaults.standard.string(forKey: "childID")!
+
+            usagePhone()
         }
         
         // Side Menu
@@ -97,8 +108,41 @@ class Phone: UIViewController{
         ])
         // Default Main View Controller
         //        showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
+        ChildInfoViewController = storyboard.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
+        
+              //Set up child profile pic
+        loadChildInfo()
+        let childID = UserDefaults.standard.string(forKey: "childID")!
+
+        guard let fullPhotoUrl = UserDefaults.standard.string(forKey: "photoUrl") else { return }
+
+            if let url = URL(string: fullPhotoUrl) {
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            let imageView = UIImageView(image: UIImage(data: data))
+                            imageView.contentMode = .scaleAspectFill
+                            imageView.translatesAutoresizingMaskIntoConstraints = false
+                            imageView.layer.cornerRadius = 20 // half of 36
+                            imageView.clipsToBounds = true
+                            self.childButton.addSubview(imageView)
+                            NSLayoutConstraint.activate([
+                                imageView.widthAnchor.constraint(equalToConstant: 36),
+                                imageView.heightAnchor.constraint(equalToConstant: 36),
+                                imageView.centerXAnchor.constraint(equalTo: self.childButton.centerXAnchor),
+                                imageView.centerYAnchor.constraint(equalTo: self.childButton.centerYAnchor)
+                            ])
+                        }
+                    }
+                }.resume()
+            }
+        // Add target action to child button
+        childButton.addTarget(self, action: #selector(childButtonTapped), for: .touchUpInside)
         
     }
+    deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
     
     // Keep the state of the side menu (expanded or collapse) in rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -106,6 +150,20 @@ class Phone: UIViewController{
         coordinator.animate { _ in
             if self.revealSideMenuOnTop {
                 self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
+            }
+        }
+    }
+    func usagePhone(){
+        ApiManagerAdd.shareInstance1.getPhoneUsageForChart(childID: 7, statisticsData: false) { Phoneuse in
+            if let Phoneuse = Phoneuse {
+                // Utilisez les données reçues dans la variable phoneUsage
+                print("Usage Phone Per Day:", Phoneuse.usage_phone_per_day)
+                print("Average:", Phoneuse.average)
+                print("label", Phoneuse.limitExcededStatus.label)
+                self.typeCarte = Phoneuse.limitExcededStatus.label
+                // ... Faites ce que vous voulez avec les données
+            } else {
+                print("Unable to fetch phone usage data.")
             }
         }
     }
@@ -118,6 +176,20 @@ class Phone: UIViewController{
         DateTF.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     
+    @objc func updateDateTF() {
+            if let startDate = sharedDateModel.startDate, let endDate = sharedDateModel.endDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                dateFormatter.dateStyle = .medium
+                
+                let startDateString = dateFormatter.string(from: startDate)
+                let endDateString = dateFormatter.string(from: endDate)
+                
+                DateTF.text = "Du \(startDateString) Au \(endDateString)"
+      
+                
+            }
+        }
     func addConstant(){
 //        Set up first name
         guard let firstName = UserDefaults.standard.string(forKey: "firstName") else { return }
@@ -206,6 +278,7 @@ class Phone: UIViewController{
     
     @objc func showDatePicker() {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
+        
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
@@ -242,25 +315,53 @@ class Phone: UIViewController{
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
         alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            
             let startDate = startDatePicker.date
             let endDate = endDatePicker.date
-            print(startDate,endDate)
-            print("start and end dates: \(startDate),\(endDate)")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
             
             let startDateString = dateFormatter.string(from: startDate)
             let endDateString = dateFormatter.string(from: endDate)
             
-            let startDateTimestamp = startDate.timeIntervalSince1970
-            let endDateTimestamp = endDate.timeIntervalSince1970
-            print("time stamps dates: \(startDateTimestamp),\(endDateTimestamp)")
+            self.DateTF.text = "Du \(startDateString) Au \(endDateString)" // Update the text field
             
-            self.DateTF.text = "Du \(startDateString) Au  \(endDateString)"
+            // Update the sharedDateModel with the selected start and end dates
+            self.sharedDateModel.startDate = startDate
+            self.sharedDateModel.endDate = endDate
+            
+            // Post a notification to indicate that dates have been selected
+            NotificationCenter.default.post(name: Notification.Name("DatesSelected"), object: nil)
         }))
-        present(alertController, animated: true, completion: nil)
         
+        present(alertController, animated: true, completion: nil)
+    }
+  
+
+    @objc func childButtonTapped() {
+        guard let selectedChild = selectedChild else { return }
+        
+        // Add ChildInfoViewController as child view controller
+        addChild(ChildInfoViewController!)
+        
+        // Add childInfoContainerView to the view hierarchy
+        view.addSubview(childInfoContainerView)
+        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set up constraints for childInfoContainerView
+        NSLayoutConstraint.activate([
+            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        // Add ChildInfoViewController's view to the childInfoContainerView
+        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+        
+        // Notify ChildInfoViewController that it has been added to its parent view controller
+        ChildInfoViewController!.didMove(toParent: self)
     }
     
     @IBAction func calenderButton(_ sender: Any) {
@@ -270,6 +371,27 @@ class Phone: UIViewController{
     }
     
     @IBAction func childButton(_ sender: Any) {
+        // Add ChildInfoViewController as child view controller
+        addChild(ChildInfoViewController!)
+        print("clissssssss")
+        // Add childInfoContainerView to the view hierarchy
+        view.addSubview(childInfoContainerView)
+        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set up constraints for childInfoContainerView
+        NSLayoutConstraint.activate([
+            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        // Add ChildInfoViewController's view to the childInfoContainerView
+        childInfoContainerView.addSubview(ChildInfoViewController!.view)
+        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+        
+        // Notify ChildInfoViewController that it has been added to its parent view controller
+        ChildInfoViewController!.didMove(toParent: self)
         
     }
     @IBAction func revealSideMenu(_ sender: Any) {
@@ -521,7 +643,35 @@ extension Phone: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let carteCell = carteCollectionView.dequeueReusableCell(withReuseIdentifier: "UsageCollectionViewCell", for: indexPath) as! UsageCollectionViewCell
-        carteCell.setData(text: self.carteArray1[indexPath.row], image: self.imageArray[indexPath.row], phrase: self.carteArray2[indexPath.row])
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+
+        if let startDate = SharedDateModel.shared.startDate,
+           let endDate = SharedDateModel.shared.endDate {
+            
+            let days = startDate.calculateDaysBetweenDates(endDate: endDate)
+            nbJour = days
+            print("Nombre de jours entre les dates:", days)
+        } else {
+            print("Les dates ne sont pas disponibles dans SharedDateModel")
+        }
+
+
+
+        if indexPath.row == 0 {
+            if typeCarte == "Excessive"{
+                carteCell.setData(text: String(nbJour), image: "phone-time-card-rouge", phrase: " passe beaucoup trop de temps sur son téléphone.")
+            }
+            if typeCarte == "Normal"{
+                carteCell.setData(text: "aaaaaa", image: "phone-time-card-vert", phrase: " ne passe pas trop de temps sur son téléphone.")
+            }
+            if typeCarte == "Abnormal"{
+                carteCell.setData(text: "aaaaaa", image: "phone-time-card-orange", phrase: "a tendance à passer trop de temps sur son téléphone.")
+            }
+        }else{
+            carteCell.setData(text: self.carteArray1[indexPath.row], image: self.imageArray[indexPath.row], phrase: self.carteArray2[indexPath.row])
+        }
         return carteCell
     }
     

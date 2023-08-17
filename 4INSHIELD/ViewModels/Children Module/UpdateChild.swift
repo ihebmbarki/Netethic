@@ -23,7 +23,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBOutlet weak var changeLanguageBtn: UIButton!
     
     @IBOutlet weak var prenomLbl: UILabel!
-    @IBOutlet weak var socialText: UILabel!
     @IBOutlet weak var nomLbl: UILabel!
     @IBOutlet weak var genreLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
@@ -41,6 +40,8 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var SocialMediaTableView: UITableView!
     @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var socialText: UILabel!
+    
     @IBOutlet weak var socialView: UIView!
     @IBOutlet weak var addNewProfileBtn: UIButton!
     @IBOutlet weak var ddUserAccBtn: UIButton!
@@ -102,9 +103,17 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         configureUI()
         SetUpDesign()
-        loadChildInfo()
-        //        getCurrentChildSocialMedia()
+        
+        let currentLanguage = LanguageManager.shared.currentLanguage
+        loadChildInfo(language: currentLanguage)
+        //getCurrentChildSocialMedia()
         configureTableView()
+        
+        // Set content hugging and compression resistance priorities
+        socialText.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        nameLbl.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        socialText.widthAnchor.constraint(lessThanOrEqualToConstant: 230).isActive = true
         
     }
 
@@ -470,7 +479,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         nomLbl.text = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "")
         genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
         dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
-        
         garçonLbl.text = NSLocalizedString("boy", tableName: nil, bundle: bundle, value: "", comment: "")
         filleLbl.text = NSLocalizedString("girl", tableName: nil, bundle: bundle, value: "", comment: "")
         nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
@@ -498,18 +506,15 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         }
     }
     
-    func loadChildInfo() {
+    func loadChildInfo(language: String) {
         guard let savedChildID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
                 self.PrenomTf.text = child.user?.first_name
                 self.nomTf.text = child.user?.last_name
                 //Show child name for socials
-                if let firstName = child.user?.first_name {
-                    self.nameLbl.text = firstName
-                } else {
-                    self.nameLbl.text = " "
-                }
+                self.nameLbl.text = child.user?.first_name
+
                 if child.user!.gender == "M" {
                     self.maleRadioButton.isSelected = true
                 } else if child.user!.gender == "F" {
@@ -535,6 +540,11 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
                 }
             }
         }
+    }
+    
+    func languageDidChange(newLanguage: String) {
+        LanguageManager.shared.currentLanguage = newLanguage
+        loadChildInfo(language: newLanguage)
     }
     
     func goToScreen(withId identifier: String) {

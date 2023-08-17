@@ -87,10 +87,21 @@ Please check your registered email for the activation link.";
 "girl" = "Girl";
 "other" = "Not precised";
 "edit_child" = "Edit child's profile";
-"social_media_child" = "Children's social networks";
+"social_media_child" = "Social networks of";
 
 "add_media" = "Add a social network";
 "add_another_profile" = "Add a new profile";
 "update" = "Update";
 "cancel" = "Cancel";
 "create" = "Create";
+
+//MARK: Parent Profile
+"profile" = "Profile";
+"modify_profile" = "Edit my profile";
+"my_children" = "My children";
+"Female" = "Female";
+"male" = "Male";
+"supp_acc" = "Delete the account";
+"supp_acc_text" = "Deleting your account will delete your profile, login info, and your browsing data from our database.";
+"supp" = "Delete the account";
+"add_child" = "Add child";

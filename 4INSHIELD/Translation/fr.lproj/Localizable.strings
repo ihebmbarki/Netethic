@@ -86,9 +86,20 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "girl" = "Fille";
 "other" = "Non précisé";
 "edit_child" = "Modifier le profil de l'enfant";
-"social_media_child" = "Les réseaux sociaux des enfants";
+"social_media_child" = "Les réseaux sociaux de";
 "add_media" = " Ajoutez un réseau social";
 "add_another_profile" = "Ajouter un nouveau profil";
 "update" = "Modifier";
 "cancel" = "Annuler";
 "create" = "Créer";
+
+//MARK: Parent Profile
+"profile" = "Profil";
+"modify_profile" = "Modifier mon profile";
+"my_children" = "Mes Enfants";
+"Female" = "Femme";
+"male" = "Homme";
+"supp_acc" = "Supprimer le compte";
+"supp_acc_text" = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données.";
+"supp" = "Supprimer le compte";
+"add_child" = "Ajouter un enfant";

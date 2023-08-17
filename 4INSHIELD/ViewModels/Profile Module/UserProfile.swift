@@ -8,6 +8,10 @@
 import UIKit
 import Foundation
 
+protocol LanguageChangeDelegate: AnyObject {
+    func languageDidChange()
+}
+
 class UserProfile: KeyboardHandlingBaseVC {
 
     // IBOutlets
@@ -19,6 +23,7 @@ class UserProfile: KeyboardHandlingBaseVC {
     @IBOutlet weak var enfantsButton: UIButton!
     @IBOutlet weak var modifierButton: UIButton!
     
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     var image: UIImage?
     
@@ -28,6 +33,10 @@ class UserProfile: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Update localized strings
+        updateLocalizedStrings()
+
         //Load user infos
         getCurrentUserData()
         // Instantiate child view controllers from storyboard
@@ -54,6 +63,12 @@ class UserProfile: KeyboardHandlingBaseVC {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageButtonTapped))
         userPhoto.isUserInteractionEnabled = true
         userPhoto.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
     }
     
     @objc fileprivate func profileImageButtonTapped() {
@@ -124,6 +139,57 @@ class UserProfile: KeyboardHandlingBaseVC {
                 }
             }
         }
+    }
+    
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+            }
+        }
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
+        modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+
+        if LanguageManager.shared.currentLanguage == "en" {
+            languageAlert.title = "Choose Language"
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            languageAlert.title = "Choisir la langue"
+        }
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+                }
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
     }
     
     @IBAction func changePicTaped(_ sender: Any) {

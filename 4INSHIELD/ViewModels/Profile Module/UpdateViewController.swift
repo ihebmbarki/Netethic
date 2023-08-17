@@ -10,10 +10,26 @@ import Foundation
 import DLRadioButton
 import PhoneNumberKit
 
-class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteAlertDelegate {
+class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteAlertDelegate,LanguageChangeDelegate {
+    
+    func languageDidChange() {
+        updateLocalizedStrings()
+    }
+    
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
+    
+    @IBOutlet weak var prenomLbl: UILabel!
+    @IBOutlet weak var nomLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var genreLbl: UILabel!
+    @IBOutlet weak var femmeLbl: UILabel!
+    @IBOutlet weak var hommeLbl: UILabel!
+    @IBOutlet weak var nonPreciseLbl: UILabel!
+    @IBOutlet weak var deleteAccLbl: UILabel!
+    @IBOutlet weak var deleteTextView: UITextView!
+    @IBOutlet weak var dateLbl: UILabel!
     
     @IBOutlet weak var parent1Btn: DLRadioButton!
     @IBOutlet weak var parent2: DLRadioButton!
@@ -38,7 +54,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         super.viewDidLoad()
         
         resetForm()
-        
+        updateLocalizedStrings()
         //Setup deleteview
         deleteView.layer.cornerRadius = 5.0
         deleteView.clipsToBounds = true
@@ -69,6 +85,30 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+    }
+    
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        prenomLbl.text = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        nomLbl.text = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        emailLbl.text = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "")
+        genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
+        dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
+        hommeLbl.text = NSLocalizedString("male", tableName: nil, bundle: bundle, value: "", comment: "")
+        femmeLbl.text = NSLocalizedString("Female", tableName: nil, bundle: bundle, value: "", comment: "")
+        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
+        deleteAccLbl.text = NSLocalizedString("supp_acc", tableName: nil, bundle: bundle, value: "", comment: "")
+        deleteTextView.text = NSLocalizedString("supp_acc_text", tableName: nil, bundle: bundle, value: "", comment: "add media")
+        deleteBtn.setTitle(NSLocalizedString("supp", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+    }
+    
     func resetForm() {
         updateBtn.isEnabled = false
 
@@ -76,11 +116,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         lastnameError.isHidden = true
         emailError.isHidden = true
         dateError.isHidden = true
-
-//        usernameError.text = "Required"
-//        emailError.text = "Required"
-//        passwordError.text = "Required"
-//        confirmpwdError.text = "Required"
     }
     
     func checkForValidForm()
@@ -122,19 +157,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
                 return "This field cannot be blank."
                 }
             }
-//            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
-//            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-//            if !predicate.evaluate(with: value)
-//            {
-//                if LanguageManager.shared.currentLanguage == "fr"{
-//                return "Nom d'utilisateur non valide"
-//
-//            }
-//                if LanguageManager.shared.currentLanguage == "en"{
-//                    return "Invalid name"
-//                }
-//
-//            }
             return nil
         }
     
@@ -164,19 +186,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
                 return "This field cannot be blank."
                 }
             }
-//            let reqularExpression = "^[a-zA-Z0-9]{3,20}$"
-//            let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-//            if !predicate.evaluate(with: value)
-//            {
-//                if LanguageManager.shared.currentLanguage == "fr"{
-//                return "Nom d'utilisateur non valide"
-//
-//            }
-//                if LanguageManager.shared.currentLanguage == "en"{
-//                    return "Invalid username"
-//                }
-//
-//            }
             return nil
         }
     

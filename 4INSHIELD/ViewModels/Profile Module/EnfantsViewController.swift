@@ -18,12 +18,22 @@ class EnfantsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+        updateLocalizedStrings()
         configureTableView()
         childrenTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        addChildBtn.setTitle(NSLocalizedString("add_child", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateLocalizedStrings()
+
         DispatchQueue.main.async {
             self.getCurrentUserChildren()
             guard let userIDString = UserDefaults.standard.string(forKey: "userID"),

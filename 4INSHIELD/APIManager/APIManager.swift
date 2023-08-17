@@ -927,12 +927,26 @@ class APIManager {
         ]
         
         AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            print("Response:", response)
+            
             switch response.result {
-            case .success:
-                if (200..<300).contains(response.response?.statusCode ?? 0) {
-                    completionHandler(true, "Child user registered successfully")
-                } else {
-                    completionHandler(false, "Try again!")
+            case .success(let data):
+                if let statusCode = response.response?.statusCode {
+                    print("Status Code:", statusCode)
+                }
+                
+                if let responseData = data, let responseString = String(data: responseData, encoding: .utf8) {
+                    print("Response Data:", responseString)
+                    
+                    if (200..<300).contains(response.response!.statusCode) {
+                        completionHandler(true, "Child user registered successfully")
+                    } else {
+                        // Extract and print any error message from the response if available
+                        if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: responseData) {
+                            print("Error Message:", errorResponse.message)
+                        }
+                        completionHandler(false, "Try again!")
+                    }
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")

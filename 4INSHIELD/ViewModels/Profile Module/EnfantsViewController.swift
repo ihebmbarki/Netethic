@@ -19,11 +19,24 @@ class EnfantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        // Listen for language change notification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChangeNotification), name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+        
+        // Initial setup of localized strings
         updateLocalizedStrings()
+        
         configureTableView()
         childrenTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
+    deinit {
+         // Don't forget to remove the observer when the view controller is deallocated
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+     }
+
+     @objc func handleLanguageChangeNotification() {
+         // Update localized strings when language changes
+         updateLocalizedStrings()
+     }
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main

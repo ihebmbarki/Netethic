@@ -305,7 +305,6 @@ class APIManager {
                }
            }
        }
-
     
     func getScore(completion: @escaping (Score?) -> Void) {
         AF.request(user_score, method: .get).response { response in
@@ -921,38 +920,66 @@ class APIManager {
     //
     //        }
     
-    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {
+    func registerChildAPI(parameters: [String: Any], completionHandler: @escaping (Bool, String) -> ()) {
         let headers: HTTPHeaders = [
             .contentType("application/json")
         ]
         
-        AF.request(register_url, method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-            print("Response:", response)
-            
-            switch response.result {
-            case .success(let data):
-                if let statusCode = response.response?.statusCode {
-                    print("Status Code:", statusCode)
-                }
-                
-                if let responseData = data, let responseString = String(data: responseData, encoding: .utf8) {
-                    print("Response Data:", responseString)
-                    
-                    if (200..<300).contains(response.response!.statusCode) {
-                        completionHandler(true, "Child user registered successfully")
-                    } else {
-                        // Extract and print any error message from the response if available
-                        if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: responseData) {
-                            print("Error Message:", errorResponse.message)
+        AF.request(register_url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .response { response in
+                print(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
+                switch response.result {
+                case .success:
+                    if (200..<300).contains(response.response?.statusCode ?? 0) {
+                        var successMessage = ""
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            successMessage = "L'inscription a été effectuée avec succès ! Veuillez vérifier votre e-mail d'inscription pour le lien d'activation."
+                        } else {
+                            successMessage = "Registration completed successfully! Please check your registered email for the activation link."
                         }
-                        completionHandler(false, "Try again!")
+                        completionHandler(true, successMessage)
+                    } else {
+                        var errorMessage = ""
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            errorMessage = "Les données sont introuvables."
+                        } else {
+                            errorMessage = "Data not found."
+                        }
+                        completionHandler(false, errorMessage)
                     }
+                case .failure(let error):
+                    var errorMessage = ""
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode >= 500 {
+                            if let data = response.data, let serverErrorString = String(data: data, encoding: .utf8) {
+                                completionHandler(false, serverErrorString)
+                            } else {
+                                if LanguageManager.shared.currentLanguage == "fr" {
+                                    errorMessage = "Erreur serveur. Veuillez réessayer plus tard."
+                                } else {
+                                    errorMessage = "Server error. Please try again later."
+                                }
+                                completionHandler(false, errorMessage)
+                            }
+                        } else {
+                            if LanguageManager.shared.currentLanguage == "fr" {
+                                errorMessage = "Une erreur de réseau est survenue."
+                            } else {
+                                errorMessage = "A network error occurred. Check your internet connection."
+                            }
+                            completionHandler(false, errorMessage)
+                        }
+                    } else {
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            errorMessage = "Une erreur s'est produite. Veuillez réessayer."
+                        } else {
+                            errorMessage = "An error occurred. Please try again."
+                        }
+                        completionHandler(false, errorMessage)
+                    }
+                    print("error: \(error.localizedDescription)")
                 }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-                completionHandler(false, "Try again!")
             }
-        }
     }
     
 //    func registerChildAPI(register: ChildRegisterModel, completionHandler: @escaping (Bool, String) -> ()) {

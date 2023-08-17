@@ -8,10 +8,6 @@
 import UIKit
 import Foundation
 
-protocol LanguageChangeDelegate: AnyObject {
-    func languageDidChange()
-}
-
 class UserProfile: KeyboardHandlingBaseVC {
 
     // IBOutlets
@@ -181,7 +177,8 @@ class UserProfile: KeyboardHandlingBaseVC {
                     self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
                 }
                 self.updateLocalizedStrings()
-                self.view.setNeedsLayout() // Refresh the layout of the view
+                NotificationCenter.default.post(name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+
             }
             languageAlert.addAction(action)
         }

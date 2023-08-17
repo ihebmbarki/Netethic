@@ -140,7 +140,6 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="h48-dN-baC" secondAttribute="bottom" id="B1L-aF-eug"/>
-                                                    <constraint firstItem="h48-dN-baC" firstAttribute="top" secondItem="9OP-r5-MKQ" secondAttribute="bottom" constant="13" id="Iu0-7z-AQa"/>
                                                     <constraint firstAttribute="trailing" secondItem="h48-dN-baC" secondAttribute="trailing" id="S4j-bk-Pnh"/>
                                                     <constraint firstAttribute="bottom" secondItem="h48-dN-baC" secondAttribute="bottom" constant="1.1368683772161603e-13" id="a3F-YS-9yQ"/>
                                                     <constraint firstItem="5kw-Iq-kak" firstAttribute="top" secondItem="ECp-BC-7oK" secondAttribute="top" constant="245" id="att-Ef-dE9"/>
@@ -208,10 +207,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7E-hV-DVT">
-                                <rect key="frame" x="0.0" y="89" width="393" height="703"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="753"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="n7d-3E-Hn4">
-                                        <rect key="frame" x="15" y="0.0" width="363" height="703"/>
+                                        <rect key="frame" x="15" y="0.0" width="363" height="753"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQe-tf-nxg">
                                                 <rect key="frame" x="20" y="0.0" width="343" height="365"/>
@@ -515,30 +514,30 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-WY-wZT">
-                                                <rect key="frame" x="23" y="553" width="340" height="150"/>
+                                                <rect key="frame" x="23" y="553" width="340" height="200"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FwC-Vh-O1M">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Supprimer le compte " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-gk-Ltl">
-                                                                <rect key="frame" x="8" y="8" width="168" height="21"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Supprimer le compte " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-gk-Ltl">
+                                                                <rect key="frame" x="8" y="7.9999999999999982" width="167.33333333333334" height="20.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                 <color key="textColor" red="0.5" green="0.013815433679999999" blue="0.041918759319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B4J-fi-NLi">
-                                                                <rect key="frame" x="8" y="29" width="310" height="80"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B4J-fi-NLi">
+                                                                <rect key="frame" x="8" y="36" width="310" height="80"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="80" id="383-UL-mJB"/>
+                                                                </constraints>
                                                                 <string key="text">La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données. </string>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-QU-clb">
-                                                                <rect key="frame" x="8" y="111" width="188" height="35"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-QU-clb">
+                                                                <rect key="frame" x="8" y="123.99999999999999" width="187.66666666666666" height="34.333333333333329"/>
                                                                 <color key="backgroundColor" red="0.5" green="0.013815433681866551" blue="0.041918759317508159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
@@ -550,12 +549,19 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstItem="aQL-QU-clb" firstAttribute="top" secondItem="B4J-fi-NLi" secondAttribute="bottom" constant="8" id="2TM-UW-HUK"/>
+                                                            <constraint firstAttribute="height" constant="200" id="5sB-xn-CwF"/>
+                                                            <constraint firstItem="bdh-gk-Ltl" firstAttribute="top" secondItem="FwC-Vh-O1M" secondAttribute="topMargin" id="M2p-XH-67k"/>
                                                             <constraint firstAttribute="width" constant="320" id="MBU-Y8-WR4"/>
-                                                            <constraint firstAttribute="height" constant="150" id="eMl-Mc-biM"/>
+                                                            <constraint firstItem="bdh-gk-Ltl" firstAttribute="leading" secondItem="B4J-fi-NLi" secondAttribute="leading" id="OEr-8x-lBL"/>
+                                                            <constraint firstAttribute="bottom" secondItem="aQL-QU-clb" secondAttribute="bottom" constant="41.666666666666657" id="axd-ln-EF1"/>
+                                                            <constraint firstItem="B4J-fi-NLi" firstAttribute="leading" secondItem="aQL-QU-clb" secondAttribute="leading" id="gzu-18-sKV"/>
+                                                            <constraint firstItem="aQL-QU-clb" firstAttribute="leading" secondItem="FwC-Vh-O1M" secondAttribute="leading" constant="8" id="pp4-BX-ify"/>
+                                                            <constraint firstAttribute="trailing" secondItem="B4J-fi-NLi" secondAttribute="trailing" constant="2" id="rcr-fZ-6zc"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGC-cG-PuA">
-                                                        <rect key="frame" x="320" y="0.0" width="20" height="150"/>
+                                                        <rect key="frame" x="320" y="0.0" width="20" height="200"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="U6O-XQ-p5w"/>
@@ -585,7 +591,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="x7E-hV-DVT" firstAttribute="centerY" secondItem="RFN-jl-58J" secondAttribute="centerY" id="41u-5j-cOg"/>
-                            <constraint firstItem="x7E-hV-DVT" firstAttribute="top" secondItem="NXK-tr-IxO" secondAttribute="top" constant="30" id="EgV-rj-nwj"/>
+                            <constraint firstItem="x7E-hV-DVT" firstAttribute="top" secondItem="NXK-tr-IxO" secondAttribute="top" id="EgV-rj-nwj"/>
                             <constraint firstItem="x7E-hV-DVT" firstAttribute="leading" secondItem="RFN-jl-58J" secondAttribute="leading" id="TnO-FR-xgh"/>
                         </constraints>
                     </view>

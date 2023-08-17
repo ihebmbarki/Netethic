@@ -10,11 +10,7 @@ import Foundation
 import DLRadioButton
 import PhoneNumberKit
 
-class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteAlertDelegate,LanguageChangeDelegate {
-    
-    func languageDidChange() {
-        updateLocalizedStrings()
-    }
+class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteAlertDelegate {
     
     @IBOutlet weak var prenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
@@ -53,8 +49,14 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetForm()
+        // Listen for language change notification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChangeNotification), name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+        
+        // Initial setup of localized strings
         updateLocalizedStrings()
+        
+        resetForm()
+        
         //Setup deleteview
         deleteView.layer.cornerRadius = 5.0
         deleteView.clipsToBounds = true
@@ -85,11 +87,15 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateLocalizedStrings()
-    }
-    
+    deinit {
+         // Don't forget to remove the observer when the view controller is deallocated
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+     }
+
+     @objc func handleLanguageChangeNotification() {
+         // Update localized strings when language changes
+         updateLocalizedStrings()
+     }
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main

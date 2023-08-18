@@ -62,11 +62,11 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         deleteView.clipsToBounds = true
         deleteView.layer.borderWidth = 0.5
         deleteView.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
-        deleteView.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
-        deleteView.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
-        deleteView.layer.shadowOpacity = 0.5
-        deleteView.layer.shadowRadius = 0.0
-        deleteView.layer.masksToBounds = false
+//        deleteView.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
+//        deleteView.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+//        deleteView.layer.shadowOpacity = 0.5
+//        deleteView.layer.shadowRadius = 0.0
+//        deleteView.layer.masksToBounds = false
         
         //Utilities
         setUpDesign()
@@ -88,7 +88,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     }
     
     deinit {
-         // Don't forget to remove the observer when the view controller is deallocated
          NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotification"), object: nil)
      }
 

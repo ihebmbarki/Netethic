@@ -153,6 +153,14 @@ class UserProfile: KeyboardHandlingBaseVC {
         profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
         modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        // Manual button title translation based on the selected language
+          if LanguageManager.shared.currentLanguage == "en" {
+              modifierButton.setTitle("Edit my profile", for: .normal)
+              enfantsButton.setTitle("My children", for: .normal)
+          } else if LanguageManager.shared.currentLanguage == "fr" {
+              modifierButton.setTitle("Modifier mon profile", for: .normal)
+              enfantsButton.setTitle("Mes Enfants", for: .normal)
+          }
     }
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
@@ -178,7 +186,6 @@ class UserProfile: KeyboardHandlingBaseVC {
                 }
                 self.updateLocalizedStrings()
                 NotificationCenter.default.post(name: NSNotification.Name("LanguageChangedNotification"), object: nil)
-
             }
             languageAlert.addAction(action)
         }

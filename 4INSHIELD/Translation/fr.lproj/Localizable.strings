@@ -92,6 +92,9 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "update" = "Modifier";
 "cancel" = "Annuler";
 "create" = "Créer";
+"delete" = "Supprimer";
+"supp_alert" = "Voulez-vous vraiment supprimer votre compte?";
+"saisir_username" = "Saisissez votre nom d'utilisateur";
 
 //MARK: Parent Profile
 "profile" = "Profil";
@@ -103,3 +106,4 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "supp_acc_text" = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données.";
 "supp" = "Supprimer le compte";
 "add_child" = "Ajouter un enfant";
+

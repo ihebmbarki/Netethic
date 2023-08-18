@@ -94,6 +94,9 @@ Please check your registered email for the activation link.";
 "update" = "Update";
 "cancel" = "Cancel";
 "create" = "Create";
+"delete" = "Delete";
+"supp_alert" = "Do you really want to delete your account?";
+"saisir_username" = "Saisissez votre nom d'utilisateur";
 
 //MARK: Parent Profile
 "profile" = "Profile";

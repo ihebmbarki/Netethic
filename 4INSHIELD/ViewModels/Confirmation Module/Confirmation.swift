@@ -143,13 +143,25 @@ class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
                     switch result {
                     case .success(_):
                         print("Your account associated to this email \(email) is now active!")
-                        DispatchQueue.main.async {
-                            let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
-                            let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
-                                self.goToSignIn(withId: "signIn")
+                        if LanguageManager.shared.currentLanguage == "fr"{
+                            DispatchQueue.main.async {
+                                let alertController = UIAlertController(title: "Succès", message: "Votre compte est maintenant actif !", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                                    self.goToSignIn(withId: "signIn")
+                                }
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
                             }
-                            alertController.addAction(okayAction)
-                            self.present(alertController, animated: true, completion: nil)
+                        }
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            DispatchQueue.main.async {
+                                let alertController = UIAlertController(title: "Success", message: "Your account is now active!", preferredStyle: .alert)
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                                    self.goToSignIn(withId: "signIn")
+                                }
+                                alertController.addAction(okayAction)
+                                self.present(alertController, animated: true, completion: nil)
+                            }
                         }
 
                     case .failure(let error):

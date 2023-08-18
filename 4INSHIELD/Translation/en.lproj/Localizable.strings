@@ -25,7 +25,8 @@
 //MARK: Register
 "your_username" = "Username";
 "create_account" = "Create an account";
-"re_type_password" = "Confirm Password";
+"re_type_password" = "Password";
+"confirmPassword" = "Confirm Password";
 "sign_up" = "sign up";
 "text_login" = "Have an account?";
 "Login" = "Sign in";

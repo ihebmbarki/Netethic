@@ -263,25 +263,9 @@ class SignIn: KeyboardHandlingBaseVC {
                                             self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "ChildProfileAdded")
                                         case 4:
-//                                            if LanguageManager.shared.currentLanguage == "fr"{
-//                                                let alertImage = UIImage(named: "yey")
-//                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "ChildDevice")
-//                                            }
-//                                            if LanguageManager.shared.currentLanguage == "en"{
-//                                                let alertImage = UIImage(named: "yey")
-//                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "ChildDevice")
-//                                            }
                                             self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:
-//                                            if LanguageManager.shared.currentLanguage == "fr"{
-//                                                let alertImage = UIImage(named: "yey")
-//                                                self.showAlertWithImageAndAction1(title: "yeeey ", message: "Succès ", image: alertImage!, name: "Congrats")
-//                                            }
-//                                            if LanguageManager.shared.currentLanguage == "en"{
-//                                                let alertImage = UIImage(named: "yey")
-//                                                self.showAlertWithImageAndAction1(title: "yeeey", message: "Success", image: alertImage!, name: "Congrats")
-//                                            }
                                             self.loadingIndicator.stopAnimating()
                                             self.goToScreen(withId: "Congrats")
                                         case 6:
@@ -371,32 +355,33 @@ class SignIn: KeyboardHandlingBaseVC {
     }
 
     func visualiserPassword(){
-        imageicon.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
-        imageicon.tintColor = .black
-        let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 40))
-        imageViewContainerView.addSubview(imageicon)
-        passwordTF.rightView = imageViewContainerView
-        passwordTF.rightViewMode = .always
-        
-         
-        let tapGestureRecongnizer = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer: )))
-        imageicon.isUserInteractionEnabled = true
-        imageicon.addGestureRecognizer(tapGestureRecongnizer)
-    }
-    
-    @objc func imageTaped(tapGestureRecongnizer: UITapGestureRecognizer){
-        let tappedImage = tapGestureRecongnizer.view as!UIImageView
-        if iconClick{
-            iconClick = false
-            tappedImage.image = UIImage(named: "openeye")
-            passwordTF.isSecureTextEntry = false
-        }
-        else{
-            iconClick = true
-            tappedImage.image = UIImage(named: "closeeye")
-            passwordTF.isSecureTextEntry = true
-        }
-    }
+          imageicon.image = UIImage(named: "closeeye")?.withRenderingMode(.alwaysTemplate)
+          imageicon.tintColor = .black
+          let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 40))
+          imageViewContainerView.addSubview(imageicon)
+          passwordTF.rightView = imageViewContainerView
+          passwordTF.rightViewMode = .always
+          
+           
+          let tapGestureRecongnizer = UITapGestureRecognizer(target: self, action: #selector(imageTaped(tapGestureRecongnizer: )))
+          imageicon.isUserInteractionEnabled = true
+          imageicon.addGestureRecognizer(tapGestureRecongnizer)
+      }
+      
+      @objc func imageTaped(tapGestureRecongnizer: UITapGestureRecognizer){
+          let tappedImage = tapGestureRecongnizer.view as!UIImageView
+          if iconClick{
+              iconClick = false
+              tappedImage.image = UIImage(named: "openeye")
+              passwordTF.isSecureTextEntry = false
+          }
+          else{
+              iconClick = true
+              tappedImage.image = UIImage(named: "closeeye")
+              passwordTF.isSecureTextEntry = true
+          }
+      }
+
     func showAlertWithImageAndAction1(title: String, message: String, image: UIImage, name: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -529,18 +514,22 @@ class SignIn: KeyboardHandlingBaseVC {
     }
     @IBAction func passwordChanged(_ sender: Any) {
         if let password = passwordTF.text {
+            
             if let errorMessage = invalidPassword(password)
             {
                 passwordErrorLabel.text = errorMessage
                 passwordErrorLabel.isHidden = false
                 passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
 //                passwordTF.setupRightSideImage(image: "error", colorName: "redControl")
+             
+    
             }
             else
             {
                 passwordErrorLabel.isHidden = true
                 passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
-                passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
+//                passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
+                passwordTF.setupVerifPassword(image: "done", colorName: "vertDone", text: passwordTF)
 
             }
             checkForValidForm()
@@ -661,7 +650,7 @@ extension UITextField {
         leftViewMode = .always
     }
     func setupRightSideImage(image: String, colorName: String) {
-        let imageView = UIImageView(frame: CGRect(x: 12, y: 9, width: 20, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 9, width: 20, height: 20))
         imageView.image = UIImage(named: image)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: colorName)
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
@@ -675,6 +664,20 @@ extension UITextField {
         layer.borderWidth = 1
         layer.borderColor = UIColor(named: "grisBorder")?.cgColor
         //layer.borderColor = UIColor(red: 0.20, green: 0.49, blue: 0.75, alpha: 1.00).cgColor
+    }
+    func setupVerifPassword(image: String, colorName: String, text : UITextField){
+        let imageViewIcon = UIImageView()
+        imageViewIcon.image = UIImage(named: image)?.withRenderingMode(.alwaysTemplate)
+        imageViewIcon.tintColor = UIColor(named: colorName)
+        text.addSubview(imageViewIcon)
+
+        // Appliquer les contraintes pour positionner l'imageicon
+        imageViewIcon.translatesAutoresizingMaskIntoConstraints = false
+        imageViewIcon.trailingAnchor.constraint(equalTo: text.trailingAnchor, constant: -50).isActive = true
+        imageViewIcon.centerYAnchor.constraint(equalTo: text.centerYAnchor).isActive = true
+        imageViewIcon.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        imageViewIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
     }
 }
 

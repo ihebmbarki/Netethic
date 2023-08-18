@@ -652,7 +652,7 @@ class SignIn: KeyboardHandlingBaseVC {
 extension UITextField {
     
     func setupLeftSideImage(ImageViewNamed: String) {
-        let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 20, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: 8, width: 24, height: 24))
         imageView.image = UIImage(named: ImageViewNamed)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(named: "AccentColor")
         let imageViewContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))

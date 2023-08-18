@@ -180,7 +180,7 @@ class homeVC: UIViewController, ChartViewDelegate {
 
         //Humor pie chart
         let childID = selectedChild?.id
-        UserDefaults.standard.set("childID", forKey: "childID")
+//        UserDefaults.standard.set("childID", forKey: "childID")
         APIManager.shareInstance.getMentalState(childID:selectedChild?.id ?? 2, startDateTimestamp: 0, endDateTimestamp: 0) { [weak self] fetchedState in
             guard let self = self else { return }
 
@@ -193,7 +193,7 @@ class homeVC: UIViewController, ChartViewDelegate {
             }
                         
             // Call the API to fetch platforms
-            APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 2) { [weak self] platforms in
+            APIManager.shareInstance.fetchPlatforms(forPerson: selectedChild?.id ?? 7) { [weak self] platforms in
                 guard let self = self else {
                     return
                 }
@@ -466,7 +466,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     func getScorePlateform(startDateT: Int, endDateT: Int) {
         // Call the fetchScore function to fetch the score data
-        APIManager.shareInstance.fetchScorePlatform(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
+        APIManager.shareInstance.fetchScorePlatform(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateT, endDateTimestamp: endDateT) { [weak self] fetchedScore in
             print(fetchedScore?.result)
             print("")
             var listeDates: [Double] = []
@@ -1258,7 +1258,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 //                cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 2, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(Double(Int(startDateTimestamp))), endDateTimestamp: Int(endDateTimestamp)) { score in
                 if LanguageManager.shared.currentLanguage == "fr" {
                     if let score = score {
                         // Use the score value to determine the cardTitle
@@ -1362,7 +1362,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         print("oooooo")
                         let state = self.states[indexPath.row]
                         let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                        dateFormatter.locale = Locale(identifier: "fr")
+                        dateFormatter.dateFormat = "d\nEEEE"
+                        cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
                         cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
                         if state.mental_state == "happy" {
                             cell.cardLogo.image = UIImage(named: "smileyface")

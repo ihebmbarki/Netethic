@@ -490,9 +490,13 @@ class Register: KeyboardHandlingBaseVC {
 
     
     @IBAction func signInButton(_ sender: Any) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "signIn")
-        navigationController?.pushViewController(VC, animated: true)
+//        navigationController?.pushViewController(VC, animated: true)
+        self.dismiss(animated: true)
+        VC.modalPresentationStyle = .overFullScreen
+        self.present(VC, animated: true, completion: nil)
     }
     
     @IBAction func signUpGoogleTapped(_ sender: Any) {

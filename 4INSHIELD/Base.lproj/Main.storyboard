@@ -2980,14 +2980,14 @@
                                     <action selector="exitButtonTapped:" destination="yIc-sp-hDs" eventType="touchUpInside" id="hvU-1i-DQz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caq-hu-RTT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caq-hu-RTT">
                                 <rect key="frame" x="65" y="235" width="308" height="76"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.062745098040000002" green="0.1647058824" blue="0.27058823529999998" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5U-gN-sCL">
-                                <rect key="frame" x="46" y="330" width="44.333333333333343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5U-gN-sCL">
+                                <rect key="frame" x="46" y="351" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.062745098039215685" green="0.16470588235294117" blue="0.27058823529411763" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3031,8 +3031,8 @@
                                     <constraint firstAttribute="height" constant="80" id="JFf-hY-7Cu"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aaa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnO-Ez-BUc">
-                                <rect key="frame" x="365.33333333333331" y="311" width="30.666666666666686" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="France" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnO-Ez-BUc">
+                                <rect key="frame" x="340.66666666666669" y="311" width="55.333333333333314" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.062745098040000002" green="0.1647058824" blue="0.27058823529999998" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3632,6 +3632,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="7pW-Iw-Css"/>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cb8-lt-wb3"/>
                         <constraints>
                             <constraint firstItem="Gfn-Sc-btc" firstAttribute="top" secondItem="GKO-ca-oag" secondAttribute="top" id="GIe-vt-tqY"/>
                             <constraint firstItem="Gfn-Sc-btc" firstAttribute="leading" secondItem="GKO-ca-oag" secondAttribute="leading" id="Jbc-9u-Hu6"/>
@@ -3915,10 +3916,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7t-J1-bi5">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="919.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="963.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-tb-IUT">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="911.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="955.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0y1-NF-2gU">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
@@ -4167,10 +4168,10 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQB-1L-DTK" customClass="FooterView" customModule="_INSHIELD_Development" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="875.66666666666663" width="393" height="36"/>
+                                                        <rect key="frame" x="0.0" y="875.66666666666663" width="393" height="80"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="36" id="EpT-kP-cK2"/>
+                                                            <constraint firstAttribute="height" constant="80" id="EpT-kP-cK2"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>

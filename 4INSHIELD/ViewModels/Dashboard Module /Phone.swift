@@ -179,6 +179,7 @@ class Phone: UIViewController{
     @objc func updateDateTF() {
             if let startDate = sharedDateModel.startDate, let endDate = sharedDateModel.endDate {
                 let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "fr")
                 dateFormatter.dateFormat = "dd-MM-yyyy"
                 dateFormatter.dateStyle = .medium
                 
@@ -248,6 +249,7 @@ class Phone: UIViewController{
         let calendar = Calendar.current
         if let oneWeekAgo = calendar.date(byAdding: .day, value: -7, to: currentDate) {
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "fr")
             dateFormatter.dateFormat = "yyyy-MM-dd"
             
             // Formater les dates sans heure
@@ -265,9 +267,11 @@ class Phone: UIViewController{
                 print("Date d'une semaine avant: \(oneWeekAgoFormatted)")
                 print("Timestamp d'une semaine avant: \(oneWeekAgoTimestamp)")
             if LanguageManager.shared.currentLanguage == "fr" {
+                dateFormatter.locale = Locale(identifier: "fr")
                 self.DateTF.text = "Du \(currentDateFormatted) Au \(oneWeekAgoFormatted)"
             }
             if LanguageManager.shared.currentLanguage == "en" {
+                dateFormatter.locale = Locale(identifier: "en")
                 self.DateTF.text = "From \(currentDateFormatted) to \(oneWeekAgoFormatted)"
             }
        

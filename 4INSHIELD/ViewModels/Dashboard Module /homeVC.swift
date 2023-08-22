@@ -37,7 +37,8 @@ class homeVC: UIViewController, ChartViewDelegate {
     let signIn = SignIn()
     
     var days: [Double] = []
-
+    
+    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var messageRappotLabel: UILabel!
     @IBOutlet weak var loadingPersonIndicator: UIActivityIndicatorView!
@@ -135,7 +136,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var erroIndicatorLabel: UILabel!
     
-    @IBOutlet weak var indicateurActivityindicator: UIActivityIndicatorView!
+
     @IBOutlet weak var rapportActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var indicateurCollectionView: UICollectionView!
@@ -157,6 +158,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         loadingIndicatorCarte.startAnimating()
         loadingIndicatorCarte.isHidden = false
 
+        loadingActivityIndicator.startAnimating()
+        loadingActivityIndicator.isHidden = false
+        
         missingDataLbl.isHidden = true
         messageLineChart.isHidden = true
         errorLbl.isHidden = true
@@ -322,8 +326,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             
             dangerCollectionView.dataSource = self
             dangerCollectionView.delegate = self
-            let nib2 = UINib(nibName: "DangerCardCell", bundle: nil)
-            dangerCollectionView.register(nib2, forCellWithReuseIdentifier: "DangerCell")
+            let nib2 = UINib(nibName: "DangerCollectionViewCell", bundle: nil)
+            dangerCollectionView.register(nib2, forCellWithReuseIdentifier: "DangerCollectionViewCell")
             
             personsCollectionView.dataSource = self
             personsCollectionView.delegate = self
@@ -1200,8 +1204,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             // Assign the description and logo based on indexPath or any other logic
             switch indexPath.item {
             case 0:
-                cell.cardDesc.text = "Tendance actuelle"
-                cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")
+               
                 
                 // Call the getScore function to fetch the score
                 APIManager.shareInstance.getScore { [self] score in
@@ -1209,14 +1212,17 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     loadingIndicatorCarte.isHidden = true
                     // Update the UI on the main thread
                     DispatchQueue.main.async {
-                        let (backgroundImage, cardTitle) = self.getBackgroundImage(for: score?.global_score)
+                        let (backgroundImage, cardTitle, colorCard) = self.getBackgroundImage(for: score?.global_score)
                         cell.cardTitle.text = cardTitle
                         
                         if let backgroundImage = backgroundImage {
                             if let imageView = cell.backgroundImage as? UIImageView {
                                 imageView.image = backgroundImage
+                                imageView.layer.cornerRadius = 15
                                 imageView.contentMode = .scaleAspectFill
                             }
+                            cell.cardDesc.text = "Tendance actuelle"
+                            cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")?.withTintColor(UIColor(named: colorCard)!, renderingMode: .alwaysOriginal)
 //                            cell.backgroundImage.backgroundColor = UIColor(patternImage: backgroundImage)
                         } else {
                             // Handle nil background image
@@ -1227,7 +1233,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         cell.cardProgress.progress = Float(score?.global_score ?? 0) / 100.0
                         
                         // Update the cardTitle label's text based on the score
-                        let (_, translatedString) = self.getBackgroundImage(for: score?.global_score)
+                        let (_, translatedString, _) = self.getBackgroundImage(for: score?.global_score)
                         cell.cardTitle.text = translatedString
                     }
                 }
@@ -1237,19 +1243,21 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 loadingIndicatorCarte.isHidden = true
                 cell.cardDesc.text = "Risque de harcèlement à venir"
                 cell.cardTitle.text = "Partiellement harcelé"
-                cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")
+                cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")!.withTintColor(UIColor(named: "orange")!, renderingMode: .alwaysOriginal)
+                cell.cardLogo.backgroundColor = .white
                 cell.backgroundImage.image = UIImage(named: "orange")!
+                cell.backgroundImage.layer.cornerRadius = 15
             case 2:
                 self.loadingIndicatorCarte.stopAnimating()
                 loadingIndicatorCarte.isHidden = true
-                cell.cardDesc.text = "ÉTAT MENTAL"
-                cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
-                cell.backgroundImage.image = UIImage(named: "red")!
-                cell.cardTitle.text = "Non harcelé"
+                fetchAndProcessMentalState(cell: cell)
+
+             
+//                cell.backgroundImage.image = UIImage(named: "red")!
+//                cell.cardTitle.text = "Non harcelé"
 //                cell.backgroundImage.contentMode = .scaleAspectFill
                 
                 // Call the fetchAndProcessMentalState function to fetch and process the mental state data
-                fetchAndProcessMentalState(cell: cell)
             default:
                 break
             }
@@ -1261,13 +1269,12 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 //            loadingPlatformIndicator.stopAnimating()
 //            loadingPlatformIndicator.isHidden = true
             // Dequeue the cell
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCell", for: indexPath) as? DangerCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DangerCollectionViewCell", for: indexPath) as? DangerCollectionViewCell else {
                 fatalError("Unable to dequeue DangerCollectionViewCell")
             }
             
             let platform = platforms[indexPath.item]
             let logoURL = platform.logo.absoluteString
-            
             // Check if the URL starts with "http://"
             if logoURL.hasPrefix("http://") {
                 // Replace "http://" with "https://"
@@ -1281,40 +1288,60 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 //                cell.cardLogo.af.setImage(withURL: platform.logo)
             }
             
-            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: 1692023154, endDateTimestamp: 1692627954) { [self] score in
-                self.loadingPlatformIndicator.stopAnimating()
-                self.loadingPlatformIndicator.isHidden = true
-                if LanguageManager.shared.currentLanguage == "fr" {
-                    if let score = score {
-                        // Use the score value to determine the cardTitle
-                        if score < 30 {
-                            cell.cardTitle.text = "Statut ordinaire"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
-                        } else if score >= 30 && score < 50 {
-                            cell.cardTitle.text = "Statut Irrégulier"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
-                        } else {
-                            cell.cardTitle.text = "Statut à Risque"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+            APIManager.shareInstance.fetchScore(forPlatform: platform.platform, childID: selectedChild?.id ?? 7, startDateTimestamp: Int(startDateTimestamp), endDateTimestamp: Int(endDateTimestamp)) { [self] score in
+                    self.loadingPlatformIndicator.stopAnimating()
+                    self.loadingPlatformIndicator.isHidden = true
+                    cell.platformLabel.text = platform.platform
+                    if LanguageManager.shared.currentLanguage == "fr" {
+                        if let score = score {
+                            // Use the score value to determine the cardTitle
+                            if score < 30 {
+                                cell.cardTitle.text = "Statut ordinaire"
+                                
+                                cell.backgroundImage.image = UIImage(named: "green")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                            } else if score >= 30 && score < 50 {
+                                cell.cardTitle.text = "Statut Irrégulier"
+                                cell.backgroundImage.image = UIImage(named: "orange")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+                            } else if score >= 50 {
+                                cell.cardTitle.text = "Statut à Risque"
+                                cell.backgroundImage.image = UIImage(named: "red")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                            }
+                        }else{
+                            self.dangerCollectionView.isHidden = true
+                            self.loadingPlatformIndicator.stopAnimating()
+                            self.loadingPlatformIndicator.isHidden = true
+                            self.errorLbl.isHidden = false
+                            self.errorLbl.text = " Il n'y a pas de données à afficher pour le moment."
+                        }
+                    }
+                    if LanguageManager.shared.currentLanguage == "en" {
+                        if let score = score {
+                            // Use the score value to determine the cardTitle
+                            if score < 30 {
+                                cell.cardTitle.text = "ordinary statute"
+                                cell.backgroundImage.image = UIImage(named: "green")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+                            } else if score >= 30 && score < 50 {
+                                cell.cardTitle.text = "irregular status"
+                                cell.backgroundImage.image = UIImage(named: "orange")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
+                            } else {
+                                cell.cardTitle.text = "Risk status"
+                                cell.backgroundImage.image = UIImage(named: "red")
+                                //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
+                            }
+                        }else{
+                            self.dangerCollectionView.isHidden = true
+                            self.loadingPlatformIndicator.stopAnimating()
+                            self.loadingPlatformIndicator.isHidden = true
+                            self.errorLbl.isHidden = false
+                            self.errorLbl.text = "There Is No Data to Display at this Moment."
                         }
                     }
                 }
-                if LanguageManager.shared.currentLanguage == "en" {
-                    if let score = score {
-                        // Use the score value to determine the cardTitle
-                        if score < 30 {
-                            cell.cardTitle.text = "ordinary statute"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
-                        } else if score >= 30 && score < 50 {
-                            cell.cardTitle.text = "irregular status"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
-                        } else {
-                            cell.cardTitle.text = "Risk status"
-                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
-                        }
-                    }
-                }
-                
                 
 //                else {
 //                    // Handle error case or set a default value for the cardTitle
@@ -1334,7 +1361,6 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 //                    }
 //
 //                    }
-            }
             return cell
         } else
         if collectionView.tag == 3 {
@@ -1342,8 +1368,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as? ToxicPersonCollectionViewCell else {
                 fatalError("Unable to dequeue ToxicPersonCollectionViewCell")
             }
-            loadingPlatformIndicator.stopAnimating()
-            loadingPlatformIndicator.isHidden = true
+            loadingPersonIndicator.stopAnimating()
+            loadingPersonIndicator.isHidden = true
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
             
@@ -1466,13 +1492,15 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                   cell.layer.shadowOpacity = 0.3
                   cell.layer.shadowOffset = CGSize(width: 0, height: 2)
                   cell.layer.shadowRadius = 3
-            
-            ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: 1660645240, toDateTimestamp: 1692181240) { indicatorActivity in
-                if let indicatorActivity = indicatorActivity {
+            ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: startDateTimestamp, toDateTimestamp: endDateTimestamp){ [self] indicatorActivity in
+//            ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: 1690896442, toDateTimestamp: 1692538042) { indicatorActivity in
+                self.loadingActivityIndicator.stopAnimating()
+                self.loadingActivityIndicator.isHidden = true
+                if let indicator = indicatorActivity {
                     // Traitez les données indicatorActivity ici
-                    print(indicatorActivity)
-                    if indexPath.item < indicatorActivity.count {
-                        let indicatorData = indicatorActivity[indexPath.item]
+                    print(indicator)
+                    if indexPath.item < indicator.count {
+                        let indicatorData = indicator[indexPath.item]
                         self.erroIndicatorLabel.isHidden = true
                         // Utilisez les propriétés de indicatorData pour configurer la cellule
                         let icon = indicatorData.icon
@@ -1482,10 +1510,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                             self.background = "red"
                             } else if indicatorData.toxicityRate > 0.2 {
                                 self.background = "orange"
-                            } else {
+                            } else if indicatorData.toxicityRate >= 0 && indicatorData.toxicityRate < 0.4  {
                                 self.background = "green"
                             }
-                            
+                        cell.iconImage.backgroundColor = UIColor(named: self.background)
                         cell.setData(background: self.background, icon: icon, toxicity: toxicityRate, name: name)
                     }else{
                         self.indicateurCollectionView.isHidden = true
@@ -1538,7 +1566,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             return states.count
           // return 10
         } else if collectionView.tag == 5{
-            return 4
+            return indicator.count
         }
         
         return 0
@@ -1548,7 +1576,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     func fetchAndProcessMentalState(cell: CardCollectionViewCell) {
         // Call the getMentalState function to fetch the mental state data`
         
-        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 2, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
+        APIManager.shareInstance.getMentalState(childID: selectedChild?.id ?? 7, startDateTimestamp: startDateTimestamp, endDateTimestamp: endDateTimestamp) { states in
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 if let states = states?.data {
@@ -1557,25 +1585,38 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     
                     let text: String
                     let backgroundImage: UIImage?
+                    var color = String()
                     
                     if countHappy > countStressed {
                         text = "happy"
-                        backgroundImage = self.getBackgroundImageST(forMentalState: "happy")
+                        backgroundImage = UIImage(named: "green")
+                        color = "green"
                     } else {
                         text = "stressed"
-                        backgroundImage = self.getBackgroundImageST(forMentalState: "stress")
+                        backgroundImage = UIImage(named: "red")
+                        color = "red"
                     }
-                    
-                    // Update your text label with the determined text value
-                    cell.cardTitle.text = text
-                    
-                    // Set the background image based on the mental state
-                    cell.backgroundImage.backgroundColor = backgroundImage != nil ? UIColor(patternImage: backgroundImage!) : .white
-                } else {
-                    // Handle nil state
-                    cell.cardTitle.text = "N/A"
-                    cell.backgroundImage.backgroundColor = self.getBackgroundImageST(forMentalState: nil) != nil ? UIColor(patternImage: self.getBackgroundImageST(forMentalState: nil)!) : .white
-                }
+                    if let imageView = cell.backgroundImage as? UIImageView {
+                                     imageView.image = backgroundImage
+                                     imageView.layer.cornerRadius = 15
+                                     imageView.contentMode = .scaleAspectFill
+                                 }
+                                 cell.cardTitle.text = text
+                                 cell.cardDesc.text = "ÉTAT MENTAL"
+                    cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")?.withTintColor(UIColor(named: color)!, renderingMode: .alwaysOriginal)
+                    //cell.cardLogo.tintColor = .blue
+                             } else {
+                                 // Handle nil state
+                                 // Update the cell with appropriate values
+                                 if let imageView = cell.backgroundImage as? UIImageView {
+                                     imageView.image = self.getBackgroundImageST(forMentalState: nil)
+                                     imageView.layer.cornerRadius = 15
+                                     imageView.contentMode = .scaleAspectFill
+                                 }
+                                 cell.cardTitle.text = "N/A"
+                                 cell.cardDesc.text = "ÉTAT MENTAL"
+                                 cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")
+                             }
             }
         }
     }
@@ -1674,6 +1715,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             getScorePlateform(startDateT: Int(oneWeekAgoTimestamp), endDateT: Int(currentDateTimestamp))
             getMentalState(startDateT: Int(oneWeekAgoTimestamp), endDateT: Int(currentDateTimestamp))
             getIndicatorActivite(startDateTimestamp: oneWeekAgoTimestamp, endDateTimestamp: currentDateTimestamp)
+            startDateTimestamp = oneWeekAgoTimestamp
+            endDateTimestamp = currentDateTimestamp
+           
       
         } else {
             print("Erreur lors de la récupération de la date d'une semaine avant.")
@@ -1698,17 +1742,20 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
-        
+        startDatePicker.locale = Locale(identifier: "fr_FR") // Set the French locale
+
         let endDatePicker = UIDatePicker()
         endDatePicker.datePickerMode = .date
         endDatePicker.preferredDatePickerStyle = .compact
-        
+        endDatePicker.locale = Locale(identifier: "fr_FR") // Set the French locale
+
         alertController.view.addSubview(startDatePicker)
         alertController.view.addSubview(endDatePicker)
-        
+
         let spacingView = UIView() // Empty view for spacing
         spacingView.translatesAutoresizingMaskIntoConstraints = false
         alertController.view.addSubview(spacingView)
+
         
         startDatePicker.translatesAutoresizingMaskIntoConstraints = false
         endDatePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -1730,16 +1777,17 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
             spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
         ])
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             let startDate = startDatePicker.date
             let endDate = endDatePicker.date
             
             let dateFormatter = DateFormatter()
+            endDatePicker.locale = Locale(identifier: "fr_FR")
             dateFormatter.dateFormat = "dd-MM-yyyy"
+            dateFormatter.dateStyle = .medium
             
             let startDateString = dateFormatter.string(from: startDate)
             let endDateString = dateFormatter.string(from: endDate)
-            
             self.dateTF.text = "Du \(startDateString) Au \(endDateString)" // Update the text field
             
             // Update the sharedDateModel with the selected start and end dates
@@ -1749,7 +1797,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             // Post a notification to indicate that dates have been selected
             NotificationCenter.default.post(name: Notification.Name("DatesSelected"), object: nil)
         }))
-        
+        dangerCollectionView.reloadData()
+        indicateurCollectionView.reloadData()
+        cardsCollectionView.reloadData()
+        personsCollectionView.reloadData()
         present(alertController, animated: true, completion: nil)
     }
 
@@ -1765,25 +1816,28 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         return UIImage(named: "green")
     }
     
-    func getBackgroundImage(for score: Int?) -> (UIImage?, String) {
+    func getBackgroundImage(for score: Int?) -> (UIImage?, String, String) {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-        
+        var colorCard = String()
         if let scoreValue = score {
             if scoreValue < 20 {
                 let nonHarceleLocalizedString = NSLocalizedString("non_harcele", tableName: nil, bundle: bundle, value: "", comment: "Non Harcelé")
-           
-                return (UIImage(named: "green"), nonHarceleLocalizedString)
+                    colorCard = "green"
+                return (UIImage(named: "green"), nonHarceleLocalizedString, colorCard)
             } else if scoreValue >= 20 && scoreValue < 50 {
                 let partiellementHarceleLocalizedString = NSLocalizedString("parc_har", tableName: nil, bundle: bundle, value: "", comment: "Partiellement Harcelé")
-                return (UIImage(named: "orange"), partiellementHarceleLocalizedString)
+                colorCard = "orange"
+                return (UIImage(named: "orange"), partiellementHarceleLocalizedString, colorCard)
             } else {
                 let harceleLocalizedString = NSLocalizedString("harcled", tableName: nil, bundle: bundle, value: "", comment: "Harcelé")
-                return (UIImage(named: "red"), harceleLocalizedString)
+                colorCard = "red"
+                return (UIImage(named: "red"), harceleLocalizedString, colorCard)
                 
             }
         } else {
             let nonHarceleLocalizedString = NSLocalizedString("non_harcele", tableName: nil, bundle: bundle, value: "", comment: "Non Harcelé")
-            return (UIImage(named: "green"), nonHarceleLocalizedString)
+            colorCard = "green"
+            return (UIImage(named: "green"), nonHarceleLocalizedString, colorCard)
         }
     }
     

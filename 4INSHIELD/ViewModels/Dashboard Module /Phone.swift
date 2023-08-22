@@ -282,148 +282,151 @@ class Phone: UIViewController{
     
     @objc func showDatePicker() {
         let alertController = UIAlertController(title: "Sélectionnez une période", message: nil, preferredStyle: .alert)
-        
+            
         let startDatePicker = UIDatePicker()
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .compact
-        
+        startDatePicker.locale = Locale(identifier: "fr_FR") // Set the French locale
+
         let endDatePicker = UIDatePicker()
         endDatePicker.datePickerMode = .date
         endDatePicker.preferredDatePickerStyle = .compact
-        
+        endDatePicker.locale = Locale(identifier: "fr_FR") // Set the French locale
+
         alertController.view.addSubview(startDatePicker)
         alertController.view.addSubview(endDatePicker)
-        
+
         let spacingView = UIView() // Empty view for spacing
         spacingView.translatesAutoresizingMaskIntoConstraints = false
         alertController.view.addSubview(spacingView)
-        
-        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [
-            startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
-            startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
-            
-            endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
-            endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
-        ]
-        NSLayoutConstraint.activate(constraints)
-        // Add spacing constraints
-        NSLayoutConstraint.activate([
-            endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
-            endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
-            
-            spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
-            spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
-            spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
-            spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
-        ])
-        alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-            let startDate = startDatePicker.date
-            let endDate = endDatePicker.date
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            
-            let startDateString = dateFormatter.string(from: startDate)
-            let endDateString = dateFormatter.string(from: endDate)
-            
-            self.DateTF.text = "Du \(startDateString) Au \(endDateString)" // Update the text field
-            
-            // Update the sharedDateModel with the selected start and end dates
-            self.sharedDateModel.startDate = startDate
-            self.sharedDateModel.endDate = endDate
-            
-            // Post a notification to indicate that dates have been selected
-            NotificationCenter.default.post(name: Notification.Name("DatesSelected"), object: nil)
-        }))
-        
-        present(alertController, animated: true, completion: nil)
-    }
-  
 
-    @objc func childButtonTapped() {
-        guard let selectedChild = selectedChild else { return }
-        
-        // Add ChildInfoViewController as child view controller
-        addChild(ChildInfoViewController!)
-        
-        // Add childInfoContainerView to the view hierarchy
-        view.addSubview(childInfoContainerView)
-        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Set up constraints for childInfoContainerView
-        NSLayoutConstraint.activate([
-            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
-        ])
-        
-        // Add ChildInfoViewController's view to the childInfoContainerView
-        childInfoContainerView.addSubview(ChildInfoViewController!.view)
-        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
-        
-        // Notify ChildInfoViewController that it has been added to its parent view controller
-        ChildInfoViewController!.didMove(toParent: self)
-    }
-    
-    @IBAction func calenderButton(_ sender: Any) {
-    }
-    
-    @IBAction func changeLangageButton(_ sender: Any) {
-    }
-    
-    @IBAction func childButton(_ sender: Any) {
-        // Add ChildInfoViewController as child view controller
-        addChild(ChildInfoViewController!)
-        print("clissssssss")
-        // Add childInfoContainerView to the view hierarchy
-        view.addSubview(childInfoContainerView)
-        childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Set up constraints for childInfoContainerView
-        NSLayoutConstraint.activate([
-            childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
-        ])
-        
-        // Add ChildInfoViewController's view to the childInfoContainerView
-        childInfoContainerView.addSubview(ChildInfoViewController!.view)
-        ChildInfoViewController!.view.frame = childInfoContainerView.bounds
-        
-        // Notify ChildInfoViewController that it has been added to its parent view controller
-        ChildInfoViewController!.didMove(toParent: self)
-        
-    }
-    @IBAction func revealSideMenu(_ sender: Any) {
-        self.sideMenuState(expanded: self.isExpanded ? false : true)
-    }
-    
-    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
-        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-}
+            startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+            endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = [
+                startDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+                startDatePicker.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
+                
+                endDatePicker.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 50),
+                endDatePicker.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+            // Add spacing constraints
+            NSLayoutConstraint.activate([
+                endDatePicker.leadingAnchor.constraint(equalTo: startDatePicker.trailingAnchor, constant: 20),
+                endDatePicker.widthAnchor.constraint(equalTo: startDatePicker.widthAnchor),
+                
+                spacingView.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 8),
+                spacingView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor),
+                spacingView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor),
+                spacingView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -30)
+            ])
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                let startDate = startDatePicker.date
+                let endDate = endDatePicker.date
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                dateFormatter.dateStyle = .medium
+                
+                let startDateString = dateFormatter.string(from: startDate)
+                let endDateString = dateFormatter.string(from: endDate)
+                
+                self.DateTF.text = "Du \(startDateString) Au \(endDateString)" // Update the text field
+                
+                // Update the sharedDateModel with the selected start and end dates
+                self.sharedDateModel.startDate = startDate
+                self.sharedDateModel.endDate = endDate
+                
+                // Post a notification to indicate that dates have been selected
+                NotificationCenter.default.post(name: Notification.Name("DatesSelected"), object: nil)
+            }))
+            
+            present(alertController, animated: true, completion: nil)
+        }
+      
 
-extension Phone : SideBarDelegate {
-    func changeLangage(langue: String) {
-    
+        @objc func childButtonTapped() {
+            guard let selectedChild = selectedChild else { return }
+            
+            // Add ChildInfoViewController as child view controller
+            addChild(ChildInfoViewController!)
+            
+            // Add childInfoContainerView to the view hierarchy
+            view.addSubview(childInfoContainerView)
+            childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Set up constraints for childInfoContainerView
+            NSLayoutConstraint.activate([
+                childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
+            ])
+            
+            // Add ChildInfoViewController's view to the childInfoContainerView
+            childInfoContainerView.addSubview(ChildInfoViewController!.view)
+            ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+            
+            // Notify ChildInfoViewController that it has been added to its parent view controller
+            ChildInfoViewController!.didMove(toParent: self)
+        }
+        
+        @IBAction func calenderButton(_ sender: Any) {
+        }
+        
+        @IBAction func changeLangageButton(_ sender: Any) {
+        }
+        
+        @IBAction func childButton(_ sender: Any) {
+            // Add ChildInfoViewController as child view controller
+            addChild(ChildInfoViewController!)
+            print("clissssssss")
+            // Add childInfoContainerView to the view hierarchy
+            view.addSubview(childInfoContainerView)
+            childInfoContainerView.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Set up constraints for childInfoContainerView
+            NSLayoutConstraint.activate([
+                childInfoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                childInfoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                childInfoContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                childInfoContainerView.heightAnchor.constraint(equalToConstant: 400)
+            ])
+            
+            // Add ChildInfoViewController's view to the childInfoContainerView
+            childInfoContainerView.addSubview(ChildInfoViewController!.view)
+            ChildInfoViewController!.view.frame = childInfoContainerView.bounds
+            
+            // Notify ChildInfoViewController that it has been added to its parent view controller
+            ChildInfoViewController!.didMove(toParent: self)
+            
+        }
+        @IBAction func revealSideMenu(_ sender: Any) {
+            self.sideMenuState(expanded: self.isExpanded ? false : true)
+        }
+        
+        func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+            let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier) as! UINavigationController
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
-    
-    func selectedCell(_ row: Int) {
-        switch row {
-        case 0:
-            // Profile
-            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
-            //        case 1:
-            //            // Autorisation d’accés
-            //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
-            //        case 2:
+
+    extension Phone : SideBarDelegate {
+        func changeLangage(langue: String) {
+        
+        }
+        
+        func selectedCell(_ row: Int) {
+            switch row {
+            case 0:
+                // Profile
+                self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
+                //        case 1:
+                //            // Autorisation d’accés
+                //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
+                //        case 2:
             //            // Nous contacter
             //            self.showViewController(viewController: UINavigationController.self, storyboardId: " ")
             //        case 3:

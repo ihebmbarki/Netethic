@@ -19,8 +19,6 @@
 		041910C129C8BAF800C9D17D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041910C029C8BAF800C9D17D /* Environment.swift */; };
 		041BB32D29E6AC1B00B149F1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BB32C29E6AC1B00B149F1 /* extensions.swift */; };
 		042A4C4929E5A8640080CADF /* UpdateChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A4C4829E5A8640080CADF /* UpdateChild.swift */; };
-		04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04340A582A1FD48100F69B19 /* DangerCardCell.xib */; };
-		04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */; };
 		04340B2129C09B610055B394 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2029C09B610055B394 /* SocialMedia.swift */; };
 		04340B2429C09BDF0055B394 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2329C09BDF0055B394 /* Phone.swift */; };
 		04340B2629C09C070055B394 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04340B2529C09C070055B394 /* Events.swift */; };
@@ -105,6 +103,8 @@
 		872F8A572A937B430034DB2A /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 872F8A552A937B430034DB2A /* CardCollectionViewCell.xib */; };
 		874A73092A83FEAF00B17A85 /* wizardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */; };
 		8752062C2A6E7EFA00486C0C /* AddUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */; };
+		87A3F1582A94CBCE00AFBF99 /* DangerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A3F1562A94CBCE00AFBF99 /* DangerCollectionViewCell.swift */; };
+		87A3F1592A94CBCE00AFBF99 /* DangerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87A3F1572A94CBCE00AFBF99 /* DangerCollectionViewCell.xib */; };
 		87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */; };
 		87A8A5E52A6FFABC00AF631C /* HalfCircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */; };
 		87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */; };
@@ -169,8 +169,6 @@
 		041910C029C8BAF800C9D17D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		041BB32C29E6AC1B00B149F1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		042A4C4829E5A8640080CADF /* UpdateChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChild.swift; sourceTree = "<group>"; };
-		04340A582A1FD48100F69B19 /* DangerCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DangerCardCell.xib; sourceTree = "<group>"; };
-		04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCollectionViewCell.swift; sourceTree = "<group>"; };
 		04340B2029C09B610055B394 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
 		04340B2329C09BDF0055B394 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
 		04340B2529C09C070055B394 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
@@ -261,6 +259,8 @@
 		872F8A552A937B430034DB2A /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
 		874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wizardStepViewController.swift; sourceTree = "<group>"; };
 		8752062B2A6E7EFA00486C0C /* AddUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddUserAccount.swift; path = ../../../../../Downloads/AddUserAccount.swift; sourceTree = "<group>"; };
+		87A3F1562A94CBCE00AFBF99 /* DangerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCollectionViewCell.swift; sourceTree = "<group>"; };
+		87A3F1572A94CBCE00AFBF99 /* DangerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DangerCollectionViewCell.xib; sourceTree = "<group>"; };
 		87A8A5E02A6FE9AD00AF631C /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		87A8A5E42A6FFABC00AF631C /* HalfCircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircleChartView.swift; sourceTree = "<group>"; };
 		87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
@@ -352,8 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				04A7510C2A0BCD510099619C /* ChildInfoViewController.swift */,
-				04340A582A1FD48100F69B19 /* DangerCardCell.xib */,
-				04340A5A2A1FD56400F69B19 /* DangerCollectionViewCell.swift */,
 				04B91C1A2A30ED5700626AF2 /* ToxicPersonCell.xib */,
 				04B91C1C2A30ED8500626AF2 /* ToxicPersonCollectionViewCell.swift */,
 				04BCF2962A33A4E800202D6D /* humorCell.xib */,
@@ -362,6 +360,8 @@
 				87B5A1802A8CED0D00476E6E /* IndicatorCollectionViewCell.xib */,
 				872F8A542A937B420034DB2A /* CardCollectionViewCell.swift */,
 				872F8A552A937B430034DB2A /* CardCollectionViewCell.xib */,
+				87A3F1562A94CBCE00AFBF99 /* DangerCollectionViewCell.swift */,
+				87A3F1572A94CBCE00AFBF99 /* DangerCollectionViewCell.xib */,
 			);
 			path = "Child State";
 			sourceTree = "<group>";
@@ -912,6 +912,7 @@
 				04BCF2972A33A4E800202D6D /* humorCell.xib in Resources */,
 				87BDF8B72A84E0EF001210F0 /* Assets.xcassets in Resources */,
 				872964062A77D4CF009649B3 /* Contact.storyboard in Resources */,
+				87A3F1592A94CBCE00AFBF99 /* DangerCollectionViewCell.xib in Resources */,
 				872963FD2A77D4AA009649B3 /* Apropos.storyboard in Resources */,
 				049C154629DD85430028A314 /* ChildTableViewCell.xib in Resources */,
 				04D4F0742A01DAEB0033818F /* childCell.xib in Resources */,
@@ -927,7 +928,6 @@
 				040DDCCF2A01285600ED3223 /* Profile.storyboard in Resources */,
 				04850C5629ACC3E4001A27FF /* Main.storyboard in Resources */,
 				04C241AA29ED76C3003C3F97 /* Succes.gif in Resources */,
-				04340A592A1FD48100F69B19 /* DangerCardCell.xib in Resources */,
 				872F8A572A937B430034DB2A /* CardCollectionViewCell.xib in Resources */,
 				0473B4E329E81A5F00E160DD /* Child_SocialMedia_TvCell.xib in Resources */,
 			);
@@ -1004,6 +1004,7 @@
 				049C44A829B1E96400AAA582 /* LoginModel.swift in Sources */,
 				040821AA29D43F4500D7A562 /* Profil.swift in Sources */,
 				87CC77FE2A5E0AAB008FA7F8 /* TargetType.swift in Sources */,
+				87A3F1582A94CBCE00AFBF99 /* DangerCollectionViewCell.swift in Sources */,
 				043C49FB29E43ACA00B5FF9E /* PinConfig.swift in Sources */,
 				04844B5029E0269E008AFBF6 /* ResetPwdViewController.swift in Sources */,
 				87ACEBB42A8E1E0D0000D256 /* SubSideTableViewCell.swift in Sources */,
@@ -1018,7 +1019,6 @@
 				04850C4F29ACC3E3001A27FF /* AppDelegate.swift in Sources */,
 				04E27AE52A69595700BDA1F1 /* homeVC.swift in Sources */,
 				87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */,
-				04340A5B2A1FD56400F69B19 /* DangerCollectionViewCell.swift in Sources */,
 				87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */,
 				87ED64972A8D8A9500091C61 /* SideMenuTableViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,

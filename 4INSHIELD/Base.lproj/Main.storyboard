@@ -2486,7 +2486,7 @@
                                                                     <constraint firstAttribute="height" constant="150" id="MrB-xX-b1p"/>
                                                                 </constraints>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3eb-9G-exu">
-                                                                    <size key="itemSize" width="132" height="108"/>
+                                                                    <size key="itemSize" width="202" height="150"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2713,7 +2713,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <activityIndicatorView opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="zda-b0-9HA">
-                                                                <rect key="frame" x="134.33333333333334" y="41.666666666666742" width="20" height="20"/>
+                                                                <rect key="frame" x="134.33333333333334" y="31.666666666666742" width="20" height="20"/>
                                                                 <color key="color" name="AccentColor"/>
                                                             </activityIndicatorView>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CgB-iN-Bub">
@@ -2736,7 +2736,7 @@
                                                             <constraint firstItem="CgB-iN-Bub" firstAttribute="top" secondItem="iGK-CZ-OWS" secondAttribute="bottom" constant="22" id="Is7-8t-RmK"/>
                                                             <constraint firstAttribute="trailing" secondItem="CgB-iN-Bub" secondAttribute="trailing" constant="8" id="QlO-T0-R6I"/>
                                                             <constraint firstItem="zda-b0-9HA" firstAttribute="centerX" secondItem="iGK-CZ-OWS" secondAttribute="centerX" id="d5I-e0-7DH"/>
-                                                            <constraint firstItem="zda-b0-9HA" firstAttribute="top" secondItem="iGK-CZ-OWS" secondAttribute="bottom" constant="12" id="gse-sl-hJA"/>
+                                                            <constraint firstItem="zda-b0-9HA" firstAttribute="top" secondItem="iGK-CZ-OWS" secondAttribute="bottom" constant="2" id="gse-sl-hJA"/>
                                                             <constraint firstItem="iGK-CZ-OWS" firstAttribute="top" secondItem="GiX-kU-mDG" secondAttribute="top" constant="8" id="lX9-Oy-7C4"/>
                                                             <constraint firstItem="CgB-iN-Bub" firstAttribute="leading" secondItem="GiX-kU-mDG" secondAttribute="leading" constant="8" id="mna-8V-Y1K"/>
                                                             <constraint firstAttribute="height" constant="180" id="sdz-Xf-Iuy"/>
@@ -2795,6 +2795,14 @@
                                                                 <color key="textColor" name="AccentColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lYY-4E-OM9">
+                                                                <rect key="frame" x="186.66666666666666" y="38" width="20" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="20" id="SUO-nl-C6W"/>
+                                                                    <constraint firstAttribute="width" constant="20" id="fDH-fl-QtJ"/>
+                                                                </constraints>
+                                                                <color key="color" name="AccentColor"/>
+                                                            </activityIndicatorView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT8-Tg-KJF">
                                                                 <rect key="frame" x="20" y="56" width="365" height="60"/>
                                                                 <constraints>
@@ -2820,7 +2828,9 @@
                                                             </collectionView>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="lYY-4E-OM9" firstAttribute="centerX" secondItem="dey-q8-e7J" secondAttribute="centerX" id="3Xf-XU-bpd"/>
                                                             <constraint firstItem="tT8-Tg-KJF" firstAttribute="top" secondItem="fG6-n1-GZb" secondAttribute="bottom" constant="20" id="Eul-RK-rcV"/>
+                                                            <constraint firstItem="lYY-4E-OM9" firstAttribute="top" secondItem="fG6-n1-GZb" secondAttribute="bottom" constant="2" id="MpR-SX-73a"/>
                                                             <constraint firstItem="MYJ-b7-6eX" firstAttribute="leading" secondItem="fG6-n1-GZb" secondAttribute="leading" id="NQD-P8-9ZC"/>
                                                             <constraint firstItem="fG6-n1-GZb" firstAttribute="top" secondItem="dey-q8-e7J" secondAttribute="top" constant="12" id="hgh-bb-UgY"/>
                                                             <constraint firstAttribute="height" constant="340" id="m8d-VG-2jd"/>
@@ -2911,7 +2921,7 @@
                         <outlet property="dangerCollectionView" destination="cg1-Kl-eF9" id="MMJ-L7-eOd"/>
                         <outlet property="dangerLabel" destination="f6r-MC-x72" id="ZRs-h5-h4Y"/>
                         <outlet property="dateTF" destination="aKK-MW-KzP" id="sBr-UK-wQq"/>
-                        <outlet property="erroIndicatorLabel" destination="tT8-Tg-KJF" id="dnS-Iw-DE0"/>
+                        <outlet property="erroIndicatorLabel" destination="tT8-Tg-KJF" id="VvE-89-kwA"/>
                         <outlet property="errorLbl" destination="UDI-zK-8kz" id="Ew1-Ao-sQb"/>
                         <outlet property="humorChart" destination="KFr-DY-vzV" id="myL-pj-qM1"/>
                         <outlet property="humorCollectionView" destination="CgB-iN-Bub" id="9G7-S5-4v7"/>
@@ -2922,7 +2932,8 @@
                         <outlet property="imageView5" destination="iuL-lo-K1s" id="bSD-WF-Lpr"/>
                         <outlet property="indicateurCollectionView" destination="MYJ-b7-6eX" id="kaf-i8-gto"/>
                         <outlet property="lineChartView" destination="c9v-E0-yDx" id="o3T-GA-Wc1"/>
-                        <outlet property="loadingIndicator" destination="pgb-in-g1l" id="9cz-V5-rOV"/>
+                        <outlet property="loadingActivityIndicator" destination="lYY-4E-OM9" id="AAM-cS-UFp"/>
+                        <outlet property="loadingIndicator" destination="pgb-in-g1l" id="dPP-F2-n9e"/>
                         <outlet property="loadingIndicatorCarte" destination="WMk-74-eHk" id="b9F-04-b8b"/>
                         <outlet property="loadingPersonIndicator" destination="6aB-NN-p8N" id="gqy-HJ-1Ci"/>
                         <outlet property="loadingPlatformIndicator" destination="wHE-XR-5ZT" id="O3i-AT-e8a"/>

@@ -30,8 +30,7 @@ class IndicatorCollectionViewCell: UICollectionViewCell {
             self.iconImage.af.setImage(withURL: url)
             print(url)
         }
-        self.iconImage.backgroundColor = UIColor(patternImage: UIImage(named: background)!)
-
+        iconImage.backgroundColor = UIColor(named: background)
          // Convert toxicity to percentage and display
          if let toxicityRate = Double(toxicity) {
              let percentage = Int(toxicityRate * 100)

@@ -121,3 +121,36 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 
 //SideBar: 
 "param" = "Paramètres";
+
+//MARK: Child Profile1
+"First_name" = "Prénom";
+"Last_name" = "Nom";
+"birthday" = "Date de naissance ";
+"Gender" = "Genre";
+"Next" = "Suivant";
+"LabelText" = "Veuillez entrer les informations requises pour compléter le profil de votre enfant" ;
+
+"boy" = "Garçon";
+"girl" = "Fille";
+"other" = "Non précisé";
+"edit_child" = "Modifier le profil de l'enfant";
+"social_media_child" = "Les réseaux sociaux de";
+"add_media" = " Ajoutez un réseau social";
+"add_another_profile" = "Ajouter un nouveau profil";
+"update" = "Modifier";
+"cancel" = "Annuler";
+"create" = "Créer";
+"delete" = "Supprimer";
+"supp_alert" = "Voulez-vous vraiment supprimer votre compte?";
+"saisir_username" = "Saisissez votre nom d'utilisateur";
+
+//MARK: Parent Profile
+"profile" = "Profil";
+"modify_profile" = "Modifier mon profile";
+"my_children" = "Mes Enfants";
+"Female" = "Femme";
+"male" = "Homme";
+"supp_acc" = "Supprimer le compte";
+"supp_acc_text" = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données.";
+"supp" = "Supprimer le compte";
+"add_child" = "Ajouter un enfant";

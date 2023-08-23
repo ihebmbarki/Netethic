@@ -15,11 +15,11 @@ class ChildrenViewController: UIViewController {
     @IBOutlet weak var backBtn: UIBarButtonItem!
     @IBOutlet weak var listLabel: UILabel!
     @IBOutlet weak var changeLanguageBtn: UIButton!
-
+    @IBOutlet weak var addChildBtn: UIButton!
+    
     var childrenArray = [Child]()
     var decodedChildrenArray = [Childd]()
     var selectedChild: Childd?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,9 @@ class ChildrenViewController: UIViewController {
         // Do any additional setup after loading the view.
 //        getCurrentUserChildren()
         configureTableView()
+        
+        addChildBtn.layer.cornerRadius = addChildBtn.frame.size.height/2
+        addChildBtn.layer.masksToBounds = true
     }
     //MARK: Translation
     func updateLanguageButtonImage() {
@@ -37,6 +40,11 @@ class ChildrenViewController: UIViewController {
                 changeLanguageBtn.setImage(UIImage(named: "eng_white"), for: .normal)
             }
         }
+    }
+    
+    
+    @IBAction func addChildBtnTapped(_ sender: Any) {
+        self.gotoScreen(storyBoardName: "Main", stbIdentifier: "childInfos")
     }
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {

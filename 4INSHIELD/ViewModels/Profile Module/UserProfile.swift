@@ -19,6 +19,7 @@ class UserProfile: KeyboardHandlingBaseVC {
     @IBOutlet weak var enfantsButton: UIButton!
     @IBOutlet weak var modifierButton: UIButton!
     
+    @IBOutlet weak var changeLanguageBtn: UIButton!
     
     var image: UIImage?
     
@@ -28,6 +29,10 @@ class UserProfile: KeyboardHandlingBaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Update localized strings
+        updateLocalizedStrings()
+
         //Load user infos
         getCurrentUserData()
         // Instantiate child view controllers from storyboard
@@ -40,7 +45,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         userView.addSubview(updateViewController!.view)
         updateViewController?.didMove(toParent: self)
         // Underline selected button
-        modifierButton.setUnderline()
+        modifierButton.setUnderline(title: NSLocalizedString("modify_profile", comment: ""))
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
@@ -54,6 +59,12 @@ class UserProfile: KeyboardHandlingBaseVC {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageButtonTapped))
         userPhoto.isUserInteractionEnabled = true
         userPhoto.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
     }
     
     @objc fileprivate func profileImageButtonTapped() {
@@ -126,6 +137,68 @@ class UserProfile: KeyboardHandlingBaseVC {
         }
     }
     
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+            }
+        }
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
+        
+        // Update button titles using NSLocalizedString
+        modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        
+        // Set underline and alpha based on the current language
+        if LanguageManager.shared.currentLanguage == "en" {
+            modifierButton.setUnderline(title: "Edit my profile")
+            enfantsButton.setUnderline(title: "My children")
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            modifierButton.setUnderline(title: "Modifier mon profil")
+            enfantsButton.setUnderline(title: "Mes Enfants")
+        }
+    }
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+
+        if LanguageManager.shared.currentLanguage == "en" {
+            languageAlert.title = "Choose Language"
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            languageAlert.title = "Choisir la langue"
+        }
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+                }
+                self.updateLocalizedStrings()
+                NotificationCenter.default.post(name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
     @IBAction func changePicTaped(_ sender: Any) {
         print("Change profile picture")
         presentPicker()
@@ -147,7 +220,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         enfantsViewController?.didMove(toParent: self)
         
         // Underline selected button
-        enfantsButton.setUnderline()
+        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
         modifierButton.removeUnderline()
         
         // Set text color opacity for selected button to 100%
@@ -171,7 +244,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         updateViewController?.didMove(toParent: self)
         
         // Underline selected button
-        modifierButton.setUnderline()
+        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
@@ -199,15 +272,14 @@ class UserProfile: KeyboardHandlingBaseVC {
 }
 
 extension UIButton {
-    func setUnderline() {
-        guard let title = self.titleLabel?.text else { return }
+    func setUnderline(title: String) {
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         self.setAttributedTitle(attributedString, for: .normal)
     }
     
     func removeUnderline() {
-        guard let title = self.titleLabel?.text else { return }
+        guard let title = self.title(for: .normal) else { return }
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.removeAttribute(.underlineStyle, range: NSRange(location: 0, length: attributedString.length))
         self.setAttributedTitle(attributedString, for: .normal)

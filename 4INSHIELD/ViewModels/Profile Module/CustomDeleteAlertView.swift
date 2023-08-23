@@ -32,6 +32,9 @@ class CustomDeleteAlertView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
 
+        // Listen for language change notification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChangeNotification), name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+        
         resetForm()
         
         // Make the UITextField borderless with an underline
@@ -66,6 +69,25 @@ class CustomDeleteAlertView: UIViewController {
             self.alertDeleteView.alpha = 1.0;
             self.alertDeleteView.frame.origin.y = self.alertDeleteView.frame.origin.y - 0
         })
+    }
+    
+    deinit {
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+     }
+
+     @objc func handleLanguageChangeNotification() {
+         // Update localized strings when language changes
+         updateLocalizedStrings()
+     }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        alertLbl.text = NSLocalizedString("supp_alert", tableName: nil, bundle: bundle, value: "", comment: "")
+        enterUsernameLbl.text = NSLocalizedString("saisir_username", tableName: nil, bundle: bundle, value: "", comment: "")
+
+        deleteBtn.setTitle(NSLocalizedString("delete", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
     }
     
     func resetForm() {

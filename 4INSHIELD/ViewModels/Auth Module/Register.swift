@@ -94,11 +94,6 @@ class Register: KeyboardHandlingBaseVC {
         passwordError.isHidden = true
         confirmpwdError.isHidden = true
 
-//        usernameError.text = "Required"
-//        emailError.text = "Required"
-//        passwordError.text = "Required"
-//        confirmpwdError.text = "Required"
-
         usernameTF.text = ""
         emailTF.text = ""
         passwordTF.text = ""

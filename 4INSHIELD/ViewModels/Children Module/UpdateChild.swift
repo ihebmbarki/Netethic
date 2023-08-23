@@ -12,10 +12,26 @@ import DLRadioButton
 class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //IBOutlets
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var childPhoto: UIImageView!
     @IBOutlet weak var PrenomTf: UITextField!
     @IBOutlet weak var nomTf: UITextField!
+    @IBOutlet weak var firstnameErrorLbl: UILabel!
+    @IBOutlet weak var lastnameErorLbl: UILabel!
+    @IBOutlet weak var dateErrorLbl: UILabel!
     
+    @IBOutlet weak var changeLanguageBtn: UIButton!
+    
+    @IBOutlet weak var prenomLbl: UILabel!
+    @IBOutlet weak var nomLbl: UILabel!
+    @IBOutlet weak var genreLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    
+    @IBOutlet weak var garçonLbl: UILabel!
+    @IBOutlet weak var filleLbl: UILabel!
+    @IBOutlet weak var nonPreciseLbl: UILabel!
+    
+
     @IBOutlet weak var maleRadioButton: DLRadioButton!
     @IBOutlet weak var femaleRadioButton: DLRadioButton!
     @IBOutlet weak var otherRadioButton: DLRadioButton!
@@ -23,10 +39,15 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var SocialMediaTableView: UITableView!
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var socialText: UILabel!
+    
+    @IBOutlet weak var socialView: UIView!
     @IBOutlet weak var addNewProfileBtn: UIButton!
     @IBOutlet weak var ddUserAccBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var updateBtn: UIButton!
+    
     let pickerView = UIPickerView()
     let datePicker = UIDatePicker()
     var index = 0
@@ -54,6 +75,11 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        resetForm()
+        
+        // Update localized strings
+        updateLocalizedStrings()
+        
         //search bar
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -77,10 +103,144 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         
         configureUI()
         SetUpDesign()
-        loadChildInfo()
-        //        getCurrentChildSocialMedia()
+        
+        let currentLanguage = LanguageManager.shared.currentLanguage
+        loadChildInfo(language: currentLanguage)
+        //getCurrentChildSocialMedia()
         configureTableView()
         
+        // Set content hugging and compression resistance priorities
+        socialText.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        nameLbl.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        socialText.widthAnchor.constraint(lessThanOrEqualToConstant: 230).isActive = true
+        
+    }
+
+    func updateLanguageButtonImage() {
+        if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
+            if selectedLanguage == "fr" {
+                changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+            } else if selectedLanguage == "en" {
+                changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+            }
+        }
+    }
+    
+    func resetForm() {
+        updateBtn.isEnabled = false
+
+        firstnameErrorLbl.isHidden = true
+        lastnameErorLbl.isHidden = true
+        dateErrorLbl.isHidden = true
+    }
+    
+    func checkForValidForm()
+    {
+        if firstnameErrorLbl.isHidden && lastnameErorLbl.isHidden && dateErrorLbl.isHidden
+        {
+            updateBtn.isEnabled = true
+        }
+        else
+        {
+            updateBtn.isEnabled = false
+        }
+    }
+    
+    @IBAction func firstnameChanged(_ sender: Any) {
+        if let firstname = PrenomTf.text {
+            if let errorMessage = invalidfirstName(firstname) {
+                firstnameErrorLbl.text = errorMessage
+                firstnameErrorLbl.isHidden = false
+                PrenomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                PrenomTf.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                firstnameErrorLbl.isHidden = true
+                PrenomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                PrenomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidfirstName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+            return nil
+        }
+    
+    @IBAction func laastnameChanged(_ sender: Any) {
+        if let lastname = nomTf.text {
+            if let errorMessage = invalidlastName(lastname) {
+                lastnameErorLbl.text = errorMessage
+                lastnameErorLbl.isHidden = false
+                nomTf.layer.borderColor = UIColor(named: "redControl")?.cgColor
+                nomTf.setupRightSideImage(image: "error", colorName: "redControl")
+            } else {
+                lastnameErorLbl.isHidden = true
+                nomTf.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+                nomTf.setupRightSideImage(image: "done", colorName: "vertDone")
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidlastName(_ value: String) -> String?
+        {
+            if value.isEmpty {
+                if LanguageManager.shared.currentLanguage == "fr"{
+                return "Ce champ ne peut pas être vide. "
+                }
+                if LanguageManager.shared.currentLanguage == "en"{
+                return "This field cannot be blank."
+                }
+            }
+            return nil
+        }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        if let date = dateTextField.text {
+            if let errorMessage = invalidDate(date) {
+                dateErrorLbl.text = errorMessage
+                dateErrorLbl.isHidden = false
+                dateTextField.layer.borderColor = UIColor(named: "redControl")?.cgColor
+            } else {
+                dateErrorLbl.isHidden = true
+                dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+            }
+        }
+        checkForValidForm()
+    }
+    
+    func invalidDate(_ value: String) -> String? {
+        if value.isEmpty {
+            if LanguageManager.shared.currentLanguage == "fr" {
+                return "Ce champ ne peut pas être vide."
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                return "This field cannot be blank."
+            }
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if dateFormatter.date(from: value) == nil {
+                if LanguageManager.shared.currentLanguage == "fr" {
+                    return "Format de date invalide."
+                }
+                if LanguageManager.shared.currentLanguage == "en" {
+                    return "Invalid date format."
+                }
+            }
+        }
+        return nil
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -114,6 +274,8 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             self.dateTextField.text = dateFormatter.string(from: datePicker.date)
+            self.dateErrorLbl.isHidden = true
+            self.dateTextField.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         }))
         
         // Present the alert controller
@@ -124,11 +286,6 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     
     //register tableView Cell
     func configureTableView(){
-        SocialMediaTableView.layer.cornerRadius = 10.0
-        SocialMediaTableView.layer.borderWidth = 1.0
-        SocialMediaTableView.layer.borderColor = UIColor.lightGray.cgColor
-        SocialMediaTableView.layer.masksToBounds = true
-        
         SocialMediaTableView.delegate = self
         SocialMediaTableView.dataSource = self
         SocialMediaTableView.register(UINib.init(nibName: "Child_SocialMedia_TvCell", bundle: nil), forCellReuseIdentifier: "ChildSocialMediaCell")
@@ -140,7 +297,9 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI()
-        //self.getCurrentChildSocialMedia()
+//        self.getCurrentChildSocialMedia()
+        updateLocalizedStrings()
+        updateLanguageButtonImage()
     }
     
     func SetUpDesign() {
@@ -176,13 +335,26 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         dateTextField.layer.masksToBounds = true
         dateTextField.leftView = datePaddingView
         dateTextField.leftViewMode = .always
-        
+                
         //Set up buttons
-        cancelBtn.layer.borderWidth = 1
+        cancelBtn.layer.borderWidth = 0.5
+        cancelBtn.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowColor = UIColor(named: "grisBorder")?.cgColor
+        cancelBtn.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+        cancelBtn.layer.shadowOpacity = 0.5
+        cancelBtn.layer.shadowRadius = 0.0
+        cancelBtn.layer.masksToBounds = false
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
+        
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
+        
+        socialView.layer.cornerRadius = 10.0
+        socialView.layer.borderWidth = 1.0
+        socialView.layer.masksToBounds = true
+        socialView.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+        
     }
     
     func verifyProfileList(profileList: [Profile]) {
@@ -264,8 +436,61 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    
+    @IBAction func changeLanguageBtnTapped(_ sender: Any) {
+        let languages = ["English", "Français"]
+        let languageAlert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+
+        if LanguageManager.shared.currentLanguage == "en" {
+            languageAlert.title = "Choose Language"
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            languageAlert.title = "Choisir la langue"
+        }
+        
+        for language in languages {
+            let action = UIAlertAction(title: language, style: .default) { action in
+                if action.title == "English" {
+                    LanguageManager.shared.currentLanguage = "en"
+                    UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "eng_white1"), for: .normal)
+                } else if action.title == "Français" {
+                    LanguageManager.shared.currentLanguage = "fr"
+                    UserDefaults.standard.set("fr", forKey: "selectedLanguage")
+                    self.changeLanguageBtn.setImage(UIImage(named: "fr_white1"), for: .normal)
+                }
+                self.updateLocalizedStrings()
+                self.view.setNeedsLayout() // Refresh the layout of the view
+            }
+            languageAlert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        languageAlert.addAction(cancelAction)
+        
+        present(languageAlert, animated: true, completion: nil)
+    }
+    
+    func updateLocalizedStrings() {
+        let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
+        
+        titleLbl.text = NSLocalizedString("edit_child", tableName: nil, bundle: bundle, value: "", comment: "")
+        prenomLbl.text = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        nomLbl.text = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "")
+        genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
+        dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
+        garçonLbl.text = NSLocalizedString("boy", tableName: nil, bundle: bundle, value: "", comment: "")
+        filleLbl.text = NSLocalizedString("girl", tableName: nil, bundle: bundle, value: "", comment: "")
+        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
+        socialText.text = NSLocalizedString("social_media_child", tableName: nil, bundle: bundle, value: "", comment: "")
+        addNewProfileBtn.setTitle(NSLocalizedString("add_media", tableName: nil, bundle: bundle, value: "", comment: "add media"), for: .normal)
+        ddUserAccBtn.setTitle(NSLocalizedString("add_another_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+    }
+    
     @IBAction func backBtnTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func radioButtonTapped(_ sender: DLRadioButton) {
@@ -281,13 +506,15 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         }
     }
     
-    func loadChildInfo() {
+    func loadChildInfo(language: String) {
         guard let savedChildID = UserDefaults.standard.value(forKey: "childID") as? Int else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchChild(withID: savedChildID) { child in
                 self.PrenomTf.text = child.user?.first_name
                 self.nomTf.text = child.user?.last_name
-                
+                //Show child name for socials
+                self.nameLbl.text = child.user?.first_name
+
                 if child.user!.gender == "M" {
                     self.maleRadioButton.isSelected = true
                 } else if child.user!.gender == "F" {
@@ -302,7 +529,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
                     self.dateTextField.text = dateFormatter.string(from: birthdate)
                 }
                 
-                if (child.user?.photo)!.isEmpty {
+                if (child.user?.photo ?? "").isEmpty {
                     if child.user!.gender == "M" {
                         self.childPhoto.image = UIImage(imageLiteralResourceName: "malePic")
                     } else {
@@ -313,6 +540,11 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
                 }
             }
         }
+    }
+    
+    func languageDidChange(newLanguage: String) {
+        LanguageManager.shared.currentLanguage = newLanguage
+        loadChildInfo(language: newLanguage)
     }
     
     func goToScreen(withId identifier: String) {

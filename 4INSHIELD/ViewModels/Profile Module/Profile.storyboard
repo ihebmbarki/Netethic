@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xbr-TI-xzU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="n7d-3E-Hn4">
-                                        <rect key="frame" x="15" y="0.0" width="363" height="759"/>
+                                        <rect key="frame" x="15" y="0.0" width="363" height="777"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQe-tf-nxg">
                                                 <rect key="frame" x="20" y="0.0" width="343" height="365"/>
@@ -514,10 +514,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-WY-wZT">
-                                                <rect key="frame" x="20" y="577" width="343" height="182"/>
+                                                <rect key="frame" x="20" y="577" width="343" height="200"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FwC-Vh-O1M">
-                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="182"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="200"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Supprimer le compte " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-gk-Ltl">
                                                                 <rect key="frame" x="8" y="7.9999999999999982" width="167.33333333333334" height="20.333333333333329"/>
@@ -526,10 +526,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B4J-fi-NLi">
-                                                                <rect key="frame" x="8" y="33.333333333333371" width="310" height="80"/>
+                                                                <rect key="frame" x="8" y="33.333333333333371" width="310" height="50"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="80" id="OJi-lU-tpZ"/>
+                                                                    <constraint firstAttribute="height" constant="50" id="OJi-lU-tpZ"/>
                                                                     <constraint firstAttribute="width" constant="310" id="dod-of-qjT"/>
                                                                 </constraints>
                                                                 <string key="text">La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données. </string>
@@ -538,8 +538,12 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-QU-clb">
-                                                                <rect key="frame" x="8" y="118.33333333333336" width="187.66666666666666" height="34.333333333333329"/>
+                                                                <rect key="frame" x="8" y="88.333333333333371" width="190" height="35"/>
                                                                 <color key="backgroundColor" red="0.5" green="0.013815433681866551" blue="0.041918759317508159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="5mX-nU-ves"/>
+                                                                    <constraint firstAttribute="width" constant="190" id="aBL-ds-qu3"/>
+                                                                </constraints>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Supprimer le compte "/>
@@ -551,6 +555,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="B4J-fi-NLi" firstAttribute="top" secondItem="bdh-gk-Ltl" secondAttribute="bottom" constant="5.0000000000000426" id="JXX-7k-0Rb"/>
+                                                            <constraint firstAttribute="height" constant="200" id="NPj-AX-hba"/>
                                                             <constraint firstItem="bdh-gk-Ltl" firstAttribute="top" secondItem="FwC-Vh-O1M" secondAttribute="topMargin" id="OcC-e7-H2e"/>
                                                             <constraint firstItem="aQL-QU-clb" firstAttribute="leading" secondItem="B4J-fi-NLi" secondAttribute="leading" id="PYW-DE-9YN"/>
                                                             <constraint firstItem="bdh-gk-Ltl" firstAttribute="leading" secondItem="FwC-Vh-O1M" secondAttribute="leadingMargin" id="UP4-jb-3si"/>
@@ -559,7 +564,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGC-cG-PuA">
-                                                        <rect key="frame" x="323" y="0.0" width="20" height="182"/>
+                                                        <rect key="frame" x="323" y="0.0" width="20" height="200"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="U6O-XQ-p5w"/>
@@ -583,7 +588,6 @@
                                     <constraint firstItem="n7d-3E-Hn4" firstAttribute="top" secondItem="x7E-hV-DVT" secondAttribute="top" id="EfL-Dd-XHH"/>
                                     <constraint firstAttribute="trailing" secondItem="n7d-3E-Hn4" secondAttribute="trailing" constant="15" id="Vy4-iY-IJG"/>
                                     <constraint firstItem="n7d-3E-Hn4" firstAttribute="leading" secondItem="x7E-hV-DVT" secondAttribute="leading" constant="15" id="WNx-RQ-b1g"/>
-                                    <constraint firstAttribute="bottom" secondItem="n7d-3E-Hn4" secondAttribute="bottom" id="uDI-Bk-OqJ"/>
                                 </constraints>
                             </view>
                         </subviews>

@@ -45,7 +45,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         userView.addSubview(updateViewController!.view)
         updateViewController?.didMove(toParent: self)
         // Underline selected button
-        modifierButton.setUnderline()
+        modifierButton.setUnderline(title: NSLocalizedString("modify_profile", comment: ""))
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
@@ -151,16 +151,19 @@ class UserProfile: KeyboardHandlingBaseVC {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         
         profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
+        
+        // Update button titles using NSLocalizedString
         modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        // Manual button title translation based on the selected language
-          if LanguageManager.shared.currentLanguage == "en" {
-              modifierButton.setTitle("Edit my profile", for: .normal)
-              enfantsButton.setTitle("My children", for: .normal)
-          } else if LanguageManager.shared.currentLanguage == "fr" {
-              modifierButton.setTitle("Modifier mon profile", for: .normal)
-              enfantsButton.setTitle("Mes Enfants", for: .normal)
-          }
+        
+        // Set underline and alpha based on the current language
+        if LanguageManager.shared.currentLanguage == "en" {
+            modifierButton.setUnderline(title: "Edit my profile")
+            enfantsButton.setUnderline(title: "My children")
+        } else if LanguageManager.shared.currentLanguage == "fr" {
+            modifierButton.setUnderline(title: "Modifier mon profil")
+            enfantsButton.setUnderline(title: "Mes Enfants")
+        }
     }
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
@@ -217,7 +220,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         enfantsViewController?.didMove(toParent: self)
         
         // Underline selected button
-        enfantsButton.setUnderline()
+        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
         modifierButton.removeUnderline()
         
         // Set text color opacity for selected button to 100%
@@ -241,7 +244,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         updateViewController?.didMove(toParent: self)
         
         // Underline selected button
-        modifierButton.setUnderline()
+        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
@@ -269,15 +272,14 @@ class UserProfile: KeyboardHandlingBaseVC {
 }
 
 extension UIButton {
-    func setUnderline() {
-        guard let title = self.titleLabel?.text else { return }
+    func setUnderline(title: String) {
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         self.setAttributedTitle(attributedString, for: .normal)
     }
     
     func removeUnderline() {
-        guard let title = self.titleLabel?.text else { return }
+        guard let title = self.title(for: .normal) else { return }
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.removeAttribute(.underlineStyle, range: NSRange(location: 0, length: attributedString.length))
         self.setAttributedTitle(attributedString, for: .normal)

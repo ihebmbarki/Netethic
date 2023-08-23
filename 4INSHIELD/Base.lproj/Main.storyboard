@@ -1639,10 +1639,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="qVg-WP-8Sn">
-                                                                <rect key="frame" x="-15" y="-17" width="408" height="226"/>
+                                                                <rect key="frame" x="-15" y="-17" width="423" height="226"/>
                                                             </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4inshield logo blanc" translatesAutoresizingMaskIntoConstraints="NO" id="x6I-ua-Asw">
-                                                                <rect key="frame" x="82" y="46" width="214" height="100"/>
+                                                                <rect key="frame" x="82" y="46" width="229" height="100"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="100" id="d29-6K-gcj"/>
                                                                 </constraints>

@@ -1,9 +1,3 @@
-//
-//  ChildProfileAdded.swift
-//  4INSHIELD
-//
-//  Created by iheb mbarki on 23/3/2023.
-//
 import Foundation
 import UIKit
 import FLAnimatedImage
@@ -38,7 +32,9 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
         super.viewDidLoad()
 
         //appel Progressbar
-        setupProgressBarWithDifferentDimensions()
+        if  SharedVariables.shared.wizzard != 6{
+            setupProgressBarWithDifferentDimensions()
+        }
         // Do any additional setup after loading the view.
         continueButton.setupBorderBtn()
         continueButton.applyGradient()
@@ -218,7 +214,7 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
                         /// Handle success, parse JSON data
                         do {
                             let jsonData = try JSONDecoder().decode(WizardResponse.self, from: JSONSerialization.data(withJSONObject: data))
-                            
+                            SharedVariables.shared.wizzard = 5
                             print("save!!!!!")
                         } catch let error {
                             /// Handle json decode error
@@ -268,14 +264,13 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
     
     
     @IBAction func backButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func continuebutton(_ sender: Any) {
-        platform()
+        if  SharedVariables.shared.wizzard != 6{
+            platform()
+        }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "wizardStepViewController")
         vc.modalPresentationStyle = .overFullScreen

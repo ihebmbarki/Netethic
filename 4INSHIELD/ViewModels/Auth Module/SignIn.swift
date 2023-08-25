@@ -267,7 +267,7 @@ class SignIn: KeyboardHandlingBaseVC {
                                             self.goToScreen(withId: "ChildDevice")
                                         case 5:
                                             self.loadingIndicator.stopAnimating()
-                                            self.goToScreen(withId: "Congrats")
+                                            self.goToScreen(withId: "wizardStepViewController")
                                         case 6:
                                             self.loadingIndicator.stopAnimating()
                                                 let storyboard = UIStoryboard(name: "Children", bundle: nil)
@@ -622,6 +622,8 @@ class SignIn: KeyboardHandlingBaseVC {
                 } else {
                     if let lastJourney = userJourneys.last {
                         print (lastJourney.wizard_step)
+                        SharedVariables.shared.wizzard = lastJourney.wizard_step
+                                        print(SharedVariables.shared.wizzard)
                         completion(lastJourney.wizard_step)
                     } else {
                         completion(0)

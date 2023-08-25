@@ -12,7 +12,9 @@ import Alamofire
 
 class CustomAlertViewController: UIViewController {
     let parties = ["Joyeux(se)","Stressé(e)"]
+    let partiesEn = ["Happy","Stressed"]
     var valeur = [Double]()
+    @IBOutlet weak var moyenneTitleLabel: UILabel!
     @IBOutlet weak var parentView: UIView! {
         didSet {
             parentView.backgroundColor = UIColor.black.withAlphaComponent(0.2) // Transparent background
@@ -20,9 +22,10 @@ class CustomAlertViewController: UIViewController {
     }
     @IBOutlet weak var halfPieChartView: PieChartView!
     
-
+    var langue = String()
     override func viewDidLoad() {
             super.viewDidLoad()
+        
             view.backgroundColor = UIColor.black.withAlphaComponent(0.5) // Transparent background
             
             halfPieChartView.holeColor = .white
@@ -47,23 +50,56 @@ class CustomAlertViewController: UIViewController {
             halfPieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
             
             // Do any additional setup after loading the view.
+        if LanguageManager.shared.currentLanguage == "fr"{
             self.setDataCount(2, range: 100)
-            
+        }
+        if LanguageManager.shared.currentLanguage == "en"{
+            self.setDataCountEn(2, range: 100)
+        }
             let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView))
             parentView.addGestureRecognizer(tap)
         }
-        
+    
         @objc func dismissView() {
             self.dismiss(animated: true)
         }
         
-        func setDataCount(_ count: Int, range: Double) {
+    func setDataCount(_ count: Int, range: Double) {
             let entries = (0..<count).map { (i) -> PieChartDataEntry in
                 // IMPORTANT: In a PieChart, no values (Entry) should have the same xIndex (even if from different DataSets), since no values can be drawn above each other.
                 return PieChartDataEntry(value: valeur[i],
                                          label: parties[i % parties.count])
             }
+        moyenneTitleLabel.text = " Moyenne générale de l'humeur"
+            let set = PieChartDataSet(entries: entries, label: "")
+            set.sliceSpace = 3
+            set.selectionShift = 5
+            set.colors = [UIColor(named: "SuccessColorChart")!, UIColor(named: "FailureColorChart")!]
             
+            let data = PieChartData(dataSet: set)
+            
+            let pFormatter = NumberFormatter()
+            pFormatter.numberStyle = .percent
+            pFormatter.maximumFractionDigits = 2
+            pFormatter.multiplier = 2
+            pFormatter.percentSymbol = " %"
+            data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
+            
+            data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 17)!)
+            data.setValueTextColor(.black)
+            
+            halfPieChartView.data = data
+            
+            halfPieChartView.setNeedsDisplay()
+        
+    }
+    func setDataCountEn(_ count: Int, range: Double) {
+            let entries = (0..<count).map { (i) -> PieChartDataEntry in
+                // IMPORTANT: In a PieChart, no values (Entry) should have the same xIndex (even if from different DataSets), since no values can be drawn above each other.
+                return PieChartDataEntry(value: valeur[i],
+                                         label: partiesEn[i % parties.count])
+            }
+        moyenneTitleLabel.text = "Overall Mood Average "
             let set = PieChartDataSet(entries: entries, label: "")
             set.sliceSpace = 3
             set.selectionShift = 5

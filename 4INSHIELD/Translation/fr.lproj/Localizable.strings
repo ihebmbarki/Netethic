@@ -82,6 +82,10 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "rapport" = "Humeur générale au quotidien";
 "moyenne" = "Humeur générale moyenne";
 "moyenneBt" = "Moyenne général";
+"activite" = "Indicateurs d'activités";
+"personne" = "personnes";
+
+
  
 //MARK: Child Profile
 "First_name" = "Prénom";

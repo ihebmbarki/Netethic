@@ -116,7 +116,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     
     func resetForm() {
         updateBtn.isEnabled = false
-
+        updateBtn.setTitleColor(.white, for: .disabled) // Changer la couleur du texte en blanc pour l'état désactivé
         nameError.isHidden = true
         lastnameError.isHidden = true
         emailError.isHidden = true
@@ -128,6 +128,8 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         if nameError.isHidden && lastnameError.isHidden && emailError.isHidden && dateError.isHidden
         {
             updateBtn.isEnabled = true
+            updateBtn.setTitleColor(.white, for: .disabled) // Changer la couleur du texte en blanc pour l'état désactivé
+
         }
         else
         {

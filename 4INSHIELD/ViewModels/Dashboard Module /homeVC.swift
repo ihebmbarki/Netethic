@@ -1,10 +1,3 @@
-//
-//  homeVC.swift
-//  4INSHIELD
-//
-//  Created by iheb mbarki on 15/3/2023.
-//
-
 import UIKit
 import Foundation
 import DGCharts
@@ -37,9 +30,23 @@ class homeVC: UIViewController, ChartViewDelegate {
     let signIn = SignIn()
     
     var days: [Double] = []
-    
+    var nbToxic = Int()
+    @IBOutlet weak var circleView: UIView!{
+        didSet{
+            circleView.layer.cornerRadius = circleView.frame.size.width / 2
+
+        }
+    }
+    @IBOutlet weak var circleImage: UIImageView!{
+        didSet{
+            circleImage.image = UIImage(named: "imageBackground")?.withRenderingMode(.alwaysTemplate)
+            circleImage.tintColor = UIColor(named: "circle")
+        }
+    }
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var personneLabel: UILabel!
+    @IBOutlet weak var indicatorTitleLabel: UILabel!
     @IBOutlet weak var messageRappotLabel: UILabel!
     @IBOutlet weak var loadingPersonIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -50,6 +57,29 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var lineChartView: LineChartView! {
         didSet {
             lineChartView.addShadowView(width: 2, height: 3, Opacidade: 0.1, radius: 15, shadowRadius: 5)
+        }
+    }
+    
+    @IBOutlet weak var personneToxicView: UIView!{
+        didSet{
+            personneToxicView.layer.shadowColor = UIColor.black.cgColor
+                   personneToxicView.layer.shadowOpacity = 0.2
+                   personneToxicView.layer.shadowOffset = CGSize(width: 2, height: 2)
+                   personneToxicView.layer.shadowRadius = 4
+            
+//            let circleLayer = CAShapeLayer()
+//                        let circleDiameter: CGFloat = 180.0 // Définissez le diamètre du cercle ici
+//            let centerX = personneToxicView.bounds.width / 1.8
+//            let centerY = personneToxicView.bounds.height / 2
+//                        let circleOrigin = CGPoint(x: centerX - circleDiameter / 2, y: centerY - circleDiameter / 2)
+//            let circlePath = UIBezierPath(ovalIn: CGRect(origin: circleOrigin, size: CGSize(width: circleDiameter / 1.6, height: circleDiameter)))
+//
+//
+//                    circleLayer.path = circlePath.cgPath
+//                    circleLayer.fillColor = UIColor.clear.cgColor
+//            circleLayer.strokeColor = UIColor(named: "AccentColor")?.cgColor
+//                    circleLayer.lineWidth = 1.8
+//                    personneToxicView.layer.addSublayer(circleLayer)
         }
     }
     @IBOutlet weak var moyenneGlabel: UILabel!
@@ -90,6 +120,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     //@IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var humorChart: PieChartView!
     
+
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var scoreLbl: UILabel!
     @IBOutlet weak var current_harLbl: UILabel!
@@ -100,7 +131,11 @@ class homeVC: UIViewController, ChartViewDelegate {
     @IBOutlet weak var imageView2: UIImageView!
     @IBOutlet weak var imageView3: UIImageView!
     @IBOutlet weak var imageView4: UIImageView!
-    @IBOutlet weak var imageView5: UIImageView!
+    @IBOutlet weak var imageView5: UIImageView!{
+        didSet{
+            imageView5.layer.cornerRadius = imageView5.frame.size.width / 2
+        }
+    }
     @IBOutlet weak var personsBtn: UIButton!{
         didSet{
             personsBtn.applyGradient()
@@ -141,7 +176,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var indicateurCollectionView: UICollectionView!
     let pieChartView = PieChartView()
-    let subSideBar = SubSideBarViewController()
+
     var background = String()
     
     var sharedDateModel = SharedDateModel.shared
@@ -301,6 +336,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                             self.imageView4.layer.cornerRadius = self.imageView4.frame.height / 2
                             self.imageView4.clipsToBounds = true
                             
+
                             self.personsCollectionView.reloadData()
                         }
                     }.resume()
@@ -539,13 +575,11 @@ class homeVC: UIViewController, ChartViewDelegate {
         APIManager.shareInstance.fetchConcernedRelationship(forPerson: selectedChild?.id ?? 2) { [weak self] concernedRelationship in
             guard let self = self else { return }
             if let toxicCount = concernedRelationship {
-                let toxicPersonsText = String(format: "%02d personnes", toxicCount)
-                if LanguageManager.shared.currentLanguage == "fr" {
-                    let toxicPersonsText = String(format: "%02d personnes", toxicCount)
-                }
-                if LanguageManager.shared.currentLanguage == "en" {
-                    let toxicPersonsText = String(format: "%02d individuals", toxicCount)
-                }
+                let toxicPersonsText = String(format: "%02d ", toxicCount)
+                nbToxic = toxicCount
+//                if LanguageManager.shared.currentLanguage == "en" {
+//                    let toxicPersonsText = String(format: "%02d individuals", toxicCount)
+//                }
                 if toxicCount == 0{
                     
                     loadingPersonIndicator.stopAnimating()
@@ -631,6 +665,10 @@ class homeVC: UIViewController, ChartViewDelegate {
             loadingIndicator.isHidden = true
             messageLineChart.text = ""
             maxScoreLabel.isHidden = false
+            maxScoreLabel.text = "Max score platform par date"
+            if LanguageManager.shared.currentLanguage == "en" {
+                maxScoreLabel.text = "Maximum score on the platform by date"
+            }
             // Create a line dataset
             let lineDataSet = LineChartDataSet(entries: dataEntries, label: "Percentage")
             
@@ -728,7 +766,8 @@ class homeVC: UIViewController, ChartViewDelegate {
         
         BonjourLbl.text = localizedText
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
-        
+        indicatorTitleLabel.text = NSLocalizedString("activite", tableName: nil, bundle: bundle, value: "", comment: "")
+        personneLabel.text = NSLocalizedString("personne", tableName: nil, bundle: bundle, value: "", comment: "")
         RisqueLabel.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
         errorLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
         missingDataLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
@@ -740,8 +779,16 @@ class homeVC: UIViewController, ChartViewDelegate {
         moyenneGnLabel.text = NSLocalizedString("moyenne", tableName: nil, bundle: bundle, value: "", comment: "")
         personsBtn.setTitle(NSLocalizedString("tousPersonneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         moyenneButton.setTitle(NSLocalizedString("moyenneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        if LanguageManager.shared.currentLanguage == "en" {
+            maxScoreLabel.text = "Maximum score on the platform by date"
+        }
+
         dateWeek()
         addConcernedRelationship()
+        cardsCollectionView.reloadData()
+        dangerCollectionView.reloadData()
+        humorCollectionView.reloadData()
+        indicateurCollectionView.reloadData()
         // Translate the text labels in the collection view cells
 //        for cell in cardsCollectionView.visibleCells {
 //            if let cell = cell as? CardCollectionViewCell {
@@ -887,9 +934,9 @@ class homeVC: UIViewController, ChartViewDelegate {
             let fullPhotoUrl =  photo
             imageView5.loadImage(fullPhotoUrl) { [weak self] image in
                 self?.imageView5.image = image
-                self?.imageView5.layer.cornerRadius = (self?.imageView5.frame.size.width ?? 0) / 2
+                self?.imageView5.layer.cornerRadius = (self?.imageView5.frame.size.height ?? 0) / 2
                 self?.imageView5.clipsToBounds = true
-                self?.imageView5.contentMode = .scaleAspectFit // Or another appropriate mode
+//                self?.imageView5.contentMode = .scaleAspectFit // Or another appropriate mode
 
             }
         }
@@ -922,15 +969,20 @@ class homeVC: UIViewController, ChartViewDelegate {
                 if action.title == "English" {
                     LanguageManager.shared.currentLanguage = "en"
                     self.delegateSide?.changeLangage(langue: "en")
-                    self.subSideBar.langue = "en"
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                    let toxicPersonsText = String(format: "%02d individuals", self.nbToxic)
+                    self.percentageLabel.text = toxicPersonsText
+
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
                     UserDefaults.standard.set("fr", forKey: "selectedLanguage")
                     self.delegateSide?.changeLangage(langue: "fr")
-                    self.subSideBar.langue = "fr"
                 }
                         NotificationCenter.default.post(name: NSNotification.Name("NotificationFromB"), object: nil, userInfo: ["message": LanguageManager.shared.currentLanguage])
+                
+     
+                
+
                 self.updateLanguageButtonImage()
                 self.updateLocalizedStrings()
                 
@@ -956,9 +1008,14 @@ extension homeVC : SideBarDelegate {
     
     func selectedCell(_ row: Int) {
         switch row {
-        case 0: break
+        case 0:
             // Profile
-//            self.gotoScreen(storyBoardName: "Profile", stbIdentifier: "userProfile")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let VC = storyboard.instantiateViewController(withIdentifier: "SubSideBarViewController")
+    //        navigationController?.pushViewController(VC, animated: true)
+            VC.modalPresentationStyle = .overFullScreen
+            self.present(VC, animated: true, completion: nil)
+//            self.gotoScreen(storyBoardName: "SubSideBarViewController", stbIdentifier: "SubSideBarViewController")
         case 1:
             // Autorisation d’accés
             self.gotoScreen(storyBoardName: "Autorisation", stbIdentifier: "AutorisationID")
@@ -1224,6 +1281,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                             cell.cardDesc.text = "Tendance actuelle"
                             cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")?.withTintColor(UIColor(named: colorCard)!, renderingMode: .alwaysOriginal)
 //                            cell.backgroundImage.backgroundColor = UIColor(patternImage: backgroundImage)
+                            if LanguageManager.shared.currentLanguage == "en"{
+                                cell.cardDesc.text = "Current trend"
+                            }
                         } else {
                             // Handle nil background image
                             cell.backgroundImage.backgroundColor = .white
@@ -1243,6 +1303,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 loadingIndicatorCarte.isHidden = true
                 cell.cardDesc.text = "Risque de harcèlement à venir"
                 cell.cardTitle.text = "Partiellement harcelé"
+                if LanguageManager.shared.currentLanguage == "en"{
+                    cell.cardDesc.text = "Future Harassment Risk"
+                    cell.cardTitle.text = "Partially Harassed"
+                }
                 cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")!.withTintColor(UIColor(named: "orange")!, renderingMode: .alwaysOriginal)
                 cell.cardLogo.backgroundColor = .white
                 cell.backgroundImage.image = UIImage(named: "orange")!
@@ -1297,15 +1361,23 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                             // Use the score value to determine the cardTitle
                             if score < 30 {
                                 cell.cardTitle.text = "Statut ordinaire"
-                                
+                                if LanguageManager.shared.currentLanguage == "en"{
+                                    cell.cardTitle.text = "Regular Status"
+                                }
                                 cell.backgroundImage.image = UIImage(named: "green")
                                 //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
                             } else if score >= 30 && score < 50 {
                                 cell.cardTitle.text = "Statut Irrégulier"
+                                if LanguageManager.shared.currentLanguage == "en"{
+                                    cell.cardTitle.text = " Irregular Status "
+                                }
                                 cell.backgroundImage.image = UIImage(named: "orange")
                                 //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "orange")!)
                             } else if score >= 50 {
                                 cell.cardTitle.text = "Statut à Risque"
+                                if LanguageManager.shared.currentLanguage == "en"{
+                                    cell.cardTitle.text = "Risky Status"
+                                }
                                 cell.backgroundImage.image = UIImage(named: "red")
                                 //                            cell.containerView.backgroundColor = UIColor(patternImage: UIImage(named: "red")!)
                             }
@@ -1374,23 +1446,23 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             cell.cardTitle.text = pseudo
             
             
-            let carteCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as! ToxicPersonCollectionViewCell
-            carteCell.setData(text: self.toxicPseudos[indexPath.row], image: self.toxicPseudos[indexPath.row])
-            return carteCell
+//            let carteCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as! ToxicPersonCollectionViewCell
+//            carteCell.setData(text: self.toxicPseudos[indexPath.row], image: self.toxicPseudos[indexPath.row])
+//            return carteCell
             
             // Set the image to the cardLogo image view
-            //            if let image = sharedImage {
+                        if let image = sharedImage {
             //                // Resize the image to fit within the cardLogo image view
-            //                let resizedImage = image.resize(to: CGSize(width: 30, height: 30))
-            //
-            //                cell.cardLogo.image = resizedImage
-            //            } else {
+                            let resizedImage = image.resize(to: CGSize(width: 30, height: 30))
+            
+                            cell.cardLogo.image = resizedImage
+                        } else {
             //                // Set a placeholder image or handle the case when sharedImage is nil
-            //                cell.cardLogo.image = UIImage(named: "empty")
-            //            }
-            //
-            //            cell.cardLogo.contentMode = .scaleAspectFit
-            //            cell.cardLogo.clipsToBounds = true
+                            cell.cardLogo.image = UIImage(named: "empty")
+                        }
+            
+                        cell.cardLogo.contentMode = .scaleAspectFit
+                        cell.cardLogo.clipsToBounds = true
             
             return cell
         } else
@@ -1440,7 +1512,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                         
                         let dateFormatter = DateFormatter()
                         dateFormatter.locale = Locale(identifier: "en") // Set locale to English
-                        dateFormatter.dateFormat = "EEE\nd" // Customize the date format as needed
+                        dateFormatter.dateFormat = "d\nEEEE" // Customize the date format as needed
                         
                         cell.cardTitle.text = dateFormatter.string(from: Date(timeIntervalSince1970: state.date))
                         
@@ -1583,16 +1655,22 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     let countHappy = states.filter { $0.mental_state == "happy" }.count
                     let countStressed = states.filter { $0.mental_state == "stress" }.count
                     
-                    let text: String
+                    var text: String
                     let backgroundImage: UIImage?
                     var color = String()
                     
                     if countHappy > countStressed {
-                        text = "happy"
+                        text = "Joyeux(se)"
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            text = "Happy"
+                        }
                         backgroundImage = UIImage(named: "green")
                         color = "green"
                     } else {
-                        text = "stressed"
+                        text = "Stressé(e)"
+                        if LanguageManager.shared.currentLanguage == "en"{
+                            text = "Stressed"
+                        }
                         backgroundImage = UIImage(named: "red")
                         color = "red"
                     }
@@ -1603,6 +1681,9 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                                  }
                                  cell.cardTitle.text = text
                                  cell.cardDesc.text = "ÉTAT MENTAL"
+                    if LanguageManager.shared.currentLanguage == "en"{
+                        cell.cardDesc.text = "Mental State"
+                    }
                     cell.cardLogo.image = UIImage(named: "ETAT_MENTAL")?.withTintColor(UIColor(named: color)!, renderingMode: .alwaysOriginal)
                     //cell.cardLogo.tintColor = .blue
                              } else {
@@ -1702,10 +1783,10 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                 print("Timestamp actuel: \(currentDateTimestamp)")
                 print("Date d'une semaine avant: \(oneWeekAgoFormatted)")
                 print("Timestamp d'une semaine avant: \(oneWeekAgoTimestamp)")
-            if LanguageManager.shared.currentLanguage == "fr" {
+      
                 dateFormatter.locale = Locale(identifier: "fr")
                 self.dateTF.text = "Du \(oneWeekAgoFormatted) Au \(currentDateFormatted)"
-            }
+            
             if LanguageManager.shared.currentLanguage == "en" {
                 dateFormatter.locale = Locale(identifier: "en")
                 self.dateTF.text = "From \(oneWeekAgoFormatted) to \(currentDateFormatted)"
@@ -1881,3 +1962,4 @@ extension Array where Element == Double {
         }
     }
 }
+

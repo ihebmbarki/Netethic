@@ -44,7 +44,11 @@ class ChildrenViewController: UIViewController {
     
     
     @IBAction func addChildBtnTapped(_ sender: Any) {
-        self.gotoScreen(storyBoardName: "Main", stbIdentifier: "childInfos")
+//        self.gotoScreen(storyBoardName: "Main", stbIdentifier: "childInfos")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "childInfos")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
@@ -127,15 +131,15 @@ class ChildrenViewController: UIViewController {
     
     func verifyChildList(childrenList: [Childd]) {
         hideIndicator()
-        if childrenList.count > 0 {
-            // Children list is not empty, do nothing.
-        } else {
-            let alertController = UIAlertController(title: "NETETHIC", message: "Your children list is empty!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
+//        if childrenList.count > 0 {
+//            // Children list is not empty, do nothing.
+//        } else {
+//            let alertController = UIAlertController(title: "NETETHIC", message: "Your children list is empty!", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            self.present(alertController, animated: true, completion: nil)
+//        }
     }
-    
+
     //register tableView Cell
     func configureTableView(){
         //        tableView.delegate = self
@@ -226,15 +230,36 @@ extension ChildrenViewController:  UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
             
             let user = self.selectedChild?.user
-            let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
-                self.decodedChildrenArray.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
-                APIManager.shareInstance.deleteChild(withID: child.id)
-                print("You have deleted element \(user?.first_name)")
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
-            self.present(alert, animated: true, completion: nil)
+            if LanguageManager.shared.currentLanguage == "fr" {
+                let alert = UIAlertController(title: nil, message: "Êtes-vous sûr(e) de vouloir supprimer cet enfant de votre liste ?", preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction(title: "Oui, Bien sûr.", style: .destructive, handler: { _ in
+                    self.hideIndicator()
+                    self.decodedChildrenArray.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    APIManager.shareInstance.deleteChild(withID: child.id)
+                    print("You have deleted element \(user?.first_name)")
+                    self.hideIndicator()
+
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
+                self.present(alert, animated: true, completion: nil)
+                self.hideIndicator()
+            }
+            if LanguageManager.shared.currentLanguage == "en" {
+                let alert = UIAlertController(title: nil, message: "Are you sure, you want remove this child from your list?", preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction(title: "Yes, sure", style: .destructive, handler: { _ in
+                    self.hideIndicator()
+                    self.decodedChildrenArray.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    APIManager.shareInstance.deleteChild(withID: child.id)
+                    print("You have deleted element \(user?.first_name)")
+                    self.hideIndicator()
+
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel ,handler: { _ in self.tableView.reloadData()}))
+                self.present(alert, animated: true, completion: nil)
+                self.hideIndicator()
+            }
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
         deleteAction.backgroundColor = .systemRed

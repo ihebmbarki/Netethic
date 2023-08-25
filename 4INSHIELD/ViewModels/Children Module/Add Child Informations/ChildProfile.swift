@@ -82,7 +82,13 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         super.viewDidLoad()
 //        setupProgressBar()
 //        setupProgressBarWithoutLastState()
-        setupProgressBarWithDifferentDimensions()
+        if SharedVariables.shared.wizzard != 6{
+               setupProgressBarWithDifferentDimensions(wizzard: SharedVariables.shared.wizzard)
+           }
+           if SharedVariables.shared.wizzard == 5{
+               setupProgressBarWithDifferentDimensions(wizzard: SharedVariables.shared.wizzard)
+           }
+
 
         firstNameTF.setupBorderTFs()
         lastNameTF.setupBorderTFs()
@@ -265,27 +271,42 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                             UserDefaults.standard.set(userRole.child.id, forKey: "childID")
                             if LanguageManager.shared.currentLanguage == "fr" {
                                 let alertController = UIAlertController(title: "Success", message: "Les informations de profil de votre enfant ont été ajoutées avec succès ", preferredStyle: .alert)
-                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
                                     self.goToScreen(identifier: "ChildSocialMedia")
-                                    self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                    if SharedVariables.shared.wizzard != 6 {
+                                                                            self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                                                        }
+                                                                        if SharedVariables.shared.wizzard == 5 {
+                                                                            self.progressBarWithDifferentDimensions.completedTillIndex = 5
+                                                                        }
                                 }
                                 
                                 alertController.addAction(okayAction)
                                 self.present(alertController, animated: true, completion: nil)
                                 print("User child registered successfully")
-                                self.platform()
+                                print(SharedVariables.shared.wizzard)
+                                if SharedVariables.shared.wizzard != 6 &&  SharedVariables.shared.wizzard != 5{
+                                    self.platform()
+                                }
                             }
-                            if LanguageManager.shared.currentLanguage == "fr" {
+                            if LanguageManager.shared.currentLanguage == "en" {
                                 let alertController = UIAlertController(title: "Success", message: "Your child’s profile information has been successfully added ", preferredStyle: .alert)
-                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
                                     self.goToScreen(identifier: "ChildSocialMedia")
-                                    self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                    if SharedVariables.shared.wizzard != 6 {
+                                                                           self.progressBarWithDifferentDimensions.completedTillIndex = 1
+                                                                       }
+                                                                       if SharedVariables.shared.wizzard == 5 {
+                                                                           self.progressBarWithDifferentDimensions.completedTillIndex = 5
+                                                                       }
                                 }
                                 
                                 alertController.addAction(okayAction)
                                 self.present(alertController, animated: true, completion: nil)
                                 print("User child registered successfully")
-                                self.platform()
+                                if SharedVariables.shared.wizzard != 6 &&  SharedVariables.shared.wizzard != 5{
+                                    self.platform()
+                                }
                             }
                         } catch {
                             print("Decoding error: \(error)")
@@ -346,7 +367,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
                         /// Handle success, parse JSON data
                         do {
                             let jsonData = try JSONDecoder().decode(WizardResponse.self, from: JSONSerialization.data(withJSONObject: data))
-                            
+                            SharedVariables.shared.wizzard = 2
                             print("save!!!!!")
                         } catch let error {
                             /// Handle json decode error
@@ -391,7 +412,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
     
 
 
-    func setupProgressBarWithDifferentDimensions() {
+    func setupProgressBarWithDifferentDimensions(wizzard : Int) {
         progressBarWithDifferentDimensions = FlexibleSteppedProgressBar()
         progressBarWithDifferentDimensions.translatesAutoresizingMaskIntoConstraints = false
         self.progressFirstView.addSubview(progressBarWithDifferentDimensions)
@@ -421,7 +442,7 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         progressBarWithDifferentDimensions.currentSelectedCenterColor = progressColor ?? .blue
         progressBarWithDifferentDimensions.stepTextColor = textColorHere
         progressBarWithDifferentDimensions.currentSelectedTextColor = progressColor
-        progressBarWithDifferentDimensions.completedTillIndex = 0
+        progressBarWithDifferentDimensions.completedTillIndex = ( wizzard + 1)
     }
     
     
@@ -509,7 +530,9 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         present(languageAlert, animated: true, completion: nil)
     }
     @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+
     }
     func invalidBirthday(_ value: String) -> String? {
         if value.isEmpty {

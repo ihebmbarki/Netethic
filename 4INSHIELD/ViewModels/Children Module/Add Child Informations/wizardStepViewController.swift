@@ -28,8 +28,9 @@ class wizardStepViewController: UIViewController, FlexibleSteppedProgressBarDele
     var maxIndex = -1
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupProgressBarWithDifferentDimensions()
+        if  SharedVariables.shared.wizzard != 6{
+            setupProgressBarWithDifferentDimensions()
+        }
         // Do any additional setup after loading the view.
         dashboardButton.setupBorderBtn()
         dashboardButton.applyGradient()
@@ -160,7 +161,8 @@ class wizardStepViewController: UIViewController, FlexibleSteppedProgressBarDele
     }
     
     @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func changeLangageButton(_ sender: Any) {
         translate()

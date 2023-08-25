@@ -1,10 +1,3 @@
-//
-//  SideBar.swift
-//  4INSHIELD
-//
-//  Created by iheb mbarki on 15/3/2023.
-//
-
 import UIKit
 
 protocol SideBarDelegate: AnyObject {
@@ -52,33 +45,11 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
                 print("Received notification: \(message)")
                 print(message)
                 langue = message
-//                menufr.removeAll()
-//                menuang.removeAll()
-//                menuImages.removeAll()
                 sideMenuTableView.reloadData()
                 menufr = ["Paramétres", "Contactez-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
                 menuang = ["Settings", "Contact Us", "Legal Notice", "About", "Help & support ", "Log out"]
                 menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
                 sideMenuTableView.reloadData()
-
-//                if message == "fr"{
-//                    print("france")
-//                    menu.removeAll()
-//                    menu = ["Paramétres", "Contactez-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
-////                    menuImages.removeAll()
-////                     menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
-//                    sideMenuTableView.reloadData()
-//
-//                }
-//                else if message == "en"{
-//                    print("anglais")
-//                    menu.removeAll()
-//                    menu = ["d", "dd-nous", "Mentions légales", "À propos de nous", "Aide & support", "Déconnexion"]
-////                    menuImages.removeAll()
-////                     menuImages = ["param", "contact", "mention", "apropos", "aide", "deconnexion"]
-//
-//                    sideMenuTableView.reloadData()
-//                }
             }
         }
     
@@ -115,12 +86,6 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
             cell.titleLabel.text = menuang[indexPath.row]
         }
             
-
-        
-
-
-
-
         return cell
     }
    
@@ -134,26 +99,26 @@ class SideBar: UIViewController, UITableViewDelegate, UITableViewDataSource, Sid
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 0 { // If the first cell is selected
-            showSubSideBarViewController()
-        } else {
+//        if indexPath.row == 0 { // If the first cell is selected
+//            showSubSideBarViewController()
+//        } else {
             self.delegate?.selectedCell(indexPath.row)
-        }
+//        }
     }
 
     // Show SubSideBarViewController
-
-    func showSubSideBarViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-        if let subSideBarViewController = storyboard.instantiateViewController(withIdentifier: "SubSideBarViewController") as? SubSideBarViewController {
-            subSideBarViewController.delegate = self
-            subSideBarViewController.preferredWidth = self.view.frame.width * 1.0 // Adjust the fraction as needed
-            let subSidebarNav = UINavigationController(rootViewController: subSideBarViewController)
-            subSidebarNav.modalPresentationStyle = .overCurrentContext
-            present(subSidebarNav, animated: true, completion: nil)
-        }
-    }
+//
+//    func showSubSideBarViewController() {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        if let subSideBarViewController = storyboard.instantiateViewController(withIdentifier: "SubSideBarViewController") as? SubSideBarViewController {
+//            subSideBarViewController.delegate = self
+//            subSideBarViewController.preferredWidth = self.view.frame.width * 1.0 // Adjust the fraction as needed
+//            let subSidebarNav = UINavigationController(rootViewController: subSideBarViewController)
+//            subSidebarNav.modalPresentationStyle = .overCurrentContext
+//            present(subSidebarNav, animated: true, completion: nil)
+//        }
+//    }
 
 
     // MARK: - SideBarDelegate

@@ -18,7 +18,7 @@
         <!--Update Child-->
         <scene sceneID="0qg-sY-B8G">
             <objects>
-                <viewController storyboardIdentifier="updateChild" id="wyn-el-f4F" customClass="UpdateChild" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="updateChild" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wyn-el-f4F" customClass="UpdateChild" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A7Q-C6-gDK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="885"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,11 +35,11 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukC-28-ZIJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="190"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_bg" translatesAutoresizingMaskIntoConstraints="NO" id="GKe-Xt-1wx">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_bg" translatesAutoresizingMaskIntoConstraints="NO" id="GKe-Xt-1wx">
                                                                 <rect key="frame" x="-59" y="-85" width="511" height="228"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIB-qn-mZX">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIB-qn-mZX">
                                                                 <rect key="frame" x="151" y="76" width="90" height="90"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -601,7 +601,7 @@
         <!--Ajouter un compte utilisateur-->
         <scene sceneID="KYV-ue-WuB">
             <objects>
-                <viewController storyboardIdentifier="UserAccountID" id="Dxj-bl-qWa" customClass="AddUserAccount" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserAccountID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dxj-bl-qWa" customClass="AddUserAccount" customModule="_INSHIELD_Development" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IT7-mD-Yvm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -895,12 +895,12 @@
     <resources>
         <image name="Groupe 105" width="32.666667938232422" height="33"/>
         <image name="background" width="360" height="209"/>
-        <image name="calendar" width="19" height="19"/>
+        <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="fr_white1" width="2137" height="2137"/>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="125"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="profile_bg" width="360" height="126"/>
+        <image name="profile_bg" width="720" height="252"/>
         <namedColor name="AccentColor">
             <color red="0.33700001239776611" green="0.34900000691413879" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

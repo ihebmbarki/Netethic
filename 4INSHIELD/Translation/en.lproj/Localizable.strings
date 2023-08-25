@@ -83,6 +83,9 @@ Please check your registered email for the activation link.";
 "rapport" = "General mood on a daily basis";
 "moyenne" = "Average general mood";
 "moyenneBt" = "General average";
+"activite" = "Activity Indicators";
+"personne" = "individuals";
+
 
 //MARK: Child Profile
 "First_name" = "First Name";

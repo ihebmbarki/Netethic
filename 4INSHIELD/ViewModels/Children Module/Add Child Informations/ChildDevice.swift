@@ -161,6 +161,13 @@ class ChildDevice: UIViewController {
         
     }
     @IBAction func nextButton(_ sender: Any) {
-       platform()
+        if  SharedVariables.shared.wizzard != 6 && SharedVariables.shared.wizzard != 5{
+            platform()
         }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChildProfileAdded")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+        
 }

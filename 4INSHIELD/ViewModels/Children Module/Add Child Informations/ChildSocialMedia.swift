@@ -71,7 +71,12 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         super.viewDidLoad()
         
         //appel Progressbar
-        setupProgressBarWithDifferentDimensions()
+        if SharedVariables.shared.wizzard != 6{
+            setupProgressBarWithDifferentDimensions(wizzard: SharedVariables.shared.wizzard)
+        }
+        if SharedVariables.shared.wizzard == 5{
+            setupProgressBarWithDifferentDimensions(wizzard: SharedVariables.shared.wizzard)
+        }
         //        TextField border
         urlTextField.setupBorderTF()
         pseudoTextField.setupBorderTF()
@@ -203,7 +208,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                         /// Handle success, parse JSON data
                         do {
                             let jsonData = try JSONDecoder().decode(WizardResponse.self, from: JSONSerialization.data(withJSONObject: data))
-                            
+                            SharedVariables.shared.wizzard = 3
                             print("save!!!!!")
                         } catch let error {
                             /// Handle json decode error
@@ -239,24 +244,31 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                             if LanguageManager.shared.currentLanguage == "fr" {
                                 
                                 let alertController = UIAlertController(title: "Succès ", message: "Le réseau social  a été ajouté avec succès", preferredStyle: .alert)
-                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
                                     //self.dismiss(animated: true, completion: nil)
                                     if let childrenListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChildDevice") as? ChildrenViewController {
                                         childrenListVC.modalPresentationStyle = .overFullScreen
                                         self.present(childrenListVC, animated: true, completion: nil)                                    }
                                     
-                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
-                                    
+                                    if  SharedVariables.shared.wizzard != 6{
+                                                               self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                                           }
+                                                           if  SharedVariables.shared.wizzard == 5{
+                                                               self.progressBarWithDifferentDimensions.completedTillIndex = 5
+                                                           }
+
                                 }
                                 alertController.addAction(okayAction)
                                 self.present(alertController, animated: true, completion: nil)
                                 print("good")
-                                self.platform()
+                                if  SharedVariables.shared.wizzard != 6 && SharedVariables.shared.wizzard != 5{
+                                                              self.platform()
+                                                          }
                             }
                             if LanguageManager.shared.currentLanguage == "fr" {
                                 
                                 let alertController = UIAlertController(title: "Success", message: "Un profil de réseau social a été ajouté avec succès  ", preferredStyle: .alert)
-                                let okayAction = UIAlertAction(title: "Okay", style: .default) {
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) {
                                     _ in
                                     //self.dismiss(animated: true, completion: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -264,27 +276,39 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
                                     vc.modalPresentationStyle = .overFullScreen
                                     self.present(vc, animated: true, completion: nil)
                                     
-                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
-                                    
+                                    if  SharedVariables.shared.wizzard != 6{
+                                                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                                                }
+                                                                if  SharedVariables.shared.wizzard == 5{
+                                                                    self.progressBarWithDifferentDimensions.completedTillIndex = 5
+                                                                }
+
                                 }
                             }
                             if LanguageManager.shared.currentLanguage == "en" {
                                 
                                 let alertController = UIAlertController(title: "Success", message: "Social media has been successfully added. ", preferredStyle: .alert)
-                                let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
+                                let okayAction = UIAlertAction(title: "Ok", style: .default) { _ in
                                     //self.dismiss(animated: true, completion: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
                                     vc.modalPresentationStyle = .overFullScreen
                                     self.present(vc, animated: true, completion: nil)
                                     
-                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
-                                    
+                                    if  SharedVariables.shared.wizzard != 6{
+                                                                    self.progressBarWithDifferentDimensions.completedTillIndex = 2
+                                                                }
+                                                                if  SharedVariables.shared.wizzard == 5{
+                                                                    self.progressBarWithDifferentDimensions.completedTillIndex = 5
+                                                                }
+
                                 }
                                 alertController.addAction(okayAction)
                                 self.present(alertController, animated: true, completion: nil)
                                 print("good")
-                                self.platform()
+                                if  SharedVariables.shared.wizzard != 6 && SharedVariables.shared.wizzard != 5 {
+                                    self.platform()
+                                }
                             }
                         } catch let error {
                             /// Handle json decode error
@@ -304,7 +328,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
             })
     }
     
-    func setupProgressBarWithDifferentDimensions() {
+    func setupProgressBarWithDifferentDimensions(wizzard: Int) {
         progressBarWithDifferentDimensions = FlexibleSteppedProgressBar()
         progressBarWithDifferentDimensions.translatesAutoresizingMaskIntoConstraints = false
         self.progressBarView.addSubview(progressBarWithDifferentDimensions)
@@ -334,7 +358,7 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         progressBarWithDifferentDimensions.currentSelectedCenterColor = progressColor ?? .blue
         progressBarWithDifferentDimensions.stepTextColor = textColorHere
         progressBarWithDifferentDimensions.currentSelectedTextColor = progressColor
-        progressBarWithDifferentDimensions.completedTillIndex = 2
+        progressBarWithDifferentDimensions.completedTillIndex = wizzard
     }
     func progressBar(_ progressBar: FlexibleSteppedProgressBar,
                      textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
@@ -449,7 +473,9 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     }
     
     @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     func translate() {

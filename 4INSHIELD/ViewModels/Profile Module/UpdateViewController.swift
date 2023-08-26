@@ -104,14 +104,34 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         emailLbl.text = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "")
         genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
         dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
-        hommeLbl.text = NSLocalizedString("male", tableName: nil, bundle: bundle, value: "", comment: "")
-        femmeLbl.text = NSLocalizedString("Female", tableName: nil, bundle: bundle, value: "", comment: "")
-        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
-        deleteAccLbl.text = NSLocalizedString("supp_acc", tableName: nil, bundle: bundle, value: "", comment: "")
-        deleteTextView.text = NSLocalizedString("supp_acc_text", tableName: nil, bundle: bundle, value: "", comment: "add media")
-        deleteBtn.setTitle(NSLocalizedString("supp", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        hommeLbl.text = NSLocalizedString("male", tableName: nil, bundle: bundle, value: "", comment: "")
+//        femmeLbl.text = NSLocalizedString("Female", tableName: nil, bundle: bundle, value: "", comment: "")
+//        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
+//        deleteAccLbl.text = NSLocalizedString("supp_acc", tableName: nil, bundle: bundle, value: "", comment: "")
+//        deleteTextView.text = NSLocalizedString("supp_acc_text", tableName: nil, bundle: bundle, value: "", comment: "add media")
+//        deleteBtn.setTitle(NSLocalizedString("supp", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        if LanguageManager.shared.currentLanguage == "fr" {
+            deleteAccLbl.text = "Supprimer le compte "
+            deleteTextView.text = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données. "
+            deleteBtn.setTitle("Supprimer le compte ", for: .normal)
+            hommeLbl.text = "Homme"
+            femmeLbl.text = "Femme"
+            nonPreciseLbl.text = "Non précisé"
+            updateBtn.setTitle("Modifier", for: .normal)
+            cancelBtn.setTitle("Annuler", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "en" {
+            deleteAccLbl.text = "Delete the account"
+            deleteTextView.text = "Deleting your account will delete your profile, login info, and your browsing data from our database."
+            deleteBtn.setTitle("Delete the account", for: .normal)
+            hommeLbl.text = "Male"
+            femmeLbl.text = "Female"
+            nonPreciseLbl.text = "Not precised"
+            updateBtn.setTitle("Update", for: .normal)
+            cancelBtn.setTitle("Cancel", for: .normal)
+        }
     }
     
     func resetForm() {

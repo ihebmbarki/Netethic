@@ -83,7 +83,7 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         //search bar
         let searchBar = UISearchBar()
         searchBar.delegate = self
-        searchBar.placeholder = "User name"
+        searchBar.placeholder = ""
         searchBar.searchBarStyle = .minimal
         searchBar.sizeToFit()
         SocialMediaTableView.tableHeaderView = searchBar
@@ -474,19 +474,41 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         
-        titleLbl.text = NSLocalizedString("edit_child", tableName: nil, bundle: bundle, value: "", comment: "")
+//        titleLbl.text = NSLocalizedString("edit_child", tableName: nil, bundle: bundle, value: "", comment: "")
         prenomLbl.text = NSLocalizedString("First_name", tableName: nil, bundle: bundle, value: "", comment: "")
         nomLbl.text = NSLocalizedString("Last_name", tableName: nil, bundle: bundle, value: "", comment: "")
         genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
         dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
-        garçonLbl.text = NSLocalizedString("boy", tableName: nil, bundle: bundle, value: "", comment: "")
-        filleLbl.text = NSLocalizedString("girl", tableName: nil, bundle: bundle, value: "", comment: "")
-        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
-        socialText.text = NSLocalizedString("social_media_child", tableName: nil, bundle: bundle, value: "", comment: "")
-        addNewProfileBtn.setTitle(NSLocalizedString("add_media", tableName: nil, bundle: bundle, value: "", comment: "add media"), for: .normal)
-        ddUserAccBtn.setTitle(NSLocalizedString("add_another_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        garçonLbl.text = NSLocalizedString("boy", tableName: nil, bundle: bundle, value: "", comment: "")
+//        filleLbl.text = NSLocalizedString("girl", tableName: nil, bundle: bundle, value: "", comment: "")
+//        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
+//        socialText.text = NSLocalizedString("social_media_child", tableName: nil, bundle: bundle, value: "", comment: "")
+//        addNewProfileBtn.setTitle(NSLocalizedString("add_media", tableName: nil, bundle: bundle, value: "", comment: "add media"), for: .normal)
+//        ddUserAccBtn.setTitle(NSLocalizedString("add_another_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        if LanguageManager.shared.currentLanguage == "fr" {
+            titleLbl.text = "Modifier le profil de l'enfant"
+            garçonLbl.text = "Garçon"
+            filleLbl.text = "Fille"
+            nonPreciseLbl.text = "Non précisé"
+            socialText.text = "Les réseaux sociaux de"
+            addNewProfileBtn.setTitle("Ajoutez un réseau social", for: .normal)
+            ddUserAccBtn.setTitle("Ajouter un nouveau profil", for: .normal)
+            cancelBtn.setTitle("Annuler", for: .normal)
+            updateBtn.setTitle("Créer", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "en" {
+            titleLbl.text = "Edit child's profile"
+            garçonLbl.text = "Boy"
+            filleLbl.text = "Girl"
+            nonPreciseLbl.text = "Not precised"
+            socialText.text = "Social networks of"
+            addNewProfileBtn.setTitle("Add a social network", for: .normal)
+            ddUserAccBtn.setTitle("Add a new profile", for: .normal)
+            cancelBtn.setTitle("Cancel", for: .normal)
+            updateBtn.setTitle("Create", for: .normal)
+        }
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
@@ -593,6 +615,13 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    @IBAction func addAcount(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddAccount")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     @IBAction func addNewProfileBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -601,15 +630,11 @@ class UpdateChild: KeyboardHandlingBaseVC, UISearchBarDelegate {
         self.present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func addUserAccBtnTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UpdateChild", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "UserAccountID")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
+   
+    
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Children", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)

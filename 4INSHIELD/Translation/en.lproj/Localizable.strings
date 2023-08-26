@@ -123,7 +123,7 @@ Please check your registered email for the activation link.";
 "ajoutDevice" = "Please add your child’s devices  ";
 "information" = "The information from your child's device will help you monitor their mental health, sleep quality, whereabouts, and apps of interest, etc. ";`
 
-//SideBar:
+//MARK: SideBar
 "param" = "Settings";
 
 //MARK: Child Profile1

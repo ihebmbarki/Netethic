@@ -122,6 +122,7 @@
 		87CA53BC2A990B8A00E3006D /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87CA53BA2A990B8A00E3006D /* FooterView.xib */; };
 		87CA53BD2A990B8A00E3006D /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA53BB2A990B8A00E3006D /* FooterView.swift */; };
 		87CA53BF2A990E9700E3006D /* SharedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA53BE2A990E9700E3006D /* SharedVariables.swift */; };
+		87CA53C12A994D5D00E3006D /* AddAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA53C02A994D5D00E3006D /* AddAccount.swift */; };
 		87CC77F42A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */; };
 		87CC77FC2A5E0AAB008FA7F8 /* UsersNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */; };
 		87CC77FD2A5E0AAB008FA7F8 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */; };
@@ -279,6 +280,7 @@
 		87CA53BA2A990B8A00E3006D /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FooterView.xib; path = "../../../../../../Downloads/Test 7/Test/Footer/FooterView.xib"; sourceTree = "<group>"; };
 		87CA53BB2A990B8A00E3006D /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FooterView.swift; path = "../../../../../../Downloads/Test 7/Test/Footer/FooterView.swift"; sourceTree = "<group>"; };
 		87CA53BE2A990E9700E3006D /* SharedVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedVariables.swift; sourceTree = "<group>"; };
+		87CA53C02A994D5D00E3006D /* AddAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccount.swift; sourceTree = "<group>"; };
 		87CC77F32A5E09DA008FA7F8 /* KeyboardHandlingBaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlingBaseVC.swift; sourceTree = "<group>"; };
 		87CC77F72A5E0AAB008FA7F8 /* UsersNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersNetworking.swift; sourceTree = "<group>"; };
 		87CC77F82A5E0AAB008FA7F8 /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				0479739929CC929C00FD28DF /* ChildDevice.swift */,
 				0479739B29CC92D100FD28DF /* Congrats.swift */,
 				874A73082A83FEAF00B17A85 /* wizardStepViewController.swift */,
+				87CA53C02A994D5D00E3006D /* AddAccount.swift */,
 			);
 			path = "Add Child Informations";
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 			files = (
 				87CA53BF2A990E9700E3006D /* SharedVariables.swift in Sources */,
 				87B5A17E2A8CDBB800476E6E /* IndicatorActivite.swift in Sources */,
+				87CA53C12A994D5D00E3006D /* AddAccount.swift in Sources */,
 				0479739A29CC929C00FD28DF /* ChildDevice.swift in Sources */,
 				04844B4D29DF1035008AFBF6 /* ForgotViewController.swift in Sources */,
 				044BB27D2A2E484E0008B143 /* ToxicPersons.swift in Sources */,

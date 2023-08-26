@@ -123,7 +123,7 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "ajoutDevice" = "Veuillez ajouter les appareils de votre enfant  ";
 "information" = "Les informations fournies par l'appareil de votre enfant vous aideront à veiller sur sa santé mentale, la qualité de son sommeil, ses allées et venues, les applications qui l'intéressent, etc. ";`
 
-//SideBar: 
+//MARK: sideBar
 "param" = "Paramètres";
 
 //MARK: Child Profile1

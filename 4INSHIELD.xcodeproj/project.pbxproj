@@ -107,6 +107,7 @@
 		87A8A5E72A6FFDDA00AF631C /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */; };
 		87A8A5E92A70025F00AF631C /* HalfCirclePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */; };
 		87A8A5EF2A71544700AF631C /* TestChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A8A5EE2A71544700AF631C /* TestChartViewController.swift */; };
+		87A906FF2A9C8FD600802D5C /* OpenHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A906FE2A9C8FD600802D5C /* OpenHomeViewController.swift */; };
 		87ACCCFF2A77A37000D0BBD3 /* PhoneUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */; };
 		87ACEBB42A8E1E0D0000D256 /* SubSideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACEBB22A8E1E0D0000D256 /* SubSideTableViewCell.swift */; };
 		87ACEBB52A8E1E0D0000D256 /* SubSideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ACEBB32A8E1E0D0000D256 /* SubSideTableViewCell.xib */; };
@@ -265,6 +266,7 @@
 		87A8A5E62A6FFDDA00AF631C /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		87A8A5E82A70025F00AF631C /* HalfCirclePieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCirclePieChartView.swift; sourceTree = "<group>"; };
 		87A8A5EE2A71544700AF631C /* TestChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChartViewController.swift; sourceTree = "<group>"; };
+		87A906FE2A9C8FD600802D5C /* OpenHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenHomeViewController.swift; sourceTree = "<group>"; };
 		87ACCCFE2A77A37000D0BBD3 /* PhoneUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneUsage.swift; sourceTree = "<group>"; };
 		87ACEBB22A8E1E0D0000D256 /* SubSideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSideTableViewCell.swift; sourceTree = "<group>"; };
 		87ACEBB32A8E1E0D0000D256 /* SubSideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubSideTableViewCell.xib; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				04844B4B29DF100C008AFBF6 /* Forgot Pwd */,
 				04E54A3829ACC95300B00906 /* SignIn.swift */,
 				049736BD29ACFEB0005C3662 /* Register.swift */,
+				87A906FE2A9C8FD600802D5C /* OpenHomeViewController.swift */,
 			);
 			path = "Auth Module";
 			sourceTree = "<group>";
@@ -1030,6 +1033,7 @@
 				87E3A42E2A6591A200CE4C43 /* DataHandler.swift in Sources */,
 				87ED64972A8D8A9500091C61 /* SideMenuTableViewCell.swift in Sources */,
 				040821AF29D6DB1400D7A562 /* OnboardingSlide.swift in Sources */,
+				87A906FF2A9C8FD600802D5C /* OpenHomeViewController.swift in Sources */,
 				0496979629AF769800F65DF4 /* Loading.swift in Sources */,
 				87A8A5E12A6FE9AD00AF631C /* CustomMarkerView.swift in Sources */,
 				040DDCD12A0150CA00ED3223 /* EnfantsViewController.swift in Sources */,

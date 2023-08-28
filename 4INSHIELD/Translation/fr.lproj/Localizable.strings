@@ -7,7 +7,7 @@
 */
 
 //MARK: Login
-"Welcome" = "Bienvenue à netethic";
+"Welcome" = "Bienvenue sur netethic";
 "Welcome2" = "Connectez-vous pour continuer";
 "e_mail" = "Adresse Email";
 "Password" = "Mot de passe";
@@ -61,7 +61,7 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "Reset passs" = "Réinitialiser le mot de passe";
 
 //MARK: Children list
-"list_child_item" = "Liste des enfants";
+"list_child_item" = "Mes enfants";
 "alert_message" = "Balayez vers la gauche pour gérer (supprimer ou mettre à jour) votre liste d'enfants";
 
 //MARK: Dashboard
@@ -158,3 +158,11 @@ Veuillez vérifier votre e-mail d'inscription pour le lien d'activation.";
 "supp_acc_text" = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données.";
 "supp" = "Supprimer le compte";
 "add_child" = "Ajouter un enfant";
+ 
+//MARK: Open Home
+"Bien" = "Bienvenue sur netethic";
+"Inscription" = "Inscrivez-vous ou connectez-vous pour continuer";
+"First" = "L'application netethic veille au bien-être des enfants et des adolescents dans l'espace numérique.";
+"Seconde" = "Inscrivez-vous dès maintenant pour accéder à un outil de protection complet et facile à utiliser pour vous et vos enfants.";
+"sign-up" = "Inscription";
+"sign-in" = "Connexion";

@@ -18,6 +18,11 @@ class wizardStepViewController: UIViewController, FlexibleSteppedProgressBarDele
     @IBOutlet weak var changeLangageButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var mainView: FooterView!{
+        didSet{
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+    }
     var progressBar: FlexibleSteppedProgressBar!
     var progressBarWithoutLastState: FlexibleSteppedProgressBar!
     var progressBarWithDifferentDimensions: FlexibleSteppedProgressBar!
@@ -114,17 +119,16 @@ class wizardStepViewController: UIViewController, FlexibleSteppedProgressBarDele
     }
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-        footer.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "")
 
         if LanguageManager.shared.currentLanguage == "fr" {
             merciLabel.text = "Merci pour votre confiance "
-         
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
             self.dashboardButton.setTitle("Aller au tableau de board", for: .normal)
         }
         if LanguageManager.shared.currentLanguage == "en" {
             merciLabel.text = "Thank you for placing your trust in us "
-            
             self.dashboardButton.setTitle("Go to dashboard ", for: .normal)
+            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
         }
     }
     func translate() {

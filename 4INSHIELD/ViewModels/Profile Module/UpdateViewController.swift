@@ -425,7 +425,13 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
             break
         }
     }
-    
+    func gotoScreen(storyBoardName: String, stbIdentifier: String) {
+        let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: stbIdentifier)
+//        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
     @IBAction func cancelBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Children", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
@@ -483,11 +489,12 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
             case .success(let updatedUser):
                 print("Updated user: \(updatedUser)")
                 //Success alert
-                let alertController = UIAlertController(title: "Success", message: "Parent informations updated successfully", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-
+//                let alertController = UIAlertController(title: "Success", message: "Parent informations updated successfully", preferredStyle: .alert)
+//                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                alertController.addAction(okAction)
+//                self.present(alertController, animated: true, completion: nil)
+                
+                self.gotoScreen(storyBoardName: "Main", stbIdentifier: "HomeNavID")
             case .failure(let error):
                 print("Error updating user info: \(error.localizedDescription)")
                 // Handle error case, e.g. display error alert to user

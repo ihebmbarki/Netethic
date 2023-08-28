@@ -62,7 +62,7 @@ Please check your registered email for the activation link.";
 "Reset passs" = "Reset Password";
 
 //MARK: Children list
-"list_child_item" = "Children’s List";
+"list_child_item" = "My children";
 "alert_message" = "Swipe left to manage (Delete or update) your children list";
 
 //MARK: Dashboard
@@ -159,3 +159,12 @@ Please check your registered email for the activation link.";
 "supp_acc_text" = "Deleting your account will delete your profile, login info, and your browsing data from our database.";
 "supp" = "Delete the account";
 "add_child" = "Add child";
+
+//MARK: Open Home
+"Bien" = "Welcome to netethic";
+"Inscription" = "Register or sign in to continue";
+"First"  = "The netethic application ensures the well-being of children and adolescents in the digital space.";
+"Seconde" = "Sign up now for a comprehensive and easy-to-use protection tool for you and your children.";
+"sign-up" = "Sign Up";
+"sign-in" = "Sign In";
+

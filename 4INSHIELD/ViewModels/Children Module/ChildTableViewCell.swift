@@ -21,7 +21,7 @@ class ChildTableViewCell: UITableViewCell {
         childAvatar.layer.cornerRadius = 36/2
 //        childView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: 1, height: 1), radius: 20, scale: false)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

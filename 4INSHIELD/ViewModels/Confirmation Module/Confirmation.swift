@@ -42,6 +42,11 @@ class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
         fifthOtpTf.delegate = self
         sixthOtpTf.delegate = self
         
+        [firstOtpTf, secondOtpTf, thirdOtpTf, fourthOtpTf, fifthOtpTf, sixthOtpTf].forEach { textField in
+               textField.delegate = self
+               textField.keyboardType = .numberPad
+           }
+
         registerBtn.applyGradient()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +54,7 @@ class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
         updateLocalizedStrings()
         updateLanguageButtonImage()
     }
+
     func updateLanguageButtonImage() {
         if let selectedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") {
             if selectedLanguage == "fr" {
@@ -119,8 +125,14 @@ class Confirmation: KeyboardHandlingBaseVC, UITextFieldDelegate {
         // Fill the text field with the input
         textField.text = string
         
+        // Check if all fields are filled
+        if let lastTextField = textField.superview?.viewWithTag(6) as? UITextField,
+           newLength == 1 {
+            lastTextField.resignFirstResponder()
+        }
         return false
     }
+
     
     func goToSignIn(withId identifier: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -29,7 +29,11 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
             scrollView.contentInsetAdjustmentBehavior = .never
-            
+        }
+    }
+    @IBOutlet weak var mainView: FooterView!{
+        didSet{
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
         }
     }
     
@@ -153,7 +157,12 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         errorUrlLabel.text = NSLocalizedString("url2", tableName: nil, bundle: bundle, value: "", comment: "url2")
         errorPseudoLabel.text = NSLocalizedString("pseudo1", tableName: nil, bundle: bundle, value: "", comment: "pseudo1")
         errorPseudoLabel.text = NSLocalizedString("pseudo2", tableName: nil, bundle: bundle, value: "", comment: "pseudo2")
-        footer.text = NSLocalizedString("footer", tableName: nil, bundle: bundle, value: "", comment: "")
+        if LanguageManager.shared.currentLanguage == "fr"{
+            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
+        if LanguageManager.shared.currentLanguage == "en"{
+            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+        }
         if LanguageManager.shared.currentLanguage == "fr" {
             pseudoTextField.placeholder = "Entrez le pseudo"
             urlTextField.placeholder = "Entrez l'URL"
@@ -177,10 +186,17 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         if mediaID == 0 {mediaID = 1}
         let params = profil1(child: childID, social_media_name: mediaID, pseudo: pseudo, url: url)
         self.response(params: params)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+        if SharedVariables.shared.wizzard != 6{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }else{
+            let storyboard = UIStoryboard(name: "Children", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
         
     }
     
@@ -513,11 +529,18 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
     @IBAction func sauterButton(_ sender: Any) {
         print("sauter")
 //            goToScreen(withId: "ChildDevice")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
-        vc.modalPresentationStyle = .fullScreen
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+        if SharedVariables.shared.wizzard != 6{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChildDevice")
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }else{
+            let storyboard = UIStoryboard(name: "Children", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChildrenListSB")
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

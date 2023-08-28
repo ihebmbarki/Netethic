@@ -151,6 +151,7 @@ class SignIn: KeyboardHandlingBaseVC {
     
     @IBAction func changeLanguageBtnTapped(_ sender: Any) {
         translate()
+        print("langue")
     }
     
     func updateLocalizedStrings() {
@@ -598,12 +599,6 @@ class SignIn: KeyboardHandlingBaseVC {
                 return !predicate.evaluate(with: value)
             }
             
-//            func containsUpperCase(_ value: String) -> Bool
-//            {
-//                let reqularExpression = ".*[A-Z]+.*"
-//                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-//                return !predicate.evaluate(with: value)
-//            }
     
     @IBAction func signInGoogleTapped(_ sender: Any) {
     }

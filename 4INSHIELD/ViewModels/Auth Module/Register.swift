@@ -189,18 +189,27 @@ class Register: KeyboardHandlingBaseVC {
     
     @IBAction func passwordChanged(_ sender: Any) {
         if let password = passwordTF.text {
-             if let errorMessage = invalidPassword(password) {
-                 passwordError.text = errorMessage
-                 passwordError.isHidden = false
-                 passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
-//                 passwordTF.setupRightSideImage(image: "error", colorName: "redControl")
-             } else {
-                 passwordError.isHidden = true
-                 passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
-//                 passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
-                 passwordTF.setupVerifPassword(image: "done", colorName: "vertDone", text: passwordTF)
-             }
-         }
+            
+            if let errorMessage = invalidPassword(password)
+            {
+                passwordError.text = errorMessage
+                passwordError.isHidden = false
+                passwordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
+//                passwordTF.setupRightSideImage(image: "error", colorName: "redControl")
+             
+    
+            }
+            else
+            {
+                passwordError.isHidden = true
+                passwordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
+//                passwordTF.setupRightSideImage(image: "done", colorName: "vertDone")
+                passwordTF.setupVerifPassword(image: "done", colorName: "vertDone", text: passwordTF)
+
+            }
+            checkForValidForm()
+
+        }
          
          checkForValidForm()
     }
@@ -264,6 +273,7 @@ class Register: KeyboardHandlingBaseVC {
     }
     
     @IBAction func confirmpwdChanged(_ sender: Any) {
+        
         if let password = passwordTF.text,
            let confirmPassword = confirmPasswordTF.text {
             
@@ -271,16 +281,16 @@ class Register: KeyboardHandlingBaseVC {
                 confirmpwdError.isHidden = true
                 confirmPasswordTF.layer.borderColor = UIColor(named: "grisBorder")?.cgColor
 //                confirmPasswordTF.setupRightSideImage(image: "done", colorName: "vertDone")
-                confirmPasswordTF.setupVerifPassword(image: "done", colorName: "vertDone", text: passwordTF)
+                confirmPasswordTF.setupVerifPassword(image: "done", colorName: "vertDone", text: confirmPasswordTF)
 
-            } else {
+            }
+            if password != confirmPassword {
+                confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
                 if LanguageManager.shared.currentLanguage == "fr" {
                     confirmpwdError.text = "Les 2 mots de passe ne correspondent pas."
-                    confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
 //                    confirmPasswordTF.setupRightSideImage(image: "error", colorName: "redControl")
                 } else {
                     confirmpwdError.text = "Passwords do not match."
-                    confirmPasswordTF.layer.borderColor = UIColor(named: "redControl")?.cgColor
 //                    confirmPasswordTF.setupRightSideImage(image: "error", colorName: "redControl")
                 }
                 confirmpwdError.isHidden = false

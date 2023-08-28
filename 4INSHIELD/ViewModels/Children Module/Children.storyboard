@@ -26,39 +26,47 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mes enfants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-e0-BOn">
-                                            <rect key="frame" x="114" y="18" width="164" height="30"/>
+                                            <rect key="frame" x="0.0" y="16" width="393" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="hg2-Tm-whP"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                             <color key="textColor" name="AccentColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgy-TX-UdW">
-                                            <rect key="frame" x="303" y="18" width="24" height="18"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain"/>
-                                            <connections>
-                                                <action selector="changeLanguageBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="i1B-rd-PF8"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-H1-f8n">
-                                            <rect key="frame" x="335" y="16" width="49.666666666666686" height="34"/>
+                                            <rect key="frame" x="355" y="16" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="iUJ-6d-znB"/>
+                                                <constraint firstAttribute="width" constant="30" id="zIh-3B-CPk"/>
+                                            </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system"/>
                                             <connections>
                                                 <action selector="infoBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="nSG-84-xB5"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cu-yz-5ko">
+                                            <rect key="frame" x="317" y="16" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="D5w-bv-BLp"/>
+                                                <constraint firstAttribute="height" constant="30" id="h4i-My-o7L"/>
+                                            </constraints>
+                                            <state key="normal" image="fr_white1"/>
+                                            <connections>
+                                                <action selector="changeLanguageBtnTapped:" destination="7ll-Og-AKn" eventType="touchUpInside" id="4hu-Wo-OQZ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="tgy-TX-UdW" secondAttribute="bottom" constant="52" id="K3b-LE-Ckh"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Gv-e0-BOn" secondAttribute="trailing" id="DhJ-9h-Ss2"/>
+                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="leading" secondItem="PZF-RR-aO5" secondAttribute="leading" id="JiB-5l-L7P"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="16" id="QbR-EB-3ny"/>
-                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="18" id="Y1I-Pb-gFT"/>
-                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="top" secondItem="PZF-RR-aO5" secondAttribute="top" constant="18" id="b2V-8D-Zke"/>
-                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="leading" secondItem="PZF-RR-aO5" secondAttribute="leading" constant="114" id="cZE-Yb-Jbc"/>
-                                        <constraint firstItem="tgy-TX-UdW" firstAttribute="centerY" secondItem="EUu-H1-f8n" secondAttribute="centerY" constant="-6" id="hqv-uy-pGB"/>
+                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="0cu-yz-5ko" secondAttribute="trailing" constant="8" id="dkH-dq-Mnf"/>
                                         <constraint firstItem="EUu-H1-f8n" firstAttribute="trailing" secondItem="PZF-RR-aO5" secondAttribute="trailingMargin" id="mti-x2-QeP"/>
-                                        <constraint firstItem="EUu-H1-f8n" firstAttribute="leading" secondItem="tgy-TX-UdW" secondAttribute="trailing" constant="8.3333333333332575" id="ouK-QS-SYN"/>
-                                        <constraint firstAttribute="trailing" secondItem="0Gv-e0-BOn" secondAttribute="trailing" constant="115" id="yY1-gJ-dRf"/>
+                                        <constraint firstItem="0cu-yz-5ko" firstAttribute="top" secondItem="EUu-H1-f8n" secondAttribute="top" id="sCX-WY-Dwb"/>
+                                        <constraint firstItem="0Gv-e0-BOn" firstAttribute="top" secondItem="EUu-H1-f8n" secondAttribute="top" id="sOM-D1-Nfi"/>
                                     </constraints>
                                 </view>
                             </tableView>
@@ -89,7 +97,7 @@
                     <navigationItem key="navigationItem" id="qYp-4c-c4m"/>
                     <connections>
                         <outlet property="addChildBtn" destination="o2u-yP-yJg" id="btX-5U-V7O"/>
-                        <outlet property="changeLanguageBtn" destination="tgy-TX-UdW" id="kDc-LN-DyI"/>
+                        <outlet property="changeLanguageBtn" destination="0cu-yz-5ko" id="ZoW-Sc-SJi"/>
                         <outlet property="listLabel" destination="0Gv-e0-BOn" id="6Rc-bD-I9G"/>
                         <outlet property="tableView" destination="0Cu-dI-PCp" id="Lz7-il-WDX"/>
                     </connections>
@@ -118,6 +126,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fr_white1" width="2137" height="2137"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">

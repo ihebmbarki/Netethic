@@ -11,11 +11,17 @@ protocol deleteAlertDelegate {
     
 }
 
-class CustomDeleteAlertView: UIViewController {
+class CustomDeleteAlertView: KeyboardHandlingBaseVC {
     
     @IBOutlet weak var alertDeleteView: UIView!{
         didSet {
             alertDeleteView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        }
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
     @IBOutlet weak var alertLbl: UILabel!

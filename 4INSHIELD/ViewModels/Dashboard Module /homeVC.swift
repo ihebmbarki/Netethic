@@ -261,9 +261,12 @@ class homeVC: UIViewController, ChartViewDelegate {
             APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 7) { [self] pseudos in
                 if let pseudos = pseudos {
                     // Update your toxic pseudos array
-                    self.loadingPersonIndicator.stopAnimating()
-                    self.loadingPersonIndicator.isHidden = true
+//                    self.loadingPersonIndicator.stopAnimating()
+//                    self.loadingPersonIndicator.isHidden = true
                     self.toxicPseudos = pseudos
+                    if self.toxicPseudos.count > 0 {
+                        self.personsBtn.isHidden = false
+                    }
                     if self.toxicPseudos.count > 4 {
                         self.personneImage1Label.text = self.toxicPseudos[0]
                         self.personneImage2Label.text = self.toxicPseudos[1]
@@ -400,8 +403,8 @@ class homeVC: UIViewController, ChartViewDelegate {
             ChildInfoViewController = storyboard?.instantiateViewController(withIdentifier: "ChildInfoViewController") as? ChildInfoViewController
             
             //Set up first name
-            guard let firstName = UserDefaults.standard.string(forKey: "firstName") else { return }
-            self.BonjourLbl.text = "Bonjour \(firstName) !"
+            guard let lastName = UserDefaults.standard.string(forKey: "lastName") else { return }
+            self.BonjourLbl.text = "Bonjour \(lastName) !"
             //Set up child profile pic
             loadChildInfo()
             guard let selectedChild = selectedChild else { return }
@@ -521,7 +524,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         
     }
     func getIndicatorActivite(startDateTimestamp: Double, endDateTimestamp: Double){
-        ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: 1660645240, toDateTimestamp: 1692181240) { indicatorActivity in
+        ApiManagerAdd.shareInstance1.getIndicatorActivityData(personID: selectedChild?.id ?? 7, fromDateTimestamp: startDateTimestamp, toDateTimestamp: endDateTimestamp) { [self] indicatorActivity in
             if let indicatorActivity = indicatorActivity {
                 // Traitez les données indicatorActivity ici
                 print(indicatorActivity)
@@ -533,9 +536,11 @@ class homeVC: UIViewController, ChartViewDelegate {
                 else{
 //                    loadingPlatformIndicator.stopAnimating()
 //                    loadingPlatformIndicator.isHidden = true
-                  
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.loadingActivityIndicator.isHidden = true
+                    indicateurCollectionView.isHidden = true
                     self.erroIndicatorLabel.isHidden = false
-                    print("Aucune donnée disponible ou erreur est survenue")
+                    print("Aucune donnée disponible ou erreur est survenue indicator activity")
                     if LanguageManager.shared.currentLanguage == "fr" {
                         self.erroIndicatorLabel.text = " Il n'y a pas de données à afficher pour le moment. "
                     }
@@ -582,8 +587,8 @@ class homeVC: UIViewController, ChartViewDelegate {
 //                }
                 if toxicCount == 0{
                     
-                    loadingPersonIndicator.stopAnimating()
-                    loadingPersonIndicator.isHidden = true
+//                    loadingPersonIndicator.stopAnimating()
+//                    loadingPersonIndicator.isHidden = true
                     personsBtn.isHidden = true
                     missingDataLbl.isHidden = false
                     if LanguageManager.shared.currentLanguage == "fr" {
@@ -623,7 +628,7 @@ class homeVC: UIViewController, ChartViewDelegate {
                     personneImage4Label.isHidden = false
                 }
                 DispatchQueue.main.async {
-                    self.toxicPersonsLbl.text = toxicPersonsText
+                    self.percentageLabel.text = toxicPersonsText
                     self.personsCollectionView.reloadData()
                 }
             }
@@ -633,6 +638,7 @@ class homeVC: UIViewController, ChartViewDelegate {
     // hacrcelemnt de actuel
     func setupLineChart(listeDates: [Double]?, listeMaxScore: [Int]?) {
         messageLineChart.text = ""
+        lineChartView.noDataText = ""
         let formattedDates = listeDates?.formatTimestampsToStrings(dateFormat: "dd-MM-yyyy")
         print(formattedDates)
         // Create chart entries
@@ -646,7 +652,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         if dataEntries.isEmpty {
             // Hide the chart and remove any messages
             lineChartView.isHidden = false
-//            lineChartView.noDataText = ""
+            lineChartView.noDataText = ""
             print("no data")
             loadingIndicator.stopAnimating()
             loadingIndicator.isHidden = true
@@ -761,8 +767,9 @@ class homeVC: UIViewController, ChartViewDelegate {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         addConcernedRelationship()
         let bonjourString = NSLocalizedString("hello", tableName: nil, bundle: bundle, value: "", comment: "Bonjour greeting")
-        let firstName = UserDefaults.standard.string(forKey: "firstName") ?? ""
-        let localizedText = "\(bonjourString) \(firstName) !"
+        let lastName = UserDefaults.standard.string(forKey: "lastName") ?? ""
+        let localizedText = "\(bonjourString) \(lastName) !"
+
         
         BonjourLbl.text = localizedText
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
@@ -774,7 +781,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         messageLineChart.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
         dangerLabel.text = NSLocalizedString("danger", tableName: nil, bundle: bundle, value: "", comment: "")
         nombrePersonneLabel.text = NSLocalizedString("personneToxique", tableName: nil, bundle: bundle, value: "", comment: "")
-        percentageLabel.text = NSLocalizedString("number", tableName: nil, bundle: bundle, value: "", comment: "")
+//        percentageLabel.text = NSLocalizedString("number", tableName: nil, bundle: bundle, value: "", comment: "")
         rapportLabel.text = NSLocalizedString("rapport", tableName: nil, bundle: bundle, value: "", comment: "")
         moyenneGnLabel.text = NSLocalizedString("moyenne", tableName: nil, bundle: bundle, value: "", comment: "")
         personsBtn.setTitle(NSLocalizedString("tousPersonneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
@@ -858,20 +865,20 @@ class homeVC: UIViewController, ChartViewDelegate {
         personsBtn.isHidden = true
    
         personsCollectionView.isHidden = false
-        self.loadingPersonIndicator.isHidden = false
-        self.loadingPersonIndicator.startAnimating()
+//        self.loadingPersonIndicator.isHidden = false
+//        self.loadingPersonIndicator.startAnimating()
         // Call the API to fetch toxic persons
         APIManager.shareInstance.fetchToxicPersons(forPerson: selectedChild?.id ?? 2) { [self] pseudos in
             if let pseudos = pseudos {
                 // Update your toxic pseudos array
-                self.loadingPersonIndicator.stopAnimating()
-                self.loadingPersonIndicator.isHidden = true
+//                self.loadingPersonIndicator.stopAnimating()
+//                self.loadingPersonIndicator.isHidden = true
                 // Reload the collection view to reflect the changes
                 self.personsCollectionView.reloadData()
             } else {
                 print("No toxic persons data")
-                self.loadingPersonIndicator.stopAnimating()
-                self.loadingPersonIndicator.isHidden = true
+//                self.loadingPersonIndicator.stopAnimating()
+//                self.loadingPersonIndicator.isHidden = true
                 personsCollectionView.isHidden = false
                 missingDataLbl.isHidden = false
                
@@ -970,8 +977,8 @@ class homeVC: UIViewController, ChartViewDelegate {
                     LanguageManager.shared.currentLanguage = "en"
                     self.delegateSide?.changeLangage(langue: "en")
                     UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                    let toxicPersonsText = String(format: "%02d individuals", self.nbToxic)
-                    self.percentageLabel.text = toxicPersonsText
+//                    let toxicPersonsText = String(format: "%02d individuals", self.nbToxic)
+//                    self.percentageLabel.text = toxicPersonsText
 
                 } else if action.title == "Français" {
                     LanguageManager.shared.currentLanguage = "fr"
@@ -1440,8 +1447,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToxicPersonCell", for: indexPath) as? ToxicPersonCollectionViewCell else {
                 fatalError("Unable to dequeue ToxicPersonCollectionViewCell")
             }
-            loadingPersonIndicator.stopAnimating()
-            loadingPersonIndicator.isHidden = true
+//            loadingPersonIndicator.stopAnimating()
+//            loadingPersonIndicator.isHidden = true
             let pseudo = toxicPseudos[indexPath.item]
             cell.cardTitle.text = pseudo
             
@@ -1771,7 +1778,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             
             // Formater les dates sans heure
             dateFormatter.timeStyle = .none
-            dateFormatter.dateStyle = .medium
+            dateFormatter.dateStyle = .short
             
             let currentDateFormatted = dateFormatter.string(from: currentDate)
             let oneWeekAgoFormatted = dateFormatter.string(from: oneWeekAgo)
@@ -1808,7 +1815,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             if let startDate = sharedDateModel.startDate, let endDate = sharedDateModel.endDate {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy"
-                dateFormatter.dateStyle = .medium
+                dateFormatter.dateStyle = .short
                 
                 let startDateString = dateFormatter.string(from: startDate)
                 let endDateString = dateFormatter.string(from: endDate)
@@ -1865,7 +1872,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
             let dateFormatter = DateFormatter()
             endDatePicker.locale = Locale(identifier: "fr_FR")
             dateFormatter.dateFormat = "dd-MM-yyyy"
-            dateFormatter.dateStyle = .medium
+            dateFormatter.dateStyle = .short
             
             let startDateString = dateFormatter.string(from: startDate)
             let endDateString = dateFormatter.string(from: endDate)

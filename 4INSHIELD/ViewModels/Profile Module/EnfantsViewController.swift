@@ -40,7 +40,13 @@ class EnfantsViewController: UIViewController {
     
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
-        addChildBtn.setTitle(NSLocalizedString("add_child", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        addChildBtn.setTitle(NSLocalizedString("add_child", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+        if LanguageManager.shared.currentLanguage == "en" {
+            addChildBtn.setTitle("Add child", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "fr" {
+            addChildBtn.setTitle("Ajouter un enfant", for: .normal)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

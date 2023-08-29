@@ -45,7 +45,7 @@ class UserProfile: KeyboardHandlingBaseVC {
         userView.addSubview(updateViewController!.view)
         updateViewController?.didMove(toParent: self)
         // Underline selected button
-        modifierButton.setUnderline(title: NSLocalizedString("modify_profile", comment: ""))
+//        modifierButton.setUnderline(title: NSLocalizedString("modify_profile", comment: ""))
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)
@@ -150,19 +150,24 @@ class UserProfile: KeyboardHandlingBaseVC {
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
         
-        profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
+//        profileLbl.text = NSLocalizedString("profile", tableName: nil, bundle: bundle, value: "", comment: "")
         
         // Update button titles using NSLocalizedString
-        modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-        enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        modifierButton.setTitle(NSLocalizedString("modify_profile", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
+//        enfantsButton.setTitle(NSLocalizedString("my_children", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         
         // Set underline and alpha based on the current language
         if LanguageManager.shared.currentLanguage == "en" {
-            modifierButton.setUnderline(title: "Edit my profile")
-            enfantsButton.setUnderline(title: "My children")
-        } else if LanguageManager.shared.currentLanguage == "fr" {
-            modifierButton.setUnderline(title: "Modifier mon profil")
-            enfantsButton.setUnderline(title: "Mes Enfants")
+            enfantsButton.setTitle("My children", for: .normal)
+            profileLbl.text = "Profile"
+            modifierButton.setTitle("Edit my profile", for: .normal)
+            enfantsButton.setTitle("My children", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "fr" {
+            enfantsButton.setTitle("Mes Enfants", for: .normal)
+            profileLbl.text = "Profil"
+            modifierButton.setTitle("Modifier mon profile", for: .normal)
+            enfantsButton.setTitle("Mes Enfants", for: .normal)
         }
     }
     
@@ -189,6 +194,8 @@ class UserProfile: KeyboardHandlingBaseVC {
                 }
                 self.updateLocalizedStrings()
                 NotificationCenter.default.post(name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name("NotificationFromB"), object: nil, userInfo: ["message": LanguageManager.shared.currentLanguage])
+    
             }
             languageAlert.addAction(action)
         }
@@ -220,7 +227,13 @@ class UserProfile: KeyboardHandlingBaseVC {
         enfantsViewController?.didMove(toParent: self)
         
         // Underline selected button
-        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
+//        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
+        if LanguageManager.shared.currentLanguage == "en" {
+            modifierButton.setTitle("Edit my profile", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "fr" {
+            modifierButton.setTitle("Modifier mon profil", for: .normal)
+        }
         modifierButton.removeUnderline()
         
         // Set text color opacity for selected button to 100%
@@ -244,7 +257,13 @@ class UserProfile: KeyboardHandlingBaseVC {
         updateViewController?.didMove(toParent: self)
         
         // Underline selected button
-        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
+//        enfantsButton.setUnderline(title: NSLocalizedString("my_children", comment: ""))
+        if LanguageManager.shared.currentLanguage == "en" {
+            enfantsButton.setTitle("My children", for: .normal)
+        }
+        if LanguageManager.shared.currentLanguage == "fr" {
+            enfantsButton.setTitle("Mes Enfants", for: .normal)
+        }
         enfantsButton.removeUnderline()
         // Set text color opacity for selected button to 100%
         modifierButton.setTitleColor(modifierButton.titleLabel?.textColor?.withAlphaComponent(1.0), for: .normal)

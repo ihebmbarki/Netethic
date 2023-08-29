@@ -44,14 +44,19 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var deleteBtn: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+    }
+    
     var gender: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Listen for language change notification
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChangeNotification), name: NSNotification.Name("LanguageChangedNotification"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification(_:)), name: NSNotification.Name("NotificationFromB"), object: nil)
         // Initial setup of localized strings
         updateLocalizedStrings()
         
@@ -88,10 +93,47 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     }
     
     deinit {
-         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotification"), object: nil)
+         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LanguageChangedNotificationUpdate"), object: nil)
      }
 
-     @objc func handleLanguageChangeNotification() {
+    @objc func receiveNotification(_ notification: Notification) {
+            if let message = notification.userInfo?["message"] as? String {
+                // Gérer la notification venant de ViewControllerB
+                print("Received notification: \(message)")
+                print(message)
+                if message == "fr" {
+                    deleteAccLbl.text = "Supprimer le compte "
+                    deleteTextView.text = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données. "
+                    deleteBtn.setTitle("Supprimer le compte ", for: .normal)
+                    hommeLbl.text = "Homme"
+                    femmeLbl.text = "Femme"
+                    nonPreciseLbl.text = "Non précisé"
+                    updateBtn.setTitle("Modifier", for: .normal)
+                    cancelBtn.setTitle("Annuler", for: .normal)
+                    prenomLbl.text = "Prénom"
+                    nomLbl.text = "Nom"
+                    genreLbl.text = "Genre"
+                    dateLbl.text = "Date de naissance"
+                }
+                if message == "en" {
+                    deleteAccLbl.text = "Delete the account"
+                    deleteTextView.text = "Deleting your account will delete your profile, login info, and your browsing data from our database."
+                    deleteBtn.setTitle("Delete the account", for: .normal)
+                    hommeLbl.text = "Male"
+                    femmeLbl.text = "Female"
+                    nonPreciseLbl.text = "Not precised"
+                    updateBtn.setTitle("Update", for: .normal)
+                    cancelBtn.setTitle("Cancel", for: .normal)
+                    prenomLbl.text = "First Name"
+                    nomLbl.text = "Last Name"
+                    genreLbl.text = "Gender"
+                    dateLbl.text = "Birthday"
+                }
+                self.view.setNeedsLayout()
+            }
+        }
+
+     @objc func handleLanguageChangeNotificationUpdate() {
          // Update localized strings when language changes
          updateLocalizedStrings()
      }
@@ -104,14 +146,6 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         emailLbl.text = NSLocalizedString("e_mail", tableName: nil, bundle: bundle, value: "", comment: "")
         genreLbl.text = NSLocalizedString("Gender", tableName: nil, bundle: bundle, value: "", comment: "")
         dateLbl.text = NSLocalizedString("birthday", tableName: nil, bundle: bundle, value: "", comment: "")
-//        hommeLbl.text = NSLocalizedString("male", tableName: nil, bundle: bundle, value: "", comment: "")
-//        femmeLbl.text = NSLocalizedString("Female", tableName: nil, bundle: bundle, value: "", comment: "")
-//        nonPreciseLbl.text = NSLocalizedString("other", tableName: nil, bundle: bundle, value: "", comment: "")
-//        deleteAccLbl.text = NSLocalizedString("supp_acc", tableName: nil, bundle: bundle, value: "", comment: "")
-//        deleteTextView.text = NSLocalizedString("supp_acc_text", tableName: nil, bundle: bundle, value: "", comment: "add media")
-//        deleteBtn.setTitle(NSLocalizedString("supp", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-//        updateBtn.setTitle(NSLocalizedString("update", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
-//        cancelBtn.setTitle(NSLocalizedString("cancel", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         if LanguageManager.shared.currentLanguage == "fr" {
             deleteAccLbl.text = "Supprimer le compte "
             deleteTextView.text = "La suppression de votre compte a pour effet la suppression de votre profil, de vos informations de connexion et de vos données de navigation de notre base de données. "
@@ -382,6 +416,12 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.height/2
         cancelBtn.layer.masksToBounds = true
         
+        updateBtn.layer.borderWidth = 0.5
+        updateBtn.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
+        updateBtn.layer.shadowColor = UIColor(named: "AccentColor")?.cgColor
+        updateBtn.layer.shadowOffset = CGSize(width: 0.0, height:1.0)
+        updateBtn.layer.shadowOpacity = 0.5
+        updateBtn.layer.shadowRadius = 0.0
         updateBtn.layer.cornerRadius = updateBtn.frame.size.height/2
         updateBtn.layer.masksToBounds = true
     }
@@ -440,6 +480,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     }
     
     @IBAction func updateBtnTapped(_ sender: Any) {
+        print("update parent profile")
         guard let userID = UserDefaults.standard.object(forKey: "userID") as? Int else { return }
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
         
@@ -504,6 +545,7 @@ class UpdateViewController: KeyboardHandlingBaseVC, UITextFieldDelegate, deleteA
     
 
     @IBAction func deleteAccBtnTapped(_ sender: Any) {
+        print("delete")
         let deleteCustomAlert = self.storyboard?.instantiateViewController(identifier: "deleteCustomAlertID") as! CustomDeleteAlertView
         deleteCustomAlert.delegate  = self
         deleteCustomAlert.modalPresentationStyle = .overCurrentContext

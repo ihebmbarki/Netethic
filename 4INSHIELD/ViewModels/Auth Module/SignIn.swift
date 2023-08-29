@@ -341,9 +341,9 @@ class SignIn: KeyboardHandlingBaseVC {
         guard let savedUserName = UserDefaults.standard.string(forKey: "username") else { return }
         DispatchQueue.main.async {
             APIManager.shareInstance.fetchCurrentUserData(username: savedUserName) { user in
-                if let firstName = user.first_name {
-                    UserDefaults.standard.set(user.first_name, forKey: "firstName")
-                   print("La variable déballée vaut \(firstName)")
+                if let lastName = user.last_name {
+                    UserDefaults.standard.set(user.last_name, forKey: "lastName")
+                   print("La variable déballée vaut \(lastName)")
                 }
             }
         }

@@ -181,7 +181,7 @@ class Phone: UIViewController{
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: "fr")
                 dateFormatter.dateFormat = "dd-MM-yyyy"
-                dateFormatter.dateStyle = .medium
+                dateFormatter.dateStyle = .short
                 
                 let startDateString = dateFormatter.string(from: startDate)
                 let endDateString = dateFormatter.string(from: endDate)
@@ -254,7 +254,7 @@ class Phone: UIViewController{
             
             // Formater les dates sans heure
             dateFormatter.timeStyle = .none
-            dateFormatter.dateStyle = .medium
+            dateFormatter.dateStyle = .short
             
             let currentDateFormatted = dateFormatter.string(from: currentDate)
             let oneWeekAgoFormatted = dateFormatter.string(from: oneWeekAgo)
@@ -326,7 +326,7 @@ class Phone: UIViewController{
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy"
-                dateFormatter.dateStyle = .medium
+                dateFormatter.dateStyle = .short
                 
                 let startDateString = dateFormatter.string(from: startDate)
                 let endDateString = dateFormatter.string(from: endDate)

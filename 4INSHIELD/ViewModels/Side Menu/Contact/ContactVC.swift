@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContactVC: UIViewController {
+class ContactVC: KeyboardHandlingBaseVC {
     
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
@@ -15,6 +15,12 @@ class ContactVC: UIViewController {
     @IBOutlet weak var messageTF: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

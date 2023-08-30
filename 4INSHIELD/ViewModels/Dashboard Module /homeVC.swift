@@ -266,23 +266,69 @@ class homeVC: UIViewController, ChartViewDelegate {
                     self.toxicPseudos = pseudos
                     if self.toxicPseudos.count > 0 {
                         self.personsBtn.isHidden = false
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                                self.personneLabel.text = "personnes"
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                                self.personneLabel.text = "individuals"
+                        }
                     }
-                    if self.toxicPseudos.count > 4 {
+                    if self.toxicPseudos.count == 0 {
+                        if  LanguageManager.shared.currentLanguage == "fr"{
+                                self.personneLabel.text = "Aucun individu à surveiller actuellement"
+                                self.percentageLabel.text = ""
+                                self.personneLabel.textColor = UIColor.black
+                    }
+                        if  LanguageManager.shared.currentLanguage == "en"{
+                            self.personneLabel.text = "No individuals to monitor at the moment"
+                            self.percentageLabel.text = ""
+                            self.personneLabel.textColor = UIColor.black
+                }
+                    }
+                    if self.toxicPseudos.count >= 4 {
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                                self.personneLabel.text = "personnes"
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                                self.personneLabel.text = "individuals"
+                        }
                         self.personneImage1Label.text = self.toxicPseudos[0]
                         self.personneImage2Label.text = self.toxicPseudos[1]
                         self.personneImage3Label.text = self.toxicPseudos[2]
                         self.personneImage4Label.text = self.toxicPseudos[3]
                     }
                     if self.toxicPseudos.count == 3 {
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                                self.personneLabel.text = "personnes"
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                            self.personneLabel.text = "individuals"
+                        }
                         self.personneImage1Label.text = self.toxicPseudos[0]
                         self.personneImage2Label.text = self.toxicPseudos[1]
                         self.personneImage3Label.text = self.toxicPseudos[2]
                     }
                     if self.toxicPseudos.count == 2 {
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                                self.personneLabel.text = "personnes"
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                                self.personneLabel.text = "individuals"
+                        }
                         self.personneImage1Label.text = self.toxicPseudos[0]
                         self.personneImage2Label.text = self.toxicPseudos[1]
                     }
                     if self.toxicPseudos.count == 1 {
+                        if LanguageManager.shared.currentLanguage == "fr" {
+                            if self.personneLabel.text == "individuals"{
+                                self.personneLabel.text = "personnes"
+                            }
+                        }
+                        if LanguageManager.shared.currentLanguage == "en" {
+                            if self.personneLabel.text == "personnes"{
+                                self.personneLabel.text = "individuals"
+                            }
+                        }
                         self.personneImage1Label.text = self.toxicPseudos[0]
                     }
                 }
@@ -590,13 +636,17 @@ class homeVC: UIViewController, ChartViewDelegate {
 //                    loadingPersonIndicator.stopAnimating()
 //                    loadingPersonIndicator.isHidden = true
                     personsBtn.isHidden = true
-                    missingDataLbl.isHidden = false
-                    if LanguageManager.shared.currentLanguage == "fr" {
-                        self.missingDataLbl.text = " Il n'y a pas de données à afficher pour le moment. "
-                    }
-                    if LanguageManager.shared.currentLanguage == "en" {
-                        self.missingDataLbl.text = " There is No Data to Display at this Moment."
-                    }
+                    if  LanguageManager.shared.currentLanguage == "fr"{
+                            self.personneLabel.text = "Aucun individu à surveiller actuellement"
+                            self.percentageLabel.text = ""
+                            self.personneLabel.textColor = UIColor.black
+                }
+                    if  LanguageManager.shared.currentLanguage == "en"{
+                        self.personneLabel.text = "No individuals to monitor at the moment"
+                        self.percentageLabel.text = ""
+                        self.personneLabel.textColor = UIColor.black
+            }
+
                 }
                 if toxicCount == 1{
                     imageView1.isHidden = false
@@ -627,9 +677,11 @@ class homeVC: UIViewController, ChartViewDelegate {
                     imageView4.isHidden = false
                     personneImage4Label.isHidden = false
                 }
-                DispatchQueue.main.async {
-                    self.percentageLabel.text = toxicPersonsText
-                    self.personsCollectionView.reloadData()
+                if nbToxic != 0{
+                    DispatchQueue.main.async {
+                        self.percentageLabel.text = toxicPersonsText
+                        self.personsCollectionView.reloadData()
+                    }
                 }
             }
         }
@@ -774,7 +826,7 @@ class homeVC: UIViewController, ChartViewDelegate {
         BonjourLbl.text = localizedText
         dateTF.placeholder = NSLocalizedString("rangeDate", tableName: nil, bundle: bundle, value: "", comment: "rangeDate")
         indicatorTitleLabel.text = NSLocalizedString("activite", tableName: nil, bundle: bundle, value: "", comment: "")
-        personneLabel.text = NSLocalizedString("personne", tableName: nil, bundle: bundle, value: "", comment: "")
+//        personneLabel.text = NSLocalizedString("personne", tableName: nil, bundle: bundle, value: "", comment: "")
         RisqueLabel.text = NSLocalizedString("current_har", tableName: nil, bundle: bundle, value: "", comment: "")
         errorLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
         missingDataLbl.text = NSLocalizedString("msgerreur", tableName: nil, bundle: bundle, value: "", comment: "")
@@ -788,6 +840,22 @@ class homeVC: UIViewController, ChartViewDelegate {
         moyenneButton.setTitle(NSLocalizedString("moyenneBt", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         if LanguageManager.shared.currentLanguage == "en" {
             maxScoreLabel.text = "Maximum score on the platform by date"
+        }
+        if LanguageManager.shared.currentLanguage == "en" {
+            if self.personneLabel.text == "Aucun individu à surveiller actuellement"{
+                self.personneLabel.text = "No individuals to monitor at the moment."
+            }
+            if self.personneLabel.text == "personnes"{
+                self.personneLabel.text = "individuals"
+            }
+        }
+        if LanguageManager.shared.currentLanguage == "fr" {
+            if self.personneLabel.text == "individuals"{
+                self.personneLabel.text = "personnes"
+            }
+            if self.personneLabel.text == "No individuals to monitor at the moment."{
+                self.personneLabel.text = "Aucun individu à surveiller actuellement"
+            }
         }
 
         dateWeek()

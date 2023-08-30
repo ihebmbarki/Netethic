@@ -15,7 +15,7 @@ class CustomDeleteAlertView: KeyboardHandlingBaseVC {
     
     @IBOutlet weak var alertDeleteView: UIView!{
         didSet {
-            alertDeleteView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            alertDeleteView.backgroundColor = UIColor.white
         }
     }
     
@@ -29,14 +29,29 @@ class CustomDeleteAlertView: KeyboardHandlingBaseVC {
     @IBOutlet weak var usernameTf: UITextField!
     @IBOutlet weak var usernameErrorLbl: UILabel!
     
-    @IBOutlet weak var cancelBtn: UIButton!
-    @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!{
+        didSet{
+            cancelBtn.layer.shadowColor = UIColor.black.cgColor
+                 cancelBtn.layer.shadowOpacity = 0.5
+                 cancelBtn.layer.shadowOffset = CGSize(width: 0, height: 2)
+                 cancelBtn.layer.shadowRadius = 4
+        }
+    }
+    @IBOutlet weak var deleteBtn: UIButton!{
+        didSet{
+            deleteBtn.layer.shadowColor = UIColor.black.cgColor
+                  deleteBtn.layer.shadowOpacity = 0.5
+                  deleteBtn.layer.shadowOffset = CGSize(width: 0, height: 2)
+                  deleteBtn.layer.shadowRadius = 4
+        }
+    }
     
     var delegate:deleteAlertDelegate? = nil
     
     override func viewDidLoad( ) {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+//        view.backgroundColor = UIColor.white
+        scrollView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
 
         // Listen for language change notification
         NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChangeNotification), name: NSNotification.Name("LanguageChangedNotification"), object: nil)
@@ -47,7 +62,7 @@ class CustomDeleteAlertView: KeyboardHandlingBaseVC {
         usernameTf.borderStyle = .none
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: usernameTf.frame.height - 1, width: usernameTf.frame.width, height: 1)
-        bottomLine.backgroundColor = #colorLiteral(red: 0.7954139113, green: 0.8042928576, blue: 0.8041365743, alpha: 1)
+        bottomLine.backgroundColor = UIColor.white.cgColor
         usernameTf.layer.addSublayer(bottomLine)
     }
     
@@ -126,6 +141,8 @@ class CustomDeleteAlertView: KeyboardHandlingBaseVC {
         if usernameErrorLbl.isHidden
         {
             deleteBtn.isEnabled = true
+            deleteBtn.setTitleColor(.white, for: .normal)
+
         }
         else
         {

@@ -31,11 +31,11 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
             scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
-    @IBOutlet weak var mainView: FooterView!{
-        didSet{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
-    }
+//    @IBOutlet weak var mainView: FooterView!{
+//        didSet{
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
+//    }
     
     @IBOutlet weak var errorPseudoLabel: UILabel!
     
@@ -158,10 +158,10 @@ class ChildSocialMedia: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelega
         errorPseudoLabel.text = NSLocalizedString("pseudo1", tableName: nil, bundle: bundle, value: "", comment: "pseudo1")
         errorPseudoLabel.text = NSLocalizedString("pseudo2", tableName: nil, bundle: bundle, value: "", comment: "pseudo2")
         if LanguageManager.shared.currentLanguage == "fr"{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
         }
         if LanguageManager.shared.currentLanguage == "en"{
-            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
         }
         if LanguageManager.shared.currentLanguage == "fr" {
             pseudoTextField.placeholder = "Entrez le pseudo"

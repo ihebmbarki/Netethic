@@ -26,11 +26,11 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
             
         }
     }
-    @IBOutlet weak var mainView: FooterView!{
-        didSet{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
-    }
+//    @IBOutlet weak var mainView: FooterView!{
+//        didSet{
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
+//    }
     
     @IBOutlet weak var errorBirthdayLabel: UILabel!
     @IBOutlet weak var errorEmaillabel: UILabel!
@@ -498,12 +498,12 @@ class ChildProfile: KeyboardHandlingBaseVC, FlexibleSteppedProgressBarDelegate {
         genderLabel.text = NSLocalizedString("gender1", tableName: nil, bundle: bundle, value: "", comment: "gender1")
         genderLabel.text = NSLocalizedString("gender2", tableName: nil, bundle: bundle, value: "", comment: "gender2")
         genderLabel.text = NSLocalizedString("gender3", tableName: nil, bundle: bundle, value: "", comment: "gender3")
-        if LanguageManager.shared.currentLanguage == "fr"{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
-        if LanguageManager.shared.currentLanguage == "en"{
-            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
+//        if LanguageManager.shared.currentLanguage == "fr"{
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
+//        if LanguageManager.shared.currentLanguage == "en"{
+//            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
         
     }
     

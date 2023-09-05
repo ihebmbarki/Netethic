@@ -17,11 +17,11 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
     
     @IBOutlet weak var changeLanguageButton: UIButton!
     
-    @IBOutlet weak var mainView: FooterView!{
-        didSet{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
-    }
+//    @IBOutlet weak var mainView: FooterView!{
+//        didSet{
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
+//    }
     
     @IBOutlet weak var footer: UILabel!
     var progressBar: FlexibleSteppedProgressBar!
@@ -149,7 +149,7 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
         if LanguageManager.shared.currentLanguage == "fr" {
             felicitationLabel.text = "Félicitations!"
             textLabel.text = "Vous avez complété avec succès le profil de votre enfant. "
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
          
             self.continueButton.setTitle("Continuer", for: .normal)
             self.addNewProfileBtn.setTitle("Ajouter un autre enfant", for: .normal)
@@ -157,7 +157,7 @@ class ChildProfileAdded: UIViewController, FlexibleSteppedProgressBarDelegate {
         if LanguageManager.shared.currentLanguage == "en" {
             felicitationLabel.text = "Congratulations!"
             textLabel.text = "You have successfully completed your child's profile."
-            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
             
             self.continueButton.setTitle("Continue", for: .normal)
             self.addNewProfileBtn.setTitle("Add another child ", for: .normal)

@@ -9,11 +9,11 @@ import UIKit
 
 class OpenHomeViewController: UIViewController {
 
-    @IBOutlet weak var mainView: FooterView!{
-        didSet{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
-        }
-    }
+//    @IBOutlet weak var mainView: FooterView!{
+//        didSet{
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//        }
+//    }
     
     @IBOutlet weak var scrollView: UIScrollView!{
         didSet{
@@ -58,7 +58,7 @@ class OpenHomeViewController: UIViewController {
     func updateLocalizedStrings() {
         let bundle = Bundle.main.path(forResource: LanguageManager.shared.currentLanguage, ofType: "lproj").flatMap(Bundle.init) ?? Bundle.main
             if LanguageManager.shared.currentLanguage == "fr"{
-            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 Tous Droits Réservés Réalisé par Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
             BienvenueLabel.text = NSLocalizedString("Bienvenue sur netethic", tableName: nil, bundle: bundle, value: "", comment: "")
             InscriptionLabel.text = NSLocalizedString("Inscrivez-vous ou connectez-vous pour continuer", tableName: nil, bundle: bundle, value: "", comment: "")
                 let text = NSLocalizedString("L'application netethic veille au bien-être des enfants et des adolescents dans l'espace numérique.", tableName: nil, bundle: Bundle.main, value: "", comment: "")
@@ -77,7 +77,7 @@ class OpenHomeViewController: UIViewController {
             connexionButton.setTitle(NSLocalizedString("Connexion", tableName: nil, bundle: bundle, value: "", comment: ""), for: .normal)
         }
         if LanguageManager.shared.currentLanguage == "en"{
-            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
+//            mainView.configure(titleText: "© 2023 All Rights Reserved Made by Data4Ethic", color: UIColor(named: "AccentColor") ?? .white)
             BienvenueLabel.text = NSLocalizedString("Welcome to netethic", tableName: nil, bundle: bundle, value: "", comment: "")
             InscriptionLabel.text = NSLocalizedString("Register or sign in to continue", tableName: nil, bundle: bundle, value: "", comment: "")
            

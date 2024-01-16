@@ -69,5 +69,5 @@ Innovative iOS application dedicated to real-time analysis and detection of cybe
 
 ## DEMO
 
-![Demo GIF](https://drive.google.com/file/d/1vKKGjwTUA075M8aP0REtrXxwT1S8ZF14/view?usp=drive_link)
-
+[![Demo Video](video_thumbnail_url)](https://drive.google.com/file/d/1cgX24vKkZeKPIXRTOFG-4t1dtiG8i0lr/view?usp=sharing
+)

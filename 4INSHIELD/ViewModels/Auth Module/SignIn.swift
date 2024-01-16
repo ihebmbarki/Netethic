@@ -165,9 +165,29 @@ class SignIn: KeyboardHandlingBaseVC {
         emailTF.placeholder = NSLocalizedString("Connexion", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         passwordTF.placeholder = NSLocalizedString("Password", tableName: nil, bundle: bundle, value: "", comment: "sign in label")
         dontHaveAccLabel.text = NSLocalizedString("text_register", tableName: nil, bundle: bundle, value: "", comment: "no account ?")
-        forgotPwdBtn.setTitle(NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot password"), for: .normal)
+        let forgetPasswordText = NSLocalizedString("forget", tableName: nil, bundle: bundle, value: "", comment: "forgot password")
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue, // Underline style
+            .foregroundColor: UIColor.blue, // Text color
+            // Add any other attributes you need
+        ]
+
+        let attributedText = NSAttributedString(string: forgetPasswordText, attributes: attributes)
+
+        forgotPwdBtn.setAttributedTitle(attributedText, for: .normal)
         signInBtn.setTitle(NSLocalizedString("Login", tableName: nil, bundle: bundle, value: "", comment: "Login"), for: .normal)
-        registerBtn.setTitle(NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register"), for: .normal)
+        let registerText = NSLocalizedString("register", tableName: nil, bundle: bundle, value: "", comment: "register")
+
+        let registerAttributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: UIColor.blue,
+            // Add any other attributes you need
+        ]
+
+        let attributedRegisterText = NSAttributedString(string: registerText, attributes: registerAttributes)
+
+        registerBtn.setAttributedTitle(attributedRegisterText, for: .normal)
         signIn_google.setTitle(NSLocalizedString("google_connect", tableName: nil, bundle: bundle, value: "", comment: "google"), for: .normal)
         signIn_facebook.setTitle(NSLocalizedString("fb", tableName: nil, bundle: bundle, value: "", comment: "facebook"), for: .normal)
 //        if LanguageManager.shared.currentLanguage == "fr"{

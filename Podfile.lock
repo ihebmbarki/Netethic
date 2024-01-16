@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.8.0)
-  - AlamofireImage (4.2.0):
-    - Alamofire (~> 5.4)
+  - AlamofireImage (4.3.0):
+    - Alamofire (~> 5.8)
   - ANActivityIndicator (1.2.0)
   - DGCharts (5.0.0):
     - DGCharts/Core (= 5.0.0)
@@ -12,9 +12,9 @@ PODS:
   - FlexibleSteppedProgressBar (0.7.2)
   - FSCalendar (2.8.4)
   - MHLoadingButton (0.1.3)
-  - SDWebImage (5.18.0):
-    - SDWebImage/Core (= 5.18.0)
-  - SDWebImage/Core (5.18.0)
+  - SDWebImage (5.18.3):
+    - SDWebImage/Core (= 5.18.3)
+  - SDWebImage/Core (5.18.3)
   - TinyConstraints (4.0.2)
 
 DEPENDENCIES:
@@ -47,7 +47,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
-  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  AlamofireImage: 843953fa97bee5f561cf05d83abd759e590b068d
   ANActivityIndicator: 44a996931d0c554cf157b31056603b23bbdbe76a
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
@@ -56,9 +56,9 @@ SPEC CHECKSUMS:
   FlexibleSteppedProgressBar: 6a781cfed749bf59c69813a8706aa397c342ab5c
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   MHLoadingButton: 13bab47a3ce9d88df15638b7a5b73a8ac9f21077
-  SDWebImage: 182830bcddc30cde95fbc60dfe4badc3553d94ba
+  SDWebImage: 96e0c18ef14010b7485210e92fac888587ebb958
   TinyConstraints: 7b7ccc0c485bb3bb47082138ff28bc33cd49897f
 
 PODFILE CHECKSUM: c9dd8e895d6538428bdda70b2ab30eb2c3be34e6
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3

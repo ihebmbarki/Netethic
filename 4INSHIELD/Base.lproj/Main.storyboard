@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aAE-Gg-NkL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aAE-Gg-NkL">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -42,10 +42,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xi3-Jj-IzU">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="967.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="965.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pMp-kP-OEf">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="935.33333333333337"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="933.33333333333337"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGc-h6-f4e">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
@@ -143,7 +143,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="200" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22J-kC-gRr">
-                                                        <rect key="frame" x="0.0" y="686" width="393" height="249.33333333333337"/>
+                                                        <rect key="frame" x="0.0" y="686" width="393" height="247.33333333333337"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adresse Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWX-HS-LM8">
                                                                 <rect key="frame" x="36.666666666666657" y="0.0" width="320" height="42"/>
@@ -156,7 +156,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQE-qs-4FM">
-                                                                <rect key="frame" x="154.33333333333334" y="207.33333333333337" width="84.666666666666657" height="42"/>
+                                                                <rect key="frame" x="154.33333333333334" y="205.33333333333337" width="84.666666666666657" height="42"/>
                                                                 <color key="backgroundColor" name="AccentColor"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
@@ -2387,16 +2387,16 @@
                                                         <rect key="frame" x="0.0" y="340" width="393" height="400"/>
                                                         <subviews>
                                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max score platform par date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60p-8i-5Uc">
-                                                                <rect key="frame" x="89.333333333333329" y="46" width="214.33333333333337" height="20.333333333333329"/>
+                                                                <rect key="frame" x="89.333333333333329" y="46" width="214.33333333333337" height="22.333333333333329"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9v-E0-yDx" customClass="LineChartView" customModule="DGCharts">
-                                                                <rect key="frame" x="20" y="74.333333333333314" width="357" height="309.66666666666669"/>
+                                                                <rect key="frame" x="20" y="76.333333333333314" width="357" height="307.66666666666669"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGo-KV-auS">
-                                                                        <rect key="frame" x="20" y="80" width="317" height="150"/>
+                                                                        <rect key="frame" x="20" y="79" width="317" height="150"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3963,7 +3963,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nde-Km-nTv">
-                                <rect key="frame" x="0.0" y="-32" width="393" height="718"/>
+                                <rect key="frame" x="0.0" y="-32" width="393" height="718.33333333333337"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="xML-ki-UQ5">
                                     <size key="itemSize" width="413" height="667"/>
@@ -4065,7 +4065,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="TFk-ee-VXp">
-                                <rect key="frame" x="138.66666666666666" y="686" width="115.66666666666666" height="26"/>
+                                <rect key="frame" x="138.66666666666666" y="686.33333333333337" width="115.66666666666666" height="25.666666666666629"/>
                                 <color key="pageIndicatorTintColor" systemColor="systemGray5Color"/>
                                 <color key="currentPageIndicatorTintColor" name="AccentColor"/>
                             </pageControl>
@@ -4982,7 +4982,6 @@
                         <outlet property="backButton" destination="JRb-ez-Z4V" id="S8E-rB-JJf"/>
                         <outlet property="changeLangageButton" destination="ECw-lK-cLy" id="Tcr-3C-7Iw"/>
                         <outlet property="dashboardButton" destination="P6Q-I9-blA" id="Bix-A3-B2M"/>
-                        <outlet property="mainView" destination="KGo-eL-zuW" id="fwA-R5-ihv"/>
                         <outlet property="merciLabel" destination="LcW-ro-awa" id="F6w-1k-OyP"/>
                         <outlet property="progressBarView" destination="hAz-g9-Y4z" id="b8F-Ud-ACQ"/>
                     </connections>
@@ -5064,10 +5063,10 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <prototypes>
                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="W0G-UH-eNX">
-                            <rect key="frame" x="0.0" y="50" width="250" height="43.666667938232422"/>
+                            <rect key="frame" x="0.0" y="50" width="250" height="47.666667938232422"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W0G-UH-eNX" id="tI6-Ba-GPG">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="47.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </tableViewCellContentView>
                             <inset key="separatorInset" minX="15" minY="0.0" maxX="22" maxY="0.0"/>
@@ -5288,14 +5287,14 @@
         <image name="Vector" width="2134" height="1525"/>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="background" width="360" height="209"/>
-        <image name="bell.badge.fill" catalog="system" width="123" height="128"/>
+        <image name="bell.badge.fill" catalog="system" width="117" height="128"/>
         <image name="birthday" width="512" height="512"/>
         <image name="calendar" width="22.333333969116211" height="21.666666030883789"/>
         <image name="changePwdLogo" width="197" height="140.66667175292969"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
-        <image name="childprofilbg" width="360" height="296"/>
+        <image name="childprofilbg" width="360" height="64"/>
         <image name="facebook_icon" width="22" height="22"/>
         <image name="footer" width="360" height="209"/>
         <image name="forgotLogo" width="184" height="150.66667175292969"/>
@@ -5308,7 +5307,7 @@
         <image name="localisation" width="512" height="512"/>
         <image name="menu" width="21.333333969116211" height="15.666666984558105"/>
         <image name="next" width="14" height="14"/>
-        <image name="person.2.fill" catalog="system" width="128" height="81"/>
+        <image name="person.2.fill" catalog="system" width="128" height="86"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="phone" width="30" height="30"/>
         <image name="pinCode" width="161.66667175292969" height="126"/>
@@ -5327,7 +5326,7 @@
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

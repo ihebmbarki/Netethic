@@ -1354,8 +1354,8 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                                 imageView.contentMode = .scaleAspectFill
                             }
                             cell.cardDesc.text = "Tendance actuelle"
-                            cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")?.withTintColor(UIColor(named: colorCard)!, renderingMode: .alwaysOriginal)
-//                            cell.backgroundImage.backgroundColor = UIColor(patternImage: backgroundImage)
+                            cell.cardLogo.image = UIImage(named: "HARCÈLEMENT_ACTUEL")?.withTintColor(UIColor(named: "green") ?? .green, renderingMode: .alwaysOriginal)
+                            cell.backgroundImage.backgroundColor = UIColor(patternImage: backgroundImage)
                             if LanguageManager.shared.currentLanguage == "en"{
                                 cell.cardDesc.text = "Current trend"
                             }
@@ -1382,7 +1382,7 @@ extension homeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
                     cell.cardDesc.text = "Future Harassment Risk"
                     cell.cardTitle.text = "Partially Harassed"
                 }
-                cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")!.withTintColor(UIColor(named: "orange")!, renderingMode: .alwaysOriginal)
+                cell.cardLogo.image = UIImage(named: "RISQUE_FUTUR")!.withTintColor(UIColor(named: "orange") ?? .orange, renderingMode: .alwaysOriginal)
                 cell.cardLogo.backgroundColor = .white
                 cell.backgroundImage.image = UIImage(named: "orange")!
                 cell.backgroundImage.layer.cornerRadius = 15

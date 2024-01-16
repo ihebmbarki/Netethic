@@ -2,7 +2,7 @@
 
 ## Overview 🌐
 
-Developed an innovative iOS application during the End-of-Studies Internship at Smartconseil (Feb 2023 - Aug 2023). Dedicated to real-time analysis and detection of cyberbullying on social networks, providing parents with key data insights.
+Innovative iOS application dedicated to real-time analysis and detection of cyberbullying on social networks, providing parents with key data insights.
 
 ## Features 🚀
 

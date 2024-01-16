@@ -68,6 +68,6 @@ Innovative iOS application dedicated to real-time analysis and detection of cybe
   - Efficient task management tool
 
 ## DEMO
-*Click on the image to open the demo video.*
-[![Demo Video](https://drive.google.com/uc?export=view&id=1GOJahQhjgNm92EN4zl459JwEzt6iOa1E)](https://drive.google.com/file/d/1cgX24vKkZeKPIXRTOFG-4t1dtiG8i0lr/view?usp=sharing)
 
+[![Demo Video](https://drive.google.com/uc?export=view&id=1GOJahQhjgNm92EN4zl459JwEzt6iOa1E)](https://drive.google.com/file/d/1cgX24vKkZeKPIXRTOFG-4t1dtiG8i0lr/view?usp=sharing)
+*Click on the image to open the demo video.*
